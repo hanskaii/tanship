@@ -20,7 +20,7 @@ import {
 	type TemplateItem
 } from "./-components/template-card";
 
-export const Route = createFileRoute("/(app)/_home/templates")({
+export const Route = createFileRoute("/(app)/_home/templates/")({
 	component: TemplatesPage
 });
 

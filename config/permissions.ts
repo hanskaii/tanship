@@ -16,7 +16,8 @@ export const ROLE_PERMISSIONS = {
 		"profile:update",
 		"security:manage",
 		"agents:manage",
-		"agents:chat"
+		"agents:chat",
+		"templates:access"
 	],
 	user: [
 		"app:use",
@@ -25,7 +26,8 @@ export const ROLE_PERMISSIONS = {
 		"api-keys:manage",
 		"profile:update",
 		"security:manage",
-		"agents:chat"
+		"agents:chat",
+		"templates:access"
 	]
 } as const;
 

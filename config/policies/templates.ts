@@ -1,5 +1,6 @@
-import { definePolicy, allow, deny } from "@workspace/core";
+import { definePolicy, allow, deny, combine } from "@workspace/core";
 import type { Actor } from "@workspace/core";
+import { authorize } from "../permissions";
 
 interface TemplatesPolicyContext {
 	actor: Actor;
@@ -9,12 +10,15 @@ interface TemplatesPolicyContext {
 export const TemplatesPolicy = {
 	access: definePolicy<TemplatesPolicyContext, "templates.access">(
 		"templates.access",
-		(ctx) => {
-			if (ctx.resource?.planSlug === "tanflare-pro") return allow();
-			return deny({
-				code: "PLAN_REQUIRED",
-				message: "Templates access requires Tanflare Pro."
-			});
-		}
+		combine(
+			authorize("templates:access"),
+			(ctx) => {
+				if (ctx.resource?.planSlug === "tanflare-pro") return allow();
+				return deny({
+					code: "PLAN_REQUIRED",
+					message: "Templates access requires Tanflare Pro."
+				});
+			}
+		)
 	)
 };
