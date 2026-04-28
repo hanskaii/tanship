@@ -1,0 +1,15 @@
+@import "@workspace/ui/globals.css";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+@source "../../../packages/ui";
+@source "../../../packages/flow";
+
+@keyframes ticker {
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(-50%);
+	}
+}
