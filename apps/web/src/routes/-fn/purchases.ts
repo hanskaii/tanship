@@ -17,6 +17,12 @@ export interface ClaimGithubResult {
 	repos: string[];
 }
 
+export interface ActivateResult {
+	githubUsername: string;
+	repos: string[];
+	planSlug: string;
+}
+
 // ─── Fetch purchases ─────────────────────────────────────────────────────────
 
 export const getPurchasesFn = createServerFn({ method: "GET" }).handler(() =>
@@ -52,5 +58,30 @@ export const claimGithubFn = createServerFn({ method: "POST" })
 				);
 			}
 			return json.data as ClaimGithubResult;
+		})
+	);
+
+// ─── Activate license + GitHub access (used on /activate page) ───────────────
+
+export interface ActivateLicenseInput {
+	licenseKey: string;
+	githubUsername: string;
+}
+
+export const activateLicenseFn = createServerFn({ method: "POST" })
+	.inputValidator((input: ActivateLicenseInput) => input)
+	.handler(({ data }) =>
+		handleError(async () => {
+			const api = createApiClient();
+			const res = await api.api.github.activate.$post({
+				json: data
+			});
+			const json = await res.json();
+			if (!res.ok) {
+				throw new Error(
+					(json as any).message ?? "Failed to activate license"
+				);
+			}
+			return json.data as ActivateResult;
 		})
 	);

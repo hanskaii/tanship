@@ -10,7 +10,7 @@ interface TemplatesPolicyContext {
 export const TemplatesPolicy = {
 	access: definePolicy<TemplatesPolicyContext, "templates.access">(
 		"templates.access",
-		combine(
+		combine<TemplatesPolicyContext>(
 			authorize("templates:access"),
 			(ctx) => {
 				if (ctx.resource?.planSlug === "tanflare-pro") return allow();

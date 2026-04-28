@@ -120,7 +120,7 @@ export const getAuth = (env: AuthEnv) => {
 				use: [
 					checkout({
 						products: App.getPayments(),
-						successUrl: "/account/billing"
+						successUrl: "/activate"
 					}),
 					portal(),
 					webhooks(getPaymentHooks(env)),

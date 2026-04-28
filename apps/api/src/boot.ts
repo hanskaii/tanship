@@ -80,21 +80,7 @@ export const boot = () => {
 			`[Billing Sync] Payment succeeded: ${ctx.paymentId} for product ${plan.name} (User: ${userId})`
 		);
 
-		if (plan.type === "credits") {
-			const creditAmount = plan.creditAmount;
-			console.log(
-				`[Billing Sync] Granting ${creditAmount} credits to user ${userId}`
-			);
-			const user = await db.query.users.findFirst({
-				where: eq(users.id, userId)
-			});
-			await db
-				.update(users)
-				.set({
-					credits: (user?.credits || 0) + creditAmount
-				})
-				.where(eq(users.id, userId));
-		} else if (plan.interval === "one-time") {
+		if (plan.interval === "one-time") {
 			await db
 				.update(users)
 				.set({

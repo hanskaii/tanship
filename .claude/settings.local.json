@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.dodopayments.com)",
+      "Bash(grep -r \"dodopayments\\\\|DodoPayments\" node_modules/.pnpm/dodopayments*/node_modules/dodopayments/src --include=\"*.ts\" -l)",
+      "Bash(xargs grep:*)",
+      "Bash(find node_modules/.pnpm/dodopayments*/node_modules -name \"checkout*\" -type f)",
+      "Bash(find node_modules/.pnpm/@dodopayments*/node_modules -name \"*.ts\")"
+    ]
+  }
+}
