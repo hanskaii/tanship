@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DefaultErrorComponent } from "@/routes/-components/default-error-component";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { authClient } from "@/auth/client";
+import { adminUsersQueryOptions } from "@/routes/-fn/admin";
 import {
 	UserMultiple02Icon,
 	UserAdd01Icon,
@@ -56,24 +57,13 @@ function AdminOverviewPage() {
 }
 
 function OverviewContent() {
-	const { data: usersData } = useSuspenseQuery({
-		queryKey: ["admin", "users"],
-		queryFn: async () => {
-			const { data, error } = await authClient.admin.listUsers({
-				query: {
-					limit: 100,
-					sortBy: "createdAt",
-					sortDirection: "desc"
-				}
-			});
-			if (error)
-				throw new Error(
-					error.message ||
-						"Failed to load users. Verify admin API access."
-				);
-			return data;
-		}
-	});
+	const { data: usersData } = useSuspenseQuery(
+		adminUsersQueryOptions({
+			limit: 100,
+			sortBy: "createdAt",
+			sortDirection: "desc"
+		})
+	);
 
 	const stats = useMemo(() => {
 		const users = usersData?.users ?? [];
