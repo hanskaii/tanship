@@ -4,7 +4,8 @@ import {
 	FlashIcon,
 	ArrowRight01Icon,
 	GithubIcon,
-	CheckmarkCircle01Icon
+	CheckmarkCircle01Icon,
+	EyeIcon
 } from "@hugeicons/core-free-icons";
 import { Link } from "@tanstack/react-router";
 
@@ -16,6 +17,8 @@ export interface TemplateItem {
 	description: string;
 	tags: string[];
 	previewBg?: string;
+	/** Live preview URL shown to all users before purchasing */
+	previewUrl?: string;
 }
 
 interface TemplateCardProps {
@@ -89,88 +92,112 @@ export function TemplateCard({
 				</div>
 
 				{/* Actions */}
-				<div className="flex items-center gap-2 pt-1 border-t border-border/40">
-					{hasAccess ? (
-						/* Pro or individually purchased → direct R2 download */
+				<div className="flex flex-col gap-2 pt-1 border-t border-border/40">
+					{/* Preview — always visible */}
+					{template.previewUrl && (
 						<Button
 							size="sm"
-							className="flex-1 h-7 text-[11px]"
+							variant="outline"
+							className="w-full h-7 text-[11px]"
 							asChild
 						>
 							<a
-								href={`/api/templates/${template.id}/download`}
-								download
+								href={template.previewUrl}
+								target="_blank"
+								rel="noreferrer"
 							>
 								<HugeiconsIcon
-									icon={GithubIcon}
+									icon={EyeIcon}
 									className="size-3 mr-1.5"
 								/>
-								Download
+								Live Preview
 							</a>
 						</Button>
-					) : isLoggedIn ? (
-						/* Logged in, no access — show both options */
-						<>
-							<Button
-								size="sm"
-								variant="outline"
-								className="flex-1 h-7 text-[11px]"
-								onClick={onUpgrade}
-								disabled={isCheckoutLoading}
-							>
-								<HugeiconsIcon
-									icon={FlashIcon}
-									className="size-3 mr-1.5"
-								/>
-								All — $299
-							</Button>
-							<Button
-								size="sm"
-								className="flex-1 h-7 text-[11px]"
-								onClick={onBuyTemplate}
-								disabled={isCheckoutLoading}
-							>
-								{isCheckoutLoading ? (
-									<Spinner className="size-3 mr-1.5" />
-								) : (
-									<HugeiconsIcon
-										icon={ArrowRight01Icon}
-										className="size-3 mr-1.5"
-									/>
-								)}
-								Buy — $99
-							</Button>
-						</>
-					) : (
-						/* Not logged in */
-						<>
-							<Button
-								size="sm"
-								variant="outline"
-								className="flex-1 h-7 text-[11px]"
-								onClick={onUpgrade}
-							>
-								<HugeiconsIcon
-									icon={FlashIcon}
-									className="size-3 mr-1.5"
-								/>
-								All — $299
-							</Button>
+					)}
+
+					<div className="flex items-center gap-2">
+						{hasAccess ? (
+							/* Pro or individually purchased → direct R2 download */
 							<Button
 								size="sm"
 								className="flex-1 h-7 text-[11px]"
 								asChild
 							>
-								<Link to="/login">
+								<a
+									href={`/api/templates/${template.id}/download`}
+									download
+								>
 									<HugeiconsIcon
-										icon={ArrowRight01Icon}
+										icon={GithubIcon}
 										className="size-3 mr-1.5"
 									/>
-									Buy — $99
-								</Link>
+									Download
+								</a>
 							</Button>
-						</>
-					)}
+						) : isLoggedIn ? (
+							/* Logged in, no access — show both options */
+							<>
+								<Button
+									size="sm"
+									variant="outline"
+									className="flex-1 h-7 text-[11px]"
+									onClick={onUpgrade}
+									disabled={isCheckoutLoading}
+								>
+									<HugeiconsIcon
+										icon={FlashIcon}
+										className="size-3 mr-1.5"
+									/>
+									All — $299
+								</Button>
+								<Button
+									size="sm"
+									className="flex-1 h-7 text-[11px]"
+									onClick={onBuyTemplate}
+									disabled={isCheckoutLoading}
+								>
+									{isCheckoutLoading ? (
+										<Spinner className="size-3 mr-1.5" />
+									) : (
+										<HugeiconsIcon
+											icon={ArrowRight01Icon}
+											className="size-3 mr-1.5"
+										/>
+									)}
+									Buy — $99
+								</Button>
+							</>
+						) : (
+							/* Not logged in */
+							<>
+								<Button
+									size="sm"
+									variant="outline"
+									className="flex-1 h-7 text-[11px]"
+									onClick={onUpgrade}
+								>
+									<HugeiconsIcon
+										icon={FlashIcon}
+										className="size-3 mr-1.5"
+									/>
+									All — $299
+								</Button>
+								<Button
+									size="sm"
+									className="flex-1 h-7 text-[11px]"
+									asChild
+								>
+									<Link to="/login">
+										<HugeiconsIcon
+											icon={ArrowRight01Icon}
+											className="size-3 mr-1.5"
+										/>
+										Buy — $99
+									</Link>
+								</Button>
+							</>
+						)}
+					</div>
 				</div>
 			</div>
 		</Card>

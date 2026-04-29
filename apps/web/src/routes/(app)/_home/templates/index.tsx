@@ -15,10 +15,7 @@ import { toast } from "@workspace/ui";
 import { appConfig } from "@workspace/config";
 import type { PricingPlan } from "@workspace/config";
 import { purchasesQueryOptions } from "@/routes/-fn/purchases";
-import {
-	TemplateCard,
-	type TemplateItem
-} from "./-components/template-card";
+import { TemplateCard, type TemplateItem } from "./-components/template-card";
 
 export const Route = createFileRoute("/(app)/_home/templates/")({
 	component: TemplatesPage
@@ -32,7 +29,8 @@ const TEMPLATES: TemplateItem[] = [
 		description:
 			"Full admin dashboard with analytics, user management, billing UI, and real-time charts.",
 		tags: ["TanStack", "shadcn/ui", "Recharts"],
-		previewBg: "from-blue-500/5 via-blue-500/10 to-blue-500/5"
+		previewBg: "from-blue-500/5 via-blue-500/10 to-blue-500/5",
+		previewUrl: "https://dashboard.tanflare.dev"
 	},
 	{
 		id: "marketing-site",
@@ -41,7 +39,8 @@ const TEMPLATES: TemplateItem[] = [
 		description:
 			"High-converting landing page with hero, features, testimonials, pricing, and blog.",
 		tags: ["TanStack Start", "MDX", "Motion"],
-		previewBg: "from-violet-500/5 via-violet-500/10 to-violet-500/5"
+		previewBg: "from-violet-500/5 via-violet-500/10 to-violet-500/5",
+		previewUrl: "https://marketing.tanflare.dev"
 	},
 	{
 		id: "docs-site",
@@ -50,7 +49,8 @@ const TEMPLATES: TemplateItem[] = [
 		description:
 			"Documentation site with full-text search, versioned content, and MDX-powered blog.",
 		tags: ["TanStack Router", "MDX"],
-		previewBg: "from-emerald-500/5 via-emerald-500/10 to-emerald-500/5"
+		previewBg: "from-emerald-500/5 via-emerald-500/10 to-emerald-500/5",
+		previewUrl: "https://docs.tanflare.dev"
 	},
 	{
 		id: "api-starter",
@@ -59,7 +59,8 @@ const TEMPLATES: TemplateItem[] = [
 		description:
 			"Production-ready Hono API with auth, rate limiting, and OpenAPI spec generation.",
 		tags: ["Hono", "Zod", "Workers"],
-		previewBg: "from-orange-500/5 via-orange-500/10 to-orange-500/5"
+		previewBg: "from-orange-500/5 via-orange-500/10 to-orange-500/5",
+		previewUrl: "https://api.tanflare.dev"
 	},
 	{
 		id: "waitlist",
@@ -68,7 +69,8 @@ const TEMPLATES: TemplateItem[] = [
 		description:
 			"Viral waitlist with referral tracking, position display, and email confirmation.",
 		tags: ["TanStack Start", "Dodo", "Resend"],
-		previewBg: "from-pink-500/5 via-pink-500/10 to-pink-500/5"
+		previewBg: "from-pink-500/5 via-pink-500/10 to-pink-500/5",
+		previewUrl: "https://waitlist.tanflare.dev"
 	},
 	{
 		id: "changelog",
@@ -77,7 +79,8 @@ const TEMPLATES: TemplateItem[] = [
 		description:
 			"Public changelog with RSS feed, email subscriber management, and markdown editor.",
 		tags: ["TanStack Router", "D1", "Resend"],
-		previewBg: "from-yellow-500/5 via-yellow-500/10 to-yellow-500/5"
+		previewBg: "from-yellow-500/5 via-yellow-500/10 to-yellow-500/5",
+		previewUrl: "https://changelog.tanflare.dev"
 	}
 ];
 
@@ -107,7 +110,9 @@ function TemplatesPage() {
 			router.navigate({ to: "/login" });
 			return;
 		}
-		const plan = appConfig.payments.find((p: PricingPlan) => p.slug === slug);
+		const plan = appConfig.payments.find(
+			(p: PricingPlan) => p.slug === slug
+		);
 		if (!plan) return;
 
 		setCheckoutSlug(slug);
@@ -284,8 +289,9 @@ function TemplatesPage() {
 							</h2>
 							<p className="text-muted-foreground text-[11px] max-w-md leading-relaxed">
 								One payment. Every template we've built and
-								everything we'll build in the future. Cheaper than
-								buying 4 individually. Priority support included.
+								everything we'll build in the future. Cheaper
+								than buying 4 individually. Priority support
+								included.
 							</p>
 						</div>
 						<div className="flex items-center gap-3">
