@@ -147,6 +147,12 @@ function HomePage() {
 							Templates
 						</Link>
 						<Link
+							to="/showcase"
+							className="text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block"
+						>
+							Showcase
+						</Link>
+						<Link
 							to="/changelog"
 							className="text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block"
 						>
