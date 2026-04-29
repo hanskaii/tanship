@@ -24,7 +24,7 @@ export interface AuthEnv {
 	BETTER_AUTH_URL: string;
 	GOOGLE_CLIENT_ID: string;
 	GOOGLE_CLIENT_SECRET: string;
-	RESEND_API_KEY: string;
+	SEND_EMAIL: SendEmail;
 	RESEND_FROM_EMAIL: string;
 	APP_NAME: string;
 	APP_ENV: string;
@@ -35,7 +35,14 @@ export interface AuthEnv {
 }
 
 export const getAuth = (env: AuthEnv) => {
-	const mailer = env.APP_ENV === "production" ? createMailer(env) : null;
+	const mailer =
+		env.APP_ENV === "production"
+			? createMailer({
+					SEND_EMAIL: env.SEND_EMAIL,
+					RESEND_FROM_EMAIL: env.RESEND_FROM_EMAIL,
+					APP_NAME: env.APP_NAME
+				})
+			: null;
 	return betterAuth({
 		database: drizzleAdapter(database(env.DATABASE), {
 			provider: "sqlite",

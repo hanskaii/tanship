@@ -36,7 +36,7 @@ function CopyButton({ text }: { text: string }) {
 	);
 }
 
-function GithubClaimForm({ purchaseId }: { purchaseId: string }) {
+function GithubClaimForm({ purchaseId: _purchaseId }: { purchaseId: string }) {
 	const [username, setUsername] = useState("");
 	const [isClaiming, setIsClaiming] = useState(false);
 	const queryClient = useQueryClient();

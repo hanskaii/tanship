@@ -6,7 +6,8 @@ import {
 	FlashIcon,
 	GithubIcon,
 	CheckmarkCircle01Icon,
-	ArrowRight01Icon
+	ArrowRight01Icon,
+	Download01Icon
 } from "@hugeicons/core-free-icons";
 import { authClient } from "@/auth/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -22,6 +23,23 @@ export const Route = createFileRoute("/(app)/_home/activate/")({
 	component: ActivatePage
 });
 
+function planDisplayName(slug: string) {
+	if (slug === "tanflare-pro") return "Tanflare Pro";
+	if (slug === "tanflare") return "Tanflare";
+	if (slug.startsWith("template-")) {
+		const id = slug.replace("template-", "");
+		return id
+			.split("-")
+			.map((w) => w[0].toUpperCase() + w.slice(1))
+			.join(" ") + " Template";
+	}
+	return slug;
+}
+
+function templateIdFromSlug(slug: string) {
+	return slug.replace("template-", "");
+}
+
 function ActivatePage() {
 	const { data: session } = authClient.useSession();
 	const queryClient = useQueryClient();
@@ -33,7 +51,7 @@ function ActivatePage() {
 		planSlug: string;
 	} | null>(null);
 
-	// Poll for unclaimed purchase (webhook may be slightly delayed)
+	// Poll for any new purchase (webhook may be slightly delayed)
 	const [pollCount, setPollCount] = useState(0);
 	const maxPolls = 15; // ~30 seconds at 2s interval
 
@@ -44,23 +62,36 @@ function ActivatePage() {
 			session?.user && pollCount < maxPolls && !activated ? 2000 : false
 	});
 
-	const unclaimedPurchase = purchases?.find((p: Purchase) => !p.githubInvitedAt);
-
-	// Increment poll count on each refetch
 	useEffect(() => {
 		if (purchases !== undefined) {
 			setPollCount((c) => c + 1);
 		}
 	}, [purchases]);
 
+	// Most recent purchase — sorted desc by createdAt
+	const latestPurchase = purchases
+		?.slice()
+		.sort(
+			(a, b) =>
+				new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+		)[0];
+
+	const isTemplatePurchase = latestPurchase?.planSlug.startsWith("template-");
+
+	// Unclaimed boilerplate purchase (needs GitHub activation)
+	const unclaimedBoilerplatePurchase = purchases?.find(
+		(p: Purchase) =>
+			!p.githubInvitedAt && !p.planSlug.startsWith("template-")
+	);
+
 	const handleActivate = async () => {
-		if (!unclaimedPurchase || !githubUsername.trim()) return;
+		if (!unclaimedBoilerplatePurchase || !githubUsername.trim()) return;
 
 		setIsActivating(true);
 		try {
 			const result = await activateLicenseFn({
 				data: {
-					licenseKey: unclaimedPurchase.licenseKey,
+					licenseKey: unclaimedBoilerplatePurchase.licenseKey,
 					githubUsername: githubUsername.trim()
 				}
 			});
@@ -76,6 +107,11 @@ function ActivatePage() {
 			setIsActivating(false);
 		}
 	};
+
+	// Determine what to show once purchases are loaded
+	const hasPurchase = !!latestPurchase;
+	const isWaiting =
+		isLoading || (!hasPurchase && pollCount < maxPolls && !activated);
 
 	return (
 		<div className="relative flex min-h-screen flex-col items-center bg-background overflow-hidden">
@@ -106,14 +142,17 @@ function ActivatePage() {
 								variant="secondary"
 								className="px-3 py-0.5 bg-primary/5 text-primary border-primary/20 text-[10px] uppercase tracking-wider font-bold mx-auto"
 							>
-								Activation
+								{isTemplatePurchase ? "Download" : "Activation"}
 							</Badge>
 							<h1 className="text-2xl font-extrabold tracking-tight">
-								Activate your license
+								{isTemplatePurchase
+									? "Your template is ready"
+									: "Activate your license"}
 							</h1>
 							<p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
-								Enter your GitHub username to activate your license
-								and receive a repository invitation.
+								{isTemplatePurchase
+									? "Download your template zip file to get started."
+									: "Enter your GitHub username to activate your license and receive a repository invitation."}
 							</p>
 						</div>
 					</div>
@@ -124,9 +163,13 @@ function ActivatePage() {
 						{!session?.user && (
 							<div className="flex flex-col items-center gap-4 py-4">
 								<p className="text-sm text-muted-foreground text-center">
-									Sign in to activate your license.
+									Sign in to access your purchase.
 								</p>
-								<Button size="sm" className="rounded-full px-6 h-9 text-xs" asChild>
+								<Button
+									size="sm"
+									className="rounded-full px-6 h-9 text-xs"
+									asChild
+								>
 									<Link to="/login">
 										<HugeiconsIcon
 											icon={ArrowRight01Icon}
@@ -138,7 +181,7 @@ function ActivatePage() {
 							</div>
 						)}
 
-						{/* Success state */}
+						{/* GitHub activation success */}
 						{activated && (
 							<motion.div
 								initial={{ opacity: 0, scale: 0.95 }}
@@ -187,28 +230,32 @@ function ActivatePage() {
 										className="rounded-full px-5 h-9 text-xs"
 										asChild
 									>
-										<Link to="/account/billing">View billing</Link>
+										<Link to="/account/billing">
+											View billing
+										</Link>
 									</Button>
 								</div>
 							</motion.div>
 						)}
 
-						{/* Logged in, not yet activated */}
+						{/* Logged in, not yet shown success */}
 						{session?.user && !activated && (
 							<>
 								{/* Waiting for webhook */}
-								{isLoading || (!unclaimedPurchase && pollCount < maxPolls) ? (
+								{isWaiting && (
 									<div className="flex flex-col items-center gap-3 py-4">
 										<Spinner className="size-5 text-muted-foreground" />
 										<p className="text-sm text-muted-foreground text-center">
 											Confirming your purchase…
 										</p>
 									</div>
-								) : !unclaimedPurchase ? (
-									/* No unclaimed purchase found */
+								)}
+
+								{/* No purchase found after polling */}
+								{!isWaiting && !hasPurchase && (
 									<div className="flex flex-col items-center gap-4 py-4 text-center">
 										<p className="text-sm text-muted-foreground">
-											No pending activation found for your account.
+											No pending purchase found for your account.
 										</p>
 										<div className="flex gap-2">
 											<Button
@@ -230,10 +277,12 @@ function ActivatePage() {
 											</Button>
 										</div>
 									</div>
-								) : (
-									/* Activation form */
+								)}
+
+								{/* Template purchase — show download */}
+								{!isWaiting && hasPurchase && isTemplatePurchase && (
 									<div className="flex flex-col gap-5">
-										{/* Plan badge */}
+										{/* Plan info */}
 										<div className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border/60">
 											<div className="flex items-center justify-center size-8 rounded-lg bg-primary/10 shrink-0">
 												<HugeiconsIcon
@@ -243,12 +292,10 @@ function ActivatePage() {
 											</div>
 											<div className="flex flex-col gap-0.5 flex-1 min-w-0">
 												<p className="text-xs font-semibold">
-													{unclaimedPurchase.planSlug === "tanflare-pro"
-														? "Tanflare Pro"
-														: "Tanflare"}
+													{planDisplayName(latestPurchase.planSlug)}
 												</p>
 												<p className="text-[11px] text-muted-foreground font-mono truncate">
-													{unclaimedPurchase.licenseKey}
+													{latestPurchase.licenseKey}
 												</p>
 											</div>
 											<Badge
@@ -259,7 +306,69 @@ function ActivatePage() {
 											</Badge>
 										</div>
 
-										{/* GitHub username input */}
+										<div className="flex flex-col items-center gap-3 py-2 text-center">
+											<div className="flex items-center justify-center size-10 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+												<HugeiconsIcon
+													icon={CheckmarkCircle01Icon}
+													className="size-5 text-emerald-500"
+												/>
+											</div>
+											<p className="text-sm text-muted-foreground">
+												Your template is ready to download. You can re-download anytime from the{" "}
+												<Link
+													to="/templates"
+													className="underline underline-offset-2 hover:text-foreground transition-colors"
+												>
+													Templates page
+												</Link>
+												.
+											</p>
+										</div>
+
+										<a
+											href={`/api/templates/${templateIdFromSlug(latestPurchase.planSlug)}/download`}
+											download
+										>
+											<Button className="w-full h-10 text-sm font-semibold">
+												<HugeiconsIcon
+													icon={Download01Icon}
+													className="size-4 mr-2"
+												/>
+												Download Template
+											</Button>
+										</a>
+									</div>
+								)}
+
+								{/* Boilerplate purchase — show GitHub form */}
+								{!isWaiting && hasPurchase && !isTemplatePurchase && unclaimedBoilerplatePurchase && (
+									<div className="flex flex-col gap-5">
+										{/* Plan info */}
+										<div className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border/60">
+											<div className="flex items-center justify-center size-8 rounded-lg bg-primary/10 shrink-0">
+												<HugeiconsIcon
+													icon={FlashIcon}
+													className="size-4 text-primary"
+												/>
+											</div>
+											<div className="flex flex-col gap-0.5 flex-1 min-w-0">
+												<p className="text-xs font-semibold">
+													{planDisplayName(
+														unclaimedBoilerplatePurchase.planSlug
+													)}
+												</p>
+												<p className="text-[11px] text-muted-foreground font-mono truncate">
+													{unclaimedBoilerplatePurchase.licenseKey}
+												</p>
+											</div>
+											<Badge
+												variant="secondary"
+												className="text-[9px] px-1.5 py-0 h-4 bg-emerald-500/10 text-emerald-600 border-emerald-500/20 shrink-0"
+											>
+												Purchased
+											</Badge>
+										</div>
+
 										<div className="flex flex-col gap-2">
 											<label className="text-xs font-semibold">
 												GitHub username
@@ -284,16 +393,14 @@ function ActivatePage() {
 												/>
 											</div>
 											<p className="text-[11px] text-muted-foreground">
-												This will be used as the device name in your license and to invite you to the GitHub repository.
+												Used as the device name in your license and to invite you to the GitHub repository.
 											</p>
 										</div>
 
 										<Button
 											className="w-full h-10 text-sm font-semibold"
 											onClick={handleActivate}
-											disabled={
-												isActivating || !githubUsername.trim()
-											}
+											disabled={isActivating || !githubUsername.trim()}
 										>
 											{isActivating ? (
 												<Spinner className="size-4 mr-2" />
@@ -309,20 +416,63 @@ function ActivatePage() {
 										</Button>
 									</div>
 								)}
+
+								{/* All boilerplate purchases already claimed */}
+								{!isWaiting && hasPurchase && !isTemplatePurchase && !unclaimedBoilerplatePurchase && (
+									<div className="flex flex-col items-center gap-4 py-4 text-center">
+										<div className="flex items-center justify-center size-10 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+											<HugeiconsIcon
+												icon={CheckmarkCircle01Icon}
+												className="size-5 text-emerald-500"
+											/>
+										</div>
+										<p className="text-sm text-muted-foreground">
+											Your license is already activated. Check your GitHub notifications for the repository invitation.
+										</p>
+										<div className="flex gap-2">
+											<Button
+												size="sm"
+												variant="outline"
+												className="rounded-full px-5 h-9 text-xs"
+												asChild
+											>
+												<a
+													href="https://github.com/notifications"
+													target="_blank"
+													rel="noreferrer"
+												>
+													<HugeiconsIcon
+														icon={GithubIcon}
+														className="size-3.5 mr-1.5"
+													/>
+													GitHub
+												</a>
+											</Button>
+											<Button
+												size="sm"
+												className="rounded-full px-5 h-9 text-xs"
+												asChild
+											>
+												<Link to="/account/billing">
+													View billing
+												</Link>
+											</Button>
+										</div>
+									</div>
+								)}
 							</>
 						)}
 					</div>
 
-					{/* Footer hint */}
 					{!activated && (
 						<p className="text-[11px] text-muted-foreground text-center">
-							Already activated?{" "}
-							<Link
-								to="/account/billing"
+							Need help?{" "}
+							<a
+								href="mailto:support@tanflare.com"
 								className="underline underline-offset-2 hover:text-foreground transition-colors"
 							>
-								View your billing page
-							</Link>
+								Contact support
+							</a>
 						</p>
 					)}
 				</motion.div>

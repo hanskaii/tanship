@@ -56,6 +56,91 @@ export const appConfig = {
 			cta: "Buy Tanflare Pro — $299",
 			popular: true,
 			footer: "One-time payment. All current + future templates."
+		},
+		// ── Individual templates ─────────────────────────────────────────
+		{
+			productId: "pdt_tpl_saas_dashboard_replace_me",
+			slug: "template-saas-dashboard",
+			name: "SaaS Dashboard Template",
+			description: "Full admin dashboard with analytics, user management, billing UI, and real-time charts.",
+			price: "$99",
+			currency: "USD",
+			interval: "one-time",
+			type: "standard",
+			features: ["TanStack", "shadcn/ui", "Recharts", "GitHub repo access"],
+			cta: "Buy Template — $99",
+			popular: false,
+			footer: "One-time payment. GitHub repo access included."
+		},
+		{
+			productId: "pdt_tpl_marketing_site_replace_me",
+			slug: "template-marketing-site",
+			name: "Marketing Site Template",
+			description: "High-converting landing page with hero, features, testimonials, pricing, and blog.",
+			price: "$99",
+			currency: "USD",
+			interval: "one-time",
+			type: "standard",
+			features: ["TanStack Start", "MDX", "Motion", "GitHub repo access"],
+			cta: "Buy Template — $99",
+			popular: false,
+			footer: "One-time payment. GitHub repo access included."
+		},
+		{
+			productId: "pdt_tpl_docs_site_replace_me",
+			slug: "template-docs-site",
+			name: "Docs & Blog Template",
+			description: "Documentation site with full-text search, versioned content, and MDX-powered blog.",
+			price: "$99",
+			currency: "USD",
+			interval: "one-time",
+			type: "standard",
+			features: ["TanStack Router", "MDX", "GitHub repo access"],
+			cta: "Buy Template — $99",
+			popular: false,
+			footer: "One-time payment. GitHub repo access included."
+		},
+		{
+			productId: "pdt_tpl_api_starter_replace_me",
+			slug: "template-api-starter",
+			name: "API Starter Template",
+			description: "Production-ready Hono API with auth, rate limiting, and OpenAPI spec generation.",
+			price: "$99",
+			currency: "USD",
+			interval: "one-time",
+			type: "standard",
+			features: ["Hono", "Zod", "Workers", "GitHub repo access"],
+			cta: "Buy Template — $99",
+			popular: false,
+			footer: "One-time payment. GitHub repo access included."
+		},
+		{
+			productId: "pdt_tpl_waitlist_replace_me",
+			slug: "template-waitlist",
+			name: "Waitlist App Template",
+			description: "Viral waitlist with referral tracking, position display, and email confirmation.",
+			price: "$99",
+			currency: "USD",
+			interval: "one-time",
+			type: "standard",
+			features: ["TanStack Start", "Dodo", "Resend", "GitHub repo access"],
+			cta: "Buy Template — $99",
+			popular: false,
+			footer: "One-time payment. GitHub repo access included."
+		},
+		{
+			productId: "pdt_tpl_changelog_replace_me",
+			slug: "template-changelog",
+			name: "Changelog App Template",
+			description: "Public changelog with RSS feed, email subscriber management, and markdown editor.",
+			price: "$99",
+			currency: "USD",
+			interval: "one-time",
+			type: "standard",
+			features: ["TanStack Router", "D1", "Resend", "GitHub repo access"],
+			cta: "Buy Template — $99",
+			popular: false,
+			footer: "One-time payment. GitHub repo access included."
 		}
 	]
 } as const satisfies {

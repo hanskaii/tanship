@@ -1,0 +1,37 @@
+---
+title: v0.9.0 — Beta Release
+description: Private beta with core auth, billing, and edge deployment working end-to-end.
+version: "0.9.0"
+date: "2026-03-15"
+tags: ["beta"]
+---
+
+## What's new
+
+Private beta released to early access members.
+
+### Auth
+
+- Email OTP verification
+- Google One Tap sign-in
+- Multi-session support (up to 5 concurrent sessions)
+- Admin panel with user management
+
+### Payments
+
+- Dodo Payments integration
+- Subscription status tracking
+- `app.use` policy gating for paid features
+
+### Infrastructure
+
+- Cloudflare Workers deployment
+- D1 database with Drizzle migrations
+- R2 object storage
+- Service bindings between web and API workers
+
+## Bug fixes
+
+- Fixed session cookie forwarding between web and API service bindings
+- Fixed OTP email template rendering in dark mode
+- Fixed Drizzle migration runner on non-zero database state

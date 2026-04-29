@@ -181,7 +181,7 @@ function BillingContent({
 											<span className="text-[11px] text-muted-foreground">
 												Renews{" "}
 												{formatDate(
-													activeSubscription.currentPeriodEnd
+													activeSubscription.currentPeriodEnd?.toString()
 												)}
 											</span>
 										)}

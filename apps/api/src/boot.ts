@@ -146,9 +146,9 @@ export const boot = () => {
 
 		if (user?.email) {
 			const env = (ctx as any).env;
-			if (env?.RESEND_API_KEY) {
+			if (env?.SEND_EMAIL) {
 				const mailer = createMailer({
-					RESEND_API_KEY: env.RESEND_API_KEY,
+					SEND_EMAIL: env.SEND_EMAIL,
 					RESEND_FROM_EMAIL: env.RESEND_FROM_EMAIL,
 					APP_NAME: env.APP_NAME
 				});

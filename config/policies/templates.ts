@@ -13,10 +13,14 @@ export const TemplatesPolicy = {
 		combine<TemplatesPolicyContext>(
 			authorize("templates:access"),
 			(ctx) => {
-				if (ctx.resource?.planSlug === "tanflare-pro") return allow();
+				const slug = ctx.resource?.planSlug;
+				// Pro plan → access to all templates
+				if (slug === "tanflare-pro") return allow();
+				// Individual template purchase → access granted
+				if (slug?.startsWith("template-")) return allow();
 				return deny({
 					code: "PLAN_REQUIRED",
-					message: "Templates access requires Tanflare Pro."
+					message: "You don't have access to this template. Purchase it to download."
 				});
 			}
 		)

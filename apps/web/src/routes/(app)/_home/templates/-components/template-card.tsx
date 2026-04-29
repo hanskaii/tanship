@@ -1,11 +1,17 @@
-import { Badge, Button, Card } from "@workspace/ui";
+import { Badge, Button, Card, Spinner } from "@workspace/ui";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { FlashIcon, ArrowRight01Icon, GithubIcon } from "@hugeicons/core-free-icons";
+import {
+	FlashIcon,
+	ArrowRight01Icon,
+	GithubIcon,
+	CheckmarkCircle01Icon
+} from "@hugeicons/core-free-icons";
 import { Link } from "@tanstack/react-router";
-import { toast } from "@workspace/ui";
 
 export interface TemplateItem {
 	id: string;
+	/** Matches the payment slug, e.g. "template-saas-dashboard" */
+	slug: string;
 	name: string;
 	description: string;
 	tags: string[];
@@ -15,19 +21,24 @@ export interface TemplateItem {
 interface TemplateCardProps {
 	template: TemplateItem;
 	isProUser: boolean;
+	/** User has purchased this specific template individually */
+	hasPurchased: boolean;
 	isLoggedIn: boolean;
 	onUpgrade: () => void;
+	onBuyTemplate: () => void;
+	isCheckoutLoading?: boolean;
 }
 
 export function TemplateCard({
 	template,
 	isProUser,
+	hasPurchased,
 	isLoggedIn,
-	onUpgrade
+	onUpgrade,
+	onBuyTemplate,
+	isCheckoutLoading
 }: TemplateCardProps) {
-	const handleIndividualBuy = () => {
-		toast.info("Individual templates coming soon!");
-	};
+	const hasAccess = isProUser || hasPurchased;
 
 	return (
 		<Card className="group relative flex flex-col border-none bg-muted/20 ring-1 ring-border/50 transition-all hover:ring-primary/30 backdrop-blur-sm overflow-hidden text-left p-0">
@@ -42,6 +53,16 @@ export function TemplateCard({
 						className="size-5 text-primary"
 					/>
 				</div>
+				{/* "Owned" badge for individually purchased templates */}
+				{hasPurchased && !isProUser && (
+					<div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-semibold text-emerald-600">
+						<HugeiconsIcon
+							icon={CheckmarkCircle01Icon}
+							className="size-3"
+						/>
+						Owned
+					</div>
+				)}
 			</div>
 
 			<div className="flex flex-col gap-3 p-4 flex-1">
@@ -69,16 +90,16 @@ export function TemplateCard({
 
 				{/* Actions */}
 				<div className="flex items-center gap-2 pt-1 border-t border-border/40">
-					{isProUser ? (
+					{hasAccess ? (
+						/* Pro or individually purchased → direct R2 download */
 						<Button
 							size="sm"
 							className="flex-1 h-7 text-[11px]"
 							asChild
 						>
 							<a
-								href={`https://github.com`}
-								target="_blank"
-								rel="noreferrer"
+								href={`/api/templates/${template.id}/download`}
+								download
 							>
 								<HugeiconsIcon
 									icon={GithubIcon}
@@ -88,40 +109,68 @@ export function TemplateCard({
 							</a>
 						</Button>
 					) : isLoggedIn ? (
-						<Button
-							size="sm"
-							className="flex-1 h-7 text-[11px]"
-							onClick={onUpgrade}
-						>
-							<HugeiconsIcon
-								icon={ArrowRight01Icon}
-								className="size-3 mr-1.5"
-							/>
-							Upgrade to Pro
-						</Button>
-					) : (
-						<Button
-							size="sm"
-							className="flex-1 h-7 text-[11px]"
-							asChild
-						>
-							<Link to="/login">
+						/* Logged in, no access — show both options */
+						<>
+							<Button
+								size="sm"
+								variant="outline"
+								className="flex-1 h-7 text-[11px]"
+								onClick={onUpgrade}
+								disabled={isCheckoutLoading}
+							>
 								<HugeiconsIcon
-									icon={ArrowRight01Icon}
+									icon={FlashIcon}
 									className="size-3 mr-1.5"
 								/>
-								Sign in to buy
-							</Link>
-						</Button>
+								All — $299
+							</Button>
+							<Button
+								size="sm"
+								className="flex-1 h-7 text-[11px]"
+								onClick={onBuyTemplate}
+								disabled={isCheckoutLoading}
+							>
+								{isCheckoutLoading ? (
+									<Spinner className="size-3 mr-1.5" />
+								) : (
+									<HugeiconsIcon
+										icon={ArrowRight01Icon}
+										className="size-3 mr-1.5"
+									/>
+								)}
+								Buy — $99
+							</Button>
+						</>
+					) : (
+						/* Not logged in */
+						<>
+							<Button
+								size="sm"
+								variant="outline"
+								className="flex-1 h-7 text-[11px]"
+								onClick={onUpgrade}
+							>
+								<HugeiconsIcon
+									icon={FlashIcon}
+									className="size-3 mr-1.5"
+								/>
+								All — $299
+							</Button>
+							<Button
+								size="sm"
+								className="flex-1 h-7 text-[11px]"
+								asChild
+							>
+								<Link to="/login">
+									<HugeiconsIcon
+										icon={ArrowRight01Icon}
+										className="size-3 mr-1.5"
+									/>
+									Buy — $99
+								</Link>
+							</Button>
+						</>
 					)}
-					<Button
-						size="sm"
-						variant="ghost"
-						className="h-7 text-[11px] text-muted-foreground shrink-0"
-						onClick={handleIndividualBuy}
-					>
-						$99
-					</Button>
 				</div>
 			</div>
 		</Card>

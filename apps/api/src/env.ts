@@ -9,10 +9,7 @@ export const EnvSchema = z.object({
 	GOOGLE_CLIENT_ID: z.string().min(1, "GOOGLE_CLIENT_ID is required"),
 	GOOGLE_CLIENT_SECRET: z.string().min(1, "GOOGLE_CLIENT_SECRET is required"),
 
-	// Email
-	RESEND_API_KEY: z
-		.string()
-		.startsWith("re_", "RESEND_API_KEY must start with re_"),
+	// Email (Cloudflare Email Workers — SEND_EMAIL is a binding, not an env var)
 	RESEND_FROM_EMAIL: z
 		.string()
 		.email("RESEND_FROM_EMAIL must be a valid email"),
@@ -35,7 +32,8 @@ export const EnvSchema = z.object({
 
 	// App
 	APP_NAME: z.string().min(1, "APP_NAME is required"),
-	APP_ENV: z.enum(["development", "staging", "production"])
+	APP_ENV: z.enum(["development", "staging", "production"]),
+	ADMIN_EMAIL: z.string().email("ADMIN_EMAIL must be a valid email").optional()
 });
 
 export type ValidatedEnv = z.infer<typeof EnvSchema>;

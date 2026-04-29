@@ -33,6 +33,11 @@
 	"ai": {
 		"binding": "AI"
 	},
+	"send_email": [
+		{
+			"name": "SEND_EMAIL"
+		}
+	],
 	"vars": {
 		// Production values — for local dev, override via apps/api/.dev.vars
 		"APP_ENV": "production",

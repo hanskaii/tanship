@@ -62,7 +62,8 @@ const githubHandler = new Hono<HonoEnv>()
 			throw ApiError.server("GitHub integration not configured");
 		}
 
-		// Find most recent unclaimed purchase
+		// Find most recent unclaimed boilerplate purchase
+		// (template-* purchases don't need GitHub — they use the download endpoint)
 		const purchase = await db.query.purchases.findFirst({
 			where: and(
 				eq(purchases.userId, user.id),
@@ -76,9 +77,20 @@ const githubHandler = new Hono<HonoEnv>()
 			);
 		}
 
-		const repos = [boilerplateRepo];
-		if (purchase.planSlug === "tanflare-pro" && templatesRepo) {
-			repos.push(templatesRepo);
+		if (purchase.planSlug.startsWith("template-")) {
+			throw ApiError.badRequest(
+				"Template purchases don't require GitHub activation. Use the download button on the Templates page."
+			);
+		}
+
+		// "tanflare" → boilerplate repo only
+		// "tanflare-pro" → boilerplate + templates repos
+		const repos: string[] = [];
+		if (purchase.planSlug === "tanflare-pro") {
+			repos.push(boilerplateRepo);
+			if (templatesRepo) repos.push(templatesRepo);
+		} else {
+			repos.push(boilerplateRepo);
 		}
 
 		// Invite to each repo via GitHub API
@@ -162,6 +174,13 @@ const githubHandler = new Hono<HonoEnv>()
 			);
 		}
 
+		// Template purchases don't use GitHub — they download directly
+		if (purchase.planSlug.startsWith("template-")) {
+			throw ApiError.badRequest(
+				"Template purchases don't require GitHub activation. Use the download button on the Templates page."
+			);
+		}
+
 		// Activate the license key with Dodo Payments
 		if (dodoApiKey) {
 			const dodo = new DodoPayments({
@@ -174,10 +193,14 @@ const githubHandler = new Hono<HonoEnv>()
 			});
 		}
 
-		// Invite to GitHub repos
-		const repos = [boilerplateRepo];
-		if (purchase.planSlug === "tanflare-pro" && templatesRepo) {
-			repos.push(templatesRepo);
+		// "tanflare" → boilerplate repo only
+		// "tanflare-pro" → boilerplate + templates repos
+		const repos: string[] = [];
+		if (purchase.planSlug === "tanflare-pro") {
+			repos.push(boilerplateRepo);
+			if (templatesRepo) repos.push(templatesRepo);
+		} else {
+			repos.push(boilerplateRepo);
 		}
 
 		for (const repo of repos) {

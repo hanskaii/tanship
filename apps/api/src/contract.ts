@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import type { HonoEnv } from "./types/hono.types";
 import uploadHandler from "./handlers/upload.handler";
 import githubHandler from "./handlers/github.handler";
+import templateDownloadHandler from "./handlers/template-download.handler";
 import { authMiddleware } from "./middleware/auth.middleware";
 import { protect } from "./middleware/protect.middleware";
 
@@ -29,7 +30,8 @@ import { protect } from "./middleware/protect.middleware";
 const contract = new Hono<HonoEnv>()
 	.use("*", authMiddleware, protect("app.use"))
 	.route("/api/upload", uploadHandler)
-	.route("/api/github", githubHandler);
+	.route("/api/github", githubHandler)
+	.route("/api/templates", templateDownloadHandler);
 
 export type AppType = typeof contract;
 export { contract };

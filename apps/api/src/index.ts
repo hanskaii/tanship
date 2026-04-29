@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 
 import authHandler from "./handlers/auth.handler";
+import showcaseHandler from "./handlers/showcase.handler";
 import { contract } from "./contract";
 
 import type { HonoEnv } from "./types/hono.types";
@@ -46,6 +47,9 @@ app.use(
 
 // Auth routes (better-auth)
 app.route("/", authHandler);
+
+// Showcase routes (mixed auth: public GET, authed POST, admin PATCH)
+app.route("/api/showcase", showcaseHandler);
 
 // Typed RPC contract routes (licenses, uploads, etc.)
 app.route("/", contract);

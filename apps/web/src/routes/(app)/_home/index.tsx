@@ -146,6 +146,12 @@ function HomePage() {
 						>
 							Templates
 						</Link>
+						<Link
+							to="/changelog"
+							className="text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block"
+						>
+							Changelog
+						</Link>
 						<div className="flex items-center gap-3">
 							<Button
 								variant="ghost"
@@ -777,6 +783,24 @@ function HomePage() {
 								className="text-xs text-muted-foreground hover:text-foreground"
 							>
 								Templates
+							</Link>
+							<Link
+								to="/changelog"
+								className="text-xs text-muted-foreground hover:text-foreground"
+							>
+								Changelog
+							</Link>
+							<Link
+								to="/showcase"
+								className="text-xs text-muted-foreground hover:text-foreground"
+							>
+								Showcase
+							</Link>
+							<Link
+								to="/badge"
+								className="text-xs text-muted-foreground hover:text-foreground"
+							>
+								Badge
 							</Link>
 							<Link
 								to="/contact"

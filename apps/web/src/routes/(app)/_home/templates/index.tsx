@@ -27,6 +27,7 @@ export const Route = createFileRoute("/(app)/_home/templates/")({
 const TEMPLATES: TemplateItem[] = [
 	{
 		id: "saas-dashboard",
+		slug: "template-saas-dashboard",
 		name: "SaaS Dashboard",
 		description:
 			"Full admin dashboard with analytics, user management, billing UI, and real-time charts.",
@@ -35,6 +36,7 @@ const TEMPLATES: TemplateItem[] = [
 	},
 	{
 		id: "marketing-site",
+		slug: "template-marketing-site",
 		name: "Marketing Site",
 		description:
 			"High-converting landing page with hero, features, testimonials, pricing, and blog.",
@@ -43,6 +45,7 @@ const TEMPLATES: TemplateItem[] = [
 	},
 	{
 		id: "docs-site",
+		slug: "template-docs-site",
 		name: "Docs & Blog",
 		description:
 			"Documentation site with full-text search, versioned content, and MDX-powered blog.",
@@ -51,6 +54,7 @@ const TEMPLATES: TemplateItem[] = [
 	},
 	{
 		id: "api-starter",
+		slug: "template-api-starter",
 		name: "API Starter",
 		description:
 			"Production-ready Hono API with auth, rate limiting, and OpenAPI spec generation.",
@@ -59,6 +63,7 @@ const TEMPLATES: TemplateItem[] = [
 	},
 	{
 		id: "waitlist",
+		slug: "template-waitlist",
 		name: "Waitlist App",
 		description:
 			"Viral waitlist with referral tracking, position display, and email confirmation.",
@@ -67,6 +72,7 @@ const TEMPLATES: TemplateItem[] = [
 	},
 	{
 		id: "changelog",
+		slug: "template-changelog",
 		name: "Changelog App",
 		description:
 			"Public changelog with RSS feed, email subscriber management, and markdown editor.",
@@ -78,7 +84,8 @@ const TEMPLATES: TemplateItem[] = [
 function TemplatesPage() {
 	const router = useRouter();
 	const { data: session } = authClient.useSession();
-	const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
+	// null = no checkout in progress; string = slug of plan being purchased
+	const [checkoutSlug, setCheckoutSlug] = useState<string | null>(null);
 
 	const { data: purchases } = useQuery({
 		...purchasesQueryOptions(),
@@ -88,22 +95,26 @@ function TemplatesPage() {
 	const isProUser =
 		purchases?.some((p) => p.planSlug === "tanflare-pro") ?? false;
 
-	const proPlan = appConfig.payments.find(
-		(p: PricingPlan) => p.slug === "tanflare-pro"
+	/** Set of individual template slugs the user already owns */
+	const ownedTemplateSlugs = new Set(
+		purchases
+			?.filter((p) => p.planSlug.startsWith("template-"))
+			.map((p) => p.planSlug) ?? []
 	);
 
-	const handleUpgrade = async () => {
+	const startCheckout = async (slug: string) => {
 		if (!session?.user) {
 			router.navigate({ to: "/login" });
 			return;
 		}
-		if (!proPlan) return;
+		const plan = appConfig.payments.find((p: PricingPlan) => p.slug === slug);
+		if (!plan) return;
 
-		setIsCheckoutLoading(true);
+		setCheckoutSlug(slug);
 		try {
 			const { data, error } =
 				await authClient.dodopayments.checkoutSession({
-					slug: proPlan.slug,
+					slug: plan.slug,
 					customer: {
 						name:
 							session.user.name ??
@@ -123,9 +134,11 @@ function TemplatesPage() {
 		} catch {
 			toast.error("Something went wrong. Please try again.");
 		} finally {
-			setIsCheckoutLoading(false);
+			setCheckoutSlug(null);
 		}
 	};
+
+	const handleUpgrade = () => startCheckout("tanflare-pro");
 
 	return (
 		<div className="relative flex min-h-screen flex-col items-center bg-background overflow-hidden">
@@ -158,8 +171,8 @@ function TemplatesPage() {
 					</h1>
 					<p className="max-w-xl text-balance text-sm text-muted-foreground sm:text-base leading-relaxed">
 						Production-ready templates built on the Tanflare stack.
-						Buy once, own forever — or unlock all of them with
-						Tanflare Pro.
+						Buy individually at $99, or unlock all of them with
+						Tanflare Pro for $299.
 					</p>
 
 					{!isProUser && (
@@ -168,9 +181,9 @@ function TemplatesPage() {
 								size="sm"
 								className="rounded-full px-6 h-10 text-xs"
 								onClick={handleUpgrade}
-								disabled={isCheckoutLoading}
+								disabled={!!checkoutSlug}
 							>
-								{isCheckoutLoading ? (
+								{checkoutSlug === "tanflare-pro" ? (
 									<Spinner className="size-3.5 mr-2" />
 								) : (
 									<HugeiconsIcon
@@ -233,8 +246,18 @@ function TemplatesPage() {
 								<TemplateCard
 									template={template}
 									isProUser={isProUser}
+									hasPurchased={ownedTemplateSlugs.has(
+										template.slug
+									)}
 									isLoggedIn={!!session?.user}
 									onUpgrade={handleUpgrade}
+									onBuyTemplate={() =>
+										startCheckout(template.slug)
+									}
+									isCheckoutLoading={
+										checkoutSlug === template.slug ||
+										checkoutSlug === "tanflare-pro"
+									}
 								/>
 							</motion.div>
 						))}
@@ -261,21 +284,26 @@ function TemplatesPage() {
 							</h2>
 							<p className="text-muted-foreground text-[11px] max-w-md leading-relaxed">
 								One payment. Every template we've built and
-								everything we'll build in the future. Priority
-								support included.
+								everything we'll build in the future. Cheaper than
+								buying 4 individually. Priority support included.
 							</p>
 						</div>
-						<Button
-							size="sm"
-							className="rounded-full px-8 h-10 text-xs font-semibold"
-							onClick={handleUpgrade}
-							disabled={isCheckoutLoading}
-						>
-							{isCheckoutLoading ? (
-								<Spinner className="size-3.5 mr-2" />
-							) : null}
-							Get Tanflare Pro — $299
-						</Button>
+						<div className="flex items-center gap-3">
+							<Button
+								size="sm"
+								className="rounded-full px-8 h-10 text-xs font-semibold"
+								onClick={handleUpgrade}
+								disabled={!!checkoutSlug}
+							>
+								{checkoutSlug === "tanflare-pro" ? (
+									<Spinner className="size-3.5 mr-2" />
+								) : null}
+								Get Tanflare Pro — $299
+							</Button>
+							<p className="text-[11px] text-muted-foreground">
+								vs. $99 × 6 = $594 individually
+							</p>
+						</div>
 					</motion.section>
 				)}
 			</main>
