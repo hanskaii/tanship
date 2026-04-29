@@ -99,101 +99,105 @@ function UpgradePage() {
 
 				{/* Pricing cards — columns match plan count, max 4 */}
 				<div
-					className={`grid w-full gap-6 grid-cols-1 sm:grid-cols-2 ${{ 1: "lg:grid-cols-1", 2: "lg:grid-cols-2", 3: "lg:grid-cols-3", 4: "lg:grid-cols-4" }[appConfig.payments.length as 1 | 2 | 3 | 4] ?? "lg:grid-cols-3"}`}
+					className={`grid w-full gap-6 grid-cols-1 sm:grid-cols-2 ${{ 1: "lg:grid-cols-1", 2: "lg:grid-cols-2", 3: "lg:grid-cols-3", 4: "lg:grid-cols-4" }[appConfig.payments.filter((p: any) => !p.slug.startsWith("template-")).length as 1 | 2 | 3 | 4] ?? "lg:grid-cols-3"}`}
 				>
-					{appConfig.payments.map((plan: any, i: number) => (
-						<motion.div
-							key={plan.name}
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.4, delay: 0.1 * i }}
-							className="flex h-full"
-						>
-							<Card
-								className={`relative flex flex-col w-full p-6 transition-all border-none bg-muted/20 ring-1 backdrop-blur-sm overflow-hidden text-left ${plan.popular ? "ring-primary/40 bg-primary/[0.03]" : "ring-border/50"}`}
+					{appConfig.payments
+						.filter((p: any) => !p.slug.startsWith("template-"))
+						.map((plan: any, i: number) => (
+							<motion.div
+								key={plan.name}
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.4, delay: 0.1 * i }}
+								className="flex h-full"
 							>
-								{plan.popular && (
-									<div className="absolute top-0 right-0">
-										<div className="bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">
-											Most Popular
-										</div>
-									</div>
-								)}
-								<div className="flex flex-col gap-1.5 mb-6">
-									<h3 className="font-bold text-lg leading-tight">
-										{plan.name}
-									</h3>
-									<div className="flex flex-col gap-0.5">
-										<div className="flex items-center gap-2">
-											{plan.originalPrice && (
-												<span className="text-sm font-medium text-muted-foreground line-through opacity-50">
-													{plan.originalPrice}
-												</span>
-											)}
-											<span className="text-3xl font-black">
-												{plan.price}
-											</span>
-											<span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest ml-1">
-												{plan.currency}
-											</span>
-										</div>
-										<span className="text-[10px] text-primary font-bold uppercase tracking-tight">
-											{plan.interval === "one-time"
-												? plan.type === "credits"
-													? `Refillable (${plan.unit})`
-													: "Pay once, build unlimited"
-												: `/ ${plan.interval}`}
-										</span>
-									</div>
-									<p className="text-[11px] text-muted-foreground leading-relaxed mt-4 h-12">
-										{plan.description}
-									</p>
-								</div>
-
-								<Separator className="mb-6 opacity-40" />
-
-								<div className="flex flex-col gap-4 mb-8 flex-1">
-									{plan.features.map((feature: string) => (
-										<div
-											key={feature}
-											className="flex items-center gap-2.5"
-										>
-											<div className="flex items-center justify-center size-4 rounded-full bg-primary/10">
-												<HugeiconsIcon
-													icon={FlashIcon}
-													className="size-2 text-primary"
-												/>
-											</div>
-											<span className="text-[11px] font-medium text-foreground/80">
-												{feature}
-											</span>
-										</div>
-									))}
-								</div>
-
-								<Button
-									size="sm"
-									variant={
-										plan.popular ? "default" : "outline"
-									}
-									className={`w-full rounded-xl text-xs h-9 font-bold transition-all ${plan.popular ? "shadow-lg shadow-primary/20" : ""}`}
-									onClick={() => handleCheckout(plan)}
-									disabled={isCheckoutLoading !== null}
+								<Card
+									className={`relative flex flex-col w-full p-6 transition-all border-none bg-muted/20 ring-1 backdrop-blur-sm overflow-hidden text-left ${plan.popular ? "ring-primary/40 bg-primary/[0.03]" : "ring-border/50"}`}
 								>
-									{isCheckoutLoading === plan.name ? (
-										<Spinner className="size-3.5 mr-2" />
-									) : null}
-									{isCheckoutLoading === plan.name
-										? "Preparing..."
-										: plan.cta}
-								</Button>
+									{plan.popular && (
+										<div className="absolute top-0 right-0">
+											<div className="bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">
+												Most Popular
+											</div>
+										</div>
+									)}
+									<div className="flex flex-col gap-1.5 mb-6">
+										<h3 className="font-bold text-lg leading-tight">
+											{plan.name}
+										</h3>
+										<div className="flex flex-col gap-0.5">
+											<div className="flex items-center gap-2">
+												{plan.originalPrice && (
+													<span className="text-sm font-medium text-muted-foreground line-through opacity-50">
+														{plan.originalPrice}
+													</span>
+												)}
+												<span className="text-3xl font-black">
+													{plan.price}
+												</span>
+												<span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest ml-1">
+													{plan.currency}
+												</span>
+											</div>
+											<span className="text-[10px] text-primary font-bold uppercase tracking-tight">
+												{plan.interval === "one-time"
+													? plan.type === "credits"
+														? `Refillable (${plan.unit})`
+														: "Pay once, build unlimited"
+													: `/ ${plan.interval}`}
+											</span>
+										</div>
+										<p className="text-[11px] text-muted-foreground leading-relaxed mt-4 h-12">
+											{plan.description}
+										</p>
+									</div>
 
-								<p className="text-center text-[9px] text-muted-foreground mt-4 opacity-60">
-									{plan.footer}
-								</p>
-							</Card>
-						</motion.div>
-					))}
+									<Separator className="mb-6 opacity-40" />
+
+									<div className="flex flex-col gap-4 mb-8 flex-1">
+										{plan.features.map(
+											(feature: string) => (
+												<div
+													key={feature}
+													className="flex items-center gap-2.5"
+												>
+													<div className="flex items-center justify-center size-4 rounded-full bg-primary/10">
+														<HugeiconsIcon
+															icon={FlashIcon}
+															className="size-2 text-primary"
+														/>
+													</div>
+													<span className="text-[11px] font-medium text-foreground/80">
+														{feature}
+													</span>
+												</div>
+											)
+										)}
+									</div>
+
+									<Button
+										size="sm"
+										variant={
+											plan.popular ? "default" : "outline"
+										}
+										className={`w-full rounded-xl text-xs h-9 font-bold transition-all ${plan.popular ? "shadow-lg shadow-primary/20" : ""}`}
+										onClick={() => handleCheckout(plan)}
+										disabled={isCheckoutLoading !== null}
+									>
+										{isCheckoutLoading === plan.name ? (
+											<Spinner className="size-3.5 mr-2" />
+										) : null}
+										{isCheckoutLoading === plan.name
+											? "Preparing..."
+											: plan.cta}
+									</Button>
+
+									<p className="text-center text-[9px] text-muted-foreground mt-4 opacity-60">
+										{plan.footer}
+									</p>
+								</Card>
+							</motion.div>
+						))}
 				</div>
 
 				{/* Footer */}

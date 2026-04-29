@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { DefaultErrorComponent } from "@/routes/-components/default-error-component";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { authClient } from "@/auth/client";
 import {
@@ -25,7 +26,8 @@ import {
 import { Bar, BarChart, XAxis, CartesianGrid } from "recharts";
 
 export const Route = createFileRoute("/(app)/_admin/s/overview/")({
-	component: AdminOverviewPage
+	component: AdminOverviewPage,
+	errorComponent: DefaultErrorComponent
 });
 
 function AdminOverviewPage() {
@@ -64,7 +66,11 @@ function OverviewContent() {
 					sortDirection: "desc"
 				}
 			});
-			if (error) throw new Error(error.message);
+			if (error)
+				throw new Error(
+					error.message ||
+						"Failed to load users. Verify admin API access."
+				);
 			return data;
 		}
 	});
