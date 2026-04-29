@@ -9,7 +9,7 @@ export const appConfig = {
 
 	payments: [
 		{
-			productId: "pdt_tanflare_replace_me",
+			productId: "pdt_0NckxDjwzwWTyMiEdEb7y",
 			slug: "tanflare",
 			name: "Tanflare",
 			description:
@@ -62,12 +62,18 @@ export const appConfig = {
 			productId: "pdt_tpl_saas_dashboard_replace_me",
 			slug: "template-saas-dashboard",
 			name: "SaaS Dashboard Template",
-			description: "Full admin dashboard with analytics, user management, billing UI, and real-time charts.",
+			description:
+				"Full admin dashboard with analytics, user management, billing UI, and real-time charts.",
 			price: "$99",
 			currency: "USD",
 			interval: "one-time",
 			type: "standard",
-			features: ["TanStack", "shadcn/ui", "Recharts", "GitHub repo access"],
+			features: [
+				"TanStack",
+				"shadcn/ui",
+				"Recharts",
+				"GitHub repo access"
+			],
 			cta: "Buy Template — $99",
 			popular: false,
 			footer: "One-time payment. GitHub repo access included."
@@ -76,7 +82,8 @@ export const appConfig = {
 			productId: "pdt_tpl_marketing_site_replace_me",
 			slug: "template-marketing-site",
 			name: "Marketing Site Template",
-			description: "High-converting landing page with hero, features, testimonials, pricing, and blog.",
+			description:
+				"High-converting landing page with hero, features, testimonials, pricing, and blog.",
 			price: "$99",
 			currency: "USD",
 			interval: "one-time",
@@ -90,7 +97,8 @@ export const appConfig = {
 			productId: "pdt_tpl_docs_site_replace_me",
 			slug: "template-docs-site",
 			name: "Docs & Blog Template",
-			description: "Documentation site with full-text search, versioned content, and MDX-powered blog.",
+			description:
+				"Documentation site with full-text search, versioned content, and MDX-powered blog.",
 			price: "$99",
 			currency: "USD",
 			interval: "one-time",
@@ -104,7 +112,8 @@ export const appConfig = {
 			productId: "pdt_tpl_api_starter_replace_me",
 			slug: "template-api-starter",
 			name: "API Starter Template",
-			description: "Production-ready Hono API with auth, rate limiting, and OpenAPI spec generation.",
+			description:
+				"Production-ready Hono API with auth, rate limiting, and OpenAPI spec generation.",
 			price: "$99",
 			currency: "USD",
 			interval: "one-time",
@@ -118,12 +127,18 @@ export const appConfig = {
 			productId: "pdt_tpl_waitlist_replace_me",
 			slug: "template-waitlist",
 			name: "Waitlist App Template",
-			description: "Viral waitlist with referral tracking, position display, and email confirmation.",
+			description:
+				"Viral waitlist with referral tracking, position display, and email confirmation.",
 			price: "$99",
 			currency: "USD",
 			interval: "one-time",
 			type: "standard",
-			features: ["TanStack Start", "Dodo", "Resend", "GitHub repo access"],
+			features: [
+				"TanStack Start",
+				"Dodo",
+				"Resend",
+				"GitHub repo access"
+			],
 			cta: "Buy Template — $99",
 			popular: false,
 			footer: "One-time payment. GitHub repo access included."
@@ -132,7 +147,8 @@ export const appConfig = {
 			productId: "pdt_tpl_changelog_replace_me",
 			slug: "template-changelog",
 			name: "Changelog App Template",
-			description: "Public changelog with RSS feed, email subscriber management, and markdown editor.",
+			description:
+				"Public changelog with RSS feed, email subscriber management, and markdown editor.",
 			price: "$99",
 			currency: "USD",
 			interval: "one-time",

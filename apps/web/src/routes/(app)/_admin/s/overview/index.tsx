@@ -46,13 +46,7 @@ function AdminOverviewPage() {
 				</div>
 			</div>
 
-			<Suspense
-				fallback={
-					<div className="px-6">
-						<StatsSkeleton />
-					</div>
-				}
-			>
+			<Suspense fallback={<StatsSkeleton />}>
 				<OverviewContent />
 			</Suspense>
 		</div>
