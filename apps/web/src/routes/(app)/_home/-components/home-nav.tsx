@@ -9,26 +9,26 @@ export function HomeNav() {
 	const { data: session } = authClient.useSession();
 
 	return (
-		<nav className="fixed top-0 z-50 flex w-full justify-center border-b border-border/40 bg-background/60 backdrop-blur-xl">
-			<div className="flex h-14 w-full max-w-3xl items-center justify-between px-6">
-				<div className="flex items-center gap-2">
+		<nav className="fixed top-0 z-50 flex w-full justify-center border-b border-border/40 bg-background/80 backdrop-blur-md">
+			<div className="flex h-14 w-full max-w-3xl items-center justify-between px-4 sm:px-6">
+				<div className="flex items-center gap-3">
 					<Link
 						to="/"
 						className="flex items-center gap-2 transition-opacity hover:opacity-80"
 					>
-						<div className="h-6 w-6 rounded-md bg-primary flex items-center justify-center">
+						<div className="h-6 w-6 rounded-none bg-foreground flex items-center justify-center">
 							<HugeiconsIcon
 								icon={FlashIcon}
-								className="size-4 text-primary-foreground"
+								className="size-3 text-background"
 							/>
 						</div>
-						<span className="font-bold text-lg tracking-tight">
+						<span className="font-semibold text-foreground tracking-tight">
 							Tanflare
 						</span>
 					</Link>
 					<Badge
 						variant="outline"
-						className="text-[10px] py-0 px-1.5 opacity-60"
+						className="text-[10px] py-0 px-2 rounded-full border-border/50 text-muted-foreground font-medium"
 					>
 						Beta
 					</Badge>
@@ -36,34 +36,22 @@ export function HomeNav() {
 				<div className="flex items-center gap-6">
 					<Link
 						to="/docs"
-						className="text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block"
+						className="text-[12px] font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block"
 					>
 						Docs
 					</Link>
 					<Link
 						to="/templates"
-						className="text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block"
+						className="text-[12px] font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block"
 					>
 						Templates
-					</Link>
-					<Link
-						to="/showcase"
-						className="text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block"
-					>
-						Showcase
-					</Link>
-					<Link
-						to="/changelog"
-						className="text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block"
-					>
-						Changelog
 					</Link>
 					<div className="flex items-center gap-3">
 						<Button
 							variant="ghost"
 							size="sm"
 							asChild
-							className="hidden sm:flex h-8 text-[11px]"
+							className="hidden sm:flex h-8 text-[12px] rounded-none border border-transparent hover:border-border/50"
 						>
 							<a
 								href="https://github.com"
@@ -80,7 +68,7 @@ export function HomeNav() {
 						<Button
 							size="sm"
 							asChild
-							className="h-8 text-[11px] px-3"
+							className="h-8 text-[12px] px-4 rounded-none bg-foreground text-background hover:bg-foreground/90"
 						>
 							<Link
 								to={

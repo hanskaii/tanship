@@ -149,65 +149,60 @@ function TemplatesPage() {
 		<div className="relative flex min-h-screen flex-col items-center bg-background overflow-hidden">
 			{/* Background */}
 			<div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-				<div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-30" />
-				<div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-30" />
-				<div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+				<div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 			</div>
 
-			<main className="relative z-10 mt-28 mb-32 flex w-full max-w-5xl flex-col items-center px-6">
+			<main className="relative z-10 pt-24 pb-32 flex w-full max-w-3xl flex-col px-4 sm:px-6 mx-auto">
 				{/* Hero */}
 				<motion.section
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
-					className="flex flex-col items-center text-center gap-6 mb-16"
+					className="flex flex-col gap-6 mb-16 border-b border-border/40 pb-16"
 				>
 					<Badge
 						variant="secondary"
-						className="px-3 py-0.5 bg-primary/5 text-primary border-primary/20 text-[10px] uppercase tracking-wider font-bold"
+						className="w-fit px-3 py-1 bg-muted/30 text-foreground border border-border/50 text-[10px] uppercase tracking-widest font-bold rounded-full"
 					>
 						Templates
 					</Badge>
-					<h1 className="max-w-2xl font-extrabold text-4xl leading-tight tracking-tight sm:text-5xl">
-						Ship faster with{" "}
-						<span className="bg-linear-to-r from-primary via-primary/80 to-primary/50 bg-clip-text text-transparent">
-							ready-made templates
-						</span>
+					<h1 className="max-w-2xl font-semibold text-4xl leading-tight tracking-tight sm:text-5xl">
+						Ship faster with ready-made templates
 					</h1>
-					<p className="max-w-xl text-balance text-sm text-muted-foreground sm:text-base leading-relaxed">
+					<p className="max-w-xl text-balance text-base text-muted-foreground leading-relaxed">
 						Production-ready templates built on the Tanflare stack.
 						Buy individually at $99, or unlock all of them with
 						Tanflare Pro for $299.
 					</p>
 
 					{!isProUser && (
-						<div className="flex items-center gap-3 mt-2">
+						<div className="flex flex-wrap items-center gap-4 mt-2">
 							<Button
-								size="sm"
-								className="rounded-full px-6 h-10 text-xs"
+								size="lg"
+								className="rounded-none px-6 h-12 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
 								onClick={handleUpgrade}
 								disabled={!!checkoutSlug}
 							>
 								{checkoutSlug === "tanflare-pro" ? (
-									<Spinner className="size-3.5 mr-2" />
+									<Spinner className="size-4 mr-2" />
 								) : (
 									<HugeiconsIcon
 										icon={FlashIcon}
-										className="size-3.5 mr-2"
+										className="size-4 mr-2"
 									/>
 								)}
 								Get All Templates — $299
 							</Button>
 							<Button
-								size="sm"
-								variant="outline"
-								className="rounded-full px-6 h-10 text-xs"
+								size="lg"
+								variant="ghost"
+								className="rounded-none px-6 h-12 text-sm font-medium border border-border/50 hover:bg-muted/10"
 								asChild
 							>
 								<Link to="/">
 									<HugeiconsIcon
 										icon={ArrowRight01Icon}
-										className="size-3.5 mr-2"
+										className="size-4 mr-2"
 									/>
 									View Plans
 								</Link>
@@ -216,10 +211,10 @@ function TemplatesPage() {
 					)}
 
 					{isProUser && (
-						<div className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-600 font-medium">
+						<div className="flex w-fit items-center gap-2 px-4 py-2 rounded-none border border-foreground/20 bg-muted/5 text-xs text-foreground font-medium">
 							<HugeiconsIcon
 								icon={GithubIcon}
-								className="size-3.5"
+								className="size-4"
 							/>
 							Pro access active — all templates unlocked
 						</div>
@@ -228,19 +223,19 @@ function TemplatesPage() {
 
 				{/* Template grid */}
 				<div className="w-full">
-					<div className="flex items-center gap-2 mb-6">
-						<span className="text-sm font-semibold">
+					<div className="flex items-center gap-3 mb-8">
+						<span className="text-base font-semibold">
 							{TEMPLATES.length} templates
 						</span>
 						<Badge
 							variant="secondary"
-							className="text-[9px] px-1.5 py-0 opacity-60"
+							className="text-[10px] px-2 py-0.5 rounded-full opacity-60 border-border/50"
 						>
 							More coming soon
 						</Badge>
 					</div>
 
-					<div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+					<div className="grid gap-6 sm:grid-cols-2">
 						{TEMPLATES.map((template, i) => (
 							<motion.div
 								key={template.id}
@@ -275,38 +270,38 @@ function TemplatesPage() {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5, delay: 0.3 }}
-						className="mt-20 w-full relative overflow-hidden rounded-2xl bg-primary/5 border border-primary/20 p-8 sm:p-10 py-14 text-center flex flex-col items-center gap-5"
+						className="mt-20 w-full relative overflow-hidden rounded-none border border-border/50 bg-muted/5 p-8 sm:p-12 text-center flex flex-col items-center gap-6"
 					>
-						<div className="flex items-center justify-center size-12 rounded-2xl bg-primary/10 border border-primary/20">
+						<div className="flex items-center justify-center size-12 rounded-none bg-background border border-border/50">
 							<HugeiconsIcon
 								icon={FlashIcon}
-								className="size-6 text-primary"
+								className="size-5 text-foreground"
 							/>
 						</div>
-						<div className="flex flex-col gap-2">
-							<h2 className="text-xl sm:text-2xl font-bold tracking-tight">
+						<div className="flex flex-col gap-3">
+							<h2 className="text-2xl font-semibold tracking-tight">
 								Unlock all templates with Tanflare Pro
 							</h2>
-							<p className="text-muted-foreground text-[11px] max-w-md leading-relaxed">
+							<p className="text-muted-foreground text-sm max-w-md mx-auto leading-relaxed">
 								One payment. Every template we've built and
 								everything we'll build in the future. Cheaper
 								than buying 4 individually. Priority support
 								included.
 							</p>
 						</div>
-						<div className="flex items-center gap-3">
+						<div className="flex flex-col items-center gap-3 mt-4">
 							<Button
-								size="sm"
-								className="rounded-full px-8 h-10 text-xs font-semibold"
+								size="lg"
+								className="rounded-none px-8 h-12 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
 								onClick={handleUpgrade}
 								disabled={!!checkoutSlug}
 							>
 								{checkoutSlug === "tanflare-pro" ? (
-									<Spinner className="size-3.5 mr-2" />
+									<Spinner className="size-4 mr-2" />
 								) : null}
 								Get Tanflare Pro — $299
 							</Button>
-							<p className="text-[11px] text-muted-foreground">
+							<p className="text-[11px] text-muted-foreground font-mono uppercase tracking-wider">
 								vs. $99 × 6 = $594 individually
 							</p>
 						</div>

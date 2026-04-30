@@ -190,7 +190,8 @@ function BillingContent({
 							) : latestPurchase ? (
 								<>
 									<p className="text-sm font-semibold leading-tight">
-										{latestPurchase.planSlug === "tanflare-pro"
+										{latestPurchase.planSlug ===
+										"tanflare-pro"
 											? "Tanflare Pro"
 											: "Tanflare"}
 									</p>

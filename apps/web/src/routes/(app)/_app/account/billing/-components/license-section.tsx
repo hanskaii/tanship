@@ -8,10 +8,7 @@ import {
 	Copy01Icon,
 	FlashIcon
 } from "@hugeicons/core-free-icons";
-import {
-	claimGithubFn,
-	type Purchase
-} from "@/routes/-fn/purchases";
+import { claimGithubFn, type Purchase } from "@/routes/-fn/purchases";
 
 function CopyButton({ text }: { text: string }) {
 	const [copied, setCopied] = useState(false);
@@ -27,10 +24,7 @@ function CopyButton({ text }: { text: string }) {
 			className="h-7 px-2 text-[11px] shrink-0"
 			onClick={handleCopy}
 		>
-			<HugeiconsIcon
-				icon={Copy01Icon}
-				className="size-3.5 mr-1"
-			/>
+			<HugeiconsIcon icon={Copy01Icon} className="size-3.5 mr-1" />
 			{copied ? "Copied!" : "Copy"}
 		</Button>
 	);
@@ -160,10 +154,7 @@ function PurchaseCard({ purchase }: { purchase: Purchase }) {
 			{/* GitHub status */}
 			{isClaimed ? (
 				<div className="flex items-center gap-2 text-[11px] text-muted-foreground border-t border-border/50 pt-3">
-					<HugeiconsIcon
-						icon={GithubIcon}
-						className="size-3.5"
-					/>
+					<HugeiconsIcon icon={GithubIcon} className="size-3.5" />
 					Repository access granted to{" "}
 					<span className="font-semibold text-foreground">
 						@{purchase.githubUsername}
@@ -189,7 +180,8 @@ export function LicensesSection({ purchases }: { purchases: Purchase[] }) {
 						No licenses yet
 					</p>
 					<p className="text-xs text-muted-foreground/60">
-						Purchase a plan to get your license key and GitHub access.
+						Purchase a plan to get your license key and GitHub
+						access.
 					</p>
 				</div>
 				<Button size="sm" className="h-8 text-xs mt-1" asChild>

@@ -113,8 +113,7 @@ const githubHandler = new Hono<HonoEnv>()
 			// 201 = invitation created, 204 = already a collaborator
 			if (res.status !== 201 && res.status !== 204) {
 				const body = (await res.json().catch(() => ({}))) as any;
-				const msg =
-					body?.message ?? `GitHub API error (${res.status})`;
+				const msg = body?.message ?? `GitHub API error (${res.status})`;
 				console.error(
 					`[GitHub] Failed to invite ${githubUsername} to ${repo}: ${msg}`
 				);
@@ -222,7 +221,9 @@ const githubHandler = new Hono<HonoEnv>()
 			if (res.status !== 201 && res.status !== 204) {
 				const body = (await res.json().catch(() => ({}))) as any;
 				const msg = body?.message ?? `GitHub API error (${res.status})`;
-				throw ApiError.badRequest(`Failed to invite @${githubUsername}: ${msg}`);
+				throw ApiError.badRequest(
+					`Failed to invite @${githubUsername}: ${msg}`
+				);
 			}
 
 			console.log(
@@ -236,11 +237,15 @@ const githubHandler = new Hono<HonoEnv>()
 			.set({ githubUsername, githubInvitedAt: new Date() })
 			.where(eq(purchases.id, purchase.id));
 
-		return ApiResponse.ok(c, "License activated and GitHub invitation sent", {
-			githubUsername,
-			repos,
-			planSlug: purchase.planSlug
-		});
+		return ApiResponse.ok(
+			c,
+			"License activated and GitHub invitation sent",
+			{
+				githubUsername,
+				repos,
+				planSlug: purchase.planSlug
+			}
+		);
 	});
 
 export default githubHandler;

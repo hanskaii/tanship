@@ -62,44 +62,43 @@ function UpgradePage() {
 	};
 
 	return (
-		<div className="relative flex min-h-screen flex-col items-center justify-center bg-background overflow-hidden px-6 py-16">
+		<div className="relative flex min-h-screen flex-col items-center bg-background overflow-hidden px-4 sm:px-6 pt-24 pb-32">
 			{/* Background */}
 			<div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-				<div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-30" />
-				<div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-30" />
+				<div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 			</div>
 
-			<div className="relative z-10 w-full max-w-7xl flex flex-col items-center gap-12">
+			<div className="relative z-10 w-full max-w-3xl flex flex-col items-center gap-12 mx-auto">
 				{/* Header */}
 				<motion.div
 					initial={{ opacity: 0, y: 16 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.4 }}
-					className="flex flex-col items-center text-center gap-3"
+					className="flex flex-col items-center text-center gap-4 border-b border-border/40 w-full pb-12"
 				>
 					<Badge
 						variant="secondary"
-						className="px-3 py-0.5 bg-primary/5 text-primary border-primary/20 text-[10px] uppercase tracking-wider font-bold"
+						className="px-3 py-1 bg-muted/30 text-foreground border border-border/50 text-[10px] uppercase tracking-widest font-bold rounded-full"
 					>
 						Subscription Required
 					</Badge>
-					<h1 className="text-3xl font-bold tracking-tight">
+					<h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
 						Upgrade to get access
 					</h1>
-					<p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
+					<p className="text-muted-foreground text-base max-w-md leading-relaxed">
 						Choose a plan to unlock the app. Already subscribed?{" "}
 						<button
 							onClick={() => window.location.reload()}
-							className="text-primary underline-offset-4 hover:underline"
+							className="text-foreground underline-offset-4 hover:underline font-medium"
 						>
 							Refresh the page.
 						</button>
 					</p>
 				</motion.div>
 
-				{/* Pricing cards — columns match plan count, max 4 */}
+				{/* Pricing cards */}
 				<div
-					className={`grid w-full gap-6 grid-cols-1 sm:grid-cols-2 ${{ 1: "lg:grid-cols-1", 2: "lg:grid-cols-2", 3: "lg:grid-cols-3", 4: "lg:grid-cols-4" }[appConfig.payments.filter((p: any) => !p.slug.startsWith("template-")).length as 1 | 2 | 3 | 4] ?? "lg:grid-cols-3"}`}
+					className={`grid w-full gap-6 grid-cols-1 ${appConfig.payments.filter((p: any) => !p.slug.startsWith("template-")).length > 1 ? "sm:grid-cols-2" : ""}`}
 				>
 					{appConfig.payments
 						.filter((p: any) => !p.slug.startsWith("template-"))
@@ -111,63 +110,61 @@ function UpgradePage() {
 								transition={{ duration: 0.4, delay: 0.1 * i }}
 								className="flex h-full"
 							>
-								<Card
-									className={`relative flex flex-col w-full p-6 transition-all border-none bg-muted/20 ring-1 backdrop-blur-sm overflow-hidden text-left ${plan.popular ? "ring-primary/40 bg-primary/[0.03]" : "ring-border/50"}`}
+								<div
+									className={`relative flex flex-col w-full p-8 transition-all border-none bg-background ring-1 ${plan.popular ? "ring-foreground bg-muted/5 shadow-md" : "ring-border/60 hover:ring-border"}`}
 								>
 									{plan.popular && (
-										<div className="absolute top-0 right-0">
-											<div className="bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">
+										<div className="absolute -top-3 right-8">
+											<div className="bg-foreground text-background text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
 												Most Popular
 											</div>
 										</div>
 									)}
-									<div className="flex flex-col gap-1.5 mb-6">
-										<h3 className="font-bold text-lg leading-tight">
+									<div className="flex flex-col gap-2 mb-8">
+										<h3 className="font-semibold text-xl leading-tight text-foreground">
 											{plan.name}
 										</h3>
-										<div className="flex flex-col gap-0.5">
+										<div className="flex flex-col gap-1 mt-2">
 											<div className="flex items-center gap-2">
 												{plan.originalPrice && (
 													<span className="text-sm font-medium text-muted-foreground line-through opacity-50">
 														{plan.originalPrice}
 													</span>
 												)}
-												<span className="text-3xl font-black">
+												<span className="text-4xl font-semibold text-foreground tracking-tight">
 													{plan.price}
 												</span>
-												<span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest ml-1">
+												<span className="text-xs font-mono text-muted-foreground uppercase tracking-widest ml-1 mt-1">
 													{plan.currency}
 												</span>
 											</div>
-											<span className="text-[10px] text-primary font-bold uppercase tracking-tight">
+											<span className="text-xs text-muted-foreground uppercase tracking-wider font-mono mt-1">
 												{plan.interval === "one-time"
 													? plan.type === "credits"
 														? `Refillable (${plan.unit})`
-														: "Pay once, build unlimited"
+														: "One-time payment"
 													: `/ ${plan.interval}`}
 											</span>
 										</div>
-										<p className="text-[11px] text-muted-foreground leading-relaxed mt-4 h-12">
+										<p className="text-sm text-muted-foreground leading-relaxed mt-4">
 											{plan.description}
 										</p>
 									</div>
 
-									<Separator className="mb-6 opacity-40" />
+									<Separator className="mb-8 opacity-40 bg-border/50" />
 
 									<div className="flex flex-col gap-4 mb-8 flex-1">
 										{plan.features.map(
 											(feature: string) => (
 												<div
 													key={feature}
-													className="flex items-center gap-2.5"
+													className="flex items-start gap-3"
 												>
-													<div className="flex items-center justify-center size-4 rounded-full bg-primary/10">
-														<HugeiconsIcon
-															icon={FlashIcon}
-															className="size-2 text-primary"
-														/>
-													</div>
-													<span className="text-[11px] font-medium text-foreground/80">
+													<HugeiconsIcon
+														icon={FlashIcon}
+														className="size-4 text-foreground flex-shrink-0 mt-0.5"
+													/>
+													<span className="text-sm text-foreground">
 														{feature}
 													</span>
 												</div>
@@ -176,35 +173,32 @@ function UpgradePage() {
 									</div>
 
 									<Button
-										size="sm"
-										variant={
-											plan.popular ? "default" : "outline"
-										}
-										className={`w-full rounded-xl text-xs h-9 font-bold transition-all ${plan.popular ? "shadow-lg shadow-primary/20" : ""}`}
+										size="lg"
+										className={`w-full rounded-none h-12 text-sm font-medium transition-colors ${plan.popular ? "bg-foreground text-background hover:bg-foreground/90" : "bg-transparent text-foreground border border-border/60 hover:bg-muted/10"}`}
 										onClick={() => handleCheckout(plan)}
 										disabled={isCheckoutLoading !== null}
 									>
 										{isCheckoutLoading === plan.name ? (
-											<Spinner className="size-3.5 mr-2" />
+											<Spinner className="size-4 mr-2" />
 										) : null}
 										{isCheckoutLoading === plan.name
 											? "Preparing..."
 											: plan.cta}
 									</Button>
 
-									<p className="text-center text-[9px] text-muted-foreground mt-4 opacity-60">
+									<p className="text-center text-xs text-muted-foreground mt-4 opacity-60">
 										{plan.footer}
 									</p>
-								</Card>
+								</div>
 							</motion.div>
 						))}
 				</div>
 
 				{/* Footer */}
-				<div className="flex flex-col items-center gap-2">
-					<p className="text-xs text-muted-foreground">
+				<div className="flex flex-col items-center gap-2 mt-8">
+					<p className="text-sm text-muted-foreground">
 						Signed in as{" "}
-						<span className="font-medium text-foreground">
+						<span className="font-semibold text-foreground">
 							{user?.email}
 						</span>
 					</p>
@@ -213,7 +207,7 @@ function UpgradePage() {
 						size="sm"
 						onClick={logout}
 						disabled={isLogoutPending}
-						className="text-xs text-muted-foreground"
+						className="text-sm text-muted-foreground rounded-none hover:text-foreground"
 					>
 						{isLogoutPending ? "Logging out..." : "Log out"}
 					</Button>

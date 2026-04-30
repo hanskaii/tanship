@@ -43,7 +43,12 @@ function ShowcaseSubmitPage() {
 	};
 
 	const handleSubmit = async () => {
-		if (!form.submitterName || !form.projectName || !form.projectUrl || !form.description) {
+		if (
+			!form.submitterName ||
+			!form.projectName ||
+			!form.projectUrl ||
+			!form.description
+		) {
 			toast.error("Please fill in all required fields.");
 			return;
 		}
@@ -56,14 +61,15 @@ function ShowcaseSubmitPage() {
 			formData.append("projectName", form.projectName);
 			formData.append("projectUrl", form.projectUrl);
 			formData.append("description", form.description);
-			if (form.twitterHandle) formData.append("twitterHandle", form.twitterHandle);
+			if (form.twitterHandle)
+				formData.append("twitterHandle", form.twitterHandle);
 			if (screenshot) formData.append("screenshot", screenshot);
 
 			const res = await fetch("/api/showcase", {
 				method: "POST",
 				body: formData
 			});
-			const json = await res.json() as any;
+			const json = (await res.json()) as any;
 			if (!res.ok) {
 				throw new Error(json.message ?? "Submission failed");
 			}
@@ -109,8 +115,8 @@ function ShowcaseSubmitPage() {
 								Submit your project
 							</h1>
 							<p className="text-sm text-muted-foreground leading-relaxed">
-								Show the community what you built with Tanflare. We
-								review every submission before publishing.
+								Show the community what you built with Tanflare.
+								We review every submission before publishing.
 							</p>
 						</div>
 					</div>
@@ -123,7 +129,11 @@ function ShowcaseSubmitPage() {
 								<p className="text-sm text-muted-foreground">
 									Sign in to submit your project.
 								</p>
-								<Button size="sm" className="rounded-full px-6 h-9 text-xs" asChild>
+								<Button
+									size="sm"
+									className="rounded-full px-6 h-9 text-xs"
+									asChild
+								>
 									<Link to="/login">
 										<HugeiconsIcon
 											icon={ArrowRight01Icon}
@@ -149,10 +159,12 @@ function ShowcaseSubmitPage() {
 									/>
 								</div>
 								<div className="flex flex-col gap-1">
-									<p className="font-bold">Submitted for review!</p>
+									<p className="font-bold">
+										Submitted for review!
+									</p>
 									<p className="text-sm text-muted-foreground">
-										We'll review your project and add it to the
-										showcase shortly.
+										We'll review your project and add it to
+										the showcase shortly.
 									</p>
 								</div>
 								<Button
@@ -172,7 +184,8 @@ function ShowcaseSubmitPage() {
 								{/* Name */}
 								<div className="flex flex-col gap-1.5">
 									<label className="text-xs font-semibold">
-										Your name <span className="text-red-400">*</span>
+										Your name{" "}
+										<span className="text-red-400">*</span>
 									</label>
 									<Input
 										className="h-9 text-sm"
@@ -191,7 +204,8 @@ function ShowcaseSubmitPage() {
 								{/* Project name */}
 								<div className="flex flex-col gap-1.5">
 									<label className="text-xs font-semibold">
-										Project name <span className="text-red-400">*</span>
+										Project name{" "}
+										<span className="text-red-400">*</span>
 									</label>
 									<Input
 										className="h-9 text-sm"
@@ -210,7 +224,8 @@ function ShowcaseSubmitPage() {
 								{/* URL */}
 								<div className="flex flex-col gap-1.5">
 									<label className="text-xs font-semibold">
-										Project URL <span className="text-red-400">*</span>
+										Project URL{" "}
+										<span className="text-red-400">*</span>
 									</label>
 									<Input
 										className="h-9 text-sm"
@@ -269,7 +284,8 @@ function ShowcaseSubmitPage() {
 											onChange={(e) =>
 												setForm((f) => ({
 													...f,
-													twitterHandle: e.target.value
+													twitterHandle:
+														e.target.value
 												}))
 											}
 											disabled={isSubmitting}
@@ -305,7 +321,8 @@ function ShowcaseSubmitPage() {
 													setScreenshot(null);
 													setScreenshotPreview(null);
 													if (fileInputRef.current)
-														fileInputRef.current.value = "";
+														fileInputRef.current.value =
+															"";
 												}}
 												className="absolute top-2 right-2 text-[10px] bg-background/80 text-foreground px-2 py-0.5 rounded border border-border/50 hover:bg-background transition"
 											>
@@ -314,7 +331,9 @@ function ShowcaseSubmitPage() {
 										</div>
 									) : (
 										<button
-											onClick={() => fileInputRef.current?.click()}
+											onClick={() =>
+												fileInputRef.current?.click()
+											}
 											disabled={isSubmitting}
 											className="flex flex-col items-center gap-2 py-6 rounded-lg border border-dashed border-border/60 text-muted-foreground hover:border-primary/40 hover:text-primary transition-colors"
 										>
@@ -348,7 +367,9 @@ function ShowcaseSubmitPage() {
 											className="size-4 mr-2"
 										/>
 									)}
-									{isSubmitting ? "Submitting…" : "Submit for review"}
+									{isSubmitting
+										? "Submitting…"
+										: "Submit for review"}
 								</Button>
 							</div>
 						)}

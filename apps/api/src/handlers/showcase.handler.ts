@@ -74,8 +74,13 @@ const showcaseHandler = new Hono<HonoEnv>()
 			);
 		}
 
-		const { submitterName, projectName, projectUrl, description, twitterHandle } =
-			parsed.data;
+		const {
+			submitterName,
+			projectName,
+			projectUrl,
+			description,
+			twitterHandle
+		} = parsed.data;
 
 		// Optional screenshot upload
 		let imageKey: string | null = null;
@@ -131,7 +136,10 @@ const showcaseHandler = new Hono<HonoEnv>()
 					adminReviewUrl: `${origin}/s/showcase`
 				});
 			} catch (err) {
-				console.error("[Showcase] Failed to send admin notification:", err);
+				console.error(
+					"[Showcase] Failed to send admin notification:",
+					err
+				);
 			}
 		}
 
@@ -139,21 +147,16 @@ const showcaseHandler = new Hono<HonoEnv>()
 	})
 
 	// ─── Admin: list pending ──────────────────────────────────────────────────
-	.get(
-		"/pending",
-		authMiddleware,
-		protect("admin.access"),
-		async (c) => {
-			const db = c.get("db");
+	.get("/pending", authMiddleware, protect("admin.access"), async (c) => {
+		const db = c.get("db");
 
-			const rows = await db.query.showcases.findMany({
-				where: eq(showcases.status, "pending"),
-				orderBy: (t, { asc }) => [asc(t.createdAt)]
-			});
+		const rows = await db.query.showcases.findMany({
+			where: eq(showcases.status, "pending"),
+			orderBy: (t, { asc }) => [asc(t.createdAt)]
+		});
 
-			return ApiResponse.ok(c, "Pending showcases", rows);
-		}
-	)
+		return ApiResponse.ok(c, "Pending showcases", rows);
+	})
 
 	// ─── Admin: approve ───────────────────────────────────────────────────────
 	.patch(
@@ -165,11 +168,16 @@ const showcaseHandler = new Hono<HonoEnv>()
 			const { id } = c.req.param();
 
 			const showcase = await db.query.showcases.findFirst({
-				where: and(eq(showcases.id, id), eq(showcases.status, "pending"))
+				where: and(
+					eq(showcases.id, id),
+					eq(showcases.status, "pending")
+				)
 			});
 
 			if (!showcase) {
-				throw ApiError.notFound("Showcase not found or already reviewed");
+				throw ApiError.notFound(
+					"Showcase not found or already reviewed"
+				);
 			}
 
 			await db
@@ -191,11 +199,16 @@ const showcaseHandler = new Hono<HonoEnv>()
 			const { id } = c.req.param();
 
 			const showcase = await db.query.showcases.findFirst({
-				where: and(eq(showcases.id, id), eq(showcases.status, "pending"))
+				where: and(
+					eq(showcases.id, id),
+					eq(showcases.status, "pending")
+				)
 			});
 
 			if (!showcase) {
-				throw ApiError.notFound("Showcase not found or already reviewed");
+				throw ApiError.notFound(
+					"Showcase not found or already reviewed"
+				);
 			}
 
 			await db

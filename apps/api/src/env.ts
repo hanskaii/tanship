@@ -33,7 +33,10 @@ export const EnvSchema = z.object({
 	// App
 	APP_NAME: z.string().min(1, "APP_NAME is required"),
 	APP_ENV: z.enum(["development", "staging", "production"]),
-	ADMIN_EMAIL: z.string().email("ADMIN_EMAIL must be a valid email").optional()
+	ADMIN_EMAIL: z
+		.string()
+		.email("ADMIN_EMAIL must be a valid email")
+		.optional()
 });
 
 export type ValidatedEnv = z.infer<typeof EnvSchema>;

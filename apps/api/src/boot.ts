@@ -114,7 +114,9 @@ export const boot = () => {
 			payload.data?.metadata?.userId || payload.data?.metadata?.user_id;
 
 		if (!userId) {
-			console.warn("[License] license_key.created: no userId in metadata");
+			console.warn(
+				"[License] license_key.created: no userId in metadata"
+			);
 			return;
 		}
 

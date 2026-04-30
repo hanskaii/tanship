@@ -33,24 +33,24 @@ function ContactCard({
 	isExternal?: boolean;
 }) {
 	const Content = (
-		<Card className="flex flex-col items-center bg-muted/20 border-border/50 hover:bg-muted/30 transition-all cursor-pointer group h-full">
-			<CardHeader className="flex flex-col items-center text-center gap-2 py-4 px-3">
-				<div className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+		<div className="flex flex-col items-center bg-background border border-border/50 hover:bg-muted/10 transition-all cursor-pointer group h-full rounded-none p-6">
+			<div className="flex flex-col items-center text-center gap-3">
+				<div className="w-12 h-12 rounded-none bg-muted/30 border border-border/50 flex items-center justify-center shadow-sm transition-transform group-hover:scale-105">
 					<HugeiconsIcon
 						icon={icon}
-						className="size-4 text-foreground/80"
+						className="size-5 text-foreground/80"
 					/>
 				</div>
-				<div className="flex flex-col gap-0.5">
-					<CardTitle className="text-sm font-bold tracking-tight">
+				<div className="flex flex-col gap-1.5 mt-2">
+					<h3 className="text-sm font-semibold tracking-tight">
 						{title}
-					</CardTitle>
-					<CardDescription className="text-[10px] leading-relaxed opacity-60 px-2">
+					</h3>
+					<p className="text-xs leading-relaxed text-muted-foreground px-2">
 						{description}
-					</CardDescription>
+					</p>
 				</div>
-			</CardHeader>
-		</Card>
+			</div>
+		</div>
 	);
 
 	if (isExternal) {
@@ -90,27 +90,24 @@ const faqs = [
 
 function ContactPage() {
 	return (
-		<div className="relative flex flex-col items-center w-full max-w-3xl mx-auto p-6 pt-24 pb-32 min-h-screen z-10">
-			{/* Background Decoration */}
-			<div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(var(--primary),0.03),transparent_100%)] pointer-events-none -z-10" />
-
-			<div className="flex flex-col gap-3 text-center mb-16">
+		<div className="flex flex-col items-center w-full max-w-3xl mx-auto px-4 sm:px-6 pt-24 pb-32 min-h-screen">
+			<div className="flex flex-col gap-4 text-center mb-20">
 				<Badge
 					variant="outline"
-					className="w-fit mx-auto rounded-full px-3 py-0.5 bg-primary/5 text-primary border-primary/20 text-[9px] uppercase tracking-widest font-bold"
+					className="w-fit mx-auto rounded-full px-3 py-1 bg-muted/30 text-foreground border-border/50 text-[10px] uppercase tracking-widest font-bold"
 				>
 					Support
 				</Badge>
-				<h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+				<h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
 					How can we help?
 				</h1>
-				<p className="text-muted-foreground text-xs sm:text-sm max-w-md mx-auto leading-relaxed opacity-80 text-balance">
+				<p className="text-muted-foreground text-base max-w-md mx-auto leading-relaxed text-balance mt-2">
 					Questions about setup, billing, or roadmap? We're here to
 					help you build faster.
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mb-28">
+			<div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mb-28">
 				<ContactCard
 					title="Documentation"
 					description="Guides, API reference, and more."
@@ -133,18 +130,18 @@ function ContactPage() {
 				/>
 			</div>
 
-			<div className="flex flex-col items-center gap-10 w-full">
-				<div className="flex flex-col items-center gap-2 text-center">
-					<div className="flex items-center justify-center p-2 rounded-lg bg-primary/5 text-primary mb-2">
+			<div className="flex flex-col items-center gap-12 w-full pt-16 border-t border-border/40">
+				<div className="flex flex-col items-center gap-3 text-center">
+					<div className="flex items-center justify-center p-3 rounded-none bg-muted/30 text-foreground mb-2">
 						<HugeiconsIcon
 							icon={MessageQuestionIcon}
-							className="size-4"
+							className="size-5"
 						/>
 					</div>
-					<h2 className="text-xl font-bold tracking-tight">
+					<h2 className="text-2xl font-semibold tracking-tight">
 						Frequently asked questions
 					</h2>
-					<p className="text-muted-foreground text-[11px] opacity-70">
+					<p className="text-muted-foreground text-sm">
 						Quick answers to common questions about Tanflare.
 					</p>
 				</div>
@@ -153,33 +150,33 @@ function ContactPage() {
 					{faqs.map((faq, i) => (
 						<div
 							key={i}
-							className="flex flex-col gap-1.5 p-4 rounded-xl border border-border/40 bg-muted/5 hover:bg-muted/10 transition-colors"
+							className="flex flex-col gap-2 p-6 rounded-none border border-border/50 bg-background hover:bg-muted/10 transition-colors"
 						>
-							<h3 className="font-bold text-sm tracking-tight">
+							<h3 className="font-semibold text-base tracking-tight">
 								{faq.question}
 							</h3>
-							<p className="text-[11px] text-muted-foreground leading-relaxed opacity-80">
+							<p className="text-sm text-muted-foreground leading-relaxed">
 								{faq.answer}
 							</p>
 						</div>
 					))}
 				</div>
 
-				<div className="mt-8 flex flex-col items-center gap-4 p-8 rounded-2xl border border-dashed border-border/60 bg-muted/5 w-full">
-					<div className="flex flex-col items-center gap-1 text-center">
-						<h3 className="font-bold text-sm">
+				<div className="mt-12 flex flex-col items-center gap-4 p-10 rounded-none border border-border/50 bg-muted/5 w-full">
+					<div className="flex flex-col items-center gap-2 text-center">
+						<h3 className="font-semibold text-base">
 							Still have questions?
 						</h3>
-						<p className="text-[10px] text-muted-foreground opacity-70">
+						<p className="text-sm text-muted-foreground">
 							We're generally available via email for more formal
 							inquiries.
 						</p>
 					</div>
 					<a
 						href="mailto:support@tanflare.com"
-						className="flex items-center gap-2 text-xs font-semibold text-primary hover:opacity-80 transition-opacity"
+						className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-foreground/70 transition-colors mt-2"
 					>
-						<HugeiconsIcon icon={Mail01Icon} className="size-3.5" />
+						<HugeiconsIcon icon={Mail01Icon} className="size-4" />
 						support@tanflare.com
 					</a>
 				</div>

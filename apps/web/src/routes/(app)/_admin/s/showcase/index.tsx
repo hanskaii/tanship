@@ -75,8 +75,7 @@ function PendingList() {
 		onError: (err: any) => toast.error(err.message ?? "Failed to reject")
 	});
 
-	const isLoading =
-		approveMutation.isPending || rejectMutation.isPending;
+	const isLoading = approveMutation.isPending || rejectMutation.isPending;
 
 	if (pending.length === 0) {
 		return (
@@ -95,7 +94,8 @@ function PendingList() {
 	return (
 		<div className="flex flex-col gap-4">
 			<p className="text-xs text-muted-foreground">
-				{pending.length} pending submission{pending.length !== 1 ? "s" : ""}
+				{pending.length} pending submission
+				{pending.length !== 1 ? "s" : ""}
 			</p>
 
 			{pending.map((item: PendingShowcaseItem) => (
@@ -142,7 +142,9 @@ function ShowcaseReviewCard({
 				<div className="flex-1 min-w-0 flex flex-col gap-2">
 					<div className="flex items-start justify-between gap-2">
 						<div>
-							<h3 className="font-bold text-sm">{item.projectName}</h3>
+							<h3 className="font-bold text-sm">
+								{item.projectName}
+							</h3>
 							<p className="text-[11px] text-muted-foreground">
 								by {item.submitterName}
 							</p>
@@ -166,7 +168,10 @@ function ShowcaseReviewCard({
 							rel="noreferrer"
 							className="inline-flex items-center gap-1 text-[11px] text-primary hover:opacity-80 transition-opacity"
 						>
-							<HugeiconsIcon icon={GlobeIcon} className="size-3" />
+							<HugeiconsIcon
+								icon={GlobeIcon}
+								className="size-3"
+							/>
 							{item.projectUrl.replace(/^https?:\/\//, "")}
 						</a>
 						{item.twitterHandle && (

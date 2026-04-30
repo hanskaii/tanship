@@ -25,7 +25,7 @@ export const getShowcasesFn = createServerFn({ method: "GET" }).handler(() =>
 	handleError(async () => {
 		const res = await fetchApi("/api/showcase");
 		if (!res.ok) return [] as ShowcaseItem[];
-		const json = await res.json() as any;
+		const json = (await res.json()) as any;
 		return (json.data ?? []) as ShowcaseItem[];
 	})
 );
@@ -38,13 +38,14 @@ export const showcasesQueryOptions = () =>
 
 // ─── Admin: list pending ──────────────────────────────────────────────────────
 
-export const getPendingShowcasesFn = createServerFn({ method: "GET" }).handler(() =>
-	handleError(async () => {
-		const res = await fetchApiWithAuth("/api/showcase/pending");
-		if (!res.ok) return [] as PendingShowcaseItem[];
-		const json = await res.json() as any;
-		return (json.data ?? []) as PendingShowcaseItem[];
-	})
+export const getPendingShowcasesFn = createServerFn({ method: "GET" }).handler(
+	() =>
+		handleError(async () => {
+			const res = await fetchApiWithAuth("/api/showcase/pending");
+			if (!res.ok) return [] as PendingShowcaseItem[];
+			const json = (await res.json()) as any;
+			return (json.data ?? []) as PendingShowcaseItem[];
+		})
 );
 
 export const pendingShowcasesQueryOptions = () =>
@@ -62,7 +63,7 @@ export const approveShowcaseFn = createServerFn({ method: "POST" })
 			const res = await fetchApiWithAuth(`/api/showcase/${id}/approve`, {
 				method: "PATCH"
 			});
-			const json = await res.json() as any;
+			const json = (await res.json()) as any;
 			if (!res.ok) throw new Error(json.message ?? "Failed to approve");
 			return true;
 		})
@@ -77,7 +78,7 @@ export const rejectShowcaseFn = createServerFn({ method: "POST" })
 			const res = await fetchApiWithAuth(`/api/showcase/${id}/reject`, {
 				method: "PATCH"
 			});
-			const json = await res.json() as any;
+			const json = (await res.json()) as any;
 			if (!res.ok) throw new Error(json.message ?? "Failed to reject");
 			return true;
 		})
