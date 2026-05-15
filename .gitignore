@@ -18,4 +18,3 @@ build
 
 # Rust build artifacts
 apps/video-stitch/target/
-.claude/skills
