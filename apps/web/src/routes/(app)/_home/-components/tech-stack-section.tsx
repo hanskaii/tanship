@@ -9,86 +9,78 @@ import {
 	BetterAuthIcon
 } from "../../../-components/icons";
 
+const STACK = [
+	{
+		name: "TanStack Start",
+		desc: "The most popular type-safe full-stack React framework.",
+		Icon: TanstackIcon
+	},
+	{
+		name: "Cloudflare",
+		desc: "Complete edge infrastructure: Workers, D1, R2, and more.",
+		Icon: CloudflareIcon
+	},
+	{
+		name: "OXC",
+		desc: "The Oxidation Compiler — high-performance JS/TS toolchain.",
+		Icon: OXCIcon
+	},
+	{
+		name: "Better Auth",
+		desc: "The most comprehensive open-source auth library.",
+		Icon: BetterAuthIcon
+	},
+	{
+		name: "Drizzle ORM",
+		desc: "Lightweight, performant, headless TypeScript ORM.",
+		Icon: DrizzleIcon
+	},
+	{
+		name: "Dodo Payments",
+		desc: "Global payment processing and billing infrastructure.",
+		Icon: DodoPaymentIcon
+	},
+	{
+		name: "Hono",
+		desc: "Ultrafast, lightweight, edge-native web framework.",
+		Icon: HonoIcon
+	},
+	{
+		name: "Tailwind CSS v4",
+		desc: "The utility-first CSS framework for rapid UI development.",
+		Icon: TailwindIcon
+	}
+];
+
 export function TechStackSection() {
 	return (
-		<section className="py-20 border-b border-border/40">
-			<div className="text-center mb-16">
-				<h2 className="text-3xl font-semibold tracking-tight text-foreground mb-4">
-					Build with the best tech stack
+		<section className="border-b border-border/40 py-20">
+			<div className="mb-14 text-center">
+				<h2 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">
+					Built on the best stack
 				</h2>
-				<p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-					Use the latest industry-standard tech stack for your next
-					project, optimized for performance and cost.
+				<p className="mx-auto max-w-xl text-base text-muted-foreground">
+					Industry-standard tools, chosen for performance, developer
+					experience, and zero lock-in.
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-				{[
-					{
-						name: "TanStack Start",
-						desc: "The most popular type-safe full-stack React framework.",
-						icon: (
-							<TanstackIcon className="size-5 text-foreground" />
-						)
-					},
-					{
-						name: "Cloudflare",
-						desc: "Complete edge infrastructure including Workers, D1, R2, and more.",
-						icon: (
-							<CloudflareIcon className="size-5 text-foreground" />
-						)
-					},
-					{
-						name: "OXC",
-						desc: "The Oxidation Compiler. A collection of high-performance tools for JS and TS.",
-						icon: <OXCIcon className="size-5 text-foreground" />
-					},
-					{
-						name: "Better Auth",
-						desc: "The most comprehensive open source authentication library.",
-						icon: (
-							<BetterAuthIcon className="size-5 text-foreground" />
-						)
-					},
-					{
-						name: "Drizzle ORM",
-						desc: "Lightweight, performant, and headless TypeScript ORM.",
-						icon: <DrizzleIcon className="size-5 text-foreground" />
-					},
-					{
-						name: "Dodo Payments",
-						desc: "Global payment processing and billing infrastructure.",
-						icon: (
-							<DodoPaymentIcon className="size-5 text-foreground" />
-						)
-					},
-					{
-						name: "Hono",
-						desc: "Ultrafast, lightweight, edge-native web framework.",
-						icon: <HonoIcon className="size-5 text-foreground" />
-					},
-					{
-						name: "Tailwind CSS v4",
-						desc: "The utility-first CSS framework for rapid UI development.",
-						icon: (
-							<TailwindIcon className="size-5 text-foreground" />
-						)
-					}
-				].map((tech) => (
+			<div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+				{STACK.map(({ name, desc, Icon }) => (
 					<div
-						key={tech.name}
-						className="border border-border/50 bg-muted/5 hover:bg-muted/10 transition-colors p-6 rounded-none flex flex-col gap-3 group"
+						key={name}
+						className="group flex flex-col gap-3 border border-border/50 bg-background p-5 transition-colors hover:border-border dark:bg-muted/5"
 					>
 						<div className="flex items-center gap-3">
-							<div className="p-2 bg-background border border-border/50 rounded-none group-hover:border-foreground/30 transition-colors">
-								{tech.icon}
+							<div className="flex h-8 w-8 items-center justify-center border border-border/50 bg-muted/20 transition-colors group-hover:border-foreground/20">
+								<Icon className="size-4 text-foreground" />
 							</div>
-							<span className="font-semibold text-sm text-foreground">
-								{tech.name}
+							<span className="text-sm font-semibold text-foreground">
+								{name}
 							</span>
 						</div>
-						<p className="text-xs text-muted-foreground leading-relaxed">
-							{tech.desc}
+						<p className="text-xs leading-relaxed text-muted-foreground">
+							{desc}
 						</p>
 					</div>
 				))}

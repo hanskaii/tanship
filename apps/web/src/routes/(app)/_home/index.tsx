@@ -19,7 +19,7 @@ export const Route = createFileRoute("/(app)/_home/")({
 
 function HomePage() {
 	return (
-		<div className="bg-background text-foreground antialiased min-h-screen flex flex-col font-sans selection:bg-primary selection:text-primary-foreground mx-auto w-full max-w-3xl px-4 sm:px-6 pt-14">
+		<div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col bg-background px-4 pt-14 font-sans text-foreground antialiased selection:bg-primary selection:text-primary-foreground sm:px-6">
 			<main className="flex-grow">
 				<HeroSection />
 				<ShowcaseSection />

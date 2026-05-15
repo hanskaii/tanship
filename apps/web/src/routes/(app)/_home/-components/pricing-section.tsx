@@ -1,130 +1,132 @@
 import { HugeiconsIcon } from "@hugeicons/react";
-import { CheckmarkCircle01Icon } from "@hugeicons/core-free-icons";
-import { Button } from "@workspace/ui";
+import { CheckmarkCircle01Icon, FlashIcon } from "@hugeicons/core-free-icons";
+import { Badge, Button } from "@workspace/ui";
+
+const STANDARD_FEATURES = [
+	"TanStack Start + Cloudflare Workers",
+	"Better Auth — OAuth, OTP, sessions",
+	"Dodo Payments billing integration",
+	"Drizzle ORM + D1 SQLite",
+	"Gate policy & RBAC system",
+	"MDX blog & docs engine",
+	"Lifetime updates"
+];
+
+const PRO_FEATURES = [
+	"Everything in Standard",
+	"All current premium templates",
+	"All future templates (free forever)",
+	"Priority email support"
+];
 
 export function PricingSection() {
 	return (
-		<section className="py-20 border-b border-border/40">
-			<div className="mb-16">
-				<h2 className="text-3xl font-semibold tracking-tight text-foreground mb-4">
+		<section className="border-b border-border/40 py-20">
+			<div className="mb-14">
+				<h2 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">
 					Invest in your time.
 				</h2>
-				<p className="text-muted-foreground text-lg max-w-xl">
+				<p className="max-w-md text-base text-muted-foreground">
 					Get lifetime access to the boilerplate. Save hundreds of
 					hours of development time.
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 gap-8">
-				{/* Standard Plan */}
-				<div className="border border-border/60 p-8 bg-background relative flex flex-col sm:flex-row gap-8 rounded-none transition-colors hover:border-border">
-					<div className="flex-1">
-						<h3 className="text-xl font-semibold text-foreground mb-2">
+			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+				{/* Standard */}
+				<div className="flex flex-col border border-border/60 bg-background p-8 transition-colors hover:border-border dark:bg-muted/5">
+					<div className="mb-6">
+						<h3 className="mb-1 text-lg font-semibold text-foreground">
 							Tanship Standard
 						</h3>
-						<p className="text-sm text-muted-foreground mb-8">
+						<p className="text-sm text-muted-foreground">
 							Full boilerplate to ship an edge-native SaaS.
 						</p>
-						<div className="space-y-4 mb-8 sm:mb-0">
-							<div className="flex items-start gap-3">
-								<HugeiconsIcon
-									icon={CheckmarkCircle01Icon}
-									className="text-muted-foreground size-4 flex-shrink-0 mt-0.5"
-								/>
-								<span className="text-sm text-foreground">
-									TanStack Start + Cloudflare Workers
-								</span>
-							</div>
-							<div className="flex items-start gap-3">
-								<HugeiconsIcon
-									icon={CheckmarkCircle01Icon}
-									className="text-muted-foreground size-4 flex-shrink-0 mt-0.5"
-								/>
-								<span className="text-sm text-foreground">
-									Better Auth & Dodo Payments
-								</span>
-							</div>
-							<div className="flex items-start gap-3">
-								<HugeiconsIcon
-									icon={CheckmarkCircle01Icon}
-									className="text-muted-foreground size-4 flex-shrink-0 mt-0.5"
-								/>
-								<span className="text-sm text-foreground">
-									Drizzle ORM + D1 SQLite
-								</span>
-							</div>
-						</div>
 					</div>
-					<div className="sm:w-64 flex flex-col justify-end border-t sm:border-t-0 sm:border-l border-border/40 pt-6 sm:pt-0 sm:pl-8">
-						<div className="mb-6">
-							<div className="text-4xl font-semibold text-foreground tracking-tight">
+
+					<div className="mb-8">
+						<div className="flex items-baseline gap-1">
+							<span className="text-5xl font-semibold tracking-tight text-foreground">
 								$99
-							</div>
-							<div className="text-xs text-muted-foreground mt-2 uppercase tracking-wider font-mono">
-								One-time payment
-							</div>
+							</span>
 						</div>
-						<Button className="w-full rounded-none h-12 bg-foreground text-background hover:bg-foreground/90 font-medium">
-							Get Standard
-						</Button>
+						<div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">
+							One-time payment
+						</div>
 					</div>
+
+					<ul className="mb-8 flex flex-col gap-3 flex-1">
+						{STANDARD_FEATURES.map((f) => (
+							<li
+								key={f}
+								className="flex items-start gap-2.5 text-sm"
+							>
+								<HugeiconsIcon
+									icon={CheckmarkCircle01Icon}
+									className="mt-0.5 size-4 shrink-0 text-muted-foreground"
+								/>
+								<span className="text-foreground">{f}</span>
+							</li>
+						))}
+					</ul>
+
+					<Button className="h-11 w-full rounded-none bg-foreground text-sm font-medium text-background hover:bg-foreground/90">
+						Get Standard
+					</Button>
 				</div>
 
-				{/* Pro Plan */}
-				<div className="border border-foreground p-8 bg-background relative flex flex-col sm:flex-row gap-8 rounded-none">
-					<div className="absolute -top-3 left-8 bg-foreground text-background text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
-						Pro
+				{/* Pro */}
+				<div className="relative flex flex-col border-2 border-foreground bg-background p-8 dark:bg-muted/5">
+					<div className="absolute -top-3.5 left-6">
+						<Badge className="rounded-full bg-foreground px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-background">
+							Most Popular
+						</Badge>
 					</div>
-					<div className="flex-1 pt-2 sm:pt-0">
-						<h3 className="text-xl font-semibold text-foreground mb-2">
+
+					<div className="mb-6 pt-2">
+						<h3 className="mb-1 text-lg font-semibold text-foreground">
 							Tanship Pro
 						</h3>
-						<p className="text-sm text-muted-foreground mb-8">
+						<p className="text-sm text-muted-foreground">
 							Boilerplate + access to all premium templates.
 						</p>
-						<div className="space-y-4 mb-8 sm:mb-0">
-							<div className="flex items-start gap-3">
-								<HugeiconsIcon
-									icon={CheckmarkCircle01Icon}
-									className="text-foreground size-4 flex-shrink-0 mt-0.5"
-								/>
-								<span className="text-sm text-foreground font-medium">
-									Everything in Standard
-								</span>
-							</div>
-							<div className="flex items-start gap-3">
-								<HugeiconsIcon
-									icon={CheckmarkCircle01Icon}
-									className="text-foreground size-4 flex-shrink-0 mt-0.5"
-								/>
-								<span className="text-sm text-foreground">
-									All premium templates
-								</span>
-							</div>
-							<div className="flex items-start gap-3">
-								<HugeiconsIcon
-									icon={CheckmarkCircle01Icon}
-									className="text-foreground size-4 flex-shrink-0 mt-0.5"
-								/>
-								<span className="text-sm text-foreground">
-									Priority email support
-								</span>
-							</div>
-						</div>
 					</div>
-					<div className="sm:w-64 flex flex-col justify-end border-t sm:border-t-0 sm:border-l border-border/40 pt-6 sm:pt-0 sm:pl-8">
-						<div className="mb-6">
-							<div className="text-4xl font-semibold text-foreground tracking-tight">
+
+					<div className="mb-8">
+						<div className="flex items-baseline gap-1">
+							<span className="text-5xl font-semibold tracking-tight text-foreground">
 								$299
-							</div>
-							<div className="text-xs text-muted-foreground mt-2 uppercase tracking-wider font-mono">
-								One-time payment
-							</div>
+							</span>
 						</div>
-						<Button className="w-full rounded-none h-12 bg-foreground text-background hover:bg-foreground/90 font-medium">
-							Get Pro
-						</Button>
+						<div className="mt-1 text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">
+							One-time payment
+						</div>
 					</div>
+
+					<ul className="mb-8 flex flex-col gap-3 flex-1">
+						{PRO_FEATURES.map((f) => (
+							<li
+								key={f}
+								className="flex items-start gap-2.5 text-sm"
+							>
+								<HugeiconsIcon
+									icon={CheckmarkCircle01Icon}
+									className="mt-0.5 size-4 shrink-0 text-foreground"
+								/>
+								<span className="font-medium text-foreground">
+									{f}
+								</span>
+							</li>
+						))}
+					</ul>
+
+					<Button className="h-11 w-full rounded-none bg-foreground text-sm font-medium text-background hover:bg-foreground/90">
+						<HugeiconsIcon
+							icon={FlashIcon}
+							className="mr-2 size-4"
+						/>
+						Get Pro
+					</Button>
 				</div>
 			</div>
 		</section>

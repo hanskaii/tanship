@@ -1,7 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { Badge, Button, Card, Separator, Spinner, toast } from "@workspace/ui";
+import { Badge, Button, Separator, Spinner, toast } from "@workspace/ui";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { FlashIcon } from "@hugeicons/core-free-icons";
+import { CheckmarkCircle01Icon, FlashIcon } from "@hugeicons/core-free-icons";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { authClient } from "@/auth/client";
@@ -14,7 +14,6 @@ export const Route = createFileRoute("/(app)/_home/upgrade")({
 		const session = await context.queryClient.fetchQuery(sessionsOptions());
 		if (!session?.user) throw redirect({ to: "/login" });
 
-		// Already subscribed — send them to the app
 		const result = await Gate.can("app.use", { actor: session.user });
 		if (result.allowed) throw redirect({ to: "/overview" });
 
@@ -50,10 +49,7 @@ function UpgradePage() {
 				toast.error(error.message || "Failed to initiate checkout");
 				return;
 			}
-
-			if (data?.url) {
-				window.location.href = data.url;
-			}
+			if (data?.url) window.location.href = data.url;
 		} catch {
 			toast.error("Something went wrong. Please try again.");
 		} finally {
@@ -61,141 +57,152 @@ function UpgradePage() {
 		}
 	};
 
-	return (
-		<div className="relative flex min-h-screen flex-col items-center bg-background overflow-hidden px-4 sm:px-6 pt-24 pb-32">
-			{/* Background */}
-			<div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-				<div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-			</div>
+	const plans = appConfig.payments.filter(
+		(p: any) => !p.slug.startsWith("template-")
+	);
 
-			<div className="relative z-10 w-full max-w-3xl flex flex-col items-center gap-12 mx-auto">
+	return (
+		<div className="relative flex min-h-screen flex-col items-center overflow-hidden bg-background px-4 pb-32 pt-24 sm:px-6">
+			{/* Background grid */}
+			<div className="pointer-events-none fixed inset-0 z-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.15)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.15)_1px,transparent_1px)] bg-[size:28px_28px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
+			<div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center gap-12">
 				{/* Header */}
 				<motion.div
 					initial={{ opacity: 0, y: 16 }}
 					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.4 }}
-					className="flex flex-col items-center text-center gap-4 border-b border-border/40 w-full pb-12"
+					transition={{ duration: 0.35 }}
+					className="flex w-full flex-col items-center gap-4 border-b border-border/40 pb-12 text-center"
 				>
+					<div className="flex h-10 w-10 items-center justify-center bg-foreground">
+						<HugeiconsIcon
+							icon={FlashIcon}
+							className="size-5 text-background"
+						/>
+					</div>
 					<Badge
 						variant="secondary"
-						className="px-3 py-1 bg-muted/30 text-foreground border border-border/50 text-[10px] uppercase tracking-widest font-bold rounded-full"
+						className="rounded-full border border-border/50 bg-muted/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground"
 					>
 						Subscription Required
 					</Badge>
-					<h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
+					<h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
 						Upgrade to get access
 					</h1>
-					<p className="text-muted-foreground text-base max-w-md leading-relaxed">
+					<p className="max-w-sm text-base text-muted-foreground leading-relaxed">
 						Choose a plan to unlock the app. Already subscribed?{" "}
 						<button
 							onClick={() => window.location.reload()}
-							className="text-foreground underline-offset-4 hover:underline font-medium"
+							className="font-medium text-foreground underline-offset-3 hover:underline"
 						>
 							Refresh the page.
 						</button>
 					</p>
 				</motion.div>
 
-				{/* Pricing cards */}
+				{/* Plan cards */}
 				<div
-					className={`grid w-full gap-6 grid-cols-1 ${appConfig.payments.filter((p: any) => !p.slug.startsWith("template-")).length > 1 ? "sm:grid-cols-2" : ""}`}
+					className={`grid w-full gap-4 ${plans.length > 1 ? "sm:grid-cols-2" : "grid-cols-1"}`}
 				>
-					{appConfig.payments
-						.filter((p: any) => !p.slug.startsWith("template-"))
-						.map((plan: any, i: number) => (
-							<motion.div
-								key={plan.name}
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.4, delay: 0.1 * i }}
-								className="flex h-full"
+					{plans.map((plan: any, i: number) => (
+						<motion.div
+							key={plan.name}
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.35, delay: 0.08 * i }}
+							className="flex h-full"
+						>
+							<div
+								className={`relative flex w-full flex-col p-8 transition-all ${
+									plan.popular
+										? "border-2 border-foreground bg-background shadow-md dark:bg-muted/5"
+										: "border border-border/60 bg-background hover:border-border dark:bg-muted/5"
+								}`}
 							>
-								<div
-									className={`relative flex flex-col w-full p-8 transition-all border-none bg-background ring-1 ${plan.popular ? "ring-foreground bg-muted/5 shadow-md" : "ring-border/60 hover:ring-border"}`}
-								>
-									{plan.popular && (
-										<div className="absolute -top-3 right-8">
-											<div className="bg-foreground text-background text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
-												Most Popular
-											</div>
-										</div>
-									)}
-									<div className="flex flex-col gap-2 mb-8">
-										<h3 className="font-semibold text-xl leading-tight text-foreground">
-											{plan.name}
-										</h3>
-										<div className="flex flex-col gap-1 mt-2">
-											<div className="flex items-center gap-2">
-												{plan.originalPrice && (
-													<span className="text-sm font-medium text-muted-foreground line-through opacity-50">
-														{plan.originalPrice}
-													</span>
-												)}
-												<span className="text-4xl font-semibold text-foreground tracking-tight">
-													{plan.price}
-												</span>
-												<span className="text-xs font-mono text-muted-foreground uppercase tracking-widest ml-1 mt-1">
-													{plan.currency}
-												</span>
-											</div>
-											<span className="text-xs text-muted-foreground uppercase tracking-wider font-mono mt-1">
-												{plan.interval === "one-time"
-													? plan.type === "credits"
-														? `Refillable (${plan.unit})`
-														: "One-time payment"
-													: `/ ${plan.interval}`}
+								{plan.popular && (
+									<div className="absolute -top-3.5 right-6">
+										<span className="rounded-full bg-foreground px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-background">
+											Most Popular
+										</span>
+									</div>
+								)}
+
+								<div className="mb-6 flex flex-col gap-2 pt-1">
+									<h3 className="text-lg font-semibold leading-tight text-foreground">
+										{plan.name}
+									</h3>
+									<div className="flex items-baseline gap-1.5">
+										{plan.originalPrice && (
+											<span className="text-sm font-medium text-muted-foreground line-through opacity-50">
+												{plan.originalPrice}
 											</span>
-										</div>
-										<p className="text-sm text-muted-foreground leading-relaxed mt-4">
-											{plan.description}
-										</p>
-									</div>
-
-									<Separator className="mb-8 opacity-40 bg-border/50" />
-
-									<div className="flex flex-col gap-4 mb-8 flex-1">
-										{plan.features.map(
-											(feature: string) => (
-												<div
-													key={feature}
-													className="flex items-start gap-3"
-												>
-													<HugeiconsIcon
-														icon={FlashIcon}
-														className="size-4 text-foreground flex-shrink-0 mt-0.5"
-													/>
-													<span className="text-sm text-foreground">
-														{feature}
-													</span>
-												</div>
-											)
 										)}
+										<span className="text-4xl font-semibold tracking-tight text-foreground">
+											{plan.price}
+										</span>
+										<span className="mt-1 text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">
+											{plan.currency}
+										</span>
 									</div>
-
-									<Button
-										size="lg"
-										className={`w-full rounded-none h-12 text-sm font-medium transition-colors ${plan.popular ? "bg-foreground text-background hover:bg-foreground/90" : "bg-transparent text-foreground border border-border/60 hover:bg-muted/10"}`}
-										onClick={() => handleCheckout(plan)}
-										disabled={isCheckoutLoading !== null}
-									>
-										{isCheckoutLoading === plan.name ? (
-											<Spinner className="size-4 mr-2" />
-										) : null}
-										{isCheckoutLoading === plan.name
-											? "Preparing..."
-											: plan.cta}
-									</Button>
-
-									<p className="text-center text-xs text-muted-foreground mt-4 opacity-60">
-										{plan.footer}
+									<span className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">
+										{plan.interval === "one-time"
+											? plan.type === "credits"
+												? `Refillable (${plan.unit})`
+												: "One-time payment"
+											: `/ ${plan.interval}`}
+									</span>
+									<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+										{plan.description}
 									</p>
 								</div>
-							</motion.div>
-						))}
+
+								<Separator className="mb-6 opacity-40" />
+
+								<ul className="mb-8 flex flex-1 flex-col gap-3">
+									{plan.features.map((feature: string) => (
+										<li
+											key={feature}
+											className="flex items-start gap-2.5 text-sm"
+										>
+											<HugeiconsIcon
+												icon={CheckmarkCircle01Icon}
+												className="mt-0.5 size-4 shrink-0 text-foreground"
+											/>
+											<span className="text-foreground">
+												{feature}
+											</span>
+										</li>
+									))}
+								</ul>
+
+								<Button
+									size="lg"
+									className={`h-11 w-full rounded-none text-sm font-medium transition-colors ${
+										plan.popular
+											? "bg-foreground text-background hover:bg-foreground/90"
+											: "border border-border/60 bg-transparent text-foreground hover:bg-muted/10"
+									}`}
+									onClick={() => handleCheckout(plan)}
+									disabled={isCheckoutLoading !== null}
+								>
+									{isCheckoutLoading === plan.name && (
+										<Spinner className="mr-2 size-4" />
+									)}
+									{isCheckoutLoading === plan.name
+										? "Preparing…"
+										: plan.cta}
+								</Button>
+
+								<p className="mt-3 text-center text-[11px] text-muted-foreground opacity-60">
+									{plan.footer}
+								</p>
+							</div>
+						</motion.div>
+					))}
 				</div>
 
 				{/* Footer */}
-				<div className="flex flex-col items-center gap-2 mt-8">
+				<div className="flex flex-col items-center gap-2">
 					<p className="text-sm text-muted-foreground">
 						Signed in as{" "}
 						<span className="font-semibold text-foreground">
@@ -207,9 +214,9 @@ function UpgradePage() {
 						size="sm"
 						onClick={logout}
 						disabled={isLogoutPending}
-						className="text-sm text-muted-foreground rounded-none hover:text-foreground"
+						className="h-8 rounded-none text-[13px] text-muted-foreground hover:text-foreground"
 					>
-						{isLogoutPending ? "Logging out..." : "Log out"}
+						{isLogoutPending ? "Logging out…" : "Log out"}
 					</Button>
 				</div>
 			</div>

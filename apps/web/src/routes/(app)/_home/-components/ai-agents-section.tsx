@@ -1,34 +1,41 @@
 import { HugeiconsIcon } from "@hugeicons/react";
 import { FlashIcon } from "@hugeicons/core-free-icons";
 
+const TOOLS = ["Cursor AI", "Claude Code", "Gemini IDE", "GitHub Copilot"];
+
 export function AiAgentsSection() {
 	return (
-		<section className="py-20 border-b border-border/40">
-			<div className="border border-border/50 bg-background p-10 text-center flex flex-col items-center rounded-none">
-				<div className="flex items-center justify-center size-12 rounded-none bg-background border border-border/50 mb-6">
+		<section className="border-b border-border/40 py-20">
+			<div className="flex flex-col gap-8 border border-border/50 bg-muted/5 p-10 sm:flex-row sm:items-center dark:bg-muted/10">
+				{/* Icon */}
+				<div className="flex h-12 w-12 shrink-0 items-center justify-center border border-border/50 bg-background dark:border-border/30">
 					<HugeiconsIcon
 						icon={FlashIcon}
-						className="size-6 text-foreground"
+						className="size-5 text-foreground"
 					/>
 				</div>
-				<h2 className="text-2xl font-semibold tracking-tight text-foreground mb-4">
-					Optimized for LLMs
-				</h2>
-				<p className="text-muted-foreground text-base max-w-lg mb-8 leading-relaxed">
-					Integrates seamlessly with AI IDEs. Our codebase makes
-					development faster with custom rules and an included MCP
-					Server to turbocharge output quality.
-				</p>
-				<div className="flex flex-wrap justify-center gap-3 text-xs font-bold tracking-widest uppercase">
-					<span className="px-4 py-2 border border-border/50 bg-background text-foreground">
-						Cursor AI
-					</span>
-					<span className="px-4 py-2 border border-border/50 bg-background text-foreground">
-						Claude Code
-					</span>
-					<span className="px-4 py-2 border border-border/50 bg-background text-foreground">
-						Gemini IDE
-					</span>
+
+				{/* Copy */}
+				<div className="flex flex-col gap-3 flex-1">
+					<h2 className="text-xl font-semibold tracking-tight text-foreground">
+						Optimized for AI-assisted development
+					</h2>
+					<p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+						Custom CLAUDE.md rules, structured policy patterns, and
+						an included MCP server give AI coding assistants the
+						context they need to produce correct, idiomatic code —
+						every time.
+					</p>
+					<div className="flex flex-wrap gap-2 pt-1">
+						{TOOLS.map((tool) => (
+							<span
+								key={tool}
+								className="border border-border/50 bg-background px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-foreground dark:bg-muted/10"
+							>
+								{tool}
+							</span>
+						))}
+					</div>
 				</div>
 			</div>
 		</section>

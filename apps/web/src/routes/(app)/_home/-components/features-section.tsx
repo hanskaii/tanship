@@ -8,100 +8,82 @@ import {
 	FlashIcon
 } from "@hugeicons/core-free-icons";
 
+const FEATURES = [
+	{
+		icon: GlobeIcon,
+		title: "Cloudflare Edge",
+		description:
+			"Deploy globally in seconds. Zero cold starts, unlimited scale with Workers, D1, and R2."
+	},
+	{
+		icon: CodeIcon,
+		title: "TanStack & Hono",
+		description:
+			"100% type-safe routing and RPC. Seamless client-server state with React 19."
+	},
+	{
+		icon: Shield01Icon,
+		title: "Better Auth",
+		description:
+			"Edge-ready authentication with social logins, magic links, and session management."
+	},
+	{
+		icon: CreditCardIcon,
+		title: "Dodo Payments",
+		description:
+			"End-to-end billing. Subscriptions, webhooks, and customer portals out of the box."
+	},
+	{
+		icon: Layout01Icon,
+		title: "Minimalist UI",
+		description:
+			"Sharp, clean design system. Tailwind v4 + shadcn/ui components, ready to extend."
+	},
+	{
+		icon: FlashIcon,
+		title: "SEO & Content",
+		description:
+			"Built-in MDX blog and documentation engine so you rank without fighting config."
+	}
+];
+
 export function FeaturesSection() {
 	return (
-		<section className="py-20 border-b border-border/40">
-			<div className="mb-16">
-				<h2 className="text-3xl font-semibold tracking-tight text-foreground mb-4">
+		<section className="border-b border-border/40 py-20">
+			<div className="mb-14">
+				<h2 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">
 					Core infrastructure,
 					<br />
 					simplified.
 				</h2>
-				<p className="text-muted-foreground text-lg max-w-xl">
+				<p className="max-w-md text-base text-muted-foreground">
 					Everything you need to launch a modern SaaS, pre-configured
 					and ready to scale.
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
-				<div>
-					<HugeiconsIcon
-						icon={GlobeIcon}
-						className="size-6 text-foreground mb-5"
-					/>
-					<h3 className="text-base font-semibold text-foreground mb-2">
-						Cloudflare Edge
-					</h3>
-					<p className="text-sm text-muted-foreground leading-relaxed">
-						Deploy globally in seconds. Zero cold starts and
-						unlimited scalability with Workers, D1, and R2.
-					</p>
-				</div>
-				<div>
-					<HugeiconsIcon
-						icon={CodeIcon}
-						className="size-6 text-foreground mb-5"
-					/>
-					<h3 className="text-base font-semibold text-foreground mb-2">
-						TanStack & Hono
-					</h3>
-					<p className="text-sm text-muted-foreground leading-relaxed">
-						100% type-safe routing and RPC backend. Seamless
-						client-server state with React 19.
-					</p>
-				</div>
-				<div>
-					<HugeiconsIcon
-						icon={Shield01Icon}
-						className="size-6 text-foreground mb-5"
-					/>
-					<h3 className="text-base font-semibold text-foreground mb-2">
-						Better Auth
-					</h3>
-					<p className="text-sm text-muted-foreground leading-relaxed">
-						Secure, edge-ready authentication. Pre-configured social
-						logins, magic links, and session management.
-					</p>
-				</div>
-				<div>
-					<HugeiconsIcon
-						icon={CreditCardIcon}
-						className="size-6 text-foreground mb-5"
-					/>
-					<h3 className="text-base font-semibold text-foreground mb-2">
-						Dodo Payments
-					</h3>
-					<p className="text-sm text-muted-foreground leading-relaxed">
-						End-to-end billing integration. Subscriptions, webhooks,
-						and customer portals out of the box.
-					</p>
-				</div>
-				<div>
-					<HugeiconsIcon
-						icon={Layout01Icon}
-						className="size-6 text-foreground mb-5"
-					/>
-					<h3 className="text-base font-semibold text-foreground mb-2">
-						Minimalist UI
-					</h3>
-					<p className="text-sm text-muted-foreground leading-relaxed">
-						Tailwind Plus aesthetic out of the box. Sharp borders,
-						crisp typography, and highly accessible components.
-					</p>
-				</div>
-				<div>
-					<HugeiconsIcon
-						icon={FlashIcon}
-						className="size-6 text-foreground mb-5"
-					/>
-					<h3 className="text-base font-semibold text-foreground mb-2">
-						SEO & Content Ready
-					</h3>
-					<p className="text-sm text-muted-foreground leading-relaxed">
-						Built-in MDX blog and documentation engine so you can
-						rank higher without fighting configuration files.
-					</p>
-				</div>
+			<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				{FEATURES.map((f) => (
+					<div
+						key={f.title}
+						className="group flex flex-col gap-4 border border-border/50 bg-background p-6 transition-colors hover:border-border dark:bg-muted/5"
+					>
+						<div className="flex h-10 w-10 items-center justify-center border border-border/50 bg-muted/20 transition-colors group-hover:border-foreground/20 dark:bg-muted/10">
+							<HugeiconsIcon
+								icon={f.icon}
+								className="size-5 text-foreground"
+							/>
+						</div>
+						<div className="flex flex-col gap-1.5">
+							<h3 className="text-sm font-semibold text-foreground">
+								{f.title}
+							</h3>
+							<p className="text-sm leading-relaxed text-muted-foreground">
+								{f.description}
+							</p>
+						</div>
+					</div>
+				))}
 			</div>
 		</section>
 	);

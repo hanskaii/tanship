@@ -1,54 +1,97 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-	Badge,
-	Card,
-	CardHeader,
-	CardTitle,
-	CardDescription
-} from "@workspace/ui";
+import { Badge } from "@workspace/ui";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
 	Book02Icon,
 	TelegramIcon,
 	GithubIcon,
 	Mail01Icon,
-	MessageQuestionIcon
+	MessageQuestionIcon,
+	ArrowRight01Icon
 } from "@hugeicons/core-free-icons";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger
+} from "@workspace/ui";
 
 export const Route = createFileRoute("/(app)/_home/contact")({
 	component: ContactPage
 });
+
+const CONTACT_CARDS = [
+	{
+		title: "Documentation",
+		description: "Step-by-step guides, API reference, and setup tutorials.",
+		icon: Book02Icon,
+		href: "/docs",
+		isExternal: true,
+		cta: "Browse docs"
+	},
+	{
+		title: "Telegram",
+		description: "Join our community — fastest way to reach the team.",
+		icon: TelegramIcon,
+		href: "https://t.me/hudasaja",
+		isExternal: true,
+		cta: "Open Telegram"
+	},
+	{
+		title: "GitHub",
+		description: "Open an issue, browse the roadmap, or contribute code.",
+		icon: GithubIcon,
+		href: "https://github.com/hudasaja",
+		isExternal: true,
+		cta: "View GitHub"
+	}
+];
+
+const FAQS = [
+	{
+		q: "How do I get an API Key?",
+		a: "You can generate and manage your API keys in your Account Settings under the API Keys tab. Make sure to keep your secret keys safe."
+	},
+	{
+		q: "Is there a rate limit for the API?",
+		a: "Yes, our public API has a rate limit of 100 requests per minute per API key to ensure stability for all users."
+	},
+	{
+		q: "Where can I find the full documentation?",
+		a: "Our comprehensive API reference is available on the /docs page, featuring guides, examples, and a full API reference."
+	}
+];
 
 function ContactCard({
 	title,
 	description,
 	icon,
 	href,
-	isExternal = false
-}: {
-	title: string;
-	description: string;
-	icon: any;
-	href: string;
-	isExternal?: boolean;
-}) {
-	const Content = (
-		<div className="flex flex-col items-center bg-background border border-border/50 hover:bg-muted/10 transition-all cursor-pointer group h-full rounded-none p-6">
-			<div className="flex flex-col items-center text-center gap-3">
-				<div className="w-12 h-12 rounded-none bg-muted/30 border border-border/50 flex items-center justify-center shadow-sm transition-transform group-hover:scale-105">
-					<HugeiconsIcon
-						icon={icon}
-						className="size-5 text-foreground/80"
-					/>
-				</div>
-				<div className="flex flex-col gap-1.5 mt-2">
-					<h3 className="text-sm font-semibold tracking-tight">
-						{title}
-					</h3>
-					<p className="text-xs leading-relaxed text-muted-foreground px-2">
-						{description}
-					</p>
-				</div>
+	isExternal,
+	cta
+}: (typeof CONTACT_CARDS)[number]) {
+	const Inner = (
+		<div className="group flex h-full flex-col gap-5 border border-border/50 bg-background p-7 transition-all hover:border-border dark:bg-muted/5">
+			<div className="flex h-11 w-11 items-center justify-center border border-border/50 bg-muted/20 transition-colors group-hover:border-foreground/20">
+				<HugeiconsIcon
+					icon={icon}
+					className="size-5 text-foreground/80"
+				/>
+			</div>
+			<div className="flex flex-col gap-1.5 flex-1">
+				<h3 className="text-sm font-semibold tracking-tight text-foreground">
+					{title}
+				</h3>
+				<p className="text-xs leading-relaxed text-muted-foreground">
+					{description}
+				</p>
+			</div>
+			<div className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+				{cta}
+				<HugeiconsIcon
+					icon={ArrowRight01Icon}
+					className="size-3.5 transition-transform group-hover:translate-x-0.5"
+				/>
 			</div>
 		</div>
 	);
@@ -61,120 +104,94 @@ function ContactCard({
 				rel="noreferrer"
 				className="block h-full"
 			>
-				{Content}
+				{Inner}
 			</a>
 		);
 	}
 
 	return (
 		<Link to={href} className="block h-full">
-			{Content}
+			{Inner}
 		</Link>
 	);
 }
 
-const faqs = [
-	{
-		question: "How do I get an API Key?",
-		answer: "You can generate and manage your API keys in your Account Settings under the API Keys tab. Make sure to keep your secret keys safe."
-	},
-	{
-		question: "Is there a rate limit for the API?",
-		answer: "Yes, our public API has a rate limit of 100 requests per minute per API key to ensure stability."
-	},
-	{
-		question: "Where can I find the full documentation?",
-		answer: "Our comprehensive API reference is available on the /docs page, featuring guides and examples."
-	}
-];
-
 function ContactPage() {
 	return (
-		<div className="flex flex-col items-center w-full max-w-3xl mx-auto px-4 sm:px-6 pt-24 pb-32 min-h-screen">
-			<div className="flex flex-col gap-4 text-center mb-20">
+		<div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col items-center px-4 pb-32 pt-24 sm:px-6">
+			{/* Header */}
+			<div className="mb-16 flex flex-col items-center gap-4 text-center">
 				<Badge
 					variant="outline"
-					className="w-fit mx-auto rounded-full px-3 py-1 bg-muted/30 text-foreground border-border/50 text-[10px] uppercase tracking-widest font-bold"
+					className="mx-auto w-fit rounded-full border-border/50 bg-muted/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground"
 				>
 					Support
 				</Badge>
-				<h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
+				<h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
 					How can we help?
 				</h1>
-				<p className="text-muted-foreground text-base max-w-md mx-auto leading-relaxed text-balance mt-2">
-					Questions about setup, billing, or roadmap? We're here to
-					help you build faster.
+				<p className="max-w-sm text-balance text-base leading-relaxed text-muted-foreground">
+					Questions about setup, billing, or the roadmap? We're here
+					to help you ship faster.
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mb-28">
-				<ContactCard
-					title="Documentation"
-					description="Guides, API reference, and more."
-					icon={Book02Icon}
-					href="/docs"
-				/>
-				<ContactCard
-					title="Telegram"
-					description="Fastest way to reach the team."
-					icon={TelegramIcon}
-					href="https://t.me/hudasaja"
-					isExternal
-				/>
-				<ContactCard
-					title="GitHub"
-					description="Open issues or contribute code."
-					icon={GithubIcon}
-					href="https://github.com/hudasaja"
-					isExternal
-				/>
+			{/* Contact cards */}
+			<div className="mb-24 grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
+				{CONTACT_CARDS.map((card) => (
+					<ContactCard key={card.title} {...card} />
+				))}
 			</div>
 
-			<div className="flex flex-col items-center gap-12 w-full pt-16 border-t border-border/40">
-				<div className="flex flex-col items-center gap-3 text-center">
-					<div className="flex items-center justify-center p-3 rounded-none bg-muted/30 text-foreground mb-2">
+			{/* FAQ */}
+			<div className="w-full border-t border-border/40 pt-16">
+				<div className="mb-10 flex flex-col items-center gap-3 text-center">
+					<div className="flex h-10 w-10 items-center justify-center bg-muted/30">
 						<HugeiconsIcon
 							icon={MessageQuestionIcon}
-							className="size-5"
+							className="size-5 text-foreground"
 						/>
 					</div>
-					<h2 className="text-2xl font-semibold tracking-tight">
+					<h2 className="text-2xl font-semibold tracking-tight text-foreground">
 						Frequently asked questions
 					</h2>
-					<p className="text-muted-foreground text-sm">
+					<p className="text-sm text-muted-foreground">
 						Quick answers to common questions about Tanship.
 					</p>
 				</div>
 
-				<div className="grid grid-cols-1 gap-6 w-full max-w-2xl">
-					{faqs.map((faq, i) => (
-						<div
+				<Accordion
+					type="single"
+					collapsible
+					className="w-full max-w-2xl mx-auto"
+				>
+					{FAQS.map((faq, i) => (
+						<AccordionItem
 							key={i}
-							className="flex flex-col gap-2 p-6 rounded-none border border-border/50 bg-background hover:bg-muted/10 transition-colors"
+							value={`faq-${i}`}
+							className="border-b border-border/40 last:border-b-0"
 						>
-							<h3 className="font-semibold text-base tracking-tight">
-								{faq.question}
-							</h3>
-							<p className="text-sm text-muted-foreground leading-relaxed">
-								{faq.answer}
-							</p>
-						</div>
+							<AccordionTrigger className="py-4 text-sm font-semibold text-foreground hover:no-underline text-left">
+								{faq.q}
+							</AccordionTrigger>
+							<AccordionContent className="pb-4 text-sm leading-relaxed text-muted-foreground">
+								{faq.a}
+							</AccordionContent>
+						</AccordionItem>
 					))}
-				</div>
+				</Accordion>
 
-				<div className="mt-12 flex flex-col items-center gap-4 p-10 rounded-none border border-border/50 bg-muted/5 w-full">
-					<div className="flex flex-col items-center gap-2 text-center">
-						<h3 className="font-semibold text-base">
-							Still have questions?
-						</h3>
-						<p className="text-sm text-muted-foreground">
-							We're generally available via email for more formal
-							inquiries.
-						</p>
-					</div>
+				{/* Still need help CTA */}
+				<div className="mt-10 flex w-full max-w-2xl mx-auto flex-col items-center gap-4 border border-border/50 bg-muted/5 p-10 text-center dark:bg-muted/10">
+					<h3 className="text-sm font-semibold text-foreground">
+						Still have questions?
+					</h3>
+					<p className="text-xs text-muted-foreground">
+						We're available via email for more formal inquiries.
+					</p>
 					<a
 						href="mailto:support@tanship.com"
-						className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-foreground/70 transition-colors mt-2"
+						className="mt-1 flex items-center gap-2 text-sm font-semibold text-foreground transition-colors hover:text-foreground/70"
 					>
 						<HugeiconsIcon icon={Mail01Icon} className="size-4" />
 						support@tanship.com
