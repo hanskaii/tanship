@@ -30,7 +30,7 @@ const TEMPLATES: TemplateItem[] = [
 			"Full admin dashboard with analytics, user management, billing UI, and real-time charts.",
 		tags: ["TanStack", "shadcn/ui", "Recharts"],
 		previewBg: "from-blue-500/5 via-blue-500/10 to-blue-500/5",
-		previewUrl: "https://dashboard.tanflare.dev"
+		previewUrl: "https://dashboard.tanship.dev"
 	},
 	{
 		id: "marketing-site",
@@ -40,7 +40,7 @@ const TEMPLATES: TemplateItem[] = [
 			"High-converting landing page with hero, features, testimonials, pricing, and blog.",
 		tags: ["TanStack Start", "MDX", "Motion"],
 		previewBg: "from-violet-500/5 via-violet-500/10 to-violet-500/5",
-		previewUrl: "https://marketing.tanflare.dev"
+		previewUrl: "https://marketing.tanship.dev"
 	},
 	{
 		id: "docs-site",
@@ -50,7 +50,7 @@ const TEMPLATES: TemplateItem[] = [
 			"Documentation site with full-text search, versioned content, and MDX-powered blog.",
 		tags: ["TanStack Router", "MDX"],
 		previewBg: "from-emerald-500/5 via-emerald-500/10 to-emerald-500/5",
-		previewUrl: "https://docs.tanflare.dev"
+		previewUrl: "https://docs.tanship.dev"
 	},
 	{
 		id: "api-starter",
@@ -60,7 +60,7 @@ const TEMPLATES: TemplateItem[] = [
 			"Production-ready Hono API with auth, rate limiting, and OpenAPI spec generation.",
 		tags: ["Hono", "Zod", "Workers"],
 		previewBg: "from-orange-500/5 via-orange-500/10 to-orange-500/5",
-		previewUrl: "https://api.tanflare.dev"
+		previewUrl: "https://api.tanship.dev"
 	},
 	{
 		id: "waitlist",
@@ -70,7 +70,7 @@ const TEMPLATES: TemplateItem[] = [
 			"Viral waitlist with referral tracking, position display, and email confirmation.",
 		tags: ["TanStack Start", "Dodo", "Resend"],
 		previewBg: "from-pink-500/5 via-pink-500/10 to-pink-500/5",
-		previewUrl: "https://waitlist.tanflare.dev"
+		previewUrl: "https://waitlist.tanship.dev"
 	},
 	{
 		id: "changelog",
@@ -80,7 +80,7 @@ const TEMPLATES: TemplateItem[] = [
 			"Public changelog with RSS feed, email subscriber management, and markdown editor.",
 		tags: ["TanStack Router", "D1", "Resend"],
 		previewBg: "from-yellow-500/5 via-yellow-500/10 to-yellow-500/5",
-		previewUrl: "https://changelog.tanflare.dev"
+		previewUrl: "https://changelog.tanship.dev"
 	}
 ];
 
@@ -96,7 +96,7 @@ function TemplatesPage() {
 	});
 
 	const isProUser =
-		purchases?.some((p) => p.planSlug === "tanflare-pro") ?? false;
+		purchases?.some((p) => p.planSlug === "tanship-pro") ?? false;
 
 	/** Set of individual template slugs the user already owns */
 	const ownedTemplateSlugs = new Set(
@@ -143,7 +143,7 @@ function TemplatesPage() {
 		}
 	};
 
-	const handleUpgrade = () => startCheckout("tanflare-pro");
+	const handleUpgrade = () => startCheckout("tanship-pro");
 
 	return (
 		<div className="relative flex min-h-screen flex-col items-center bg-background overflow-hidden">
@@ -170,9 +170,9 @@ function TemplatesPage() {
 						Ship faster with ready-made templates
 					</h1>
 					<p className="max-w-xl text-balance text-base text-muted-foreground leading-relaxed">
-						Production-ready templates built on the Tanflare stack.
+						Production-ready templates built on the Tanship stack.
 						Buy individually at $99, or unlock all of them with
-						Tanflare Pro for $299.
+						Tanship Pro for $299.
 					</p>
 
 					{!isProUser && (
@@ -183,7 +183,7 @@ function TemplatesPage() {
 								onClick={handleUpgrade}
 								disabled={!!checkoutSlug}
 							>
-								{checkoutSlug === "tanflare-pro" ? (
+								{checkoutSlug === "tanship-pro" ? (
 									<Spinner className="size-4 mr-2" />
 								) : (
 									<HugeiconsIcon
@@ -256,7 +256,7 @@ function TemplatesPage() {
 									}
 									isCheckoutLoading={
 										checkoutSlug === template.slug ||
-										checkoutSlug === "tanflare-pro"
+										checkoutSlug === "tanship-pro"
 									}
 								/>
 							</motion.div>
@@ -280,7 +280,7 @@ function TemplatesPage() {
 						</div>
 						<div className="flex flex-col gap-3">
 							<h2 className="text-2xl font-semibold tracking-tight">
-								Unlock all templates with Tanflare Pro
+								Unlock all templates with Tanship Pro
 							</h2>
 							<p className="text-muted-foreground text-sm max-w-md mx-auto leading-relaxed">
 								One payment. Every template we've built and
@@ -296,10 +296,10 @@ function TemplatesPage() {
 								onClick={handleUpgrade}
 								disabled={!!checkoutSlug}
 							>
-								{checkoutSlug === "tanflare-pro" ? (
+								{checkoutSlug === "tanship-pro" ? (
 									<Spinner className="size-4 mr-2" />
 								) : null}
-								Get Tanflare Pro — $299
+								Get Tanship Pro — $299
 							</Button>
 							<p className="text-[11px] text-muted-foreground font-mono uppercase tracking-wider">
 								vs. $99 × 6 = $594 individually

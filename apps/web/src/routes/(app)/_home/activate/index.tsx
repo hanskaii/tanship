@@ -24,8 +24,8 @@ export const Route = createFileRoute("/(app)/_home/activate/")({
 });
 
 function planDisplayName(slug: string) {
-	if (slug === "tanflare-pro") return "Tanflare Pro";
-	if (slug === "tanflare") return "Tanflare";
+	if (slug === "tanship-pro") return "Tanship Pro";
+	if (slug === "tanship") return "Tanship";
 	if (slug.startsWith("template-")) {
 		const id = slug.replace("template-", "");
 		return (
@@ -504,7 +504,7 @@ function ActivatePage() {
 						<p className="text-xs text-muted-foreground text-center">
 							Need help?{" "}
 							<a
-								href="mailto:support@tanflare.com"
+								href="mailto:support@tanship.com"
 								className="underline underline-offset-4 hover:text-foreground transition-colors text-foreground font-medium"
 							>
 								Contact support

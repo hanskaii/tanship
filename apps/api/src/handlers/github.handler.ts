@@ -83,10 +83,10 @@ const githubHandler = new Hono<HonoEnv>()
 			);
 		}
 
-		// "tanflare" → boilerplate repo only
-		// "tanflare-pro" → boilerplate + templates repos
+		// "tanship" → boilerplate repo only
+		// "tanship-pro" → boilerplate + templates repos
 		const repos: string[] = [];
-		if (purchase.planSlug === "tanflare-pro") {
+		if (purchase.planSlug === "tanship-pro") {
 			repos.push(boilerplateRepo);
 			if (templatesRepo) repos.push(templatesRepo);
 		} else {
@@ -103,7 +103,7 @@ const githubHandler = new Hono<HonoEnv>()
 						Authorization: `Bearer ${githubToken}`,
 						Accept: "application/vnd.github+json",
 						"X-GitHub-Api-Version": "2022-11-28",
-						"User-Agent": "Tanflare-App",
+						"User-Agent": "Tanship-App",
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({ permission: "pull" })
@@ -192,10 +192,10 @@ const githubHandler = new Hono<HonoEnv>()
 			});
 		}
 
-		// "tanflare" → boilerplate repo only
-		// "tanflare-pro" → boilerplate + templates repos
+		// "tanship" → boilerplate repo only
+		// "tanship-pro" → boilerplate + templates repos
 		const repos: string[] = [];
-		if (purchase.planSlug === "tanflare-pro") {
+		if (purchase.planSlug === "tanship-pro") {
 			repos.push(boilerplateRepo);
 			if (templatesRepo) repos.push(templatesRepo);
 		} else {
@@ -211,7 +211,7 @@ const githubHandler = new Hono<HonoEnv>()
 						Authorization: `Bearer ${githubToken}`,
 						Accept: "application/vnd.github+json",
 						"X-GitHub-Api-Version": "2022-11-28",
-						"User-Agent": "Tanflare-App",
+						"User-Agent": "Tanship-App",
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({ permission: "pull" })

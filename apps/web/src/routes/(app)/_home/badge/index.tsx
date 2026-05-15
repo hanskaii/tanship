@@ -14,24 +14,24 @@ export const Route = createFileRoute("/(app)/_home/badge/")({
 	component: BadgePage
 });
 
-const BADGE_URL = "https://tanflare.com/badge.svg";
-const SITE_URL = "https://tanflare.com";
+const BADGE_URL = "https://tanship.com/badge.svg";
+const SITE_URL = "https://tanship.com";
 
 const snippets = [
 	{
 		label: "Markdown",
 		lang: "markdown",
-		code: `[![Built with Tanflare](${BADGE_URL})](${SITE_URL})`
+		code: `[![Built with Tanship](${BADGE_URL})](${SITE_URL})`
 	},
 	{
 		label: "HTML",
 		lang: "html",
-		code: `<a href="${SITE_URL}" target="_blank" rel="noreferrer">\n  <img src="${BADGE_URL}" alt="Built with Tanflare" />\n</a>`
+		code: `<a href="${SITE_URL}" target="_blank" rel="noreferrer">\n  <img src="${BADGE_URL}" alt="Built with Tanship" />\n</a>`
 	},
 	{
 		label: "JSX",
 		lang: "jsx",
-		code: `<a href="${SITE_URL}" target="_blank" rel="noreferrer">\n  <img src="${BADGE_URL}" alt="Built with Tanflare" />\n</a>`
+		code: `<a href="${SITE_URL}" target="_blank" rel="noreferrer">\n  <img src="${BADGE_URL}" alt="Built with Tanship" />\n</a>`
 	}
 ];
 
@@ -88,11 +88,11 @@ function BadgePage() {
 							Badge
 						</Badge>
 						<h1 className="text-3xl font-semibold tracking-tight">
-							Built with Tanflare
+							Built with Tanship
 						</h1>
 						<p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
 							Embed this badge in your README or website to show
-							that your project is powered by Tanflare.
+							that your project is powered by Tanship.
 						</p>
 					</div>
 				</motion.div>
@@ -114,7 +114,7 @@ function BadgePage() {
 								<div className="flex items-center justify-center bg-white rounded-none p-6 shadow-sm border border-border/20">
 									<img
 										src="/badge.svg"
-										alt="Built with Tanflare"
+										alt="Built with Tanship"
 										className="h-5"
 									/>
 								</div>
@@ -122,7 +122,7 @@ function BadgePage() {
 								<div className="flex items-center justify-center bg-zinc-900 rounded-none p-6 border border-border/20">
 									<img
 										src="/badge.svg"
-										alt="Built with Tanflare"
+										alt="Built with Tanship"
 										className="h-5"
 									/>
 								</div>

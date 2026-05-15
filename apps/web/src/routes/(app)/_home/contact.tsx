@@ -142,7 +142,7 @@ function ContactPage() {
 						Frequently asked questions
 					</h2>
 					<p className="text-muted-foreground text-sm">
-						Quick answers to common questions about Tanflare.
+						Quick answers to common questions about Tanship.
 					</p>
 				</div>
 
@@ -173,11 +173,11 @@ function ContactPage() {
 						</p>
 					</div>
 					<a
-						href="mailto:support@tanflare.com"
+						href="mailto:support@tanship.com"
 						className="flex items-center gap-2 text-sm font-semibold text-foreground hover:text-foreground/70 transition-colors mt-2"
 					>
 						<HugeiconsIcon icon={Mail01Icon} className="size-4" />
-						support@tanflare.com
+						support@tanship.com
 					</a>
 				</div>
 			</div>

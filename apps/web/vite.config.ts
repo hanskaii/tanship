@@ -6,8 +6,6 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import viteTsConfigPaths from "vite-tsconfig-paths";
-import * as mdxConfig from "./source.config";
-import mdx from "fumadocs-mdx/vite";
 
 const config = defineConfig({
 	resolve: {
@@ -38,7 +36,6 @@ const config = defineConfig({
 		viteTsConfigPaths({
 			projects: ["./tsconfig.json"]
 		}),
-		mdx(mdxConfig),
 		tailwindcss(),
 		tanstackStart(),
 		viteReact({

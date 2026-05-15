@@ -117,7 +117,7 @@ function ShowcasePage() {
 						Showcase
 					</Badge>
 					<h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
-						Built with Tanflare
+						Built with Tanship
 					</h1>
 					<p className="text-base text-muted-foreground max-w-md leading-relaxed">
 						Real products and projects built by our community.
@@ -164,7 +164,7 @@ function ShowcasePage() {
 							</p>
 							<p className="text-xs text-muted-foreground">
 								Be the first to showcase what you built with
-								Tanflare.
+								Tanship.
 							</p>
 						</div>
 						<Button

@@ -115,9 +115,9 @@ function PurchaseCard({ purchase }: { purchase: Purchase }) {
 					</div>
 					<div className="flex flex-col gap-0.5">
 						<p className="text-sm font-semibold leading-tight capitalize">
-							{purchase.planSlug === "tanflare-pro"
-								? "Tanflare Pro"
-								: "Tanflare"}
+							{purchase.planSlug === "tanship-pro"
+								? "Tanship Pro"
+								: "Tanship"}
 						</p>
 						<Badge
 							variant="secondary"

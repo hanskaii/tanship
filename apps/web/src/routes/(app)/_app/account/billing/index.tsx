@@ -191,9 +191,9 @@ function BillingContent({
 								<>
 									<p className="text-sm font-semibold leading-tight">
 										{latestPurchase.planSlug ===
-										"tanflare-pro"
-											? "Tanflare Pro"
-											: "Tanflare"}
+										"tanship-pro"
+											? "Tanship Pro"
+											: "Tanship"}
 									</p>
 									<StatusBadge status="lifetime" />
 								</>

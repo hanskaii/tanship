@@ -31,7 +31,7 @@ const templateDownloadHandler = new Hono<HonoEnv>().get(
 			where: and(
 				eq(purchases.userId, user.id),
 				or(
-					eq(purchases.planSlug, "tanflare-pro"),
+					eq(purchases.planSlug, "tanship-pro"),
 					eq(purchases.planSlug, `template-${templateId}`)
 				)
 			)
@@ -57,7 +57,7 @@ const templateDownloadHandler = new Hono<HonoEnv>().get(
 		object.writeHttpMetadata(headers);
 		headers.set(
 			"content-disposition",
-			`attachment; filename="tanflare-${templateId}.zip"`
+			`attachment; filename="tanship-${templateId}.zip"`
 		);
 		headers.set("cache-control", "private, no-cache");
 

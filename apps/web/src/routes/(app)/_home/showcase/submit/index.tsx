@@ -115,7 +115,7 @@ function ShowcaseSubmitPage() {
 								Submit your project
 							</h1>
 							<p className="text-sm text-muted-foreground leading-relaxed">
-								Show the community what you built with Tanflare.
+								Show the community what you built with Tanship.
 								We review every submission before publishing.
 							</p>
 						</div>
@@ -249,7 +249,7 @@ function ShowcaseSubmitPage() {
 									</label>
 									<textarea
 										className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
-										placeholder="Tell us what you built and how you used Tanflare…"
+										placeholder="Tell us what you built and how you used Tanship…"
 										maxLength={500}
 										value={form.description}
 										onChange={(e) =>

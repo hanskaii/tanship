@@ -23,7 +23,7 @@ export function HomeNav() {
 							/>
 						</div>
 						<span className="font-semibold text-foreground tracking-tight">
-							Tanflare
+							Tanship
 						</span>
 					</Link>
 					<Badge

@@ -21,16 +21,12 @@ import { Route as appAuthLoginRouteImport } from './routes/(app)/_auth/login'
 import { Route as appAppAccountRouteRouteImport } from './routes/(app)/_app/account/route'
 import { Route as appHomeTemplatesIndexRouteImport } from './routes/(app)/_home/templates/index'
 import { Route as appHomeShowcaseIndexRouteImport } from './routes/(app)/_home/showcase/index'
-import { Route as appHomeDocsIndexRouteImport } from './routes/(app)/_home/docs/index'
-import { Route as appHomeChangelogIndexRouteImport } from './routes/(app)/_home/changelog/index'
 import { Route as appHomeBadgeIndexRouteImport } from './routes/(app)/_home/badge/index'
 import { Route as appHomeActivateIndexRouteImport } from './routes/(app)/_home/activate/index'
 import { Route as appAppOverviewIndexRouteImport } from './routes/(app)/_app/overview/index'
 import { Route as appAppChatIndexRouteImport } from './routes/(app)/_app/chat/index'
 import { Route as appHomeLegalsTermsRouteImport } from './routes/(app)/_home/legals/terms'
 import { Route as appHomeLegalsPrivacyPolicyRouteImport } from './routes/(app)/_home/legals/privacy-policy'
-import { Route as appHomeDocsSplatRouteImport } from './routes/(app)/_home/docs/$'
-import { Route as appHomeChangelogSplatRouteImport } from './routes/(app)/_home/changelog/$'
 import { Route as appHomeShowcaseSubmitIndexRouteImport } from './routes/(app)/_home/showcase/submit/index'
 import { Route as appAppAccountSecurityIndexRouteImport } from './routes/(app)/_app/account/security/index'
 import { Route as appAppAccountProfileIndexRouteImport } from './routes/(app)/_app/account/profile/index'
@@ -96,16 +92,6 @@ const appHomeShowcaseIndexRoute = appHomeShowcaseIndexRouteImport.update({
   path: '/showcase/',
   getParentRoute: () => appHomeRouteRoute,
 } as any)
-const appHomeDocsIndexRoute = appHomeDocsIndexRouteImport.update({
-  id: '/docs/',
-  path: '/docs/',
-  getParentRoute: () => appHomeRouteRoute,
-} as any)
-const appHomeChangelogIndexRoute = appHomeChangelogIndexRouteImport.update({
-  id: '/changelog/',
-  path: '/changelog/',
-  getParentRoute: () => appHomeRouteRoute,
-} as any)
 const appHomeBadgeIndexRoute = appHomeBadgeIndexRouteImport.update({
   id: '/badge/',
   path: '/badge/',
@@ -137,16 +123,6 @@ const appHomeLegalsPrivacyPolicyRoute =
     path: '/legals/privacy-policy',
     getParentRoute: () => appHomeRouteRoute,
   } as any)
-const appHomeDocsSplatRoute = appHomeDocsSplatRouteImport.update({
-  id: '/docs/$',
-  path: '/docs/$',
-  getParentRoute: () => appHomeRouteRoute,
-} as any)
-const appHomeChangelogSplatRoute = appHomeChangelogSplatRouteImport.update({
-  id: '/changelog/$',
-  path: '/changelog/$',
-  getParentRoute: () => appHomeRouteRoute,
-} as any)
 const appHomeShowcaseSubmitIndexRoute =
   appHomeShowcaseSubmitIndexRouteImport.update({
     id: '/showcase/submit/',
@@ -204,16 +180,12 @@ export interface FileRoutesByFullPath {
   '/contact': typeof appHomeContactRoute
   '/upgrade': typeof appHomeUpgradeRoute
   '/': typeof appHomeIndexRoute
-  '/changelog/$': typeof appHomeChangelogSplatRoute
-  '/docs/$': typeof appHomeDocsSplatRoute
   '/legals/privacy-policy': typeof appHomeLegalsPrivacyPolicyRoute
   '/legals/terms': typeof appHomeLegalsTermsRoute
   '/chat/': typeof appAppChatIndexRoute
   '/overview/': typeof appAppOverviewIndexRoute
   '/activate/': typeof appHomeActivateIndexRoute
   '/badge/': typeof appHomeBadgeIndexRoute
-  '/changelog/': typeof appHomeChangelogIndexRoute
-  '/docs/': typeof appHomeDocsIndexRoute
   '/showcase/': typeof appHomeShowcaseIndexRoute
   '/templates/': typeof appHomeTemplatesIndexRoute
   '/s/events/': typeof appAdminSEventsIndexRoute
@@ -232,16 +204,12 @@ export interface FileRoutesByTo {
   '/contact': typeof appHomeContactRoute
   '/upgrade': typeof appHomeUpgradeRoute
   '/': typeof appHomeIndexRoute
-  '/changelog/$': typeof appHomeChangelogSplatRoute
-  '/docs/$': typeof appHomeDocsSplatRoute
   '/legals/privacy-policy': typeof appHomeLegalsPrivacyPolicyRoute
   '/legals/terms': typeof appHomeLegalsTermsRoute
   '/chat': typeof appAppChatIndexRoute
   '/overview': typeof appAppOverviewIndexRoute
   '/activate': typeof appHomeActivateIndexRoute
   '/badge': typeof appHomeBadgeIndexRoute
-  '/changelog': typeof appHomeChangelogIndexRoute
-  '/docs': typeof appHomeDocsIndexRoute
   '/showcase': typeof appHomeShowcaseIndexRoute
   '/templates': typeof appHomeTemplatesIndexRoute
   '/s/events': typeof appAdminSEventsIndexRoute
@@ -266,16 +234,12 @@ export interface FileRoutesById {
   '/(app)/_home/contact': typeof appHomeContactRoute
   '/(app)/_home/upgrade': typeof appHomeUpgradeRoute
   '/(app)/_home/': typeof appHomeIndexRoute
-  '/(app)/_home/changelog/$': typeof appHomeChangelogSplatRoute
-  '/(app)/_home/docs/$': typeof appHomeDocsSplatRoute
   '/(app)/_home/legals/privacy-policy': typeof appHomeLegalsPrivacyPolicyRoute
   '/(app)/_home/legals/terms': typeof appHomeLegalsTermsRoute
   '/(app)/_app/chat/': typeof appAppChatIndexRoute
   '/(app)/_app/overview/': typeof appAppOverviewIndexRoute
   '/(app)/_home/activate/': typeof appHomeActivateIndexRoute
   '/(app)/_home/badge/': typeof appHomeBadgeIndexRoute
-  '/(app)/_home/changelog/': typeof appHomeChangelogIndexRoute
-  '/(app)/_home/docs/': typeof appHomeDocsIndexRoute
   '/(app)/_home/showcase/': typeof appHomeShowcaseIndexRoute
   '/(app)/_home/templates/': typeof appHomeTemplatesIndexRoute
   '/(app)/_admin/s/events/': typeof appAdminSEventsIndexRoute
@@ -296,16 +260,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/upgrade'
     | '/'
-    | '/changelog/$'
-    | '/docs/$'
     | '/legals/privacy-policy'
     | '/legals/terms'
     | '/chat/'
     | '/overview/'
     | '/activate/'
     | '/badge/'
-    | '/changelog/'
-    | '/docs/'
     | '/showcase/'
     | '/templates/'
     | '/s/events/'
@@ -324,16 +284,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/upgrade'
     | '/'
-    | '/changelog/$'
-    | '/docs/$'
     | '/legals/privacy-policy'
     | '/legals/terms'
     | '/chat'
     | '/overview'
     | '/activate'
     | '/badge'
-    | '/changelog'
-    | '/docs'
     | '/showcase'
     | '/templates'
     | '/s/events'
@@ -357,16 +313,12 @@ export interface FileRouteTypes {
     | '/(app)/_home/contact'
     | '/(app)/_home/upgrade'
     | '/(app)/_home/'
-    | '/(app)/_home/changelog/$'
-    | '/(app)/_home/docs/$'
     | '/(app)/_home/legals/privacy-policy'
     | '/(app)/_home/legals/terms'
     | '/(app)/_app/chat/'
     | '/(app)/_app/overview/'
     | '/(app)/_home/activate/'
     | '/(app)/_home/badge/'
-    | '/(app)/_home/changelog/'
-    | '/(app)/_home/docs/'
     | '/(app)/_home/showcase/'
     | '/(app)/_home/templates/'
     | '/(app)/_admin/s/events/'
@@ -470,20 +422,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appHomeShowcaseIndexRouteImport
       parentRoute: typeof appHomeRouteRoute
     }
-    '/(app)/_home/docs/': {
-      id: '/(app)/_home/docs/'
-      path: '/docs'
-      fullPath: '/docs/'
-      preLoaderRoute: typeof appHomeDocsIndexRouteImport
-      parentRoute: typeof appHomeRouteRoute
-    }
-    '/(app)/_home/changelog/': {
-      id: '/(app)/_home/changelog/'
-      path: '/changelog'
-      fullPath: '/changelog/'
-      preLoaderRoute: typeof appHomeChangelogIndexRouteImport
-      parentRoute: typeof appHomeRouteRoute
-    }
     '/(app)/_home/badge/': {
       id: '/(app)/_home/badge/'
       path: '/badge'
@@ -524,20 +462,6 @@ declare module '@tanstack/react-router' {
       path: '/legals/privacy-policy'
       fullPath: '/legals/privacy-policy'
       preLoaderRoute: typeof appHomeLegalsPrivacyPolicyRouteImport
-      parentRoute: typeof appHomeRouteRoute
-    }
-    '/(app)/_home/docs/$': {
-      id: '/(app)/_home/docs/$'
-      path: '/docs/$'
-      fullPath: '/docs/$'
-      preLoaderRoute: typeof appHomeDocsSplatRouteImport
-      parentRoute: typeof appHomeRouteRoute
-    }
-    '/(app)/_home/changelog/$': {
-      id: '/(app)/_home/changelog/$'
-      path: '/changelog/$'
-      fullPath: '/changelog/$'
-      preLoaderRoute: typeof appHomeChangelogSplatRouteImport
       parentRoute: typeof appHomeRouteRoute
     }
     '/(app)/_home/showcase/submit/': {
@@ -673,14 +597,10 @@ interface appHomeRouteRouteChildren {
   appHomeContactRoute: typeof appHomeContactRoute
   appHomeUpgradeRoute: typeof appHomeUpgradeRoute
   appHomeIndexRoute: typeof appHomeIndexRoute
-  appHomeChangelogSplatRoute: typeof appHomeChangelogSplatRoute
-  appHomeDocsSplatRoute: typeof appHomeDocsSplatRoute
   appHomeLegalsPrivacyPolicyRoute: typeof appHomeLegalsPrivacyPolicyRoute
   appHomeLegalsTermsRoute: typeof appHomeLegalsTermsRoute
   appHomeActivateIndexRoute: typeof appHomeActivateIndexRoute
   appHomeBadgeIndexRoute: typeof appHomeBadgeIndexRoute
-  appHomeChangelogIndexRoute: typeof appHomeChangelogIndexRoute
-  appHomeDocsIndexRoute: typeof appHomeDocsIndexRoute
   appHomeShowcaseIndexRoute: typeof appHomeShowcaseIndexRoute
   appHomeTemplatesIndexRoute: typeof appHomeTemplatesIndexRoute
   appHomeShowcaseSubmitIndexRoute: typeof appHomeShowcaseSubmitIndexRoute
@@ -690,14 +610,10 @@ const appHomeRouteRouteChildren: appHomeRouteRouteChildren = {
   appHomeContactRoute: appHomeContactRoute,
   appHomeUpgradeRoute: appHomeUpgradeRoute,
   appHomeIndexRoute: appHomeIndexRoute,
-  appHomeChangelogSplatRoute: appHomeChangelogSplatRoute,
-  appHomeDocsSplatRoute: appHomeDocsSplatRoute,
   appHomeLegalsPrivacyPolicyRoute: appHomeLegalsPrivacyPolicyRoute,
   appHomeLegalsTermsRoute: appHomeLegalsTermsRoute,
   appHomeActivateIndexRoute: appHomeActivateIndexRoute,
   appHomeBadgeIndexRoute: appHomeBadgeIndexRoute,
-  appHomeChangelogIndexRoute: appHomeChangelogIndexRoute,
-  appHomeDocsIndexRoute: appHomeDocsIndexRoute,
   appHomeShowcaseIndexRoute: appHomeShowcaseIndexRoute,
   appHomeTemplatesIndexRoute: appHomeTemplatesIndexRoute,
   appHomeShowcaseSubmitIndexRoute: appHomeShowcaseSubmitIndexRoute,
