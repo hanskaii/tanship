@@ -279,7 +279,9 @@ export function AudioPlayerProvider<TData = unknown>({
 					ref={audioRef}
 					className="hidden"
 					crossOrigin="anonymous"
-				/>
+				>
+					<track kind="captions" />
+				</audio>
 				{children}
 			</AudioPlayerTimeContext.Provider>
 		</AudioPlayerContext.Provider>

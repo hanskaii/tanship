@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { authClient } from "@/auth/client";
 import { useState, useRef } from "react";
-import { Badge, Button, Input, Spinner, toast } from "@workspace/ui";
+import { Button, Input, Spinner, toast } from "@workspace/ui";
 import { motion } from "framer-motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {

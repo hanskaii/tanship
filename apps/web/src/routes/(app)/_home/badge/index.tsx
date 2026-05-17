@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Badge } from "@workspace/ui";
 import { motion } from "framer-motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
