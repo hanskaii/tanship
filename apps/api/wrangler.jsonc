@@ -3,7 +3,9 @@
 	"name": "tanship-api",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-09-02",
-	"compatibility_flags": ["nodejs_compat"],
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
 	"placement": {
 		"mode": "smart"
 	},
@@ -51,5 +53,4 @@
 		"GITHUB_REPO_OWNER": "hanskaii",
 		"GITHUB_REPO_BOILERPLATE": "tanship"
 	},
-	"migrations": []
 }

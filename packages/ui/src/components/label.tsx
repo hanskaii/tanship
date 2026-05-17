@@ -3,6 +3,7 @@ import type * as React from "react";
 import { cn } from "../lib/cn";
 
 function Label({ className, ...props }: React.ComponentProps<"label">) {
+	// oxlint-disable-next-line jsx-a11y/label-has-associated-control
 	return (
 		<label
 			data-slot="label"
