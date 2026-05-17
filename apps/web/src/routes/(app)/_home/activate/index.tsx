@@ -185,17 +185,23 @@ function ActivatePage() {
 										className="font-mono text-sm"
 									/>
 									<Button
-										size="sm"
-										className="h-9 shrink-0 px-4 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
+										className="h-10 shrink-0 px-5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
 										onClick={handleLookup}
 										disabled={
 											!licenseKey.trim() || isLoading
 										}
 									>
-										<HugeiconsIcon
-											icon={Search01Icon}
-											className="size-4"
-										/>
+										{isLoading ? (
+											<Spinner className="size-4" />
+										) : (
+											<>
+												<HugeiconsIcon
+													icon={Search01Icon}
+													className="size-4 mr-2"
+												/>
+												Validate
+											</>
+										)}
 									</Button>
 								</div>
 								{submittedKey.trim() &&
