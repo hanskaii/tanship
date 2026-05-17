@@ -4,9 +4,10 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import {
 	Book02Icon,
 	TelegramIcon,
-	GithubIcon,
+	Mail01Icon,
 	ArrowRight01Icon
 } from "@hugeicons/core-free-icons";
+import { appConfig } from "@workspace/config";
 import { FaqSection } from "../-components/faq-section";
 import { FooterSection } from "../-components/footer-section";
 import { Fragment } from "react/jsx-runtime";
@@ -33,12 +34,13 @@ const CONTACT_CARDS = [
 		cta: "Open Telegram"
 	},
 	{
-		title: "GitHub",
-		description: "Open an issue, browse the roadmap, or contribute code.",
-		icon: GithubIcon,
-		href: "https://github.com/hudasaja",
+		title: "Email Support",
+		description:
+			"Need private or detailed help? Send us an email directly.",
+		icon: Mail01Icon,
+		href: `mailto:${appConfig.supportEmail}`,
 		isExternal: true,
-		cta: "View GitHub"
+		cta: "Send email"
 	}
 ];
 
@@ -51,8 +53,8 @@ function ContactCard({
 	cta
 }: (typeof CONTACT_CARDS)[number]) {
 	const Inner = (
-		<div className="group flex h-full flex-col gap-5 rounded-xl bg-card ring-1 ring-border/40 p-7 transition-all hover:ring-border">
-			<div className="flex size-11 items-center justify-center rounded-xl bg-secondary">
+		<div className="group flex h-full flex-col gap-5 rounded-xl bg-card p-7 transition-all hover:bg-card/80">
+			<div className="flex size-11 items-center justify-center rounded-xl bg-secondary group-hover:bg-background transition-colors">
 				<HugeiconsIcon
 					icon={icon}
 					className="size-5 text-foreground/80"
@@ -66,11 +68,11 @@ function ContactCard({
 					{description}
 				</p>
 			</div>
-			<div className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+			<div className="mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-md bg-foreground text-sm font-medium text-background transition-colors group-hover:bg-foreground/90 group-active:translate-y-px">
 				{cta}
 				<HugeiconsIcon
 					icon={ArrowRight01Icon}
-					className="size-3.5 transition-transform group-hover:translate-x-0.5"
+					className="size-4 transition-transform group-hover:translate-x-0.5"
 				/>
 			</div>
 		</div>
@@ -125,10 +127,12 @@ function ContactPage() {
 					</p>
 				</div>
 
-				<div className="mb-24 grid w-full grid-cols-1 gap-3 sm:grid-cols-3">
-					{CONTACT_CARDS.map((card) => (
-						<ContactCard key={card.title} {...card} />
-					))}
+				<div className="mb-24 w-full rounded-2xl bg-secondary p-2">
+					<div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+						{CONTACT_CARDS.map((card) => (
+							<ContactCard key={card.title} {...card} />
+						))}
+					</div>
 				</div>
 
 				<FaqSection />

@@ -18,18 +18,35 @@ const MARQUEE_WORDS = [
 	"Powered by Cloudflare"
 ];
 
-const FOOTER_LINKS = [
-	{ label: "Documentation", href: "/docs", external: true },
-	{ label: "Templates", href: "/templates", external: false },
-	{ label: "Showcase", href: "/showcase", external: false },
-	{ label: "Contact", href: "/contact", external: false },
+const FOOTER_GROUPS = [
 	{
-		label: "Privacy Policy",
-		href: "/legals/privacy-policy",
-		external: false
+		title: "Product",
+		links: [
+			{ label: "Templates", href: "/templates", external: false },
+			{ label: "Showcase", href: "/showcase", external: false },
+			{ label: "Badge", href: "/badge", external: false }
+		]
 	},
-	{ label: "Terms of Service", href: "/legals/terms", external: false },
-	{ label: "Badge", href: "/badge", external: false }
+	{
+		title: "Company",
+		links: [
+			{ label: "Contact", href: "/contact", external: false },
+			{
+				label: "Privacy Policy",
+				href: "/legals/privacy-policy",
+				external: false
+			},
+			{
+				label: "Terms of Service",
+				href: "/legals/terms",
+				external: false
+			}
+		]
+	},
+	{
+		title: "Resources",
+		links: [{ label: "Documentation", href: "/docs", external: true }]
+	}
 ];
 
 export function FooterSection() {
@@ -100,57 +117,70 @@ export function FooterSection() {
 						</div>
 
 						{/* Footer bottom row */}
-						<div className="flex flex-col gap-4 border-t border-primary-foreground/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
-							<div className="flex items-center gap-2">
-								<Logo className="h-6 w-6" />
+						<div className="grid grid-cols-1 md:grid-cols-5 gap-10 border-t border-primary-foreground/10 pt-12">
+							<div className="flex flex-col gap-4 md:col-span-2">
+								<div className="flex items-center gap-2">
+									<Logo className="h-6 w-6" />
+									<span
+										className="font-semibold text-primary-foreground"
+										style={{
+											fontSize: "14px",
+											letterSpacing: "-0.01em"
+										}}
+									>
+										Tanship
+									</span>
+								</div>
+								<p className="text-primary-foreground/60 text-[13px] leading-relaxed max-w-[280px]">
+									The ultimate TanStack boilerplate for
+									building modern web applications faster and
+									better.
+								</p>
 								<span
-									className="font-semibold text-primary-foreground"
-									style={{
-										fontSize: "14px",
-										letterSpacing: "-0.01em"
-									}}
-								>
-									Tanship
-								</span>
-								<span
-									className="text-primary-foreground/40"
+									className="text-primary-foreground/40 mt-4"
 									style={{ fontSize: "12px" }}
 								>
-									© {year}
+									© {year} Tanship. All rights reserved.
 								</span>
 							</div>
 
-							<nav className="flex flex-wrap gap-x-6 gap-y-2">
-								{FOOTER_LINKS.map(({ label, href, external }) =>
-									external ? (
-										<a
-											key={label}
-											href={href}
-											target="_blank"
-											rel="noreferrer"
-											className="font-medium text-primary-foreground/60 transition-colors hover:text-primary-foreground"
-											style={{
-												fontSize: "13px",
-												letterSpacing: "-0.01em"
-											}}
-										>
-											{label}
-										</a>
-									) : (
-										<Link
-											key={label}
-											to={href}
-											className="font-medium text-primary-foreground/60 transition-colors hover:text-primary-foreground"
-											style={{
-												fontSize: "13px",
-												letterSpacing: "-0.01em"
-											}}
-										>
-											{label}
-										</Link>
-									)
-								)}
-							</nav>
+							<div className="grid grid-cols-2 sm:grid-cols-3 gap-8 md:col-span-3">
+								{FOOTER_GROUPS.map((group) => (
+									<div
+										key={group.title}
+										className="flex flex-col gap-5"
+									>
+										<h3 className="font-semibold text-primary-foreground text-[14px] tracking-[-0.01em]">
+											{group.title}
+										</h3>
+										<ul className="flex flex-col gap-3">
+											{group.links.map(
+												({ label, href, external }) => (
+													<li key={label}>
+														{external ? (
+															<a
+																href={href}
+																target="_blank"
+																rel="noreferrer"
+																className="font-medium text-primary-foreground/60 transition-colors hover:text-primary-foreground text-[13px] tracking-[-0.01em]"
+															>
+																{label}
+															</a>
+														) : (
+															<Link
+																to={href}
+																className="font-medium text-primary-foreground/60 transition-colors hover:text-primary-foreground text-[13px] tracking-[-0.01em]"
+															>
+																{label}
+															</Link>
+														)}
+													</li>
+												)
+											)}
+										</ul>
+									</div>
+								))}
+							</div>
 						</div>
 					</div>
 				</div>
