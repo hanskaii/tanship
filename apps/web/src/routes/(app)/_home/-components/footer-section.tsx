@@ -1,76 +1,159 @@
 import { Link } from "@tanstack/react-router";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { FlashIcon } from "@hugeicons/core-free-icons";
+import { Logo } from "@/routes/-components/logo";
 
-const LINKS = [
+const MARQUEE_WORDS = [
+	"Ship faster",
+	"Global by default",
+	"Start on day one",
+	"Zero lock-in",
+	"Lifetime updates",
+	"Built on TanStack",
+	"Powered by Cloudflare",
+	"Ship faster",
+	"Global by default",
+	"Start on day one",
+	"Zero lock-in",
+	"Lifetime updates",
+	"Built on TanStack",
+	"Powered by Cloudflare"
+];
+
+const FOOTER_LINKS = [
 	{ label: "Documentation", href: "/docs", external: true },
 	{ label: "Templates", href: "/templates", external: false },
 	{ label: "Showcase", href: "/showcase", external: false },
 	{ label: "Contact", href: "/contact", external: false },
 	{
-		label: "Twitter",
-		href: "https://twitter.com/tanship",
-		external: true
+		label: "Privacy Policy",
+		href: "/legals/privacy-policy",
+		external: false
 	},
-	{
-		label: "GitHub",
-		href: "https://github.com/inurhuda00",
-		external: true
-	}
+	{ label: "Terms of Service", href: "/legals/terms", external: false },
+	{ label: "Badge", href: "/badge", external: false }
 ];
 
 export function FooterSection() {
 	const year = new Date().getFullYear();
 
 	return (
-		<footer className="border-t border-border/40 py-12">
-			<div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-				{/* Brand */}
-				<div className="flex items-center gap-2.5">
-					<div className="flex h-7 w-7 items-center justify-center bg-foreground">
-						<HugeiconsIcon
-							icon={FlashIcon}
-							className="size-3.5 text-background"
-						/>
+		<footer>
+			{/* Full-lime footer block */}
+			<div className="bg-primary overflow-hidden">
+				{/* Marquee */}
+				<div className="border-b border-primary-foreground/10 py-5 overflow-hidden">
+					<style>{`
+						@keyframes marquee {
+							from { transform: translateX(0); }
+							to   { transform: translateX(-50%); }
+						}
+						.marquee-track {
+							display: flex;
+							width: max-content;
+							animation: marquee 28s linear infinite;
+						}
+						.marquee-track:hover { animation-play-state: paused; }
+					`}</style>
+					<div className="marquee-track">
+						{MARQUEE_WORDS.map((word, i) => (
+							<span
+								key={i}
+								className="flex shrink-0 items-center gap-6 pr-12 font-heading font-medium text-primary-foreground/80"
+								style={{
+									fontSize: "clamp(1rem, 2.5vw, 1.25rem)",
+									letterSpacing: "-0.02em"
+								}}
+							>
+								<span
+									className="h-1 w-1 shrink-0 rounded-full bg-primary-foreground/40"
+									aria-hidden
+								/>
+								{word}
+							</span>
+						))}
 					</div>
-					<span className="font-semibold tracking-tight text-foreground">
-						Tanship
-					</span>
-					<span className="hidden text-xs text-muted-foreground sm:block">
-						— Edge-native SaaS Starter Kit
-					</span>
 				</div>
 
-				{/* Links */}
-				<div className="flex flex-wrap gap-x-5 gap-y-2">
-					{LINKS.map(({ label, href, external }) =>
-						external ? (
+				{/* Main CTA area */}
+				<div className="px-8 py-16 md:px-16">
+					<div className="flex flex-col gap-10">
+						<div className="flex flex-col gap-4">
+							<p
+								className="font-heading font-medium text-primary-foreground/40 uppercase"
+								style={{
+									fontSize: "11px",
+									letterSpacing: "0.12em"
+								}}
+							>
+								Start building today
+							</p>
 							<a
-								key={label}
-								href={href}
-								target="_blank"
-								rel="noreferrer"
-								className="text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+								href="#pricing"
+								className="font-heading font-medium text-primary-foreground underline decoration-primary-foreground/30 underline-offset-4 transition-opacity hover:opacity-70"
+								style={{
+									fontSize: "clamp(2.4rem, 7vw, 5rem)",
+									letterSpacing: "-0.04em",
+									lineHeight: "1.0"
+								}}
 							>
-								{label}
+								Get Tanship
 							</a>
-						) : (
-							<Link
-								key={label}
-								to={href}
-								className="text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
-							>
-								{label}
-							</Link>
-						)
-					)}
-				</div>
-			</div>
+						</div>
 
-			<div className="mt-8 border-t border-border/30 pt-6">
-				<p className="text-xs text-muted-foreground">
-					© {year} Tanship. All rights reserved.
-				</p>
+						{/* Footer bottom row */}
+						<div className="flex flex-col gap-4 border-t border-primary-foreground/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+							<div className="flex items-center gap-2">
+								<Logo className="h-6 w-6" />
+								<span
+									className="font-semibold text-primary-foreground"
+									style={{
+										fontSize: "14px",
+										letterSpacing: "-0.01em"
+									}}
+								>
+									Tanship
+								</span>
+								<span
+									className="text-primary-foreground/40"
+									style={{ fontSize: "12px" }}
+								>
+									© {year}
+								</span>
+							</div>
+
+							<nav className="flex flex-wrap gap-x-6 gap-y-2">
+								{FOOTER_LINKS.map(({ label, href, external }) =>
+									external ? (
+										<a
+											key={label}
+											href={href}
+											target="_blank"
+											rel="noreferrer"
+											className="font-medium text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+											style={{
+												fontSize: "13px",
+												letterSpacing: "-0.01em"
+											}}
+										>
+											{label}
+										</a>
+									) : (
+										<Link
+											key={label}
+											to={href}
+											className="font-medium text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+											style={{
+												fontSize: "13px",
+												letterSpacing: "-0.01em"
+											}}
+										>
+											{label}
+										</Link>
+									)
+								)}
+							</nav>
+						</div>
+					</div>
+				</div>
 			</div>
 		</footer>
 	);

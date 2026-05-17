@@ -9,7 +9,7 @@ export const purchases = sqliteTable(
 			.notNull()
 			.references(() => users.id, { onDelete: "cascade" }),
 		productId: text("product_id").notNull(),
-		planSlug: text("plan_slug").notNull(), // "tanflare" | "tanflare-pro"
+		planSlug: text("plan_slug").notNull(), // "tanship" | "tanship-pro"
 		licenseKey: text("license_key").notNull().unique(),
 		paymentId: text("payment_id"),
 		githubUsername: text("github_username"), // null until user claims

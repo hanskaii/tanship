@@ -17,7 +17,7 @@ const STACK = [
 	},
 	{
 		name: "Cloudflare",
-		desc: "Complete edge infrastructure: Workers, D1, R2, and more.",
+		desc: "Complete cloud infrastructure: Workers, D1, R2, and more.",
 		Icon: CloudflareIcon
 	},
 	{
@@ -42,7 +42,7 @@ const STACK = [
 	},
 	{
 		name: "Hono",
-		desc: "Ultrafast, lightweight, edge-native web framework.",
+		desc: "Ultrafast, lightweight web framework built for speed.",
 		Icon: HonoIcon
 	},
 	{
@@ -55,35 +55,61 @@ const STACK = [
 export function TechStackSection() {
 	return (
 		<section className="border-b border-border/40 py-20">
-			<div className="mb-14 text-center">
-				<h2 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">
+			<div className="mb-14">
+				<h2
+					className="mb-3 font-heading font-medium text-foreground"
+					style={{
+						fontSize: "clamp(2rem, 5vw, 3rem)",
+						letterSpacing: "-0.04em",
+						lineHeight: "1.05"
+					}}
+				>
 					Built on the best stack
 				</h2>
-				<p className="mx-auto max-w-xl text-base text-muted-foreground">
+				<p
+					className="max-w-xl text-muted-foreground"
+					style={{
+						fontSize: "15px",
+						lineHeight: "1.6",
+						letterSpacing: "-0.02em"
+					}}
+				>
 					Industry-standard tools, chosen for performance, developer
 					experience, and zero lock-in.
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-				{STACK.map(({ name, desc, Icon }) => (
-					<div
-						key={name}
-						className="group flex flex-col gap-3 border border-border/50 bg-background p-5 transition-colors hover:border-border dark:bg-muted/5"
-					>
-						<div className="flex items-center gap-3">
-							<div className="flex h-8 w-8 items-center justify-center border border-border/50 bg-muted/20 transition-colors group-hover:border-foreground/20">
-								<Icon className="size-4 text-foreground" />
+			<div className="rounded-2xl bg-secondary p-2">
+				<div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
+					{STACK.map(({ name, desc, Icon }) => (
+						<div
+							key={name}
+							className="flex flex-col gap-8 rounded-xl bg-card p-6"
+						>
+							<Icon className="size-7 text-foreground" />
+							<div className="flex flex-col gap-1">
+								<span
+									className="font-medium text-foreground"
+									style={{
+										fontSize: "14px",
+										letterSpacing: "-0.01em"
+									}}
+								>
+									{name}
+								</span>
+								<p
+									className="leading-relaxed text-muted-foreground"
+									style={{
+										fontSize: "12px",
+										letterSpacing: "-0.01em"
+									}}
+								>
+									{desc}
+								</p>
 							</div>
-							<span className="text-sm font-semibold text-foreground">
-								{name}
-							</span>
 						</div>
-						<p className="text-xs leading-relaxed text-muted-foreground">
-							{desc}
-						</p>
-					</div>
-				))}
+					))}
+				</div>
 			</div>
 		</section>
 	);

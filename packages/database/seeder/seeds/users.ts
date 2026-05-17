@@ -131,7 +131,7 @@ export async function seedUsers(db: DrizzleD1Database<typeof schema> | any) {
 		.insert(schema.apiKeys)
 		.values({
 			id: "ak_admin_seed",
-			key: "tanflare_admin_test_key",
+			key: "tanship_admin_test_key",
 			referenceId: "user_admin_seed",
 			name: "Admin Dev Key",
 			createdAt: daysAgo(90),
@@ -141,7 +141,7 @@ export async function seedUsers(db: DrizzleD1Database<typeof schema> | any) {
 
 	console.log(`✓ Seeded ${usersData.length} users with auth records`);
 	console.log(
-		"  admin@example.com     → admin (API Key: tanflare_admin_test_key)"
+		"  admin@example.com     → admin (API Key: tanship_admin_test_key)"
 	);
 	console.log("  alice@example.com     → pro subscriber");
 	console.log("  bob@example.com       → free user");

@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Badge, Button } from "@workspace/ui";
+import { Button } from "@workspace/ui";
 import { motion } from "framer-motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
 	ArrowRight01Icon,
+	ArrowUpRight01Icon,
 	GlobeIcon,
 	TwitterIcon
 } from "@hugeicons/core-free-icons";
@@ -12,6 +13,7 @@ import {
 	showcasesQueryOptions,
 	type ShowcaseItem
 } from "@/routes/-fn/showcase";
+import { FooterSection } from "../-components/footer-section";
 
 export const Route = createFileRoute("/(app)/_home/showcase/")({
 	component: ShowcasePage
@@ -19,13 +21,14 @@ export const Route = createFileRoute("/(app)/_home/showcase/")({
 
 function ShowcaseCardSkeleton() {
 	return (
-		<div className="flex flex-col border border-border/40 bg-background animate-pulse">
-			<div className="h-44 bg-muted/30" />
-			<div className="flex flex-col gap-3 p-5">
-				<div className="h-3.5 w-2/3 rounded bg-muted/40" />
-				<div className="h-3 w-full rounded bg-muted/30" />
-				<div className="h-3 w-4/5 rounded bg-muted/30" />
-				<div className="mt-2 h-3 w-1/3 rounded bg-muted/20" />
+		<div className="rounded-2xl bg-secondary p-2 animate-pulse">
+			<div className="flex flex-col gap-6 rounded-xl bg-card px-5 py-6 sm:grid sm:grid-cols-3 sm:gap-6 sm:px-6 sm:py-8">
+				<div className="flex flex-col gap-3">
+					<div className="h-4 w-2/3 rounded bg-secondary" />
+					<div className="h-3 w-full rounded bg-secondary" />
+					<div className="h-3 w-4/5 rounded bg-secondary" />
+				</div>
+				<div className="col-span-2 aspect-[14/9] rounded-xl bg-secondary" />
 			</div>
 		</div>
 	);
@@ -38,67 +41,72 @@ function ShowcaseCard({ item }: { item: ShowcaseItem }) {
 		<motion.div
 			initial={{ opacity: 0, y: 12 }}
 			animate={{ opacity: 1, y: 0 }}
-			className="group flex flex-col border border-border/50 bg-background transition-all hover:border-border hover:shadow-sm dark:bg-muted/5"
+			className="rounded-2xl bg-secondary p-2"
 		>
-			{/* Screenshot */}
-			<div className="relative h-44 overflow-hidden border-b border-border/40 bg-muted/20">
-				{imageUrl ? (
-					<img
-						src={imageUrl}
-						alt={item.projectName}
-						className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-					/>
-				) : (
-					<div className="flex h-full w-full items-center justify-center">
-						<HugeiconsIcon
-							icon={GlobeIcon}
-							className="size-10 text-muted-foreground/20"
-						/>
+			<div className="group flex flex-col gap-6 rounded-xl bg-card px-5 py-6 sm:grid sm:grid-cols-3 sm:gap-6 sm:px-6 sm:py-8">
+				{/* Text column */}
+				<div className="flex flex-col gap-4 justify-between">
+					<div className="flex flex-col gap-2">
+						<div className="flex items-start justify-between gap-2">
+							<h3
+								className="text-base font-semibold leading-tight text-foreground"
+								style={{ letterSpacing: "-0.02em" }}
+							>
+								{item.projectName}
+							</h3>
+							<a
+								href={item.projectUrl}
+								target="_blank"
+								rel="noreferrer"
+								className="shrink-0 text-muted-foreground transition-colors hover:text-foreground"
+								title="Visit project"
+							>
+								<HugeiconsIcon
+									icon={ArrowUpRight01Icon}
+									className="size-4"
+								/>
+							</a>
+						</div>
+						<p className="text-sm leading-relaxed text-muted-foreground">
+							{item.description}
+						</p>
 					</div>
-				)}
-			</div>
 
-			{/* Info */}
-			<div className="flex flex-col gap-3 p-5 flex-1">
-				<div className="flex flex-col gap-1 flex-1">
-					<div className="flex items-center justify-between gap-2">
-						<h3 className="text-sm font-semibold leading-tight text-foreground">
-							{item.projectName}
-						</h3>
-						<a
-							href={item.projectUrl}
-							target="_blank"
-							rel="noreferrer"
-							className="shrink-0 text-muted-foreground transition-colors hover:text-foreground"
-							title="Visit project"
-						>
-							<HugeiconsIcon
-								icon={ArrowRight01Icon}
-								className="size-4"
-							/>
-						</a>
+					<div className="flex items-center justify-between">
+						<span className="text-xs font-medium text-muted-foreground">
+							{item.submitterName}
+						</span>
+						{item.twitterHandle && (
+							<a
+								href={`https://twitter.com/${item.twitterHandle}`}
+								target="_blank"
+								rel="noreferrer"
+								className="text-muted-foreground transition-colors hover:text-foreground"
+							>
+								<HugeiconsIcon
+									icon={TwitterIcon}
+									className="size-4"
+								/>
+							</a>
+						)}
 					</div>
-					<p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
-						{item.description}
-					</p>
 				</div>
 
-				<div className="flex items-center justify-between border-t border-border/30 pt-3">
-					<span className="text-xs font-medium text-muted-foreground">
-						{item.submitterName}
-					</span>
-					{item.twitterHandle && (
-						<a
-							href={`https://twitter.com/${item.twitterHandle}`}
-							target="_blank"
-							rel="noreferrer"
-							className="text-muted-foreground transition-colors hover:text-foreground"
-						>
+				{/* Image */}
+				<div className="col-span-2 aspect-[14/9] overflow-hidden rounded-xl bg-card">
+					{imageUrl ? (
+						<img
+							src={imageUrl}
+							alt={item.projectName}
+							className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+						/>
+					) : (
+						<div className="flex h-full w-full items-center justify-center bg-secondary">
 							<HugeiconsIcon
-								icon={TwitterIcon}
-								className="size-4"
+								icon={GlobeIcon}
+								className="size-10 text-muted-foreground/20"
 							/>
-						</a>
+						</div>
 					)}
 				</div>
 			</div>
@@ -112,33 +120,34 @@ function ShowcasePage() {
 	);
 
 	return (
-		<div className="relative flex min-h-screen flex-col items-center overflow-hidden bg-background">
-			{/* Background */}
-			<div className="pointer-events-none fixed inset-0 z-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.15)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.15)_1px,transparent_1px)] bg-[size:28px_28px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-
-			<main className="relative z-10 mx-auto flex w-full max-w-3xl flex-col px-4 pb-32 pt-24 sm:px-6">
-				{/* Header */}
-				<motion.div
-					initial={{ opacity: 0, y: 16 }}
-					animate={{ opacity: 1, y: 0 }}
-					className="mb-16 flex flex-col gap-5 border-b border-border/40 pb-16"
-				>
-					<Badge
-						variant="secondary"
-						className="w-fit rounded-full border border-border/50 bg-muted/30 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground"
+		<>
+			<main className="px-4 sm:px-6 pb-32 pt-24">
+				<div className="mb-16 flex flex-col gap-5 border-b border-border/40 pb-16">
+					<div className="flex items-center gap-2">
+						<div className="h-1.5 w-1.5 rounded-full bg-primary" />
+						<span className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+							Showcase
+						</span>
+					</div>
+					<h1
+						className="font-heading font-medium text-foreground"
+						style={{
+							fontSize: "clamp(2rem, 5vw, 3rem)",
+							letterSpacing: "-0.04em",
+							lineHeight: "1.05"
+						}}
 					>
-						Showcase
-					</Badge>
-					<h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
 						Built with Tanship
 					</h1>
-					<p className="max-w-md text-base leading-relaxed text-muted-foreground">
+					<p
+						className="max-w-md text-base leading-relaxed text-muted-foreground"
+						style={{ letterSpacing: "-0.01em" }}
+					>
 						Real products and projects built by our community.
 					</p>
-
 					<Button
 						size="lg"
-						className="w-fit rounded-none bg-foreground px-6 text-sm font-medium text-background hover:bg-foreground/90"
+						className="h-11 w-fit px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
 						asChild
 					>
 						<Link to="/showcase/submit">
@@ -149,51 +158,53 @@ function ShowcasePage() {
 							/>
 						</Link>
 					</Button>
-				</motion.div>
+				</div>
 
-				{/* Grid */}
 				{isLoading ? (
-					<div className="grid gap-5 sm:grid-cols-2">
-						{Array.from({ length: 4 }).map((_, i) => (
+					<div className="flex flex-col gap-3">
+						{Array.from({ length: 3 }).map((_, i) => (
 							<ShowcaseCardSkeleton key={i} />
 						))}
 					</div>
 				) : showcases.length === 0 ? (
-					<div className="flex flex-col items-center gap-5 border border-border/50 bg-muted/5 py-20 text-center dark:bg-muted/10">
-						<div className="flex h-14 w-14 items-center justify-center border border-border/50 bg-background">
-							<HugeiconsIcon
-								icon={GlobeIcon}
-								className="size-6 text-muted-foreground/40"
-							/>
+					<div className="rounded-2xl bg-secondary p-2">
+						<div className="rounded-xl bg-card flex flex-col items-center gap-5 py-20 text-center">
+							<div className="flex size-14 items-center justify-center rounded-xl bg-secondary">
+								<HugeiconsIcon
+									icon={GlobeIcon}
+									className="size-6 text-muted-foreground/40"
+								/>
+							</div>
+							<div className="flex flex-col gap-1.5">
+								<p className="text-sm font-semibold text-foreground">
+									No projects yet
+								</p>
+								<p className="text-xs text-muted-foreground">
+									Be the first to showcase what you built with
+									Tanship.
+								</p>
+							</div>
+							<Button
+								size="sm"
+								variant="outline"
+								className="px-5 font-medium"
+								asChild
+							>
+								<Link to="/showcase/submit">
+									Submit your project
+								</Link>
+							</Button>
 						</div>
-						<div className="flex flex-col gap-1.5">
-							<p className="text-sm font-semibold text-foreground">
-								No projects yet
-							</p>
-							<p className="text-xs text-muted-foreground">
-								Be the first to showcase what you built with
-								Tanship.
-							</p>
-						</div>
-						<Button
-							size="sm"
-							variant="outline"
-							className="rounded-none px-5 font-medium"
-							asChild
-						>
-							<Link to="/showcase/submit">
-								Submit your project
-							</Link>
-						</Button>
 					</div>
 				) : (
-					<div className="grid gap-5 sm:grid-cols-2">
+					<div className="flex flex-col gap-3">
 						{showcases.map((item) => (
 							<ShowcaseCard key={item.id} item={item} />
 						))}
 					</div>
 				)}
 			</main>
-		</div>
+			<FooterSection />
+		</>
 	);
 }

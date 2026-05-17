@@ -44,7 +44,7 @@ export type PaymentPlan =
 
 export class App {
 	private static config: AppConfig = {
-		name: "Tanflare",
+		name: "Tanship",
 		version: "1.0.0"
 	};
 

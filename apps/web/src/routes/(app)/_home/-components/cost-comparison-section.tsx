@@ -22,15 +22,28 @@ export function CostComparisonSection() {
 			<div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_1.4fr] md:items-center">
 				{/* Left: copy */}
 				<div>
-					<h2 className="mb-4 text-3xl font-semibold leading-tight tracking-tight text-foreground">
+					<h2
+						className="mb-4 font-heading font-medium text-foreground"
+						style={{
+							fontSize: "clamp(2rem, 5vw, 3rem)",
+							letterSpacing: "-0.04em",
+							lineHeight: "1.05"
+						}}
+					>
 						Scale infinitely.
 						<br />
 						Pay almost nothing.
 					</h2>
-					<p className="mb-8 text-base text-muted-foreground">
-						By running on Cloudflare's edge network your SaaS is
-						faster and costs significantly less than traditional
-						cloud.
+					<p
+						className="mb-8 text-muted-foreground"
+						style={{
+							fontSize: "15px",
+							lineHeight: "1.6",
+							letterSpacing: "-0.02em"
+						}}
+					>
+						Cloudflare runs your app close to your users worldwide.
+						Faster responses, lower bills, no servers to manage.
 					</p>
 					<ul className="flex flex-col gap-4">
 						{BENEFITS.map((b) => (
@@ -40,7 +53,7 @@ export function CostComparisonSection() {
 							>
 								<HugeiconsIcon
 									icon={CheckmarkCircle01Icon}
-									className="mt-0.5 size-4 shrink-0 text-emerald-500"
+									className="mt-0.5 size-4 shrink-0 text-foreground"
 								/>
 								<span className="text-foreground">
 									<strong className="font-semibold">
@@ -54,41 +67,53 @@ export function CostComparisonSection() {
 				</div>
 
 				{/* Right: cost bars */}
-				<div className="flex flex-col gap-6 border border-border/50 bg-muted/5 p-8 dark:bg-muted/10">
+				<div className="flex flex-col gap-6 rounded-xl bg-secondary p-8 md:rounded-xl md:bg-secondary md:p-8">
 					{/* AWS */}
 					<div className="flex flex-col gap-2">
 						<div className="flex items-center justify-between">
 							<span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
 								Estimated AWS Cost
 							</span>
-							<span className="font-mono text-lg font-semibold text-muted-foreground line-through decoration-red-400/60">
+							<span
+								className="font-heading font-medium text-muted-foreground line-through decoration-destructive/40"
+								style={{
+									fontSize: "1.3rem",
+									letterSpacing: "-0.03em"
+								}}
+							>
 								$150/mo
 							</span>
 						</div>
-						<div className="h-2 w-full overflow-hidden bg-muted/30">
-							<div className="h-full w-full bg-red-400/30" />
-						</div>
+						<div className="h-px w-full bg-destructive/20" />
 					</div>
 
 					{/* Cloudflare */}
-					<div className="flex flex-col gap-2">
-						<div className="flex items-center justify-between">
-							<span className="text-[11px] font-bold uppercase tracking-widest text-foreground">
-								Cloudflare Workers Cost
+					<div className="flex flex-col gap-3">
+						<div className="flex items-baseline justify-between">
+							<span className="text-[10px] font-medium uppercase tracking-widest text-foreground">
+								Cloudflare Workers
 							</span>
-							<span className="font-mono text-3xl font-semibold tracking-tight text-foreground">
+							<span
+								className="font-heading font-medium text-foreground"
+								style={{
+									fontSize: "clamp(1.8rem, 4vw, 2.4rem)",
+									letterSpacing: "-0.04em",
+									lineHeight: "1"
+								}}
+							>
 								$0
-								<span className="ml-1 text-base font-normal text-muted-foreground">
+								<span
+									className="ml-1 text-sm font-normal text-muted-foreground"
+									style={{ letterSpacing: "-0.01em" }}
+								>
 									/mo*
 								</span>
 							</span>
 						</div>
-						<div className="h-2 w-full overflow-hidden bg-muted/30">
-							<div className="h-full w-[3%] bg-emerald-500" />
-						</div>
+						<div className="h-px w-full bg-foreground/20" />
 					</div>
 
-					<p className="text-[11px] text-muted-foreground">
+					<p className="text-[11px] text-muted-foreground/60">
 						* Until you reach significant scale (100k+ daily
 						requests)
 					</p>

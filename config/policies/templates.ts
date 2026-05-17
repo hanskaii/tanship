@@ -15,12 +15,13 @@ export const TemplatesPolicy = {
 			(ctx) => {
 				const slug = ctx.resource?.planSlug;
 				// Pro plan → access to all templates
-				if (slug === "tanflare-pro") return allow();
+				if (slug === "tanship-pro") return allow();
 				// Individual template purchase → access granted
 				if (slug?.startsWith("template-")) return allow();
 				return deny({
 					code: "PLAN_REQUIRED",
-					message: "You don't have access to this template. Purchase it to download."
+					message:
+						"You don't have access to this template. Purchase it to download."
 				});
 			}
 		)

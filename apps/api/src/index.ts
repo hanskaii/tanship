@@ -17,7 +17,6 @@ const STATUS_NAME: Record<StatusCode, string> = Object.fromEntries(
 
 import { notFoundHandler } from "./helpers/not-found.helper";
 import { ApiResponse } from "./helpers/response.helper";
-import { ChatAgent } from "./agents/chat.agent";
 import { PolicyError } from "@workspace/core";
 import { EnvSchema } from "./env";
 
@@ -109,7 +108,6 @@ app.onError((err, c) => {
 	);
 });
 
-export { ChatAgent };
 export type { AppType } from "./contract";
 
 export default {

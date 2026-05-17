@@ -8,11 +8,11 @@ import {
 const FAQS = [
 	{
 		q: "What exactly is Tanship?",
-		a: "Tanship is a full-stack SaaS Starter Kit — a premium, edge-ready codebase that you can use to build your SaaS product. It includes authentication, billing, organizations, and a beautiful UI out of the box."
+		a: "Tanship is a full-stack SaaS Starter Kit — a production-ready codebase you can use to build your SaaS product. It includes authentication, billing, organizations, and a polished UI out of the box."
 	},
 	{
 		q: "Why should I buy Tanship instead of another boilerplate?",
-		a: "Purchasing a Tanship license is an investment in a production-grade foundation. We focus heavily on modern edge infrastructure (Cloudflare, TanStack, Hono) giving you insane performance and zero vendor lock-in. Think of us as your technical co-founder."
+		a: "Purchasing a Tanship license is an investment in a production-grade foundation. We chose Cloudflare, TanStack, and Hono specifically for their performance and reliability — giving you insane speed and zero vendor lock-in. Think of us as your technical co-founder."
 	},
 	{
 		q: "I don't know how to code. Should I buy Tanship?",
@@ -52,34 +52,56 @@ export function FaqSection() {
 	return (
 		<section className="border-b border-border/40 py-20">
 			<div className="mb-14">
-				<h2 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">
+				<h2
+					className="mb-3 font-heading font-medium text-foreground"
+					style={{
+						fontSize: "clamp(2rem, 5vw, 3rem)",
+						letterSpacing: "-0.04em",
+						lineHeight: "1.05"
+					}}
+				>
 					Frequently asked questions
 				</h2>
-				<p className="max-w-md text-base text-muted-foreground">
+				<p
+					className="max-w-md text-muted-foreground"
+					style={{
+						fontSize: "15px",
+						lineHeight: "1.6",
+						letterSpacing: "-0.02em"
+					}}
+				>
 					Everything you need to know before you buy.
 				</p>
 			</div>
 
-			<Accordion
-				type="single"
-				collapsible
-				className="flex flex-col gap-0"
-			>
-				{FAQS.map((faq, i) => (
-					<AccordionItem
-						key={i}
-						value={`faq-${i}`}
-						className="border-b border-border/40 last:border-b-0"
-					>
-						<AccordionTrigger className="py-5 text-sm font-semibold text-foreground hover:no-underline text-left">
-							{faq.q}
-						</AccordionTrigger>
-						<AccordionContent className="pb-5 text-sm leading-relaxed text-muted-foreground">
-							{faq.a}
-						</AccordionContent>
-					</AccordionItem>
-				))}
-			</Accordion>
+			<div className="rounded-2xl bg-secondary p-2">
+				<Accordion
+					type="single"
+					collapsible
+					className="flex flex-col gap-2"
+				>
+					{FAQS.map((faq, i) => (
+						<AccordionItem
+							key={i}
+							value={`faq-${i}`}
+							className="overflow-hidden rounded-xl border-none! bg-card px-6"
+						>
+							<AccordionTrigger
+								className="py-5 text-left text-sm font-medium text-foreground hover:no-underline [&>svg]:text-muted-foreground"
+								style={{ letterSpacing: "-0.01em" }}
+							>
+								{faq.q}
+							</AccordionTrigger>
+							<AccordionContent
+								className="pb-5 text-sm leading-relaxed text-muted-foreground"
+								style={{ letterSpacing: "-0.01em" }}
+							>
+								{faq.a}
+							</AccordionContent>
+						</AccordionItem>
+					))}
+				</Accordion>
+			</div>
 		</section>
 	);
 }

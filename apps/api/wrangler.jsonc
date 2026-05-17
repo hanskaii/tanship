@@ -51,18 +51,5 @@
 		"GITHUB_REPO_OWNER": "hanskaii",
 		"GITHUB_REPO_BOILERPLATE": "tanship"
 	},
-	"durable_objects": {
-		"bindings": [
-			{
-				"name": "chat-agent",
-				"class_name": "ChatAgent"
-			}
-		]
-	},
-	"migrations": [
-		{
-			"tag": "v2",
-			"new_sqlite_classes": ["ChatAgent"]
-		}
-	]
+	"migrations": []
 }

@@ -1,5 +1,5 @@
 {
-	"name": "tanflare",
+	"name": "tanship",
 	"private": true,
 	"workspaces": [
 		"apps/*",

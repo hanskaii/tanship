@@ -15,16 +15,15 @@ import { Route as appAuthRouteRouteImport } from './routes/(app)/_auth/route'
 import { Route as appAppRouteRouteImport } from './routes/(app)/_app/route'
 import { Route as appAdminRouteRouteImport } from './routes/(app)/_admin/route'
 import { Route as appHomeIndexRouteImport } from './routes/(app)/_home/index'
-import { Route as appHomeUpgradeRouteImport } from './routes/(app)/_home/upgrade'
-import { Route as appHomeContactRouteImport } from './routes/(app)/_home/contact'
 import { Route as appAuthLoginRouteImport } from './routes/(app)/_auth/login'
 import { Route as appAppAccountRouteRouteImport } from './routes/(app)/_app/account/route'
+import { Route as appHomeUpgradeIndexRouteImport } from './routes/(app)/_home/upgrade/index'
 import { Route as appHomeTemplatesIndexRouteImport } from './routes/(app)/_home/templates/index'
 import { Route as appHomeShowcaseIndexRouteImport } from './routes/(app)/_home/showcase/index'
+import { Route as appHomeContactIndexRouteImport } from './routes/(app)/_home/contact/index'
 import { Route as appHomeBadgeIndexRouteImport } from './routes/(app)/_home/badge/index'
 import { Route as appHomeActivateIndexRouteImport } from './routes/(app)/_home/activate/index'
 import { Route as appAppOverviewIndexRouteImport } from './routes/(app)/_app/overview/index'
-import { Route as appAppChatIndexRouteImport } from './routes/(app)/_app/chat/index'
 import { Route as appHomeLegalsTermsRouteImport } from './routes/(app)/_home/legals/terms'
 import { Route as appHomeLegalsPrivacyPolicyRouteImport } from './routes/(app)/_home/legals/privacy-policy'
 import { Route as appHomeShowcaseSubmitIndexRouteImport } from './routes/(app)/_home/showcase/submit/index'
@@ -62,16 +61,6 @@ const appHomeIndexRoute = appHomeIndexRouteImport.update({
   path: '/',
   getParentRoute: () => appHomeRouteRoute,
 } as any)
-const appHomeUpgradeRoute = appHomeUpgradeRouteImport.update({
-  id: '/upgrade',
-  path: '/upgrade',
-  getParentRoute: () => appHomeRouteRoute,
-} as any)
-const appHomeContactRoute = appHomeContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => appHomeRouteRoute,
-} as any)
 const appAuthLoginRoute = appAuthLoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -82,6 +71,11 @@ const appAppAccountRouteRoute = appAppAccountRouteRouteImport.update({
   path: '/account',
   getParentRoute: () => appAppRouteRoute,
 } as any)
+const appHomeUpgradeIndexRoute = appHomeUpgradeIndexRouteImport.update({
+  id: '/upgrade/',
+  path: '/upgrade/',
+  getParentRoute: () => appHomeRouteRoute,
+} as any)
 const appHomeTemplatesIndexRoute = appHomeTemplatesIndexRouteImport.update({
   id: '/templates/',
   path: '/templates/',
@@ -90,6 +84,11 @@ const appHomeTemplatesIndexRoute = appHomeTemplatesIndexRouteImport.update({
 const appHomeShowcaseIndexRoute = appHomeShowcaseIndexRouteImport.update({
   id: '/showcase/',
   path: '/showcase/',
+  getParentRoute: () => appHomeRouteRoute,
+} as any)
+const appHomeContactIndexRoute = appHomeContactIndexRouteImport.update({
+  id: '/contact/',
+  path: '/contact/',
   getParentRoute: () => appHomeRouteRoute,
 } as any)
 const appHomeBadgeIndexRoute = appHomeBadgeIndexRouteImport.update({
@@ -105,11 +104,6 @@ const appHomeActivateIndexRoute = appHomeActivateIndexRouteImport.update({
 const appAppOverviewIndexRoute = appAppOverviewIndexRouteImport.update({
   id: '/overview/',
   path: '/overview/',
-  getParentRoute: () => appAppRouteRoute,
-} as any)
-const appAppChatIndexRoute = appAppChatIndexRouteImport.update({
-  id: '/chat/',
-  path: '/chat/',
   getParentRoute: () => appAppRouteRoute,
 } as any)
 const appHomeLegalsTermsRoute = appHomeLegalsTermsRouteImport.update({
@@ -177,17 +171,16 @@ const appAdminSEventsIndexRoute = appAdminSEventsIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/account': typeof appAppAccountRouteRouteWithChildren
   '/login': typeof appAuthLoginRoute
-  '/contact': typeof appHomeContactRoute
-  '/upgrade': typeof appHomeUpgradeRoute
   '/': typeof appHomeIndexRoute
   '/legals/privacy-policy': typeof appHomeLegalsPrivacyPolicyRoute
   '/legals/terms': typeof appHomeLegalsTermsRoute
-  '/chat/': typeof appAppChatIndexRoute
   '/overview/': typeof appAppOverviewIndexRoute
   '/activate/': typeof appHomeActivateIndexRoute
   '/badge/': typeof appHomeBadgeIndexRoute
+  '/contact/': typeof appHomeContactIndexRoute
   '/showcase/': typeof appHomeShowcaseIndexRoute
   '/templates/': typeof appHomeTemplatesIndexRoute
+  '/upgrade/': typeof appHomeUpgradeIndexRoute
   '/s/events/': typeof appAdminSEventsIndexRoute
   '/s/overview/': typeof appAdminSOverviewIndexRoute
   '/s/showcase/': typeof appAdminSShowcaseIndexRoute
@@ -201,17 +194,16 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/account': typeof appAppAccountRouteRouteWithChildren
   '/login': typeof appAuthLoginRoute
-  '/contact': typeof appHomeContactRoute
-  '/upgrade': typeof appHomeUpgradeRoute
   '/': typeof appHomeIndexRoute
   '/legals/privacy-policy': typeof appHomeLegalsPrivacyPolicyRoute
   '/legals/terms': typeof appHomeLegalsTermsRoute
-  '/chat': typeof appAppChatIndexRoute
   '/overview': typeof appAppOverviewIndexRoute
   '/activate': typeof appHomeActivateIndexRoute
   '/badge': typeof appHomeBadgeIndexRoute
+  '/contact': typeof appHomeContactIndexRoute
   '/showcase': typeof appHomeShowcaseIndexRoute
   '/templates': typeof appHomeTemplatesIndexRoute
+  '/upgrade': typeof appHomeUpgradeIndexRoute
   '/s/events': typeof appAdminSEventsIndexRoute
   '/s/overview': typeof appAdminSOverviewIndexRoute
   '/s/showcase': typeof appAdminSShowcaseIndexRoute
@@ -231,17 +223,16 @@ export interface FileRoutesById {
   '/(app)/_home': typeof appHomeRouteRouteWithChildren
   '/(app)/_app/account': typeof appAppAccountRouteRouteWithChildren
   '/(app)/_auth/login': typeof appAuthLoginRoute
-  '/(app)/_home/contact': typeof appHomeContactRoute
-  '/(app)/_home/upgrade': typeof appHomeUpgradeRoute
   '/(app)/_home/': typeof appHomeIndexRoute
   '/(app)/_home/legals/privacy-policy': typeof appHomeLegalsPrivacyPolicyRoute
   '/(app)/_home/legals/terms': typeof appHomeLegalsTermsRoute
-  '/(app)/_app/chat/': typeof appAppChatIndexRoute
   '/(app)/_app/overview/': typeof appAppOverviewIndexRoute
   '/(app)/_home/activate/': typeof appHomeActivateIndexRoute
   '/(app)/_home/badge/': typeof appHomeBadgeIndexRoute
+  '/(app)/_home/contact/': typeof appHomeContactIndexRoute
   '/(app)/_home/showcase/': typeof appHomeShowcaseIndexRoute
   '/(app)/_home/templates/': typeof appHomeTemplatesIndexRoute
+  '/(app)/_home/upgrade/': typeof appHomeUpgradeIndexRoute
   '/(app)/_admin/s/events/': typeof appAdminSEventsIndexRoute
   '/(app)/_admin/s/overview/': typeof appAdminSOverviewIndexRoute
   '/(app)/_admin/s/showcase/': typeof appAdminSShowcaseIndexRoute
@@ -257,17 +248,16 @@ export interface FileRouteTypes {
   fullPaths:
     | '/account'
     | '/login'
-    | '/contact'
-    | '/upgrade'
     | '/'
     | '/legals/privacy-policy'
     | '/legals/terms'
-    | '/chat/'
     | '/overview/'
     | '/activate/'
     | '/badge/'
+    | '/contact/'
     | '/showcase/'
     | '/templates/'
+    | '/upgrade/'
     | '/s/events/'
     | '/s/overview/'
     | '/s/showcase/'
@@ -281,17 +271,16 @@ export interface FileRouteTypes {
   to:
     | '/account'
     | '/login'
-    | '/contact'
-    | '/upgrade'
     | '/'
     | '/legals/privacy-policy'
     | '/legals/terms'
-    | '/chat'
     | '/overview'
     | '/activate'
     | '/badge'
+    | '/contact'
     | '/showcase'
     | '/templates'
+    | '/upgrade'
     | '/s/events'
     | '/s/overview'
     | '/s/showcase'
@@ -310,17 +299,16 @@ export interface FileRouteTypes {
     | '/(app)/_home'
     | '/(app)/_app/account'
     | '/(app)/_auth/login'
-    | '/(app)/_home/contact'
-    | '/(app)/_home/upgrade'
     | '/(app)/_home/'
     | '/(app)/_home/legals/privacy-policy'
     | '/(app)/_home/legals/terms'
-    | '/(app)/_app/chat/'
     | '/(app)/_app/overview/'
     | '/(app)/_home/activate/'
     | '/(app)/_home/badge/'
+    | '/(app)/_home/contact/'
     | '/(app)/_home/showcase/'
     | '/(app)/_home/templates/'
+    | '/(app)/_home/upgrade/'
     | '/(app)/_admin/s/events/'
     | '/(app)/_admin/s/overview/'
     | '/(app)/_admin/s/showcase/'
@@ -380,20 +368,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appHomeIndexRouteImport
       parentRoute: typeof appHomeRouteRoute
     }
-    '/(app)/_home/upgrade': {
-      id: '/(app)/_home/upgrade'
-      path: '/upgrade'
-      fullPath: '/upgrade'
-      preLoaderRoute: typeof appHomeUpgradeRouteImport
-      parentRoute: typeof appHomeRouteRoute
-    }
-    '/(app)/_home/contact': {
-      id: '/(app)/_home/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof appHomeContactRouteImport
-      parentRoute: typeof appHomeRouteRoute
-    }
     '/(app)/_auth/login': {
       id: '/(app)/_auth/login'
       path: '/login'
@@ -408,6 +382,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appAppAccountRouteRouteImport
       parentRoute: typeof appAppRouteRoute
     }
+    '/(app)/_home/upgrade/': {
+      id: '/(app)/_home/upgrade/'
+      path: '/upgrade'
+      fullPath: '/upgrade/'
+      preLoaderRoute: typeof appHomeUpgradeIndexRouteImport
+      parentRoute: typeof appHomeRouteRoute
+    }
     '/(app)/_home/templates/': {
       id: '/(app)/_home/templates/'
       path: '/templates'
@@ -420,6 +401,13 @@ declare module '@tanstack/react-router' {
       path: '/showcase'
       fullPath: '/showcase/'
       preLoaderRoute: typeof appHomeShowcaseIndexRouteImport
+      parentRoute: typeof appHomeRouteRoute
+    }
+    '/(app)/_home/contact/': {
+      id: '/(app)/_home/contact/'
+      path: '/contact'
+      fullPath: '/contact/'
+      preLoaderRoute: typeof appHomeContactIndexRouteImport
       parentRoute: typeof appHomeRouteRoute
     }
     '/(app)/_home/badge/': {
@@ -441,13 +429,6 @@ declare module '@tanstack/react-router' {
       path: '/overview'
       fullPath: '/overview/'
       preLoaderRoute: typeof appAppOverviewIndexRouteImport
-      parentRoute: typeof appAppRouteRoute
-    }
-    '/(app)/_app/chat/': {
-      id: '/(app)/_app/chat/'
-      path: '/chat'
-      fullPath: '/chat/'
-      preLoaderRoute: typeof appAppChatIndexRouteImport
       parentRoute: typeof appAppRouteRoute
     }
     '/(app)/_home/legals/terms': {
@@ -567,13 +548,11 @@ const appAppAccountRouteRouteWithChildren =
 
 interface appAppRouteRouteChildren {
   appAppAccountRouteRoute: typeof appAppAccountRouteRouteWithChildren
-  appAppChatIndexRoute: typeof appAppChatIndexRoute
   appAppOverviewIndexRoute: typeof appAppOverviewIndexRoute
 }
 
 const appAppRouteRouteChildren: appAppRouteRouteChildren = {
   appAppAccountRouteRoute: appAppAccountRouteRouteWithChildren,
-  appAppChatIndexRoute: appAppChatIndexRoute,
   appAppOverviewIndexRoute: appAppOverviewIndexRoute,
 }
 
@@ -594,28 +573,28 @@ const appAuthRouteRouteWithChildren = appAuthRouteRoute._addFileChildren(
 )
 
 interface appHomeRouteRouteChildren {
-  appHomeContactRoute: typeof appHomeContactRoute
-  appHomeUpgradeRoute: typeof appHomeUpgradeRoute
   appHomeIndexRoute: typeof appHomeIndexRoute
   appHomeLegalsPrivacyPolicyRoute: typeof appHomeLegalsPrivacyPolicyRoute
   appHomeLegalsTermsRoute: typeof appHomeLegalsTermsRoute
   appHomeActivateIndexRoute: typeof appHomeActivateIndexRoute
   appHomeBadgeIndexRoute: typeof appHomeBadgeIndexRoute
+  appHomeContactIndexRoute: typeof appHomeContactIndexRoute
   appHomeShowcaseIndexRoute: typeof appHomeShowcaseIndexRoute
   appHomeTemplatesIndexRoute: typeof appHomeTemplatesIndexRoute
+  appHomeUpgradeIndexRoute: typeof appHomeUpgradeIndexRoute
   appHomeShowcaseSubmitIndexRoute: typeof appHomeShowcaseSubmitIndexRoute
 }
 
 const appHomeRouteRouteChildren: appHomeRouteRouteChildren = {
-  appHomeContactRoute: appHomeContactRoute,
-  appHomeUpgradeRoute: appHomeUpgradeRoute,
   appHomeIndexRoute: appHomeIndexRoute,
   appHomeLegalsPrivacyPolicyRoute: appHomeLegalsPrivacyPolicyRoute,
   appHomeLegalsTermsRoute: appHomeLegalsTermsRoute,
   appHomeActivateIndexRoute: appHomeActivateIndexRoute,
   appHomeBadgeIndexRoute: appHomeBadgeIndexRoute,
+  appHomeContactIndexRoute: appHomeContactIndexRoute,
   appHomeShowcaseIndexRoute: appHomeShowcaseIndexRoute,
   appHomeTemplatesIndexRoute: appHomeTemplatesIndexRoute,
+  appHomeUpgradeIndexRoute: appHomeUpgradeIndexRoute,
   appHomeShowcaseSubmitIndexRoute: appHomeShowcaseSubmitIndexRoute,
 }
 

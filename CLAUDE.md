@@ -1,4 +1,4 @@
-# Tanflare — Claude Rules
+# Tanship — Claude Rules
 
 ## Architecture Overview
 

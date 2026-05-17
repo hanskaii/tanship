@@ -1,17 +1,17 @@
 import type { PaymentPlan } from "@workspace/core";
 
 export const appConfig = {
-	name: "Tanflare",
+	name: "Tanship",
 	version: "1.0.0",
-	supportEmail: "support@tanflare.com",
+	supportEmail: "support@tanship.dev",
 
 	authDefaultRedirect: "/overview",
 
 	payments: [
 		{
 			productId: "pdt_0NckxDjwzwWTyMiEdEb7y",
-			slug: "tanflare",
-			name: "Tanflare",
+			slug: "tanship",
+			name: "Tanship",
 			description:
 				"Full boilerplate with everything you need to ship an edge-native SaaS.",
 			price: "$99",
@@ -30,22 +30,22 @@ export const appConfig = {
 				"Turborepo monorepo setup",
 				"Lifetime updates via GitHub"
 			],
-			cta: "Buy Tanflare — $99",
+			cta: "Buy Tanship — $99",
 			popular: false,
 			footer: "One-time payment. GitHub repo access included."
 		},
 		{
-			productId: "pdt_tanflare_pro_replace_me",
-			slug: "tanflare-pro",
-			name: "Tanflare Pro",
+			productId: "pdt_tanship_pro_replace_me",
+			slug: "tanship-pro",
+			name: "Tanship Pro",
 			description:
-				"Everything in Tanflare plus access to all premium templates.",
+				"Everything in Tanship plus access to all premium templates.",
 			price: "$299",
 			currency: "USD",
 			interval: "one-time",
 			type: "standard",
 			features: [
-				"Everything in Tanflare",
+				"Everything in Tanship",
 				"All premium templates (growing library)",
 				"SaaS dashboard template",
 				"Marketing site template",
@@ -53,7 +53,7 @@ export const appConfig = {
 				"Priority email support",
 				"Early access to new templates"
 			],
-			cta: "Buy Tanflare Pro — $299",
+			cta: "Buy Tanship Pro — $299",
 			popular: true,
 			footer: "One-time payment. All current + future templates."
 		},

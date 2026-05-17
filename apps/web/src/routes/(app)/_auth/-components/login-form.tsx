@@ -233,7 +233,7 @@ export function LoginForm({ redirectTo }: { redirectTo?: string }) {
 
 					<Button
 						type="submit"
-						className="h-10 w-full rounded-none bg-foreground text-sm font-medium text-background hover:bg-foreground/90"
+						className="h-10 w-full bg-foreground text-sm font-medium text-background hover:bg-foreground/90"
 						disabled={sendOtpMutation.isPending}
 					>
 						{sendOtpMutation.isPending ? (
@@ -333,7 +333,7 @@ export function LoginForm({ redirectTo }: { redirectTo?: string }) {
 
 					<Button
 						type="submit"
-						className="h-10 w-full rounded-none bg-foreground text-sm font-medium text-background hover:bg-foreground/90"
+						className="h-10 w-full bg-foreground text-sm font-medium text-background hover:bg-foreground/90"
 						disabled={verifyOtpMutation.isPending}
 					>
 						{verifyOtpMutation.isPending ? (

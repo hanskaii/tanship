@@ -1,17 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HeroSection } from "./-components/hero-section";
-import { ShowcaseSection } from "./-components/showcase-section";
 import { TechStackSection } from "./-components/tech-stack-section";
-import { FeaturesSection } from "./-components/features-section";
-import { CostComparisonSection } from "./-components/cost-comparison-section";
-import { ComparisonSection } from "./-components/comparison-section";
+import { StatementSection } from "./-components/statement-section";
+import { ShowcaseSection } from "./-components/showcase-section";
 import { BuildVsBuySection } from "./-components/build-vs-buy-section";
 import { AiAgentsSection } from "./-components/ai-agents-section";
-import { TestimonialsSection } from "./-components/testimonials-section";
-import { TemplatesSection } from "./-components/templates-section";
 import { PricingSection } from "./-components/pricing-section";
+import { HireSection } from "./-components/hire-section";
+import { TemplatesSection } from "./-components/templates-section";
 import { FaqSection } from "./-components/faq-section";
 import { FooterSection } from "./-components/footer-section";
+import { FeaturesSection } from "./-components/features-section";
+import { Fragment } from "react/jsx-runtime";
 
 export const Route = createFileRoute("/(app)/_home/")({
 	component: HomePage
@@ -19,23 +19,22 @@ export const Route = createFileRoute("/(app)/_home/")({
 
 function HomePage() {
 	return (
-		<div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col bg-background px-4 pt-14 font-sans text-foreground antialiased selection:bg-primary selection:text-primary-foreground sm:px-6">
-			<main className="flex-grow">
+		<Fragment>
+			<main className="px-4 sm:px-6">
 				<HeroSection />
-				<ShowcaseSection />
 				<TechStackSection />
+				<StatementSection />
+				<ShowcaseSection />
 				<FeaturesSection />
-				<CostComparisonSection />
-				<ComparisonSection />
 				<BuildVsBuySection />
 				<AiAgentsSection />
-				<TestimonialsSection />
-				<TemplatesSection />
 				<PricingSection />
+				<HireSection />
+				<TemplatesSection />
 				<FaqSection />
 			</main>
 
 			<FooterSection />
-		</div>
+		</Fragment>
 	);
 }

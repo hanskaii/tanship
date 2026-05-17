@@ -1,20 +1,84 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="154" height="20">
-  <linearGradient id="s" x2="0" y2="100%">
-    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
-    <stop offset="1" stop-opacity=".1"/>
-  </linearGradient>
-  <clipPath id="r">
-    <rect width="154" height="20" rx="3" fill="#fff"/>
-  </clipPath>
-  <g clip-path="url(#r)">
-    <rect width="88" height="20" fill="#555"/>
-    <rect x="88" width="66" height="20" fill="#ff6b35"/>
-    <rect width="154" height="20" fill="url(#s)"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="164" height="28" viewBox="0 0 164 28" fill="none">
+  <defs>
+    <linearGradient id="bg-right" x1="92" y1="0" x2="164" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D7FF4A"/>
+      <stop offset="1" stop-color="#B8F000"/>
+    </linearGradient>
+
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="28">
+      <stop stop-color="#fff" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.2" flood-opacity=".18"/>
+    </filter>
+
+    <clipPath id="clip">
+      <rect width="164" height="28" rx="8"/>
+    </clipPath>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <g clip-path="url(#clip)">
+      <rect width="92" height="28" fill="#222"/>
+      <rect x="92" width="72" height="28" fill="url(#bg-right)"/>
+      <rect width="164" height="28" fill="url(#shine)"/>
+    </g>
   </g>
-  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
-    <text x="445" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="680" lengthAdjust="spacing">Built with</text>
-    <text x="445" y="140" transform="scale(.1)" textLength="680" lengthAdjust="spacing">Built with</text>
-    <text x="1205" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="520" lengthAdjust="spacing" font-weight="bold">Tanflare</text>
-    <text x="1205" y="140" transform="scale(.1)" textLength="520" lengthAdjust="spacing" font-weight="bold">Tanflare</text>
+
+  <g
+    fill="#fff"
+    text-anchor="middle"
+    font-family="Inter,DejaVu Sans,Verdana,Geneva,sans-serif"
+    font-size="125"
+  >
+    <text
+      x="460"
+      y="195"
+      fill="#000"
+      fill-opacity=".22"
+      transform="scale(.1)"
+      textLength="760"
+      lengthAdjust="spacing"
+    >
+      Built with
+    </text>
+
+    <text
+      x="460"
+      y="185"
+      transform="scale(.1)"
+      textLength="760"
+      lengthAdjust="spacing"
+      font-weight="500"
+    >
+      Built with
+    </text>
+
+    <text
+      x="1280"
+      y="195"
+      fill="#000"
+      fill-opacity=".18"
+      transform="scale(.1)"
+      textLength="560"
+      lengthAdjust="spacing"
+      font-weight="700"
+    >
+      Tanship
+    </text>
+
+    <text
+      x="1280"
+      y="185"
+      transform="scale(.1)"
+      textLength="560"
+      lengthAdjust="spacing"
+      fill="#111"
+      font-weight="800"
+    >
+      Tanship
+    </text>
   </g>
 </svg>

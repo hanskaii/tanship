@@ -42,7 +42,7 @@ export const purchaseConfirmationTemplate = (
     <div class="header">
       <div class="logo">
         <div class="logo-icon">⚡</div>
-        <span class="logo-name">Tanflare</span>
+        <span class="logo-name">Tanship</span>
       </div>
     </div>
     <div class="body">
@@ -73,7 +73,7 @@ export const purchaseConfirmationTemplate = (
       <p style="font-size: 12px; color: #555;">Questions? Reply to this email and we'll help you out.</p>
     </div>
     <div class="footer">
-      © 2026 Tanflare — You're receiving this because you purchased ${data.planName}.
+      © 2026 Tanship — You're receiving this because you purchased ${data.planName}.
     </div>
   </div>
 </body>

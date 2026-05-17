@@ -1,39 +1,69 @@
-import { HugeiconsIcon } from "@hugeicons/react";
-import { FlashIcon } from "@hugeicons/core-free-icons";
-
-const TOOLS = ["Cursor AI", "Claude Code", "Gemini IDE", "GitHub Copilot"];
+const TOOLS = [
+	{ name: "Claude Code", src: "/ai-tools/claude.png" },
+	{ name: "Cursor", src: "/ai-tools/cursor.jpg" },
+	{ name: "ChatGPT", src: "/ai-tools/chatgpt.webp" },
+	{ name: "GitHub Copilot", src: "/ai-tools/copilot.png" },
+	{ name: "Windsurf", src: "/ai-tools/windsurf.jpg" },
+	{ name: "Gemini", src: "/ai-tools/gemini.webp" },
+	{ name: "Grok", src: "/ai-tools/grok.jpg" }
+];
 
 export function AiAgentsSection() {
 	return (
 		<section className="border-b border-border/40 py-20">
-			<div className="flex flex-col gap-8 border border-border/50 bg-muted/5 p-10 sm:flex-row sm:items-center dark:bg-muted/10">
-				{/* Icon */}
-				<div className="flex h-12 w-12 shrink-0 items-center justify-center border border-border/50 bg-background dark:border-border/30">
-					<HugeiconsIcon
-						icon={FlashIcon}
-						className="size-5 text-foreground"
-					/>
+			<div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-16">
+				{/* Left: heading */}
+				<div className="sm:w-64 sm:shrink-0">
+					<div className="mb-3 flex items-center gap-2">
+						<div className="h-1 w-1 rounded-full bg-primary" />
+						<span className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+							AI-first
+						</span>
+					</div>
+					<h2
+						className="font-heading font-medium text-foreground"
+						style={{
+							fontSize: "clamp(2rem, 5vw, 3rem)",
+							letterSpacing: "-0.04em",
+							lineHeight: "1.05"
+						}}
+					>
+						Optimized for AI development
+					</h2>
 				</div>
 
-				{/* Copy */}
-				<div className="flex flex-col gap-3 flex-1">
-					<h2 className="text-xl font-semibold tracking-tight text-foreground">
-						Optimized for AI-assisted development
-					</h2>
-					<p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+				{/* Right: copy + tool logos */}
+				<div className="flex flex-1 flex-col gap-8">
+					<p
+						className="text-muted-foreground"
+						style={{
+							fontSize: "15px",
+							lineHeight: "1.6",
+							letterSpacing: "-0.02em"
+						}}
+					>
 						Custom CLAUDE.md rules, structured policy patterns, and
 						an included MCP server give AI coding assistants the
 						context they need to produce correct, idiomatic code —
 						every time.
 					</p>
-					<div className="flex flex-wrap gap-2 pt-1">
+
+					<div className="flex flex-wrap gap-3">
 						{TOOLS.map((tool) => (
-							<span
-								key={tool}
-								className="border border-border/50 bg-background px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-foreground dark:bg-muted/10"
+							<div
+								key={tool.name}
+								className="flex items-center gap-2.5 rounded-full bg-secondary px-3 py-2 transition-colors hover:bg-muted/80"
+								title={tool.name}
 							>
-								{tool}
-							</span>
+								<img
+									src={tool.src}
+									alt={tool.name}
+									className="h-5 w-5 rounded-full object-cover"
+								/>
+								<span className="text-[13px] font-medium text-foreground">
+									{tool.name}
+								</span>
+							</div>
 						))}
 					</div>
 				</div>

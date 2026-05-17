@@ -1,11 +1,10 @@
-import { Badge, Button, Card, Spinner } from "@workspace/ui";
+import { Button, Spinner } from "@workspace/ui";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-	FlashIcon,
 	ArrowRight01Icon,
 	GithubIcon,
 	CheckmarkCircle01Icon,
-	EyeIcon
+	ArrowUpRight01Icon
 } from "@hugeicons/core-free-icons";
 import { Link } from "@tanstack/react-router";
 
@@ -27,6 +26,7 @@ interface TemplateCardProps {
 	onUpgrade: () => void;
 	onBuyTemplate: () => void;
 	isCheckoutLoading?: boolean;
+	index: number;
 }
 
 export function TemplateCard({
@@ -36,170 +36,149 @@ export function TemplateCard({
 	isLoggedIn,
 	onUpgrade,
 	onBuyTemplate,
-	isCheckoutLoading
+	isCheckoutLoading,
+	index: _index
 }: TemplateCardProps) {
 	const hasAccess = isProUser || hasPurchased;
+	const img1 = `https://picsum.photos/seed/${template.id}-a/700/440`;
+	const img2 = `https://picsum.photos/seed/${template.id}-b/700/440`;
 
 	return (
-		<Card className="group relative flex flex-col overflow-hidden border border-border/50 bg-background p-0 text-left ring-0 transition-all hover:border-border hover:shadow-sm dark:bg-muted/5">
-			{/* Preview area */}
-			<div
-				className={`relative h-36 overflow-hidden border-b border-border/40 bg-gradient-to-br ${template.previewBg ?? "from-primary/5 via-primary/10 to-primary/5"} flex items-center justify-center`}
-			>
-				<div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.2)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.2)_1px,transparent_1px)] bg-[size:16px_16px]" />
-				<div className="relative z-10 flex h-11 w-11 items-center justify-center border border-border/50 bg-background/80 shadow-sm backdrop-blur-sm transition-transform duration-300 group-hover:scale-105">
-					<HugeiconsIcon
-						icon={FlashIcon}
-						className="size-5 text-foreground"
-					/>
-				</div>
-
-				{/* Owned badge */}
-				{hasPurchased && !isProUser && (
-					<div className="absolute right-2.5 top-2.5 z-10 flex items-center gap-1 border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-600">
-						<HugeiconsIcon
-							icon={CheckmarkCircle01Icon}
-							className="size-3"
-						/>
-						Owned
-					</div>
-				)}
-				{isProUser && (
-					<div className="absolute right-2.5 top-2.5 z-10 flex items-center gap-1 border border-foreground/20 bg-foreground/10 px-2 py-0.5 text-[10px] font-semibold text-foreground">
-						Pro
-					</div>
-				)}
-			</div>
-
-			{/* Info */}
-			<div className="flex flex-col gap-3 p-5 flex-1">
-				<div className="flex flex-col gap-1.5 flex-1">
-					<h3 className="text-sm font-semibold leading-tight text-foreground">
-						{template.name}
-					</h3>
-					<p className="text-xs leading-relaxed text-muted-foreground">
-						{template.description}
-					</p>
-				</div>
-
-				{/* Tags */}
-				<div className="flex flex-wrap gap-1.5">
-					{template.tags.map((tag) => (
-						<Badge
-							key={tag}
-							variant="secondary"
-							className="h-5 rounded-none px-2 py-0 text-[10px] font-medium bg-muted/40"
-						>
-							{tag}
-						</Badge>
-					))}
-				</div>
-
-				{/* Actions */}
-				<div className="flex flex-col gap-2 border-t border-border/40 pt-3">
-					{template.previewUrl && (
-						<Button
-							size="sm"
-							variant="outline"
-							className="h-8 w-full rounded-none text-xs"
-							asChild
-						>
-							<a
-								href={template.previewUrl}
-								target="_blank"
-								rel="noreferrer"
+		<div className="rounded-2xl bg-secondary p-2">
+			<div className="group flex flex-col gap-6 rounded-xl bg-card px-5 py-6 sm:grid sm:grid-cols-3 sm:gap-6 sm:px-6 sm:py-8">
+				{/* Text column */}
+				<div className="flex flex-col gap-4 justify-between">
+					<div className="flex flex-col gap-2">
+						<div className="flex items-start justify-between gap-2">
+							<h3
+								className="text-base font-semibold leading-tight text-foreground"
+								style={{ letterSpacing: "-0.02em" }}
 							>
-								<HugeiconsIcon
-									icon={EyeIcon}
-									className="mr-1.5 size-3.5"
-								/>
-								Live Preview
-							</a>
-						</Button>
-					)}
-
-					<div className="flex items-center gap-2">
-						{hasAccess ? (
-							<Button
-								size="sm"
-								className="h-8 flex-1 rounded-none text-xs"
-								asChild
-							>
+								{template.name}
+							</h3>
+							{template.previewUrl && (
 								<a
-									href={`/api/templates/${template.id}/download`}
-									download
+									href={template.previewUrl}
+									target="_blank"
+									rel="noreferrer"
+									className="shrink-0 text-muted-foreground transition-colors hover:text-foreground"
+									title="Live preview"
 								>
 									<HugeiconsIcon
-										icon={GithubIcon}
-										className="mr-1.5 size-3.5"
+										icon={ArrowUpRight01Icon}
+										className="size-4"
 									/>
-									Download
 								</a>
-							</Button>
-						) : isLoggedIn ? (
+							)}
+						</div>
+						<p className="text-xs text-muted-foreground">
+							{template.tags.join(" · ")}
+						</p>
+						<p className="text-sm leading-relaxed text-muted-foreground mt-1">
+							{template.description}
+						</p>
+					</div>
+
+					<div className="flex flex-col gap-2">
+						{hasAccess ? (
 							<>
-								<Button
-									size="sm"
-									variant="outline"
-									className="h-8 flex-1 rounded-none text-xs"
-									onClick={onUpgrade}
-									disabled={isCheckoutLoading}
-								>
-									<HugeiconsIcon
-										icon={FlashIcon}
-										className="mr-1.5 size-3.5"
-									/>
-									All — $299
-								</Button>
-								<Button
-									size="sm"
-									className="h-8 flex-1 rounded-none text-xs"
-									onClick={onBuyTemplate}
-									disabled={isCheckoutLoading}
-								>
-									{isCheckoutLoading ? (
-										<Spinner className="mr-1.5 size-3.5" />
-									) : (
+								{hasPurchased && !isProUser && (
+									<span className="flex items-center gap-1 text-[11px] font-medium text-emerald-600">
 										<HugeiconsIcon
-											icon={ArrowRight01Icon}
-											className="mr-1.5 size-3.5"
+											icon={CheckmarkCircle01Icon}
+											className="size-3.5"
 										/>
-									)}
-									Buy — $99
+										Owned
+									</span>
+								)}
+								{isProUser && (
+									<span className="text-[11px] font-medium text-muted-foreground">
+										Included with Pro
+									</span>
+								)}
+								<Button
+									size="sm"
+									className="w-fit h-7 px-3 text-xs bg-foreground text-background hover:bg-foreground/90"
+									asChild
+								>
+									<a
+										href={`/api/templates/${template.id}/download`}
+										download
+									>
+										<HugeiconsIcon
+											icon={GithubIcon}
+											className="mr-1.5 size-3"
+										/>
+										Download
+									</a>
 								</Button>
 							</>
 						) : (
 							<>
-								<Button
-									size="sm"
-									variant="outline"
-									className="h-8 flex-1 rounded-none text-xs"
-									onClick={onUpgrade}
-								>
-									<HugeiconsIcon
-										icon={FlashIcon}
-										className="mr-1.5 size-3.5"
-									/>
-									All — $299
-								</Button>
-								<Button
-									size="sm"
-									className="h-8 flex-1 rounded-none text-xs"
-									asChild
-								>
-									<Link to="/login">
-										<HugeiconsIcon
-											icon={ArrowRight01Icon}
-											className="mr-1.5 size-3.5"
-										/>
+								<p className="text-sm font-semibold text-foreground">
+									$99{" "}
+									<span className="font-normal text-muted-foreground text-xs">
+										or{" "}
+										<button
+											onClick={onUpgrade}
+											className="text-foreground hover:underline underline-offset-2 font-medium"
+										>
+											included with Pro
+										</button>
+									</span>
+								</p>
+								{isLoggedIn ? (
+									<Button
+										size="sm"
+										className="w-fit h-7 px-3 text-xs bg-foreground text-background hover:bg-foreground/90"
+										onClick={onBuyTemplate}
+										disabled={isCheckoutLoading}
+									>
+										{isCheckoutLoading ? (
+											<Spinner className="size-3 mr-1" />
+										) : (
+											<HugeiconsIcon
+												icon={ArrowRight01Icon}
+												className="mr-1 size-3"
+											/>
+										)}
 										Buy — $99
-									</Link>
-								</Button>
+									</Button>
+								) : (
+									<Button
+										size="sm"
+										className="w-fit h-7 px-3 text-xs bg-foreground text-background hover:bg-foreground/90"
+										asChild
+									>
+										<Link to="/login">Buy — $99</Link>
+									</Button>
+								)}
 							</>
 						)}
 					</div>
 				</div>
+
+				{/* Preview slider */}
+				<div
+					className="col-span-2 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+					style={{ scrollSnapType: "x mandatory" }}
+				>
+					{[img1, img2].map((src, i) => (
+						<div
+							key={i}
+							className="aspect-[14/9] w-[80%] shrink-0 overflow-hidden rounded-xl bg-card"
+							style={{ scrollSnapAlign: "start" }}
+						>
+							<img
+								src={src}
+								alt={`${template.name} preview ${i + 1}`}
+								className="h-full w-full object-cover"
+								loading="lazy"
+							/>
+						</div>
+					))}
+				</div>
 			</div>
-		</Card>
+		</div>
 	);
 }

@@ -1,114 +1,83 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@workspace/ui";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowRight01Icon, FlashIcon } from "@hugeicons/core-free-icons";
-
-const TERMINAL_LINES = [
-	{ prefix: "$", text: "pnpm create tanship my-saas", type: "cmd" },
-	{ prefix: "✓", text: "Auth configured (Better Auth + Google)", type: "ok" },
-	{ prefix: "✓", text: "Payments wired (Dodo Payments)", type: "ok" },
-	{ prefix: "✓", text: "Edge DB ready (Cloudflare D1)", type: "ok" },
-	{ prefix: "✓", text: "UI components installed (shadcn/ui)", type: "ok" },
-	{ prefix: "$", text: "pnpm dev", type: "cmd" },
-	{ prefix: "▸", text: "Ready on http://localhost:3000", type: "ready" }
-];
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import { authClient } from "@/auth/client";
 
 export function HeroSection() {
+	const { data: session } = authClient.useSession();
 	return (
-		<section className="flex flex-col gap-20 pb-20 pt-28 sm:flex-row sm:items-center sm:gap-12">
-			{/* Left: copy */}
-			<div className="flex flex-col gap-8 sm:flex-1">
-				<div className="inline-flex w-fit items-center gap-2 rounded-full border border-border/50 bg-muted/30 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-					<HugeiconsIcon
-						icon={FlashIcon}
-						className="size-3 text-foreground"
-					/>
-					v1.0 — Now Live
+		<section className="pb-24 pt-32">
+			<div className="flex flex-col gap-10">
+				{/* Eyebrow */}
+				<div className="flex items-center gap-2">
+					<div className="h-1.5 w-1.5 rounded-full bg-primary" />
+					<span className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+						SaaS Boilerplate for Builders
+					</span>
 				</div>
 
-				<div className="flex flex-col gap-4">
-					<h1 className="text-balance text-5xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-6xl">
-						Build your next
+				{/* Headline — Albert Sans, weight 400, tight tracking like Eleveight */}
+				<div className="flex flex-col gap-5">
+					<h1
+						className="font-heading font-medium text-foreground"
+						style={{
+							fontSize: "clamp(2.8rem, 9vw, 4.8rem)",
+							letterSpacing: "-0.04em",
+							lineHeight: "1.0"
+						}}
+					>
+						Ship faster with{" "}
+						<span className="bg-primary px-1 text-primary-foreground">
+							TanStack.
+						</span>
 						<br />
-						idea, faster.
+						Cost less with Cloudflare.
 					</h1>
-					<p className="max-w-sm text-balance text-base leading-relaxed text-muted-foreground">
-						Stop wiring auth, payments, and databases from scratch.
-						Get a production-ready edge foundation in seconds.
+					<p
+						className="max-w-lg text-muted-foreground"
+						style={{
+							fontSize: "17px",
+							lineHeight: "1.6",
+							letterSpacing: "-0.02em"
+						}}
+					>
+						The complete boilerplate for building profitable SaaS —
+						auth, payments, AI, database, storage, email, blog,
+						dashboard, SEO and more.
 					</p>
 				</div>
 
+				{/* CTAs */}
 				<div className="flex flex-wrap items-center gap-3">
 					<Button
 						size="lg"
-						className="h-11 rounded-none bg-foreground px-6 text-sm font-medium text-background hover:bg-foreground/90"
+						className="h-11 bg-foreground px-6 text-sm font-medium text-background hover:bg-foreground/90"
 						asChild
 					>
-						<Link to="/login">
-							Start Building
+						<a href="#pricing">
+							Get Access
 							<HugeiconsIcon
 								icon={ArrowRight01Icon}
 								className="ml-2 size-4"
 							/>
-						</Link>
+						</a>
 					</Button>
 					<Button
 						variant="ghost"
 						size="lg"
-						className="h-11 rounded-none border border-border/50 px-6 text-sm font-medium text-foreground hover:bg-muted/30"
+						className="h-11 border border-border px-6 text-sm font-medium text-foreground hover:bg-secondary"
 						asChild
 					>
-						<a href="/docs">Explore Docs</a>
+						{session?.user ? (
+							<Link search={{ license: "" }} to="/activate">
+								Activate
+							</Link>
+						) : (
+							<Link to="/login">Sign in</Link>
+						)}
 					</Button>
 				</div>
-			</div>
-
-			{/* Right: terminal mockup */}
-			<div className="relative w-full sm:w-[340px] sm:flex-none">
-				<div className="overflow-hidden border border-border/60 bg-background shadow-lg dark:bg-muted/10">
-					{/* Title bar */}
-					<div className="flex items-center gap-2 border-b border-border/40 bg-muted/20 px-4 py-3">
-						<span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-						<span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-						<span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
-						<span className="ml-2 font-mono text-[10px] text-muted-foreground">
-							terminal
-						</span>
-					</div>
-					{/* Lines */}
-					<div className="flex flex-col gap-1.5 p-4 font-mono text-[11px]">
-						{TERMINAL_LINES.map((line, i) => (
-							<div key={i} className="flex gap-2">
-								<span
-									className={
-										line.type === "ok"
-											? "text-emerald-500"
-											: line.type === "ready"
-												? "text-blue-400"
-												: "text-muted-foreground"
-									}
-								>
-									{line.prefix}
-								</span>
-								<span
-									className={
-										line.type === "cmd"
-											? "text-foreground"
-											: "text-muted-foreground"
-									}
-								>
-									{line.text}
-								</span>
-							</div>
-						))}
-						<div className="mt-1 flex items-center gap-2">
-							<span className="text-muted-foreground">$</span>
-							<span className="inline-block h-3.5 w-0.5 animate-pulse bg-foreground/70" />
-						</div>
-					</div>
-				</div>
-				{/* Decorative glow */}
-				<div className="pointer-events-none absolute -inset-px -z-10 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-40 blur-xl" />
 			</div>
 		</section>
 	);

@@ -1,100 +1,65 @@
 import { Link } from "@tanstack/react-router";
-import { Badge, Button } from "@workspace/ui";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { FlashIcon, GithubIcon } from "@hugeicons/core-free-icons";
+import { Button } from "@workspace/ui";
+import { Logo } from "@/routes/-components/logo";
 import { authClient } from "@/auth/client";
 import { appConfig } from "@workspace/config";
-import { useEffect, useState } from "react";
+import { ThemeToggle } from "@/routes/-components/layouts/theme-toggle";
 
 export function HomeNav() {
 	const { data: session } = authClient.useSession();
-	const [scrolled, setScrolled] = useState(false);
-
-	useEffect(() => {
-		const onScroll = () => setScrolled(window.scrollY > 12);
-		window.addEventListener("scroll", onScroll, { passive: true });
-		return () => window.removeEventListener("scroll", onScroll);
-	}, []);
 
 	return (
-		<nav
-			className={`fixed top-0 z-50 flex w-full justify-center transition-all duration-200 ${
-				scrolled
-					? "border-b border-border/50 bg-background/90 backdrop-blur-md shadow-sm"
-					: "border-b border-transparent bg-transparent"
-			}`}
-		>
-			<div className="flex h-14 w-full max-w-3xl items-center justify-between px-4 sm:px-6">
-				{/* Logo */}
-				<div className="flex items-center gap-3">
-					<Link
-						to="/"
-						className="flex items-center gap-2 transition-opacity hover:opacity-75"
-					>
-						<div className="flex h-6 w-6 items-center justify-center bg-foreground">
-							<HugeiconsIcon
-								icon={FlashIcon}
-								className="size-3 text-background"
-							/>
-						</div>
-						<span className="font-semibold tracking-tight text-foreground">
-							Tanship
-						</span>
-					</Link>
-					<Badge
-						variant="outline"
-						className="rounded-full border-border/40 px-2 py-0 text-[10px] font-medium text-muted-foreground"
-					>
-						Beta
-					</Badge>
-				</div>
-
-				{/* Links */}
-				<div className="flex items-center gap-5">
-					<div className="hidden items-center gap-5 sm:flex">
-						<a
-							href="/docs"
-							className="text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
-						>
-							Docs
-						</a>
-						<Link
-							to="/templates"
-							className="text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
-						>
-							Templates
-						</Link>
-						<a
-							href="https://github.com/inurhuda00"
-							target="_blank"
-							rel="noreferrer"
-							className="flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
-						>
-							<HugeiconsIcon
-								icon={GithubIcon}
-								className="size-3.5"
-							/>
-							GitHub
-						</a>
-					</div>
-
-					<Button
-						size="sm"
-						asChild
-						className="h-8 rounded-none bg-foreground px-4 text-[13px] text-background hover:bg-foreground/85"
-					>
-						<Link
-							to={
-								session?.user
-									? appConfig.authDefaultRedirect
-									: "/login"
-							}
-						>
-							{session?.user ? "Dashboard" : "Sign in"}
-						</Link>
-					</Button>
-				</div>
+		<header className="fixed top-0 z-50 w-full max-w-4xl mx-auto px-4 sm:px-6 border-b bg-background flex h-14 items-center justify-between">
+			<div className="flex items-center gap-4">
+				<Link
+					to="/"
+					className="flex flex-shrink-0 gap-2 items-center justify-center hover:opacity-80 transition-opacity"
+				>
+					<Logo />
+					<span className="font-semibold tracking-tight text-foreground">
+						Tanship
+					</span>
+				</Link>
 			</div>
-		</nav>
+
+			<div className="flex items-center gap-2">
+				<div className="hidden items-center gap-5 sm:flex">
+					<a
+						href="/docs"
+						className="text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+					>
+						Docs
+					</a>
+					<Link
+						to="/templates"
+						className="text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+					>
+						Templates
+					</Link>
+					<Link
+						to="/showcase"
+						className="text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+					>
+						Showcase
+					</Link>
+				</div>
+				<ThemeToggle />
+				<Button
+					size="sm"
+					asChild
+					className="h-8 bg-foreground px-4 text-[13px] text-background hover:bg-foreground/85"
+				>
+					<Link
+						to={
+							session?.user
+								? appConfig.authDefaultRedirect
+								: "/login"
+						}
+					>
+						{session?.user ? "Dashboard" : "Sign in"}
+					</Link>
+				</Button>
+			</div>
+		</header>
 	);
 }

@@ -16,6 +16,8 @@ import { appConfig } from "@workspace/config";
 import type { PricingPlan } from "@workspace/config";
 import { purchasesQueryOptions } from "@/routes/-fn/purchases";
 import { TemplateCard, type TemplateItem } from "./-components/template-card";
+import { FooterSection } from "../-components/footer-section";
+import { HireSection } from "../-components/hire-section";
 
 export const Route = createFileRoute("/(app)/_home/templates/")({
 	component: TemplatesPage
@@ -87,7 +89,6 @@ const TEMPLATES: TemplateItem[] = [
 function TemplatesPage() {
 	const router = useRouter();
 	const { data: session } = authClient.useSession();
-	// null = no checkout in progress; string = slug of plan being purchased
 	const [checkoutSlug, setCheckoutSlug] = useState<string | null>(null);
 
 	const { data: purchases } = useQuery({
@@ -97,8 +98,6 @@ function TemplatesPage() {
 
 	const isProUser =
 		purchases?.some((p) => p.planSlug === "tanship-pro") ?? false;
-
-	/** Set of individual template slugs the user already owns */
 	const ownedTemplateSlugs = new Set(
 		purchases
 			?.filter((p) => p.planSlug.startsWith("template-"))
@@ -114,7 +113,6 @@ function TemplatesPage() {
 			(p: PricingPlan) => p.slug === slug
 		);
 		if (!plan) return;
-
 		setCheckoutSlug(slug);
 		try {
 			const { data, error } =
@@ -128,14 +126,11 @@ function TemplatesPage() {
 						email: session.user.email ?? ""
 					}
 				} as any);
-
 			if (error) {
 				toast.error(error.message || "Failed to initiate checkout");
 				return;
 			}
-			if (data?.url) {
-				window.location.href = data.url;
-			}
+			if (data?.url) window.location.href = data.url;
 		} catch {
 			toast.error("Something went wrong. Please try again.");
 		} finally {
@@ -146,72 +141,71 @@ function TemplatesPage() {
 	const handleUpgrade = () => startCheckout("tanship-pro");
 
 	return (
-		<div className="relative flex min-h-screen flex-col items-center bg-background overflow-hidden">
-			{/* Background */}
-			<div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-				<div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-			</div>
-
-			<main className="relative z-10 pt-24 pb-32 flex w-full max-w-3xl flex-col px-4 sm:px-6 mx-auto">
-				{/* Hero */}
+		<>
+			<main className="grid gap-6 px-4 sm:px-6 pb-32 pt-24">
 				<motion.section
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
 					className="flex flex-col gap-6 mb-16 border-b border-border/40 pb-16"
 				>
-					<Badge
-						variant="secondary"
-						className="w-fit px-3 py-1 bg-muted/30 text-foreground border border-border/50 text-[10px] uppercase tracking-widest font-bold rounded-full"
+					<div className="flex items-center gap-2">
+						<div className="h-1.5 w-1.5 rounded-full bg-primary" />
+						<span className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+							Templates
+						</span>
+					</div>
+					<h1
+						className="font-heading font-medium text-foreground"
+						style={{
+							fontSize: "clamp(2rem, 5vw, 3rem)",
+							letterSpacing: "-0.04em",
+							lineHeight: "1.05"
+						}}
 					>
-						Templates
-					</Badge>
-					<h1 className="max-w-2xl font-semibold text-4xl leading-tight tracking-tight sm:text-5xl">
 						Ship faster with ready-made templates
 					</h1>
-					<p className="max-w-xl text-balance text-base text-muted-foreground leading-relaxed">
+					<p
+						className="max-w-xl text-balance text-base text-muted-foreground leading-relaxed"
+						style={{ letterSpacing: "-0.01em" }}
+					>
 						Production-ready templates built on the Tanship stack.
 						Buy individually at $99, or unlock all of them with
 						Tanship Pro for $299.
 					</p>
 
 					{!isProUser && (
-						<div className="flex flex-wrap items-center gap-4 mt-2">
+						<div className="flex flex-wrap items-center gap-3 mt-2">
 							<Button
 								size="lg"
-								className="rounded-none px-6 h-12 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
+								className="h-11 px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
 								onClick={handleUpgrade}
 								disabled={!!checkoutSlug}
 							>
 								{checkoutSlug === "tanship-pro" ? (
 									<Spinner className="size-4 mr-2" />
-								) : (
+								) : null}
+								Get All Templates — $299
+								{checkoutSlug !== "tanship-pro" && (
 									<HugeiconsIcon
-										icon={FlashIcon}
-										className="size-4 mr-2"
+										icon={ArrowRight01Icon}
+										className="ml-2 size-4"
 									/>
 								)}
-								Get All Templates — $299
 							</Button>
 							<Button
 								size="lg"
 								variant="ghost"
-								className="rounded-none px-6 h-12 text-sm font-medium border border-border/50 hover:bg-muted/10"
+								className="h-11 px-6 text-sm font-medium border border-border text-foreground hover:bg-secondary"
 								asChild
 							>
-								<Link to="/">
-									<HugeiconsIcon
-										icon={ArrowRight01Icon}
-										className="size-4 mr-2"
-									/>
-									View Plans
-								</Link>
+								<Link to="/">View Plans</Link>
 							</Button>
 						</div>
 					)}
 
 					{isProUser && (
-						<div className="flex w-fit items-center gap-2 px-4 py-2 rounded-none border border-foreground/20 bg-muted/5 text-xs text-foreground font-medium">
+						<div className="flex w-fit items-center gap-2 px-4 py-2 rounded-xl bg-secondary border border-border/40 text-xs text-foreground font-medium">
 							<HugeiconsIcon
 								icon={GithubIcon}
 								className="size-4"
@@ -221,7 +215,6 @@ function TemplatesPage() {
 					)}
 				</motion.section>
 
-				{/* Template grid */}
 				<div className="w-full">
 					<div className="flex items-center gap-3 mb-8">
 						<span className="text-base font-semibold">
@@ -229,13 +222,13 @@ function TemplatesPage() {
 						</span>
 						<Badge
 							variant="secondary"
-							className="text-[10px] px-2 py-0.5 rounded-full opacity-60 border-border/50"
+							className="text-[10px] px-2 py-0.5 rounded-full opacity-60"
 						>
 							More coming soon
 						</Badge>
 					</div>
 
-					<div className="grid gap-6 sm:grid-cols-2">
+					<div className="flex flex-col gap-3">
 						{TEMPLATES.map((template, i) => (
 							<motion.div
 								key={template.id}
@@ -245,6 +238,7 @@ function TemplatesPage() {
 							>
 								<TemplateCard
 									template={template}
+									index={i}
 									isProUser={isProUser}
 									hasPurchased={ownedTemplateSlugs.has(
 										template.slug
@@ -264,50 +258,73 @@ function TemplatesPage() {
 					</div>
 				</div>
 
-				{/* Pro CTA */}
+				<HireSection />
+
 				{!isProUser && (
 					<motion.section
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5, delay: 0.3 }}
-						className="mt-20 w-full relative overflow-hidden rounded-none border border-border/50 bg-muted/5 p-8 sm:p-12 text-center flex flex-col items-center gap-6"
+						className="w-full"
 					>
-						<div className="flex items-center justify-center size-12 rounded-none bg-background border border-border/50">
-							<HugeiconsIcon
-								icon={FlashIcon}
-								className="size-5 text-foreground"
-							/>
-						</div>
-						<div className="flex flex-col gap-3">
-							<h2 className="text-2xl font-semibold tracking-tight">
-								Unlock all templates with Tanship Pro
-							</h2>
-							<p className="text-muted-foreground text-sm max-w-md mx-auto leading-relaxed">
-								One payment. Every template we've built and
-								everything we'll build in the future. Cheaper
-								than buying 4 individually. Priority support
-								included.
-							</p>
-						</div>
-						<div className="flex flex-col items-center gap-3 mt-4">
-							<Button
-								size="lg"
-								className="rounded-none px-8 h-12 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
-								onClick={handleUpgrade}
-								disabled={!!checkoutSlug}
-							>
-								{checkoutSlug === "tanship-pro" ? (
-									<Spinner className="size-4 mr-2" />
-								) : null}
-								Get Tanship Pro — $299
-							</Button>
-							<p className="text-[11px] text-muted-foreground font-mono uppercase tracking-wider">
-								vs. $99 × 6 = $594 individually
-							</p>
+						<div className="rounded-2xl bg-secondary p-2">
+							<div className="rounded-xl bg-foreground text-background p-8 sm:p-12 text-center flex flex-col items-center gap-6">
+								<div className="flex size-11 items-center justify-center rounded-xl bg-background/10">
+									<HugeiconsIcon
+										icon={FlashIcon}
+										className="size-5 text-background"
+									/>
+								</div>
+								<div className="flex flex-col gap-3">
+									<h2
+										className="font-heading font-medium text-background"
+										style={{
+											fontSize:
+												"clamp(1.4rem, 3vw, 1.8rem)",
+											letterSpacing: "-0.04em",
+											lineHeight: "1.05"
+										}}
+									>
+										Unlock all templates with Tanship Pro
+									</h2>
+									<p
+										className="text-background/60 text-sm max-w-md mx-auto leading-relaxed"
+										style={{ letterSpacing: "-0.01em" }}
+									>
+										One payment. Every template we've built
+										and everything we'll build in the
+										future. Cheaper than buying 4
+										individually.
+									</p>
+								</div>
+								<div className="flex flex-col items-center gap-3 mt-4">
+									<Button
+										size="lg"
+										className="h-11 px-6 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90"
+										onClick={handleUpgrade}
+										disabled={!!checkoutSlug}
+									>
+										{checkoutSlug === "tanship-pro" ? (
+											<Spinner className="size-4 mr-2" />
+										) : null}
+										Get Tanship Pro — $299
+										{checkoutSlug !== "tanship-pro" && (
+											<HugeiconsIcon
+												icon={ArrowRight01Icon}
+												className="ml-2 size-4"
+											/>
+										)}
+									</Button>
+									<p className="text-[11px] text-background/40 font-mono uppercase tracking-wider">
+										vs. $99 × 6 = $594 individually
+									</p>
+								</div>
+							</div>
 						</div>
 					</motion.section>
 				)}
 			</main>
-		</div>
+			<FooterSection />
+		</>
 	);
 }

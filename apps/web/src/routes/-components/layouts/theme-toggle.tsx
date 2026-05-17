@@ -18,7 +18,7 @@ export function ThemeToggle({ className }: { className?: string }) {
 			onClick={toggleTheme}
 			suppressHydrationWarning
 			className={cn(
-				"size-7 rounded-lg border-border bg-background px-2 py-1.5 transition-colors hover:bg-accent hover:text-accent-foreground",
+				"size-7 !rounded-[6px] border-border bg-background px-2 py-1.5 transition-colors hover:bg-accent hover:text-accent-foreground",
 				className
 			)}
 		>
