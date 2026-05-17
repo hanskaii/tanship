@@ -21,7 +21,7 @@ export function HireSection() {
 					</div>
 
 					{/* Bottom row */}
-					<div className="flex items-end justify-between gap-6">
+					<div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
 						<div className="flex flex-col gap-2">
 							<h2
 								className="font-heading font-medium text-foreground"
@@ -45,7 +45,7 @@ export function HireSection() {
 							href="https://contra.com/inurhuda00"
 							target="_blank"
 							rel="noreferrer"
-							className="shrink-0 flex items-center gap-2 rounded-xl bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
+							className="shrink-0 self-start sm:self-auto flex items-center gap-2 rounded-xl bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
 						>
 							Hire on Contra
 							<HugeiconsIcon
