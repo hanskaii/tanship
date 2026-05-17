@@ -11,6 +11,7 @@ import { TemplatesSection } from "./-components/templates-section";
 import { FaqSection } from "./-components/faq-section";
 import { FooterSection } from "./-components/footer-section";
 import { FeaturesSection } from "./-components/features-section";
+import { DemoVideoSection } from "./-components/demo-video-section";
 import { Fragment } from "react/jsx-runtime";
 
 export const Route = createFileRoute("/(app)/_home/")({
@@ -22,6 +23,7 @@ function HomePage() {
 		<Fragment>
 			<main className="px-4 sm:px-6">
 				<HeroSection />
+				<DemoVideoSection />
 				<TechStackSection />
 				<StatementSection />
 				<ShowcaseSection />
