@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@workspace/ui";
 import { motion } from "framer-motion";
+import { EASE_OUT_EXPO } from "../-lib/motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
 	ArrowRight01Icon,
@@ -41,6 +42,7 @@ function ShowcaseCard({ item }: { item: ShowcaseItem }) {
 		<motion.div
 			initial={{ opacity: 0, y: 12 }}
 			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
 			className="rounded-2xl bg-secondary p-2"
 		>
 			<div className="group flex flex-col gap-6 rounded-xl bg-card px-5 py-6 sm:grid sm:grid-cols-3 sm:gap-6 sm:px-6 sm:py-8">
@@ -122,7 +124,12 @@ function ShowcasePage() {
 	return (
 		<>
 			<main className="px-4 sm:px-6 pb-32 pt-24">
-				<div className="mb-16 flex flex-col gap-5 border-b border-border/40 pb-16">
+				<motion.div
+					className="mb-16 flex flex-col gap-5 border-b border-border/40 pb-16"
+					initial={{ opacity: 0, y: 16 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+				>
 					<div className="flex items-center gap-2">
 						<div className="h-1.5 w-1.5 rounded-full bg-primary" />
 						<span className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
@@ -158,7 +165,7 @@ function ShowcasePage() {
 							/>
 						</Link>
 					</Button>
-				</div>
+				</motion.div>
 
 				{isLoading ? (
 					<div className="flex flex-col gap-3">

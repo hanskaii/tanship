@@ -73,11 +73,13 @@ export function TemplatesSection() {
 				{templates.map((template: PricingPlan, i: number) => (
 					<div
 						key={template.slug}
-						className="rounded-xl bg-secondary p-2"
+						className="group rounded-xl bg-secondary p-2"
 					>
 						<div className="overflow-hidden rounded-lg bg-card">
 							<div className="aspect-[14/9] overflow-hidden">
-								<TemplatePreview index={i} />
+								<div className="h-full w-full transition-transform duration-500 ease-out group-hover:scale-[1.03]">
+									<TemplatePreview index={i} />
+								</div>
 							</div>
 							<div className="border-t border-border/30 px-4 py-3">
 								<div className="flex items-start justify-between gap-2">

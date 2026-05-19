@@ -1,7 +1,8 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { HireSection } from "@/routes/(app)/_home/-components/hire-section";
 import { Button } from "@workspace/ui";
-
+import { motion } from "framer-motion";
+import { EASE_OUT_EXPO } from "@/routes/(app)/_home/-lib/motion";
 import { Plans } from "@/routes/(app)/_home/-components/pricing-section";
 import { sessionsOptions, useLogoutMutation } from "@/routes/-fn/auth";
 import { Gate } from "@workspace/core";
@@ -33,7 +34,12 @@ function UpgradePage() {
 
 	return (
 		<main className="grid gap-6 px-4 sm:px-6 pb-32 pt-24">
-			<div className="mb-14">
+			<motion.div
+				className="mb-14"
+				initial={{ opacity: 0, y: 16 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+			>
 				<h2
 					className="mb-3 font-heading font-medium text-foreground"
 					style={{
@@ -55,7 +61,7 @@ function UpgradePage() {
 					Get lifetime access to the boilerplate. Save hundreds of
 					hours of development time.
 				</p>
-			</div>
+			</motion.div>
 
 			<Plans />
 

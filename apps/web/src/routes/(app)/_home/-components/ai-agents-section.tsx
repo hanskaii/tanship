@@ -52,13 +52,13 @@ export function AiAgentsSection() {
 						{TOOLS.map((tool) => (
 							<div
 								key={tool.name}
-								className="flex items-center gap-2.5 rounded-full bg-secondary px-3 py-2 transition-colors hover:bg-muted/80"
+								className="group flex items-center gap-2.5 rounded-full bg-secondary px-3 py-2 transition-colors hover:bg-muted/80"
 								title={tool.name}
 							>
 								<img
 									src={tool.src}
 									alt={tool.name}
-									className="h-5 w-5 rounded-full object-cover"
+									className="h-5 w-5 rounded-full object-cover transition-transform duration-200 ease-out group-hover:scale-110"
 								/>
 								<span className="text-[13px] font-medium text-foreground">
 									{tool.name}

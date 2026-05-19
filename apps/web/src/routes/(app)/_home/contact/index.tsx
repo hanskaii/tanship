@@ -10,6 +10,8 @@ import { appConfig } from "@workspace/config";
 import { FaqSection } from "../-components/faq-section";
 import { FooterSection } from "../-components/footer-section";
 import { Fragment } from "react/jsx-runtime";
+import { motion, useReducedMotion } from "framer-motion";
+import { EASE_OUT_EXPO } from "../-lib/motion";
 
 export const Route = createFileRoute("/(app)/_home/contact/")({
 	component: ContactPage
@@ -53,7 +55,7 @@ function ContactCard({
 }: (typeof CONTACT_CARDS)[number]) {
 	const Inner = (
 		<div className="group flex h-full flex-col gap-5 rounded-xl bg-card p-7 transition-all hover:bg-card/80">
-			<div className="flex size-11 items-center justify-center rounded-xl bg-secondary group-hover:bg-background transition-colors">
+			<div className="flex size-11 items-center justify-center rounded-xl bg-secondary group-hover:bg-background transition-all group-hover:-translate-y-0.5 group-hover:scale-110">
 				<HugeiconsIcon
 					icon={icon}
 					className="size-5 text-foreground/80"
@@ -96,42 +98,93 @@ function ContactCard({
 	);
 }
 
+const headerVariants = {
+	hidden: {},
+	show: { transition: { staggerChildren: 0.1 } }
+};
+
+const headerItemVariants = {
+	hidden: { opacity: 0, y: 16 },
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.5, ease: EASE_OUT_EXPO }
+	}
+};
+
+const cardContainerVariants = {
+	hidden: {},
+	show: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } }
+};
+
+const cardVariants = {
+	hidden: { opacity: 0, y: 14 },
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.5, ease: EASE_OUT_EXPO }
+	}
+};
+
 function ContactPage() {
+	const reduced = useReducedMotion();
+
 	return (
 		<Fragment>
 			<main className="px-4 sm:px-6 pb-32 pt-24">
-				<div className="mb-16 flex flex-col items-center gap-4 text-center">
-					<div className="flex items-center gap-2">
+				<motion.div
+					className="mb-16 flex flex-col items-center gap-4 text-center"
+					variants={headerVariants}
+					initial="hidden"
+					animate="show"
+				>
+					<motion.div
+						className="flex items-center gap-2"
+						variants={headerItemVariants}
+					>
 						<div className="h-1.5 w-1.5 rounded-full bg-primary" />
 						<span className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
 							Support
 						</span>
-					</div>
-					<h1
+					</motion.div>
+					<motion.h1
 						className="font-heading font-medium text-foreground"
 						style={{
 							fontSize: "clamp(2rem, 5vw, 3rem)",
 							letterSpacing: "-0.04em",
 							lineHeight: "1.05"
 						}}
+						variants={headerItemVariants}
 					>
 						How can we help?
-					</h1>
-					<p
+					</motion.h1>
+					<motion.p
 						className="max-w-sm text-balance text-base leading-relaxed text-muted-foreground"
 						style={{ letterSpacing: "-0.01em" }}
+						variants={headerItemVariants}
 					>
 						Questions about setup, billing, or the roadmap? We're
 						here to help you ship faster.
-					</p>
-				</div>
+					</motion.p>
+				</motion.div>
 
 				<div className="mb-24 w-full rounded-2xl bg-secondary p-2">
-					<div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+					<motion.div
+						className="grid grid-cols-1 gap-2 sm:grid-cols-3"
+						variants={reduced ? undefined : cardContainerVariants}
+						initial={reduced ? undefined : "hidden"}
+						animate={reduced ? undefined : "show"}
+					>
 						{CONTACT_CARDS.map((card) => (
-							<ContactCard key={card.title} {...card} />
+							<motion.div
+								key={card.title}
+								variants={reduced ? undefined : cardVariants}
+								className="h-full"
+							>
+								<ContactCard {...card} />
+							</motion.div>
 						))}
-					</div>
+					</motion.div>
 				</div>
 
 				<FaqSection />

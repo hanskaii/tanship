@@ -45,12 +45,12 @@ export function HireSection() {
 							href="https://contra.com/inurhuda00"
 							target="_blank"
 							rel="noreferrer"
-							className="shrink-0 self-start sm:self-auto flex items-center gap-2 rounded-xl bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
+							className="group shrink-0 self-start sm:self-auto flex items-center gap-2 rounded-xl bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
 						>
 							Hire on Contra
 							<HugeiconsIcon
 								icon={ArrowUpRight01Icon}
-								className="size-4"
+								className="size-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
 							/>
 						</a>
 					</div>

@@ -3,22 +3,41 @@ import { Button } from "@workspace/ui";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { authClient } from "@/auth/client";
+import { motion } from "framer-motion";
+import { useHeroVariants } from "../-lib/motion";
 
 export function HeroSection() {
 	const { data: session } = authClient.useSession();
+	const { container, item } = useHeroVariants();
+
 	return (
 		<section className="pb-24 pt-32">
-			<div className="flex flex-col gap-10">
+			<motion.div
+				className="flex flex-col gap-10"
+				variants={container}
+				initial="hidden"
+				animate="show"
+			>
 				{/* Eyebrow */}
-				<div className="flex items-center gap-2">
-					<div className="h-1.5 w-1.5 rounded-full bg-primary" />
+				<motion.div variants={item} className="flex items-center gap-2">
+					{/* Pulsing dot — "edge is live" indicator */}
+					<motion.div
+						className="h-1.5 w-1.5 rounded-full bg-primary"
+						animate={{ opacity: [1, 0.3, 1] }}
+						transition={{
+							duration: 2,
+							ease: "easeInOut",
+							repeat: Infinity,
+							repeatType: "loop"
+						}}
+					/>
 					<span className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
 						SaaS Boilerplate for Builders
 					</span>
-				</div>
+				</motion.div>
 
-				{/* Headline — Albert Sans, weight 400, tight tracking like Eleveight */}
-				<div className="flex flex-col gap-5">
+				{/* Headline */}
+				<motion.div variants={item} className="flex flex-col gap-5">
 					<h1
 						className="font-heading font-medium text-foreground"
 						style={{
@@ -46,20 +65,23 @@ export function HeroSection() {
 						auth, payments, AI, database, storage, email, blog,
 						dashboard, SEO and more.
 					</p>
-				</div>
+				</motion.div>
 
 				{/* CTAs */}
-				<div className="flex flex-wrap items-center gap-3">
+				<motion.div
+					variants={item}
+					className="flex flex-wrap items-center gap-3"
+				>
 					<Button
 						size="lg"
-						className="h-11 bg-foreground px-6 text-sm font-medium text-background hover:bg-foreground/90"
+						className="group h-11 bg-foreground px-6 text-sm font-medium text-background hover:bg-foreground/90"
 						asChild
 					>
 						<a href="#pricing">
 							Get Access
 							<HugeiconsIcon
 								icon={ArrowRight01Icon}
-								className="ml-2 size-4"
+								className="ml-2 size-4 transition-transform duration-200 group-hover:translate-x-1"
 							/>
 						</a>
 					</Button>
@@ -77,8 +99,8 @@ export function HeroSection() {
 							<Link to="/login">Sign in</Link>
 						)}
 					</Button>
-				</div>
-			</div>
+				</motion.div>
+			</motion.div>
 		</section>
 	);
 }

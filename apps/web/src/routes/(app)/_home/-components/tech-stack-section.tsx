@@ -84,9 +84,9 @@ export function TechStackSection() {
 					{STACK.map(({ name, desc, Icon }) => (
 						<div
 							key={name}
-							className="flex flex-col gap-8 rounded-xl bg-card p-6"
+							className="group flex flex-col gap-8 rounded-xl bg-card p-6"
 						>
-							<Icon className="size-7 text-foreground" />
+							<Icon className="size-7 text-foreground transition-transform duration-200 ease-out group-hover:scale-110" />
 							<div className="flex flex-col gap-1">
 								<span
 									className="font-medium text-foreground"

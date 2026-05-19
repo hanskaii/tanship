@@ -3,6 +3,7 @@ import { authClient } from "@/auth/client";
 import { useState, useRef } from "react";
 import { Button, Input, Spinner, toast } from "@workspace/ui";
 import { motion } from "framer-motion";
+import { EASE_OUT_EXPO } from "../../-lib/motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
 	CheckmarkCircle01Icon,
@@ -84,7 +85,7 @@ function ShowcaseSubmitPage() {
 				<motion.section
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5 }}
+					transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
 					className="flex flex-col gap-6 mb-16 border-b border-border/40 pb-16"
 				>
 					<div className="flex items-center gap-2">
@@ -117,15 +118,21 @@ function ShowcaseSubmitPage() {
 						<motion.div
 							initial={{ opacity: 0, y: 8 }}
 							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
 							className="rounded-2xl bg-secondary p-2"
 						>
 							<div className="rounded-xl bg-card px-6 py-16 flex flex-col items-center gap-5 text-center">
-								<div className="flex size-14 items-center justify-center rounded-xl bg-emerald-500/10">
-									<HugeiconsIcon
-										icon={CheckmarkCircle01Icon}
-										className="size-7 text-emerald-500"
-									/>
-								</div>
+								<motion.div
+								className="flex size-14 items-center justify-center rounded-xl bg-emerald-500/10"
+								initial={{ scale: 0.4, opacity: 0 }}
+								animate={{ scale: 1, opacity: 1 }}
+								transition={{ duration: 0.45, ease: EASE_OUT_EXPO, delay: 0.2 }}
+							>
+								<HugeiconsIcon
+									icon={CheckmarkCircle01Icon}
+									className="size-7 text-emerald-500"
+								/>
+							</motion.div>
 								<div className="flex flex-col gap-2">
 									<p className="text-base font-semibold text-foreground">
 										Submitted for review

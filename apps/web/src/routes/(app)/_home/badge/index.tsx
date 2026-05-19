@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { EASE_OUT_EXPO } from "../-lib/motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
 	FlashIcon,
@@ -50,10 +51,36 @@ function CopyButton({ text }: { text: string }) {
 			onClick={handleCopy}
 			className="flex items-center gap-1 text-[10px] text-muted-foreground hover:text-foreground transition-colors"
 		>
-			<HugeiconsIcon
-				icon={copied ? CheckmarkCircle01Icon : Copy01Icon}
-				className={`size-3.5 ${copied ? "text-emerald-500" : ""}`}
-			/>
+			<span className="relative size-3.5 shrink-0">
+				<AnimatePresence mode="wait" initial={false}>
+					{copied ? (
+						<motion.span
+							key="check"
+							className="absolute inset-0 flex items-center justify-center"
+							initial={{ scale: 0.4, opacity: 0 }}
+							animate={{ scale: 1, opacity: 1 }}
+							exit={{ scale: 0.4, opacity: 0 }}
+							transition={{ duration: 0.15, ease: EASE_OUT_EXPO }}
+						>
+							<HugeiconsIcon
+								icon={CheckmarkCircle01Icon}
+								className="size-3.5 text-emerald-500"
+							/>
+						</motion.span>
+					) : (
+						<motion.span
+							key="copy"
+							className="absolute inset-0 flex items-center justify-center"
+							initial={{ scale: 0.4, opacity: 0 }}
+							animate={{ scale: 1, opacity: 1 }}
+							exit={{ scale: 0.4, opacity: 0 }}
+							transition={{ duration: 0.15, ease: EASE_OUT_EXPO }}
+						>
+							<HugeiconsIcon icon={Copy01Icon} className="size-3.5" />
+						</motion.span>
+					)}
+				</AnimatePresence>
+			</span>
 			{copied ? "Copied!" : "Copy"}
 		</button>
 	);
@@ -68,6 +95,7 @@ function BadgePage() {
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
 							className="flex flex-col items-center text-center gap-6 border-b border-border/40 pb-12"
 						>
 							<div className="flex size-14 items-center justify-center rounded-xl bg-secondary">
@@ -107,7 +135,7 @@ function BadgePage() {
 						<motion.div
 							initial={{ opacity: 0, y: 12 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.1 }}
+							transition={{ duration: 0.45, delay: 0.1, ease: EASE_OUT_EXPO }}
 						>
 							<div className="rounded-2xl bg-secondary p-2">
 								<div className="rounded-xl bg-card p-8 flex flex-col items-center gap-6">
@@ -140,7 +168,7 @@ function BadgePage() {
 									key={snippet.label}
 									initial={{ opacity: 0, y: 10 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.1 + i * 0.05 }}
+									transition={{ duration: 0.4, delay: 0.1 + i * 0.05, ease: EASE_OUT_EXPO }}
 									className="flex flex-col gap-3"
 								>
 									<div className="flex items-center justify-between border-b border-border/30 pb-2">

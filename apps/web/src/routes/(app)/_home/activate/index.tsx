@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Badge, Button, Input, Spinner } from "@workspace/ui";
 import { motion } from "framer-motion";
+import { EASE_OUT_EXPO } from "../-lib/motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
 	FlashIcon,
@@ -105,7 +106,7 @@ function ActivatePage() {
 				<motion.section
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5 }}
+					transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
 					className="flex flex-col gap-6 mb-16 border-b border-border/40 pb-16"
 				>
 					<div className="flex items-center gap-2">
@@ -220,6 +221,7 @@ function ActivatePage() {
 							<motion.div
 								initial={{ opacity: 0, y: 8 }}
 								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
 								className="rounded-2xl bg-secondary p-2"
 							>
 								<div className="rounded-xl bg-card px-6 py-8 flex flex-col gap-6">
@@ -329,13 +331,21 @@ function ActivatePage() {
 												scale: 0.97
 											}}
 											animate={{ opacity: 1, scale: 1 }}
+											transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
 											className="flex flex-col gap-4"
 										>
 											<div className="flex items-center gap-3 text-sm text-muted-foreground">
-												<HugeiconsIcon
-													icon={CheckmarkCircle01Icon}
-													className="size-4 text-emerald-500 shrink-0"
-												/>
+												<motion.span
+													initial={{ scale: 0.3, opacity: 0 }}
+													animate={{ scale: 1, opacity: 1 }}
+													transition={{ duration: 0.4, ease: EASE_OUT_EXPO, delay: 0.15 }}
+													className="shrink-0"
+												>
+													<HugeiconsIcon
+														icon={CheckmarkCircle01Icon}
+														className="size-4 text-emerald-500"
+													/>
+												</motion.span>
 												GitHub invitation sent to{" "}
 												<span className="font-medium text-foreground">
 													@{activated.githubUsername}

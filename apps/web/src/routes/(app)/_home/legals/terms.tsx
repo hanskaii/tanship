@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FooterSection } from "../-components/footer-section";
+import { motion } from "framer-motion";
+import { EASE_OUT_EXPO } from "../-lib/motion";
 
 export const Route = createFileRoute("/(app)/_home/legals/terms")({
 	component: RouteComponent
@@ -11,7 +13,12 @@ function RouteComponent() {
 			<main className="px-4 sm:px-6 pb-32 pt-24">
 				<div className="mx-auto w-full max-w-2xl">
 					<article>
-						<header className="mb-10 border-b border-border/40 pb-8">
+						<motion.header
+							className="mb-10 border-b border-border/40 pb-8"
+							initial={{ opacity: 0, y: 16 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+						>
 							<h1
 								className="font-heading font-medium text-foreground"
 								style={{
@@ -25,7 +32,7 @@ function RouteComponent() {
 							<p className="mt-3 text-sm text-muted-foreground">
 								Last updated: January 1, 2025
 							</p>
-						</header>
+						</motion.header>
 
 						<div className="flex flex-col gap-8 text-sm leading-7 text-muted-foreground [&_h2]:mb-3 [&_h2]:mt-8 [&_h2]:text-base [&_h2]:font-semibold [&_h2]:text-foreground [&_p]:text-muted-foreground">
 							<p>

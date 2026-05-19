@@ -10,7 +10,7 @@ Indie hackers and solo founders building their first or second SaaS. They've was
 
 ## Product Purpose
 
-Tanship is an invite-only TanStack Start boilerplate for building profitable SaaS products on Cloudflare Workers. It ships everything wired — auth, payments, AI, database, storage, email, newsletter, blog, dashboard, SEO — so founders can start on the actual product on day one.
+Tanship is an invite-only TanStack Start boilerplate for building profitable SaaS products on Cloudflare Workers. It ships everything wired — auth (magic links, OTP, Google OAuth, multi-session, API keys), payments (Dodo Payments, subscriptions, credit system), database (Drizzle + D1), storage, email (transactional templates), blog and docs (MDX + fumadocs), SEO, admin panel, RBAC with Gate policies, and a built-in showcase — so founders can start on the actual product on day one.
 
 ## Brand Personality
 

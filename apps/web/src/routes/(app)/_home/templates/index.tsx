@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Badge, Button, Spinner } from "@workspace/ui";
 import { motion } from "framer-motion";
+import { EASE_OUT_EXPO } from "../-lib/motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
 	FlashIcon,
@@ -146,7 +147,7 @@ function TemplatesPage() {
 				<motion.section
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5 }}
+					transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
 					className="flex flex-col gap-6 mb-16 border-b border-border/40 pb-16"
 				>
 					<div className="flex items-center gap-2">
@@ -234,7 +235,7 @@ function TemplatesPage() {
 								key={template.id}
 								initial={{ opacity: 0, y: 20 }}
 								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.4, delay: 0.05 * i }}
+								transition={{ duration: 0.4, delay: 0.05 * i, ease: EASE_OUT_EXPO }}
 							>
 								<TemplateCard
 									template={template}
@@ -264,7 +265,7 @@ function TemplatesPage() {
 					<motion.section
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5, delay: 0.3 }}
+						transition={{ duration: 0.5, delay: 0.3, ease: EASE_OUT_EXPO }}
 						className="w-full"
 					>
 						<div className="rounded-2xl bg-secondary p-2">

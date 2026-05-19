@@ -12,6 +12,8 @@ import { FaqSection } from "./-components/faq-section";
 import { FooterSection } from "./-components/footer-section";
 import { FeaturesSection } from "./-components/features-section";
 import { DemoVideoSection } from "./-components/demo-video-section";
+import { ScrollReveal } from "./-components/scroll-reveal";
+import { ConsoleEgg } from "./-components/console-egg";
 import { Fragment } from "react/jsx-runtime";
 
 export const Route = createFileRoute("/(app)/_home/")({
@@ -21,22 +23,60 @@ export const Route = createFileRoute("/(app)/_home/")({
 function HomePage() {
 	return (
 		<Fragment>
+			<ConsoleEgg />
 			<main className="px-4 sm:px-6">
+				{/* Hero animates itself on mount */}
 				<HeroSection />
-				<DemoVideoSection />
-				<TechStackSection />
-				<StatementSection />
-				<ShowcaseSection />
-				<FeaturesSection />
-				<BuildVsBuySection />
-				<AiAgentsSection />
-				<PricingSection />
-				<HireSection />
-				<TemplatesSection />
-				<FaqSection />
+
+				<ScrollReveal>
+					<DemoVideoSection />
+				</ScrollReveal>
+
+				<ScrollReveal>
+					<TechStackSection />
+				</ScrollReveal>
+
+				<ScrollReveal>
+					<StatementSection />
+				</ScrollReveal>
+
+				<ScrollReveal>
+					<ShowcaseSection />
+				</ScrollReveal>
+
+				<ScrollReveal>
+					<FeaturesSection />
+				</ScrollReveal>
+
+				{/* BuildVsBuySection has its own internal stagger on the rows */}
+				<ScrollReveal>
+					<BuildVsBuySection />
+				</ScrollReveal>
+
+				<ScrollReveal>
+					<AiAgentsSection />
+				</ScrollReveal>
+
+				<ScrollReveal>
+					<PricingSection />
+				</ScrollReveal>
+
+				<ScrollReveal>
+					<HireSection />
+				</ScrollReveal>
+
+				<ScrollReveal>
+					<TemplatesSection />
+				</ScrollReveal>
+
+				<ScrollReveal>
+					<FaqSection />
+				</ScrollReveal>
 			</main>
 
-			<FooterSection />
+			<ScrollReveal>
+				<FooterSection />
+			</ScrollReveal>
 		</Fragment>
 	);
 }

@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@workspace/ui";
+import { motion } from "framer-motion";
+import { EASE_OUT_EXPO } from "../-lib/motion";
 
 const STANDARD_FEATURES = [
 	"TanStack Start + Cloudflare Workers",
@@ -17,6 +19,15 @@ const PRO_FEATURES = [
 	"All future templates (free forever)",
 	"Priority email support"
 ];
+
+const cardVariants = {
+	hidden: { opacity: 0, y: 20 },
+	show: (delay: number) => ({
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.55, ease: EASE_OUT_EXPO, delay }
+	})
+};
 
 export function PricingSection() {
 	return (
@@ -55,7 +66,14 @@ export function Plans() {
 		<div className="rounded-2xl bg-secondary p-2">
 			<div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
 				{/* Standard — white card */}
-				<div className="flex flex-col rounded-xl bg-card p-8">
+				<motion.div
+					className="flex flex-col rounded-xl bg-card p-8"
+					variants={cardVariants}
+					custom={0}
+					initial="hidden"
+					whileInView="show"
+					viewport={{ once: true, margin: "-8%" }}
+				>
 					<div className="mb-4">
 						<h3
 							className="mb-1 font-heading font-medium text-foreground"
@@ -109,7 +127,7 @@ export function Plans() {
 						<Link to="/upgrade">Get Standard</Link>
 					</Button>
 
-					<ul className="flex flex-col gap-3 flex-1">
+					<ul className="flex flex-1 flex-col gap-3">
 						{STANDARD_FEATURES.map((f) => (
 							<li
 								key={f}
@@ -126,10 +144,17 @@ export function Plans() {
 							</li>
 						))}
 					</ul>
-				</div>
+				</motion.div>
 
-				{/* Pro — dark featured card */}
-				<div className="flex flex-col rounded-xl bg-foreground p-8 text-background">
+				{/* Pro — dark featured card, arrives 100ms after Standard */}
+				<motion.div
+					className="flex flex-col rounded-xl bg-foreground p-8 text-background"
+					variants={cardVariants}
+					custom={0.1}
+					initial="hidden"
+					whileInView="show"
+					viewport={{ once: true, margin: "-8%" }}
+				>
 					<div className="mb-4">
 						<h3
 							className="mb-1 font-heading font-medium"
@@ -183,7 +208,7 @@ export function Plans() {
 						<Link to="/upgrade">Get Pro</Link>
 					</Button>
 
-					<ul className="flex flex-col gap-3 flex-1">
+					<ul className="flex flex-1 flex-col gap-3">
 						{PRO_FEATURES.map((f) => (
 							<li
 								key={f}
@@ -200,10 +225,10 @@ export function Plans() {
 							</li>
 						))}
 					</ul>
-				</div>
+				</motion.div>
 			</div>
 			<p
-				className="mt-3 mb-2 flex items-center justify-center gap-2 text-[12px] text-muted-foreground"
+				className="mb-2 mt-3 flex items-center justify-center gap-2 text-[12px] text-muted-foreground"
 				style={{ letterSpacing: "-0.01em" }}
 			>
 				<svg

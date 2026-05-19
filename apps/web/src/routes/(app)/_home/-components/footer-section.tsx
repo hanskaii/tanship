@@ -105,7 +105,7 @@ export function FooterSection() {
 							</p>
 							<a
 								href="#pricing"
-								className="font-heading font-medium text-primary-foreground underline decoration-primary-foreground/30 underline-offset-4 transition-opacity hover:opacity-70"
+								className="font-heading font-medium text-primary-foreground underline decoration-primary-foreground/30 underline-offset-4 transition-[text-decoration-color,opacity] duration-200 hover:decoration-primary-foreground/80"
 								style={{
 									fontSize: "clamp(2.4rem, 7vw, 5rem)",
 									letterSpacing: "-0.04em",

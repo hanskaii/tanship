@@ -1,5 +1,7 @@
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Cancel01Icon } from "@hugeicons/core-free-icons";
+import { motion } from "framer-motion";
+import { EASE_OUT_EXPO, useStaggerVariants } from "../-lib/motion";
 
 const ROWS = [
 	{ component: "Authentication (OAuth, MFA)", scratch: "2–4 weeks" },
@@ -20,7 +22,23 @@ const DIFFERENTIATORS = [
 	}
 ];
 
+/** Cascades from parent row variant — pops in after the row slides up */
+const checkVariants = {
+	hidden: { scale: 0, opacity: 0 },
+	show: {
+		scale: 1,
+		opacity: 1,
+		transition: {
+			duration: 0.25,
+			ease: EASE_OUT_EXPO,
+			delay: 0.12
+		}
+	}
+};
+
 export function BuildVsBuySection() {
+	const { container, item } = useStaggerVariants(0.06);
+
 	return (
 		<section className="border-b border-border/40 py-20">
 			<div className="mb-14">
@@ -57,29 +75,41 @@ export function BuildVsBuySection() {
 					<div className="w-28">With Tanship</div>
 				</div>
 
-				{ROWS.map((row, i) => (
-					<div
-						key={i}
-						className={`grid grid-cols-[1fr_auto_auto] items-center py-4 text-sm transition-colors hover:opacity-80 ${
-							i < ROWS.length - 1
-								? "border-b border-border/30"
-								: ""
-						}`}
-					>
-						<div className="font-medium text-foreground">
-							{row.component}
-						</div>
-						<div className="px-6 text-right text-muted-foreground line-through decoration-muted-foreground/30">
-							{row.scratch}
-						</div>
-						<div className="flex w-28 items-center gap-2 font-semibold text-foreground">
-							<span className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
-								✓
-							</span>
-							Pre-built
-						</div>
-					</div>
-				))}
+				<motion.div
+					variants={container}
+					initial="hidden"
+					whileInView="show"
+					viewport={{ once: true, margin: "-10%" }}
+				>
+					{ROWS.map((row, i) => (
+						<motion.div
+							key={i}
+							variants={item}
+							className={`grid grid-cols-[1fr_auto_auto] items-center py-4 text-sm transition-colors hover:opacity-80 ${
+								i < ROWS.length - 1
+									? "border-b border-border/30"
+									: ""
+							}`}
+						>
+							<div className="font-medium text-foreground">
+								{row.component}
+							</div>
+							<div className="px-6 text-right text-muted-foreground line-through decoration-muted-foreground/30">
+								{row.scratch}
+							</div>
+							<div className="flex w-28 items-center gap-2 font-semibold text-foreground">
+								{/* Checkmark pops in after the row slides up */}
+								<motion.span
+									variants={checkVariants}
+									className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground"
+								>
+									✓
+								</motion.span>
+								Pre-built
+							</div>
+						</motion.div>
+					))}
+				</motion.div>
 			</div>
 
 			{/* Summary cards */}

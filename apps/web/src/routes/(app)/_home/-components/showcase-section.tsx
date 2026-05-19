@@ -184,7 +184,7 @@ export function ShowcaseSection() {
 					<button
 						onClick={() => scroll("left")}
 						aria-label="Scroll left"
-						className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-secondary"
+						className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-all hover:bg-secondary active:scale-95"
 					>
 						<svg
 							width="14"
@@ -205,7 +205,7 @@ export function ShowcaseSection() {
 					<button
 						onClick={() => scroll("right")}
 						aria-label="Scroll right"
-						className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-secondary"
+						className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-all hover:bg-secondary active:scale-95"
 					>
 						<svg
 							width="14"

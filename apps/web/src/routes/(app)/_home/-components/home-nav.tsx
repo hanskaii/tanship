@@ -4,16 +4,27 @@ import { Logo } from "@/routes/-components/logo";
 import { authClient } from "@/auth/client";
 import { appConfig } from "@workspace/config";
 import { ThemeToggle } from "@/routes/-components/layouts/theme-toggle";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export function HomeNav() {
 	const { data: session } = authClient.useSession();
+	const { scrollY } = useScroll();
+
+	// Border fades in from invisible after 80px of scroll
+	const borderOpacity = useTransform(scrollY, [0, 80], [0, 1]);
 
 	return (
-		<header className="fixed top-0 z-50 w-full max-w-4xl mx-auto px-4 sm:px-6 border-b bg-background flex h-14 items-center justify-between">
+		<header className="fixed top-0 z-50 mx-auto flex h-14 w-full max-w-4xl items-center justify-between bg-background px-4 sm:px-6">
+			{/* Scroll-aware bottom border */}
+			<motion.div
+				className="absolute inset-x-0 bottom-0 h-px bg-border"
+				style={{ opacity: borderOpacity }}
+			/>
+
 			<div className="flex items-center gap-4">
 				<Link
 					to="/"
-					className="flex flex-shrink-0 gap-2 items-center justify-center hover:opacity-80 transition-opacity"
+					className="flex flex-shrink-0 items-center justify-center gap-2 transition-opacity hover:opacity-80"
 				>
 					<Logo />
 					<span className="font-semibold tracking-tight text-foreground">
