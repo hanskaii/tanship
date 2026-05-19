@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Badge, Button, Input, Spinner } from "@workspace/ui";
 import { motion } from "framer-motion";
 import { EASE_OUT_EXPO } from "../-lib/motion";
@@ -13,7 +13,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { authClient } from "@/auth/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "@workspace/ui";
 import {
 	purchasesQueryOptions,
@@ -21,6 +21,8 @@ import {
 	type Purchase
 } from "@/routes/-fn/purchases";
 import { FooterSection } from "../-components/footer-section";
+
+const PENDING_KEY = "pendingLicenseKey";
 
 export const Route = createFileRoute("/(app)/_home/activate/")({
 	validateSearch: (search: Record<string, unknown>) => ({
@@ -51,6 +53,7 @@ function templateIdFromSlug(slug: string) {
 function ActivatePage() {
 	const { license: licenseParam } = Route.useSearch();
 	const { data: session } = authClient.useSession();
+	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 
 	const [licenseKey, setLicenseKey] = useState(licenseParam ?? "");
@@ -59,7 +62,29 @@ function ActivatePage() {
 	const [isActivating, setIsActivating] = useState(false);
 	const [activated, setActivated] = useState<{
 		githubUsername: string;
+		planSlug: string;
 	} | null>(null);
+
+	// Guest flow: if unauthenticated and license key present, save + redirect to login
+	useEffect(() => {
+		if (session === undefined) return; // still loading
+		if (session?.user) {
+			// Authenticated: check for pending key from sessionStorage
+			const pending = sessionStorage.getItem(PENDING_KEY);
+			if (pending) {
+				sessionStorage.removeItem(PENDING_KEY);
+				setLicenseKey(pending);
+				setSubmittedKey(pending);
+			}
+			return;
+		}
+		// Not authenticated
+		const keyToSave = licenseParam ?? sessionStorage.getItem(PENDING_KEY);
+		if (keyToSave) {
+			sessionStorage.setItem(PENDING_KEY, keyToSave);
+			navigate({ to: "/login", search: { redirect: "/activate" } });
+		}
+	}, [session, licenseParam, navigate]);
 
 	const { data: purchases, isLoading } = useQuery({
 		...purchasesQueryOptions(),
@@ -91,7 +116,10 @@ function ActivatePage() {
 				}
 			});
 			await queryClient.invalidateQueries({ queryKey: ["purchases"] });
-			setActivated({ githubUsername: result.githubUsername });
+			setActivated({
+				githubUsername: result.githubUsername,
+				planSlug: result.planSlug ?? matchedPurchase.planSlug
+			});
 			toast.success("License activated! GitHub invitation sent.");
 		} catch (err: any) {
 			toast.error(err.message ?? "Activation failed. Please try again.");
@@ -221,7 +249,10 @@ function ActivatePage() {
 							<motion.div
 								initial={{ opacity: 0, y: 8 }}
 								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
+								transition={{
+									duration: 0.4,
+									ease: EASE_OUT_EXPO
+								}}
 								className="rounded-2xl bg-secondary p-2"
 							>
 								<div className="rounded-xl bg-card px-6 py-8 flex flex-col gap-6">
@@ -331,45 +362,85 @@ function ActivatePage() {
 												scale: 0.97
 											}}
 											animate={{ opacity: 1, scale: 1 }}
-											transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
+											transition={{
+												duration: 0.35,
+												ease: EASE_OUT_EXPO
+											}}
 											className="flex flex-col gap-4"
 										>
 											<div className="flex items-center gap-3 text-sm text-muted-foreground">
 												<motion.span
-													initial={{ scale: 0.3, opacity: 0 }}
-													animate={{ scale: 1, opacity: 1 }}
-													transition={{ duration: 0.4, ease: EASE_OUT_EXPO, delay: 0.15 }}
+													initial={{
+														scale: 0.3,
+														opacity: 0
+													}}
+													animate={{
+														scale: 1,
+														opacity: 1
+													}}
+													transition={{
+														duration: 0.4,
+														ease: EASE_OUT_EXPO,
+														delay: 0.15
+													}}
 													className="shrink-0"
 												>
 													<HugeiconsIcon
-														icon={CheckmarkCircle01Icon}
+														icon={
+															CheckmarkCircle01Icon
+														}
 														className="size-4 text-emerald-500"
 													/>
 												</motion.span>
-												GitHub invitation sent to{" "}
+												License activated! GitHub
+												invitation sent to{" "}
 												<span className="font-medium text-foreground">
 													@{activated.githubUsername}
+												</span>{" "}
+												for{" "}
+												<span className="font-medium text-foreground">
+													{planDisplayName(
+														activated.planSlug
+													)}
 												</span>
 												.
 											</div>
-											<Button
-												size="lg"
-												variant="outline"
-												className="h-11 w-fit px-6 text-sm font-medium"
-												asChild
-											>
-												<a
-													href="https://github.com/notifications"
-													target="_blank"
-													rel="noreferrer"
+											<div className="flex gap-3">
+												<Button
+													size="lg"
+													variant="outline"
+													className="h-11 w-fit px-6 text-sm font-medium"
+													asChild
 												>
-													<HugeiconsIcon
-														icon={GithubIcon}
-														className="mr-2 size-4"
-													/>
-													Open GitHub
-												</a>
-											</Button>
+													<a
+														href="https://github.com/notifications"
+														target="_blank"
+														rel="noreferrer"
+													>
+														<HugeiconsIcon
+															icon={GithubIcon}
+															className="mr-2 size-4"
+														/>
+														Open GitHub
+													</a>
+												</Button>
+												<Button
+													size="lg"
+													variant="outline"
+													className="h-11 w-fit px-6 text-sm font-medium"
+													asChild
+												>
+													<Link to="/account/billing">
+														View Purchases
+														<HugeiconsIcon
+															icon={
+																ArrowRight01Icon
+															}
+															className="ml-2 size-4"
+														/>
+													</Link>
+												</Button>
+											</div>
 										</motion.div>
 									)}
 

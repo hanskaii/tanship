@@ -17,7 +17,9 @@ export const ROLE_PERMISSIONS = {
 		"security:manage",
 		"agents:manage",
 		"agents:chat",
-		"templates:access"
+		"templates:access",
+		"purchase:initiate",
+		"license:activate"
 	],
 	user: [
 		"app:use",
@@ -27,7 +29,9 @@ export const ROLE_PERMISSIONS = {
 		"profile:update",
 		"security:manage",
 		"agents:chat",
-		"templates:access"
+		"templates:access",
+		"purchase:initiate",
+		"license:activate"
 	]
 } as const;
 
