@@ -21,8 +21,7 @@ declare namespace Cloudflare {
 		GOOGLE_CLIENT_ID: string;
 		GOOGLE_CLIENT_SECRET: string;
 		SESSION_DOMAIN: string;
-		RESEND_API_KEY: string;
-		RESEND_FROM_EMAIL: string;
+		FROM_EMAIL: string;
 		DODO_PAYMENTS_API_KEY: string;
 		DODO_PAYMENTS_WEBHOOK_SECRET: string;
 		GITHUB_TOKEN: string;
@@ -37,7 +36,7 @@ type StringifyValues<EnvType extends Record<string, unknown>> = {
 	[Binding in keyof EnvType]: EnvType[Binding] extends string ? EnvType[Binding] : string;
 };
 declare namespace NodeJS {
-	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "CORS_ORIGIN" | "VITE_URL" | "R2_BUCKET_NAME" | "APP_NAME" | "APP_ENV" | "BETTER_AUTH_SECRET" | "BETTER_AUTH_URL" | "GOOGLE_CLIENT_ID" | "GOOGLE_CLIENT_SECRET" | "SESSION_DOMAIN" | "RESEND_API_KEY" | "RESEND_FROM_EMAIL" | "DODO_PAYMENTS_API_KEY" | "DODO_PAYMENTS_WEBHOOK_SECRET" | "GITHUB_TOKEN" | "GITHUB_REPO_OWNER" | "GITHUB_REPO_BOILERPLATE" | "GITHUB_REPO_TEMPLATES" | "ADMIN_EMAIL">> {}
+	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "CORS_ORIGIN" | "VITE_URL" | "R2_BUCKET_NAME" | "APP_NAME" | "APP_ENV" | "BETTER_AUTH_SECRET" | "BETTER_AUTH_URL" | "GOOGLE_CLIENT_ID" | "GOOGLE_CLIENT_SECRET" | "SESSION_DOMAIN" | "DODO_PAYMENTS_API_KEY" | "DODO_PAYMENTS_WEBHOOK_SECRET" | "GITHUB_TOKEN" | "GITHUB_REPO_OWNER" | "GITHUB_REPO_BOILERPLATE" | "GITHUB_REPO_TEMPLATES" | "ADMIN_EMAIL">> {}
 }
 
 // Begin runtime types

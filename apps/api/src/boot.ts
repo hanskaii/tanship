@@ -151,7 +151,7 @@ export const boot = () => {
 			if (env?.SEND_EMAIL) {
 				const mailer = createMailer({
 					SEND_EMAIL: env.SEND_EMAIL,
-					RESEND_FROM_EMAIL: env.RESEND_FROM_EMAIL,
+					FROM_EMAIL: env.FROM_EMAIL,
 					APP_NAME: env.APP_NAME
 				});
 				const billingUrl = `${env.BETTER_AUTH_URL}/account/billing`;

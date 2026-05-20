@@ -10,9 +10,7 @@ export const EnvSchema = z.object({
 	GOOGLE_CLIENT_SECRET: z.string().min(1, "GOOGLE_CLIENT_SECRET is required"),
 
 	// Email (Cloudflare Email Workers — SEND_EMAIL is a binding, not an env var)
-	RESEND_FROM_EMAIL: z
-		.string()
-		.email("RESEND_FROM_EMAIL must be a valid email"),
+	FROM_EMAIL: z.string().email("FROM_EMAIL must be a valid email"),
 
 	// Payments
 	DODO_PAYMENTS_API_KEY: z

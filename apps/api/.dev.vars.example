@@ -7,8 +7,7 @@ BETTER_AUTH_URL=http://localhost:8787
 GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 
-RESEND_API_KEY=re_your_resend_api_key
-RESEND_FROM_EMAIL=noreply@yourdomain.com
+FROM_EMAIL=noreply@yourdomain.com
 
 DODO_PAYMENTS_API_KEY=your-dodo-payments-api-key
 DODO_PAYMENTS_WEBHOOK_SECRET=your-dodo-webhook-secret
