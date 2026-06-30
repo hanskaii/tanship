@@ -11,7 +11,7 @@ export const appConfig = {
 		{
 			productId: "pdt_0NckxDjwzwWTyMiEdEb7y",
 			slug: "tanship",
-			name: "Tanship",
+			name: "Tanship Standard",
 			description:
 				"Full boilerplate with everything you need to ship an edge-native SaaS.",
 			price: "$99",
@@ -30,9 +30,9 @@ export const appConfig = {
 				"Turborepo monorepo setup",
 				"Lifetime updates via GitHub"
 			],
-			cta: "Buy Tanship — $99",
+			cta: "Get Standard",
 			popular: false,
-			footer: "One-time payment. GitHub repo access included."
+			footer: "One-time payment. Lifetime access. No subscriptions."
 		},
 		{
 			productId: "pdt_tanship_pro_replace_me",
@@ -53,9 +53,9 @@ export const appConfig = {
 				"Priority email support",
 				"Early access to new templates"
 			],
-			cta: "Buy Tanship Pro — $299",
+			cta: "Get Pro",
 			popular: true,
-			footer: "One-time payment. All current + future templates."
+			footer: "One-time payment. Lifetime access. No subscriptions."
 		},
 		// ── Individual templates ─────────────────────────────────────────
 		{
