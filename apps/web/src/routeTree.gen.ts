@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as OgRouteImport } from './routes/og'
 import { Route as appRouteRouteImport } from './routes/(app)/route'
 import { Route as appHomeRouteRouteImport } from './routes/(app)/_home/route'
 import { Route as appAuthRouteRouteImport } from './routes/(app)/_auth/route'
@@ -36,6 +37,11 @@ import { Route as appAdminSShowcaseIndexRouteImport } from './routes/(app)/_admi
 import { Route as appAdminSOverviewIndexRouteImport } from './routes/(app)/_admin/s/overview/index'
 import { Route as appAdminSEventsIndexRouteImport } from './routes/(app)/_admin/s/events/index'
 
+const OgRoute = OgRouteImport.update({
+  id: '/og',
+  path: '/og',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const appRouteRoute = appRouteRouteImport.update({
   id: '/(app)',
   getParentRoute: () => rootRouteImport,
@@ -169,6 +175,7 @@ const appAdminSEventsIndexRoute = appAdminSEventsIndexRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/og': typeof OgRoute
   '/account': typeof appAppAccountRouteRouteWithChildren
   '/login': typeof appAuthLoginRoute
   '/': typeof appHomeIndexRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByFullPath {
   '/showcase/submit/': typeof appHomeShowcaseSubmitIndexRoute
 }
 export interface FileRoutesByTo {
+  '/og': typeof OgRoute
   '/account': typeof appAppAccountRouteRouteWithChildren
   '/login': typeof appAuthLoginRoute
   '/': typeof appHomeIndexRoute
@@ -217,6 +225,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(app)': typeof appRouteRouteWithChildren
+  '/og': typeof OgRoute
   '/(app)/_admin': typeof appAdminRouteRouteWithChildren
   '/(app)/_app': typeof appAppRouteRouteWithChildren
   '/(app)/_auth': typeof appAuthRouteRouteWithChildren
@@ -246,6 +255,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/og'
     | '/account'
     | '/login'
     | '/'
@@ -269,6 +279,7 @@ export interface FileRouteTypes {
     | '/showcase/submit/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/og'
     | '/account'
     | '/login'
     | '/'
@@ -293,6 +304,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/(app)'
+    | '/og'
     | '/(app)/_admin'
     | '/(app)/_app'
     | '/(app)/_auth'
@@ -322,10 +334,18 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   appRouteRoute: typeof appRouteRouteWithChildren
+  OgRoute: typeof OgRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/og': {
+      id: '/og'
+      path: '/og'
+      fullPath: '/og'
+      preLoaderRoute: typeof OgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(app)': {
       id: '/(app)'
       path: ''
@@ -622,6 +642,7 @@ const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   appRouteRoute: appRouteRouteWithChildren,
+  OgRoute: OgRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

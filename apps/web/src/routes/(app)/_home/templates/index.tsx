@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { Badge, Button, Spinner } from "@workspace/ui";
 import { motion } from "framer-motion";
 import { EASE_OUT_EXPO } from "../-lib/motion";
@@ -21,6 +22,14 @@ import { FooterSection } from "../-components/footer-section";
 import { HireSection } from "../-components/hire-section";
 
 export const Route = createFileRoute("/(app)/_home/templates/")({
+	head: () =>
+		seo({
+			title: "Templates",
+			description:
+				"Production-ready templates built on the Tanship stack — SaaS dashboards, marketing sites, docs, APIs, and more. Buy individually at $99 or unlock all with Tanship Pro.",
+			path: "/templates",
+			ogEyebrow: "Templates"
+		}),
 	component: TemplatesPage
 });
 
@@ -235,7 +244,11 @@ function TemplatesPage() {
 								key={template.id}
 								initial={{ opacity: 0, y: 20 }}
 								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.4, delay: 0.05 * i, ease: EASE_OUT_EXPO }}
+								transition={{
+									duration: 0.4,
+									delay: 0.05 * i,
+									ease: EASE_OUT_EXPO
+								}}
 							>
 								<TemplateCard
 									template={template}
@@ -265,7 +278,11 @@ function TemplatesPage() {
 					<motion.section
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5, delay: 0.3, ease: EASE_OUT_EXPO }}
+						transition={{
+							duration: 0.5,
+							delay: 0.3,
+							ease: EASE_OUT_EXPO
+						}}
 						className="w-full"
 					>
 						<div className="rounded-2xl bg-secondary p-2">

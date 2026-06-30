@@ -2,8 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { FooterSection } from "../-components/footer-section";
 import { motion } from "framer-motion";
 import { EASE_OUT_EXPO } from "../-lib/motion";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/(app)/_home/legals/privacy-policy")({
+	head: () =>
+		seo({
+			title: "Privacy Policy",
+			description:
+				"How Tanship collects, uses, and protects your personal data.",
+			path: "/legals/privacy-policy",
+			ogEyebrow: "Legal"
+		}),
 	component: RouteComponent
 });
 

@@ -12,8 +12,17 @@ import { FooterSection } from "../-components/footer-section";
 import { Fragment } from "react/jsx-runtime";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE_OUT_EXPO } from "../-lib/motion";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/(app)/_home/contact/")({
+	head: () =>
+		seo({
+			title: "Contact",
+			description:
+				"Get in touch with the Tanship team. Documentation, Telegram community, and direct email support.",
+			path: "/contact",
+			ogEyebrow: "Contact"
+		}),
 	component: ContactPage
 });
 

@@ -15,8 +15,17 @@ import {
 	type ShowcaseItem
 } from "@/routes/-fn/showcase";
 import { FooterSection } from "../-components/footer-section";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/(app)/_home/showcase/")({
+	head: () =>
+		seo({
+			title: "Showcase",
+			description:
+				"Real products shipped with Tanship. See what builders are launching on the edge-native TanStack Start + Cloudflare stack.",
+			path: "/showcase",
+			ogEyebrow: "Showcase"
+		}),
 	component: ShowcasePage
 });
 

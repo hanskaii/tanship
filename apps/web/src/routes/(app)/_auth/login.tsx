@@ -6,6 +6,7 @@ import { LoginForm } from "./-components/login-form";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft01Icon } from "@hugeicons/core-free-icons";
 import { buttonVariants } from "@workspace/ui";
+import { seo } from "@/lib/seo";
 
 const loginSearchSchema = z.object({
 	redirect: z.string().optional()
@@ -14,12 +15,13 @@ const loginSearchSchema = z.object({
 export const Route = createFileRoute("/(app)/_auth/login")({
 	validateSearch: loginSearchSchema,
 	component: LoginPage,
-	head: () => ({
-		meta: [
-			{ title: "Sign in — Tanship" },
-			{ name: "description", content: "Sign in to your Tanship account." }
-		]
-	})
+	head: () =>
+		seo({
+			title: "Sign in",
+			description: "Sign in to your Tanship account.",
+			path: "/login",
+			noindex: true
+		})
 });
 
 function LoginPage() {
