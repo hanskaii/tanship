@@ -25,7 +25,7 @@ export interface AuthEnv {
 	GOOGLE_CLIENT_ID: string;
 	GOOGLE_CLIENT_SECRET: string;
 	SEND_EMAIL: SendEmail;
-	RESEND_FROM_EMAIL: string;
+	FROM_EMAIL: string;
 	APP_NAME: string;
 	APP_ENV: string;
 	CORS_ORIGIN?: string;
@@ -35,14 +35,12 @@ export interface AuthEnv {
 }
 
 export const getAuth = (env: AuthEnv) => {
-	const mailer =
-		env.APP_ENV === "production"
-			? createMailer({
-					SEND_EMAIL: env.SEND_EMAIL,
-					RESEND_FROM_EMAIL: env.RESEND_FROM_EMAIL,
-					APP_NAME: env.APP_NAME
-				})
-			: null;
+	const mailer = createMailer({
+		SEND_EMAIL: env.SEND_EMAIL,
+		FROM_EMAIL: env.FROM_EMAIL,
+		APP_NAME: env.APP_NAME
+	});
+
 	return betterAuth({
 		database: drizzleAdapter(database(env.DATABASE), {
 			provider: "sqlite",
@@ -105,15 +103,8 @@ export const getAuth = (env: AuthEnv) => {
 			}),
 			emailOTP({
 				async sendVerificationOTP({ email, otp, type }) {
-					if (env.APP_ENV === "development") {
-						console.log(
-							`[OTP] Sending verification code to ${email}: ${otp}`
-						);
-						return;
-					}
-
 					if (type === "sign-in") {
-						await mailer!.sendOTP(email, otp);
+						await mailer.sendOTP(email, otp);
 					}
 				}
 			}),

@@ -6,6 +6,7 @@ import { ApiError } from "../helpers/errors.helper";
 import { ApiResponse } from "../helpers/response.helper";
 import type { HonoEnv } from "../types/hono.types";
 import { purchases, eq, and, isNull } from "@workspace/database";
+import { Gate } from "@workspace/core";
 
 const GithubUsernameSchema = z
 	.string()
@@ -171,6 +172,14 @@ const githubHandler = new Hono<HonoEnv>()
 			throw ApiError.badRequest(
 				"License key not found or already activated"
 			);
+		}
+
+		const gateResult = await Gate.can("license.activate", {
+			actor: user,
+			resource: { userId: purchase.userId ?? "" }
+		});
+		if (!gateResult.allowed) {
+			throw ApiError.forbidden(gateResult.message ?? "Not your license.");
 		}
 
 		// Template purchases don't use GitHub — they download directly

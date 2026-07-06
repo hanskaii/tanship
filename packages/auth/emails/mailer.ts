@@ -11,12 +11,12 @@ import { otpEmailTemplate } from "./templates/otp";
 interface MailerEnv {
 	/** Cloudflare Email Workers send_email binding */
 	SEND_EMAIL: SendEmail;
-	RESEND_FROM_EMAIL: string;
+	FROM_EMAIL: string;
 	APP_NAME: string;
 }
 
 export const createMailer = (env: MailerEnv) => {
-	const from = `${env.APP_NAME} <${env.RESEND_FROM_EMAIL}>`;
+	const from = `${env.APP_NAME} <${env.FROM_EMAIL}>`;
 
 	const send = (to: string, subject: string, html: string) =>
 		env.SEND_EMAIL.send({ from, to, subject, html });

@@ -42,13 +42,13 @@
 	],
 	"vars": {
 		// Production values — for local dev, override via apps/api/.dev.vars
-		"APP_ENV": "production",
+		"APP_ENV": "development",
 		"APP_NAME": "tanship",
 		"BETTER_AUTH_URL": "https://api.tanship.dev",
 		"CORS_ORIGIN": "https://tanship.dev",
 		"VITE_URL": "https://tanship.dev",
 		"SESSION_DOMAIN": "tanship.dev",
-		"RESEND_FROM_EMAIL": "no-reply@mixetape.com",
+		"FROM_EMAIL": "no-reply@tanship.dev",
 		"R2_BUCKET_NAME": "tanship",
 		"GITHUB_REPO_OWNER": "hanskaii",
 		"GITHUB_REPO_BOILERPLATE": "tanship"

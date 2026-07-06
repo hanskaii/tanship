@@ -35,7 +35,7 @@ export const appConfig = {
 			footer: "One-time payment. Lifetime access. No subscriptions."
 		},
 		{
-			productId: "pdt_tanship_pro_replace_me",
+			productId: "pdt_0NckxPorlzacS6mGIUiXc",
 			slug: "tanship-pro",
 			name: "Tanship Pro",
 			description:

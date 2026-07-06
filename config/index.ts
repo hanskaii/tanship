@@ -3,6 +3,7 @@ import { UserPolicy } from "./policies/user";
 import { AccountPolicy } from "./policies/account";
 import { AppPolicy } from "./policies/app";
 import { TemplatesPolicy } from "./policies/templates";
+import { PurchasePolicy } from "./policies/purchase";
 
 /**
  * Extend GateActions with app-specific policy action types.
@@ -14,7 +15,8 @@ declare module "@workspace/core" {
 			InferPolicyActions<typeof UserPolicy>,
 			InferPolicyActions<typeof AccountPolicy>,
 			InferPolicyActions<typeof AppPolicy>,
-			InferPolicyActions<typeof TemplatesPolicy> {}
+			InferPolicyActions<typeof TemplatesPolicy>,
+			InferPolicyActions<typeof PurchasePolicy> {}
 }
 
 /**
@@ -25,7 +27,8 @@ Gate.policies({
 	user: UserPolicy,
 	account: AccountPolicy,
 	app: AppPolicy,
-	templates: TemplatesPolicy
+	templates: TemplatesPolicy,
+	purchase: PurchasePolicy
 });
 
 export * from "./app";
@@ -34,3 +37,4 @@ export * from "./policies/user";
 export * from "./policies/account";
 export * from "./policies/app";
 export * from "./policies/templates";
+export * from "./policies/purchase";
