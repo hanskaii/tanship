@@ -2,8 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { FooterSection } from "../-components/footer-section";
 import { motion } from "framer-motion";
 import { EASE_OUT_EXPO } from "../-lib/motion";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/(app)/_home/legals/terms")({
+	head: () =>
+		seo({
+			title: "Terms of Service",
+			description:
+				"The terms and conditions that govern your use of Tanship.",
+			path: "/legals/terms",
+			ogEyebrow: "Legal"
+		}),
 	component: RouteComponent
 });
 

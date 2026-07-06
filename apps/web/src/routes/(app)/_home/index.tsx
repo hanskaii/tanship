@@ -35,7 +35,7 @@ const JSON_LD = {
 			"@id": `${SITE_URL}/#organization`,
 			name: SITE_NAME,
 			url: SITE_URL,
-			logo: `${SITE_URL}/logo512.png`,
+			logo: `${SITE_URL}/icon-512.png`,
 			sameAs: ["https://twitter.com/tanship"]
 		},
 		{

@@ -6,5 +6,7 @@ Disallow: /overview
 Disallow: /account/
 Disallow: /s/
 Disallow: /activate
+Disallow: /upgrade
+Disallow: /og
 
 Sitemap: https://tanship.dev/sitemap.xml

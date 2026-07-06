@@ -97,6 +97,7 @@ export function seo(args: SeoArgs = {}): {
 
 		// Open Graph
 		{ property: "og:type", content: "website" },
+		{ property: "og:locale", content: "en_US" },
 		{ property: "og:site_name", content: SITE_NAME },
 		{ property: "og:title", content: title },
 		{ property: "og:description", content: description },
@@ -111,6 +112,7 @@ export function seo(args: SeoArgs = {}): {
 		{ name: "twitter:title", content: title },
 		{ name: "twitter:description", content: description },
 		{ name: "twitter:image", content: image },
+		{ name: "twitter:image:alt", content: title },
 		{ name: "twitter:site", content: TWITTER_HANDLE },
 		{ name: "twitter:creator", content: TWITTER_HANDLE }
 	];
