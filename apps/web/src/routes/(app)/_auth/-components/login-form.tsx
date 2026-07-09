@@ -22,6 +22,7 @@ import {
 import { Fragment, useEffect, useRef, useState } from "react";
 import z from "zod";
 import { authClient } from "@/auth/client";
+import { analytics } from "@/lib/analytics";
 import { appConfig } from "@workspace/config";
 
 type Step = "email" | "otp";
@@ -66,6 +67,7 @@ export function LoginForm({ redirectTo }: { redirectTo?: string }) {
 			}
 			setStep("otp");
 			startCountdown();
+			analytics.capture("login_started", { method: "email-otp" });
 			toast.success("Verification code sent to your email");
 		},
 		onError: (error: { error?: { message?: string } }) => {
@@ -84,6 +86,7 @@ export function LoginForm({ redirectTo }: { redirectTo?: string }) {
 				return;
 			}
 			toast.success("Successfully signed in");
+			analytics.capture("user_signed_in", { method: "email-otp" });
 			if (response?.data)
 				queryClient.setQueryData(["user"], response.data);
 			window.location.href = redirectTo || appConfig.authDefaultRedirect;
@@ -123,6 +126,7 @@ export function LoginForm({ redirectTo }: { redirectTo?: string }) {
 			const callbackURL = redirectTo
 				? `${import.meta.env.VITE_URL}${redirectTo}`
 				: `${import.meta.env.VITE_URL}${appConfig.authDefaultRedirect}`;
+			analytics.capture("login_started", { method: "google" });
 			return authClient.signIn.social({ provider, callbackURL });
 		},
 		onError: (error: { error?: { message?: string } }, variables) => {

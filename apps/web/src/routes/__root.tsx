@@ -9,6 +9,7 @@ import { DefaultErrorComponent } from "./-components/default-error-component";
 import { DefaultNotFoundComponent } from "./-components/default-notfound-component";
 import { DefaultPendingComponent } from "./-components/default-pending-components";
 import { RootProvider } from "fumadocs-ui/provider/tanstack";
+import { AnalyticsProvider } from "@/lib/analytics/provider";
 import { seo, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export interface RouterAppContext {
@@ -85,7 +86,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				<RootProvider>{children}</RootProvider>
+				<AnalyticsProvider>
+					<RootProvider>{children}</RootProvider>
+				</AnalyticsProvider>
 				<Scripts />
 			</body>
 		</html>

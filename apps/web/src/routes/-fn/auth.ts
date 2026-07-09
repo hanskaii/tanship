@@ -6,6 +6,7 @@ import { toast } from "@workspace/ui";
 import type { Session, User } from "@workspace/auth";
 import { useState } from "react";
 import { authClient } from "@/auth/client";
+import { analytics } from "@/lib/analytics";
 import { getApi, postApi, createApiClient } from "@/routes/-fn/api-client";
 
 const SESSION_STALE_TIME = 1000 * 60 * 5;
@@ -102,6 +103,7 @@ export const useLogoutMutation = () => {
 		setIsPending(true);
 		try {
 			await authClient.signOut();
+			analytics.reset();
 			queryClient.clear();
 			await router.navigate({ to: "/login" });
 			toast.success("Logged out successfully");

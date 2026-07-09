@@ -12,6 +12,7 @@ import {
 	Search01Icon
 } from "@hugeicons/core-free-icons";
 import { authClient } from "@/auth/client";
+import { analytics } from "@/lib/analytics";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { toast } from "@workspace/ui";
@@ -119,6 +120,9 @@ function ActivatePage() {
 			setActivated({
 				githubUsername: result.githubUsername,
 				planSlug: result.planSlug ?? matchedPurchase.planSlug
+			});
+			analytics.capture("license_activated", {
+				plan: result.planSlug ?? matchedPurchase.planSlug
 			});
 			toast.success("License activated! GitHub invitation sent.");
 		} catch (err: any) {

@@ -14,6 +14,7 @@ import {
 } from "@tanstack/react-query";
 import { Gate } from "@workspace/core";
 import { authClient } from "@/auth/client";
+import { analytics } from "@/lib/analytics";
 import {
 	accountsListOptions,
 	sessionsListOptions,
@@ -106,6 +107,7 @@ function SecurityPageContent() {
 			return true;
 		},
 		onSuccess: () => {
+			analytics.reset();
 			queryClient.clear();
 			router.navigate({ to: "/" });
 		},

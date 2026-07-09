@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import { EASE_OUT_EXPO } from "@/routes/(app)/_home/-lib/motion";
 import { Plans } from "@/routes/(app)/_home/-components/pricing-section";
 import { sessionsOptions, useLogoutMutation } from "@/routes/-fn/auth";
+import { analytics } from "@/lib/analytics";
 import { Gate } from "@workspace/core";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/(app)/_home/upgrade/")({
 	beforeLoad: async ({ context }) => {
@@ -31,6 +33,10 @@ function UpgradePage() {
 		session: { user }
 	} = Route.useRouteContext();
 	const { logout, isPending: isLogoutPending } = useLogoutMutation();
+
+	useEffect(() => {
+		analytics.capture("upgrade_page_viewed");
+	}, []);
 
 	return (
 		<main className="grid gap-6 px-4 sm:px-6 pb-32 pt-24">
