@@ -1,5 +1,6 @@
 import type { RoutesConfig } from "@x402/core/server";
 import type { Network } from "@x402/hono";
+import { declareDiscoveryExtension } from "@x402/extensions/bazaar";
 
 import type { NetworkDef } from "@/networks";
 
@@ -10,7 +11,10 @@ export interface ServiceDef {
 	price: string;
 	description: string;
 	mimeType: string;
+	/** Human-readable field docs, surfaced by GET /v1/services. */
 	input: Record<string, string>;
+	/** Example request body — powers Bazaar discovery so agents can call it. */
+	example: Record<string, unknown>;
 }
 
 /**
@@ -32,6 +36,11 @@ export const SERVICES: ServiceDef[] = [
 				"Array of { role: system|user|assistant, content: string }",
 			model: "Optional model id from the allowlist",
 			max_tokens: "Optional max output tokens (default 1024)"
+		},
+		example: {
+			messages: [
+				{ role: "user", content: "Explain x402 in one sentence." }
+			]
 		}
 	},
 	{
@@ -45,6 +54,9 @@ export const SERVICES: ServiceDef[] = [
 		input: {
 			prompt: "Image description",
 			steps: "Optional diffusion steps 1-8 (default 4)"
+		},
+		example: {
+			prompt: "a red panda coding on a laptop, studio ghibli style"
 		}
 	},
 	{
@@ -57,7 +69,8 @@ export const SERVICES: ServiceDef[] = [
 		mimeType: "application/json",
 		input: {
 			text: "A string or array of strings (max 100)"
-		}
+		},
+		example: { text: ["hello world", "hola mundo"] }
 	},
 	{
 		id: "browser.screenshot",
@@ -72,7 +85,8 @@ export const SERVICES: ServiceDef[] = [
 			fullPage: "Optional boolean (default false)",
 			width: "Optional viewport width (default 1280)",
 			height: "Optional viewport height (default 800)"
-		}
+		},
+		example: { url: "https://example.com", fullPage: true }
 	},
 	{
 		id: "browser.pdf",
@@ -83,7 +97,8 @@ export const SERVICES: ServiceDef[] = [
 		mimeType: "application/pdf",
 		input: {
 			url: "Page URL"
-		}
+		},
+		example: { url: "https://example.com" }
 	},
 	{
 		id: "browser.markdown",
@@ -95,7 +110,8 @@ export const SERVICES: ServiceDef[] = [
 		mimeType: "application/json",
 		input: {
 			url: "Page URL"
-		}
+		},
+		example: { url: "https://example.com" }
 	},
 	{
 		id: "browser.snapshot",
@@ -107,7 +123,8 @@ export const SERVICES: ServiceDef[] = [
 		mimeType: "application/json",
 		input: {
 			url: "Page URL"
-		}
+		},
+		example: { url: "https://example.com" }
 	},
 	{
 		id: "browser.scrape",
@@ -120,6 +137,10 @@ export const SERVICES: ServiceDef[] = [
 		input: {
 			url: "Page URL",
 			selectors: "Array of CSS selectors (max 20)"
+		},
+		example: {
+			url: "https://news.ycombinator.com",
+			selectors: [".titleline > a"]
 		}
 	},
 	{
@@ -134,6 +155,10 @@ export const SERVICES: ServiceDef[] = [
 			url: "Page URL",
 			prompt: "What to extract, in plain language",
 			schema: "Optional JSON Schema for the response shape"
+		},
+		example: {
+			url: "https://example.com",
+			prompt: "Extract the page title and main heading"
 		}
 	},
 	{
@@ -146,7 +171,8 @@ export const SERVICES: ServiceDef[] = [
 		mimeType: "application/json",
 		input: {
 			url: "Page URL"
-		}
+		},
+		example: { url: "https://example.com" }
 	},
 	{
 		id: "browser.rss",
@@ -159,7 +185,8 @@ export const SERVICES: ServiceDef[] = [
 		input: {
 			url: "Page URL",
 			limit: "Optional max items (default 20)"
-		}
+		},
+		example: { url: "https://blog.cloudflare.com", limit: 20 }
 	}
 ];
 
@@ -179,7 +206,13 @@ export function buildRoutesConfig(
 					payTo: network.namespace === "solana" ? svmPayTo! : evmPayTo
 				})),
 				description: service.description,
-				mimeType: service.mimeType
+				mimeType: service.mimeType,
+				// Bazaar discovery: lets the facilitator catalog this endpoint
+				// (input shape + method) once a payment settles for it.
+				extensions: declareDiscoveryExtension({
+					bodyType: "json",
+					input: service.example
+				})
 			}
 		])
 	) as RoutesConfig;

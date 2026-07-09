@@ -111,6 +111,9 @@ importers:
       '@x402/evm':
         specifier: ^2.17.0
         version: 2.17.0(typescript@5.9.3)
+      '@x402/extensions':
+        specifier: ^2.17.0
+        version: 2.17.0(typescript@5.9.3)
       '@x402/hono':
         specifier: ^2.17.0
         version: 2.17.0(hono@4.12.14)(typescript@5.9.3)
@@ -8738,7 +8741,7 @@ snapshots:
   '@libsql/isomorphic-ws@0.1.5':
     dependencies:
       '@types/ws': 8.18.1
-      ws: 8.20.0
+      ws: 8.21.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -9939,7 +9942,7 @@ snapshots:
 
   '@scure/bip32@1.7.0':
     dependencies:
-      '@noble/curves': 1.9.1
+      '@noble/curves': 1.9.7
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
 

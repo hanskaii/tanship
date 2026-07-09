@@ -9,6 +9,7 @@ import { HTTPFacilitatorClient } from "@x402/core/server";
 import { convertToTokenAmount, numberToDecimalString } from "@x402/core/utils";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { ExactSvmScheme } from "@x402/svm/exact/server";
+import { bazaarResourceServerExtension } from "@x402/extensions/bazaar";
 
 import { buildRoutesConfig } from "@/catalog";
 import { CUSTOM_STABLECOINS, hasAssetFor } from "@/assets";
@@ -60,6 +61,8 @@ export const x402 = createMiddleware<HonoEnv>(async (c, next) => {
 		const svmScheme = new ExactSvmScheme();
 
 		const resourceServer = new x402ResourceServer(facilitator);
+		// Enables Bazaar discovery metadata declared per-route in catalog.ts
+		resourceServer.registerExtension(bazaarResourceServerExtension);
 		for (const network of networks) {
 			resourceServer.register(
 				network.caip2 as Network,

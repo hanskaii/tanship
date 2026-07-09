@@ -84,6 +84,19 @@ curl -s -X POST https://console.tanflare.com/v1/ai/chat \
 # → 402 with accepts[] payment requirements (one entry per network)
 ```
 
+## Discoverability (Bazaar)
+
+Every route declares the [x402 Bazaar](https://docs.payai.network) discovery extension (`@x402/extensions/bazaar`), so the endpoint is machine-discoverable by AI agents. The 402 challenge carries an `extensions.bazaar` payload (input shape + method) built from each service's `example` in `src/catalog.ts`.
+
+There is **no separate registration step** — the facilitator catalogs the endpoint the first time a payment settles for that URL. After ≥1 successful settlement through PayAI, the service appears in the PayAI discovery index:
+
+```bash
+curl -s "https://facilitator.payai.network/discovery/resources?limit=50" \
+  | jq '.items[] | select(.resource | contains("console.tanflare.com"))'
+```
+
+To give agents richer metadata, edit the per-service `example` (request body) in `src/catalog.ts` — that shape is what shows up as `inputSchema` in the index.
+
 ## Adding a new paid endpoint
 
 1. Add the service to `src/catalog.ts` (price, path, description) — middleware pricing and `/v1/services` both derive from it.
