@@ -1,0 +1,16 @@
+APP_ENV=development
+
+# Wallet that receives x402 payments on EVM networks
+PAY_TO_ADDRESS=0xYourReceivingAddress
+# Optional: Solana wallet — Solana networks are only offered when this is set
+# SVM_PAY_TO_ADDRESS=YourSolanaAddress
+
+# Comma-separated network slugs or CAIP-2 ids (see src/networks.ts)
+X402_NETWORKS=arbitrum,arbitrum-sepolia,avalanche,avalanche-fuji,base,base-sepolia,polygon,polygon-amoy,sei,sei-testnet,skale-base,skale-base-sepolia,solana,solana-devnet,xlayer,xlayer-testnet
+# PayAI facilitator — supports every network above
+FACILITATOR_URL=https://facilitator.payai.network
+
+# Cloudflare Browser Rendering REST API credentials
+# Token needs the "Browser Rendering:Edit" permission
+CLOUDFLARE_ACCOUNT_ID=your-cloudflare-account-id
+CLOUDFLARE_API_TOKEN=your-cloudflare-api-token
