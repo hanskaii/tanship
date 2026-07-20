@@ -249,6 +249,21 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://x402.tanship.dev/assets/sample.mp3"
 		}
+	},
+	{
+		id: "ai.describe",
+		method: "POST",
+		path: "/v1/ai/describe",
+		price: "$0.005",
+		description:
+			"Describe or caption any image via Workers AI (BLIP), returns description text",
+		mimeType: "application/json",
+		input: {
+			url: "Absolute URL to the image file to describe"
+		},
+		example: {
+			url: "https://x402.tanship.dev/assets/sample.jpg"
+		}
 	}
 ];
 

@@ -17,6 +17,7 @@ const IMAGE_MODEL = "@cf/black-forest-labs/flux-1-schnell";
 const TRANSLATION_MODEL = "@cf/meta/m2m100-1.2b";
 const SENTIMENT_MODEL = "@cf/huggingface/distilbert-sst-2-int8";
 const TRANSCRIBE_MODEL = "@cf/openai/whisper";
+const DESCRIBE_MODEL = "@cf/salesforce/blip-image-captioning-large";
 
 const ChatSchema = z.object({
 	messages: z
@@ -55,6 +56,10 @@ const SentimentSchema = z.object({
 });
 
 const TranscribeSchema = z.object({
+	url: z.string().url()
+});
+
+const DescribeSchema = z.object({
 	url: z.string().url()
 });
 
@@ -161,6 +166,28 @@ const aiHandler = new Hono<HonoEnv>()
 			word_count: result.word_count ?? 0,
 			words: result.words ?? [],
 			vtt: result.vtt ?? ""
+		});
+	})
+	.post("/describe", zValidator("json", DescribeSchema), async (c) => {
+		const { url } = c.req.valid("json");
+
+		const imageRes = await fetch(url);
+		if (!imageRes.ok) {
+			throw ApiError.badRequest(
+				`Failed to fetch image from URL: ${imageRes.statusText}`
+			);
+		}
+
+		const blob = await imageRes.arrayBuffer();
+		const image = Array.from(new Uint8Array(blob));
+
+		const result = (await c.env.AI.run(DESCRIBE_MODEL as any, {
+			image
+		})) as any;
+
+		return ApiResponse.ok(c, "Image description completed", {
+			model: DESCRIBE_MODEL,
+			result: result ?? null
 		});
 	});
 
