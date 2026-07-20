@@ -14,6 +14,7 @@ const CHAT_MODELS = [
 
 const EMBEDDING_MODEL = "@cf/baai/bge-m3";
 const IMAGE_MODEL = "@cf/black-forest-labs/flux-1-schnell";
+const TRANSLATION_MODEL = "@cf/meta/m2m100-1.2b";
 
 const ChatSchema = z.object({
 	messages: z
@@ -39,6 +40,12 @@ const EmbeddingsSchema = z.object({
 		z.string().min(1).max(10_000),
 		z.array(z.string().min(1).max(10_000)).min(1).max(100)
 	])
+});
+
+const TranslationSchema = z.object({
+	text: z.string().min(1).max(10_000),
+	source_lang: z.string().min(2).max(10).optional(),
+	target_lang: z.string().min(2).max(10)
 });
 
 const aiHandler = new Hono<HonoEnv>()
@@ -88,6 +95,20 @@ const aiHandler = new Hono<HonoEnv>()
 			count: embeddings.length,
 			dimensions: embeddings[0]?.length ?? 0,
 			embeddings
+		});
+	})
+	.post("/translate", zValidator("json", TranslationSchema), async (c) => {
+		const { text, source_lang, target_lang } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(TRANSLATION_MODEL as any, {
+			text,
+			source_lang,
+			target_lang
+		})) as { translated_text?: string };
+
+		return ApiResponse.ok(c, "Translation completed", {
+			model: TRANSLATION_MODEL,
+			translatedText: result.translated_text ?? ""
 		});
 	});
 

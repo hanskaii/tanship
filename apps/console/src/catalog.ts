@@ -73,6 +73,24 @@ export const SERVICES: ServiceDef[] = [
 		example: { text: ["hello world", "hola mundo"] }
 	},
 	{
+		id: "ai.translate",
+		method: "POST",
+		path: "/v1/ai/translate",
+		price: "$0.003",
+		description: "AI-powered translation via Workers AI (m2m100-1.2b)",
+		mimeType: "application/json",
+		input: {
+			text: "Text to translate",
+			source_lang: "Optional source language code (e.g. en, es, fr)",
+			target_lang: "Target language code (e.g. id, es, ja)"
+		},
+		example: {
+			text: "Hello world, how are you?",
+			source_lang: "en",
+			target_lang: "id"
+		}
+	},
+	{
 		id: "browser.screenshot",
 		method: "POST",
 		path: "/v1/browser/screenshot",
