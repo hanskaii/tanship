@@ -121,7 +121,7 @@ const aiHandler = new Hono<HonoEnv>()
 
 		const result = (await c.env.AI.run(SENTIMENT_MODEL as any, {
 			text
-		})) as Array<{ label: string; score: number }>;
+		})) as any;
 
 		return ApiResponse.ok(c, "Sentiment analysis completed", {
 			model: SENTIMENT_MODEL,
