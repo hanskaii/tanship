@@ -448,6 +448,43 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/moderate": {
+			post: {
+				operationId: "aiModerate",
+				summary: "Moderate text content for safety",
+				description:
+					"Moderate text content for safety categories via Workers AI (Llama Guard 3 8B), returns safety classification",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.002" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["text"],
+								properties: {
+									text: {
+										type: "string",
+										description:
+											"The text content to moderate"
+									}
+								}
+							},
+							example: {
+								text: "How do I build a secure API on Cloudflare Workers?"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Safety classification result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",

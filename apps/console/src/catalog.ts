@@ -302,6 +302,21 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://x402.tanship.dev/assets/sample.jpg"
 		}
+	},
+	{
+		id: "ai.moderate",
+		method: "POST",
+		path: "/v1/ai/moderate",
+		price: "$0.002",
+		description:
+			"Moderate text content for safety categories via Workers AI (Llama Guard 3 8B), returns safety classification",
+		mimeType: "application/json",
+		input: {
+			text: "The text content to moderate"
+		},
+		example: {
+			text: "How do I build a secure API on Cloudflare Workers?"
+		}
 	}
 ];
 

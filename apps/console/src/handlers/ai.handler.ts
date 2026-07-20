@@ -20,6 +20,7 @@ const TRANSCRIBE_MODEL = "@cf/openai/whisper";
 const DESCRIBE_MODEL = "@cf/salesforce/blip-image-captioning-large";
 const RERANK_MODEL = "@cf/baai/bge-reranker-large";
 const CLASSIFY_MODEL = "@cf/microsoft/resnet-50";
+const MODERATE_MODEL = "@cf/meta/llama-guard-3-8b";
 
 const ChatSchema = z.object({
 	messages: z
@@ -73,6 +74,10 @@ const RerankSchema = z.object({
 
 const ClassifySchema = z.object({
 	url: z.string().url()
+});
+
+const ModerateSchema = z.object({
+	text: z.string().min(1).max(10_000)
 });
 
 const aiHandler = new Hono<HonoEnv>()
@@ -236,6 +241,29 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Image classification completed", {
 			model: CLASSIFY_MODEL,
 			result: result ?? []
+		});
+	})
+	.post("/moderate", zValidator("json", ModerateSchema), async (c) => {
+		const { text } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(MODERATE_MODEL as any, {
+			messages: [{ role: "user", content: text }]
+		})) as any;
+
+		const responseText = result.response ?? "safe";
+		const safe = responseText.trim().toLowerCase().startsWith("safe");
+
+		return ApiResponse.ok(c, "Content moderation completed", {
+			model: MODERATE_MODEL,
+			safe,
+			flaggedCategories: safe
+				? []
+				: responseText
+						.split("\n")
+						.slice(1)
+						.map((s: string) => s.trim())
+						.filter(Boolean),
+			response: responseText
 		});
 	});
 
