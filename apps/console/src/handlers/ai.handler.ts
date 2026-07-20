@@ -19,6 +19,7 @@ const SENTIMENT_MODEL = "@cf/huggingface/distilbert-sst-2-int8";
 const TRANSCRIBE_MODEL = "@cf/openai/whisper";
 const DESCRIBE_MODEL = "@cf/salesforce/blip-image-captioning-large";
 const RERANK_MODEL = "@cf/baai/bge-reranker-large";
+const CLASSIFY_MODEL = "@cf/microsoft/resnet-50";
 
 const ChatSchema = z.object({
 	messages: z
@@ -68,6 +69,10 @@ const RerankSchema = z.object({
 	query: z.string().min(1).max(10_000),
 	documents: z.array(z.string().min(1).max(10_000)).min(1).max(100),
 	top_n: z.number().int().min(1).max(100).optional()
+});
+
+const ClassifySchema = z.object({
+	url: z.string().url()
 });
 
 const aiHandler = new Hono<HonoEnv>()
@@ -209,6 +214,28 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Text reranking completed", {
 			model: RERANK_MODEL,
 			results: result ?? []
+		});
+	})
+	.post("/classify", zValidator("json", ClassifySchema), async (c) => {
+		const { url } = c.req.valid("json");
+
+		const imageRes = await fetch(url);
+		if (!imageRes.ok) {
+			throw ApiError.badRequest(
+				`Failed to fetch image from URL: ${imageRes.statusText}`
+			);
+		}
+
+		const blob = await imageRes.arrayBuffer();
+		const image = Array.from(new Uint8Array(blob));
+
+		const result = (await c.env.AI.run(CLASSIFY_MODEL as any, {
+			image
+		})) as any;
+
+		return ApiResponse.ok(c, "Image classification completed", {
+			model: CLASSIFY_MODEL,
+			result: result ?? []
 		});
 	});
 

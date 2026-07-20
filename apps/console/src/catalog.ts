@@ -287,6 +287,21 @@ export const SERVICES: ServiceDef[] = [
 			],
 			top_n: 2
 		}
+	},
+	{
+		id: "ai.classify",
+		method: "POST",
+		path: "/v1/ai/classify",
+		price: "$0.003",
+		description:
+			"Classify any image into pre-trained categories via Workers AI (ResNet-50), returns tags and scores",
+		mimeType: "application/json",
+		input: {
+			url: "Absolute URL to the image file to classify"
+		},
+		example: {
+			url: "https://x402.tanship.dev/assets/sample.jpg"
+		}
 	}
 ];
 
