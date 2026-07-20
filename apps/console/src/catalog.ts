@@ -264,6 +264,29 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://x402.tanship.dev/assets/sample.jpg"
 		}
+	},
+	{
+		id: "ai.rerank",
+		method: "POST",
+		path: "/v1/ai/rerank",
+		price: "$0.003",
+		description:
+			"Rerank a list of documents relative to a query via Workers AI (BGE Reranker Large)",
+		mimeType: "application/json",
+		input: {
+			query: "Relevance query string",
+			documents: "Array of strings to rank",
+			top_n: "Optional number of top results to return"
+		},
+		example: {
+			query: "base network",
+			documents: [
+				"Base is a secure, low-cost, builder-friendly Ethereum L2 built on OP Stack.",
+				"Solana is a blockchain platform designed for hosting decentralized applications.",
+				"The Base network is incubated by Coinbase."
+			],
+			top_n: 2
+		}
 	}
 ];
 

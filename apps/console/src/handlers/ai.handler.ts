@@ -18,6 +18,7 @@ const TRANSLATION_MODEL = "@cf/meta/m2m100-1.2b";
 const SENTIMENT_MODEL = "@cf/huggingface/distilbert-sst-2-int8";
 const TRANSCRIBE_MODEL = "@cf/openai/whisper";
 const DESCRIBE_MODEL = "@cf/salesforce/blip-image-captioning-large";
+const RERANK_MODEL = "@cf/baai/bge-reranker-large";
 
 const ChatSchema = z.object({
 	messages: z
@@ -61,6 +62,12 @@ const TranscribeSchema = z.object({
 
 const DescribeSchema = z.object({
 	url: z.string().url()
+});
+
+const RerankSchema = z.object({
+	query: z.string().min(1).max(10_000),
+	documents: z.array(z.string().min(1).max(10_000)).min(1).max(100),
+	top_n: z.number().int().min(1).max(100).optional()
 });
 
 const aiHandler = new Hono<HonoEnv>()
@@ -188,6 +195,20 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Image description completed", {
 			model: DESCRIBE_MODEL,
 			result: result ?? null
+		});
+	})
+	.post("/rerank", zValidator("json", RerankSchema), async (c) => {
+		const { query, documents, top_n } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(RERANK_MODEL as any, {
+			query,
+			documents,
+			top_n
+		})) as any;
+
+		return ApiResponse.ok(c, "Text reranking completed", {
+			model: RERANK_MODEL,
+			results: result ?? []
 		});
 	});
 

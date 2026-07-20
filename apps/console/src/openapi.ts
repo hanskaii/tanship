@@ -355,6 +355,58 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/rerank": {
+			post: {
+				operationId: "aiRerank",
+				summary: "Rerank documents relative to query",
+				description:
+					"Rerank a list of documents relative to a query via Workers AI (BGE Reranker Large)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.003" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["query", "documents"],
+								properties: {
+									query: {
+										type: "string",
+										description: "Relevance query string"
+									},
+									documents: {
+										type: "array",
+										items: { type: "string" },
+										description: "Array of strings to rank"
+									},
+									top_n: {
+										type: "integer",
+										description:
+											"Optional number of top results to return"
+									}
+								}
+							},
+							example: {
+								query: "base network",
+								documents: [
+									"Base is a secure, low-cost, builder-friendly Ethereum L2 built on OP Stack.",
+									"Solana is a blockchain platform designed for hosting decentralized applications.",
+									"The Base network is incubated by Coinbase."
+								],
+								top_n: 2
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Reranking scores result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",
