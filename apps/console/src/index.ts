@@ -6,6 +6,7 @@ import browserHandler from "./handlers/browser.handler";
 import summarizeHandler from "./handlers/summarize.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
+import { OPENAPI_SPEC } from "./openapi";
 import { hasAssetFor } from "./assets";
 import { parseNetworks } from "./networks";
 import { EnvSchema } from "./env";
@@ -44,6 +45,10 @@ const app = new Hono<HonoEnv>()
 			docs: "/v1/services",
 			payment: "x402 (https://x402.org)"
 		})
+	)
+	.get("/openapi.json", (c) => c.json(OPENAPI_SPEC))
+	.get("/.well-known/x402", (c) =>
+		c.json({ openapi: "https://x402.tanship.dev/openapi.json" })
 	)
 	.get("/v1/services", (c) =>
 		ApiResponse.ok(c, "Available paid services", {
