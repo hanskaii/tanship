@@ -3,9 +3,7 @@
 	"name": "tanflare-console",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-09-02",
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
+	"compatibility_flags": ["nodejs_compat"],
 	"observability": {
 		"enabled": true
 	},
@@ -14,16 +12,17 @@
 	},
 	"routes": [
 		{
-			"pattern": "console.tanflare.com",
+			"pattern": "x402.tanship.dev",
 			"custom_domain": true
 		}
 	],
 	"vars": {
 		// Production values — for local dev, override via apps/console/.dev.vars
-		"APP_ENV": "development",
+		"APP_ENV": "production",
+		"CLOUDFLARE_ACCOUNT_ID": "526998f1dc79660b3b5d57b5fe264a16",
 		// Comma-separated network slugs or CAIP-2 ids (see src/networks.ts).
 		// Solana networks are only offered when SVM_PAY_TO_ADDRESS is set.
-		"X402_NETWORKS": "arbitrum,arbitrum-sepolia,avalanche,avalanche-fuji,base,base-sepolia,polygon,polygon-amoy,sei,sei-testnet,skale-base,skale-base-sepolia,solana,solana-devnet,xlayer,xlayer-testnet",
+		"X402_NETWORKS": "base,base-sepolia",
 		// PayAI facilitator — supports every network above (v2 exact scheme)
 		"FACILITATOR_URL": "https://facilitator.payai.network"
 	}

@@ -42,6 +42,27 @@ export const x402 = createMiddleware<HonoEnv>(async (c, next) => {
 		});
 
 		const facilitator = new HTTPFacilitatorClient({ url: FACILITATOR_URL });
+		// Override to skip slow network fetch on Cloudflare Workers startup
+		facilitator.getSupported = async () => {
+			return {
+				schemes: ["exact"],
+				networks: ["eip155:8453", "eip155:84532"] as Network[],
+				kinds: [
+					{
+						x402Version: 2,
+						scheme: "exact",
+						network: "eip155:8453" as Network
+					},
+					{
+						x402Version: 2,
+						scheme: "exact",
+						network: "eip155:84532" as Network
+					}
+				],
+				extensions: ["bazaar"],
+				signers: {}
+			};
+		};
 
 		// Fills the gaps in @x402/evm's built-in USDC registry (see assets.ts)
 		const evmScheme = new ExactEvmScheme().registerMoneyParser(
