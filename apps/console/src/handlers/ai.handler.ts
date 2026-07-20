@@ -15,6 +15,7 @@ const CHAT_MODELS = [
 const EMBEDDING_MODEL = "@cf/baai/bge-m3";
 const IMAGE_MODEL = "@cf/black-forest-labs/flux-1-schnell";
 const TRANSLATION_MODEL = "@cf/meta/m2m100-1.2b";
+const SENTIMENT_MODEL = "@cf/huggingface/distilbert-sst-2-int8";
 
 const ChatSchema = z.object({
 	messages: z
@@ -46,6 +47,10 @@ const TranslationSchema = z.object({
 	text: z.string().min(1).max(10_000),
 	source_lang: z.string().min(2).max(10).optional(),
 	target_lang: z.string().min(2).max(10)
+});
+
+const SentimentSchema = z.object({
+	text: z.string().min(1).max(10_000)
 });
 
 const aiHandler = new Hono<HonoEnv>()
@@ -109,6 +114,18 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Translation completed", {
 			model: TRANSLATION_MODEL,
 			translatedText: result.translated_text ?? ""
+		});
+	})
+	.post("/sentiment", zValidator("json", SentimentSchema), async (c) => {
+		const { text } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(SENTIMENT_MODEL as any, {
+			text
+		})) as Array<{ label: string; score: number }>;
+
+		return ApiResponse.ok(c, "Sentiment analysis completed", {
+			model: SENTIMENT_MODEL,
+			result: result ?? []
 		});
 	});
 

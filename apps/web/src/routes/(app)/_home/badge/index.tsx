@@ -76,7 +76,10 @@ function CopyButton({ text }: { text: string }) {
 							exit={{ scale: 0.4, opacity: 0 }}
 							transition={{ duration: 0.15, ease: EASE_OUT_EXPO }}
 						>
-							<HugeiconsIcon icon={Copy01Icon} className="size-3.5" />
+							<HugeiconsIcon
+								icon={Copy01Icon}
+								className="size-3.5"
+							/>
 						</motion.span>
 					)}
 				</AnimatePresence>
@@ -135,7 +138,11 @@ function BadgePage() {
 						<motion.div
 							initial={{ opacity: 0, y: 12 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.45, delay: 0.1, ease: EASE_OUT_EXPO }}
+							transition={{
+								duration: 0.45,
+								delay: 0.1,
+								ease: EASE_OUT_EXPO
+							}}
 						>
 							<div className="rounded-2xl bg-secondary p-2">
 								<div className="rounded-xl bg-card p-8 flex flex-col items-center gap-6">
@@ -168,7 +175,11 @@ function BadgePage() {
 									key={snippet.label}
 									initial={{ opacity: 0, y: 10 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.4, delay: 0.1 + i * 0.05, ease: EASE_OUT_EXPO }}
+									transition={{
+										duration: 0.4,
+										delay: 0.1 + i * 0.05,
+										ease: EASE_OUT_EXPO
+									}}
 									className="flex flex-col gap-3"
 								>
 									<div className="flex items-center justify-between border-b border-border/30 pb-2">

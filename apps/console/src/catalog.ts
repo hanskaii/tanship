@@ -91,6 +91,21 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "ai.sentiment",
+		method: "POST",
+		path: "/v1/ai/sentiment",
+		price: "$0.002",
+		description:
+			"Sentiment analysis on text using Workers AI, returns positive/negative label with score",
+		mimeType: "application/json",
+		input: {
+			text: "Text to analyze"
+		},
+		example: {
+			text: "I love building autonomous agents on Base L2!"
+		}
+	},
+	{
 		id: "browser.screenshot",
 		method: "POST",
 		path: "/v1/browser/screenshot",

@@ -11,7 +11,11 @@ interface ScrollRevealProps {
 	delay?: number;
 }
 
-export function ScrollReveal({ children, className, delay }: ScrollRevealProps) {
+export function ScrollReveal({
+	children,
+	className,
+	delay
+}: ScrollRevealProps) {
 	const variants = useRevealVariants();
 
 	const finalVariants = delay

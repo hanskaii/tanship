@@ -123,16 +123,20 @@ function ShowcaseSubmitPage() {
 						>
 							<div className="rounded-xl bg-card px-6 py-16 flex flex-col items-center gap-5 text-center">
 								<motion.div
-								className="flex size-14 items-center justify-center rounded-xl bg-emerald-500/10"
-								initial={{ scale: 0.4, opacity: 0 }}
-								animate={{ scale: 1, opacity: 1 }}
-								transition={{ duration: 0.45, ease: EASE_OUT_EXPO, delay: 0.2 }}
-							>
-								<HugeiconsIcon
-									icon={CheckmarkCircle01Icon}
-									className="size-7 text-emerald-500"
-								/>
-							</motion.div>
+									className="flex size-14 items-center justify-center rounded-xl bg-emerald-500/10"
+									initial={{ scale: 0.4, opacity: 0 }}
+									animate={{ scale: 1, opacity: 1 }}
+									transition={{
+										duration: 0.45,
+										ease: EASE_OUT_EXPO,
+										delay: 0.2
+									}}
+								>
+									<HugeiconsIcon
+										icon={CheckmarkCircle01Icon}
+										className="size-7 text-emerald-500"
+									/>
+								</motion.div>
 								<div className="flex flex-col gap-2">
 									<p className="text-base font-semibold text-foreground">
 										Submitted for review
