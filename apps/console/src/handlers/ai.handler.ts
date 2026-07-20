@@ -16,6 +16,7 @@ const EMBEDDING_MODEL = "@cf/baai/bge-m3";
 const IMAGE_MODEL = "@cf/black-forest-labs/flux-1-schnell";
 const TRANSLATION_MODEL = "@cf/meta/m2m100-1.2b";
 const SENTIMENT_MODEL = "@cf/huggingface/distilbert-sst-2-int8";
+const TRANSCRIBE_MODEL = "@cf/openai/whisper";
 
 const ChatSchema = z.object({
 	messages: z
@@ -51,6 +52,10 @@ const TranslationSchema = z.object({
 
 const SentimentSchema = z.object({
 	text: z.string().min(1).max(10_000)
+});
+
+const TranscribeSchema = z.object({
+	url: z.string().url()
 });
 
 const aiHandler = new Hono<HonoEnv>()
@@ -126,6 +131,36 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Sentiment analysis completed", {
 			model: SENTIMENT_MODEL,
 			result: result ?? []
+		});
+	})
+	.post("/transcribe", zValidator("json", TranscribeSchema), async (c) => {
+		const { url } = c.req.valid("json");
+
+		const audioRes = await fetch(url);
+		if (!audioRes.ok) {
+			throw ApiError.badRequest(
+				`Failed to fetch audio from URL: ${audioRes.statusText}`
+			);
+		}
+
+		const blob = await audioRes.arrayBuffer();
+		const audio = Array.from(new Uint8Array(blob));
+
+		const result = (await c.env.AI.run(TRANSCRIBE_MODEL as any, {
+			audio
+		})) as unknown as {
+			text: string;
+			word_count?: number;
+			words?: Array<{ word: string; start: number; end: number }>;
+			vtt?: string;
+		};
+
+		return ApiResponse.ok(c, "Transcription completed", {
+			model: TRANSCRIBE_MODEL,
+			text: result.text ?? "",
+			word_count: result.word_count ?? 0,
+			words: result.words ?? [],
+			vtt: result.vtt ?? ""
 		});
 	});
 

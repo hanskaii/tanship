@@ -279,6 +279,44 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/transcribe": {
+			post: {
+				operationId: "aiTranscribe",
+				summary: "Speech-to-text audio transcription",
+				description:
+					"Speech-to-text audio transcription via Workers AI (Whisper), returns text and metadata",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.01" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Absolute URL to the audio file to transcribe"
+									}
+								}
+							},
+							example: {
+								url: "https://x402.tanship.dev/assets/sample.mp3"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Transcription text and metadata" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",

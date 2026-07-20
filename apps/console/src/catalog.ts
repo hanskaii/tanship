@@ -234,6 +234,21 @@ export const SERVICES: ServiceDef[] = [
 			prompt: "Optional guidelines or focus areas for the summary"
 		},
 		example: { url: "https://example.com" }
+	},
+	{
+		id: "ai.transcribe",
+		method: "POST",
+		path: "/v1/ai/transcribe",
+		price: "$0.01",
+		description:
+			"Speech-to-text audio transcription via Workers AI (Whisper), returns text and metadata",
+		mimeType: "application/json",
+		input: {
+			url: "Absolute URL to the audio file to transcribe"
+		},
+		example: {
+			url: "https://x402.tanship.dev/assets/sample.mp3"
+		}
 	}
 ];
 
