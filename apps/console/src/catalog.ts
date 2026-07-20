@@ -220,6 +220,20 @@ export const SERVICES: ServiceDef[] = [
 			limit: "Optional max items (default 20)"
 		},
 		example: { url: "https://blog.cloudflare.com", limit: 20 }
+	},
+	{
+		id: "ai.summarize",
+		method: "POST",
+		path: "/v1/summarize",
+		price: "$0.015",
+		description:
+			"Summarize any webpage — fetch readable markdown and synthesize highlights using AI",
+		mimeType: "application/json",
+		input: {
+			url: "Page URL to summarize",
+			prompt: "Optional guidelines or focus areas for the summary"
+		},
+		example: { url: "https://example.com" }
 	}
 ];
 

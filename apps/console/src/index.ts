@@ -3,6 +3,7 @@ import { cors } from "hono/cors";
 
 import aiHandler from "./handlers/ai.handler";
 import browserHandler from "./handlers/browser.handler";
+import summarizeHandler from "./handlers/summarize.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
 import { hasAssetFor } from "./assets";
@@ -36,6 +37,7 @@ const app = new Hono<HonoEnv>()
 	.use("/v1/*", x402)
 	.route("/v1/ai", aiHandler)
 	.route("/v1/browser", browserHandler)
+	.route("/v1/summarize", summarizeHandler)
 	// Free discovery endpoints
 	.get("/", (c) =>
 		ApiResponse.ok(c, "Tanflare Console — x402 API", {
