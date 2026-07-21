@@ -133,7 +133,15 @@ export const SERVICES: ServiceDef[] = [
 		description: "Render any URL to PDF via Cloudflare Browser Rendering",
 		mimeType: "application/pdf",
 		input: {
-			url: "Page URL"
+			url: "Page URL",
+			scale: "Optional PDF render scale 0.1-2.0 (default 1.0)",
+			printBackground:
+				"Optional print background graphics (default false)",
+			landscape:
+				"Optional print in landscape orientation (default false)",
+			pageRanges: "Optional paper ranges to print (e.g. 1-5)",
+			format: "Optional paper format (e.g. Letter, A4, default Letter)",
+			margin: "Optional margin config object {top, bottom, left, right}"
 		},
 		example: { url: "https://example.com" }
 	},

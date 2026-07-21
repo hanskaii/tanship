@@ -1431,6 +1431,59 @@ export const OPENAPI_SPEC = {
 										type: "string",
 										format: "uri",
 										description: "Page URL"
+									},
+									scale: {
+										type: "number",
+										minimum: 0.1,
+										maximum: 2.0,
+										default: 1.0,
+										description: "Optional PDF render scale"
+									},
+									printBackground: {
+										type: "boolean",
+										default: false,
+										description:
+											"Optional print background graphics"
+									},
+									landscape: {
+										type: "boolean",
+										default: false,
+										description:
+											"Optional print in landscape orientation"
+									},
+									pageRanges: {
+										type: "string",
+										description:
+											"Optional paper ranges to print (e.g. 1-5)"
+									},
+									format: {
+										type: "string",
+										default: "Letter",
+										description:
+											"Optional paper format (e.g. Letter, A4)"
+									},
+									margin: {
+										type: "object",
+										properties: {
+											top: {
+												type: "string",
+												default: "0px"
+											},
+											bottom: {
+												type: "string",
+												default: "0px"
+											},
+											left: {
+												type: "string",
+												default: "0px"
+											},
+											right: {
+												type: "string",
+												default: "0px"
+											}
+										},
+										description:
+											"Optional margin config object"
 									}
 								}
 							},

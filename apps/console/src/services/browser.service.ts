@@ -64,8 +64,31 @@ export class BrowserRenderingService {
 		return res.arrayBuffer();
 	}
 
-	async pdf(url: string): Promise<ArrayBuffer> {
-		const res = await this.post("pdf", { url });
+	async pdf(options: {
+		url: string;
+		scale: number;
+		printBackground: boolean;
+		landscape: boolean;
+		pageRanges?: string;
+		format: string;
+		margin?: {
+			top: string;
+			bottom: string;
+			left: string;
+			right: string;
+		};
+	}): Promise<ArrayBuffer> {
+		const res = await this.post("pdf", {
+			url: options.url,
+			pdfOptions: {
+				scale: options.scale,
+				printBackground: options.printBackground,
+				landscape: options.landscape,
+				pageRanges: options.pageRanges,
+				format: options.format,
+				margin: options.margin
+			}
+		});
 		return res.arrayBuffer();
 	}
 

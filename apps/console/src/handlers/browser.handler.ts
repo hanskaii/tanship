@@ -19,6 +19,22 @@ const ScreenshotSchema = UrlSchema.extend({
 	selector: z.string().optional()
 });
 
+const PdfSchema = UrlSchema.extend({
+	scale: z.number().min(0.1).max(2.0).default(1.0),
+	printBackground: z.boolean().default(false),
+	landscape: z.boolean().default(false),
+	pageRanges: z.string().optional(),
+	format: z.string().default("Letter"),
+	margin: z
+		.object({
+			top: z.string().default("0px"),
+			bottom: z.string().default("0px"),
+			left: z.string().default("0px"),
+			right: z.string().default("0px")
+		})
+		.optional()
+});
+
 const ScrapeSchema = UrlSchema.extend({
 	selectors: z.array(z.string().min(1).max(500)).min(1).max(20)
 });
@@ -229,14 +245,14 @@ const browserHandler = new Hono<HonoEnv>()
 		const image = await browser.screenshot(input);
 		return c.body(image, 200, { "Content-Type": "image/png" });
 	})
-	.post("/pdf", zValidator("json", UrlSchema), async (c) => {
-		const { url } = c.req.valid("json");
+	.post("/pdf", zValidator("json", PdfSchema), async (c) => {
+		const input = c.req.valid("json");
 		const browser = new BrowserRenderingService(
 			c.env.CLOUDFLARE_ACCOUNT_ID,
 			c.env.CLOUDFLARE_API_TOKEN
 		);
 
-		const pdf = await browser.pdf(url);
+		const pdf = await browser.pdf(input);
 		return c.body(pdf, 200, { "Content-Type": "application/pdf" });
 	})
 	.post("/markdown", zValidator("json", UrlSchema), async (c) => {
