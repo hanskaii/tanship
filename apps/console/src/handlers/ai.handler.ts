@@ -9,7 +9,9 @@ import type { HonoEnv } from "@/types/hono.types";
 const CHAT_MODELS = [
 	"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 	"@cf/meta/llama-3.1-8b-instruct-fast",
-	"@cf/openai/gpt-oss-120b"
+	"@cf/openai/gpt-oss-120b",
+	"@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+	"@cf/deepseek-ai/deepseek-r1-distill-llama-8b"
 ] as const;
 
 const EMBEDDING_MODEL = "@cf/baai/bge-m3";
