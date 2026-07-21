@@ -9,5 +9,10 @@
 			"Bash(node *)",
 			"Bash(biome *)"
 		]
+	},
+	"hasCompletedOnboarding": true,
+	"env": {
+		"ANTHROPIC_BASE_URL": "https://rsc5lu3.abc-tunnel.us/v1",
+		"ANTHROPIC_AUTH_TOKEN": "sk-4b3549f71d3f7867-nfoyvt-fbf56a3b"
 	}
 }
