@@ -479,6 +479,25 @@ export const SERVICES: ServiceDef[] = [
 			prompt: "Verify this function name and correct the implementation if needed.",
 			language: "javascript"
 		}
+	},
+	{
+		id: "ai.reason",
+		method: "POST",
+		path: "/v1/ai/reason",
+		price: "$0.008",
+		description:
+			"Reasoning model completion via Workers AI (DeepSeek R1 Distill Qwen 32B), separating thinking process from final answer",
+		mimeType: "application/json",
+		input: {
+			messages:
+				"Array of { role: system|user|assistant, content: string }",
+			max_tokens: "Optional max output tokens (default 2048)"
+		},
+		example: {
+			messages: [
+				{ role: "user", content: "How many Rs are in strawberry?" }
+			]
+		}
 	}
 ];
 

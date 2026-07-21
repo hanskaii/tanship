@@ -711,6 +711,70 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/reason": {
+			post: {
+				operationId: "aiReason",
+				summary: "Reasoning model completion",
+				description:
+					"Reasoning model completion via Workers AI (DeepSeek R1 Distill Qwen 32B), separating thinking process from final answer",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["messages"],
+								properties: {
+									messages: {
+										type: "array",
+										items: {
+											type: "object",
+											required: ["role", "content"],
+											properties: {
+												role: {
+													type: "string",
+													enum: [
+														"system",
+														"user",
+														"assistant"
+													]
+												},
+												content: { type: "string" }
+											}
+										},
+										description:
+											"Array of { role: system|user|assistant, content: string }"
+									},
+									max_tokens: {
+										type: "integer",
+										default: 2048,
+										description:
+											"Optional max output tokens"
+									}
+								}
+							},
+							example: {
+								messages: [
+									{
+										role: "user",
+										content:
+											"How many Rs are in strawberry?"
+									}
+								]
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Thinking process and final answer" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",

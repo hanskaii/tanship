@@ -25,6 +25,7 @@ const CLASSIFY_MODEL = "@cf/microsoft/resnet-50";
 const MODERATE_MODEL = "@cf/meta/llama-guard-3-8b";
 const DETECT_MODEL = "@cf/facebook/detr-resnet-50";
 const ANSWER_MODEL = "@cf/google/paligemma-3b-pt-448";
+const REASON_MODEL = "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b";
 
 const ChatSchema = z.object({
 	messages: z
@@ -107,6 +108,19 @@ const CodeSchema = z.object({
 	code: z.string().min(1).max(30_000),
 	prompt: z.string().min(1).max(4096),
 	language: z.string().min(1).max(50).optional()
+});
+
+const ReasonSchema = z.object({
+	messages: z
+		.array(
+			z.object({
+				role: z.enum(["system", "user", "assistant"]),
+				content: z.string().min(1)
+			})
+		)
+		.min(1)
+		.max(50),
+	max_tokens: z.number().int().min(1).max(4096).default(2048)
 });
 
 const aiHandler = new Hono<HonoEnv>()
@@ -424,6 +438,36 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Code analysis completed", {
 			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 			response: result.response ?? ""
+		});
+	})
+	.post("/reason", zValidator("json", ReasonSchema), async (c) => {
+		const { messages, max_tokens } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(REASON_MODEL as any, {
+			messages,
+			max_tokens
+		})) as { response?: string };
+
+		const content = result.response ?? "";
+
+		let thinking = "";
+		let answer = content;
+
+		const thinkStart = content.indexOf("<think>");
+		const thinkEnd = content.indexOf("</think>");
+
+		if (thinkStart !== -1 && thinkEnd !== -1 && thinkEnd > thinkStart) {
+			thinking = content.substring(thinkStart + 7, thinkEnd).trim();
+			answer = content.substring(thinkEnd + 8).trim();
+		} else if (thinkStart !== -1) {
+			thinking = content.substring(thinkStart + 7).trim();
+			answer = "";
+		}
+
+		return ApiResponse.ok(c, "Reasoning completed", {
+			model: REASON_MODEL,
+			thinking,
+			answer
 		});
 	});
 
