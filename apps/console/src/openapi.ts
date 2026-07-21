@@ -668,6 +668,45 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/search/summary": {
+			post: {
+				operationId: "browserSearchSummary",
+				summary: "Perform web search with AI summary",
+				description:
+					"Perform web search and synthesize results into a structured AI answer with cited sources (Perplexity clone)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.03" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["query"],
+								properties: {
+									query: {
+										type: "string",
+										description: "Search query to research"
+									}
+								}
+							},
+							example: {
+								query: "what is base network and how does it relate to coinbase"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description:
+							"Synthesized research answer with cited sources"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/metadata": {
 			post: {
 				operationId: "browserMetadata",

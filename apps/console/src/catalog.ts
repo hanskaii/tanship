@@ -430,6 +430,21 @@ export const SERVICES: ServiceDef[] = [
 			url: "https://x402.tanship.dev/assets/sample.jpg",
 			prompt: "What is written on the laptop screen?"
 		}
+	},
+	{
+		id: "browser.search.summary",
+		method: "POST",
+		path: "/v1/browser/search/summary",
+		price: "$0.03",
+		description:
+			"Perform web search and synthesize results into a structured AI answer with cited sources (Perplexity clone)",
+		mimeType: "application/json",
+		input: {
+			query: "Search query to research"
+		},
+		example: {
+			query: "what is base network and how does it relate to coinbase"
+		}
 	}
 ];
 

@@ -35,6 +35,9 @@ const SearchSchema = z.object({
 	query: z.string().min(1).max(500),
 	limit: z.number().int().min(1).max(50).default(10)
 });
+const SearchSummarySchema = z.object({
+	query: z.string().min(1).max(500)
+});
 const NewsSchema = z.object({
 	query: z.string().min(1).max(500),
 	limit: z.number().int().min(1).max(50).default(10)
@@ -372,6 +375,88 @@ const browserHandler = new Hono<HonoEnv>()
 			count: results.length,
 			results
 		});
-	});
+	})
+	.post(
+		"/search/summary",
+		zValidator("json", SearchSummarySchema),
+		async (c) => {
+			const { query } = c.req.valid("json");
+			const browser = new BrowserRenderingService(
+				c.env.CLOUDFLARE_ACCOUNT_ID,
+				c.env.CLOUDFLARE_API_TOKEN
+			);
+
+			const targetUrl =
+				"https://html.duckduckgo.com/html/?q=" +
+				encodeURIComponent(query);
+
+			const extracted = (await browser.json(
+				targetUrl,
+				"Extract the search result items listed on this page. Include every search result with its title, absolute URL, and snippet description.",
+				SEARCH_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+			)) as {
+				results?: Array<{
+					title: string;
+					url: string;
+					snippet: string;
+				}>;
+			} | null;
+
+			const results = (extracted?.results ?? []).slice(0, 5);
+
+			if (results.length === 0) {
+				return ApiResponse.ok(
+					c,
+					"No search results found to summarize",
+					{
+						query,
+						answer: "No relevant search results were found.",
+						sources: []
+					}
+				);
+			}
+
+			// Format sources context
+			const context = results
+				.map(
+					(r, i) =>
+						"[" +
+						(i + 1) +
+						"] Title: " +
+						r.title +
+						"\nURL: " +
+						r.url +
+						"\nSnippet: " +
+						r.snippet
+				)
+				.join("\n\n");
+
+			const systemPrompt =
+				"You are a professional research assistant. Synthesize the provided search results to answer the user request accurately. Cite your sources using [1], [2], etc., corresponding to the indices of the search results. Keep your response concise, factual, and clear.";
+			const userPrompt =
+				"Query: " + query + "\n\nSearch Results:\n" + context;
+
+			const aiResult = (await c.env.AI.run(
+				"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+				{
+					messages: [
+						{ role: "system", content: systemPrompt },
+						{ role: "user", content: userPrompt }
+					],
+					max_tokens: 1024
+				}
+			)) as { response?: string };
+
+			return ApiResponse.ok(c, "Search summary completed", {
+				query,
+				answer: aiResult.response ?? "",
+				sources: results.map((r, i) => ({
+					index: i + 1,
+					title: r.title,
+					url: r.url
+				}))
+			});
+		}
+	);
 
 export default browserHandler;
