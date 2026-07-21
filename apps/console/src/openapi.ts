@@ -625,6 +625,43 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/correct": {
+			post: {
+				operationId: "aiCorrect",
+				summary: "Correct text grammar and spelling",
+				description:
+					"Automatically correct grammar, spelling, punctuation, and phrasing via Workers AI (Llama 3.3 70B)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["text"],
+								properties: {
+									text: {
+										type: "string",
+										description:
+											"The text content to check and correct"
+									}
+								}
+							},
+							example: {
+								text: "i has a error in my code and it dont build"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Grammar correction result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",

@@ -99,6 +99,10 @@ const AnswerSchema = z.object({
 	prompt: z.string().min(1).max(2048)
 });
 
+const CorrectSchema = z.object({
+	text: z.string().min(1).max(20_000)
+});
+
 const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
@@ -362,6 +366,32 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Visual question answering completed", {
 			model: ANSWER_MODEL,
 			response: result.response ?? ""
+		});
+	})
+	.post("/correct", zValidator("json", CorrectSchema), async (c) => {
+		const { text } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are a professional copyeditor. Correct the grammar, spelling, punctuation, and phrasing of the input text. Return ONLY the corrected text, with no preamble, explanations, or quotes."
+					},
+					{
+						role: "user",
+						content: text
+					}
+				],
+				max_tokens: 2048
+			}
+		)) as { response?: string };
+
+		return ApiResponse.ok(c, "Text corrected", {
+			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			correctedText: result.response ?? ""
 		});
 	});
 

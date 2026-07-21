@@ -445,6 +445,21 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			query: "what is base network and how does it relate to coinbase"
 		}
+	},
+	{
+		id: "ai.correct",
+		method: "POST",
+		path: "/v1/ai/correct",
+		price: "$0.005",
+		description:
+			"Automatically correct grammar, spelling, punctuation, and phrasing via Workers AI (Llama 3.3 70B)",
+		mimeType: "application/json",
+		input: {
+			text: "The text content to check and correct"
+		},
+		example: {
+			text: "i has a error in my code and it dont build"
+		}
 	}
 ];
 
