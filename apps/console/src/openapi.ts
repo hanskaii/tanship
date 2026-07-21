@@ -1033,6 +1033,45 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/emotion": {
+			post: {
+				operationId: "aiEmotion",
+				summary: "Analyze text emotion",
+				description:
+					"Analyze sentiment and detailed emotion categories (joy, sadness, anger, fear, etc) via Workers AI (Llama 3.3 70B)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["text"],
+								properties: {
+									text: {
+										type: "string",
+										description:
+											"The text content to analyze emotions on"
+									}
+								}
+							},
+							example: {
+								text: "I am absolutely thrilled and excited about our launch, but also slightly terrified!"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Sentiment and emotion scores result"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",

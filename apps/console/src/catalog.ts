@@ -653,6 +653,21 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://example.com"
 		}
+	},
+	{
+		id: "ai.emotion",
+		method: "POST",
+		path: "/v1/ai/emotion",
+		price: "$0.005",
+		description:
+			"Analyze sentiment and detailed emotion categories (joy, sadness, anger, fear, etc) via Workers AI (Llama 3.3 70B)",
+		mimeType: "application/json",
+		input: {
+			text: "The text content to analyze emotions on"
+		},
+		example: {
+			text: "I am absolutely thrilled and excited about our launch, but also slightly terrified!"
+		}
 	}
 ];
 

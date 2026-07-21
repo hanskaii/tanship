@@ -370,6 +370,13 @@ export const LANDING_PAGE_HTML = `
 						</div>
 						<p class="card-desc">Generate optimized SQL queries from natural language text with dialect selection.</p>
 					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.emotion</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Analyze sentiment and detailed emotion categories (joy, sadness, anger, fear, etc) via Llama 3.3.</p>
+					</div>
 				<div class="card">
 					<div class="card-header">
 						<span class="card-title">browser.search</span>

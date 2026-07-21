@@ -152,6 +152,10 @@ const SqlSchema = z.object({
 	dialect: z.string().min(1).max(50).optional()
 });
 
+const EmotionSchema = z.object({
+	text: z.string().min(1).max(10_000)
+});
+
 const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
@@ -710,6 +714,52 @@ const aiHandler = new Hono<HonoEnv>()
 		}
 
 		return ApiResponse.ok(c, "SQL generated", {
+			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			result: parsed
+		});
+	})
+	.post("/emotion", zValidator("json", EmotionSchema), async (c) => {
+		const { text } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are an expert sentiment and emotion analyzer. Analyze the provided text and output a JSON object with: 1) sentiment (string: positive|negative|neutral), 2) emotions (object with keys: joy, sadness, anger, fear, surprise, love, each mapped to a float score from 0.0 to 1.0 representing confidence), 3) primaryEmotion (string: the highest scoring emotion name), 4) explanation (string: brief explanation of the emotional analysis). Output ONLY the JSON."
+					},
+					{
+						role: "user",
+						content: text
+					}
+				],
+				response_format: { type: "json_object" },
+				max_tokens: 1024
+			}
+		)) as { response?: string };
+
+		let parsed: unknown;
+		try {
+			parsed = JSON.parse(result.response ?? "{}");
+		} catch {
+			parsed = {
+				sentiment: "neutral",
+				emotions: {
+					joy: 0,
+					sadness: 0,
+					anger: 0,
+					fear: 0,
+					surprise: 0,
+					love: 0
+				},
+				primaryEmotion: "neutral",
+				explanation: "Failed to analyze emotions"
+			};
+		}
+
+		return ApiResponse.ok(c, "Emotion analysis completed", {
 			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 			result: parsed
 		});
