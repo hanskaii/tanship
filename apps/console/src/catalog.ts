@@ -394,6 +394,23 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			text: "Model Context Protocol (MCP) is an open standard that enables developers to build secure, bidirectional connections between AI models and their data sources. By using standard JSON-RPC over stdio or SSE, clients can dynamically discover and call tools, read resources, and subscribe to prompts."
 		}
+	},
+	{
+		id: "browser.news",
+		method: "POST",
+		path: "/v1/browser/news",
+		price: "$0.005",
+		description:
+			"Perform a real-time web news search, returns a structured list of recent news articles (titles, links, dates, sources)",
+		mimeType: "application/json",
+		input: {
+			query: "News search query string",
+			limit: "Optional max results to return (default 10)"
+		},
+		example: {
+			query: "base network coinbase L2",
+			limit: 5
+		}
 	}
 ];
 

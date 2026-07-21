@@ -35,6 +35,10 @@ const SearchSchema = z.object({
 	query: z.string().min(1).max(500),
 	limit: z.number().int().min(1).max(50).default(10)
 });
+const NewsSchema = z.object({
+	query: z.string().min(1).max(500),
+	limit: z.number().int().min(1).max(50).default(10)
+});
 
 const SEARCH_EXTRACTION_SCHEMA = {
 	type: "object",
@@ -297,6 +301,77 @@ const browserHandler = new Hono<HonoEnv>()
 		);
 
 		return ApiResponse.ok(c, "Article extracted", { url, article: result });
+	})
+	.post("/news", zValidator("json", NewsSchema), async (c) => {
+		const { query, limit } = c.req.valid("json");
+
+		const rssUrl =
+			"https://news.google.com/rss/search?q=" +
+			encodeURIComponent(query) +
+			"&hl=en-US&gl=US&ceid=US:en";
+
+		const res = await fetch(rssUrl, {
+			headers: {
+				"User-Agent":
+					"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+			}
+		});
+
+		if (!res.ok) {
+			throw ApiError.badGateway(
+				"Failed to fetch news from Google RSS: " + res.statusText
+			);
+		}
+
+		const xml = await res.text();
+		const items = [];
+
+		const itemMatches = xml.matchAll(/<item>([\s\S]*?)<\/item>/g);
+		for (const match of itemMatches) {
+			const itemXml = match[1];
+			const title =
+				(itemXml.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || "";
+			const link =
+				(itemXml.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || "";
+			const pubDate =
+				(itemXml.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [])[1] ||
+				"";
+			const source =
+				(itemXml.match(/<source[^>]*>([\s\S]*?)<\/source>/) || [])[1] ||
+				"";
+
+			// Clean XML entities
+			const cleanTitle = title
+				.replace(/&amp;/g, "&")
+				.replace(/&lt;/g, "<")
+				.replace(/&gt;/g, ">")
+				.replace(/&quot;/g, String.fromCharCode(34))
+				.replace(/&apos;/g, String.fromCharCode(39))
+				.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1");
+
+			const cleanLink = link
+				.replace(/&amp;/g, "&")
+				.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1");
+
+			const cleanSource = source
+				.replace(/&amp;/g, "&")
+				.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1");
+
+			items.push({
+				title: cleanTitle.trim(),
+				link: cleanLink.trim(),
+				pubDate: pubDate.trim(),
+				source: cleanSource.trim()
+			});
+		}
+
+		const results = items.slice(0, limit);
+
+		return ApiResponse.ok(c, "Real-time news search completed", {
+			query,
+			count: results.length,
+			results
+		});
 	});
 
 export default browserHandler;
