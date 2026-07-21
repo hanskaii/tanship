@@ -1390,6 +1390,44 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/forms": {
+			post: {
+				operationId: "browserForms",
+				summary: "Extract web forms",
+				description:
+					"Extract all web forms and input schemas from any webpage via browser rendering + AI",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.012" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Page URL to extract forms from"
+									}
+								}
+							},
+							example: {
+								url: "https://example.com/login"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Extracted web forms result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",

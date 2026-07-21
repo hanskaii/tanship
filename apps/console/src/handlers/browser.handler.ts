@@ -108,6 +108,38 @@ const ARTICLE_EXTRACTION_SCHEMA = {
 	required: ["title", "contentMarkdown"]
 } as const;
 
+const FORMS_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		forms: {
+			type: "array",
+			items: {
+				type: "object",
+				properties: {
+					action: { type: "string" },
+					method: { type: "string" },
+					inputs: {
+						type: "array",
+						items: {
+							type: "object",
+							properties: {
+								name: { type: "string" },
+								type: { type: "string" },
+								placeholder: { type: "string" },
+								required: { type: "boolean" }
+							},
+							required: ["name", "type"]
+						}
+					},
+					submitButton: { type: "string" }
+				},
+				required: ["inputs"]
+			}
+		}
+	},
+	required: ["forms"]
+} as const;
+
 const CONTACTS_EXTRACTION_SCHEMA = {
 	type: "object",
 	properties: {
@@ -641,5 +673,20 @@ const browserHandler = new Hono<HonoEnv>()
 			count: internalLinks.length,
 			links: internalLinks
 		});
+	})
+	.post("/forms", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const result = await browser.json(
+			url,
+			"Extract all web forms and input elements from this page. Return an array of forms, each containing the action URL, method, inputs schema (name, type, placeholder, required), and submit button text.",
+			FORMS_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		);
+
+		return ApiResponse.ok(c, "Web forms extracted", { url, result });
 	});
 export default browserHandler;

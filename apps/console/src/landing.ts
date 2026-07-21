@@ -461,6 +461,20 @@ export const LANDING_PAGE_HTML = `
 						</div>
 						<p class="card-desc">Extract website internal links to generate an XML sitemap or JSON URLs array via browser rendering.</p>
 					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.health</span>
+							<span class="card-price">$0.015</span>
+						</div>
+						<p class="card-desc">Perform automated webpage uptime, speed, SSL, and console error checks via browser rendering + AI.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.forms</span>
+							<span class="card-price">$0.012</span>
+						</div>
+						<p class="card-desc">Extract all web forms and input schemas from any webpage via browser rendering + AI.</p>
+					</div>
 			</div>
 		</section>
 

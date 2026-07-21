@@ -669,6 +669,21 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			text: "I am absolutely thrilled and excited about our launch, but also slightly terrified!"
 		}
+	},
+	{
+		id: "browser.forms",
+		method: "POST",
+		path: "/v1/browser/forms",
+		price: "$0.012",
+		description:
+			"Extract all web forms and input schemas from any webpage via browser rendering + AI",
+		mimeType: "application/json",
+		input: {
+			url: "Page URL to extract forms from"
+		},
+		example: {
+			url: "https://example.com/login"
+		}
 	}
 ];
 

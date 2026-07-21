@@ -40,6 +40,7 @@ Payment-gated API on `console.tanflare.com`. Wraps Cloudflare services (Workers 
 | `POST /v1/browser/seo`            | $0.015 | Webpage SEO health audit and validator               |
 | `POST /v1/browser/contacts`       | $0.012 | Lead email, phone, and social links scraper          |
 | `POST /v1/browser/sitemap`        | $0.008 | Website XML sitemap crawler                          |
+| `POST /v1/browser/forms`          | $0.012 | Extract all web forms and input schemas              |
 | `POST /v1/browser/health`         | $0.015 | Webpage uptime, speed, SSL, and error check          |
 | `POST /v1/browser/screenshot`     | $0.010 | Screenshot any webpage (PNG) with CSS selectors      |
 | `POST /v1/browser/pdf`            | $0.010 | Render any URL to PDF with custom layout/scale       |
