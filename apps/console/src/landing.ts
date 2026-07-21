@@ -265,6 +265,13 @@ export const LANDING_PAGE_HTML = `
 					</div>
 					<p class="card-desc">BLIP image captioning and description.</p>
 				</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.answer</span>
+							<span class="card-price">$0.008</span>
+						</div>
+						<p class="card-desc">PaliGemma Visual Question Answering (VQA) on any image.</p>
+					</div>
 				<div class="card">
 					<div class="card-header">
 						<span class="card-title">ai.detect</span>
@@ -300,6 +307,34 @@ export const LANDING_PAGE_HTML = `
 					</div>
 					<p class="card-desc">Llama 3.3 context semantic text compression.</p>
 				</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.correct</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Grammar, spelling, and phrasing correction via Llama 3.3.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.code</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Coding helper, debugger, and refactorer via Llama 3.3.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.reason</span>
+							<span class="card-price">$0.008</span>
+						</div>
+						<p class="card-desc">DeepSeek-R1 reasoning with separated thinking process.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.similarity</span>
+							<span class="card-price">$0.004</span>
+						</div>
+						<p class="card-desc">Semantic similarity score between two texts via BGE-M3.</p>
+					</div>
 				<div class="card">
 					<div class="card-header">
 						<span class="card-title">browser.search</span>
@@ -307,6 +342,13 @@ export const LANDING_PAGE_HTML = `
 					</div>
 					<p class="card-desc">Headless browser rendering + AI structured search results.</p>
 				</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.search.summary</span>
+							<span class="card-price">$0.030</span>
+						</div>
+						<p class="card-desc">Search-GPT/Perplexity clone: web search + AI synthesis with cited sources.</p>
+					</div>
 				<div class="card">
 					<div class="card-header">
 						<span class="card-title">browser.article</span>
