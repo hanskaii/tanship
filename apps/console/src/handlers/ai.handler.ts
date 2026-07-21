@@ -210,14 +210,36 @@ const aiHandler = new Hono<HonoEnv>()
 	.post("/translate", zValidator("json", TranslationSchema), async (c) => {
 		const { text, source_lang, target_lang } = c.req.valid("json");
 
+		let detectedLang = source_lang;
+		if (!detectedLang) {
+			const detectResult = (await c.env.AI.run(
+				"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+				{
+					messages: [
+						{
+							role: "system",
+							content:
+								"You are a language detection engine. Return ONLY the 2-letter ISO 639-1 language code (e.g. en, es, fr, id, ja, de, zh) of the text input. No explanation."
+						},
+						{ role: "user", content: text.slice(0, 500) }
+					],
+					max_tokens: 10
+				}
+			)) as { response?: string };
+			detectedLang =
+				detectResult.response?.trim().toLowerCase().slice(0, 2) || "en";
+		}
+
 		const result = (await c.env.AI.run(TRANSLATION_MODEL as any, {
 			text,
-			source_lang,
+			source_lang: detectedLang,
 			target_lang
 		})) as { translated_text?: string };
 
 		return ApiResponse.ok(c, "Translation completed", {
 			model: TRANSLATION_MODEL,
+			sourceLang: detectedLang,
+			targetLang: target_lang,
 			translatedText: result.translated_text ?? ""
 		});
 	})
