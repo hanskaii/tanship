@@ -103,6 +103,12 @@ const CorrectSchema = z.object({
 	text: z.string().min(1).max(20_000)
 });
 
+const CodeSchema = z.object({
+	code: z.string().min(1).max(30_000),
+	prompt: z.string().min(1).max(4096),
+	language: z.string().min(1).max(50).optional()
+});
+
 const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
@@ -392,6 +398,32 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Text corrected", {
 			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 			correctedText: result.response ?? ""
+		});
+	})
+	.post("/code", zValidator("json", CodeSchema), async (c) => {
+		const { code, prompt, language } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are an expert software engineer assistant. Analyze the provided code and follow the user instructions exactly. Focus on correct typing, security, edge-cases, and performance. Keep explanations concise. If requested to modify code, return the code and a short explanation of the changes."
+					},
+					{
+						role: "user",
+						content: `Language: ${language || "unspecified"}\nCode:\n${code}\n\nInstructions: ${prompt}`
+					}
+				],
+				max_tokens: 2048
+			}
+		)) as { response?: string };
+
+		return ApiResponse.ok(c, "Code analysis completed", {
+			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			response: result.response ?? ""
 		});
 	});
 

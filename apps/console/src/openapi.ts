@@ -662,6 +662,55 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/code": {
+			post: {
+				operationId: "aiCode",
+				summary: "Analyze or debug code",
+				description:
+					"Analyze, debug, or refactor code via coding-tailored Workers AI (Llama 3.3 70B)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["code", "prompt"],
+								properties: {
+									code: {
+										type: "string",
+										description:
+											"The code snippet to analyze"
+									},
+									prompt: {
+										type: "string",
+										description:
+											"Coding instruction (e.g. explain, debug, rewrite)"
+									},
+									language: {
+										type: "string",
+										description:
+											"Optional programming language name"
+									}
+								}
+							},
+							example: {
+								code: "function add(a, b) { return a - b; }",
+								prompt: "Verify this function name and correct the implementation if needed.",
+								language: "javascript"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Code analysis result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",

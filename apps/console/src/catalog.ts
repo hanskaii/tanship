@@ -460,6 +460,25 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			text: "i has a error in my code and it dont build"
 		}
+	},
+	{
+		id: "ai.code",
+		method: "POST",
+		path: "/v1/ai/code",
+		price: "$0.005",
+		description:
+			"Analyze, debug, or refactor code via coding-tailored Workers AI (Llama 3.3 70B)",
+		mimeType: "application/json",
+		input: {
+			code: "The code snippet to analyze",
+			prompt: "Coding instruction (e.g. explain, debug, rewrite)",
+			language: "Optional programming language name"
+		},
+		example: {
+			code: "function add(a, b) { return a - b; }",
+			prompt: "Verify this function name and correct the implementation if needed.",
+			language: "javascript"
+		}
 	}
 ];
 
