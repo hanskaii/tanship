@@ -413,6 +413,23 @@ export const SERVICES: ServiceDef[] = [
 			query: "base network coinbase L2",
 			limit: 5
 		}
+	},
+	{
+		id: "ai.answer",
+		method: "POST",
+		path: "/v1/ai/answer",
+		price: "$0.008",
+		description:
+			"Perform visual question answering (VQA) on any image via Workers AI (PaliGemma), returns the text answer",
+		mimeType: "application/json",
+		input: {
+			url: "Absolute URL to the image file to analyze",
+			prompt: "Question or prompt about the image"
+		},
+		example: {
+			url: "https://x402.tanship.dev/assets/sample.jpg",
+			prompt: "What is written on the laptop screen?"
+		}
 	}
 ];
 

@@ -24,6 +24,7 @@ const RERANK_MODEL = "@cf/baai/bge-reranker-large";
 const CLASSIFY_MODEL = "@cf/microsoft/resnet-50";
 const MODERATE_MODEL = "@cf/meta/llama-guard-3-8b";
 const DETECT_MODEL = "@cf/facebook/detr-resnet-50";
+const ANSWER_MODEL = "@cf/google/paligemma-3b-pt-448";
 
 const ChatSchema = z.object({
 	messages: z
@@ -91,6 +92,11 @@ const DetectSchema = z.object({
 
 const CompressSchema = z.object({
 	text: z.string().min(1).max(20_000)
+});
+
+const AnswerSchema = z.object({
+	url: z.string().url(),
+	prompt: z.string().min(1).max(2048)
 });
 
 const aiHandler = new Hono<HonoEnv>()
@@ -333,6 +339,29 @@ const aiHandler = new Hono<HonoEnv>()
 				(1 - compressed.length / text.length) * 100
 			),
 			compressedText: compressed
+		});
+	})
+	.post("/answer", zValidator("json", AnswerSchema), async (c) => {
+		const { url, prompt } = c.req.valid("json");
+
+		const imageRes = await fetch(url);
+		if (!imageRes.ok) {
+			throw ApiError.badRequest(
+				`Failed to fetch image from URL: ${imageRes.statusText}`
+			);
+		}
+
+		const blob = await imageRes.arrayBuffer();
+		const image = Array.from(new Uint8Array(blob));
+
+		const result = (await c.env.AI.run(ANSWER_MODEL as any, {
+			image,
+			prompt
+		})) as { response?: string };
+
+		return ApiResponse.ok(c, "Visual question answering completed", {
+			model: ANSWER_MODEL,
+			response: result.response ?? ""
 		});
 	});
 

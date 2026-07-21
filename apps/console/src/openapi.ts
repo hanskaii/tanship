@@ -579,6 +579,52 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/answer": {
+			post: {
+				operationId: "aiAnswer",
+				summary: "Visual question answering",
+				description:
+					"Perform visual question answering (VQA) on any image via Workers AI (PaliGemma), returns the text answer",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url", "prompt"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Absolute URL to the image file to analyze"
+									},
+									prompt: {
+										type: "string",
+										description:
+											"Question or prompt about the image"
+									}
+								}
+							},
+							example: {
+								url: "https://x402.tanship.dev/assets/sample.jpg",
+								prompt: "What is written on the laptop screen?"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Visual question answering text result"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",
