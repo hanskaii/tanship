@@ -379,6 +379,21 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://blog.cloudflare.com/introducing-browser-rendering-api"
 		}
+	},
+	{
+		id: "ai.compress",
+		method: "POST",
+		path: "/v1/ai/compress",
+		price: "$0.005",
+		description:
+			"Compress long text semantically using Workers AI (Llama 3.3 70B) to save downstream LLM prompt tokens",
+		mimeType: "application/json",
+		input: {
+			text: "The text content to semantically compress"
+		},
+		example: {
+			text: "Model Context Protocol (MCP) is an open standard that enables developers to build secure, bidirectional connections between AI models and their data sources. By using standard JSON-RPC over stdio or SSE, clients can dynamically discover and call tools, read resources, and subscribe to prompts."
+		}
 	}
 ];
 

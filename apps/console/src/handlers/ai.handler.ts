@@ -87,6 +87,10 @@ const DetectSchema = z.object({
 	url: z.string().url()
 });
 
+const CompressSchema = z.object({
+	text: z.string().min(1).max(20_000)
+});
+
 const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
@@ -293,6 +297,38 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Object detection completed", {
 			model: DETECT_MODEL,
 			result: result ?? []
+		});
+	})
+	.post("/compress", zValidator("json", CompressSchema), async (c) => {
+		const { text } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are a context compression engine. Compress the input text into a highly dense, abbreviated, yet semantically complete representation. Drop fluff, articles, filler, and verbose phrasing. Keep key facts, relationships, numbers, and core technical details exact. Use shorthand abbreviations if clear. Goal: Save 60% of tokens while retaining all reasoning signals."
+					},
+					{
+						role: "user",
+						content: text
+					}
+				],
+				max_tokens: 2048
+			}
+		)) as { response?: string };
+
+		const compressed = result.response ?? "";
+
+		return ApiResponse.ok(c, "Text compressed", {
+			originalLength: text.length,
+			compressedLength: compressed.length,
+			savingsPercent: Math.round(
+				(1 - compressed.length / text.length) * 100
+			),
+			compressedText: compressed
 		});
 	});
 

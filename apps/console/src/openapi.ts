@@ -526,6 +526,43 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/compress": {
+			post: {
+				operationId: "aiCompress",
+				summary: "Compress text semantically",
+				description:
+					"Compress long text semantically using Workers AI (Llama 3.3 70B) to save downstream LLM prompt tokens",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["text"],
+								properties: {
+									text: {
+										type: "string",
+										description:
+											"The text content to semantically compress"
+									}
+								}
+							},
+							example: {
+								text: "Model Context Protocol (MCP) is an open standard that enables developers to build secure, bidirectional connections between AI models and their data sources. By using standard JSON-RPC over stdio or SSE, clients can dynamically discover and call tools, read resources, and subscribe to prompts."
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Semantic compression results" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",
