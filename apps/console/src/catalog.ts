@@ -628,6 +628,21 @@ export const SERVICES: ServiceDef[] = [
 			schema: "CREATE TABLE users (id INT, name TEXT, spend REAL, date TEXT);",
 			dialect: "sqlite"
 		}
+	},
+	{
+		id: "browser.sitemap",
+		method: "POST",
+		path: "/v1/browser/sitemap",
+		price: "$0.008",
+		description:
+			"Extract and filter all internal links from a website root to generate an XML sitemap or JSON URLs array via browser rendering",
+		mimeType: "application/json",
+		input: {
+			url: "Root website URL to crawl for sitemap generation"
+		},
+		example: {
+			url: "https://example.com"
+		}
 	}
 ];
 

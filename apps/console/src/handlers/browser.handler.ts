@@ -573,5 +573,56 @@ const browserHandler = new Hono<HonoEnv>()
 			url,
 			contacts: result
 		});
+	})
+	.post("/sitemap", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const links = await browser.links(url);
+
+		let origin;
+		try {
+			origin = new URL(url).origin;
+		} catch (err) {
+			throw ApiError.badRequest("Invalid website root URL");
+		}
+
+		const internalLinks = Array.from(
+			new Set(
+				links
+					.map((link) => {
+						try {
+							const parsed = new URL(link, url);
+							if (parsed.origin === origin) {
+								parsed.hash = "";
+								return parsed.toString();
+							}
+						} catch (e) {}
+						return null;
+					})
+					.filter((link): link is string => link !== null)
+			)
+		);
+
+		const accept = c.req.header("Accept");
+		if (
+			accept &&
+			(accept.includes("application/xml") || accept.includes("text/xml"))
+		) {
+			const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${internalLinks.map((l) => `  <url>\n    <loc>${l.replace(/&/g, "&amp;")}</loc>\n  </url>`).join("\n")}\n</urlset>`;
+			return c.body(xml, 200, {
+				"Content-Type": "application/xml; charset=utf-8"
+			});
+		}
+
+		return ApiResponse.ok(c, "XML sitemap links extracted", {
+			url,
+			origin,
+			count: internalLinks.length,
+			links: internalLinks
+		});
 	});
 export default browserHandler;

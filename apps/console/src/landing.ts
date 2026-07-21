@@ -447,6 +447,13 @@ export const LANDING_PAGE_HTML = `
 						</div>
 						<p class="card-desc">Extract email addresses, phone numbers, and social media profile links from any webpage.</p>
 					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.sitemap</span>
+							<span class="card-price">$0.008</span>
+						</div>
+						<p class="card-desc">Extract website internal links to generate an XML sitemap or JSON URLs array via browser rendering.</p>
+					</div>
 			</div>
 		</section>
 

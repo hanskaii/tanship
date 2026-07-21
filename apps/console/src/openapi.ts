@@ -1313,6 +1313,44 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/sitemap": {
+			post: {
+				operationId: "browserSitemap",
+				summary: "Extract website sitemap links",
+				description:
+					"Extract and filter all internal links from a website root to generate an XML sitemap or JSON URLs array via browser rendering",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Root website URL to crawl for sitemap generation"
+									}
+								}
+							},
+							example: {
+								url: "https://example.com"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Sitemap links list result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",
