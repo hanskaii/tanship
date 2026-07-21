@@ -31,6 +31,33 @@ const RssSchema = UrlSchema.extend({
 	limit: z.number().int().min(1).max(50).default(20)
 });
 
+const SearchSchema = z.object({
+	query: z.string().min(1).max(500),
+	limit: z.number().int().min(1).max(50).default(10)
+});
+
+const SEARCH_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		results: {
+			type: "array",
+			items: {
+				type: "object",
+				properties: {
+					title: { type: "string" },
+					url: {
+						type: "string",
+						description: "Absolute URL of the search result link"
+					},
+					snippet: { type: "string" }
+				},
+				required: ["title", "url", "snippet"]
+			}
+		}
+	},
+	required: ["results"]
+} as const;
+
 const RSS_EXTRACTION_SCHEMA = {
 	type: "object",
 	properties: {
@@ -170,6 +197,31 @@ const browserHandler = new Hono<HonoEnv>()
 
 		return c.body(feed, 200, {
 			"Content-Type": "application/rss+xml; charset=utf-8"
+		});
+	})
+	.post("/search", zValidator("json", SearchSchema), async (c) => {
+		const { query, limit } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const targetUrl = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`;
+
+		const extracted = (await browser.json(
+			targetUrl,
+			"Extract the search result items listed on this page. Include every search result with its title, absolute URL, and snippet description.",
+			SEARCH_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		)) as {
+			results?: Array<{ title: string; url: string; snippet: string }>;
+		} | null;
+
+		const results = extracted?.results ?? [];
+
+		return ApiResponse.ok(c, "Web search completed", {
+			query,
+			count: results.length,
+			results: results.slice(0, limit)
 		});
 	});
 

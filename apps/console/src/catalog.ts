@@ -332,6 +332,23 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://x402.tanship.dev/assets/sample.jpg"
 		}
+	},
+	{
+		id: "browser.search",
+		method: "POST",
+		path: "/v1/browser/search",
+		price: "$0.02",
+		description:
+			"Perform a web search via headless browser rendering, returns structured search results (titles, links, snippets)",
+		mimeType: "application/json",
+		input: {
+			query: "Search query string",
+			limit: "Optional max results to return (default 10)"
+		},
+		example: {
+			query: "base network coinbase L2",
+			limit: 5
+		}
 	}
 ];
 

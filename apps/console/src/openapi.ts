@@ -526,6 +526,49 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/search": {
+			post: {
+				operationId: "browserSearch",
+				summary: "Perform web search",
+				description:
+					"Perform a web search via headless browser rendering, returns structured search results (titles, links, snippets)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.02" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["query"],
+								properties: {
+									query: {
+										type: "string",
+										description: "Search query string"
+									},
+									limit: {
+										type: "integer",
+										default: 10,
+										description:
+											"Optional max results to return"
+									}
+								}
+							},
+							example: {
+								query: "base network coinbase L2",
+								limit: 5
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Structured web search results" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",
