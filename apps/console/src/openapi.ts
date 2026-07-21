@@ -856,6 +856,50 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/lint": {
+			post: {
+				operationId: "aiLint",
+				summary: "Static code syntax checking",
+				description:
+					"Perform static code syntax checking and linting via compiler-tailored Workers AI (Llama 3.3 70B)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["code"],
+								properties: {
+									code: {
+										type: "string",
+										description: "The code snippet to lint"
+									},
+									language: {
+										type: "string",
+										description:
+											"Optional programming language name"
+									}
+								}
+							},
+							example: {
+								code: "const x = 5\nconsole.log(y)",
+								language: "javascript"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Structured linter analysis results"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",

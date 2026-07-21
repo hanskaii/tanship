@@ -330,6 +330,13 @@ export const LANDING_PAGE_HTML = `
 					</div>
 					<div class="card">
 						<div class="card-header">
+							<span class="card-title">ai.lint</span>
+							<span class="card-price">$0.008</span>
+						</div>
+						<p class="card-desc">Static code syntax checking, compile verification, and bug linting via Llama 3.3.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
 							<span class="card-title">ai.reason</span>
 							<span class="card-price">$0.008</span>
 						</div>

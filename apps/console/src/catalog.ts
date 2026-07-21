@@ -560,6 +560,23 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://example.com/contact"
 		}
+	},
+	{
+		id: "ai.lint",
+		method: "POST",
+		path: "/v1/ai/lint",
+		price: "$0.008",
+		description:
+			"Perform static code syntax checking and linting via compiler-tailored Workers AI (Llama 3.3 70B)",
+		mimeType: "application/json",
+		input: {
+			code: "The code snippet to lint",
+			language: "Optional programming language name"
+		},
+		example: {
+			code: "const x = 5\nconsole.log(y)",
+			language: "javascript"
+		}
 	}
 ];
 

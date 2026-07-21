@@ -132,6 +132,11 @@ const OcrSchema = z.object({
 	url: z.string().url()
 });
 
+const LintSchema = z.object({
+	code: z.string().min(1).max(30_000),
+	language: z.string().min(1).max(50).optional()
+});
+
 const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
@@ -544,6 +549,50 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Visual OCR completed", {
 			model: ANSWER_MODEL,
 			text: result.response ?? ""
+		});
+	})
+	.post("/lint", zValidator("json", LintSchema), async (c) => {
+		const { code, language } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are a professional compiler and linter. Check the provided code for syntax errors, compilation failures, reference errors, and critical bugs. Return a JSON object with: 1) valid (boolean: true if no errors/critical bugs), 2) issues (array of { line: number, severity: error|warning, message: string, fix: string }). Output must strictly follow the JSON format."
+					},
+					{
+						role: "user",
+						content: `Language: ${language || "unspecified"}\nCode:\n${code}`
+					}
+				],
+				response_format: { type: "json_object" },
+				max_tokens: 2048
+			}
+		)) as { response?: string };
+
+		let parsed: unknown;
+		try {
+			parsed = JSON.parse(result.response ?? "{}");
+		} catch {
+			parsed = {
+				valid: false,
+				issues: [
+					{
+						line: 1,
+						severity: "error",
+						message: "Failed to parse linter output",
+						fix: ""
+					}
+				]
+			};
+		}
+
+		return ApiResponse.ok(c, "Code syntax check completed", {
+			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			result: parsed
 		});
 	});
 
