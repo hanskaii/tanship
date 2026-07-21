@@ -15,7 +15,8 @@ const UrlSchema = z.object({
 const ScreenshotSchema = UrlSchema.extend({
 	fullPage: z.boolean().default(false),
 	width: z.number().int().min(320).max(3840).default(1280),
-	height: z.number().int().min(240).max(2160).default(800)
+	height: z.number().int().min(240).max(2160).default(800),
+	selector: z.string().optional()
 });
 
 const ScrapeSchema = UrlSchema.extend({

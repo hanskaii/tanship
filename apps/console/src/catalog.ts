@@ -119,7 +119,9 @@ export const SERVICES: ServiceDef[] = [
 			url: "Page URL",
 			fullPage: "Optional boolean (default false)",
 			width: "Optional viewport width (default 1280)",
-			height: "Optional viewport height (default 800)"
+			height: "Optional viewport height (default 800)",
+			selector:
+				"Optional CSS selector to capture specific element instead of viewport"
 		},
 		example: { url: "https://example.com", fullPage: true }
 	},

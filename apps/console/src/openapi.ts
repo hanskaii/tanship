@@ -1388,6 +1388,11 @@ export const OPENAPI_SPEC = {
 										type: "integer",
 										default: 800,
 										description: "Viewport height"
+									},
+									selector: {
+										type: "string",
+										description:
+											"Optional CSS selector to capture specific element instead of viewport"
 									}
 								}
 							},

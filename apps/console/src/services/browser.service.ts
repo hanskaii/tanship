@@ -51,10 +51,14 @@ export class BrowserRenderingService {
 		fullPage: boolean;
 		width: number;
 		height: number;
+		selector?: string;
 	}): Promise<ArrayBuffer> {
 		const res = await this.post("screenshot", {
 			url: options.url,
-			screenshotOptions: { fullPage: options.fullPage },
+			screenshotOptions: {
+				fullPage: options.fullPage,
+				selector: options.selector
+			},
 			viewport: { width: options.width, height: options.height }
 		});
 		return res.arrayBuffer();
