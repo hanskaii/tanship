@@ -775,6 +775,49 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/similarity": {
+			post: {
+				operationId: "aiSimilarity",
+				summary: "Calculate semantic similarity",
+				description:
+					"Calculate semantic cosine similarity score between two texts via Workers AI (BGE-M3 embeddings)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.004" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["text1", "text2"],
+								properties: {
+									text1: {
+										type: "string",
+										description:
+											"First text content to compare"
+									},
+									text2: {
+										type: "string",
+										description:
+											"Second text content to compare"
+									}
+								}
+							},
+							example: {
+								text1: "The weather is very warm today.",
+								text2: "It is quite hot outside."
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Semantic similarity score" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",

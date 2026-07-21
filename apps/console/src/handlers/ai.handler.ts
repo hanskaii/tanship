@@ -123,6 +123,11 @@ const ReasonSchema = z.object({
 	max_tokens: z.number().int().min(1).max(4096).default(2048)
 });
 
+const SimilaritySchema = z.object({
+	text1: z.string().min(1).max(10_000),
+	text2: z.string().min(1).max(10_000)
+});
+
 const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
@@ -468,6 +473,50 @@ const aiHandler = new Hono<HonoEnv>()
 			model: REASON_MODEL,
 			thinking,
 			answer
+		});
+	})
+	.post("/similarity", zValidator("json", SimilaritySchema), async (c) => {
+		const { text1, text2 } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(EMBEDDING_MODEL as any, {
+			text: [text1, text2]
+		})) as { data?: number[][] };
+
+		const vectors = result.data ?? [];
+		if (vectors.length < 2) {
+			throw ApiError.badGateway(
+				"Failed to generate embeddings for both texts"
+			);
+		}
+
+		const vec1 = vectors[0];
+		const vec2 = vectors[1];
+
+		if (
+			!vec1 ||
+			!vec2 ||
+			vec1.length !== vec2.length ||
+			vec1.length === 0
+		) {
+			throw ApiError.badGateway(
+				"Generated embeddings are empty or mismatched"
+			);
+		}
+
+		let dotProduct = 0;
+		let normA = 0;
+		let normB = 0;
+		for (let i = 0; i < vec1.length; i++) {
+			dotProduct += vec1[i] * vec2[i];
+			normA += vec1[i] * vec1[i];
+			normB += vec2[i] * vec2[i];
+		}
+
+		const similarity = dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+
+		return ApiResponse.ok(c, "Similarity checker completed", {
+			model: EMBEDDING_MODEL,
+			similarity: parseFloat(similarity.toFixed(6))
 		});
 	});
 

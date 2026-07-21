@@ -498,6 +498,23 @@ export const SERVICES: ServiceDef[] = [
 				{ role: "user", content: "How many Rs are in strawberry?" }
 			]
 		}
+	},
+	{
+		id: "ai.similarity",
+		method: "POST",
+		path: "/v1/ai/similarity",
+		price: "$0.004",
+		description:
+			"Calculate semantic cosine similarity score between two texts via Workers AI (BGE-M3 embeddings)",
+		mimeType: "application/json",
+		input: {
+			text1: "First text content to compare",
+			text2: "Second text content to compare"
+		},
+		example: {
+			text1: "The weather is very warm today.",
+			text2: "It is quite hot outside."
+		}
 	}
 ];
 
