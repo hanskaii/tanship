@@ -128,6 +128,10 @@ const SimilaritySchema = z.object({
 	text2: z.string().min(1).max(10_000)
 });
 
+const OcrSchema = z.object({
+	url: z.string().url()
+});
+
 const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
@@ -517,6 +521,29 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Similarity checker completed", {
 			model: EMBEDDING_MODEL,
 			similarity: parseFloat(similarity.toFixed(6))
+		});
+	})
+	.post("/ocr", zValidator("json", OcrSchema), async (c) => {
+		const { url } = c.req.valid("json");
+
+		const imageRes = await fetch(url);
+		if (!imageRes.ok) {
+			throw ApiError.badRequest(
+				`Failed to fetch image from URL: ${imageRes.statusText}`
+			);
+		}
+
+		const blob = await imageRes.arrayBuffer();
+		const image = Array.from(new Uint8Array(blob));
+
+		const result = (await c.env.AI.run(ANSWER_MODEL as any, {
+			image,
+			prompt: "ocr"
+		})) as { response?: string };
+
+		return ApiResponse.ok(c, "Visual OCR completed", {
+			model: ANSWER_MODEL,
+			text: result.response ?? ""
 		});
 	});
 

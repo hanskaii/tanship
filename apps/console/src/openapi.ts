@@ -818,6 +818,44 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/ocr": {
+			post: {
+				operationId: "aiOcr",
+				summary: "Extract text from image",
+				description:
+					"Extract spelling/text content from any image via Workers AI (PaliGemma OCR)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Absolute URL to the image file to extract text from"
+									}
+								}
+							},
+							example: {
+								url: "https://x402.tanship.dev/assets/sample.jpg"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Extracted text content result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",

@@ -515,6 +515,21 @@ export const SERVICES: ServiceDef[] = [
 			text1: "The weather is very warm today.",
 			text2: "It is quite hot outside."
 		}
+	},
+	{
+		id: "ai.ocr",
+		method: "POST",
+		path: "/v1/ai/ocr",
+		price: "$0.008",
+		description:
+			"Extract spelling/text content from any image via Workers AI (PaliGemma OCR)",
+		mimeType: "application/json",
+		input: {
+			url: "Absolute URL to the image file to extract text from"
+		},
+		example: {
+			url: "https://x402.tanship.dev/assets/sample.jpg"
+		}
 	}
 ];
 

@@ -272,6 +272,13 @@ export const LANDING_PAGE_HTML = `
 						</div>
 						<p class="card-desc">PaliGemma Visual Question Answering (VQA) on any image.</p>
 					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.ocr</span>
+							<span class="card-price">$0.008</span>
+						</div>
+						<p class="card-desc">PaliGemma Visual OCR: extract exact text content from any image.</p>
+					</div>
 				<div class="card">
 					<div class="card-header">
 						<span class="card-title">ai.detect</span>
