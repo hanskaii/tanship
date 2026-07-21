@@ -104,15 +104,34 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
 
 			for (const [key, desc] of Object.entries(svc.input)) {
 				const isOptional = desc.toLowerCase().includes("optional");
-				properties[key] = {
-					type:
-						key === "messages" ||
-						key === "selectors" ||
-						key === "documents"
-							? "array"
-							: "string",
-					description: desc
-				};
+				if (key === "messages") {
+					properties[key] = {
+						type: "array",
+						description: desc,
+						items: {
+							type: "object",
+							properties: {
+								role: {
+									type: "string",
+									enum: ["system", "user", "assistant"]
+								},
+								content: { type: "string" }
+							},
+							required: ["role", "content"]
+						}
+					} as any;
+				} else if (key === "selectors" || key === "documents") {
+					properties[key] = {
+						type: "array",
+						description: desc,
+						items: { type: "string" }
+					} as any;
+				} else {
+					properties[key] = {
+						type: "string",
+						description: desc
+					};
+				}
 				if (!isOptional) {
 					required.push(key);
 				}
