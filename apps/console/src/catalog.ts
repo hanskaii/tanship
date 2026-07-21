@@ -545,6 +545,21 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://example.com"
 		}
+	},
+	{
+		id: "browser.contacts",
+		method: "POST",
+		path: "/v1/browser/contacts",
+		price: "$0.012",
+		description:
+			"Extract contact details and social media links from any webpage via browser rendering + AI",
+		mimeType: "application/json",
+		input: {
+			url: "Page URL to extract contacts from"
+		},
+		example: {
+			url: "https://example.com/contact"
+		}
 	}
 ];
 

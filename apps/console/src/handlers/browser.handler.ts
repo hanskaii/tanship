@@ -91,6 +91,42 @@ const ARTICLE_EXTRACTION_SCHEMA = {
 	required: ["title", "contentMarkdown"]
 } as const;
 
+const CONTACTS_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		emails: {
+			type: "array",
+			items: { type: "string" },
+			description: "Email addresses found on the page"
+		},
+		phones: {
+			type: "array",
+			items: { type: "string" },
+			description: "Phone numbers found on the page"
+		},
+		addresses: {
+			type: "array",
+			items: { type: "string" },
+			description: "Physical or mailing addresses found on the page"
+		},
+		socialLinks: {
+			type: "array",
+			items: {
+				type: "object",
+				properties: {
+					platform: {
+						type: "string",
+						description: "e.g. twitter, linkedin, github, facebook"
+					},
+					url: { type: "string", description: "Profile URL" }
+				},
+				required: ["platform", "url"]
+			}
+		}
+	},
+	required: ["emails", "phones", "socialLinks"]
+} as const;
+
 const SEO_EXTRACTION_SCHEMA = {
 	type: "object",
 	properties: {
@@ -519,6 +555,23 @@ const browserHandler = new Hono<HonoEnv>()
 		);
 
 		return ApiResponse.ok(c, "SEO audit completed", { url, audit: result });
-	});
+	})
+	.post("/contacts", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
 
+		const result = await browser.json(
+			url,
+			"Extract all contact details. Return an object with emails, phones, addresses, and socialLinks (platform and profile URL) found on the page.",
+			CONTACTS_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		);
+
+		return ApiResponse.ok(c, "Contact details extracted", {
+			url,
+			contacts: result
+		});
+	});
 export default browserHandler;

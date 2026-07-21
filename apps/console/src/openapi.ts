@@ -1098,6 +1098,44 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/contacts": {
+			post: {
+				operationId: "browserContacts",
+				summary: "Extract contact details",
+				description:
+					"Extract contact details and social media links from any webpage via browser rendering + AI",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.012" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Page URL to extract contacts from"
+									}
+								}
+							},
+							example: {
+								url: "https://example.com/contact"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Extracted contact details results" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",
