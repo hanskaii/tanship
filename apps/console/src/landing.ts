@@ -405,6 +405,13 @@ export const LANDING_PAGE_HTML = `
 					</div>
 					<p class="card-desc">Real-time news search (titles, links, dates, sources).</p>
 				</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.seo</span>
+							<span class="card-price">$0.015</span>
+						</div>
+						<p class="card-desc">Perform automated SEO health audit and validator on any webpage via browser rendering + AI.</p>
+					</div>
 			</div>
 		</section>
 

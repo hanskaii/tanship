@@ -1061,6 +1061,43 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/seo": {
+			post: {
+				operationId: "browserSeo",
+				summary: "SEO health audit and validation",
+				description:
+					"Perform an automated SEO health audit and validator on any webpage via browser rendering + AI",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.015" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description: "Page URL to audit for SEO"
+									}
+								}
+							},
+							example: {
+								url: "https://example.com"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "SEO health audit results" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",

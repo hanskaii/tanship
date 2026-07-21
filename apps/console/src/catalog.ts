@@ -530,6 +530,21 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://x402.tanship.dev/assets/sample.jpg"
 		}
+	},
+	{
+		id: "browser.seo",
+		method: "POST",
+		path: "/v1/browser/seo",
+		price: "$0.015",
+		description:
+			"Perform an automated SEO health audit and validator on any webpage via browser rendering + AI",
+		mimeType: "application/json",
+		input: {
+			url: "Page URL to audit for SEO"
+		},
+		example: {
+			url: "https://example.com"
+		}
 	}
 ];
 

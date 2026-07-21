@@ -91,6 +91,53 @@ const ARTICLE_EXTRACTION_SCHEMA = {
 	required: ["title", "contentMarkdown"]
 } as const;
 
+const SEO_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		score: {
+			type: "integer",
+			description: "SEO Health Score from 0 to 100"
+		},
+		metadata: {
+			type: "object",
+			properties: {
+				title: { type: "string" },
+				description: { type: "string" },
+				canonicalUrl: { type: "string" },
+				robots: { type: "string" }
+			},
+			required: ["title"]
+		},
+		headingStructure: {
+			type: "array",
+			items: { type: "string" },
+			description:
+				"Sequence of heading tags on the page (e.g. h1, h2, h2, h3)"
+		},
+		imageCount: {
+			type: "object",
+			properties: {
+				total: { type: "integer" },
+				missingAlt: { type: "integer" }
+			},
+			required: ["total", "missingAlt"]
+		},
+		issues: {
+			type: "array",
+			items: {
+				type: "object",
+				properties: {
+					severity: { type: "string", enum: ["critical", "warning"] },
+					message: { type: "string" },
+					recommendation: { type: "string" }
+				},
+				required: ["severity", "message", "recommendation"]
+			}
+		}
+	},
+	required: ["score", "metadata", "issues"]
+} as const;
+
 const METADATA_EXTRACTION_SCHEMA = {
 	type: "object",
 	properties: {
@@ -457,6 +504,21 @@ const browserHandler = new Hono<HonoEnv>()
 				}))
 			});
 		}
-	);
+	)
+	.post("/seo", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const result = await browser.json(
+			url,
+			"Perform an SEO audit of this webpage. Check the metadata (title, description, canonical link, robots meta tag), heading tags sequence (H1s, H2s), image counts, and missing alt tags. Evaluate and return a health score (0-100), structure, and a list of key issues/warnings with recommendations.",
+			SEO_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		);
+
+		return ApiResponse.ok(c, "SEO audit completed", { url, audit: result });
+	});
 
 export default browserHandler;
