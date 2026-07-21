@@ -21,6 +21,7 @@ const DESCRIBE_MODEL = "@cf/salesforce/blip-image-captioning-large";
 const RERANK_MODEL = "@cf/baai/bge-reranker-large";
 const CLASSIFY_MODEL = "@cf/microsoft/resnet-50";
 const MODERATE_MODEL = "@cf/meta/llama-guard-3-8b";
+const DETECT_MODEL = "@cf/facebook/detr-resnet-50";
 
 const ChatSchema = z.object({
 	messages: z
@@ -78,6 +79,10 @@ const ClassifySchema = z.object({
 
 const ModerateSchema = z.object({
 	text: z.string().min(1).max(10_000)
+});
+
+const DetectSchema = z.object({
+	url: z.string().url()
 });
 
 const aiHandler = new Hono<HonoEnv>()
@@ -264,6 +269,28 @@ const aiHandler = new Hono<HonoEnv>()
 						.map((s: string) => s.trim())
 						.filter(Boolean),
 			response: responseText
+		});
+	})
+	.post("/detect", zValidator("json", DetectSchema), async (c) => {
+		const { url } = c.req.valid("json");
+
+		const imageRes = await fetch(url);
+		if (!imageRes.ok) {
+			throw ApiError.badRequest(
+				`Failed to fetch image from URL: ${imageRes.statusText}`
+			);
+		}
+
+		const blob = await imageRes.arrayBuffer();
+		const image = Array.from(new Uint8Array(blob));
+
+		const result = (await c.env.AI.run(DETECT_MODEL as any, {
+			image
+		})) as any;
+
+		return ApiResponse.ok(c, "Object detection completed", {
+			model: DETECT_MODEL,
+			result: result ?? []
 		});
 	});
 

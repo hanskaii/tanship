@@ -317,6 +317,21 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			text: "How do I build a secure API on Cloudflare Workers?"
 		}
+	},
+	{
+		id: "ai.detect",
+		method: "POST",
+		path: "/v1/ai/detect",
+		price: "$0.005",
+		description:
+			"Detect objects inside any image via Workers AI (DETR-ResNet-50), returns tags and bounding boxes",
+		mimeType: "application/json",
+		input: {
+			url: "Absolute URL to the image file to detect objects inside"
+		},
+		example: {
+			url: "https://x402.tanship.dev/assets/sample.jpg"
+		}
 	}
 ];
 

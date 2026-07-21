@@ -485,6 +485,47 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/detect": {
+			post: {
+				operationId: "aiDetect",
+				summary: "Detect objects inside image",
+				description:
+					"Detect objects inside any image via Workers AI (DETR-ResNet-50), returns tags and bounding boxes",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Absolute URL to the image file to detect objects inside"
+									}
+								}
+							},
+							example: {
+								url: "https://x402.tanship.dev/assets/sample.jpg"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description:
+							"Object detection result bounding boxes and scores"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",
