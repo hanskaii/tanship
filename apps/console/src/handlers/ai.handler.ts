@@ -137,6 +137,15 @@ const LintSchema = z.object({
 	language: z.string().min(1).max(50).optional()
 });
 
+const MemoryAddSchema = z.object({
+	text: z.string().min(1).max(10_000)
+});
+
+const MemorySearchSchema = z.object({
+	query: z.string().min(1).max(1000),
+	top_k: z.number().int().min(1).max(20).default(5)
+});
+
 const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
@@ -594,6 +603,76 @@ const aiHandler = new Hono<HonoEnv>()
 			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 			result: parsed
 		});
-	});
+	})
+	.post("/memory/add", zValidator("json", MemoryAddSchema), async (c) => {
+		const { text } = c.req.valid("json");
+
+		// Generate embedding vector
+		const result = (await c.env.AI.run(EMBEDDING_MODEL as any, {
+			text: [text]
+		})) as { data?: number[][] };
+
+		const vectors = result.data ?? [];
+		const values = vectors[0];
+		if (!values || values.length === 0) {
+			throw ApiError.badGateway(
+				"Failed to generate embedding for the memory text"
+			);
+		}
+
+		// Generate unique id and insert into Vectorize
+		const id = crypto.randomUUID();
+		await c.env.VECTORIZE.insert([
+			{
+				id,
+				values,
+				metadata: { text, timestamp: Date.now() }
+			}
+		]);
+
+		return ApiResponse.ok(c, "Memory added successfully", {
+			id,
+			text
+		});
+	})
+	.post(
+		"/memory/search",
+		zValidator("json", MemorySearchSchema),
+		async (c) => {
+			const { query, top_k } = c.req.valid("json");
+
+			// Generate query embedding vector
+			const result = (await c.env.AI.run(EMBEDDING_MODEL as any, {
+				text: [query]
+			})) as { data?: number[][] };
+
+			const vectors = result.data ?? [];
+			const values = vectors[0];
+			if (!values || values.length === 0) {
+				throw ApiError.badGateway(
+					"Failed to generate embedding for the search query"
+				);
+			}
+
+			// Query Vectorize index
+			const queryResult = await c.env.VECTORIZE.query(values, {
+				topK: top_k,
+				returnValues: false,
+				returnMetadata: "all"
+			});
+
+			const memories = queryResult.matches.map((match) => ({
+				id: match.id,
+				score: match.score,
+				text: (match.metadata as Record<string, unknown>)?.text ?? ""
+			}));
+
+			return ApiResponse.ok(c, "Semantic memory search completed", {
+				query,
+				count: memories.length,
+				memories
+			});
+		}
+	);
 
 export default aiHandler;

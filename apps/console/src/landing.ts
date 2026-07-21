@@ -349,6 +349,20 @@ export const LANDING_PAGE_HTML = `
 						</div>
 						<p class="card-desc">Semantic similarity score between two texts via BGE-M3.</p>
 					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.memory.add</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Insert text chunks semantically into persistent memory via BGE-M3 + Cloudflare Vectorize.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.memory.search</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Search semantically matching text chunks from persistent memory with score metrics.</p>
+					</div>
 				<div class="card">
 					<div class="card-header">
 						<span class="card-title">browser.search</span>

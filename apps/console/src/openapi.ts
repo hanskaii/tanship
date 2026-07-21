@@ -900,6 +900,88 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/memory/add": {
+			post: {
+				operationId: "aiMemoryAdd",
+				summary: "Insert text to semantic memory",
+				description:
+					"Insert text chunks semantically into persistent memory using Workers AI (BGE-M3) and Cloudflare Vectorize",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["text"],
+								properties: {
+									text: {
+										type: "string",
+										description:
+											"The text content to store in semantic memory"
+									}
+								}
+							},
+							example: {
+								text: "Model Context Protocol (MCP) is standard JSON-RPC over stdio or SSE."
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Memory added successfully with ID" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/memory/search": {
+			post: {
+				operationId: "aiMemorySearch",
+				summary: "Search semantic memory",
+				description:
+					"Search semantically matching text chunks from persistent memory via BGE-M3 + Vectorize",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["query"],
+								properties: {
+									query: {
+										type: "string",
+										description: "Search query string"
+									},
+									top_k: {
+										type: "integer",
+										default: 5,
+										description:
+											"Optional number of top matches to return"
+									}
+								}
+							},
+							example: {
+								query: "how does MCP work?",
+								top_k: 3
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Semantic memory search matches results"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",

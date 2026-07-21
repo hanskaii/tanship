@@ -577,6 +577,38 @@ export const SERVICES: ServiceDef[] = [
 			code: "const x = 5\nconsole.log(y)",
 			language: "javascript"
 		}
+	},
+	{
+		id: "ai.memory.add",
+		method: "POST",
+		path: "/v1/ai/memory/add",
+		price: "$0.005",
+		description:
+			"Insert text chunks semantically into persistent memory using Workers AI (BGE-M3) and Cloudflare Vectorize",
+		mimeType: "application/json",
+		input: {
+			text: "The text content to store in semantic memory"
+		},
+		example: {
+			text: "Model Context Protocol (MCP) is standard JSON-RPC over stdio or SSE."
+		}
+	},
+	{
+		id: "ai.memory.search",
+		method: "POST",
+		path: "/v1/ai/memory/search",
+		price: "$0.005",
+		description:
+			"Search semantically matching text chunks from persistent memory via BGE-M3 + Vectorize",
+		mimeType: "application/json",
+		input: {
+			query: "Search query string",
+			top_k: "Optional number of top matches to return (default 5)"
+		},
+		example: {
+			query: "how does MCP work?",
+			top_k: 3
+		}
 	}
 ];
 
