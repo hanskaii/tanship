@@ -1,3 +1,4 @@
+import { LANDING_PAGE_HTML } from "./landing";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 
@@ -40,12 +41,16 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/browser", browserHandler)
 	.route("/v1/summarize", summarizeHandler)
 	// Free discovery endpoints
-	.get("/", (c) =>
-		ApiResponse.ok(c, "Tanflare Console — x402 API", {
-			docs: "/v1/services",
-			payment: "x402 (https://x402.org)"
-		})
-	)
+	.get("/", (c) => {
+		const accept = c.req.header("Accept");
+		if (accept && accept.includes("application/json")) {
+			return ApiResponse.ok(c, "Tanflare Console — x402 API", {
+				docs: "/v1/services",
+				payment: "x402 (https://x402.org)"
+			});
+		}
+		return c.html(LANDING_PAGE_HTML);
+	})
 	.get("/openapi.json", (c) => c.json(OPENAPI_SPEC))
 	.get("/.well-known/x402", (c) =>
 		c.json({ openapi: "https://x402.tanship.dev/openapi.json" })
