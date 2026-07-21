@@ -138,6 +138,22 @@ export const OPENAPI_SPEC = {
 										default: 4,
 										description:
 											"Optional diffusion steps 1-8"
+									},
+									width: {
+										type: "integer",
+										minimum: 256,
+										maximum: 1024,
+										default: 1024,
+										description:
+											"Optional image width (default 1024)"
+									},
+									height: {
+										type: "integer",
+										minimum: 256,
+										maximum: 1024,
+										default: 1024,
+										description:
+											"Optional image height (default 1024)"
 									}
 								}
 							},

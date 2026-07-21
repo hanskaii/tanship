@@ -53,7 +53,9 @@ export const SERVICES: ServiceDef[] = [
 		mimeType: "image/jpeg",
 		input: {
 			prompt: "Image description",
-			steps: "Optional diffusion steps 1-8 (default 4)"
+			steps: "Optional diffusion steps 1-8 (default 4)",
+			width: "Optional image width 256-1024 (default 1024)",
+			height: "Optional image height 256-1024 (default 1024)"
 		},
 		example: {
 			prompt: "a red panda coding on a laptop, studio ghibli style"

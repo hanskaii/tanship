@@ -41,7 +41,9 @@ const ChatSchema = z.object({
 
 const ImageSchema = z.object({
 	prompt: z.string().min(1).max(2048),
-	steps: z.number().int().min(1).max(8).default(4)
+	steps: z.number().int().min(1).max(8).default(4),
+	width: z.number().int().min(256).max(1024).default(1024),
+	height: z.number().int().min(256).max(1024).default(1024)
 });
 
 const EmbeddingsSchema = z.object({
@@ -107,11 +109,13 @@ const aiHandler = new Hono<HonoEnv>()
 		});
 	})
 	.post("/image", zValidator("json", ImageSchema), async (c) => {
-		const { prompt, steps } = c.req.valid("json");
+		const { prompt, steps, width, height } = c.req.valid("json");
 
 		const result = (await c.env.AI.run(IMAGE_MODEL as any, {
 			prompt,
-			steps
+			steps,
+			width,
+			height
 		})) as { image?: string };
 
 		if (!result.image) {
