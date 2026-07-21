@@ -58,6 +58,21 @@ const SEARCH_EXTRACTION_SCHEMA = {
 	required: ["results"]
 } as const;
 
+const METADATA_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		title: { type: "string" },
+		description: { type: "string" },
+		ogTitle: { type: "string" },
+		ogDescription: { type: "string" },
+		ogImage: { type: "string" },
+		canonicalUrl: { type: "string" },
+		author: { type: "string" },
+		keywords: { type: "array", items: { type: "string" } }
+	},
+	required: ["title"]
+} as const;
+
 const RSS_EXTRACTION_SCHEMA = {
 	type: "object",
 	properties: {
@@ -222,6 +237,24 @@ const browserHandler = new Hono<HonoEnv>()
 			query,
 			count: results.length,
 			results: results.slice(0, limit)
+		});
+	})
+	.post("/metadata", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const result = await browser.json(
+			url,
+			"Extract the page SEO and OpenGraph metadata. Return an object with title, description, ogTitle, ogDescription, ogImage, canonicalUrl, author, and keywords.",
+			METADATA_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		);
+
+		return ApiResponse.ok(c, "Metadata extracted", {
+			url,
+			metadata: result
 		});
 	});
 

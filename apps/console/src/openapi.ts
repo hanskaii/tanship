@@ -569,6 +569,44 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/metadata": {
+			post: {
+				operationId: "browserMetadata",
+				summary: "Extract SEO & OpenGraph metadata",
+				description:
+					"Extract SEO & OpenGraph metadata from any webpage via browser rendering + AI",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Page URL to extract metadata from"
+									}
+								}
+							},
+							example: {
+								url: "https://example.com"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Extracted metadata" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",

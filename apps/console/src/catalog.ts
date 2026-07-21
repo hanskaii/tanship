@@ -349,6 +349,21 @@ export const SERVICES: ServiceDef[] = [
 			query: "base network coinbase L2",
 			limit: 5
 		}
+	},
+	{
+		id: "browser.metadata",
+		method: "POST",
+		path: "/v1/browser/metadata",
+		price: "$0.008",
+		description:
+			"Extract SEO & OpenGraph metadata from any webpage via browser rendering + AI",
+		mimeType: "application/json",
+		input: {
+			url: "Page URL to extract metadata from"
+		},
+		example: {
+			url: "https://example.com"
+		}
 	}
 ];
 
