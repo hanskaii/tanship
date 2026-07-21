@@ -1,0 +1,22 @@
+{
+	"name": "@workspace/mcp",
+	"version": "0.0.1",
+	"private": true,
+	"bin": {
+		"tanship-mcp": "./dist/index.js"
+	},
+	"type": "module",
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsc -w"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.4.1",
+		"viem": "^2.23.5"
+	},
+	"devDependencies": {
+		"@types/node": "^22.19.17",
+		"typescript": "^5.8.3"
+	}
+}
