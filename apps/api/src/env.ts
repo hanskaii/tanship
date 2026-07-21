@@ -29,6 +29,7 @@ export const EnvSchema = z.object({
 	GITHUB_REPO_TEMPLATES: z.string().optional(),
 
 	// App
+	CORS_ORIGIN: z.string().min(1, "CORS_ORIGIN is required"),
 	APP_NAME: z.string().min(1, "APP_NAME is required"),
 	APP_ENV: z.enum(["development", "staging", "production"]),
 	ADMIN_EMAIL: z

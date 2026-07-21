@@ -12,6 +12,7 @@ interface FeatureFlags {
 interface BasePlan {
 	productId: string;
 	slug: string;
+	repository?: string;
 	name: string;
 	description: string;
 	price: string;

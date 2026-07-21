@@ -36,11 +36,11 @@ const createMockDb = (purchase: any) => ({
 });
 
 // Mock Gate policy engine
-vi.mock("@workspace/core", () => ({
-	Gate: {
-		can: vi.fn().mockResolvedValue({ allowed: true })
-	}
-}));
+vi.mock("@workspace/core", async (importOriginal) => {
+	const actual = await importOriginal<typeof import("@workspace/core")>();
+	actual.Gate.can = vi.fn().mockResolvedValue({ allowed: true }) as any;
+	return actual;
+});
 
 // Mock Better-Auth API standard
 const mockUser = { id: "user_123", email: "test@example.com" };
@@ -196,5 +196,61 @@ describe("githubHandler", () => {
 				body: JSON.stringify({ permission: "pull" })
 			})
 		);
+	});
+
+	it("should invite user to repository with custom repository property if configured", async () => {
+		const { appConfig } = await import("@workspace/config");
+		const targetPlan = appConfig.payments.find(
+			(p) => p.slug === "template-saas-dashboard"
+		);
+		const originalRepo = targetPlan
+			? (targetPlan as any).repository
+			: undefined;
+
+		if (targetPlan) {
+			(targetPlan as any).repository = "custom-dashboard-repo";
+		}
+
+		try {
+			const db = createMockDb({
+				id: "purchase_template_custom",
+				userId: "user_123",
+				planSlug: "template-saas-dashboard",
+				licenseKey: "TEMPLATE-LICENSE-CUSTOM",
+				githubUsername: null,
+				githubInvitedAt: null
+			});
+
+			const app = new Hono<HonoEnv>();
+			app.use("*", async (c, next) => {
+				c.set("user", mockUser as any);
+				c.set("db", db as any);
+				(c as any).env = mockEnv;
+				await next();
+			});
+			app.route("/github", githubHandler);
+
+			const response = await app.request("/github/claim", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ githubUsername: "testuser" })
+			});
+
+			expect(response.status).toBe(200);
+			const json = (await response.json()) as any;
+			expect(json.data.target).toBe("custom-dashboard-repo");
+
+			expect(mockFetch).toHaveBeenCalledWith(
+				"https://api.github.com/repos/tanshipkit/custom-dashboard-repo/collaborators/testuser",
+				expect.objectContaining({
+					method: "PUT",
+					body: JSON.stringify({ permission: "pull" })
+				})
+			);
+		} finally {
+			if (targetPlan && originalRepo) {
+				(targetPlan as any).repository = originalRepo;
+			}
+		}
 	});
 });

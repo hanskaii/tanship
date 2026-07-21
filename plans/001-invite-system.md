@@ -34,6 +34,19 @@ The prior logic did not support templates in the GitHub invitation flow (they we
     - `apps/web/src/routes/-fn/purchases.ts` — Types and client-side server functions wrapper for purchases API.
     - `apps/api/src/handlers/github.handler.test.ts` — Vitest handler tests.
 
+- Code excerpt from `apps/api/src/handlers/github.handler.ts` (claim handler logic):
+    ```ts
+    // "tanship" → boilerplate repo only
+    // "tanship-pro" → boilerplate + templates repos
+    const repos: string[] = [];
+    if (purchase.planSlug === "tanship-pro") {
+    	repos.push(boilerplateRepo);
+    	if (templatesRepo) repos.push(templatesRepo);
+    } else {
+    	repos.push(boilerplateRepo);
+    }
+    ```
+
 ## Commands you will need
 
 | Purpose   | Command                                                                       | Expected on success |
@@ -54,6 +67,12 @@ The prior logic did not support templates in the GitHub invitation flow (they we
 **Out of scope**:
 
 - `apps/api/src/handlers/template-download.handler.ts` (downloading template archives is kept as-is)
+
+## Git workflow
+
+- Branch: `advisor/001-invite-system`
+- Commits style: Use standard lowercase git message style (e.g. `implement github organization and repository invitations based on plan`).
+- Do NOT push or open a PR unless instructed.
 
 ## Steps
 

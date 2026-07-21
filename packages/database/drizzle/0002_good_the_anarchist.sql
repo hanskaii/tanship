@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `idx_api_keys_key` ON `api_keys` (`key`);

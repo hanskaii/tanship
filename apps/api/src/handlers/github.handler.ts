@@ -7,6 +7,16 @@ import { ApiResponse } from "../helpers/response.helper";
 import type { HonoEnv } from "../types/hono.types";
 import { purchases, eq, and, isNull } from "@workspace/database";
 import { Gate } from "@workspace/core";
+import { appConfig as rawAppConfig } from "@workspace/config";
+import type { PaymentPlan } from "@workspace/core";
+
+const appConfig = rawAppConfig as unknown as {
+	name: string;
+	version: string;
+	supportEmail?: string;
+	authDefaultRedirect: string;
+	payments: PaymentPlan[];
+};
 
 const GithubUsernameSchema = z
 	.string()
@@ -109,10 +119,12 @@ const githubHandler = new Hono<HonoEnv>()
 			);
 		} else {
 			// Tanship Standard or Individual Template -> Invite to specific repo
+			const payments = appConfig.payments as readonly PaymentPlan[];
+			const plan = payments.find((p) => p.slug === purchase.planSlug);
 			const repo =
 				purchase.planSlug === "tanship"
 					? boilerplateRepo
-					: purchase.planSlug;
+					: (plan?.repository ?? purchase.planSlug);
 
 			const res = await fetch(
 				`https://api.github.com/repos/${repoOwner}/${repo}/collaborators/${githubUsername}`,
@@ -165,7 +177,9 @@ const githubHandler = new Hono<HonoEnv>()
 					? repoOwner
 					: purchase.planSlug === "tanship"
 						? boilerplateRepo
-						: purchase.planSlug
+						: ((appConfig.payments as readonly PaymentPlan[]).find(
+								(p) => p.slug === purchase.planSlug
+							)?.repository ?? purchase.planSlug)
 		});
 	})
 	.post("/activate", zValidator("json", ActivateSchema), async (c) => {
@@ -249,10 +263,12 @@ const githubHandler = new Hono<HonoEnv>()
 			);
 		} else {
 			// Tanship Standard or Individual Template -> Invite to specific repo
+			const payments = appConfig.payments as readonly PaymentPlan[];
+			const plan = payments.find((p) => p.slug === purchase.planSlug);
 			const repo =
 				purchase.planSlug === "tanship"
 					? boilerplateRepo
-					: purchase.planSlug;
+					: (plan?.repository ?? purchase.planSlug);
 
 			const res = await fetch(
 				`https://api.github.com/repos/${repoOwner}/${repo}/collaborators/${githubUsername}`,
@@ -302,7 +318,10 @@ const githubHandler = new Hono<HonoEnv>()
 						? repoOwner
 						: purchase.planSlug === "tanship"
 							? boilerplateRepo
-							: purchase.planSlug,
+							: ((
+									appConfig.payments as readonly PaymentPlan[]
+								).find((p) => p.slug === purchase.planSlug)
+									?.repository ?? purchase.planSlug),
 				planSlug: purchase.planSlug
 			}
 		);

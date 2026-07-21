@@ -31,13 +31,22 @@ boot();
 // Validate env once per isolate lifetime
 let envValidated = false;
 
-const app = new Hono<HonoEnv>();
+export const app = new Hono<HonoEnv>();
 
 // Enable CORS for all routes
 app.use(
 	"*",
 	cors({
-		origin: (origin) => origin,
+		origin: (origin, c) => {
+			const allowedOrigin = c.env.CORS_ORIGIN;
+			if (!origin) return allowedOrigin;
+
+			// Exact match
+			if (origin === allowedOrigin) {
+				return origin;
+			}
+			return allowedOrigin; // Default fall-back to trusted origin
+		},
 		allowHeaders: ["Content-Type", "Authorization", "x-api-key"],
 		allowMethods: ["POST", "GET", "OPTIONS", "PUT", "DELETE"],
 		credentials: true
