@@ -146,6 +146,12 @@ const MemorySearchSchema = z.object({
 	top_k: z.number().int().min(1).max(20).default(5)
 });
 
+const SqlSchema = z.object({
+	prompt: z.string().min(1).max(4096),
+	schema: z.string().min(1).max(20_000).optional(),
+	dialect: z.string().min(1).max(50).optional()
+});
+
 const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
@@ -673,6 +679,40 @@ const aiHandler = new Hono<HonoEnv>()
 				memories
 			});
 		}
-	);
+	)
+	.post("/sql", zValidator("json", SqlSchema), async (c) => {
+		const { prompt, schema, dialect } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are an expert SQL generator. Generate a clean, optimized SQL query for the given request and optional schema. Output must strictly be a JSON object with: 1) sql (string: the SQL query statement), 2) explanation (string: brief explanation of how it works). Output ONLY the JSON."
+					},
+					{
+						role: "user",
+						content: `Dialect: ${dialect || "sqlite"}\nSchema:\n${schema || "unspecified"}\n\nRequest: ${prompt}`
+					}
+				],
+				response_format: { type: "json_object" },
+				max_tokens: 1024
+			}
+		)) as { response?: string };
+
+		let parsed: unknown;
+		try {
+			parsed = JSON.parse(result.response ?? "{}");
+		} catch {
+			parsed = { sql: "", explanation: "Failed to generate SQL" };
+		}
+
+		return ApiResponse.ok(c, "SQL generated", {
+			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			result: parsed
+		});
+	});
 
 export default aiHandler;
