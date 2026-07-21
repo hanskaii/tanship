@@ -58,6 +58,32 @@ const SEARCH_EXTRACTION_SCHEMA = {
 	required: ["results"]
 } as const;
 
+const ARTICLE_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		title: { type: "string" },
+		author: { type: "string" },
+		date: { type: "string", description: "Publish date if visible" },
+		readTimeMin: {
+			type: "integer",
+			description: "Estimated reading time in minutes"
+		},
+		excerpt: {
+			type: "string",
+			description: "Short summary or lead paragraph"
+		},
+		contentHtml: {
+			type: "string",
+			description: "Cleaned article body HTML, excluding ads/sidebars"
+		},
+		contentMarkdown: {
+			type: "string",
+			description: "Cleaned article body Markdown"
+		}
+	},
+	required: ["title", "contentMarkdown"]
+} as const;
+
 const METADATA_EXTRACTION_SCHEMA = {
 	type: "object",
 	properties: {
@@ -256,6 +282,21 @@ const browserHandler = new Hono<HonoEnv>()
 			url,
 			metadata: result
 		});
+	})
+	.post("/article", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const result = await browser.json(
+			url,
+			"Extract the main article content. Return an object with title, author, date, readTimeMin, excerpt, contentHtml, and contentMarkdown, cleaned from sidebars, navigations, and advertisements.",
+			ARTICLE_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		);
+
+		return ApiResponse.ok(c, "Article extracted", { url, article: result });
 	});
 
 export default browserHandler;

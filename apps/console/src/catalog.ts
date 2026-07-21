@@ -364,6 +364,21 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://example.com"
 		}
+	},
+	{
+		id: "browser.article",
+		method: "POST",
+		path: "/v1/browser/article",
+		price: "$0.012",
+		description:
+			"Extract a clean structured article from any webpage (title, content markdown, read time, etc) via browser rendering + AI",
+		mimeType: "application/json",
+		input: {
+			url: "Page URL to extract the article from"
+		},
+		example: {
+			url: "https://blog.cloudflare.com/introducing-browser-rendering-api"
+		}
 	}
 ];
 

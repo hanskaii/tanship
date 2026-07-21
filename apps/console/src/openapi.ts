@@ -607,6 +607,46 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/article": {
+			post: {
+				operationId: "browserArticle",
+				summary: "Extract clean structured article",
+				description:
+					"Extract a clean structured article from any webpage (title, content markdown, read time, etc) via browser rendering + AI",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.012" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Page URL to extract the article from"
+									}
+								}
+							},
+							example: {
+								url: "https://blog.cloudflare.com/introducing-browser-rendering-api"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Structured article extraction result"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",
