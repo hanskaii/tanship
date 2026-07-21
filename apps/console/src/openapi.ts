@@ -1793,12 +1793,17 @@ export const OPENAPI_SPEC = {
 						"application/json": {
 							schema: {
 								type: "object",
-								required: ["url"],
 								properties: {
 									url: {
 										type: "string",
 										format: "uri",
-										description: "Page URL to summarize"
+										description:
+											"Optional Page URL to summarize (if text is not provided)"
+									},
+									text: {
+										type: "string",
+										description:
+											"Optional raw text to summarize (if url is not provided)"
 									},
 									prompt: {
 										type: "string",

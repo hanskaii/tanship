@@ -242,7 +242,8 @@ export const SERVICES: ServiceDef[] = [
 			"Summarize any webpage — fetch readable markdown and synthesize highlights using AI",
 		mimeType: "application/json",
 		input: {
-			url: "Page URL to summarize",
+			url: "Optional Page URL to summarize (if text is not provided)",
+			text: "Optional raw text to summarize (if url is not provided)",
 			prompt: "Optional guidelines or focus areas for the summary"
 		},
 		example: { url: "https://example.com" }
