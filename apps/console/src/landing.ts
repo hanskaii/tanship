@@ -363,6 +363,13 @@ export const LANDING_PAGE_HTML = `
 						</div>
 						<p class="card-desc">Search semantically matching text chunks from persistent memory with score metrics.</p>
 					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.sql</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Generate optimized SQL queries from natural language text with dialect selection.</p>
+					</div>
 				<div class="card">
 					<div class="card-header">
 						<span class="card-title">browser.search</span>

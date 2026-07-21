@@ -982,6 +982,57 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/sql": {
+			post: {
+				operationId: "aiSql",
+				summary: "Generate SQL query from text",
+				description:
+					"Generate a clean, optimized SQL query from natural language instructions via Workers AI (Llama 3.3 70B)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["prompt"],
+								properties: {
+									prompt: {
+										type: "string",
+										description:
+											"Natural language query description"
+									},
+									schema: {
+										type: "string",
+										description:
+											"Optional database DDL schema structure"
+									},
+									dialect: {
+										type: "string",
+										description:
+											"Optional target SQL dialect (default sqlite)"
+									}
+								}
+							},
+							example: {
+								prompt: "Find the top 5 users by spend in June 2026",
+								schema: "CREATE TABLE users (id INT, name TEXT, spend REAL, date TEXT);",
+								dialect: "sqlite"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Generated SQL query and explanation"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",

@@ -609,6 +609,25 @@ export const SERVICES: ServiceDef[] = [
 			query: "how does MCP work?",
 			top_k: 3
 		}
+	},
+	{
+		id: "ai.sql",
+		method: "POST",
+		path: "/v1/ai/sql",
+		price: "$0.005",
+		description:
+			"Generate a clean, optimized SQL query from natural language instructions via Workers AI (Llama 3.3 70B)",
+		mimeType: "application/json",
+		input: {
+			prompt: "Natural language query description",
+			schema: "Optional database DDL schema structure",
+			dialect: "Optional target SQL dialect (default sqlite)"
+		},
+		example: {
+			prompt: "Find the top 5 users by spend in June 2026",
+			schema: "CREATE TABLE users (id INT, name TEXT, spend REAL, date TEXT);",
+			dialect: "sqlite"
+		}
 	}
 ];
 
