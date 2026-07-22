@@ -44,6 +44,51 @@ const EmailSecuritySchema = z.object({
 	domain: z.string().min(1)
 });
 
+const ConvertUnitSchema = z.object({
+	value: z.number(),
+	from: z.string().min(1),
+	to: z.string().min(1),
+	type: z.enum(["length", "mass", "volume", "temperature", "speed"])
+});
+
+const UuidSchema = z.object({
+	version: z.enum(["v4", "v7"]).default("v4"),
+	count: z.number().int().min(1).max(100).default(1)
+});
+
+const RegexTestSchema = z.object({
+	pattern: z.string().min(1),
+	flags: z.string().default(""),
+	text: z.string()
+});
+
+const TimeParseSchema = z.object({
+	text: z.string().min(1)
+});
+
+const FlattenJsonSchema = z.object({
+	data: z.record(z.string(), z.unknown()),
+	delimiter: z.string().length(1).default(".")
+});
+
+const ConvertCurrencySchema = z.object({
+	amount: z.number().min(0),
+	from: z.string().length(3),
+	to: z.string().length(3)
+});
+
+const PasswordExposureSchema = z.object({
+	password: z.string().min(1)
+});
+
+const DomainWhoisSchema = z.object({
+	domain: z.string().min(1)
+});
+
+const HtmlToMarkdownSchema = z.object({
+	html: z.string()
+});
+
 const PII_PATTERNS = [
 	{ name: "EMAIL", regex: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g },
 	{ name: "IP_ADDRESS", regex: /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g },
@@ -112,7 +157,7 @@ function parseCsv(csv: string, delimiter: string, hasHeader: boolean) {
 	return lines.map((line) => parseLine(line));
 }
 
-/** Helper to compute MD5 hash using Web Crypto (MD5 is not standard in SubtleCrypto, so we fallback to a simple JS implementation if needed, but Cloudflare Workers support MD5 in Web Crypto) */
+/** Helper to compute MD5 hash using Web Crypto */
 async function computeHash(text: string, algorithm: string): Promise<string> {
 	const encoder = new TextEncoder();
 	const data = encoder.encode(text);
@@ -156,6 +201,77 @@ function diffObjects(a: any, b: any, path = ""): any[] {
 		}
 	}
 	return diffs;
+}
+
+// Units definitions
+const UNIT_CONVERSIONS: Record<string, Record<string, number>> = {
+	length: {
+		m: 1,
+		km: 1000,
+		cm: 0.01,
+		mm: 0.001,
+		mile: 1609.34,
+		yard: 0.9144,
+		foot: 0.3048,
+		inch: 0.0254
+	},
+	mass: {
+		kg: 1,
+		g: 0.001,
+		mg: 0.000001,
+		lb: 0.453592,
+		oz: 0.0283495
+	},
+	volume: {
+		l: 1,
+		ml: 0.001,
+		gal: 3.78541,
+		qt: 0.946353,
+		pt: 0.473176,
+		cup: 0.236588
+	},
+	speed: {
+		"m/s": 1,
+		"km/h": 1 / 3.6,
+		mph: 0.44704,
+		knot: 0.514444
+	}
+};
+
+/** Convert temperature */
+function convertTemp(value: number, from: string, to: string): number {
+	let kelvin = value;
+	if (from === "C") kelvin = value + 273.15;
+	else if (from === "F") kelvin = ((value - 32) * 5) / 9 + 273.15;
+	else if (from === "K") kelvin = value;
+	else throw new Error(`Invalid from unit: ${from}`);
+
+	if (to === "C") return kelvin - 273.15;
+	if (to === "F") return ((kelvin - 273.15) * 9) / 5 + 32;
+	if (to === "K") return kelvin;
+	throw new Error(`Invalid to unit: ${to}`);
+}
+
+/** Flatten a nested JSON object */
+function flatten(
+	data: Record<string, any>,
+	delimiter: string,
+	prefix = "",
+	result: Record<string, any> = {}
+) {
+	for (const key of Object.keys(data)) {
+		const newKey = prefix ? `${prefix}${delimiter}${key}` : key;
+		if (
+			typeof data[key] === "object" &&
+			data[key] !== null &&
+			!Array.isArray(data[key])
+		) {
+			flatten(data[key], delimiter, newKey, result);
+		} else {
+			result[newKey] = data[key];
+		}
+	}
+	return result;
 }
 
 const devHandler = new Hono<HonoEnv>()
@@ -388,6 +504,369 @@ const devHandler = new Hono<HonoEnv>()
 				throw ApiError.badGateway(
 					`Email security check failed: ${err.message}`
 				);
+			}
+		}
+	)
+	.post("/convert-unit", zValidator("json", ConvertUnitSchema), async (c) => {
+		const { value, from, to, type } = c.req.valid("json");
+
+		try {
+			if (type === "temperature") {
+				const result = convertTemp(value, from, to);
+				return ApiResponse.ok(c, "Temperature converted", {
+					value,
+					from,
+					to,
+					result
+				});
+			}
+
+			const typeTable = UNIT_CONVERSIONS[type];
+			if (!typeTable) {
+				throw new Error(`Unsupported unit type: ${type}`);
+			}
+
+			const fromRate = typeTable[from];
+			const toRate = typeTable[to];
+
+			if (fromRate === undefined || toRate === undefined) {
+				throw new Error(
+					`Unsupported unit conversion from ${from} to ${to}`
+				);
+			}
+
+			// Convert to base unit (e.g. meter for length) then to target unit
+			const result = (value * fromRate) / toRate;
+
+			return ApiResponse.ok(c, "Unit converted successfully", {
+				value,
+				from,
+				to,
+				result: parseFloat(result.toFixed(8))
+			});
+		} catch (err: any) {
+			throw ApiError.badRequest(err.message);
+		}
+	})
+	.post("/uuid", zValidator("json", UuidSchema), async (c) => {
+		const { version, count } = c.req.valid("json");
+		const uuids: string[] = [];
+
+		for (let i = 0; i < count; i++) {
+			if (version === "v4") {
+				uuids.push(crypto.randomUUID());
+			} else {
+				// v7 generation (time-ordered, sortable)
+				const timestamp = Date.now();
+				const rand = crypto.getRandomValues(new Uint8Array(10));
+
+				// Timestamp is 48-bit integer
+				const tsHex = timestamp.toString(16).padStart(12, "0");
+				const randHex = Array.from(rand)
+					.map((b) => b.toString(16).padStart(2, "0"))
+					.join("");
+
+				// v7 template: xxxxxxxx-xxxx-7xxx-yxxx-xxxxxxxxxxxx
+				// Where 7 is version, and y is variant (8, 9, a, b)
+				const part1 = tsHex.slice(0, 8);
+				const part2 = tsHex.slice(8, 12);
+				const part3 = `7${randHex.slice(0, 3)}`;
+				const part4 = `${((parseInt(randHex.slice(3, 4), 16) & 0x3) | 0x8).toString(16)}${randHex.slice(4, 7)}`;
+				const part5 = randHex.slice(7, 19);
+
+				uuids.push(`${part1}-${part2}-${part3}-${part4}-${part5}`);
+			}
+		}
+
+		return ApiResponse.ok(c, "UUIDs generated successfully", { uuids });
+	})
+	.post("/regex-test", zValidator("json", RegexTestSchema), async (c) => {
+		const { pattern, flags, text } = c.req.valid("json");
+
+		try {
+			// Validate flags (allow only g, i, m, s, u, y)
+			if (flags && !/^[gimsuy]+$/.test(flags)) {
+				throw new Error("Invalid regex flags");
+			}
+
+			const regex = new RegExp(pattern, flags);
+			const matches = [];
+
+			if (flags.includes("g")) {
+				let match;
+				while ((match = regex.exec(text)) !== null) {
+					matches.push({
+						match: match[0],
+						index: match.index,
+						groups: match.slice(1)
+					});
+					// Prevent infinite loops on zero-width matches
+					if (match[0].length === 0) {
+						regex.lastIndex++;
+					}
+				}
+			} else {
+				const match = regex.exec(text);
+				if (match) {
+					matches.push({
+						match: match[0],
+						index: match.index,
+						groups: match.slice(1)
+					});
+				}
+			}
+
+			return ApiResponse.ok(c, "Regex tested successfully", {
+				pattern,
+				flags,
+				matches,
+				count: matches.length
+			});
+		} catch (err: any) {
+			throw ApiError.badRequest(`Invalid regex: ${err.message}`);
+		}
+	})
+	.post("/time-parse", zValidator("json", TimeParseSchema), async (c) => {
+		const { text } = c.req.valid("json");
+
+		try {
+			let date: Date;
+
+			// Handle relative timings like "now", "today", "yesterday", "tomorrow"
+			const lower = text.toLowerCase().trim();
+			if (lower === "now") {
+				date = new Date();
+			} else if (lower === "today") {
+				date = new Date();
+				date.setHours(0, 0, 0, 0);
+			} else if (lower === "yesterday") {
+				date = new Date();
+				date.setDate(date.getDate() - 1);
+				date.setHours(0, 0, 0, 0);
+			} else if (lower === "tomorrow") {
+				date = new Date();
+				date.setDate(date.getDate() + 1);
+				date.setHours(0, 0, 0, 0);
+			} else {
+				// Try raw ISO parsing
+				const parsed = Date.parse(text);
+				if (isNaN(parsed)) {
+					// Try raw numeric parsing (unix timestamp)
+					const num = Number(text);
+					if (!isNaN(num) && num > 0) {
+						// Is it in seconds or milliseconds?
+						date = new Date(num < 99999999999 ? num * 1000 : num);
+					} else {
+						throw new Error("Unable to parse date string");
+					}
+				} else {
+					date = new Date(parsed);
+				}
+			}
+
+			return ApiResponse.ok(c, "Time parsed successfully", {
+				iso: date.toISOString(),
+				unix: Math.floor(date.getTime() / 1000),
+				unixMs: date.getTime(),
+				utcDate: date.toUTCString(),
+				timezoneOffset: date.getTimezoneOffset()
+			});
+		} catch (err: any) {
+			throw ApiError.badRequest(err.message);
+		}
+	})
+	.post("/flatten-json", zValidator("json", FlattenJsonSchema), async (c) => {
+		const { data, delimiter } = c.req.valid("json");
+		try {
+			const result = flatten(data, delimiter);
+			return ApiResponse.ok(c, "JSON flattened successfully", { result });
+		} catch (err: any) {
+			throw ApiError.badRequest(err.message);
+		}
+	})
+	.post(
+		"/convert-currency",
+		zValidator("json", ConvertCurrencySchema),
+		async (c) => {
+			const { amount, from, to } = c.req.valid("json");
+
+			const cleanFrom = from.toUpperCase();
+			const cleanTo = to.toUpperCase();
+
+			if (cleanFrom === cleanTo) {
+				return ApiResponse.ok(c, "Currency converted", {
+					amount,
+					from: cleanFrom,
+					to: cleanTo,
+					result: amount
+				});
+			}
+
+			try {
+				// Query free keyless Frankfurter API for exchange rate
+				const res = await fetch(
+					`https://api.frankfurter.app/latest?amount=${amount}&from=${cleanFrom}&to=${cleanTo}`
+				);
+				if (!res.ok) {
+					throw new Error("Exchange rate provider failed");
+				}
+				const data = (await res.json()) as any;
+				const result = data.rates[cleanTo];
+				if (result === undefined) {
+					throw new Error(
+						`Conversion rate from ${cleanFrom} to ${cleanTo} not found`
+					);
+				}
+
+				return ApiResponse.ok(c, "Currency converted successfully", {
+					amount,
+					from: cleanFrom,
+					to: cleanTo,
+					result: parseFloat(result.toFixed(4))
+				});
+			} catch (err: any) {
+				throw ApiError.badGateway(
+					`Currency conversion failed: ${err.message}`
+				);
+			}
+		}
+	)
+	.post(
+		"/password-exposure",
+		zValidator("json", PasswordExposureSchema),
+		async (c) => {
+			const { password } = c.req.valid("json");
+
+			try {
+				// Compute SHA-1 hash for the password
+				const sha1 = await computeHash(password, "SHA-1");
+				const cleanSha1 = sha1.toUpperCase();
+				const prefix = cleanSha1.slice(0, 5);
+				const suffix = cleanSha1.slice(5);
+
+				// Query HIBP range API (k-Anonymity model)
+				const res = await fetch(
+					`https://api.pwnedpasswords.com/range/${prefix}`
+				);
+				if (!res.ok) {
+					throw new Error("HIBP API request failed");
+				}
+
+				const text = await res.text();
+				const lines = text.split(/\r?\n/);
+				let count = 0;
+
+				for (const line of lines) {
+					const [hashSuffix, matchCount] = line.split(":");
+					if (hashSuffix === suffix) {
+						count = parseInt(matchCount || "0", 10);
+						break;
+					}
+				}
+
+				return ApiResponse.ok(c, "Password exposure check completed", {
+					exposed: count > 0,
+					breachesCount: count
+				});
+			} catch (err: any) {
+				throw ApiError.badGateway(
+					`Failed to check password exposure: ${err.message}`
+				);
+			}
+		}
+	)
+	.post("/domain-whois", zValidator("json", DomainWhoisSchema), async (c) => {
+		const { domain } = c.req.valid("json");
+
+		try {
+			// Clean domain name
+			const cleanDomain = domain
+				.toLowerCase()
+				.trim()
+				.replace(/^(https?:\/\/)?(www\.)?/, "");
+
+			// Query keyless open RDAP (Registration Data Access Protocol) for domain registry info
+			// We try to query rdap.org redirector
+			const res = await fetch(`https://rdap.org/domain/${cleanDomain}`);
+			if (!res.ok) {
+				throw new Error(`RDAP registry returned status ${res.status}`);
+			}
+
+			const data = (await res.json()) as any;
+
+			// Extract basic owner and registrar info from RDAP schema
+			const status = data.status ?? [];
+			const registrar =
+				data.entities
+					?.find((e: any) => e.roles?.includes("registrar"))
+					?.vcardArray?.[1]?.find((vc: any) => vc[0] === "fn")?.[3] ??
+				"Unknown";
+
+			const events = data.events ?? [];
+			const registrationDate =
+				events.find((e: any) => e.eventAction === "registration")
+					?.eventDate ?? null;
+			const expirationDate =
+				events.find((e: any) => e.eventAction === "expiration")
+					?.eventDate ?? null;
+
+			return ApiResponse.ok(c, "Domain WHOIS (RDAP) completed", {
+				domain: cleanDomain,
+				registrar,
+				registrationDate,
+				expirationDate,
+				status
+			});
+		} catch (err: any) {
+			throw ApiError.badGateway(`WHOIS lookup failed: ${err.message}`);
+		}
+	})
+	.post(
+		"/html-to-markdown",
+		zValidator("json", HtmlToMarkdownSchema),
+		async (c) => {
+			const { html } = c.req.valid("json");
+
+			try {
+				// Minimalist regex HTML-to-Markdown parser (since no Node DOM in Workers)
+				let markdown = html
+					// Remove script & style blocks
+					.replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, "")
+					// Headings
+					.replace(/<h1[^>]*>([\s\S]*?)<\/h1>/gi, "\n# $1\n")
+					.replace(/<h2[^>]*>([\s\S]*?)<\/h2>/gi, "\n## $1\n")
+					.replace(/<h3[^>]*>([\s\S]*?)<\/h3>/gi, "\n### $1\n")
+					// Paragraphs & breaks
+					.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, "\n$1\n")
+					.replace(/<br\s*\/?>/gi, "\n")
+					// Bold & Italic
+					.replace(/<strong[^>]*>([\s\S]*?)<\/strong>/gi, "**$1**")
+					.replace(/<b[^>]*>([\s\S]*?)<\/b>/gi, "**$1**")
+					.replace(/<em[^>]*>([\s\S]*?)<\/em>/gi, "*$1*")
+					.replace(/<i[^>]*>([\s\S]*?)<\/i>/gi, "*$1*")
+					// Links: <a href="url">text</a> -> [text](url)
+					.replace(
+						/<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi,
+						"[$2]($1)"
+					)
+					// Remove remaining tags
+					.replace(/<[^>]+>/g, "");
+
+				// Clean whitespace
+				markdown = markdown
+					.split(/\r?\n/)
+					.map((line) => line.trim())
+					.filter(
+						(line, i, arr) =>
+							line.length > 0 || (i > 0 && arr[i - 1].length > 0)
+					)
+					.join("\n");
+
+				return ApiResponse.ok(c, "HTML converted to Markdown", {
+					markdown
+				});
+			} catch (err: any) {
+				throw ApiError.badRequest(`Conversion failed: ${err.message}`);
 			}
 		}
 	);

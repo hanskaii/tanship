@@ -994,6 +994,159 @@ export const SERVICES: ServiceDef[] = [
 			chain: "base",
 			tokens: ["0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"]
 		}
+	},
+	{
+		id: "dev.convert-unit",
+		method: "POST",
+		path: "/v1/dev/convert-unit",
+		price: "$0.001",
+		description:
+			"Convert values between measurement units (length, mass, volume, temperature, speed)",
+		mimeType: "application/json",
+		input: {
+			value: "The numeric value to convert",
+			from: "Source unit (e.g. m, km, kg, lb, l, gal, C, F, K, mph, km/h)",
+			to: "Target unit to convert into",
+			type: "Unit type: length, mass, volume, temperature, speed"
+		},
+		example: {
+			value: 100,
+			from: "miles",
+			to: "km",
+			type: "length"
+		}
+	},
+	{
+		id: "dev.uuid",
+		method: "POST",
+		path: "/v1/dev/uuid",
+		price: "$0.001",
+		description:
+			"Generate cryptographically secure v4 (random) or v7 (time-ordered) UUIDs",
+		mimeType: "application/json",
+		input: {
+			version: "Optional UUID version: v4, v7 (default: v4)",
+			count: "Optional count of UUIDs to generate 1-100 (default: 1)"
+		},
+		example: {
+			version: "v7",
+			count: 3
+		}
+	},
+	{
+		id: "dev.regex-test",
+		method: "POST",
+		path: "/v1/dev/regex-test",
+		price: "$0.001",
+		description:
+			"Test a JavaScript regular expression against input text and return match indexes",
+		mimeType: "application/json",
+		input: {
+			pattern: "Regular expression pattern string (without slashes)",
+			flags: "Optional regex flags (g, i, m, s, u, y)",
+			text: "The target text to evaluate"
+		},
+		example: {
+			pattern: "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\\b",
+			flags: "g",
+			text: "Hello, send mail to test@example.com or support@google.com"
+		}
+	},
+	{
+		id: "dev.time-parse",
+		method: "POST",
+		path: "/v1/dev/time-parse",
+		price: "$0.001",
+		description:
+			"Parse date/time strings or relative words into ISO and Unix timestamps",
+		mimeType: "application/json",
+		input: {
+			text: "Date/time string to parse (e.g. now, today, yesterday, tomorrow, ISO string, unix timestamp)"
+		},
+		example: {
+			text: "yesterday"
+		}
+	},
+	{
+		id: "dev.flatten-json",
+		method: "POST",
+		path: "/v1/dev/flatten-json",
+		price: "$0.001",
+		description:
+			"Flatten a nested JSON object into key/value pairs using dot-notation",
+		mimeType: "application/json",
+		input: {
+			data: "The nested JSON object to flatten",
+			delimiter:
+				"Optional custom delimiter for flattened keys (default: .)"
+		},
+		example: {
+			data: { user: { profile: { name: "Alice", age: 30 } } }
+		}
+	},
+	{
+		id: "dev.convert-currency",
+		method: "POST",
+		path: "/v1/dev/convert-currency",
+		price: "$0.001",
+		description:
+			"Convert currency amounts based on live rates from Frankfurter API",
+		mimeType: "application/json",
+		input: {
+			amount: "The amount of currency to convert",
+			from: "Source 3-letter currency code (e.g. USD, EUR, IDR)",
+			to: "Target 3-letter currency code (e.g. SGD, JPY)"
+		},
+		example: {
+			amount: 50,
+			from: "EUR",
+			to: "USD"
+		}
+	},
+	{
+		id: "dev.password-exposure",
+		method: "POST",
+		path: "/v1/dev/password-exposure",
+		price: "$0.001",
+		description:
+			"Check if a password has been compromised in data breaches via Have I Been Pwned API",
+		mimeType: "application/json",
+		input: {
+			password:
+				"The plain-text password to check (hashes locally via SHA-1)"
+		},
+		example: {
+			password: "password123"
+		}
+	},
+	{
+		id: "dev.domain-whois",
+		method: "POST",
+		path: "/v1/dev/domain-whois",
+		price: "$0.001",
+		description:
+			"Perform domain registration (WHOIS) lookup using Registration Data Access Protocol (RDAP)",
+		mimeType: "application/json",
+		input: {
+			domain: "The domain name to query (e.g. cloudflare.com)"
+		},
+		example: {
+			domain: "cloudflare.com"
+		}
+	},
+	{
+		id: "dev.html-to-markdown",
+		method: "POST",
+		path: "/v1/dev/html-to-markdown",
+		price: "$0.001",
+		description: "Sanitize raw HTML and convert it into readable markdown",
+		mimeType: "application/json",
+		input: {
+			html: "The raw HTML string to convert"
+		},
+		example: {
+			html: "<h1>Hello World</h1><p>This is a <strong>bold</strong> text.</p>"
+		}
 	}
 ];
 
