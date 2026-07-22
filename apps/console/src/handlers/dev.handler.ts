@@ -89,6 +89,25 @@ const HtmlToMarkdownSchema = z.object({
 	html: z.string()
 });
 
+const HtmlToTextSchema = z.object({
+	html: z.string()
+});
+
+const JsonToXmlSchema = z.object({
+	data: z.record(z.string(), z.unknown()),
+	rootName: z.string().default("root")
+});
+
+const XmlToJsonSchema = z.object({
+	xml: z.string()
+});
+
+const TextChunkerSchema = z.object({
+	text: z.string(),
+	chunkSize: z.number().int().min(10).max(50000).default(1000),
+	chunkOverlap: z.number().int().min(0).max(25000).default(200)
+});
+
 const PII_PATTERNS = [
 	{ name: "EMAIL", regex: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g },
 	{ name: "IP_ADDRESS", regex: /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g },
@@ -157,7 +176,7 @@ function parseCsv(csv: string, delimiter: string, hasHeader: boolean) {
 	return lines.map((line) => parseLine(line));
 }
 
-/** Helper to compute MD5 hash using Web Crypto */
+/** Helper to compute MD5/SHA hashes using Web Crypto */
 async function computeHash(text: string, algorithm: string): Promise<string> {
 	const encoder = new TextEncoder();
 	const data = encoder.encode(text);
@@ -330,7 +349,6 @@ const devHandler = new Hono<HonoEnv>()
 	.post("/geo-ip", zValidator("json", GeoIpSchema), async (c) => {
 		const { ip } = c.req.valid("json");
 
-		// If no query IP is provided, use Cloudflare's request context
 		if (!ip) {
 			const cf = c.req.raw.cf as any;
 			if (cf) {
@@ -348,7 +366,6 @@ const devHandler = new Hono<HonoEnv>()
 			}
 		}
 
-		// Otherwise, query free keyless geolocation API (ip-api.com) for external IP
 		const targetIp = ip || c.req.header("CF-Connecting-IP") || "8.8.8.8";
 		try {
 			const res = await fetch(`http://ip-api.com/json/${targetIp}`);
@@ -428,7 +445,6 @@ const devHandler = new Hono<HonoEnv>()
 					}
 				}
 
-				// DMARC is queried on _dmarc.domain
 				try {
 					const dmarcRecords = await queryDns(
 						`_dmarc.${domain}`,
@@ -442,14 +458,13 @@ const devHandler = new Hono<HonoEnv>()
 					}
 				} catch {}
 
-				// Grade email security posture
 				let score = 0;
 				const issues: string[] = [];
 
 				if (spfRecord) {
 					score += 50;
 					if (spfRecord.endsWith("-all")) {
-						score += 10; // Hard fail is best
+						score += 10;
 					} else if (spfRecord.endsWith("~all")) {
 						issues.push(
 							"SPF record uses SoftFail (~all) instead of HardFail (-all)."
@@ -507,6 +522,120 @@ const devHandler = new Hono<HonoEnv>()
 			}
 		}
 	)
+	.post("/html-to-text", zValidator("json", HtmlToTextSchema), async (c) => {
+		const { html } = c.req.valid("json");
+		try {
+			const text = html
+				.replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, "")
+				.replace(/<[^>]+>/g, " ")
+				.replace(/&nbsp;/g, " ")
+				.replace(/&lt;/g, "<")
+				.replace(/&gt;/g, ">")
+				.replace(/&amp;/g, "&")
+				.replace(/&quot;/g, '"')
+				.replace(/&apos;/g, "'")
+				.replace(/\s+/g, " ")
+				.trim();
+			return ApiResponse.ok(c, "HTML converted to plain text", { text });
+		} catch (err: any) {
+			throw ApiError.badRequest(err.message);
+		}
+	})
+	.post("/json-to-xml", zValidator("json", JsonToXmlSchema), async (c) => {
+		const { data, rootName } = c.req.valid("json");
+		const toXml = (obj: any): string => {
+			let xml = "";
+			for (const key in obj) {
+				if (Object.prototype.hasOwnProperty.call(obj, key)) {
+					const val = obj[key];
+					if (typeof val === "object" && val !== null) {
+						if (Array.isArray(val)) {
+							val.forEach((item) => {
+								xml += `<${key}>${typeof item === "object" ? toXml(item) : String(item)}</${key}>`;
+							});
+						} else {
+							xml += `<${key}>${toXml(val)}</${key}>`;
+						}
+					} else {
+						xml += `<${key}>${String(val)}</${key}>`;
+					}
+				}
+			}
+			return xml;
+		};
+		const xml = `<?xml version="1.0" encoding="UTF-8"?><${rootName}>${toXml(data)}</${rootName}>`;
+		return c.body(xml, 200, { "Content-Type": "application/xml" });
+	})
+	.post("/xml-to-json", zValidator("json", XmlToJsonSchema), async (c) => {
+		const { xml } = c.req.valid("json");
+		try {
+			const parseXml = (xmlStr: string): any => {
+				const obj: any = {};
+				const regex = /<([^>\s/]+)([^>]*)>([^<]*)<\/\1>/g;
+				let match;
+				let found = false;
+				while ((match = regex.exec(xmlStr)) !== null) {
+					found = true;
+					const tag = match[1];
+					const val = match[3].trim();
+					if (obj[tag]) {
+						if (!Array.isArray(obj[tag])) {
+							obj[tag] = [obj[tag]];
+						}
+						obj[tag].push(val);
+					} else {
+						obj[tag] = val;
+					}
+				}
+
+				const nestedRegex = /<([^>\s/]+)([^>]*)>([\s\S]*?)<\/\1>/g;
+				let nestedMatch;
+				while ((nestedMatch = nestedRegex.exec(xmlStr)) !== null) {
+					const tag = nestedMatch[1];
+					const content = nestedMatch[3].trim();
+					if (content.includes("<") && content.includes(">")) {
+						found = true;
+						const parsedNested = parseXml(content);
+						if (obj[tag]) {
+							if (!Array.isArray(obj[tag])) {
+								obj[tag] = [obj[tag]];
+							}
+							obj[tag].push(parsedNested);
+						} else {
+							obj[tag] = parsedNested;
+						}
+					}
+				}
+				return found ? obj : xmlStr.trim();
+			};
+
+			const cleanXml = xml.replace(/<\?xml[^>]*>/i, "").trim();
+			const result = parseXml(cleanXml);
+			return ApiResponse.ok(c, "XML converted to JSON", { result });
+		} catch (err: any) {
+			throw ApiError.badRequest(`XML parsing failed: ${err.message}`);
+		}
+	})
+	.post("/text-chunker", zValidator("json", TextChunkerSchema), async (c) => {
+		const { text, chunkSize, chunkOverlap } = c.req.valid("json");
+		if (chunkOverlap >= chunkSize) {
+			throw ApiError.badRequest(
+				"chunkOverlap must be less than chunkSize"
+			);
+		}
+		const chunks: string[] = [];
+		let start = 0;
+		while (start < text.length) {
+			const end = Math.min(start + chunkSize, text.length);
+			chunks.push(text.slice(start, end));
+			if (end === text.length) break;
+			start += chunkSize - chunkOverlap;
+		}
+		return ApiResponse.ok(c, "Text chunked successfully", {
+			chunks,
+			count: chunks.length
+		});
+	})
 	.post("/convert-unit", zValidator("json", ConvertUnitSchema), async (c) => {
 		const { value, from, to, type } = c.req.valid("json");
 
@@ -535,7 +664,6 @@ const devHandler = new Hono<HonoEnv>()
 				);
 			}
 
-			// Convert to base unit (e.g. meter for length) then to target unit
 			const result = (value * fromRate) / toRate;
 
 			return ApiResponse.ok(c, "Unit converted successfully", {
@@ -556,18 +684,14 @@ const devHandler = new Hono<HonoEnv>()
 			if (version === "v4") {
 				uuids.push(crypto.randomUUID());
 			} else {
-				// v7 generation (time-ordered, sortable)
 				const timestamp = Date.now();
 				const rand = crypto.getRandomValues(new Uint8Array(10));
 
-				// Timestamp is 48-bit integer
 				const tsHex = timestamp.toString(16).padStart(12, "0");
 				const randHex = Array.from(rand)
 					.map((b) => b.toString(16).padStart(2, "0"))
 					.join("");
 
-				// v7 template: xxxxxxxx-xxxx-7xxx-yxxx-xxxxxxxxxxxx
-				// Where 7 is version, and y is variant (8, 9, a, b)
 				const part1 = tsHex.slice(0, 8);
 				const part2 = tsHex.slice(8, 12);
 				const part3 = `7${randHex.slice(0, 3)}`;
@@ -584,7 +708,6 @@ const devHandler = new Hono<HonoEnv>()
 		const { pattern, flags, text } = c.req.valid("json");
 
 		try {
-			// Validate flags (allow only g, i, m, s, u, y)
 			if (flags && !/^[gimsuy]+$/.test(flags)) {
 				throw new Error("Invalid regex flags");
 			}
@@ -600,7 +723,6 @@ const devHandler = new Hono<HonoEnv>()
 						index: match.index,
 						groups: match.slice(1)
 					});
-					// Prevent infinite loops on zero-width matches
 					if (match[0].length === 0) {
 						regex.lastIndex++;
 					}
@@ -632,7 +754,6 @@ const devHandler = new Hono<HonoEnv>()
 		try {
 			let date: Date;
 
-			// Handle relative timings like "now", "today", "yesterday", "tomorrow"
 			const lower = text.toLowerCase().trim();
 			if (lower === "now") {
 				date = new Date();
@@ -648,13 +769,10 @@ const devHandler = new Hono<HonoEnv>()
 				date.setDate(date.getDate() + 1);
 				date.setHours(0, 0, 0, 0);
 			} else {
-				// Try raw ISO parsing
 				const parsed = Date.parse(text);
 				if (isNaN(parsed)) {
-					// Try raw numeric parsing (unix timestamp)
 					const num = Number(text);
 					if (!isNaN(num) && num > 0) {
-						// Is it in seconds or milliseconds?
 						date = new Date(num < 99999999999 ? num * 1000 : num);
 					} else {
 						throw new Error("Unable to parse date string");
@@ -703,7 +821,6 @@ const devHandler = new Hono<HonoEnv>()
 			}
 
 			try {
-				// Query free keyless Frankfurter API for exchange rate
 				const res = await fetch(
 					`https://api.frankfurter.app/latest?amount=${amount}&from=${cleanFrom}&to=${cleanTo}`
 				);
@@ -738,13 +855,11 @@ const devHandler = new Hono<HonoEnv>()
 			const { password } = c.req.valid("json");
 
 			try {
-				// Compute SHA-1 hash for the password
 				const sha1 = await computeHash(password, "SHA-1");
 				const cleanSha1 = sha1.toUpperCase();
 				const prefix = cleanSha1.slice(0, 5);
 				const suffix = cleanSha1.slice(5);
 
-				// Query HIBP range API (k-Anonymity model)
 				const res = await fetch(
 					`https://api.pwnedpasswords.com/range/${prefix}`
 				);
@@ -779,14 +894,11 @@ const devHandler = new Hono<HonoEnv>()
 		const { domain } = c.req.valid("json");
 
 		try {
-			// Clean domain name
 			const cleanDomain = domain
 				.toLowerCase()
 				.trim()
 				.replace(/^(https?:\/\/)?(www\.)?/, "");
 
-			// Query keyless open RDAP (Registration Data Access Protocol) for domain registry info
-			// We try to query rdap.org redirector
 			const res = await fetch(`https://rdap.org/domain/${cleanDomain}`);
 			if (!res.ok) {
 				throw new Error(`RDAP registry returned status ${res.status}`);
@@ -794,7 +906,6 @@ const devHandler = new Hono<HonoEnv>()
 
 			const data = (await res.json()) as any;
 
-			// Extract basic owner and registrar info from RDAP schema
 			const status = data.status ?? [];
 			const registrar =
 				data.entities
@@ -828,31 +939,23 @@ const devHandler = new Hono<HonoEnv>()
 			const { html } = c.req.valid("json");
 
 			try {
-				// Minimalist regex HTML-to-Markdown parser (since no Node DOM in Workers)
 				let markdown = html
-					// Remove script & style blocks
 					.replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, "")
-					// Headings
 					.replace(/<h1[^>]*>([\s\S]*?)<\/h1>/gi, "\n# $1\n")
 					.replace(/<h2[^>]*>([\s\S]*?)<\/h2>/gi, "\n## $1\n")
 					.replace(/<h3[^>]*>([\s\S]*?)<\/h3>/gi, "\n### $1\n")
-					// Paragraphs & breaks
 					.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, "\n$1\n")
 					.replace(/<br\s*\/?>/gi, "\n")
-					// Bold & Italic
 					.replace(/<strong[^>]*>([\s\S]*?)<\/strong>/gi, "**$1**")
 					.replace(/<b[^>]*>([\s\S]*?)<\/b>/gi, "**$1**")
 					.replace(/<em[^>]*>([\s\S]*?)<\/em>/gi, "*$1*")
 					.replace(/<i[^>]*>([\s\S]*?)<\/i>/gi, "*$1*")
-					// Links: <a href="url">text</a> -> [text](url)
 					.replace(
-						/<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi,
+						/<a[^+]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi,
 						"[$2]($1)"
 					)
-					// Remove remaining tags
 					.replace(/<[^>]+>/g, "");
 
-				// Clean whitespace
 				markdown = markdown
 					.split(/\r?\n/)
 					.map((line) => line.trim())

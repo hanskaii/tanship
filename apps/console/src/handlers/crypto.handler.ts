@@ -6,6 +6,10 @@ import { ApiError } from "@/helpers/errors.helper";
 import { ApiResponse } from "@/helpers/response.helper";
 import type { HonoEnv } from "@/types/hono.types";
 
+const GasPriceSchema = z.object({
+	chain: z.enum(["base", "ethereum", "arbitrum", "polygon"]).default("base")
+});
+
 const EvmAddressSchema = z
 	.string()
 	.regex(/^0x[a-fA-F0-9]{40}$/, "Invalid EVM address format");
@@ -80,10 +84,8 @@ function formatUnits(hex: string, decimals: number): string {
 	return `${integerPart}.${fracStr}`;
 }
 
-const cryptoHandler = new Hono<HonoEnv>().post(
-	"/balance",
-	zValidator("json", BalanceSchema),
-	async (c) => {
+const cryptoHandler = new Hono<HonoEnv>()
+	.post("/balance", zValidator("json", BalanceSchema), async (c) => {
 		const { address, chain, tokens } = c.req.valid("json");
 		const rpcUrl = RPC_URLS[chain];
 		if (!rpcUrl) {
@@ -210,7 +212,47 @@ const cryptoHandler = new Hono<HonoEnv>().post(
 		} catch (err: any) {
 			throw ApiError.badGateway(`RPC Query failed: ${err.message}`);
 		}
-	}
-);
+	})
+	.post("/gas-price", zValidator("json", GasPriceSchema), async (c) => {
+		const { chain } = c.req.valid("json");
+		const rpcUrl = RPC_URLS[chain];
+		if (!rpcUrl) {
+			throw ApiError.badRequest(`Unsupported chain: ${chain}`);
+		}
+
+		try {
+			const gasPriceHex = await rpcCall(rpcUrl, "eth_gasPrice", []);
+			const baseFeeGwei = parseFloat(formatUnits(gasPriceHex, 9));
+
+			let maxPriorityFeeGwei = 0;
+			try {
+				const prioHex = await rpcCall(
+					rpcUrl,
+					"eth_maxPriorityFeePerGas",
+					[]
+				);
+				maxPriorityFeeGwei = parseFloat(formatUnits(prioHex, 9));
+			} catch {}
+
+			const standard = baseFeeGwei + maxPriorityFeeGwei;
+			const slow = standard * 0.8;
+			const fast = standard * 1.2 + 1.5;
+
+			return ApiResponse.ok(c, "Gas prices retrieved in Gwei", {
+				chain,
+				unit: "Gwei",
+				gasPriceHex,
+				baseFee: parseFloat(baseFeeGwei.toFixed(6)),
+				priorityFee: parseFloat(maxPriorityFeeGwei.toFixed(6)),
+				tiers: {
+					slow: parseFloat(slow.toFixed(4)),
+					standard: parseFloat(standard.toFixed(4)),
+					fast: parseFloat(fast.toFixed(4))
+				}
+			});
+		} catch (err: any) {
+			throw ApiError.badGateway(`Gas price query failed: ${err.message}`);
+		}
+	});
 
 export default cryptoHandler;
