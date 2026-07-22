@@ -265,6 +265,20 @@ export const LANDING_PAGE_HTML = `
 					</div>
 					<p class="card-desc">BLIP image captioning and description.</p>
 				</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.answer</span>
+							<span class="card-price">$0.008</span>
+						</div>
+						<p class="card-desc">PaliGemma Visual Question Answering (VQA) on any image.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.ocr</span>
+							<span class="card-price">$0.008</span>
+						</div>
+						<p class="card-desc">PaliGemma Visual OCR: extract exact text content from any image.</p>
+					</div>
 				<div class="card">
 					<div class="card-header">
 						<span class="card-title">ai.detect</span>
@@ -300,6 +314,69 @@ export const LANDING_PAGE_HTML = `
 					</div>
 					<p class="card-desc">Llama 3.3 context semantic text compression.</p>
 				</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.correct</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Grammar, spelling, and phrasing correction via Llama 3.3.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.code</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Coding helper, debugger, and refactorer via Llama 3.3.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.lint</span>
+							<span class="card-price">$0.008</span>
+						</div>
+						<p class="card-desc">Static code syntax checking, compile verification, and bug linting via Llama 3.3.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.reason</span>
+							<span class="card-price">$0.008</span>
+						</div>
+						<p class="card-desc">DeepSeek-R1 reasoning with separated thinking process.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.similarity</span>
+							<span class="card-price">$0.004</span>
+						</div>
+						<p class="card-desc">Semantic similarity score between two texts via BGE-M3.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.memory.add</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Insert text chunks semantically into persistent memory via BGE-M3 + Cloudflare Vectorize.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.memory.search</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Search semantically matching text chunks from persistent memory with score metrics.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.sql</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Generate optimized SQL queries from natural language text with dialect selection.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">ai.emotion</span>
+							<span class="card-price">$0.005</span>
+						</div>
+						<p class="card-desc">Analyze sentiment and detailed emotion categories (joy, sadness, anger, fear, etc) via Llama 3.3.</p>
+					</div>
 				<div class="card">
 					<div class="card-header">
 						<span class="card-title">browser.search</span>
@@ -307,6 +384,13 @@ export const LANDING_PAGE_HTML = `
 					</div>
 					<p class="card-desc">Headless browser rendering + AI structured search results.</p>
 				</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.search.summary</span>
+							<span class="card-price">$0.030</span>
+						</div>
+						<p class="card-desc">Search-GPT/Perplexity clone: web search + AI synthesis with cited sources.</p>
+					</div>
 				<div class="card">
 					<div class="card-header">
 						<span class="card-title">browser.article</span>
@@ -356,6 +440,55 @@ export const LANDING_PAGE_HTML = `
 					</div>
 					<p class="card-desc">Real-time news search (titles, links, dates, sources).</p>
 				</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.rss</span>
+							<span class="card-price">$0.015</span>
+						</div>
+						<p class="card-desc">Turn any blog/news page into a subscribable RSS feed via browser rendering.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.rss.summary</span>
+							<span class="card-price">$0.020</span>
+						</div>
+						<p class="card-desc">Summarize any RSS feed or blog URL into a bullet-point newsletter digest via AI.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.seo</span>
+							<span class="card-price">$0.015</span>
+						</div>
+						<p class="card-desc">Perform automated SEO health audit and validator on any webpage via browser rendering + AI.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.contacts</span>
+							<span class="card-price">$0.012</span>
+						</div>
+						<p class="card-desc">Extract email addresses, phone numbers, and social media profile links from any webpage.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.sitemap</span>
+							<span class="card-price">$0.008</span>
+						</div>
+						<p class="card-desc">Extract website internal links to generate an XML sitemap or JSON URLs array via browser rendering.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.health</span>
+							<span class="card-price">$0.015</span>
+						</div>
+						<p class="card-desc">Perform automated webpage uptime, speed, SSL, and console error checks via browser rendering + AI.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.forms</span>
+							<span class="card-price">$0.012</span>
+						</div>
+						<p class="card-desc">Extract all web forms and input schemas from any webpage via browser rendering + AI.</p>
+					</div>
 			</div>
 		</section>
 

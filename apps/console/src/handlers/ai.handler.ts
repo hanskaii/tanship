@@ -24,6 +24,8 @@ const RERANK_MODEL = "@cf/baai/bge-reranker-large";
 const CLASSIFY_MODEL = "@cf/microsoft/resnet-50";
 const MODERATE_MODEL = "@cf/meta/llama-guard-3-8b";
 const DETECT_MODEL = "@cf/facebook/detr-resnet-50";
+const ANSWER_MODEL = "@cf/google/paligemma-3b-pt-448";
+const REASON_MODEL = "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b";
 
 const ChatSchema = z.object({
 	messages: z
@@ -93,6 +95,67 @@ const CompressSchema = z.object({
 	text: z.string().min(1).max(20_000)
 });
 
+const AnswerSchema = z.object({
+	url: z.string().url(),
+	prompt: z.string().min(1).max(2048)
+});
+
+const CorrectSchema = z.object({
+	text: z.string().min(1).max(20_000)
+});
+
+const CodeSchema = z.object({
+	code: z.string().min(1).max(30_000),
+	prompt: z.string().min(1).max(4096),
+	language: z.string().min(1).max(50).optional()
+});
+
+const ReasonSchema = z.object({
+	messages: z
+		.array(
+			z.object({
+				role: z.enum(["system", "user", "assistant"]),
+				content: z.string().min(1)
+			})
+		)
+		.min(1)
+		.max(50),
+	max_tokens: z.number().int().min(1).max(4096).default(2048)
+});
+
+const SimilaritySchema = z.object({
+	text1: z.string().min(1).max(10_000),
+	text2: z.string().min(1).max(10_000)
+});
+
+const OcrSchema = z.object({
+	url: z.string().url()
+});
+
+const LintSchema = z.object({
+	code: z.string().min(1).max(30_000),
+	language: z.string().min(1).max(50).optional()
+});
+
+const MemoryAddSchema = z.object({
+	text: z.string().min(1).max(10_000)
+});
+
+const MemorySearchSchema = z.object({
+	query: z.string().min(1).max(1000),
+	top_k: z.number().int().min(1).max(20).default(5)
+});
+
+const SqlSchema = z.object({
+	prompt: z.string().min(1).max(4096),
+	schema: z.string().min(1).max(20_000).optional(),
+	dialect: z.string().min(1).max(50).optional()
+});
+
+const EmotionSchema = z.object({
+	text: z.string().min(1).max(10_000)
+});
+
 const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
@@ -147,14 +210,36 @@ const aiHandler = new Hono<HonoEnv>()
 	.post("/translate", zValidator("json", TranslationSchema), async (c) => {
 		const { text, source_lang, target_lang } = c.req.valid("json");
 
+		let detectedLang = source_lang;
+		if (!detectedLang) {
+			const detectResult = (await c.env.AI.run(
+				"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+				{
+					messages: [
+						{
+							role: "system",
+							content:
+								"You are a language detection engine. Return ONLY the 2-letter ISO 639-1 language code (e.g. en, es, fr, id, ja, de, zh) of the text input. No explanation."
+						},
+						{ role: "user", content: text.slice(0, 500) }
+					],
+					max_tokens: 10
+				}
+			)) as { response?: string };
+			detectedLang =
+				detectResult.response?.trim().toLowerCase().slice(0, 2) || "en";
+		}
+
 		const result = (await c.env.AI.run(TRANSLATION_MODEL as any, {
 			text,
-			source_lang,
+			source_lang: detectedLang,
 			target_lang
 		})) as { translated_text?: string };
 
 		return ApiResponse.ok(c, "Translation completed", {
 			model: TRANSLATION_MODEL,
+			sourceLang: detectedLang,
+			targetLang: target_lang,
 			translatedText: result.translated_text ?? ""
 		});
 	})
@@ -333,6 +418,372 @@ const aiHandler = new Hono<HonoEnv>()
 				(1 - compressed.length / text.length) * 100
 			),
 			compressedText: compressed
+		});
+	})
+	.post("/answer", zValidator("json", AnswerSchema), async (c) => {
+		const { url, prompt } = c.req.valid("json");
+
+		const imageRes = await fetch(url);
+		if (!imageRes.ok) {
+			throw ApiError.badRequest(
+				`Failed to fetch image from URL: ${imageRes.statusText}`
+			);
+		}
+
+		const blob = await imageRes.arrayBuffer();
+		const image = Array.from(new Uint8Array(blob));
+
+		const result = (await c.env.AI.run(ANSWER_MODEL as any, {
+			image,
+			prompt
+		})) as { response?: string };
+
+		return ApiResponse.ok(c, "Visual question answering completed", {
+			model: ANSWER_MODEL,
+			response: result.response ?? ""
+		});
+	})
+	.post("/correct", zValidator("json", CorrectSchema), async (c) => {
+		const { text } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are a professional copyeditor. Correct the grammar, spelling, punctuation, and phrasing of the input text. Return ONLY the corrected text, with no preamble, explanations, or quotes."
+					},
+					{
+						role: "user",
+						content: text
+					}
+				],
+				max_tokens: 2048
+			}
+		)) as { response?: string };
+
+		return ApiResponse.ok(c, "Text corrected", {
+			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			correctedText: result.response ?? ""
+		});
+	})
+	.post("/code", zValidator("json", CodeSchema), async (c) => {
+		const { code, prompt, language } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are an expert software engineer assistant. Analyze the provided code and follow the user instructions exactly. Focus on correct typing, security, edge-cases, and performance. Keep explanations concise. If requested to modify code, return the code and a short explanation of the changes."
+					},
+					{
+						role: "user",
+						content: `Language: ${language || "unspecified"}\nCode:\n${code}\n\nInstructions: ${prompt}`
+					}
+				],
+				max_tokens: 2048
+			}
+		)) as { response?: string };
+
+		return ApiResponse.ok(c, "Code analysis completed", {
+			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			response: result.response ?? ""
+		});
+	})
+	.post("/reason", zValidator("json", ReasonSchema), async (c) => {
+		const { messages, max_tokens } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(REASON_MODEL as any, {
+			messages,
+			max_tokens
+		})) as { response?: string };
+
+		const content = result.response ?? "";
+
+		let thinking = "";
+		let answer = content;
+
+		const thinkStart = content.indexOf("<think>");
+		const thinkEnd = content.indexOf("</think>");
+
+		if (thinkStart !== -1 && thinkEnd !== -1 && thinkEnd > thinkStart) {
+			thinking = content.substring(thinkStart + 7, thinkEnd).trim();
+			answer = content.substring(thinkEnd + 8).trim();
+		} else if (thinkStart !== -1) {
+			thinking = content.substring(thinkStart + 7).trim();
+			answer = "";
+		}
+
+		return ApiResponse.ok(c, "Reasoning completed", {
+			model: REASON_MODEL,
+			thinking,
+			answer
+		});
+	})
+	.post("/similarity", zValidator("json", SimilaritySchema), async (c) => {
+		const { text1, text2 } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(EMBEDDING_MODEL as any, {
+			text: [text1, text2]
+		})) as { data?: number[][] };
+
+		const vectors = result.data ?? [];
+		if (vectors.length < 2) {
+			throw ApiError.badGateway(
+				"Failed to generate embeddings for both texts"
+			);
+		}
+
+		const vec1 = vectors[0];
+		const vec2 = vectors[1];
+
+		if (
+			!vec1 ||
+			!vec2 ||
+			vec1.length !== vec2.length ||
+			vec1.length === 0
+		) {
+			throw ApiError.badGateway(
+				"Generated embeddings are empty or mismatched"
+			);
+		}
+
+		let dotProduct = 0;
+		let normA = 0;
+		let normB = 0;
+		for (let i = 0; i < vec1.length; i++) {
+			dotProduct += vec1[i] * vec2[i];
+			normA += vec1[i] * vec1[i];
+			normB += vec2[i] * vec2[i];
+		}
+
+		const similarity = dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+
+		return ApiResponse.ok(c, "Similarity checker completed", {
+			model: EMBEDDING_MODEL,
+			similarity: parseFloat(similarity.toFixed(6))
+		});
+	})
+	.post("/ocr", zValidator("json", OcrSchema), async (c) => {
+		const { url } = c.req.valid("json");
+
+		const imageRes = await fetch(url);
+		if (!imageRes.ok) {
+			throw ApiError.badRequest(
+				`Failed to fetch image from URL: ${imageRes.statusText}`
+			);
+		}
+
+		const blob = await imageRes.arrayBuffer();
+		const image = Array.from(new Uint8Array(blob));
+
+		const result = (await c.env.AI.run(ANSWER_MODEL as any, {
+			image,
+			prompt: "ocr"
+		})) as { response?: string };
+
+		return ApiResponse.ok(c, "Visual OCR completed", {
+			model: ANSWER_MODEL,
+			text: result.response ?? ""
+		});
+	})
+	.post("/lint", zValidator("json", LintSchema), async (c) => {
+		const { code, language } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are a professional compiler and linter. Check the provided code for syntax errors, compilation failures, reference errors, and critical bugs. Return a JSON object with: 1) valid (boolean: true if no errors/critical bugs), 2) issues (array of { line: number, severity: error|warning, message: string, fix: string }). Output must strictly follow the JSON format."
+					},
+					{
+						role: "user",
+						content: `Language: ${language || "unspecified"}\nCode:\n${code}`
+					}
+				],
+				response_format: { type: "json_object" },
+				max_tokens: 2048
+			}
+		)) as { response?: string };
+
+		let parsed: unknown;
+		try {
+			parsed = JSON.parse(result.response ?? "{}");
+		} catch {
+			parsed = {
+				valid: false,
+				issues: [
+					{
+						line: 1,
+						severity: "error",
+						message: "Failed to parse linter output",
+						fix: ""
+					}
+				]
+			};
+		}
+
+		return ApiResponse.ok(c, "Code syntax check completed", {
+			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			result: parsed
+		});
+	})
+	.post("/memory/add", zValidator("json", MemoryAddSchema), async (c) => {
+		const { text } = c.req.valid("json");
+
+		// Generate embedding vector
+		const result = (await c.env.AI.run(EMBEDDING_MODEL as any, {
+			text: [text]
+		})) as { data?: number[][] };
+
+		const vectors = result.data ?? [];
+		const values = vectors[0];
+		if (!values || values.length === 0) {
+			throw ApiError.badGateway(
+				"Failed to generate embedding for the memory text"
+			);
+		}
+
+		// Generate unique id and insert into Vectorize
+		const id = crypto.randomUUID();
+		await c.env.VECTORIZE.insert([
+			{
+				id,
+				values,
+				metadata: { text, timestamp: Date.now() }
+			}
+		]);
+
+		return ApiResponse.ok(c, "Memory added successfully", {
+			id,
+			text
+		});
+	})
+	.post(
+		"/memory/search",
+		zValidator("json", MemorySearchSchema),
+		async (c) => {
+			const { query, top_k } = c.req.valid("json");
+
+			// Generate query embedding vector
+			const result = (await c.env.AI.run(EMBEDDING_MODEL as any, {
+				text: [query]
+			})) as { data?: number[][] };
+
+			const vectors = result.data ?? [];
+			const values = vectors[0];
+			if (!values || values.length === 0) {
+				throw ApiError.badGateway(
+					"Failed to generate embedding for the search query"
+				);
+			}
+
+			// Query Vectorize index
+			const queryResult = await c.env.VECTORIZE.query(values, {
+				topK: top_k,
+				returnValues: false,
+				returnMetadata: "all"
+			});
+
+			const memories = queryResult.matches.map((match) => ({
+				id: match.id,
+				score: match.score,
+				text: (match.metadata as Record<string, unknown>)?.text ?? ""
+			}));
+
+			return ApiResponse.ok(c, "Semantic memory search completed", {
+				query,
+				count: memories.length,
+				memories
+			});
+		}
+	)
+	.post("/sql", zValidator("json", SqlSchema), async (c) => {
+		const { prompt, schema, dialect } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are an expert SQL generator. Generate a clean, optimized SQL query for the given request and optional schema. Output must strictly be a JSON object with: 1) sql (string: the SQL query statement), 2) explanation (string: brief explanation of how it works). Output ONLY the JSON."
+					},
+					{
+						role: "user",
+						content: `Dialect: ${dialect || "sqlite"}\nSchema:\n${schema || "unspecified"}\n\nRequest: ${prompt}`
+					}
+				],
+				response_format: { type: "json_object" },
+				max_tokens: 1024
+			}
+		)) as { response?: string };
+
+		let parsed: unknown;
+		try {
+			parsed = JSON.parse(result.response ?? "{}");
+		} catch {
+			parsed = { sql: "", explanation: "Failed to generate SQL" };
+		}
+
+		return ApiResponse.ok(c, "SQL generated", {
+			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			result: parsed
+		});
+	})
+	.post("/emotion", zValidator("json", EmotionSchema), async (c) => {
+		const { text } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are an expert sentiment and emotion analyzer. Analyze the provided text and output a JSON object with: 1) sentiment (string: positive|negative|neutral), 2) emotions (object with keys: joy, sadness, anger, fear, surprise, love, each mapped to a float score from 0.0 to 1.0 representing confidence), 3) primaryEmotion (string: the highest scoring emotion name), 4) explanation (string: brief explanation of the emotional analysis). Output ONLY the JSON."
+					},
+					{
+						role: "user",
+						content: text
+					}
+				],
+				response_format: { type: "json_object" },
+				max_tokens: 1024
+			}
+		)) as { response?: string };
+
+		let parsed: unknown;
+		try {
+			parsed = JSON.parse(result.response ?? "{}");
+		} catch {
+			parsed = {
+				sentiment: "neutral",
+				emotions: {
+					joy: 0,
+					sadness: 0,
+					anger: 0,
+					fear: 0,
+					surprise: 0,
+					love: 0
+				},
+				primaryEmotion: "neutral",
+				explanation: "Failed to analyze emotions"
+			};
+		}
+
+		return ApiResponse.ok(c, "Emotion analysis completed", {
+			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			result: parsed
 		});
 	});
 

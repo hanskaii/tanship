@@ -579,6 +579,499 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/ai/answer": {
+			post: {
+				operationId: "aiAnswer",
+				summary: "Visual question answering",
+				description:
+					"Perform visual question answering (VQA) on any image via Workers AI (PaliGemma), returns the text answer",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url", "prompt"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Absolute URL to the image file to analyze"
+									},
+									prompt: {
+										type: "string",
+										description:
+											"Question or prompt about the image"
+									}
+								}
+							},
+							example: {
+								url: "https://x402.tanship.dev/assets/sample.jpg",
+								prompt: "What is written on the laptop screen?"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Visual question answering text result"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/correct": {
+			post: {
+				operationId: "aiCorrect",
+				summary: "Correct text grammar and spelling",
+				description:
+					"Automatically correct grammar, spelling, punctuation, and phrasing via Workers AI (Llama 3.3 70B)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["text"],
+								properties: {
+									text: {
+										type: "string",
+										description:
+											"The text content to check and correct"
+									}
+								}
+							},
+							example: {
+								text: "i has a error in my code and it dont build"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Grammar correction result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/code": {
+			post: {
+				operationId: "aiCode",
+				summary: "Analyze or debug code",
+				description:
+					"Analyze, debug, or refactor code via coding-tailored Workers AI (Llama 3.3 70B)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["code", "prompt"],
+								properties: {
+									code: {
+										type: "string",
+										description:
+											"The code snippet to analyze"
+									},
+									prompt: {
+										type: "string",
+										description:
+											"Coding instruction (e.g. explain, debug, rewrite)"
+									},
+									language: {
+										type: "string",
+										description:
+											"Optional programming language name"
+									}
+								}
+							},
+							example: {
+								code: "function add(a, b) { return a - b; }",
+								prompt: "Verify this function name and correct the implementation if needed.",
+								language: "javascript"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Code analysis result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/reason": {
+			post: {
+				operationId: "aiReason",
+				summary: "Reasoning model completion",
+				description:
+					"Reasoning model completion via Workers AI (DeepSeek R1 Distill Qwen 32B), separating thinking process from final answer",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["messages"],
+								properties: {
+									messages: {
+										type: "array",
+										items: {
+											type: "object",
+											required: ["role", "content"],
+											properties: {
+												role: {
+													type: "string",
+													enum: [
+														"system",
+														"user",
+														"assistant"
+													]
+												},
+												content: { type: "string" }
+											}
+										},
+										description:
+											"Array of { role: system|user|assistant, content: string }"
+									},
+									max_tokens: {
+										type: "integer",
+										default: 2048,
+										description:
+											"Optional max output tokens"
+									}
+								}
+							},
+							example: {
+								messages: [
+									{
+										role: "user",
+										content:
+											"How many Rs are in strawberry?"
+									}
+								]
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Thinking process and final answer" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/similarity": {
+			post: {
+				operationId: "aiSimilarity",
+				summary: "Calculate semantic similarity",
+				description:
+					"Calculate semantic cosine similarity score between two texts via Workers AI (BGE-M3 embeddings)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.004" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["text1", "text2"],
+								properties: {
+									text1: {
+										type: "string",
+										description:
+											"First text content to compare"
+									},
+									text2: {
+										type: "string",
+										description:
+											"Second text content to compare"
+									}
+								}
+							},
+							example: {
+								text1: "The weather is very warm today.",
+								text2: "It is quite hot outside."
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Semantic similarity score" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/ocr": {
+			post: {
+				operationId: "aiOcr",
+				summary: "Extract text from image",
+				description:
+					"Extract spelling/text content from any image via Workers AI (PaliGemma OCR)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Absolute URL to the image file to extract text from"
+									}
+								}
+							},
+							example: {
+								url: "https://x402.tanship.dev/assets/sample.jpg"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Extracted text content result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/lint": {
+			post: {
+				operationId: "aiLint",
+				summary: "Static code syntax checking",
+				description:
+					"Perform static code syntax checking and linting via compiler-tailored Workers AI (Llama 3.3 70B)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["code"],
+								properties: {
+									code: {
+										type: "string",
+										description: "The code snippet to lint"
+									},
+									language: {
+										type: "string",
+										description:
+											"Optional programming language name"
+									}
+								}
+							},
+							example: {
+								code: "const x = 5\nconsole.log(y)",
+								language: "javascript"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Structured linter analysis results"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/memory/add": {
+			post: {
+				operationId: "aiMemoryAdd",
+				summary: "Insert text to semantic memory",
+				description:
+					"Insert text chunks semantically into persistent memory using Workers AI (BGE-M3) and Cloudflare Vectorize",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["text"],
+								properties: {
+									text: {
+										type: "string",
+										description:
+											"The text content to store in semantic memory"
+									}
+								}
+							},
+							example: {
+								text: "Model Context Protocol (MCP) is standard JSON-RPC over stdio or SSE."
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Memory added successfully with ID" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/memory/search": {
+			post: {
+				operationId: "aiMemorySearch",
+				summary: "Search semantic memory",
+				description:
+					"Search semantically matching text chunks from persistent memory via BGE-M3 + Vectorize",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["query"],
+								properties: {
+									query: {
+										type: "string",
+										description: "Search query string"
+									},
+									top_k: {
+										type: "integer",
+										default: 5,
+										description:
+											"Optional number of top matches to return"
+									}
+								}
+							},
+							example: {
+								query: "how does MCP work?",
+								top_k: 3
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Semantic memory search matches results"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/sql": {
+			post: {
+				operationId: "aiSql",
+				summary: "Generate SQL query from text",
+				description:
+					"Generate a clean, optimized SQL query from natural language instructions via Workers AI (Llama 3.3 70B)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["prompt"],
+								properties: {
+									prompt: {
+										type: "string",
+										description:
+											"Natural language query description"
+									},
+									schema: {
+										type: "string",
+										description:
+											"Optional database DDL schema structure"
+									},
+									dialect: {
+										type: "string",
+										description:
+											"Optional target SQL dialect (default sqlite)"
+									}
+								}
+							},
+							example: {
+								prompt: "Find the top 5 users by spend in June 2026",
+								schema: "CREATE TABLE users (id INT, name TEXT, spend REAL, date TEXT);",
+								dialect: "sqlite"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Generated SQL query and explanation"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/ai/emotion": {
+			post: {
+				operationId: "aiEmotion",
+				summary: "Analyze text emotion",
+				description:
+					"Analyze sentiment and detailed emotion categories (joy, sadness, anger, fear, etc) via Workers AI (Llama 3.3 70B)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.005" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["text"],
+								properties: {
+									text: {
+										type: "string",
+										description:
+											"The text content to analyze emotions on"
+									}
+								}
+							},
+							example: {
+								text: "I am absolutely thrilled and excited about our launch, but also slightly terrified!"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Sentiment and emotion scores result"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/search": {
 			post: {
 				operationId: "browserSearch",
@@ -618,6 +1111,45 @@ export const OPENAPI_SPEC = {
 				},
 				responses: {
 					"200": { description: "Structured web search results" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/browser/search/summary": {
+			post: {
+				operationId: "browserSearchSummary",
+				summary: "Perform web search with AI summary",
+				description:
+					"Perform web search and synthesize results into a structured AI answer with cited sources (Perplexity clone)",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.03" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["query"],
+								properties: {
+									query: {
+										type: "string",
+										description: "Search query to research"
+									}
+								}
+							},
+							example: {
+								query: "what is base network and how does it relate to coinbase"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description:
+							"Synthesized research answer with cited sources"
+					},
 					"402": { description: "Payment Required" }
 				}
 			}
@@ -745,6 +1277,157 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/seo": {
+			post: {
+				operationId: "browserSeo",
+				summary: "SEO health audit and validation",
+				description:
+					"Perform an automated SEO health audit and validator on any webpage via browser rendering + AI",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.015" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description: "Page URL to audit for SEO"
+									}
+								}
+							},
+							example: {
+								url: "https://example.com"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "SEO health audit results" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/browser/contacts": {
+			post: {
+				operationId: "browserContacts",
+				summary: "Extract contact details",
+				description:
+					"Extract contact details and social media links from any webpage via browser rendering + AI",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.012" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Page URL to extract contacts from"
+									}
+								}
+							},
+							example: {
+								url: "https://example.com/contact"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Extracted contact details results" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/browser/sitemap": {
+			post: {
+				operationId: "browserSitemap",
+				summary: "Extract website sitemap links",
+				description:
+					"Extract and filter all internal links from a website root to generate an XML sitemap or JSON URLs array via browser rendering",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.008" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Root website URL to crawl for sitemap generation"
+									}
+								}
+							},
+							example: {
+								url: "https://example.com"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Sitemap links list result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/browser/forms": {
+			post: {
+				operationId: "browserForms",
+				summary: "Extract web forms",
+				description:
+					"Extract all web forms and input schemas from any webpage via browser rendering + AI",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.012" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Page URL to extract forms from"
+									}
+								}
+							},
+							example: {
+								url: "https://example.com/login"
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Extracted web forms result" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/browser/screenshot": {
 			post: {
 				operationId: "browserScreenshot",
@@ -782,6 +1465,11 @@ export const OPENAPI_SPEC = {
 										type: "integer",
 										default: 800,
 										description: "Viewport height"
+									},
+									selector: {
+										type: "string",
+										description:
+											"Optional CSS selector to capture specific element instead of viewport"
 									}
 								}
 							},
@@ -820,6 +1508,59 @@ export const OPENAPI_SPEC = {
 										type: "string",
 										format: "uri",
 										description: "Page URL"
+									},
+									scale: {
+										type: "number",
+										minimum: 0.1,
+										maximum: 2.0,
+										default: 1.0,
+										description: "Optional PDF render scale"
+									},
+									printBackground: {
+										type: "boolean",
+										default: false,
+										description:
+											"Optional print background graphics"
+									},
+									landscape: {
+										type: "boolean",
+										default: false,
+										description:
+											"Optional print in landscape orientation"
+									},
+									pageRanges: {
+										type: "string",
+										description:
+											"Optional paper ranges to print (e.g. 1-5)"
+									},
+									format: {
+										type: "string",
+										default: "Letter",
+										description:
+											"Optional paper format (e.g. Letter, A4)"
+									},
+									margin: {
+										type: "object",
+										properties: {
+											top: {
+												type: "string",
+												default: "0px"
+											},
+											bottom: {
+												type: "string",
+												default: "0px"
+											},
+											left: {
+												type: "string",
+												default: "0px"
+											},
+											right: {
+												type: "string",
+												default: "0px"
+											}
+										},
+										description:
+											"Optional margin config object"
 									}
 								}
 							},
@@ -1074,6 +1815,51 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/rss/summary": {
+			post: {
+				operationId: "browserRssSummary",
+				summary: "Summarize RSS feed articles",
+				description:
+					"Summarize and synthesize any blog or RSS feed URL into a clean newsletter bullet-point digest via browser rendering + AI",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.02" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Blog or feed Page URL to summarize"
+									},
+									limit: {
+										type: "integer",
+										default: 20,
+										description:
+											"Optional max articles to include in the summary"
+									}
+								}
+							},
+							example: {
+								url: "https://blog.cloudflare.com",
+								limit: 5
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Consolidated feed digest summary" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/summarize": {
 			post: {
 				operationId: "summarize",
@@ -1090,12 +1876,17 @@ export const OPENAPI_SPEC = {
 						"application/json": {
 							schema: {
 								type: "object",
-								required: ["url"],
 								properties: {
 									url: {
 										type: "string",
 										format: "uri",
-										description: "Page URL to summarize"
+										description:
+											"Optional Page URL to summarize (if text is not provided)"
+									},
+									text: {
+										type: "string",
+										description:
+											"Optional raw text to summarize (if url is not provided)"
 									},
 									prompt: {
 										type: "string",

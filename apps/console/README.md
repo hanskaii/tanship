@@ -10,19 +10,47 @@ Payment-gated API on `console.tanflare.com`. Wraps Cloudflare services (Workers 
 
 ## Endpoints
 
-| Endpoint                      | Price  | What it does                                         |
-| ----------------------------- | ------ | ---------------------------------------------------- |
-| `POST /v1/ai/chat`            | $0.005 | LLM chat completion (Workers AI, Llama 3.3 70B)      |
-| `POST /v1/ai/image`           | $0.02  | Text-to-image, FLUX.1 schnell (JPEG)                 |
-| `POST /v1/ai/embeddings`      | $0.002 | BGE-M3 text embeddings                               |
-| `POST /v1/browser/screenshot` | $0.01  | Screenshot any webpage (PNG)                         |
-| `POST /v1/browser/pdf`        | $0.01  | Render any URL to PDF                                |
-| `POST /v1/browser/markdown`   | $0.005 | Turn a page into Markdown — no ads, no chrome        |
-| `POST /v1/browser/snapshot`   | $0.012 | Rendered HTML + screenshot in a single call          |
-| `POST /v1/browser/scrape`     | $0.006 | Pull specific elements off a page with CSS selectors |
-| `POST /v1/browser/json`       | $0.015 | Describe what you want, get clean JSON back via AI   |
-| `POST /v1/browser/links`      | $0.003 | Get every link on a page                             |
-| `POST /v1/browser/rss`        | $0.015 | Turn any blog/news page into a subscribable RSS feed |
+| Endpoint                          | Price  | What it does                                         |
+| --------------------------------- | ------ | ---------------------------------------------------- |
+| `POST /v1/ai/chat`                | $0.005 | LLM chat completion (Workers AI, Llama 3.3 70B)      |
+| `POST /v1/ai/image`               | $0.020 | Text-to-image, FLUX.1 schnell (JPEG)                 |
+| `POST /v1/ai/embeddings`          | $0.002 | BGE-M3 text embeddings (1024 dims)                   |
+| `POST /v1/ai/translate`           | $0.003 | AI-powered translation with auto source detection    |
+| `POST /v1/ai/sentiment`           | $0.002 | Sentiment analysis (Distilbert label + score)        |
+| `POST /v1/ai/transcribe`          | $0.010 | Speech-to-text audio transcription (Whisper)         |
+| `POST /v1/ai/describe`            | $0.005 | Image captioning and description (BLIP)              |
+| `POST /v1/ai/detect`              | $0.005 | Object detection and bounding boxes (DETR-ResNet-50) |
+| `POST /v1/ai/classify`            | $0.003 | Image classification (ResNet-50 labels + scores)     |
+| `POST /v1/ai/rerank`              | $0.003 | Relevance reranking (BGE Reranker Large)             |
+| `POST /v1/ai/moderate`            | $0.002 | Content safety moderation (Llama Guard 3 8B)         |
+| `POST /v1/ai/compress`            | $0.005 | Semantic text compression to save prompt tokens      |
+| `POST /v1/ai/answer`              | $0.008 | Visual Question Answering (PaliGemma VQA)            |
+| `POST /v1/ai/correct`             | $0.005 | Spelling & grammar corrector (Llama 3.3)             |
+| `POST /v1/ai/code`                | $0.005 | Coding helper, debugger, and refactorer              |
+| `POST /v1/ai/reason`              | $0.008 | DeepSeek-R1 reasoning (separated thinking block)     |
+| `POST /v1/ai/similarity`          | $0.004 | Semantic cosine similarity score (BGE-M3)            |
+| `POST /v1/ai/memory/add`          | $0.005 | Store text chunks semantically (CF Vectorize)        |
+| `POST /v1/ai/memory/search`       | $0.005 | Search semantic memory matches (CF Vectorize)        |
+| `POST /v1/ai/sql`                 | $0.005 | SQL query generator from text with dialects          |
+| `POST /v1/browser/search`         | $0.020 | Search engine scraper + AI structured results        |
+| `POST /v1/browser/search/summary` | $0.030 | Perplexity clone: web search + AI synthesis cited    |
+| `POST /v1/browser/metadata`       | $0.008 | SEO & OpenGraph metadata extraction                  |
+| `POST /v1/browser/article`        | $0.012 | Clean structured article reader (read time, md)      |
+| `POST /v1/browser/news`           | $0.005 | Real-time news search results                        |
+| `POST /v1/browser/seo`            | $0.015 | Webpage SEO health audit and validator               |
+| `POST /v1/browser/contacts`       | $0.012 | Lead email, phone, and social links scraper          |
+| `POST /v1/browser/sitemap`        | $0.008 | Website XML sitemap crawler                          |
+| `POST /v1/browser/forms`          | $0.012 | Extract all web forms and input schemas              |
+| `POST /v1/browser/health`         | $0.015 | Webpage uptime, speed, SSL, and error check          |
+| `POST /v1/browser/screenshot`     | $0.010 | Screenshot any webpage (PNG) with CSS selectors      |
+| `POST /v1/browser/pdf`            | $0.010 | Render any URL to PDF with custom layout/scale       |
+| `POST /v1/browser/markdown`       | $0.005 | Turn a page into Markdown — no ads, no chrome        |
+| `POST /v1/browser/snapshot`       | $0.012 | Rendered HTML + screenshot in a single call          |
+| `POST /v1/browser/scrape`         | $0.006 | Pull specific elements off a page with CSS selectors |
+| `POST /v1/browser/json`           | $0.015 | Describe what you want, get clean JSON back via AI   |
+| `POST /v1/browser/links`          | $0.003 | Get every link on a page                             |
+| `POST /v1/browser/rss`            | $0.015 | Turn any blog/news page into a subscribable RSS feed |
+| `POST /v1/browser/rss/summary`    | $0.020 | Summarize blog or feed URL into newsletter digest    |
 
 Free: `GET /` (health) and `GET /v1/services` (machine-readable catalog with prices + networks).
 

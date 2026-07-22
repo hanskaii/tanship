@@ -15,7 +15,24 @@ const UrlSchema = z.object({
 const ScreenshotSchema = UrlSchema.extend({
 	fullPage: z.boolean().default(false),
 	width: z.number().int().min(320).max(3840).default(1280),
-	height: z.number().int().min(240).max(2160).default(800)
+	height: z.number().int().min(240).max(2160).default(800),
+	selector: z.string().optional()
+});
+
+const PdfSchema = UrlSchema.extend({
+	scale: z.number().min(0.1).max(2.0).default(1.0),
+	printBackground: z.boolean().default(false),
+	landscape: z.boolean().default(false),
+	pageRanges: z.string().optional(),
+	format: z.string().default("Letter"),
+	margin: z
+		.object({
+			top: z.string().default("0px"),
+			bottom: z.string().default("0px"),
+			left: z.string().default("0px"),
+			right: z.string().default("0px")
+		})
+		.optional()
 });
 
 const ScrapeSchema = UrlSchema.extend({
@@ -34,6 +51,9 @@ const RssSchema = UrlSchema.extend({
 const SearchSchema = z.object({
 	query: z.string().min(1).max(500),
 	limit: z.number().int().min(1).max(50).default(10)
+});
+const SearchSummarySchema = z.object({
+	query: z.string().min(1).max(500)
 });
 const NewsSchema = z.object({
 	query: z.string().min(1).max(500),
@@ -86,6 +106,121 @@ const ARTICLE_EXTRACTION_SCHEMA = {
 		}
 	},
 	required: ["title", "contentMarkdown"]
+} as const;
+
+const FORMS_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		forms: {
+			type: "array",
+			items: {
+				type: "object",
+				properties: {
+					action: { type: "string" },
+					method: { type: "string" },
+					inputs: {
+						type: "array",
+						items: {
+							type: "object",
+							properties: {
+								name: { type: "string" },
+								type: { type: "string" },
+								placeholder: { type: "string" },
+								required: { type: "boolean" }
+							},
+							required: ["name", "type"]
+						}
+					},
+					submitButton: { type: "string" }
+				},
+				required: ["inputs"]
+			}
+		}
+	},
+	required: ["forms"]
+} as const;
+
+const CONTACTS_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		emails: {
+			type: "array",
+			items: { type: "string" },
+			description: "Email addresses found on the page"
+		},
+		phones: {
+			type: "array",
+			items: { type: "string" },
+			description: "Phone numbers found on the page"
+		},
+		addresses: {
+			type: "array",
+			items: { type: "string" },
+			description: "Physical or mailing addresses found on the page"
+		},
+		socialLinks: {
+			type: "array",
+			items: {
+				type: "object",
+				properties: {
+					platform: {
+						type: "string",
+						description: "e.g. twitter, linkedin, github, facebook"
+					},
+					url: { type: "string", description: "Profile URL" }
+				},
+				required: ["platform", "url"]
+			}
+		}
+	},
+	required: ["emails", "phones", "socialLinks"]
+} as const;
+
+const SEO_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		score: {
+			type: "integer",
+			description: "SEO Health Score from 0 to 100"
+		},
+		metadata: {
+			type: "object",
+			properties: {
+				title: { type: "string" },
+				description: { type: "string" },
+				canonicalUrl: { type: "string" },
+				robots: { type: "string" }
+			},
+			required: ["title"]
+		},
+		headingStructure: {
+			type: "array",
+			items: { type: "string" },
+			description:
+				"Sequence of heading tags on the page (e.g. h1, h2, h2, h3)"
+		},
+		imageCount: {
+			type: "object",
+			properties: {
+				total: { type: "integer" },
+				missingAlt: { type: "integer" }
+			},
+			required: ["total", "missingAlt"]
+		},
+		issues: {
+			type: "array",
+			items: {
+				type: "object",
+				properties: {
+					severity: { type: "string", enum: ["critical", "warning"] },
+					message: { type: "string" },
+					recommendation: { type: "string" }
+				},
+				required: ["severity", "message", "recommendation"]
+			}
+		}
+	},
+	required: ["score", "metadata", "issues"]
 } as const;
 
 const METADATA_EXTRACTION_SCHEMA = {
@@ -142,14 +277,14 @@ const browserHandler = new Hono<HonoEnv>()
 		const image = await browser.screenshot(input);
 		return c.body(image, 200, { "Content-Type": "image/png" });
 	})
-	.post("/pdf", zValidator("json", UrlSchema), async (c) => {
-		const { url } = c.req.valid("json");
+	.post("/pdf", zValidator("json", PdfSchema), async (c) => {
+		const input = c.req.valid("json");
 		const browser = new BrowserRenderingService(
 			c.env.CLOUDFLARE_ACCOUNT_ID,
 			c.env.CLOUDFLARE_API_TOKEN
 		);
 
-		const pdf = await browser.pdf(url);
+		const pdf = await browser.pdf(input);
 		return c.body(pdf, 200, { "Content-Type": "application/pdf" });
 	})
 	.post("/markdown", zValidator("json", UrlSchema), async (c) => {
@@ -242,6 +377,81 @@ const browserHandler = new Hono<HonoEnv>()
 
 		return c.body(feed, 200, {
 			"Content-Type": "application/rss+xml; charset=utf-8"
+		});
+	})
+	.post("/rss/summary", zValidator("json", RssSchema), async (c) => {
+		const { url, limit } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const extracted = (await browser.json(
+			url,
+			"Extract the articles or posts listed on this page as a feed. Include every visible article with its absolute URL, and the page title and description.",
+			RSS_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		)) as {
+			title?: string;
+			description?: string;
+			items?: FeedItem[];
+		} | null;
+
+		const items = (extracted?.items ?? []).slice(0, limit);
+
+		if (items.length === 0) {
+			return ApiResponse.ok(c, "No feed items found to summarize", {
+				title: extracted?.title ?? url,
+				summary: "No articles were found in the feed.",
+				articles: []
+			});
+		}
+
+		const feedContext = items
+			.map(
+				(item, idx) =>
+					"[" +
+					(idx + 1) +
+					"] Title: " +
+					item.title +
+					"\nDescription: " +
+					(item.description || "N/A")
+			)
+			.join("\n\n");
+
+		const summaryPrompt =
+			"You are a professional editor. Synthesize the provided RSS feed articles into a clean, unified bullet-point newsletter digest. Focus on extracting the most important announcements, trends, and facts. Keep it structured and concise.\n\nFeed Title: " +
+			(extracted?.title ?? url) +
+			"\nFeed Description: " +
+			(extracted?.description ?? "N/A") +
+			"\n\nArticles:\n" +
+			feedContext;
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are a professional assistant summarizing content concisely."
+					},
+					{
+						role: "user",
+						content: summaryPrompt
+					}
+				],
+				max_tokens: 1536
+			}
+		)) as { response?: string };
+
+		return ApiResponse.ok(c, "RSS feed digest completed", {
+			title: extracted?.title ?? url,
+			description: extracted?.description ?? null,
+			summary: result.response ?? "",
+			articles: items.map((item) => ({
+				title: item.title,
+				link: item.link
+			}))
 		});
 	})
 	.post("/search", zValidator("json", SearchSchema), async (c) => {
@@ -372,6 +582,186 @@ const browserHandler = new Hono<HonoEnv>()
 			count: results.length,
 			results
 		});
-	});
+	})
+	.post(
+		"/search/summary",
+		zValidator("json", SearchSummarySchema),
+		async (c) => {
+			const { query } = c.req.valid("json");
+			const browser = new BrowserRenderingService(
+				c.env.CLOUDFLARE_ACCOUNT_ID,
+				c.env.CLOUDFLARE_API_TOKEN
+			);
 
+			const targetUrl =
+				"https://html.duckduckgo.com/html/?q=" +
+				encodeURIComponent(query);
+
+			const extracted = (await browser.json(
+				targetUrl,
+				"Extract the search result items listed on this page. Include every search result with its title, absolute URL, and snippet description.",
+				SEARCH_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+			)) as {
+				results?: Array<{
+					title: string;
+					url: string;
+					snippet: string;
+				}>;
+			} | null;
+
+			const results = (extracted?.results ?? []).slice(0, 5);
+
+			if (results.length === 0) {
+				return ApiResponse.ok(
+					c,
+					"No search results found to summarize",
+					{
+						query,
+						answer: "No relevant search results were found.",
+						sources: []
+					}
+				);
+			}
+
+			// Format sources context
+			const context = results
+				.map(
+					(r, i) =>
+						"[" +
+						(i + 1) +
+						"] Title: " +
+						r.title +
+						"\nURL: " +
+						r.url +
+						"\nSnippet: " +
+						r.snippet
+				)
+				.join("\n\n");
+
+			const systemPrompt =
+				"You are a professional research assistant. Synthesize the provided search results to answer the user request accurately. Cite your sources using [1], [2], etc., corresponding to the indices of the search results. Keep your response concise, factual, and clear.";
+			const userPrompt =
+				"Query: " + query + "\n\nSearch Results:\n" + context;
+
+			const aiResult = (await c.env.AI.run(
+				"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+				{
+					messages: [
+						{ role: "system", content: systemPrompt },
+						{ role: "user", content: userPrompt }
+					],
+					max_tokens: 1024
+				}
+			)) as { response?: string };
+
+			return ApiResponse.ok(c, "Search summary completed", {
+				query,
+				answer: aiResult.response ?? "",
+				sources: results.map((r, i) => ({
+					index: i + 1,
+					title: r.title,
+					url: r.url
+				}))
+			});
+		}
+	)
+	.post("/seo", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const result = await browser.json(
+			url,
+			"Perform an SEO audit of this webpage. Check the metadata (title, description, canonical link, robots meta tag), heading tags sequence (H1s, H2s), image counts, and missing alt tags. Evaluate and return a health score (0-100), structure, and a list of key issues/warnings with recommendations.",
+			SEO_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		);
+
+		return ApiResponse.ok(c, "SEO audit completed", { url, audit: result });
+	})
+	.post("/contacts", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const result = await browser.json(
+			url,
+			"Extract all contact details. Return an object with emails, phones, addresses, and socialLinks (platform and profile URL) found on the page.",
+			CONTACTS_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		);
+
+		return ApiResponse.ok(c, "Contact details extracted", {
+			url,
+			contacts: result
+		});
+	})
+	.post("/sitemap", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const links = await browser.links(url);
+
+		let origin;
+		try {
+			origin = new URL(url).origin;
+		} catch (err) {
+			throw ApiError.badRequest("Invalid website root URL");
+		}
+
+		const internalLinks = Array.from(
+			new Set(
+				links
+					.map((link) => {
+						try {
+							const parsed = new URL(link, url);
+							if (parsed.origin === origin) {
+								parsed.hash = "";
+								return parsed.toString();
+							}
+						} catch (e) {}
+						return null;
+					})
+					.filter((link): link is string => link !== null)
+			)
+		);
+
+		const accept = c.req.header("Accept");
+		if (
+			accept &&
+			(accept.includes("application/xml") || accept.includes("text/xml"))
+		) {
+			const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${internalLinks.map((l) => `  <url>\n    <loc>${l.replace(/&/g, "&amp;")}</loc>\n  </url>`).join("\n")}\n</urlset>`;
+			return c.body(xml, 200, {
+				"Content-Type": "application/xml; charset=utf-8"
+			});
+		}
+
+		return ApiResponse.ok(c, "XML sitemap links extracted", {
+			url,
+			origin,
+			count: internalLinks.length,
+			links: internalLinks
+		});
+	})
+	.post("/forms", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const result = await browser.json(
+			url,
+			"Extract all web forms and input elements from this page. Return an array of forms, each containing the action URL, method, inputs schema (name, type, placeholder, required), and submit button text.",
+			FORMS_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		);
+
+		return ApiResponse.ok(c, "Web forms extracted", { url, result });
+	});
 export default browserHandler;
