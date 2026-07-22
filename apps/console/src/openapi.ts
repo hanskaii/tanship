@@ -1904,6 +1904,203 @@ export const OPENAPI_SPEC = {
 					"402": { description: "Payment Required" }
 				}
 			}
+		},
+		"/v1/browser/images": {
+			post: {
+				operationId: "browserImages",
+				summary: "Search Google Images",
+				description:
+					"Search Google Images and extract structured list of results with title, imageUrl, sourceUrl, and dimensions",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.01" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["query"],
+								properties: {
+									query: {
+										type: "string",
+										description: "Image search query"
+									},
+									limit: {
+										type: "integer",
+										default: 10,
+										description: "Optional max results"
+									}
+								}
+							},
+							example: {
+								query: "cloudflare workers logo",
+								limit: 5
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Structured list of image results" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/browser/shopping": {
+			post: {
+				operationId: "browserShopping",
+				summary: "Search Google Shopping",
+				description:
+					"Search Google Shopping and extract structured list of products with title, price, store name, and link",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.01" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["query"],
+								properties: {
+									query: {
+										type: "string",
+										description: "Shopping search query"
+									},
+									limit: {
+										type: "integer",
+										default: 10,
+										description: "Optional max results"
+									}
+								}
+							},
+							example: {
+								query: "mechanical keyboard wireless",
+								limit: 5
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Structured list of products" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/reddit/search": {
+			post: {
+				operationId: "redditSearch",
+				summary: "Search Reddit posts",
+				description:
+					"Search Reddit and extract structured list of posts with title, subreddit, author, URL, score, and comments count",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.01" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["query"],
+								properties: {
+									query: {
+										type: "string",
+										description: "Reddit search query"
+									},
+									sort: {
+										type: "string",
+										enum: [
+											"relevance",
+											"hot",
+											"top",
+											"new",
+											"comments"
+										],
+										default: "relevance",
+										description: "Optional sort order"
+									},
+									timeframe: {
+										type: "string",
+										enum: [
+											"all",
+											"year",
+											"month",
+											"week",
+											"day",
+											"hour"
+										],
+										default: "all",
+										description: "Optional time filter"
+									},
+									limit: {
+										type: "integer",
+										default: 10,
+										description: "Optional max results"
+									}
+								}
+							},
+							example: {
+								query: "cloudflare workers vs lambda",
+								limit: 5
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Structured list of Reddit posts" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
+		"/v1/reddit/comments": {
+			post: {
+				operationId: "redditComments",
+				summary: "Extract Reddit post & comments",
+				description:
+					"Extract full post text and a structured list of comments from a Reddit thread URL",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.01" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description: "Reddit post URL"
+									},
+									limit: {
+										type: "integer",
+										default: 25,
+										description:
+											"Optional max comments to return"
+									}
+								}
+							},
+							example: {
+								url: "https://www.reddit.com/r/webdev/comments/example",
+								limit: 10
+							}
+						}
+					}
+				},
+				responses: {
+					"200": {
+						description: "Post content and structured comments list"
+					},
+					"402": { description: "Payment Required" }
+				}
+			}
 		}
 	}
 } as const;

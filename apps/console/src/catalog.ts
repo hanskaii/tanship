@@ -701,6 +701,146 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			url: "https://example.com/login"
 		}
+	},
+	{
+		id: "browser.images",
+		method: "POST",
+		path: "/v1/browser/images",
+		price: "$0.01",
+		description:
+			"Search for images across the web via headless browser rendering, returns structured results with image URLs, source pages, and dimensions",
+		mimeType: "application/json",
+		input: {
+			query: "Image search query string",
+			limit: "Optional max results to return (default 10)"
+		},
+		example: {
+			query: "cloudflare workers logo",
+			limit: 5
+		}
+	},
+	{
+		id: "browser.shopping",
+		method: "POST",
+		path: "/v1/browser/shopping",
+		price: "$0.01",
+		description:
+			"Search for products and prices across the web via headless browser rendering, returns structured shopping results with prices, ratings, and merchant info",
+		mimeType: "application/json",
+		input: {
+			query: "Shopping search query string",
+			limit: "Optional max results to return (default 10)"
+		},
+		example: {
+			query: "mechanical keyboard wireless",
+			limit: 5
+		}
+	},
+	{
+		id: "reddit.search",
+		method: "POST",
+		path: "/v1/reddit/search",
+		price: "$0.01",
+		description:
+			"Search Reddit posts via headless browser rendering, returns structured results with titles, subreddits, scores, and preview snippets",
+		mimeType: "application/json",
+		input: {
+			query: "Reddit search query string",
+			sort: "Optional sort order: relevance, hot, top, new, comments (default relevance)",
+			timeframe:
+				"Optional time filter: all, year, month, week, day, hour (default all)",
+			limit: "Optional max results to return (default 10)"
+		},
+		example: {
+			query: "cloudflare workers vs lambda",
+			sort: "top",
+			timeframe: "year",
+			limit: 5
+		}
+	},
+	{
+		id: "reddit.comments",
+		method: "POST",
+		path: "/v1/reddit/comments",
+		price: "$0.01",
+		description:
+			"Extract full post content and all comments from a Reddit thread via headless browser rendering + AI",
+		mimeType: "application/json",
+		input: {
+			url: "Reddit post URL (e.g. https://www.reddit.com/r/.../comments/...)",
+			limit: "Optional max comments to return (default 25)"
+		},
+		example: {
+			url: "https://www.reddit.com/r/webdev/comments/example",
+			limit: 10
+		}
+	},
+	{
+		id: "modal.sandbox.create",
+		method: "POST",
+		path: "/v1/modal/sandbox/create",
+		price: "$0.01",
+		description:
+			"Create a managed Python 3.11 sandbox with bounded CPU, memory, and lifetime limits",
+		mimeType: "application/json",
+		input: {
+			image: "Optional container image (default python:3.11-slim)",
+			timeout: "Optional max lifetime in seconds 10-3600 (default 300)",
+			cpu: "Optional CPU cores 0.25-8 (default 1)",
+			memory: "Optional memory in MiB 128-16384 (default 512)",
+			env: "Optional environment variables object",
+			workdir: "Optional working directory path"
+		},
+		example: {
+			timeout: 300,
+			cpu: 1,
+			memory: 512
+		}
+	},
+	{
+		id: "modal.sandbox.exec",
+		method: "POST",
+		path: "/v1/modal/sandbox/exec",
+		price: "$0.005",
+		description:
+			"Execute a command inside a running sandbox. Returns stdout, stderr, and exit code",
+		mimeType: "application/json",
+		input: {
+			sandbox_id: "ID of the sandbox to execute in",
+			command: "Command string or array of strings to execute"
+		},
+		example: {
+			sandbox_id: "sb-abc123",
+			command: "python -c 'print(1+1)'"
+		}
+	},
+	{
+		id: "modal.sandbox.status",
+		method: "POST",
+		path: "/v1/modal/sandbox/status",
+		price: "$0.002",
+		description: "Check the status of a sandbox (running or terminated)",
+		mimeType: "application/json",
+		input: {
+			sandbox_id: "ID of the sandbox to check"
+		},
+		example: {
+			sandbox_id: "sb-abc123"
+		}
+	},
+	{
+		id: "modal.sandbox.terminate",
+		method: "POST",
+		path: "/v1/modal/sandbox/terminate",
+		price: "$0.002",
+		description: "Terminate a running sandbox and release its resources",
+		mimeType: "application/json",
+		input: {
+			sandbox_id: "ID of the sandbox to terminate"
+		},
+		example: {
+			sandbox_id: "sb-abc123"
+		}
 	}
 ];
 
