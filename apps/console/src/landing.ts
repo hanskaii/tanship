@@ -442,6 +442,20 @@ export const LANDING_PAGE_HTML = `
 				</div>
 					<div class="card">
 						<div class="card-header">
+							<span class="card-title">browser.rss</span>
+							<span class="card-price">$0.015</span>
+						</div>
+						<p class="card-desc">Turn any blog/news page into a subscribable RSS feed via browser rendering.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<span class="card-title">browser.rss.summary</span>
+							<span class="card-price">$0.020</span>
+						</div>
+						<p class="card-desc">Summarize any RSS feed or blog URL into a bullet-point newsletter digest via AI.</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
 							<span class="card-title">browser.seo</span>
 							<span class="card-price">$0.015</span>
 						</div>

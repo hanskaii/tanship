@@ -379,6 +379,81 @@ const browserHandler = new Hono<HonoEnv>()
 			"Content-Type": "application/rss+xml; charset=utf-8"
 		});
 	})
+	.post("/rss/summary", zValidator("json", RssSchema), async (c) => {
+		const { url, limit } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const extracted = (await browser.json(
+			url,
+			"Extract the articles or posts listed on this page as a feed. Include every visible article with its absolute URL, and the page title and description.",
+			RSS_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		)) as {
+			title?: string;
+			description?: string;
+			items?: FeedItem[];
+		} | null;
+
+		const items = (extracted?.items ?? []).slice(0, limit);
+
+		if (items.length === 0) {
+			return ApiResponse.ok(c, "No feed items found to summarize", {
+				title: extracted?.title ?? url,
+				summary: "No articles were found in the feed.",
+				articles: []
+			});
+		}
+
+		const feedContext = items
+			.map(
+				(item, idx) =>
+					"[" +
+					(idx + 1) +
+					"] Title: " +
+					item.title +
+					"\nDescription: " +
+					(item.description || "N/A")
+			)
+			.join("\n\n");
+
+		const summaryPrompt =
+			"You are a professional editor. Synthesize the provided RSS feed articles into a clean, unified bullet-point newsletter digest. Focus on extracting the most important announcements, trends, and facts. Keep it structured and concise.\n\nFeed Title: " +
+			(extracted?.title ?? url) +
+			"\nFeed Description: " +
+			(extracted?.description ?? "N/A") +
+			"\n\nArticles:\n" +
+			feedContext;
+
+		const result = (await c.env.AI.run(
+			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			{
+				messages: [
+					{
+						role: "system",
+						content:
+							"You are a professional assistant summarizing content concisely."
+					},
+					{
+						role: "user",
+						content: summaryPrompt
+					}
+				],
+				max_tokens: 1536
+			}
+		)) as { response?: string };
+
+		return ApiResponse.ok(c, "RSS feed digest completed", {
+			title: extracted?.title ?? url,
+			description: extracted?.description ?? null,
+			summary: result.response ?? "",
+			articles: items.map((item) => ({
+				title: item.title,
+				link: item.link
+			}))
+		});
+	})
 	.post("/search", zValidator("json", SearchSchema), async (c) => {
 		const { query, limit } = c.req.valid("json");
 		const browser = new BrowserRenderingService(

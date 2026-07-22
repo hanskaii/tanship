@@ -50,6 +50,7 @@ Payment-gated API on `console.tanflare.com`. Wraps Cloudflare services (Workers 
 | `POST /v1/browser/json`           | $0.015 | Describe what you want, get clean JSON back via AI   |
 | `POST /v1/browser/links`          | $0.003 | Get every link on a page                             |
 | `POST /v1/browser/rss`            | $0.015 | Turn any blog/news page into a subscribable RSS feed |
+| `POST /v1/browser/rss/summary`    | $0.020 | Summarize blog or feed URL into newsletter digest    |
 
 Free: `GET /` (health) and `GET /v1/services` (machine-readable catalog with prices + networks).
 

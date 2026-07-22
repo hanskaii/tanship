@@ -234,6 +234,23 @@ export const SERVICES: ServiceDef[] = [
 		example: { url: "https://blog.cloudflare.com", limit: 20 }
 	},
 	{
+		id: "browser.rss.summary",
+		method: "POST",
+		path: "/v1/browser/rss/summary",
+		price: "$0.02",
+		description:
+			"Summarize and synthesize any blog or RSS feed URL into a clean newsletter bullet-point digest via browser rendering + AI",
+		mimeType: "application/json",
+		input: {
+			url: "Blog or feed Page URL to summarize",
+			limit: "Optional max articles to include in the summary (default 20)"
+		},
+		example: {
+			url: "https://blog.cloudflare.com",
+			limit: 5
+		}
+	},
+	{
 		id: "ai.summarize",
 		method: "POST",
 		path: "/v1/summarize",

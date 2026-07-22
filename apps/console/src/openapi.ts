@@ -1815,6 +1815,51 @@ export const OPENAPI_SPEC = {
 				}
 			}
 		},
+		"/v1/browser/rss/summary": {
+			post: {
+				operationId: "browserRssSummary",
+				summary: "Summarize RSS feed articles",
+				description:
+					"Summarize and synthesize any blog or RSS feed URL into a clean newsletter bullet-point digest via browser rendering + AI",
+				"x-payment-info": {
+					price: { mode: "fixed", currency: "USD", amount: "0.02" },
+					protocols: [{ x402: {} }]
+				},
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								required: ["url"],
+								properties: {
+									url: {
+										type: "string",
+										format: "uri",
+										description:
+											"Blog or feed Page URL to summarize"
+									},
+									limit: {
+										type: "integer",
+										default: 20,
+										description:
+											"Optional max articles to include in the summary"
+									}
+								}
+							},
+							example: {
+								url: "https://blog.cloudflare.com",
+								limit: 5
+							}
+						}
+					}
+				},
+				responses: {
+					"200": { description: "Consolidated feed digest summary" },
+					"402": { description: "Payment Required" }
+				}
+			}
+		},
 		"/v1/summarize": {
 			post: {
 				operationId: "summarize",
