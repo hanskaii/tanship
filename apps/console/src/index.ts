@@ -19,6 +19,38 @@ import { ApiError } from "./helpers/errors.helper";
 import { ApiResponse } from "./helpers/response.helper";
 import type { HonoEnv } from "./types/hono.types";
 
+interface LogEntry {
+	id: string;
+	timestamp: string;
+	method: string;
+	path: string;
+	status: number;
+	duration: number;
+	txHash: string | null;
+	payer: string | null;
+	network: string | null;
+	amount: string | null;
+	requestBody: any;
+	error: string | null;
+}
+
+const recentLogs: LogEntry[] = [];
+
+function parsePaymentSignature(sigHeader: string | null) {
+	if (!sigHeader) return null;
+	try {
+		const decoded = JSON.parse(atob(sigHeader));
+		return {
+			txHash: decoded.payload?.transaction || null,
+			payer: decoded.payload?.payer || null,
+			network: decoded.payload?.network || null,
+			amount: decoded.payload?.amount || null
+		};
+	} catch (e) {
+		return null;
+	}
+}
+
 // Reverse map: 400 → "BAD_REQUEST", 500 → "INTERNAL_SERVER_ERROR", etc.
 const STATUS_NAME: Record<StatusCode, string> = Object.fromEntries(
 	Object.entries(STATUS_CODES).map(([k, v]) => [v, k])
@@ -37,6 +69,64 @@ const app = new Hono<HonoEnv>()
 			allowMethods: ["POST", "GET", "OPTIONS"]
 		})
 	)
+	// Logging middleware for live transactions / runs
+	.use("/v1/*", async (c, next) => {
+		const path = c.req.path;
+		const method = c.req.method;
+
+		if (path === "/v1/logs" || path === "/v1/services") {
+			return await next();
+		}
+
+		const id = crypto.randomUUID();
+		const timestamp = new Date().toISOString();
+		const sigHeader =
+			c.req.header("payment-signature") ||
+			c.req.header("PAYMENT-SIGNATURE");
+		const payment = parsePaymentSignature(sigHeader || null);
+
+		let requestBody: any = null;
+		if (method === "POST") {
+			try {
+				const clone = c.req.raw.clone();
+				requestBody = await clone.json();
+			} catch (e) {
+				// Ignore
+			}
+		}
+
+		const start = performance.now();
+		let status = 200;
+		let error: string | null = null;
+
+		try {
+			await next();
+			status = c.res ? c.res.status : 200;
+		} catch (err: any) {
+			status = err.statusCode || 500;
+			error = err.message || String(err);
+			throw err;
+		} finally {
+			const duration = Math.round(performance.now() - start);
+			recentLogs.unshift({
+				id,
+				timestamp,
+				method,
+				path,
+				status,
+				duration,
+				txHash: payment?.txHash || null,
+				payer: payment?.payer || null,
+				network: payment?.network || null,
+				amount: payment?.amount || null,
+				requestBody,
+				error
+			});
+			if (recentLogs.length > 50) {
+				recentLogs.pop();
+			}
+		}
+	})
 	// Everything under /v1/* that appears in the catalog requires x402 payment
 	.use("/v1/*", x402)
 	.route("/v1/ai", aiHandler)
@@ -45,6 +135,9 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/reddit", redditHandler)
 	.route("/v1/summarize", summarizeHandler)
 	// Free discovery endpoints
+	.get("/v1/logs", (c) => {
+		return c.json({ success: true, logs: recentLogs });
+	})
 	.get("/", (c) => {
 		const accept = c.req.header("Accept");
 		if (accept && accept.includes("application/json")) {
@@ -53,7 +146,13 @@ const app = new Hono<HonoEnv>()
 				payment: "x402 (https://x402.org)"
 			});
 		}
-		return c.html(LANDING_PAGE_HTML);
+		const html = LANDING_PAGE_HTML.replace(
+			"{{PAY_TO_ADDRESS}}",
+			c.env.PAY_TO_ADDRESS || ""
+		)
+			.replace("{{FACILITATOR_URL}}", c.env.FACILITATOR_URL || "")
+			.replace("{{X402_NETWORKS}}", c.env.X402_NETWORKS || "");
+		return c.html(html);
 	})
 	.get("/openapi.json", (c) => c.json(OPENAPI_SPEC))
 	.get("/.well-known/x402", (c) =>
@@ -109,6 +208,8 @@ app.onError((err, c) => {
 });
 
 export type AppType = typeof app;
+
+export { Sandbox } from "@cloudflare/sandbox";
 
 export default {
 	fetch: async (

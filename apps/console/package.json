@@ -8,6 +8,7 @@
 		"cf-typegen": "wrangler types --env-interface CloudflareBindings"
 	},
 	"dependencies": {
+		"@cloudflare/sandbox": "latest",
 		"@hono/zod-validator": "^0.7.6",
 		"@x402/core": "^2.17.0",
 		"@x402/evm": "^2.17.0",

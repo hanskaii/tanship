@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
+import { getSandbox } from "@cloudflare/sandbox";
 
 import { ApiError } from "@/helpers/errors.helper";
 import { ApiResponse } from "@/helpers/response.helper";
@@ -17,92 +18,110 @@ const CreateSandboxSchema = z.object({
 
 const ExecSchema = z.object({
 	sandbox_id: z.string().min(1),
-	command: z.union([z.string().min(1), z.array(z.string().min(1)).min(1)])
+	command: z.string().min(1)
 });
 
 const SandboxIdSchema = z.object({
 	sandbox_id: z.string().min(1)
 });
 
-/** Forward a request to the Modal relay and return the parsed JSON. */
-async function relay(
-	baseUrl: string,
-	apiToken: string,
-	path: string,
-	body: unknown
-): Promise<unknown> {
-	const res = await fetch(`${baseUrl}${path}`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			Authorization: `Bearer ${apiToken}`
-		},
-		body: JSON.stringify(body)
-	});
-
-	if (!res.ok) {
-		const text = await res.text().catch(() => res.statusText);
-		throw ApiError.badGateway(`Modal relay error (${res.status}): ${text}`);
-	}
-
-	return res.json();
-}
-
 const modalHandler = new Hono<HonoEnv>()
 	.post(
 		"/sandbox/create",
 		zValidator("json", CreateSandboxSchema),
 		async (c) => {
-			const input = c.req.valid("json");
+			const { timeout } = c.req.valid("json");
 
-			const result = (await relay(
-				c.env.MODAL_API_URL,
-				c.env.MODAL_API_TOKEN,
-				"/sandbox/create",
-				input
-			)) as { sandbox_id: string; status: string };
+			const id = `sb-${crypto.randomUUID()}`;
+			const sandbox = getSandbox(c.env.Sandbox, id, {
+				sleepAfter: `${timeout}s`
+			});
 
-			return ApiResponse.ok(c, "Sandbox created", result);
+			try {
+				// Mark as active
+				await sandbox.writeFile("/workspace/.active", "true");
+			} catch (err: any) {
+				throw ApiError.server(
+					`Failed to initialize sandbox: ${err.message}`
+				);
+			}
+
+			return ApiResponse.ok(c, "Sandbox created", {
+				sandbox_id: id,
+				status: "running"
+			});
 		}
 	)
 	.post("/sandbox/exec", zValidator("json", ExecSchema), async (c) => {
-		const input = c.req.valid("json");
+		const { sandbox_id, command } = c.req.valid("json");
 
-		const result = (await relay(
-			c.env.MODAL_API_URL,
-			c.env.MODAL_API_TOKEN,
-			"/sandbox/exec",
-			input
-		)) as { stdout: string; stderr: string; exit_code: number };
+		const sandbox = getSandbox(c.env.Sandbox, sandbox_id);
 
-		return ApiResponse.ok(c, "Command executed", result);
+		// Check if active first
+		try {
+			const file = await sandbox.readFile("/workspace/.active");
+			if (file.content !== "true") {
+				throw new Error("Inactive");
+			}
+		} catch {
+			await sandbox.destroy();
+			throw ApiError.notFound("Sandbox not found or terminated");
+		}
+
+		try {
+			const res = await sandbox.exec(command);
+			return ApiResponse.ok(c, "Command executed", {
+				stdout: res.stdout,
+				stderr: res.stderr,
+				exit_code: res.exitCode
+			});
+		} catch (err: any) {
+			throw ApiError.server(`Execution failed: ${err.message}`);
+		}
 	})
 	.post("/sandbox/status", zValidator("json", SandboxIdSchema), async (c) => {
-		const input = c.req.valid("json");
+		const { sandbox_id } = c.req.valid("json");
 
-		const result = (await relay(
-			c.env.MODAL_API_URL,
-			c.env.MODAL_API_TOKEN,
-			"/sandbox/status",
-			input
-		)) as { sandbox_id: string; status: string; exit_code?: number };
+		const sandbox = getSandbox(c.env.Sandbox, sandbox_id);
 
-		return ApiResponse.ok(c, "Sandbox status retrieved", result);
+		try {
+			const file = await sandbox.readFile("/workspace/.active");
+			if (file.content === "true") {
+				return ApiResponse.ok(c, "Sandbox status retrieved", {
+					sandbox_id,
+					status: "running"
+				});
+			}
+		} catch {
+			// Clean up the lazily created empty instance if it wasn't active
+			await sandbox.destroy();
+		}
+
+		return ApiResponse.ok(c, "Sandbox status retrieved", {
+			sandbox_id,
+			status: "terminated"
+		});
 	})
 	.post(
 		"/sandbox/terminate",
 		zValidator("json", SandboxIdSchema),
 		async (c) => {
-			const input = c.req.valid("json");
+			const { sandbox_id } = c.req.valid("json");
 
-			const result = (await relay(
-				c.env.MODAL_API_URL,
-				c.env.MODAL_API_TOKEN,
-				"/sandbox/terminate",
-				input
-			)) as { sandbox_id: string; terminated: boolean };
+			const sandbox = getSandbox(c.env.Sandbox, sandbox_id);
 
-			return ApiResponse.ok(c, "Sandbox terminated", result);
+			try {
+				await sandbox.destroy();
+			} catch (err: any) {
+				throw ApiError.server(
+					`Failed to terminate sandbox: ${err.message}`
+				);
+			}
+
+			return ApiResponse.ok(c, "Sandbox terminated", {
+				sandbox_id,
+				terminated: true
+			});
 		}
 	);
 
