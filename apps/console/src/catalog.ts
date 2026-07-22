@@ -841,6 +841,91 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			sandbox_id: "sb-abc123"
 		}
+	},
+	{
+		id: "dev.hash",
+		method: "POST",
+		path: "/v1/dev/hash",
+		price: "$0.001",
+		description:
+			"Compute cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) for a given text",
+		mimeType: "application/json",
+		input: {
+			text: "The plain text to hash",
+			algorithm:
+				"Optional hash algorithm (MD5, SHA-1, SHA-256, SHA-512, default: SHA-256)"
+		},
+		example: {
+			text: "hello world",
+			algorithm: "SHA-256"
+		}
+	},
+	{
+		id: "dev.jwt-decode",
+		method: "POST",
+		path: "/v1/dev/jwt-decode",
+		price: "$0.001",
+		description:
+			"Decode a JWT token's header and payload without verifying signature",
+		mimeType: "application/json",
+		input: {
+			token: "The encoded JWT token string"
+		},
+		example: {
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+		}
+	},
+	{
+		id: "dev.diff-json",
+		method: "POST",
+		path: "/v1/dev/diff-json",
+		price: "$0.002",
+		description:
+			"Perform a deep structural diff comparison between two JSON objects",
+		mimeType: "application/json",
+		input: {
+			a: "First JSON object to compare",
+			b: "Second JSON object to compare"
+		},
+		example: {
+			a: { name: "Alice", age: 30 },
+			b: { name: "Alice", age: 31, city: "New York" }
+		}
+	},
+	{
+		id: "dev.csv-to-json",
+		method: "POST",
+		path: "/v1/dev/csv-to-json",
+		price: "$0.001",
+		description:
+			"Parse CSV/TSV formatted text and convert it to a structured JSON array",
+		mimeType: "application/json",
+		input: {
+			csv: "CSV or TSV text block to parse",
+			delimiter: "Optional custom column delimiter (default: ,)",
+			hasHeader:
+				"Optional boolean if first line represents column headers (default: true)"
+		},
+		example: {
+			csv: "name,age,city\nAlice,30,London\nBob,25,Paris",
+			delimiter: ",",
+			hasHeader: true
+		}
+	},
+	{
+		id: "dev.geo-ip",
+		method: "POST",
+		path: "/v1/dev/geo-ip",
+		price: "$0.001",
+		description:
+			"Geolocate an IP address. Uses Cloudflare context for the request IP, or queries target IP",
+		mimeType: "application/json",
+		input: {
+			ip: "Optional target IPv4/IPv6 address. If omitted, geolocates the incoming request IP"
+		},
+		example: {
+			ip: "8.8.8.8"
+		}
 	}
 ];
 
