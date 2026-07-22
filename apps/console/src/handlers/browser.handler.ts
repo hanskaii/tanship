@@ -885,5 +885,51 @@ const browserHandler = new Hono<HonoEnv>()
 			count: results.length,
 			results
 		});
+	})
+	.post("/text-extract", zValidator("json", UrlSchema), async (c) => {
+		const { url } = c.req.valid("json");
+		try {
+			const res = await fetch(url, {
+				headers: {
+					"User-Agent":
+						"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+					Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+				}
+			});
+
+			if (!res.ok) {
+				throw new Error(`HTTP status ${res.status}`);
+			}
+
+			const html = await res.text();
+			const text = html
+				.replace(
+					/<(script|style|svg|head|noscript)[^>]*>[\s\S]*?<\/\1>/gi,
+					""
+				)
+				.replace(/<[^>]+>/g, " ")
+				.replace(/&nbsp;/g, " ")
+				.replace(/&lt;/g, "<")
+				.replace(/&gt;/g, ">")
+				.replace(/&amp;/g, "&")
+				.replace(/&quot;/g, '"')
+				.replace(/&apos;/g, "'")
+				.replace(/\s+/g, " ")
+				.trim();
+
+			return ApiResponse.ok(
+				c,
+				"Text extracted successfully using fast engine",
+				{
+					url,
+					length: text.length,
+					text
+				}
+			);
+		} catch (err: any) {
+			throw ApiError.badGateway(
+				`Fast text extraction failed: ${err.message}`
+			);
+		}
 	});
 export default browserHandler;

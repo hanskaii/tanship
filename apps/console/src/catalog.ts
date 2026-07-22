@@ -1147,6 +1147,83 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			html: "<h1>Hello World</h1><p>This is a <strong>bold</strong> text.</p>"
 		}
+	},
+	{
+		id: "browser.text-extract",
+		method: "POST",
+		path: "/v1/browser/text-extract",
+		price: "$0.002",
+		description:
+			"Fast lightweight text extraction from any webpage (no headless browser overhead)",
+		mimeType: "application/json",
+		input: {
+			url: "Page URL to extract text from"
+		},
+		example: {
+			url: "https://example.com"
+		}
+	},
+	{
+		id: "dev.token-count",
+		method: "POST",
+		path: "/v1/dev/token-count",
+		price: "$0.001",
+		description: "Approximate cl100k-base token counter for LLM prompts",
+		mimeType: "application/json",
+		input: {
+			text: "The plain text to estimate tokens for",
+			model: "Optional LLM model name (default: gpt-4)"
+		},
+		example: {
+			text: "Model Context Protocol (MCP) is an open standard."
+		}
+	},
+	{
+		id: "dev.pdf-text",
+		method: "POST",
+		path: "/v1/dev/pdf-text",
+		price: "$0.003",
+		description:
+			"Extract raw readable text from a remote PDF file using fast native streams",
+		mimeType: "application/json",
+		input: {
+			url: "Absolute URL to the PDF file"
+		},
+		example: {
+			url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+		}
+	},
+	{
+		id: "net.ssl-check",
+		method: "POST",
+		path: "/v1/net/ssl-check",
+		price: "$0.002",
+		description:
+			"Check the SSL/TLS certificate details and expiry for a domain name",
+		mimeType: "application/json",
+		input: {
+			domain: "Domain name to check (e.g. cloudflare.com)"
+		},
+		example: {
+			domain: "cloudflare.com"
+		}
+	},
+	{
+		id: "crypto.contract-abi",
+		method: "POST",
+		path: "/v1/crypto/contract-abi",
+		price: "$0.002",
+		description:
+			"Retrieve the verified contract ABI for an EVM address on Base, Ethereum, Arbitrum, or Polygon",
+		mimeType: "application/json",
+		input: {
+			address: "EVM contract address to check",
+			chain: "Optional target blockchain network: base, ethereum, arbitrum, polygon (default: base)"
+		},
+		example: {
+			address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+			chain: "ethereum"
+		}
 	}
 ];
 
