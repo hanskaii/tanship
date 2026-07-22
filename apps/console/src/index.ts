@@ -4,6 +4,7 @@ import { cors } from "hono/cors";
 
 import aiHandler from "./handlers/ai.handler";
 import browserHandler from "./handlers/browser.handler";
+import cryptoHandler from "./handlers/crypto.handler";
 import devHandler from "./handlers/dev.handler";
 import modalHandler from "./handlers/modal.handler";
 import redditHandler from "./handlers/reddit.handler";
@@ -132,6 +133,7 @@ const app = new Hono<HonoEnv>()
 	.use("/v1/*", x402)
 	.route("/v1/ai", aiHandler)
 	.route("/v1/browser", browserHandler)
+	.route("/v1/crypto", cryptoHandler)
 	.route("/v1/dev", devHandler)
 	.route("/v1/modal", modalHandler)
 	.route("/v1/reddit", redditHandler)

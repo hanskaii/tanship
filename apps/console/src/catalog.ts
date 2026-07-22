@@ -926,6 +926,74 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			ip: "8.8.8.8"
 		}
+	},
+	{
+		id: "dev.redact",
+		method: "POST",
+		path: "/v1/dev/redact",
+		price: "$0.001",
+		description:
+			"Redact personally identifiable information (PII) and secret keys from text",
+		mimeType: "application/json",
+		input: {
+			text: "The raw text containing potential secrets",
+			replacement:
+				"Optional replacement placeholder text (default: [REDACTED])"
+		},
+		example: {
+			text: "Contact me at alice@example.com or use OpenAI key sk-1234567890abcdef1234567890abcdef"
+		}
+	},
+	{
+		id: "dev.dns",
+		method: "POST",
+		path: "/v1/dev/dns",
+		price: "$0.001",
+		description:
+			"Query DNS records (A, AAAA, MX, TXT, etc.) for a hostname via Cloudflare DoH",
+		mimeType: "application/json",
+		input: {
+			name: "Hostname to query (e.g. cloudflare.com)",
+			type: "Optional query type: A, AAAA, MX, TXT, CNAME, NS, SOA (default: A)"
+		},
+		example: {
+			name: "cloudflare.com",
+			type: "MX"
+		}
+	},
+	{
+		id: "dev.email-security",
+		method: "POST",
+		path: "/v1/dev/email-security",
+		price: "$0.002",
+		description:
+			"Audits a domain\'s email security posture by grading SPF and DMARC configurations",
+		mimeType: "application/json",
+		input: {
+			domain: "Domain name to audit (e.g. gmail.com)"
+		},
+		example: {
+			domain: "cloudflare.com"
+		}
+	},
+	{
+		id: "crypto.balance",
+		method: "POST",
+		path: "/v1/crypto/balance",
+		price: "$0.002",
+		description:
+			"Get native & ERC-20 token balances for an EVM address on Base, Ethereum, Arbitrum, or Polygon",
+		mimeType: "application/json",
+		input: {
+			address: "EVM wallet address to check",
+			chain: "Optional target blockchain network: base, ethereum, arbitrum, polygon (default: base)",
+			tokens: "Optional array of ERC-20 token contract addresses to check (max 10)"
+		},
+		example: {
+			address: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+			chain: "base",
+			tokens: ["0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"]
+		}
 	}
 ];
 

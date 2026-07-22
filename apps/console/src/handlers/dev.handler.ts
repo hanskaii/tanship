@@ -30,6 +30,49 @@ const GeoIpSchema = z.object({
 	ip: z.string().optional()
 });
 
+const RedactSchema = z.object({
+	text: z.string(),
+	replacement: z.string().default("[REDACTED]")
+});
+
+const DnsSchema = z.object({
+	name: z.string().min(1),
+	type: z.enum(["A", "AAAA", "MX", "TXT", "CNAME", "NS", "SOA"]).default("A")
+});
+
+const EmailSecuritySchema = z.object({
+	domain: z.string().min(1)
+});
+
+const PII_PATTERNS = [
+	{ name: "EMAIL", regex: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g },
+	{ name: "IP_ADDRESS", regex: /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g },
+	{ name: "CREDIT_CARD", regex: /\b(?:\d[ -]*?){13,16}\b/g },
+	{
+		name: "API_KEY",
+		regex: /\b(sk-[a-zA-Z0-9]{20,}|key-[a-zA-Z0-9]{20,}|AIzaSy[a-zA-Z0-9-_]{33})\b/gi
+	},
+	{
+		name: "JWT",
+		regex: /ey[a-zA-Z0-9-_=]+\.[a-zA-Z0-9-_=]+\.[a-zA-Z0-9-_=]*/g
+	}
+];
+
+/** Fetch DNS records via Cloudflare DoH (DNS over HTTPS) JSON API */
+async function queryDns(name: string, type: string): Promise<any[]> {
+	const res = await fetch(
+		`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(name)}&type=${type}`,
+		{
+			headers: { Accept: "application/dns-json" }
+		}
+	);
+	if (!res.ok) {
+		throw new Error(`DNS resolver failed: ${res.statusText}`);
+	}
+	const data = (await res.json()) as any;
+	return data.Answer ?? [];
+}
+
 /** Helper to parse a basic CSV string */
 function parseCsv(csv: string, delimiter: string, hasHeader: boolean) {
 	const lines = csv.split(/\r?\n/).filter((line) => line.trim().length > 0);
@@ -213,6 +256,140 @@ const devHandler = new Hono<HonoEnv>()
 		} catch (err: any) {
 			throw ApiError.badGateway(`IP lookup failed: ${err.message}`);
 		}
-	});
+	})
+	.post("/redact", zValidator("json", RedactSchema), async (c) => {
+		const { text, replacement } = c.req.valid("json");
+		let redactedText = text;
+		const redactedTypes: string[] = [];
+
+		for (const pattern of PII_PATTERNS) {
+			if (pattern.regex.test(text)) {
+				redactedText = redactedText.replace(pattern.regex, replacement);
+				redactedTypes.push(pattern.name);
+			}
+		}
+
+		return ApiResponse.ok(c, "Text redacted successfully", {
+			originalLength: text.length,
+			redactedLength: redactedText.length,
+			redactedTypes,
+			redactedText
+		});
+	})
+	.post("/dns", zValidator("json", DnsSchema), async (c) => {
+		const { name, type } = c.req.valid("json");
+		try {
+			const answers = await queryDns(name, type);
+			return ApiResponse.ok(c, "DNS query completed", {
+				name,
+				type,
+				answers: answers.map((a: any) => ({
+					name: a.name,
+					type: a.type,
+					TTL: a.TTL,
+					data: a.data
+				}))
+			});
+		} catch (err: any) {
+			throw ApiError.badGateway(`DNS lookup failed: ${err.message}`);
+		}
+	})
+	.post(
+		"/email-security",
+		zValidator("json", EmailSecuritySchema),
+		async (c) => {
+			const { domain } = c.req.valid("json");
+			try {
+				const txtRecords = await queryDns(domain, "TXT");
+
+				let spfRecord: string | null = null;
+				let dmarcRecord: string | null = null;
+
+				for (const r of txtRecords) {
+					const val = (r.data ?? "").replace(/"/g, "").trim();
+					if (val.startsWith("v=spf1")) {
+						spfRecord = val;
+					}
+				}
+
+				// DMARC is queried on _dmarc.domain
+				try {
+					const dmarcRecords = await queryDns(
+						`_dmarc.${domain}`,
+						"TXT"
+					);
+					for (const r of dmarcRecords) {
+						const val = (r.data ?? "").replace(/"/g, "").trim();
+						if (val.startsWith("v=DMARC1")) {
+							dmarcRecord = val;
+						}
+					}
+				} catch {}
+
+				// Grade email security posture
+				let score = 0;
+				const issues: string[] = [];
+
+				if (spfRecord) {
+					score += 50;
+					if (spfRecord.endsWith("-all")) {
+						score += 10; // Hard fail is best
+					} else if (spfRecord.endsWith("~all")) {
+						issues.push(
+							"SPF record uses SoftFail (~all) instead of HardFail (-all)."
+						);
+					} else {
+						issues.push("SPF record has weak ending mechanism.");
+					}
+				} else {
+					issues.push("Missing SPF record.");
+				}
+
+				if (dmarcRecord) {
+					score += 30;
+					if (dmarcRecord.includes("p=reject")) {
+						score += 10;
+					} else if (dmarcRecord.includes("p=quarantine")) {
+						score += 5;
+						issues.push(
+							"DMARC policy set to quarantine instead of reject."
+						);
+					} else {
+						issues.push(
+							"DMARC policy set to none (monitoring mode)."
+						);
+					}
+				} else {
+					issues.push("Missing DMARC record.");
+				}
+
+				return ApiResponse.ok(c, "Email security audit completed", {
+					domain,
+					score,
+					grade:
+						score >= 90
+							? "A"
+							: score >= 70
+								? "B"
+								: score >= 50
+									? "C"
+									: "F",
+					spf: {
+						exists: !!spfRecord,
+						record: spfRecord
+					},
+					dmarc: {
+						exists: !!dmarcRecord,
+						record: dmarcRecord
+					},
+					issues
+				});
+			} catch (err: any) {
+				throw ApiError.badGateway(
+					`Email security check failed: ${err.message}`
+				);
+			}
+		}
+	);
 
 export default devHandler;
