@@ -10,6 +10,11 @@ import devHandler from "./handlers/dev.handler";
 import modalHandler from "./handlers/modal.handler";
 import redditHandler from "./handlers/reddit.handler";
 import summarizeHandler from "./handlers/summarize.handler";
+import kvHandler from "./handlers/kv.handler";
+import storageHandler from "./handlers/storage.handler";
+import dbHandler from "./handlers/db.handler";
+import queueHandler from "./handlers/queue.handler";
+import durableHandler from "./handlers/durable.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
 import { OPENAPI_SPEC } from "./openapi";
@@ -140,6 +145,11 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/modal", modalHandler)
 	.route("/v1/reddit", redditHandler)
 	.route("/v1/summarize", summarizeHandler)
+	.route("/v1/kv", kvHandler)
+	.route("/v1/storage", storageHandler)
+	.route("/v1/db", dbHandler)
+	.route("/v1/queue", queueHandler)
+	.route("/v1/durable", durableHandler)
 	// Free discovery endpoints
 	.get("/v1/logs", (c) => {
 		return c.json({ success: true, logs: recentLogs });
@@ -216,6 +226,8 @@ app.onError((err, c) => {
 export type AppType = typeof app;
 
 export { Sandbox } from "@cloudflare/sandbox";
+// Durable Object class exports (required by wrangler)
+export { Counter, RateLimiter } from "./durable-objects";
 
 export default {
 	fetch: async (

@@ -29,7 +29,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/chat",
 		price: "$0.005",
 		description:
-			"LLM chat completion via Cloudflare Workers AI (Llama 3.3 70B by default)",
+			"LLM chat completion via edge AI (Llama 3.3 70B by default)",
 		mimeType: "application/json",
 		input: {
 			messages:
@@ -49,7 +49,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/image",
 		price: "$0.02",
 		description:
-			"Text-to-image generation via Workers AI (FLUX.1 schnell), returns JPEG",
+			"Text-to-image generation via edge AI (FLUX.1 schnell), returns JPEG",
 		mimeType: "image/jpeg",
 		input: {
 			prompt: "Image description",
@@ -67,7 +67,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/embeddings",
 		price: "$0.002",
 		description:
-			"Multilingual text embeddings via Workers AI (BGE-M3, 1024 dims)",
+			"Multilingual text embeddings via edge AI (BGE-M3, 1024 dims)",
 		mimeType: "application/json",
 		input: {
 			text: "A string or array of strings (max 100)"
@@ -79,7 +79,7 @@ export const SERVICES: ServiceDef[] = [
 		method: "POST",
 		path: "/v1/ai/translate",
 		price: "$0.003",
-		description: "AI-powered translation via Workers AI (m2m100-1.2b)",
+		description: "AI-powered translation via edge AI (m2m100-1.2b)",
 		mimeType: "application/json",
 		input: {
 			text: "Text to translate",
@@ -98,7 +98,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/sentiment",
 		price: "$0.002",
 		description:
-			"Sentiment analysis on text using Workers AI, returns positive/negative label with score",
+			"Sentiment analysis on text using edge AI, returns positive/negative label with score",
 		mimeType: "application/json",
 		input: {
 			text: "Text to analyze"
@@ -130,7 +130,7 @@ export const SERVICES: ServiceDef[] = [
 		method: "POST",
 		path: "/v1/browser/pdf",
 		price: "$0.01",
-		description: "Render any URL to PDF via Cloudflare Browser Rendering",
+		description: "Render any URL to PDF via headless browser rendering",
 		mimeType: "application/pdf",
 		input: {
 			url: "Page URL",
@@ -231,7 +231,7 @@ export const SERVICES: ServiceDef[] = [
 			url: "Page URL",
 			limit: "Optional max items (default 20)"
 		},
-		example: { url: "https://blog.cloudflare.com", limit: 20 }
+		example: { url: "https://blog.example.com", limit: 20 }
 	},
 	{
 		id: "browser.rss.summary",
@@ -246,7 +246,7 @@ export const SERVICES: ServiceDef[] = [
 			limit: "Optional max articles to include in the summary (default 20)"
 		},
 		example: {
-			url: "https://blog.cloudflare.com",
+			url: "https://blog.example.com",
 			limit: 5
 		}
 	},
@@ -271,7 +271,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/transcribe",
 		price: "$0.01",
 		description:
-			"Speech-to-text audio transcription via Workers AI (Whisper), returns text and metadata",
+			"Speech-to-text audio transcription via edge AI (Whisper), returns text and metadata",
 		mimeType: "application/json",
 		input: {
 			url: "Absolute URL to the audio file to transcribe"
@@ -286,7 +286,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/describe",
 		price: "$0.005",
 		description:
-			"Describe or caption any image via Workers AI (BLIP), returns description text",
+			"Describe or caption any image via edge AI (BLIP), returns description text",
 		mimeType: "application/json",
 		input: {
 			url: "Absolute URL to the image file to describe"
@@ -301,7 +301,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/rerank",
 		price: "$0.003",
 		description:
-			"Rerank a list of documents relative to a query via Workers AI (BGE Reranker Large)",
+			"Rerank a list of documents relative to a query via edge AI (BGE Reranker Large)",
 		mimeType: "application/json",
 		input: {
 			query: "Relevance query string",
@@ -324,7 +324,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/classify",
 		price: "$0.003",
 		description:
-			"Classify any image into pre-trained categories via Workers AI (ResNet-50), returns tags and scores",
+			"Classify any image into pre-trained categories via edge AI (ResNet-50), returns tags and scores",
 		mimeType: "application/json",
 		input: {
 			url: "Absolute URL to the image file to classify"
@@ -339,13 +339,13 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/moderate",
 		price: "$0.002",
 		description:
-			"Moderate text content for safety categories via Workers AI (Llama Guard 3 8B), returns safety classification",
+			"Moderate text content for safety categories via edge AI (Llama Guard 3 8B), returns safety classification",
 		mimeType: "application/json",
 		input: {
 			text: "The text content to moderate"
 		},
 		example: {
-			text: "How do I build a secure API on Cloudflare Workers?"
+			text: "How do I build a secure REST API?"
 		}
 	},
 	{
@@ -354,7 +354,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/detect",
 		price: "$0.005",
 		description:
-			"Detect objects inside any image via Workers AI (DETR-ResNet-50), returns tags and bounding boxes",
+			"Detect objects inside any image via edge AI (DETR-ResNet-50), returns tags and bounding boxes",
 		mimeType: "application/json",
 		input: {
 			url: "Absolute URL to the image file to detect objects inside"
@@ -407,7 +407,7 @@ export const SERVICES: ServiceDef[] = [
 			url: "Page URL to extract the article from"
 		},
 		example: {
-			url: "https://blog.cloudflare.com/introducing-browser-rendering-api"
+			url: "https://blog.example.com/introducing-browser-rendering-api"
 		}
 	},
 	{
@@ -416,7 +416,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/compress",
 		price: "$0.005",
 		description:
-			"Compress long text semantically using Workers AI (Llama 3.3 70B) to save downstream LLM prompt tokens",
+			"Compress long text semantically using edge AI (Llama 3.3 70B) to save downstream LLM prompt tokens",
 		mimeType: "application/json",
 		input: {
 			text: "The text content to semantically compress"
@@ -448,7 +448,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/answer",
 		price: "$0.008",
 		description:
-			"Perform visual question answering (VQA) on any image via Workers AI (PaliGemma), returns the text answer",
+			"Perform visual question answering (VQA) on any image via edge AI (PaliGemma), returns the text answer",
 		mimeType: "application/json",
 		input: {
 			url: "Absolute URL to the image file to analyze",
@@ -480,7 +480,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/correct",
 		price: "$0.005",
 		description:
-			"Automatically correct grammar, spelling, punctuation, and phrasing via Workers AI (Llama 3.3 70B)",
+			"Automatically correct grammar, spelling, punctuation, and phrasing via edge AI (Llama 3.3 70B)",
 		mimeType: "application/json",
 		input: {
 			text: "The text content to check and correct"
@@ -495,7 +495,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/code",
 		price: "$0.005",
 		description:
-			"Analyze, debug, or refactor code via coding-tailored Workers AI (Llama 3.3 70B)",
+			"Analyze, debug, or refactor code via coding-tailored edge AI (Llama 3.3 70B)",
 		mimeType: "application/json",
 		input: {
 			code: "The code snippet to analyze",
@@ -514,7 +514,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/reason",
 		price: "$0.008",
 		description:
-			"Reasoning model completion via Workers AI (DeepSeek R1 Distill Qwen 32B), separating thinking process from final answer",
+			"Reasoning model completion via edge AI (DeepSeek R1 Distill Qwen 32B), separating thinking process from final answer",
 		mimeType: "application/json",
 		input: {
 			messages:
@@ -533,7 +533,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/similarity",
 		price: "$0.004",
 		description:
-			"Calculate semantic cosine similarity score between two texts via Workers AI (BGE-M3 embeddings)",
+			"Calculate semantic cosine similarity score between two texts via edge AI (BGE-M3 embeddings)",
 		mimeType: "application/json",
 		input: {
 			text1: "First text content to compare",
@@ -550,7 +550,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/ocr",
 		price: "$0.008",
 		description:
-			"Extract spelling/text content from any image via Workers AI (PaliGemma OCR)",
+			"Extract spelling/text content from any image via edge AI (PaliGemma OCR)",
 		mimeType: "application/json",
 		input: {
 			url: "Absolute URL to the image file to extract text from"
@@ -595,7 +595,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/lint",
 		price: "$0.008",
 		description:
-			"Perform static code syntax checking and linting via compiler-tailored Workers AI (Llama 3.3 70B)",
+			"Perform static code syntax checking and linting via compiler-tailored edge AI (Llama 3.3 70B)",
 		mimeType: "application/json",
 		input: {
 			code: "The code snippet to lint",
@@ -612,7 +612,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/memory/add",
 		price: "$0.005",
 		description:
-			"Insert text chunks semantically into persistent memory using Workers AI (BGE-M3) and Cloudflare Vectorize",
+			"Insert text chunks semantically into persistent memory using edge AI (BGE-M3) and vector index",
 		mimeType: "application/json",
 		input: {
 			text: "The text content to store in semantic memory"
@@ -644,7 +644,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/sql",
 		price: "$0.005",
 		description:
-			"Generate a clean, optimized SQL query from natural language instructions via Workers AI (Llama 3.3 70B)",
+			"Generate a clean, optimized SQL query from natural language instructions via edge AI (Llama 3.3 70B)",
 		mimeType: "application/json",
 		input: {
 			prompt: "Natural language query description",
@@ -678,7 +678,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/emotion",
 		price: "$0.005",
 		description:
-			"Analyze sentiment and detailed emotion categories (joy, sadness, anger, fear, etc) via Workers AI (Llama 3.3 70B)",
+			"Analyze sentiment and detailed emotion categories (joy, sadness, anger, fear, etc) via edge AI (Llama 3.3 70B)",
 		mimeType: "application/json",
 		input: {
 			text: "The text content to analyze emotions on"
@@ -715,7 +715,7 @@ export const SERVICES: ServiceDef[] = [
 			limit: "Optional max results to return (default 10)"
 		},
 		example: {
-			query: "cloudflare workers logo",
+			query: "api gateway logo",
 			limit: 5
 		}
 	},
@@ -752,7 +752,7 @@ export const SERVICES: ServiceDef[] = [
 			limit: "Optional max results to return (default 10)"
 		},
 		example: {
-			query: "cloudflare workers vs lambda",
+			query: "edge computing vs serverless",
 			sort: "top",
 			timeframe: "year",
 			limit: 5
@@ -1223,6 +1223,366 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
 			chain: "ethereum"
+		}
+	},
+	{
+		id: "kv.set",
+		method: "POST",
+		path: "/v1/kv/set",
+		price: "$0.003",
+		description:
+			"Set a key-value pair in edge key-value store with optional TTL expiration",
+		mimeType: "application/json",
+		input: {
+			key: "Key name (max 512 chars)",
+			value: "String value to store (max 25KB)",
+			ttl: "Optional TTL in seconds 60-86400"
+		},
+		example: {
+			key: "user:123:session",
+			value: '{"token":"abc"}',
+			ttl: 3600
+		}
+	},
+	{
+		id: "kv.get",
+		method: "POST",
+		path: "/v1/kv/get",
+		price: "$0.002",
+		description: "Get a value by key from edge key-value store",
+		mimeType: "application/json",
+		input: {
+			key: "Key name to retrieve"
+		},
+		example: {
+			key: "user:123:session"
+		}
+	},
+	{
+		id: "kv.delete",
+		method: "POST",
+		path: "/v1/kv/delete",
+		price: "$0.002",
+		description: "Delete a key from edge key-value store",
+		mimeType: "application/json",
+		input: {
+			key: "Key name to delete"
+		},
+		example: {
+			key: "user:123:session"
+		}
+	},
+	{
+		id: "kv.list",
+		method: "POST",
+		path: "/v1/kv/list",
+		price: "$0.002",
+		description:
+			"List keys in edge key-value store with optional prefix filter and pagination",
+		mimeType: "application/json",
+		input: {
+			prefix: "Optional key prefix filter",
+			limit: "Optional max keys to return 1-1000 (default 100)",
+			cursor: "Optional pagination cursor from previous response"
+		},
+		example: {
+			prefix: "user:",
+			limit: 50
+		}
+	},
+	{
+		id: "storage.upload",
+		method: "POST",
+		path: "/v1/storage/upload",
+		price: "$0.01",
+		description:
+			"Upload a base64-encoded file to persistent object storage",
+		mimeType: "application/json",
+		input: {
+			key: "Object key / path (max 512 chars)",
+			content: "Base64-encoded file content (max 10MB)",
+			contentType: "Optional MIME type (default application/octet-stream)"
+		},
+		example: {
+			key: "uploads/logo.png",
+			content: "iVBORw0KGgo=",
+			contentType: "image/png"
+		}
+	},
+	{
+		id: "storage.get",
+		method: "POST",
+		path: "/v1/storage/get",
+		price: "$0.005",
+		description:
+			"Retrieve an object from persistent storage as base64-encoded content",
+		mimeType: "application/json",
+		input: {
+			key: "Object key to retrieve"
+		},
+		example: {
+			key: "uploads/logo.png"
+		}
+	},
+	{
+		id: "storage.delete",
+		method: "POST",
+		path: "/v1/storage/delete",
+		price: "$0.003",
+		description: "Delete an object from persistent storage",
+		mimeType: "application/json",
+		input: {
+			key: "Object key to delete"
+		},
+		example: {
+			key: "uploads/logo.png"
+		}
+	},
+	{
+		id: "storage.list",
+		method: "POST",
+		path: "/v1/storage/list",
+		price: "$0.003",
+		description:
+			"List objects in persistent storage with optional prefix filter and pagination",
+		mimeType: "application/json",
+		input: {
+			prefix: "Optional key prefix filter",
+			limit: "Optional max objects to return 1-1000 (default 100)",
+			cursor: "Optional pagination cursor from previous response"
+		},
+		example: {
+			prefix: "uploads/",
+			limit: 50
+		}
+	},
+	{
+		id: "storage.presign",
+		method: "POST",
+		path: "/v1/storage/presign",
+		price: "$0.003",
+		description:
+			"Get object metadata and info from persistent storage (presigned URL equivalent)",
+		mimeType: "application/json",
+		input: {
+			key: "Object key to get info for",
+			expiresIn: "Optional expiry in seconds 60-604800 (default 3600)"
+		},
+		example: {
+			key: "uploads/logo.png",
+			expiresIn: 3600
+		}
+	},
+	{
+		id: "db.query",
+		method: "POST",
+		path: "/v1/db/query",
+		price: "$0.005",
+		description:
+			"Execute a read-only SQL query (SELECT/PRAGMA/EXPLAIN) on a persistent edge SQLite database",
+		mimeType: "application/json",
+		input: {
+			sql: "SQL query string (SELECT only)",
+			params: "Optional array of bind parameters"
+		},
+		example: {
+			sql: "SELECT * FROM users WHERE id = ?",
+			params: ["user-123"]
+		}
+	},
+	{
+		id: "db.exec",
+		method: "POST",
+		path: "/v1/db/exec",
+		price: "$0.01",
+		description:
+			"Execute a write SQL statement (INSERT/UPDATE/DELETE/CREATE) on a persistent edge SQLite database",
+		mimeType: "application/json",
+		input: {
+			sql: "SQL statement to execute",
+			params: "Optional array of bind parameters"
+		},
+		example: {
+			sql: "INSERT INTO notes (id, content) VALUES (?, ?)",
+			params: ["note-1", "Hello world"]
+		}
+	},
+	{
+		id: "db.batch",
+		method: "POST",
+		path: "/v1/db/batch",
+		price: "$0.015",
+		description:
+			"Execute multiple SQL statements in a single atomic batch on a persistent edge SQLite database",
+		mimeType: "application/json",
+		input: {
+			statements: "Array of { sql, params } objects (max 50 statements)"
+		},
+		example: {
+			statements: [
+				{
+					sql: "CREATE TABLE IF NOT EXISTS notes (id TEXT PRIMARY KEY, content TEXT)",
+					params: []
+				},
+				{
+					sql: "INSERT INTO notes (id, content) VALUES (?, ?)",
+					params: ["note-1", "Hello"]
+				}
+			]
+		}
+	},
+	{
+		id: "queue.enqueue",
+		method: "POST",
+		path: "/v1/queue/enqueue",
+		price: "$0.003",
+		description:
+			"Enqueue a message to a durable message queue for async processing with optional delay",
+		mimeType: "application/json",
+		input: {
+			body: "JSON object message body",
+			contentType:
+				"Optional content type: json, text, bytes, v8 (default json)",
+			delaySeconds: "Optional delay before delivery 0-43200 seconds"
+		},
+		example: {
+			body: { task: "send-email", to: "user@example.com" },
+			delaySeconds: 60
+		}
+	},
+	{
+		id: "queue.batch",
+		method: "POST",
+		path: "/v1/queue/batch",
+		price: "$0.008",
+		description:
+			"Enqueue multiple messages to a durable message queue in a single batch (max 100)",
+		mimeType: "application/json",
+		input: {
+			messages:
+				"Array of { body, contentType?, delaySeconds? } objects (max 100)"
+		},
+		example: {
+			messages: [
+				{ body: { task: "process", id: 1 } },
+				{ body: { task: "process", id: 2 }, delaySeconds: 30 }
+			]
+		}
+	},
+	{
+		id: "durable.counter.get",
+		method: "POST",
+		path: "/v1/durable/counter/get",
+		price: "$0.002",
+		description:
+			"Get the current value of a named distributed counter via globally-consistent stateful workers",
+		mimeType: "application/json",
+		input: {
+			name: "Counter name (max 256 chars)"
+		},
+		example: {
+			name: "page-views"
+		}
+	},
+	{
+		id: "durable.counter.increment",
+		method: "POST",
+		path: "/v1/durable/counter/increment",
+		price: "$0.002",
+		description:
+			"Atomically increment a named distributed counter via globally-consistent stateful workers",
+		mimeType: "application/json",
+		input: {
+			name: "Counter name (max 256 chars)",
+			amount: "Optional increment amount 1-1000000 (default 1)"
+		},
+		example: {
+			name: "page-views",
+			amount: 1
+		}
+	},
+	{
+		id: "durable.counter.decrement",
+		method: "POST",
+		path: "/v1/durable/counter/decrement",
+		price: "$0.002",
+		description:
+			"Atomically decrement a named distributed counter via globally-consistent stateful workers",
+		mimeType: "application/json",
+		input: {
+			name: "page-views",
+			amount: "Optional decrement amount 1-1000000 (default 1)"
+		},
+		example: {
+			name: "page-views",
+			amount: 1
+		}
+	},
+	{
+		id: "durable.counter.set",
+		method: "POST",
+		path: "/v1/durable/counter/set",
+		price: "$0.002",
+		description:
+			"Set a named distributed counter to a specific value via globally-consistent stateful workers",
+		mimeType: "application/json",
+		input: {
+			name: "Counter name (max 256 chars)",
+			value: "Integer value to set"
+		},
+		example: {
+			name: "page-views",
+			value: 100
+		}
+	},
+	{
+		id: "durable.counter.reset",
+		method: "POST",
+		path: "/v1/durable/counter/reset",
+		price: "$0.002",
+		description:
+			"Reset a named distributed counter to zero via globally-consistent stateful workers",
+		mimeType: "application/json",
+		input: {
+			name: "Counter name (max 256 chars)"
+		},
+		example: {
+			name: "page-views"
+		}
+	},
+	{
+		id: "durable.ratelimit.check",
+		method: "POST",
+		path: "/v1/durable/ratelimit/check",
+		price: "$0.002",
+		description:
+			"Check and consume a rate limit slot for a named key using sliding-window algorithm via globally-consistent stateful workers",
+		mimeType: "application/json",
+		input: {
+			key: "Rate limit key e.g. IP or user ID (max 256 chars)",
+			limit: "Optional max requests per window 1-100000 (default 100)",
+			windowSeconds:
+				"Optional sliding window size in seconds 1-86400 (default 60)"
+		},
+		example: {
+			key: "api:user-123",
+			limit: 100,
+			windowSeconds: 60
+		}
+	},
+	{
+		id: "durable.ratelimit.reset",
+		method: "POST",
+		path: "/v1/durable/ratelimit/reset",
+		price: "$0.002",
+		description:
+			"Reset a rate limit window for a named key via globally-consistent stateful workers",
+		mimeType: "application/json",
+		input: {
+			key: "Rate limit key to reset"
+		},
+		example: {
+			key: "api:user-123"
 		}
 	}
 ];

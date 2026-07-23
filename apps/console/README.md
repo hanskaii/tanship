@@ -130,3 +130,18 @@ To give agents richer metadata, edit the per-service `example` (request body) in
 1. Add the service to `src/catalog.ts` (price, path, description) — middleware pricing and `/v1/services` both derive from it.
 2. Add the handler under `src/handlers/` (method chaining + `zValidator` + `ApiResponse`).
 3. Mount it under `/v1/...` in `src/index.ts`.
+
+## Storage retention (bounding one-time-payment cost)
+
+Persistent endpoints are paid **once** but cost recurring storage. Retention is capped so an upload/write can never accrue cost forever:
+
+- **R2 (`/v1/storage/*`)** — uploads stamp `expiresAt` custom metadata (default 30 days). The actual deletion is done by a bucket lifecycle rule you must set once:
+
+    ```bash
+    npx wrangler r2 bucket lifecycle add tanflare-storage \
+      --name expire-30d --prefix "" --expire-days 30
+    ```
+
+- **Durable Objects (`/v1/durable/*`)** — each counter/limiter sets a 30-day idle-expiry alarm on every write; abandoned objects wipe their own storage automatically. No manual step.
+- **D1 (`/v1/db/*`)** — writes are rejected once the database reaches its 500 MB cap (`MAX_DB_BYTES` in `db.handler.ts`).
+- **KV (`/v1/kv/*`)** — `set` enforces a max 24h TTL, so keys self-expire.
