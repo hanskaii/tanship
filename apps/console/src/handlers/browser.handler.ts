@@ -48,17 +48,17 @@ const RssSchema = UrlSchema.extend({
 	limit: z.number().int().min(1).max(50).default(20)
 });
 
-const SearchSchema = z.object({
+const QueryLimitSchema = z.object({
 	query: z.string().min(1).max(500),
 	limit: z.number().int().min(1).max(50).default(10)
 });
+const SearchSchema = QueryLimitSchema;
 const SearchSummarySchema = z.object({
 	query: z.string().min(1).max(500)
 });
-const NewsSchema = z.object({
-	query: z.string().min(1).max(500),
-	limit: z.number().int().min(1).max(50).default(10)
-});
+const NewsSchema = QueryLimitSchema;
+const ImagesSchema = QueryLimitSchema;
+const ShoppingSchema = QueryLimitSchema;
 
 const SEARCH_EXTRACTION_SCHEMA = {
 	type: "object",
@@ -264,6 +264,63 @@ const RSS_EXTRACTION_SCHEMA = {
 		}
 	},
 	required: ["title", "items"]
+} as const;
+
+const IMAGES_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		results: {
+			type: "array",
+			items: {
+				type: "object",
+				properties: {
+					title: { type: "string" },
+					imageUrl: {
+						type: "string",
+						description: "Direct URL to the image"
+					},
+					sourceUrl: {
+						type: "string",
+						description: "URL of the page the image is from"
+					},
+					width: { type: "integer" },
+					height: { type: "integer" }
+				},
+				required: ["title", "imageUrl", "sourceUrl"]
+			}
+		}
+	},
+	required: ["results"]
+} as const;
+
+const SHOPPING_EXTRACTION_SCHEMA = {
+	type: "object",
+	properties: {
+		results: {
+			type: "array",
+			items: {
+				type: "object",
+				properties: {
+					title: { type: "string" },
+					price: { type: "string" },
+					currency: { type: "string" },
+					source: {
+						type: "string",
+						description: "Store or merchant name"
+					},
+					url: {
+						type: "string",
+						description: "Product page URL"
+					},
+					imageUrl: { type: "string" },
+					rating: { type: "number" },
+					reviewCount: { type: "integer" }
+				},
+				required: ["title", "price", "url"]
+			}
+		}
+	},
+	required: ["results"]
 } as const;
 
 const browserHandler = new Hono<HonoEnv>()
@@ -763,5 +820,70 @@ const browserHandler = new Hono<HonoEnv>()
 		);
 
 		return ApiResponse.ok(c, "Web forms extracted", { url, result });
+	})
+	.post("/images", zValidator("json", ImagesSchema), async (c) => {
+		const { query, limit } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const targetUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&tbm=isch&udm=2`;
+
+		const extracted = (await browser.json(
+			targetUrl,
+			"Extract the image search results from this page. Include every image result with its title, direct image URL, source page URL, and dimensions if available.",
+			IMAGES_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		)) as {
+			results?: Array<{
+				title: string;
+				imageUrl: string;
+				sourceUrl: string;
+				width?: number;
+				height?: number;
+			}>;
+		} | null;
+
+		const results = (extracted?.results ?? []).slice(0, limit);
+
+		return ApiResponse.ok(c, "Image search completed", {
+			query,
+			count: results.length,
+			results
+		});
+	})
+	.post("/shopping", zValidator("json", ShoppingSchema), async (c) => {
+		const { query, limit } = c.req.valid("json");
+		const browser = new BrowserRenderingService(
+			c.env.CLOUDFLARE_ACCOUNT_ID,
+			c.env.CLOUDFLARE_API_TOKEN
+		);
+
+		const targetUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&tbm=shop`;
+
+		const extracted = (await browser.json(
+			targetUrl,
+			"Extract the shopping results from this page. Include every product result with its title, price, currency, store/merchant name, product URL, image URL, rating, and review count.",
+			SHOPPING_EXTRACTION_SCHEMA as unknown as Record<string, unknown>
+		)) as {
+			results?: Array<{
+				title: string;
+				price: string;
+				currency?: string;
+				source?: string;
+				url: string;
+				imageUrl?: string;
+				rating?: number;
+				reviewCount?: number;
+			}>;
+		} | null;
+
+		const results = (extracted?.results ?? []).slice(0, limit);
+
+		return ApiResponse.ok(c, "Shopping search completed", {
+			query,
+			count: results.length,
+			results
+		});
 	});
 export default browserHandler;

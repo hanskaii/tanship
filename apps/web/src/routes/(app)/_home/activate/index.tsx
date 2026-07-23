@@ -286,9 +286,9 @@ function ActivatePage() {
 										</Badge>
 									</div>
 
-									{/* Template download */}
+									{/* Template download & GitHub activation */}
 									{isTemplate && (
-										<div className="flex flex-col gap-4">
+										<div className="flex flex-col gap-4 border-b border-border/40 pb-6 mb-2">
 											<div className="flex items-center gap-3 text-sm text-muted-foreground">
 												<HugeiconsIcon
 													icon={CheckmarkCircle01Icon}
@@ -315,48 +315,44 @@ function ActivatePage() {
 										</div>
 									)}
 
-									{/* Already activated boilerplate */}
-									{!isTemplate &&
-										isAlreadyActivated &&
-										!activated && (
-											<div className="flex flex-col gap-4">
-												<div className="flex items-center gap-3 text-sm text-muted-foreground">
-													<HugeiconsIcon
-														icon={
-															CheckmarkCircle01Icon
-														}
-														className="size-4 text-emerald-500 shrink-0"
-													/>
-													Already activated for{" "}
-													<span className="font-medium text-foreground">
-														@
-														{
-															matchedPurchase.githubUsername
-														}
-													</span>
-													. Check your GitHub
-													notifications.
-												</div>
-												<Button
-													size="lg"
-													variant="outline"
-													className="h-11 w-fit px-6 text-sm font-medium"
-													asChild
-												>
-													<a
-														href="https://github.com/notifications"
-														target="_blank"
-														rel="noreferrer"
-													>
-														<HugeiconsIcon
-															icon={GithubIcon}
-															className="mr-2 size-4"
-														/>
-														Open GitHub
-													</a>
-												</Button>
+									{/* Already activated boilerplate/template */}
+									{isAlreadyActivated && !activated && (
+										<div className="flex flex-col gap-4">
+											<div className="flex items-center gap-3 text-sm text-muted-foreground">
+												<HugeiconsIcon
+													icon={CheckmarkCircle01Icon}
+													className="size-4 text-emerald-500 shrink-0"
+												/>
+												Already activated for{" "}
+												<span className="font-medium text-foreground">
+													@
+													{
+														matchedPurchase.githubUsername
+													}
+												</span>
+												. Check your GitHub
+												notifications.
 											</div>
-										)}
+											<Button
+												size="lg"
+												variant="outline"
+												className="h-11 w-fit px-6 text-sm font-medium"
+												asChild
+											>
+												<a
+													href="https://github.com/notifications"
+													target="_blank"
+													rel="noreferrer"
+												>
+													<HugeiconsIcon
+														icon={GithubIcon}
+														className="mr-2 size-4"
+													/>
+													Open GitHub
+												</a>
+											</Button>
+										</div>
+									)}
 
 									{/* Success after activation */}
 									{activated && (
@@ -448,78 +444,70 @@ function ActivatePage() {
 										</motion.div>
 									)}
 
-									{/* Unclaimed boilerplate — enter GitHub username */}
-									{!isTemplate &&
-										!isAlreadyActivated &&
-										!activated && (
-											<div className="flex flex-col gap-5">
-												<div className="flex flex-col gap-3">
-													<div className="flex flex-col gap-1.5">
-														<label
-															htmlFor="github-username"
-															className="text-sm font-medium text-foreground"
-														>
-															GitHub username
-														</label>
-														<p className="text-xs text-muted-foreground">
-															You'll receive a
-															repository
-															invitation at this
-															account.
-														</p>
-													</div>
-													<div className="relative">
-														<span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-															@
-														</span>
-														<Input
-															id="github-username"
-															className="pl-8 text-sm"
-															placeholder="your-github-username"
-															value={
-																githubUsername
-															}
-															onChange={(e) =>
-																setGithubUsername(
-																	e.target
-																		.value
-																)
-															}
-															onKeyDown={(e) =>
-																e.key ===
-																	"Enter" &&
-																!isActivating &&
-																handleActivate()
-															}
-															disabled={
-																isActivating
-															}
-														/>
-													</div>
+									{/* Unclaimed boilerplate/template — enter GitHub username */}
+									{!isAlreadyActivated && !activated && (
+										<div className="flex flex-col gap-5">
+											<div className="flex flex-col gap-3">
+												<div className="flex flex-col gap-1.5">
+													<label
+														htmlFor="github-username"
+														className="text-sm font-medium text-foreground"
+													>
+														GitHub username
+													</label>
+													<p className="text-xs text-muted-foreground">
+														You'll receive a
+														repository or
+														organization invitation
+														at this account.
+													</p>
 												</div>
-												<Button
-													size="lg"
-													className="h-11 w-fit px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
-													onClick={handleActivate}
-													disabled={
-														isActivating ||
-														!githubUsername.trim()
-													}
-												>
-													{isActivating ? (
-														<Spinner className="size-4 mr-2" />
-													) : (
-														<HugeiconsIcon
-															icon={GithubIcon}
-															className="mr-2 size-4"
-														/>
-													)}
-													{isActivating
-														? "Activating…"
-														: "Activate & Get GitHub Access"}
-												</Button>
+												<div className="relative">
+													<span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+														@
+													</span>
+													<Input
+														id="github-username"
+														className="pl-8 text-sm"
+														placeholder="your-github-username"
+														value={githubUsername}
+														onChange={(e) =>
+															setGithubUsername(
+																e.target.value
+															)
+														}
+														onKeyDown={(e) =>
+															e.key === "Enter" &&
+															!isActivating &&
+															handleActivate()
+														}
+														disabled={isActivating}
+													/>
+												</div>
 											</div>
-										)}
+											<Button
+												size="lg"
+												className="h-11 w-fit px-6 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
+												onClick={handleActivate}
+												disabled={
+													isActivating ||
+													!githubUsername.trim()
+												}
+											>
+												{isActivating ? (
+													<Spinner className="size-4 mr-2" />
+												) : (
+													<HugeiconsIcon
+														icon={GithubIcon}
+														className="mr-2 size-4"
+													/>
+												)}
+												{isActivating
+													? "Activating…"
+													: "Activate & Get GitHub Access"}
+											</Button>
+										</div>
+									)}
 								</div>
 							</motion.div>
 						)}

@@ -14,12 +14,14 @@ export interface Purchase {
 
 export interface ClaimGithubResult {
 	githubUsername: string;
-	repos: string[];
+	type: "organization" | "repository";
+	target: string;
 }
 
 export interface ActivateResult {
 	githubUsername: string;
-	repos: string[];
+	type: "organization" | "repository";
+	target: string;
 	planSlug: string;
 }
 

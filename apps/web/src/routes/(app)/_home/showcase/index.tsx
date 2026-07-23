@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@workspace/ui";
@@ -46,6 +47,7 @@ function ShowcaseCardSkeleton() {
 
 function ShowcaseCard({ item }: { item: ShowcaseItem }) {
 	const imageUrl = item.imageKey ? `/api/files/${item.imageKey}` : null;
+	const [isLoaded, setIsLoaded] = useState(false);
 
 	return (
 		<motion.div
@@ -104,13 +106,23 @@ function ShowcaseCard({ item }: { item: ShowcaseItem }) {
 				</div>
 
 				{/* Image */}
-				<div className="col-span-2 aspect-[14/9] overflow-hidden rounded-xl bg-card">
+				<div className="relative col-span-2 aspect-[14/9] overflow-hidden rounded-xl bg-card">
 					{imageUrl ? (
-						<img
-							src={imageUrl}
-							alt={item.projectName}
-							className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-						/>
+						<>
+							<img
+								src={imageUrl}
+								alt={item.projectName}
+								onLoad={() => setIsLoaded(true)}
+								className={`h-full w-full object-cover transition-all duration-500 group-hover:scale-[1.03] ${
+									isLoaded
+										? "opacity-100 scale-100"
+										: "opacity-0 scale-95"
+								}`}
+							/>
+							{!isLoaded && (
+								<div className="absolute inset-0 bg-muted/20 animate-pulse" />
+							)}
+						</>
 					) : (
 						<div className="flex h-full w-full items-center justify-center bg-secondary">
 							<HugeiconsIcon

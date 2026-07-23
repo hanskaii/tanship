@@ -7,6 +7,16 @@ import { ApiResponse } from "../helpers/response.helper";
 import type { HonoEnv } from "../types/hono.types";
 import { purchases, eq, and, isNull } from "@workspace/database";
 import { Gate } from "@workspace/core";
+import { appConfig as rawAppConfig } from "@workspace/config";
+import type { PaymentPlan } from "@workspace/core";
+
+const appConfig = rawAppConfig as unknown as {
+	name: string;
+	version: string;
+	supportEmail?: string;
+	authDefaultRedirect: string;
+	payments: PaymentPlan[];
+};
 
 const GithubUsernameSchema = z
 	.string()
@@ -57,14 +67,12 @@ const githubHandler = new Hono<HonoEnv>()
 		const githubToken: string | undefined = env.GITHUB_TOKEN;
 		const repoOwner: string | undefined = env.GITHUB_REPO_OWNER;
 		const boilerplateRepo: string | undefined = env.GITHUB_REPO_BOILERPLATE;
-		const templatesRepo: string | undefined = env.GITHUB_REPO_TEMPLATES;
 
 		if (!githubToken || !repoOwner || !boilerplateRepo) {
 			throw ApiError.server("GitHub integration not configured");
 		}
 
-		// Find most recent unclaimed boilerplate purchase
-		// (template-* purchases don't need GitHub — they use the download endpoint)
+		// Find most recent unclaimed purchase
 		const purchase = await db.query.purchases.findFirst({
 			where: and(
 				eq(purchases.userId, user.id),
@@ -78,24 +86,46 @@ const githubHandler = new Hono<HonoEnv>()
 			);
 		}
 
-		if (purchase.planSlug.startsWith("template-")) {
-			throw ApiError.badRequest(
-				"Template purchases don't require GitHub activation. Use the download button on the Templates page."
-			);
-		}
-
-		// "tanship" → boilerplate repo only
-		// "tanship-pro" → boilerplate + templates repos
-		const repos: string[] = [];
 		if (purchase.planSlug === "tanship-pro") {
-			repos.push(boilerplateRepo);
-			if (templatesRepo) repos.push(templatesRepo);
-		} else {
-			repos.push(boilerplateRepo);
-		}
+			// Invite to Organization
+			const res = await fetch(
+				`https://api.github.com/orgs/${repoOwner}/memberships/${githubUsername}`,
+				{
+					method: "PUT",
+					headers: {
+						Authorization: `Bearer ${githubToken}`,
+						Accept: "application/vnd.github+json",
+						"X-GitHub-Api-Version": "2022-11-28",
+						"User-Agent": "Tanship-App",
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({ role: "member" })
+				}
+			);
 
-		// Invite to each repo via GitHub API
-		for (const repo of repos) {
+			if (res.status !== 200 && res.status !== 201) {
+				const body = (await res.json().catch(() => ({}))) as any;
+				const msg = body?.message ?? `GitHub API error (${res.status})`;
+				console.error(
+					`[GitHub] Failed to invite ${githubUsername} to organization ${repoOwner}: ${msg}`
+				);
+				throw ApiError.badRequest(
+					`Failed to invite @${githubUsername} to organization: ${msg}`
+				);
+			}
+
+			console.log(
+				`[GitHub] Invited ${githubUsername} to organization ${repoOwner} (status: ${res.status})`
+			);
+		} else {
+			// Tanship Standard or Individual Template -> Invite to specific repo
+			const payments = appConfig.payments as readonly PaymentPlan[];
+			const plan = payments.find((p) => p.slug === purchase.planSlug);
+			const repo =
+				purchase.planSlug === "tanship"
+					? boilerplateRepo
+					: (plan?.repository ?? purchase.planSlug);
+
 			const res = await fetch(
 				`https://api.github.com/repos/${repoOwner}/${repo}/collaborators/${githubUsername}`,
 				{
@@ -111,7 +141,6 @@ const githubHandler = new Hono<HonoEnv>()
 				}
 			);
 
-			// 201 = invitation created, 204 = already a collaborator
 			if (res.status !== 201 && res.status !== 204) {
 				const body = (await res.json().catch(() => ({}))) as any;
 				const msg = body?.message ?? `GitHub API error (${res.status})`;
@@ -139,7 +168,18 @@ const githubHandler = new Hono<HonoEnv>()
 
 		return ApiResponse.ok(c, "GitHub invitation sent", {
 			githubUsername,
-			repos
+			type:
+				purchase.planSlug === "tanship-pro"
+					? "organization"
+					: "repository",
+			target:
+				purchase.planSlug === "tanship-pro"
+					? repoOwner
+					: purchase.planSlug === "tanship"
+						? boilerplateRepo
+						: ((appConfig.payments as readonly PaymentPlan[]).find(
+								(p) => p.slug === purchase.planSlug
+							)?.repository ?? purchase.planSlug)
 		});
 	})
 	.post("/activate", zValidator("json", ActivateSchema), async (c) => {
@@ -151,7 +191,6 @@ const githubHandler = new Hono<HonoEnv>()
 		const githubToken: string | undefined = env.GITHUB_TOKEN;
 		const repoOwner: string | undefined = env.GITHUB_REPO_OWNER;
 		const boilerplateRepo: string | undefined = env.GITHUB_REPO_BOILERPLATE;
-		const templatesRepo: string | undefined = env.GITHUB_REPO_TEMPLATES;
 		const dodoApiKey: string | undefined = env.DODO_PAYMENTS_API_KEY;
 		const appEnv: string | undefined = env.APP_ENV;
 
@@ -182,13 +221,6 @@ const githubHandler = new Hono<HonoEnv>()
 			throw ApiError.forbidden(gateResult.message ?? "Not your license.");
 		}
 
-		// Template purchases don't use GitHub — they download directly
-		if (purchase.planSlug.startsWith("template-")) {
-			throw ApiError.badRequest(
-				"Template purchases don't require GitHub activation. Use the download button on the Templates page."
-			);
-		}
-
 		// Activate the license key with Dodo Payments
 		if (dodoApiKey) {
 			const dodo = new DodoPayments({
@@ -201,17 +233,43 @@ const githubHandler = new Hono<HonoEnv>()
 			});
 		}
 
-		// "tanship" → boilerplate repo only
-		// "tanship-pro" → boilerplate + templates repos
-		const repos: string[] = [];
 		if (purchase.planSlug === "tanship-pro") {
-			repos.push(boilerplateRepo);
-			if (templatesRepo) repos.push(templatesRepo);
-		} else {
-			repos.push(boilerplateRepo);
-		}
+			// Invite to Organization
+			const res = await fetch(
+				`https://api.github.com/orgs/${repoOwner}/memberships/${githubUsername}`,
+				{
+					method: "PUT",
+					headers: {
+						Authorization: `Bearer ${githubToken}`,
+						Accept: "application/vnd.github+json",
+						"X-GitHub-Api-Version": "2022-11-28",
+						"User-Agent": "Tanship-App",
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({ role: "member" })
+				}
+			);
 
-		for (const repo of repos) {
+			if (res.status !== 200 && res.status !== 201) {
+				const body = (await res.json().catch(() => ({}))) as any;
+				const msg = body?.message ?? `GitHub API error (${res.status})`;
+				throw ApiError.badRequest(
+					`Failed to invite @${githubUsername} to organization: ${msg}`
+				);
+			}
+
+			console.log(
+				`[GitHub] Invited ${githubUsername} to organization ${repoOwner} (status: ${res.status})`
+			);
+		} else {
+			// Tanship Standard or Individual Template -> Invite to specific repo
+			const payments = appConfig.payments as readonly PaymentPlan[];
+			const plan = payments.find((p) => p.slug === purchase.planSlug);
+			const repo =
+				purchase.planSlug === "tanship"
+					? boilerplateRepo
+					: (plan?.repository ?? purchase.planSlug);
+
 			const res = await fetch(
 				`https://api.github.com/repos/${repoOwner}/${repo}/collaborators/${githubUsername}`,
 				{
@@ -251,7 +309,19 @@ const githubHandler = new Hono<HonoEnv>()
 			"License activated and GitHub invitation sent",
 			{
 				githubUsername,
-				repos,
+				type:
+					purchase.planSlug === "tanship-pro"
+						? "organization"
+						: "repository",
+				target:
+					purchase.planSlug === "tanship-pro"
+						? repoOwner
+						: purchase.planSlug === "tanship"
+							? boilerplateRepo
+							: ((
+									appConfig.payments as readonly PaymentPlan[]
+								).find((p) => p.slug === purchase.planSlug)
+									?.repository ?? purchase.planSlug),
 				planSlug: purchase.planSlug
 			}
 		);

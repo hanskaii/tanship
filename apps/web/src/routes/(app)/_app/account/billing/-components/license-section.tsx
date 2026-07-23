@@ -30,7 +30,28 @@ function CopyButton({ text }: { text: string }) {
 	);
 }
 
-function GithubClaimForm({ purchaseId: _purchaseId }: { purchaseId: string }) {
+function planDisplayName(slug: string) {
+	if (slug === "tanship-pro") return "Tanship Pro";
+	if (slug === "tanship") return "Tanship Standard";
+	if (slug.startsWith("template-")) {
+		const id = slug.replace("template-", "");
+		return (
+			id
+				.split("-")
+				.map((w) => w[0].toUpperCase() + w.slice(1))
+				.join(" ") + " Template"
+		);
+	}
+	return slug;
+}
+
+function GithubClaimForm({
+	purchaseId: _purchaseId,
+	planSlug
+}: {
+	purchaseId: string;
+	planSlug: string;
+}) {
 	const [username, setUsername] = useState("");
 	const [isClaiming, setIsClaiming] = useState(false);
 	const queryClient = useQueryClient();
@@ -52,15 +73,20 @@ function GithubClaimForm({ purchaseId: _purchaseId }: { purchaseId: string }) {
 		}
 	};
 
+	const isPro = planSlug === "tanship-pro";
+
 	return (
 		<div className="flex flex-col gap-3 pt-3 border-t border-border/50">
 			<div className="flex flex-col gap-0.5">
 				<p className="text-xs font-medium text-foreground">
-					Claim GitHub Repository Access
+					{isPro
+						? "Claim GitHub Organization Access"
+						: "Claim GitHub Repository Access"}
 				</p>
 				<p className="text-[11px] text-muted-foreground">
-					Enter your GitHub username to receive a repository
-					invitation.
+					{isPro
+						? "Enter your GitHub username to receive an organization invitation."
+						: "Enter your GitHub username to receive a repository invitation."}
 				</p>
 			</div>
 			<div className="flex items-center gap-2">
@@ -102,6 +128,7 @@ function GithubClaimForm({ purchaseId: _purchaseId }: { purchaseId: string }) {
 
 function PurchaseCard({ purchase }: { purchase: Purchase }) {
 	const isClaimed = !!purchase.githubInvitedAt;
+	const isPro = purchase.planSlug === "tanship-pro";
 
 	return (
 		<div className="rounded-xl border border-border bg-muted/10 p-5 flex flex-col gap-4">
@@ -114,10 +141,8 @@ function PurchaseCard({ purchase }: { purchase: Purchase }) {
 						/>
 					</div>
 					<div className="flex flex-col gap-0.5">
-						<p className="text-sm font-semibold leading-tight capitalize">
-							{purchase.planSlug === "tanship-pro"
-								? "Tanship Pro"
-								: "Tanship"}
+						<p className="text-sm font-semibold leading-tight">
+							{planDisplayName(purchase.planSlug)}
 						</p>
 						<Badge
 							variant="secondary"
@@ -155,13 +180,18 @@ function PurchaseCard({ purchase }: { purchase: Purchase }) {
 			{isClaimed ? (
 				<div className="flex items-center gap-2 text-[11px] text-muted-foreground border-t border-border/50 pt-3">
 					<HugeiconsIcon icon={GithubIcon} className="size-3.5" />
-					Repository access granted to{" "}
+					{isPro
+						? "Organization access granted to"
+						: "Repository access granted to"}{" "}
 					<span className="font-semibold text-foreground">
 						@{purchase.githubUsername}
 					</span>
 				</div>
 			) : (
-				<GithubClaimForm purchaseId={purchase.id} />
+				<GithubClaimForm
+					purchaseId={purchase.id}
+					planSlug={purchase.planSlug}
+				/>
 			)}
 		</div>
 	);

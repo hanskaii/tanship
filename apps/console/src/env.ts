@@ -24,7 +24,11 @@ export const EnvSchema = z.object({
 	CLOUDFLARE_ACCOUNT_ID: z
 		.string()
 		.min(1, "CLOUDFLARE_ACCOUNT_ID is required"),
-	CLOUDFLARE_API_TOKEN: z.string().min(1, "CLOUDFLARE_API_TOKEN is required")
+	CLOUDFLARE_API_TOKEN: z.string().min(1, "CLOUDFLARE_API_TOKEN is required"),
+
+	// Modal Sandbox relay
+	MODAL_API_URL: z.url("MODAL_API_URL must be a valid URL"),
+	MODAL_API_TOKEN: z.string().min(1, "MODAL_API_TOKEN is required")
 });
 
 export type ValidatedEnv = z.infer<typeof EnvSchema>;

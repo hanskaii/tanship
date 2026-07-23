@@ -15,6 +15,13 @@
 			"when": 1778885392991,
 			"tag": "0001_flashy_vivisector",
 			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "6",
+			"when": 1784611491086,
+			"tag": "0002_good_the_anarchist",
+			"breakpoints": true
 		}
 	]
 }
