@@ -16,6 +16,51 @@
 			"index_name": "tanship-index"
 		}
 	],
+	"kv_namespaces": [
+		{
+			"binding": "KV",
+			"id": "7f55ef3952a844e58e747dc8585a054d"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "R2",
+			"bucket_name": "tanflare-storage"
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "tanflare-db",
+			"database_id": "eb67ef9a-fb43-4e8e-8349-92c6cb82d03e"
+		}
+	],
+	"queues": {
+		"producers": [
+			{
+				"binding": "QUEUE",
+				"queue": "tanflare-jobs"
+			}
+		]
+	},
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "COUNTER",
+				"class_name": "Counter"
+			},
+			{
+				"name": "RATE_LIMITER",
+				"class_name": "RateLimiter"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_classes": ["Counter", "RateLimiter"]
+		}
+	],
 	"routes": [
 		{
 			"pattern": "x402.tanship.dev",
