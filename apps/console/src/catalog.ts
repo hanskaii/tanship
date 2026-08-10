@@ -1584,6 +1584,99 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			key: "api:user-123"
 		}
+	},
+	{
+		id: "weather.ip",
+		method: "GET",
+		path: "/v1/weather",
+		price: "$0.005",
+		description: "Get current weather data with caching support",
+		mimeType: "application/json",
+		input: {
+			ip: "Optional IP address to check weather for (defaults to request IP)"
+		},
+		example: {
+			ip: "8.8.8.8"
+		}
+	},
+	{
+		id: "agent.research",
+		method: "POST",
+		path: "/v1/agent/research",
+		price: "$0.015",
+		description:
+			"Compound research service: fetch a URL via Browser Run, cache semantically via Vectorize + D1, and synthesize a 3-sentence cited summary using Workers AI (Llama 3.3 70B). One paid call, zero infrastructure",
+		mimeType: "application/json",
+		input: {
+			url: "Absolute URL of the page to research",
+			focus: "Optional focus question or aspect to emphasize in the summary",
+			max_tokens:
+				"Optional max output tokens for the AI summary (default 512)"
+		},
+		example: {
+			url: "https://blog.cloudflare.com/workers-ai",
+			focus: "pricing and free tier limits"
+		}
+	},
+	{
+		id: "rag.upsert",
+		method: "POST",
+		path: "/v1/rag/upsert",
+		price: "$0.001",
+		description:
+			"Embed text via Workers AI (BGE-M3, 1024 dims) and upsert into the shared Vectorize index under a caller-chosen namespace. One paid call per batch",
+		mimeType: "application/json",
+		input: {
+			namespace:
+				"Caller-chosen namespace (e.g. agent id, tenant, project). Keeps vectors isolated at query time",
+			items: "Array of { id, text, metadata? } — max 50 items per call, text up to 10k chars each"
+		},
+		example: {
+			namespace: "agent-007",
+			items: [
+				{
+					id: "doc-1",
+					text: "Cloudflare Workers AI ships Llama 3.3 70B and BGE-M3 on the edge.",
+					metadata: { source: "blog.cloudflare.com" }
+				}
+			]
+		}
+	},
+	{
+		id: "rag.query",
+		method: "POST",
+		path: "/v1/rag/query",
+		price: "$0.0005",
+		description:
+			"Embed a query and return the top-K nearest neighbours from the shared Vectorize index, filtered to the caller's namespace. Pay-per-query semantic search",
+		mimeType: "application/json",
+		input: {
+			namespace: "Caller-chosen namespace to search within",
+			query: "Natural-language query to embed and search",
+			top_k: "Optional number of nearest neighbours (1-50, default 5)",
+			return_metadata:
+				"Optional boolean — include vector metadata (default true)"
+		},
+		example: {
+			namespace: "agent-007",
+			query: "what models run on the edge?",
+			top_k: 3
+		}
+	},
+	{
+		id: "rag.delete",
+		method: "POST",
+		path: "/v1/rag/delete",
+		price: "$0.0005",
+		description:
+			"Delete vectors by id from the shared Vectorize index. Useful for cleaning up after an agent session ends or a doc is removed",
+		mimeType: "application/json",
+		input: {
+			ids: "Array of vector ids to delete (max 100 per call)"
+		},
+		example: {
+			ids: ["agent-007:doc-1", "agent-007:doc-2"]
+		}
 	}
 ];
 

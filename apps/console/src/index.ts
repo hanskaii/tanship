@@ -1,5 +1,6 @@
 import { LANDING_PAGE_HTML } from "./landing";
 import { Hono } from "hono";
+import { Sandbox } from "@cloudflare/sandbox";
 import { cors } from "hono/cors";
 
 import aiHandler from "./handlers/ai.handler";
@@ -10,11 +11,14 @@ import devHandler from "./handlers/dev.handler";
 import modalHandler from "./handlers/modal.handler";
 import redditHandler from "./handlers/reddit.handler";
 import summarizeHandler from "./handlers/summarize.handler";
+import weatherHandler from "./handlers/weather.handler";
 import kvHandler from "./handlers/kv.handler";
 import storageHandler from "./handlers/storage.handler";
 import dbHandler from "./handlers/db.handler";
 import queueHandler from "./handlers/queue.handler";
 import durableHandler from "./handlers/durable.handler";
+import agentResearchHandler from "./handlers/agent.research.handler";
+import ragHandler from "./handlers/rag.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
 import { OPENAPI_SPEC } from "./openapi";
@@ -145,11 +149,14 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/modal", modalHandler)
 	.route("/v1/reddit", redditHandler)
 	.route("/v1/summarize", summarizeHandler)
+	.route("/v1/weather", weatherHandler)
 	.route("/v1/kv", kvHandler)
 	.route("/v1/storage", storageHandler)
 	.route("/v1/db", dbHandler)
 	.route("/v1/queue", queueHandler)
 	.route("/v1/durable", durableHandler)
+	.route("/v1/agent", agentResearchHandler)
+	.route("/v1/rag", ragHandler)
 	// Free discovery endpoints
 	.get("/v1/logs", (c) => {
 		return c.json({ success: true, logs: recentLogs });
@@ -185,8 +192,29 @@ const app = new Hono<HonoEnv>()
 		})
 	);
 
-app.notFound((c) =>
-	c.json(
+app.notFound((c) => {
+	// The path exists in the catalog but was called with the wrong verb —
+	// answer 405 with the expected method instead of a misleading 404.
+	const service = SERVICES.find((s) => s.path === c.req.path);
+	if (service) {
+		c.header("Allow", `${service.method}, OPTIONS`);
+		return c.json(
+			{
+				success: false,
+				message: `Method ${c.req.method} not allowed — use ${service.method} ${service.path}`,
+				code: "METHOD_NOT_ALLOWED",
+				errors: {
+					method: service.method,
+					price: service.price,
+					input: service.input,
+					example: service.example
+				}
+			},
+			405
+		);
+	}
+
+	return c.json(
 		{
 			success: false,
 			message: "Route not found",
@@ -194,8 +222,8 @@ app.notFound((c) =>
 			errors: null
 		},
 		404
-	)
-);
+	);
+});
 
 app.onError((err, c) => {
 	console.error(`${err}`);
@@ -225,9 +253,8 @@ app.onError((err, c) => {
 
 export type AppType = typeof app;
 
-export { Sandbox } from "@cloudflare/sandbox";
-// Durable Object class exports (required by wrangler)
-export { Counter, RateLimiter } from "./durable-objects";
+export { Counter, RateLimiter, Lock } from "./durable-objects";
+export { Sandbox };
 
 export default {
 	fetch: async (
