@@ -44,6 +44,28 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "ai.chat.cached",
+		method: "POST",
+		path: "/v1/ai/chat/cached",
+		price: "$0.006",
+		description:
+			"Cached AI chat completion via edge AI (Llama 3.3 70B) with KV prompt cache. Checks KV for a matching cached response first; if not found, generates new response and caches it.",
+		mimeType: "application/json",
+		input: {
+			messages:
+				"Array of { role: system|user|assistant, content: string }",
+			model: "Optional model id from the allowlist",
+			max_tokens: "Optional max output tokens (default 1024)",
+			cacheKey:
+				"Optional custom cache key (defaults to hash of model + messages)"
+		},
+		example: {
+			messages: [
+				{ role: "user", content: "Explain x402 in one sentence." }
+			]
+		}
+	},
+	{
 		id: "ai.image",
 		method: "POST",
 		path: "/v1/ai/image",

@@ -19,6 +19,7 @@ import queueHandler from "./handlers/queue.handler";
 import durableHandler from "./handlers/durable.handler";
 import agentResearchHandler from "./handlers/agent.research.handler";
 import ragHandler from "./handlers/rag.handler";
+import { aiCachedHandler } from "./handlers/ai.rag.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
 import { OPENAPI_SPEC } from "./openapi";
@@ -142,6 +143,7 @@ const app = new Hono<HonoEnv>()
 	// Everything under /v1/* that appears in the catalog requires x402 payment
 	.use("/v1/*", x402)
 	.route("/v1/ai", aiHandler)
+	.route("/v1/ai/chat/cached", aiCachedHandler)
 	.route("/v1/browser", browserHandler)
 	.route("/v1/crypto", cryptoHandler)
 	.route("/v1/dev", devHandler)
