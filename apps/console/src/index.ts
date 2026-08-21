@@ -7,6 +7,7 @@ import aiHandler from "./handlers/ai.handler";
 import browserHandler from "./handlers/browser.handler";
 import cryptoHandler from "./handlers/crypto.handler";
 import securityHandler from "./handlers/security.handler";
+import securityScreenHandler from "./handlers/security.screen.handler";
 import devHandler from "./handlers/dev.handler";
 import modalHandler from "./handlers/modal.handler";
 import redditHandler from "./handlers/reddit.handler";
@@ -18,7 +19,10 @@ import dbHandler from "./handlers/db.handler";
 import queueHandler from "./handlers/queue.handler";
 import durableHandler from "./handlers/durable.handler";
 import agentResearchHandler from "./handlers/agent.research.handler";
+import agentInboxHandler from "./handlers/agent.inbox.handler";
+import nlHandler from "./handlers/nl.handler";
 import ragHandler from "./handlers/rag.handler";
+import ragAnswerHandler from "./handlers/rag.answer.handler";
 import { aiCachedHandler } from "./handlers/ai.rag.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
@@ -59,7 +63,7 @@ function parsePaymentSignature(sigHeader: string | null) {
 			network: decoded.payload?.network || null,
 			amount: decoded.payload?.amount || null
 		};
-	} catch (e) {
+	} catch {
 		return null;
 	}
 }
@@ -103,7 +107,7 @@ const app = new Hono<HonoEnv>()
 			try {
 				const clone = c.req.raw.clone();
 				requestBody = await clone.json();
-			} catch (e) {
+			} catch {
 				// Ignore
 			}
 		}
@@ -148,6 +152,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/crypto", cryptoHandler)
 	.route("/v1/dev", devHandler)
 	.route("/v1/security", securityHandler)
+	.route("/v1/security/screen", securityScreenHandler)
 	.route("/v1/modal", modalHandler)
 	.route("/v1/reddit", redditHandler)
 	.route("/v1/summarize", summarizeHandler)
@@ -158,7 +163,10 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/queue", queueHandler)
 	.route("/v1/durable", durableHandler)
 	.route("/v1/agent", agentResearchHandler)
+	.route("/v1/agent/inbox", agentInboxHandler)
+	.route("/v1/nl", nlHandler)
 	.route("/v1/rag", ragHandler)
+	.route("/v1/rag", ragAnswerHandler)
 	// Free discovery endpoints
 	.get("/v1/logs", (c) => {
 		return c.json({ success: true, logs: recentLogs });
@@ -183,16 +191,49 @@ const app = new Hono<HonoEnv>()
 	.get("/.well-known/x402", (c) =>
 		c.json({ openapi: "https://x402.tanship.dev/openapi.json" })
 	)
-	.get("/v1/services", (c) =>
-		ApiResponse.ok(c, "Available paid services", {
+	.get("/v1/services", (c) => {
+		const response = ApiResponse.ok(c, "Available paid services", {
 			networks: parseNetworks(
 				c.env.X402_NETWORKS,
 				!!c.env.SVM_PAY_TO_ADDRESS
 			).filter(hasAssetFor),
 			facilitator: c.env.FACILITATOR_URL,
 			services: SERVICES
-		})
-	);
+		});
+
+		// Add Bazaar discovery header for endpoint registration
+		response.headers.set(
+			"X-Extension-Bazaar-Info",
+			JSON.stringify({
+				inputSchema: SERVICES.reduce(
+					(acc: Record<string, Record<string, string>>, service) => {
+						acc[service.path] = service.input;
+						return acc;
+					},
+					{}
+				),
+				outputSchema: SERVICES.reduce(
+					(acc: Record<string, Record<string, unknown>>, service) => {
+						acc[service.path] = {
+							type: "object",
+							properties: {
+								success: { type: "boolean" },
+								data: {}
+							}
+						};
+						return acc;
+					},
+					{}
+				),
+				description:
+					"Tanship marketplace of 99 pre-built AI infra endpoints",
+				tags: ["AI", "workers", "kv", "vectorize", "batch-settlement"],
+				iconUrl: "https://x402.tanship.dev/logo.svg"
+			})
+		);
+
+		return response;
+	});
 
 app.notFound((c) => {
 	// The path exists in the catalog but was called with the wrong verb —

@@ -87,7 +87,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.embeddings",
 		method: "POST",
 		path: "/v1/ai/embeddings",
-		price: "$0.002",
+		price: "$0.001",
 		description:
 			"Multilingual text embeddings via edge AI (BGE-M3, 1024 dims)",
 		mimeType: "application/json",
@@ -133,7 +133,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "browser.screenshot",
 		method: "POST",
 		path: "/v1/browser/screenshot",
-		price: "$0.01",
+		price: "$0.005",
 		description:
 			"Screenshot any webpage — paste a URL, get a pixel-perfect picture of the live page (PNG)",
 		mimeType: "image/png",
@@ -214,14 +214,13 @@ export const SERVICES: ServiceDef[] = [
 		id: "browser.extract",
 		method: "POST",
 		path: "/v1/browser/json",
-		price: "$0.015",
+		price: "$0.02",
 		description:
 			"Extract structured data — describe what you want, get clean JSON back via AI",
 		mimeType: "application/json",
 		input: {
-			url: "Page URL",
-			prompt: "What to extract, in plain language",
-			schema: "Optional JSON Schema for the response shape"
+			url: "https://example.com",
+			prompt: "Extract the page title and main heading"
 		},
 		example: {
 			url: "https://example.com",
@@ -989,7 +988,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/dev/email-security",
 		price: "$0.002",
 		description:
-			"Audits a domain\'s email security posture by grading SPF and DMARC configurations",
+			"Audits a domain's email security posture by grading SPF and DMARC configurations",
 		mimeType: "application/json",
 		input: {
 			domain: "Domain name to audit (e.g. gmail.com)"
@@ -1698,6 +1697,214 @@ export const SERVICES: ServiceDef[] = [
 		},
 		example: {
 			ids: ["agent-007:doc-1", "agent-007:doc-2"]
+		}
+	},
+	{
+		id: "rag.answer",
+		method: "POST",
+		path: "/v1/rag/answer",
+		price: "$0.01",
+		description:
+			"Compound RAG answer: embeds the query, retrieves top-k matching chunks from Vectorize, and generates a grounded Llama 3.3 70B answer. KV-cached by query hash for 1h to amortize repeat questions",
+		mimeType: "application/json",
+		input: {
+			namespace: "Vectorize namespace to search (default 'default')",
+			query: "The question to answer against the index (max 2000 chars)",
+			top_k: "Optional number of chunks to retrieve (1-10, default 4)",
+			instructions:
+				"Optional extra system-prompt guidance (max 512 chars)",
+			cacheTtlSeconds: "Optional KV cache TTL in seconds (0-86400)"
+		},
+		example: {
+			namespace: "agent-007",
+			query: "what models run on the edge?",
+			top_k: 3
+		}
+	},
+	{
+		id: "nl.query",
+		method: "POST",
+		path: "/v1/nl/query",
+		price: "$0.006",
+		description:
+			"Natural-language → SQLite SELECT against the agent's D1 database. Introspects the live schema, asks Workers AI (Llama 3.3 70B) to produce a read-only SELECT, then executes and returns rows. Safe: only SELECT/PRAGMA/EXPLAIN allowed at execution time",
+		mimeType: "application/json",
+		input: {
+			question: "Plain-English question to answer against the database",
+			tables: "Optional whitelist of table names to scope the query to (max 20)",
+			limit: "Optional max rows to return (1-1000, default 100)"
+		},
+		example: {
+			question: "what are the top 5 most-cached URLs by hit count?",
+			limit: 5
+		}
+	},
+	{
+		id: "agent.inbox.create",
+		method: "POST",
+		path: "/v1/agent/inbox/",
+		price: "$0.002",
+		description:
+			"Create a throwaway agent inbox on edge KV with a configurable TTL (1 min - 30d). Returns a short id you can hand to a remote sender. Bounded storage: max 200 messages per inbox",
+		mimeType: "application/json",
+		input: {
+			name: "Human-readable inbox name (1-256 chars)",
+			email: "Optional contact email for the inbox owner",
+			ttl_seconds:
+				"Optional inbox lifetime in seconds (60-2592000, default 604800 = 7d)"
+		},
+		example: {
+			name: "ramp-test-1",
+			ttl_seconds: 86400
+		}
+	},
+	{
+		id: "agent.inbox.send",
+		method: "POST",
+		path: "/v1/agent/inbox/:id/send",
+		price: "$0.002",
+		description:
+			"Deliver a message into a previously-created agent inbox (subject + body). Bounded to 200 messages per inbox; idempotent-by-id is NOT enforced — send carefully",
+		mimeType: "application/json",
+		input: {
+			id: "Inbox id returned from /v1/agent/inbox (path param)",
+			from: "Sender name (1-256 chars)",
+			subject: "Message subject (1-200 chars)",
+			body: "Message body (1-10000 chars)"
+		},
+		example: {
+			id: "abc123",
+			from: "external-service",
+			subject: "test payload delivered",
+			body: "Hello from the outside world"
+		}
+	},
+	{
+		id: "agent.inbox.read",
+		method: "GET",
+		path: "/v1/agent/inbox/:id/messages",
+		price: "$0.001",
+		description:
+			"Read all messages stored in an agent inbox. KV-backed, cheap, no auth required beyond the id",
+		mimeType: "application/json",
+		input: {
+			id: "Inbox id (path param)"
+		},
+		example: {
+			id: "abc123"
+		}
+	},
+	{
+		id: "security.screen",
+		method: "POST",
+		path: "/v1/security/screen",
+		price: "$0.01",
+		description:
+			"Sanctions / AML screening for crypto addresses (EVM or Solana). Deterministic OFAC SDN match → immediate block; otherwise scored 0-100 with a Llama 3.3 70B summary of risk based on a free-text counterparty note. KV-cached for 24h per (chain, address) so repeat lookups are free",
+		mimeType: "application/json",
+		input: {
+			address: "EVM (0x + 40 hex) or Solana (base58) address to screen",
+			chain: "Which chain family the address belongs to: evm | solana",
+			note: "Optional free-text counterparty context (max 2000 chars) that the AI uses to refine the risk score"
+		},
+		example: {
+			address: "0x0000000000000000000000000000000000000000",
+			chain: "evm",
+			note: "Incoming payment from an OTC desk in a high-risk jurisdiction"
+		}
+	},
+	{
+		id: "dev.base64",
+		method: "POST",
+		path: "/v1/dev/base64",
+		price: "$0.001",
+		description:
+			"Encode or decode text with Base64 (standard or URL-safe). Useful for JWT/cookie/header handling and storage payloads",
+		mimeType: "application/json",
+		input: {
+			text: "String to encode or decode (max 100k chars)",
+			operation: "encode or decode (default encode)",
+			url_safe:
+				"Use URL-safe alphabet (replace +/= with -_, drop padding)"
+		},
+		example: {
+			text: "hello world",
+			operation: "encode",
+			url_safe: false
+		}
+	},
+	{
+		id: "dev.url-codec",
+		method: "POST",
+		path: "/v1/dev/url-codec",
+		price: "$0.001",
+		description:
+			"Encode or decode a URL string (full URL or URI component). Useful for query-string and path-segment handling",
+		mimeType: "application/json",
+		input: {
+			text: "URL or string to encode/decode (max 10k chars)",
+			operation: "encode or decode (default encode)",
+			component:
+				"true = encodeURIComponent/decodeURIComponent (chars), false = encodeURI/decodeURI (full URLs)"
+		},
+		example: {
+			text: "hello world & friends",
+			operation: "encode",
+			component: true
+		}
+	},
+	{
+		id: "dev.user-agent-parse",
+		method: "POST",
+		path: "/v1/dev/user-agent-parse",
+		price: "$0.001",
+		description:
+			"Parse a User-Agent header to extract browser name + version, OS string, mobile flag, and bot heuristic. Useful for analytics & access-control logic",
+		mimeType: "application/json",
+		input: {
+			user_agent: "The User-Agent string to parse (1-512 chars)"
+		},
+		example: {
+			user_agent:
+				"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+		}
+	},
+	{
+		id: "dev.color-convert",
+		method: "POST",
+		path: "/v1/dev/color-convert",
+		price: "$0.001",
+		description:
+			"Convert a CSS color between hex, rgb, rgba, and hsl formats. Accepts #rgb, #rrggbb, #rrggbbaa, rgb(r,g,b), or rgba(r,g,b,a)",
+		mimeType: "application/json",
+		input: {
+			color: "Color string in any supported format",
+			to: "Target format: hex, rgb, hsl (default hex)"
+		},
+		example: {
+			color: "#ff5733",
+			to: "hsl"
+		}
+	},
+	{
+		id: "dev.qr-generate",
+		method: "POST",
+		path: "/v1/dev/qr-generate",
+		price: "$0.002",
+		description:
+			"Generate a QR code PNG as a data URI for any text/URL. Supports configurable size, margin, and error-correction level (L/M/Q/H)",
+		mimeType: "application/json",
+		input: {
+			text: "Text or URL to encode (1-1000 chars)",
+			size: "Output image size 64-1024 px (default 256)",
+			margin: "Quiet-zone margin in modules 0-10 (default 2)",
+			error_correction:
+				"Error-correction level: L (7%), M (15%), Q (25%), H (30%) (default M)"
+		},
+		example: {
+			text: "https://x402.tanship.dev",
+			size: 512,
+			error_correction: "H"
 		}
 	}
 ];
