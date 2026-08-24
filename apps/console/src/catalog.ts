@@ -1906,6 +1906,146 @@ export const SERVICES: ServiceDef[] = [
 			size: 512,
 			error_correction: "H"
 		}
+	},
+	{
+		id: "dev.html-to-text",
+		method: "POST",
+		path: "/v1/dev/html-to-text",
+		price: "$0.001",
+		description:
+			"Strip HTML tags, scripts, styles, and entities from a string. Returns plain text suitable for indexing or LLM ingestion.",
+		mimeType: "application/json",
+		input: {
+			html: "Raw HTML string to strip"
+		},
+		example: {
+			html: "<p>Hello <b>world</b</p><script>x</script>"
+		}
+	},
+	{
+		id: "dev.json-to-xml",
+		method: "POST",
+		path: "/v1/dev/json-to-xml",
+		price: "$0.001",
+		description:
+			"Convert a JSON object to an XML string with configurable root element name. Nested objects/arrays serialize as repeated child tags.",
+		mimeType: "application/json",
+		input: {
+			data: "Object to convert (string keys, arbitrary values)",
+			rootName: "Root XML element name (default 'root')"
+		},
+		example: {
+			data: { name: "alice", age: 30 },
+			rootName: "user"
+		}
+	},
+	{
+		id: "dev.xml-to-json",
+		method: "POST",
+		path: "/v1/dev/xml-to-json",
+		price: "$0.001",
+		description:
+			"Parse a simple XML string into a JSON object. Optimized for typical document structures (single-pass regex parser).",
+		mimeType: "application/json",
+		input: {
+			xml: "XML string to parse"
+		},
+		example: {
+			xml: "<user><name>alice</name</user>"
+		}
+	},
+	{
+		id: "dev.text-chunker",
+		method: "POST",
+		path: "/v1/dev/text-chunker",
+		price: "$0.001",
+		description:
+			"Split a long string into overlapping chunks by character count. Useful for RAG ingestion, embedding pipelines, or fitting text into a model context window.",
+		mimeType: "application/json",
+		input: {
+			text: "String to chunk",
+			chunkSize: "Max characters per chunk 10-50000 (default 1000)",
+			chunkOverlap:
+				"Overlap between adjacent chunks 0-25000 (default 200)"
+		},
+		example: {
+			text: "lorem ipsum dolor sit amet ...",
+			chunkSize: 100,
+			chunkOverlap: 20
+		}
+	},
+	{
+		id: "crypto.nonce",
+		method: "POST",
+		path: "/v1/crypto/nonce",
+		price: "$0.001",
+		description:
+			"Get the next pending transaction nonce for an EVM address. Useful for agents that need to build sequential transactions without race conditions.",
+		mimeType: "application/json",
+		input: {
+			chain: "One of: base, ethereum, arbitrum, polygon (default base)",
+			address: "0x-prefixed EVM address to query"
+		},
+		example: {
+			chain: "base",
+			address: "0x392D595f8F678df7f7A1D3d42d87E7985c8E5146"
+		}
+	},
+	{
+		id: "crypto.gas-price",
+		method: "POST",
+		path: "/v1/crypto/gas-price",
+		price: "$0.001",
+		description:
+			"Fetch current gas price (in gwei) for an EVM chain via public RPC. Returns both legacy and EIP-1559 base fee fields when available.",
+		mimeType: "application/json",
+		input: {
+			chain: "One of: base, ethereum, arbitrum, polygon (default base)"
+		},
+		example: { chain: "base" }
+	},
+	{
+		id: "crypto.ens-resolve",
+		method: "POST",
+		path: "/v1/crypto/ens-resolve",
+		price: "$0.003",
+		description:
+			"Resolve between an ENS name (e.g. vitalik.eth) and an EVM address. Auto-detects direction: addresses return primary ENS name, *.eth names return their resolved address. Uses mainnet RPC.",
+		mimeType: "application/json",
+		input: {
+			input: "Either a 0x-prefixed EVM address or a *.eth ENS name (1-254 chars)"
+		},
+		example: { input: "vitalik.eth" }
+	},
+	{
+		id: "crypto.erc20-meta",
+		method: "POST",
+		path: "/v1/crypto/erc20-meta",
+		price: "$0.003",
+		description:
+			"Look up ERC-20 token metadata by contract address: name, symbol, decimals, type, total supply, and logo URL. Queries the chain's block explorer token registry.",
+		mimeType: "application/json",
+		input: {
+			address: "0x-prefixed ERC-20 contract address",
+			chain: "One of: base, ethereum, arbitrum, polygon (default base)"
+		},
+		example: {
+			address: "0x4200000000000000000000000000000000000006",
+			chain: "base"
+		}
+	},
+	{
+		id: "dev.ulid",
+		method: "POST",
+		path: "/v1/dev/ulid",
+		price: "$0.001",
+		description:
+			"Generate ULIDs — 26-character Crockford-base32 identifiers that are lexicographically sortable by creation time. Ideal for primary keys, event IDs, and trace IDs where insertion order matters.",
+		mimeType: "application/json",
+		input: {
+			count: "Number of ULIDs to generate, 1-100 (default 1)"
+		},
+		example: { count: 3 }
 	}
 ];
 

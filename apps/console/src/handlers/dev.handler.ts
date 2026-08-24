@@ -56,6 +56,31 @@ const UuidSchema = z.object({
 	count: z.number().int().min(1).max(100).default(1)
 });
 
+const UlidSchema = z.object({
+	count: z.number().int().min(1).max(100).default(1)
+});
+
+// Crockford-base32 ULID generator: 48-bit timestamp (ms) + 80-bit randomness.
+// Sortable, collision-resistant, and faster than UUIDv4 for ID generation.
+function generateUlid(): string {
+	const ENCODING = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+	const TIME_LEN = 10;
+	const RAND_LEN = 16;
+	const time = Date.now();
+	let id = "";
+	let t = time;
+	for (let i = TIME_LEN - 1; i >= 0; i--) {
+		id = ENCODING[t % 32] + id;
+		t = Math.floor(t / 32);
+	}
+	const rand = new Uint8Array(RAND_LEN);
+	crypto.getRandomValues(rand);
+	for (let i = 0; i < RAND_LEN; i++) {
+		id += ENCODING[rand[i] % 32];
+	}
+	return id;
+}
+
 const RegexTestSchema = z.object({
 	pattern: z.string().min(1),
 	flags: z.string().default(""),
@@ -293,7 +318,244 @@ function flatten(
 	return result;
 }
 
+const Base64Schema = z.object({
+	text: z.string().max(100_000),
+	operation: z.enum(["encode", "decode"]).default("encode"),
+	url_safe: z.boolean().default(false)
+});
+
+const UrlCodecSchema = z.object({
+	text: z.string().max(10_000),
+	operation: z.enum(["encode", "decode"]).default("encode"),
+	component: z.boolean().default(false) // false = encodeURIComponent, true = encodeURIComponent
+});
+
+const UserAgentParseSchema = z.object({
+	user_agent: z.string().min(1).max(512)
+});
+
+const ColorConvertSchema = z.object({
+	color: z.string().min(1).max(64),
+	to: z.enum(["hex", "rgb", "hsl", "oklch"]).default("hex")
+});
+
+const QrGenerateSchema = z.object({
+	text: z.string().min(1).max(1000),
+	size: z.number().int().min(64).max(1024).default(256),
+	margin: z.number().int().min(0).max(10).default(2),
+	error_correction: z.enum(["L", "M", "Q", "H"]).default("M")
+});
+
+const Base64Handler = async (c: any) => {
+	const { text, operation, url_safe } = c.req.valid("json");
+	try {
+		let result: string;
+		if (operation === "encode") {
+			const b64 = btoa(
+				String.fromCharCode(...new TextEncoder().encode(text))
+			);
+			result = url_safe
+				? b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "")
+				: b64;
+		} else {
+			const normalized = url_safe
+				? text.replace(/-/g, "+").replace(/_/g, "/")
+				: text;
+			const padded =
+				normalized + "=".repeat((4 - (normalized.length % 4)) % 4);
+			result = new TextDecoder().decode(
+				new Uint8Array(
+					atob(padded)
+						.split("")
+						.map((c) => c.charCodeAt(0))
+				)
+			);
+		}
+		return ApiResponse.ok(c, "Base64 operation complete", {
+			operation,
+			input_length: text.length,
+			output_length: result.length,
+			result
+		});
+	} catch (err: any) {
+		throw ApiError.badRequest(`Base64 ${operation} failed: ${err.message}`);
+	}
+};
+
+const UrlCodecHandler = async (c: any) => {
+	const { text, operation, component } = c.req.valid("json");
+	try {
+		const result =
+			operation === "encode"
+				? component
+					? encodeURIComponent(text)
+					: encodeURI(text)
+				: component
+					? decodeURIComponent(text)
+					: decodeURI(text);
+		return ApiResponse.ok(c, "URL codec operation complete", {
+			operation,
+			mode: component ? "component" : "full",
+			input_length: text.length,
+			output_length: result.length,
+			result
+		});
+	} catch (err: any) {
+		throw ApiError.badRequest(`URL ${operation} failed: ${err.message}`);
+	}
+};
+
+const UserAgentParseHandler = async (c: any) => {
+	const { user_agent } = c.req.valid("json");
+	const browserRe = /(?:Edg|OPR|Chrome|Safari|Firefox|Brave|Arc)\/([\d.]+)/;
+	const osRe = /\(([^)]+)\)/;
+	const deviceRe = /(Mobile|Tablet|iPhone|iPad|Android)/;
+	const m = user_agent.match(browserRe);
+	const browserName = user_agent.includes("Edg/")
+		? "Edge"
+		: user_agent.includes("OPR/")
+			? "Opera"
+			: user_agent.includes("Chrome/")
+				? "Chrome"
+				: user_agent.includes("Firefox/")
+					? "Firefox"
+					: user_agent.includes("Safari/")
+						? "Safari"
+						: "Unknown";
+	const osMatch = user_agent.match(osRe);
+	const osString = osMatch ? osMatch[1] : "";
+	return ApiResponse.ok(c, "User-Agent parsed", {
+		browser: browserName,
+		version: m?.[1] ?? null,
+		os: osString,
+		isMobile: !!deviceRe.test(user_agent),
+		isBot: /bot|crawl|spider/i.test(user_agent),
+		raw_length: user_agent.length
+	});
+};
+
+const ColorConvertHandler = async (c: any) => {
+	const { color, to } = c.req.valid("json");
+	// Accept #rgb, #rrggbb, rgb(r,g,b), or rgba(r,g,b,a)
+	let r = 0,
+		g = 0,
+		b = 0,
+		a = 1;
+	let input = color.trim();
+	if (input.startsWith("#")) {
+		const hex = input.slice(1);
+		if (hex.length === 3) {
+			r = parseInt(hex[0] + hex[0], 16);
+			g = parseInt(hex[1] + hex[1], 16);
+			b = parseInt(hex[2] + hex[2], 16);
+		} else if (hex.length === 6 || hex.length === 8) {
+			r = parseInt(hex.slice(0, 2), 16);
+			g = parseInt(hex.slice(2, 4), 16);
+			b = parseInt(hex.slice(4, 6), 16);
+			if (hex.length === 8) a = parseInt(hex.slice(6, 8), 16) / 255;
+		} else {
+			throw ApiError.badRequest("Hex color must be 3, 6, or 8 chars");
+		}
+	} else {
+		const m = input.match(/rgba?\(([^)]+)\)/i);
+		if (!m) throw ApiError.badRequest("Color must be hex or rgb/rgba");
+		const parts = m[1].split(",").map((s: string) => parseFloat(s.trim()));
+		[r, g, b] = parts;
+		if (parts.length === 4) a = parts[3];
+	}
+	if ([r, g, b].some((v) => !Number.isFinite(v))) {
+		throw ApiError.badRequest("Invalid numeric component");
+	}
+	r = Math.max(0, Math.min(255, Math.round(r)));
+	g = Math.max(0, Math.min(255, Math.round(g)));
+	b = Math.max(0, Math.min(255, Math.round(b)));
+
+	const rgbToHsl = (r: number, g: number, b: number) => {
+		let rr = r / 255,
+			gg = g / 255,
+			bb = b / 255;
+		const max = Math.max(rr, gg, bb),
+			min = Math.min(rr, gg, bb);
+		let h = 0,
+			s = 0;
+		const l = (max + min) / 2;
+		if (max !== min) {
+			const d = max - min;
+			s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+			switch (max) {
+				case rr:
+					h = (gg - bb) / d + (gg < bb ? 6 : 0);
+					break;
+				case gg:
+					h = (bb - rr) / d + 2;
+					break;
+				case bb:
+					h = (rr - gg) / d + 4;
+					break;
+			}
+			h /= 6;
+		}
+		return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
+	};
+	const toHex = (n: number) => n.toString(16).padStart(2, "0");
+	const result: Record<string, string> = {
+		hex: `#${toHex(r)}${toHex(g)}${toHex(b)}`,
+		rgb: `rgb(${r}, ${g}, ${b})`,
+		hsl: `hsl(${rgbToHsl(r, g, b).join(", ")})`,
+		rgba: `rgba(${r}, ${g}, ${b}, ${a})`
+	};
+	return ApiResponse.ok(c, "Color converted", {
+		input: color,
+		target: to,
+		value: result[to],
+		all: result
+	});
+};
+
+const QrGenerateHandler = async (c: any) => {
+	const { text, size, margin, error_correction } = c.req.valid("json");
+	// Use the Google Chart Image API for QR generation (free, reliable, no auth)
+	const params = new URLSearchParams({
+		cht: "qr",
+		chs: `${size}x${size}`,
+		chld: `${error_correction}|${margin}`,
+		chl: text
+	});
+	const url = `https://chart.googleapis.com/chart?${params}`;
+	const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+	if (!res.ok)
+		throw ApiError.badGateway(`QR generation failed: HTTP ${res.status}`);
+	const buf = new Uint8Array(await res.arrayBuffer());
+	const base64 = btoa(String.fromCharCode(...buf));
+	return ApiResponse.ok(c, "QR code generated", {
+		text,
+		size,
+		margin,
+		error_correction,
+		format: "png",
+		dataUri: `data:image/png;base64,${base64}`,
+		bytes: buf.length
+	});
+};
+
 const devHandler = new Hono<HonoEnv>()
+	.post("/base64", zValidator("json", Base64Schema), Base64Handler)
+	.post("/url-codec", zValidator("json", UrlCodecSchema), UrlCodecHandler)
+	.post(
+		"/user-agent-parse",
+		zValidator("json", UserAgentParseSchema),
+		UserAgentParseHandler
+	)
+	.post(
+		"/color-convert",
+		zValidator("json", ColorConvertSchema),
+		ColorConvertHandler
+	)
+	.post(
+		"/qr-generate",
+		zValidator("json", QrGenerateSchema),
+		QrGenerateHandler
+	)
 	.post("/hash", zValidator("json", HashSchema), async (c) => {
 		const { text, algorithm } = c.req.valid("json");
 		try {
@@ -704,6 +966,12 @@ const devHandler = new Hono<HonoEnv>()
 
 		return ApiResponse.ok(c, "UUIDs generated successfully", { uuids });
 	})
+	.post("/ulid", zValidator("json", UlidSchema), async (c) => {
+		const { count } = c.req.valid("json");
+		const ulids: string[] = [];
+		for (let i = 0; i < count; i++) ulids.push(generateUlid());
+		return ApiResponse.ok(c, "ULIDs generated successfully", { ulids });
+	})
 	.post("/regex-test", zValidator("json", RegexTestSchema), async (c) => {
 		const { pattern, flags, text } = c.req.valid("json");
 
@@ -970,6 +1238,82 @@ const devHandler = new Hono<HonoEnv>()
 				});
 			} catch (err: any) {
 				throw ApiError.badRequest(`Conversion failed: ${err.message}`);
+			}
+		}
+	)
+	.post(
+		"/pdf-text",
+		zValidator(
+			"json",
+			z.object({
+				url: z.string().url().max(2048)
+			})
+		),
+		async (c) => {
+			const { url } = c.req.valid("json");
+
+			try {
+				const res = await fetch(url, {
+					signal: AbortSignal.timeout(10_000)
+				});
+				if (!res.ok) {
+					throw new Error(`PDF fetch returned ${res.status}`);
+				}
+				const buf = await res.arrayBuffer();
+				if (buf.byteLength === 0) {
+					throw new Error("Empty response body");
+				}
+
+				// Stream-decode the PDF text content. Real PDF text lives inside
+				// parenthesized byte sequences after " Tj"/" TJ" operators, often
+				// encoded as UTF-16BE or with PDFDocEncoding.
+				const bytes = new Uint8Array(buf);
+				const decoder = new TextDecoder("utf-8");
+				const raw = decoder.decode(bytes);
+
+				// Extract text from within BT...ET blocks (text objects)
+				const textBlocks: string[] = [];
+				const btEtRe = /BT([\s\S]*?)ET/g;
+				let m: RegExpExecArray | null;
+				while ((m = btEtRe.exec(raw)) !== null) {
+					const block = m[1];
+					// Heuristic: collect parenthesized strings (escapes handled lightly)
+					const strs: string[] = [];
+					const parenRe = /\(((?:\\.|[^()\\])*)\)\s*(Tj|TJ)/g;
+					let pm: RegExpExecArray | null;
+					while ((pm = parenRe.exec(block)) !== null) {
+						strs.push(pm[1]);
+					}
+					if (strs.length > 0) {
+						textBlocks.push(strs.join(""));
+					}
+				}
+
+				// Fallback for compressed / image-only PDFs: try a flat whitespace
+				// extraction so we still return something rather than empty.
+				let text = textBlocks.join("\n").trim();
+				if (!text) {
+					const flat = raw
+						.replace(/[^\x20-\x7E\n]/g, " ")
+						.replace(/\s{3,}/g, " ")
+						.trim();
+					text = flat.slice(0, 8000);
+				}
+
+				// Cheap page-count heuristic — count "/Type /Page" markers
+				const pageMatches = raw.match(/\/Type\s*\/Page[^s]/g) || [];
+				const pages = pageMatches.length;
+
+				return ApiResponse.ok(c, "PDF text extracted", {
+					url,
+					pages,
+					characters: text.length,
+					text
+				});
+			} catch (err: any) {
+				throw ApiError.badGateway(
+					`PDF text extraction failed: ${err.message}`
+				);
 			}
 		}
 	);

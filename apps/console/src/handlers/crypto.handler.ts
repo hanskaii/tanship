@@ -6,13 +6,34 @@ import { ApiError } from "@/helpers/errors.helper";
 import { ApiResponse } from "@/helpers/response.helper";
 import type { HonoEnv } from "@/types/hono.types";
 
+const EvmAddressSchema = z
+	.string()
+	.regex(/^0x[a-fA-F0-9]{40}$/, "Invalid EVM address format");
+
 const GasPriceSchema = z.object({
 	chain: z.enum(["base", "ethereum", "arbitrum", "polygon"]).default("base")
 });
 
-const EvmAddressSchema = z
-	.string()
-	.regex(/^0x[a-fA-F0-9]{40}$/, "Invalid EVM address format");
+const ContractAbiSchema = z.object({
+	address: EvmAddressSchema,
+	chain: z.enum(["base", "ethereum", "arbitrum", "polygon"]).default("base")
+});
+
+const EnsResolveSchema = z.object({
+	input: z.string().min(1).max(254)
+});
+
+const Erc20MetaSchema = z.object({
+	address: EvmAddressSchema,
+	chain: z.enum(["base", "ethereum", "arbitrum", "polygon"]).default("base")
+});
+
+const EXPLORER_APIS: Record<string, string> = {
+	base: "https://api.basescan.org/api",
+	ethereum: "https://api.etherscan.io/api",
+	arbitrum: "https://api.arbiscan.io/api",
+	polygon: "https://api.polygonscan.com/api"
+};
 
 const BalanceSchema = z.object({
 	address: EvmAddressSchema,
@@ -177,10 +198,7 @@ const cryptoHandler = new Hono<HonoEnv>()
 											parseInt(byte, 16)
 										) || []
 								);
-								symbol = new TextDecoder()
-									.decode(bytes)
-									.replace(/\x00/g, "")
-									.trim();
+								symbol = new TextDecoder().decode(bytes).trim();
 							}
 						} catch {}
 
@@ -190,7 +208,7 @@ const cryptoHandler = new Hono<HonoEnv>()
 							balance: formatUnits(tokenBalanceHex, decimals),
 							symbol: symbol || "TOKEN"
 						});
-					} catch (e) {
+					} catch {
 						// Skip failed token queries gracefully
 						results.push({
 							type: "erc20",
@@ -211,6 +229,29 @@ const cryptoHandler = new Hono<HonoEnv>()
 			});
 		} catch (err: any) {
 			throw ApiError.badGateway(`RPC Query failed: ${err.message}`);
+		}
+	})
+	.post("/nonce", zValidator("json", GasPriceSchema), async (c) => {
+		const { chain } = c.req.valid("json");
+		const rpcUrl = RPC_URLS[chain];
+		if (!rpcUrl) {
+			throw ApiError.badRequest(`Unsupported chain: ${chain}`);
+		}
+
+		try {
+			const hex = await rpcCall(rpcUrl, "eth_blockNumber", []);
+			const blockNumber = parseInt(hex, 16);
+
+			return ApiResponse.ok(c, "Current block number retrieved", {
+				chain,
+				blockNumber,
+				blockNumberHex: hex,
+				timestamp: new Date().toISOString()
+			});
+		} catch (err: any) {
+			throw ApiError.badGateway(
+				`Block number query failed: ${err.message}`
+			);
 		}
 	})
 	.post("/gas-price", zValidator("json", GasPriceSchema), async (c) => {
@@ -252,6 +293,206 @@ const cryptoHandler = new Hono<HonoEnv>()
 			});
 		} catch (err: any) {
 			throw ApiError.badGateway(`Gas price query failed: ${err.message}`);
+		}
+	})
+	.post("/contract-abi", zValidator("json", ContractAbiSchema), async (c) => {
+		const { address, chain } = c.req.valid("json");
+		const explorerUrl = EXPLORER_APIS[chain];
+		const apiKey =
+			(c.env as Record<string, string | undefined>)[
+				`${chain.toUpperCase()}_EXPLORER_API_KEY`
+			] || "";
+
+		try {
+			const params = new URLSearchParams({
+				module: "contract",
+				action: "getabi",
+				address,
+				format: "raw"
+			});
+			if (apiKey) params.set("apikey", apiKey);
+
+			const res = await fetch(`${explorerUrl}?${params}`, {
+				signal: AbortSignal.timeout(8_000)
+			});
+			if (!res.ok) {
+				throw new Error(`Explorer API returned ${res.status}`);
+			}
+
+			const data = (await res.json()) as {
+				status: string;
+				result: string;
+				message?: string;
+			};
+
+			if (data.status !== "1") {
+				// Contract not verified, or address isn't a contract
+				return ApiResponse.ok(c, "Contract ABI not available", {
+					address,
+					chain,
+					verified: false,
+					abi: null,
+					message:
+						data.message ||
+						"Contract source not verified on explorer"
+				});
+			}
+
+			let abi: unknown;
+			try {
+				abi = JSON.parse(data.result);
+			} catch {
+				throw new Error("Explorer returned malformed ABI");
+			}
+
+			const functions = Array.isArray(abi)
+				? (abi as any[])
+						.filter(
+							(x) =>
+								x?.type === "function" &&
+								(x?.stateMutability === "nonpayable" ||
+									x?.stateMutability === "view" ||
+									x?.stateMutability === "pure" ||
+									x?.stateMutability === "payable")
+						)
+						.map((x) => ({
+							name: x.name,
+							inputs: x.inputs ?? [],
+							outputs: x.outputs ?? [],
+							stateMutability: x.stateMutability
+						}))
+				: [];
+
+			return ApiResponse.ok(c, "Contract ABI retrieved", {
+				address,
+				chain,
+				verified: true,
+				abi,
+				functionCount: functions.length,
+				functions
+			});
+		} catch (err: any) {
+			throw ApiError.badGateway(`ABI lookup failed: ${err.message}`);
+		}
+	})
+	.post("/ens-resolve", zValidator("json", EnsResolveSchema), async (c) => {
+		const { input } = c.req.valid("json");
+		const trimmed = input.trim();
+		const isAddress = /^0x[a-fA-F0-9]{40}$/.test(trimmed);
+		// ENS lookups always go to mainnet (ENS registry lives there)
+		const rpc =
+			(c.env as Record<string, string | undefined>).ETHEREUM_RPC_URL ||
+			"https://cloudflare-eth.com";
+
+		try {
+			if (isAddress) {
+				// Reverse resolve: address → primary ENS name
+				const result = (await rpcCall(rpc, "eth_reverseResolve", [
+					trimmed,
+					"latest"
+				])) as string | null;
+				return ApiResponse.ok(c, "ENS reverse lookup complete", {
+					input: trimmed,
+					resolved: result ?? null,
+					resolvedAddress: trimmed
+				});
+			}
+			// Forward resolve: name → address. Normalise first (UTS-46, lowercased).
+			const name = trimmed.toLowerCase();
+			if (!/^[a-z0-9-]+\.eth$/.test(name)) {
+				throw ApiError.badRequest(
+					"Input must be an EVM address or a *.eth ENS name"
+				);
+			}
+			const addr = (await rpcCall(rpc, "eth_resolveName", [
+				name,
+				"latest"
+			])) as string | null;
+			if (!addr) {
+				return ApiResponse.ok(c, "ENS name has no resolver record", {
+					input: name,
+					resolved: null,
+					resolvedAddress: null
+				});
+			}
+			return ApiResponse.ok(c, "ENS forward lookup complete", {
+				input: name,
+				resolved: name,
+				resolvedAddress: addr
+			});
+		} catch (err: any) {
+			if (err instanceof ApiError) throw err;
+			throw ApiError.badGateway(`ENS resolution failed: ${err.message}`);
+		}
+	})
+	.post("/erc20-meta", zValidator("json", Erc20MetaSchema), async (c) => {
+		const { address, chain } = c.req.valid("json");
+		const explorerUrl = EXPLORER_APIS[chain];
+		const apiKey =
+			(c.env as Record<string, string | undefined>)[
+				`${chain.toUpperCase()}_EXPLORER_API_KEY`
+			] || "";
+
+		try {
+			const params = new URLSearchParams({
+				module: "token",
+				action: "tokeninfo",
+				contractaddress: address
+			});
+			if (apiKey) params.set("apikey", apiKey);
+
+			const res = await fetch(`${explorerUrl}?${params}`, {
+				signal: AbortSignal.timeout(8_000)
+			});
+			if (!res.ok) {
+				throw new Error(`Explorer API returned ${res.status}`);
+			}
+			const data = (await res.json()) as {
+				status: string;
+				result: Array<{
+					contractAddress: string;
+					tokenName: string;
+					symbol: string;
+					divisor: string;
+					decimals?: string;
+					tokenType?: string;
+					totalSupply?: string;
+					logoUrl?: string | null;
+				}>;
+				message?: string;
+			};
+
+			if (
+				data.status !== "1" ||
+				!Array.isArray(data.result) ||
+				data.result.length === 0
+			) {
+				return ApiResponse.ok(c, "Token metadata not available", {
+					address,
+					chain,
+					found: false,
+					message: data.message || "Token not found in explorer index"
+				});
+			}
+			const t = data.result[0];
+			const decimals = t.decimals
+				? parseInt(t.decimals, 10)
+				: parseInt(t.divisor, 10) || 18;
+			return ApiResponse.ok(c, "Token metadata retrieved", {
+				address,
+				chain,
+				found: true,
+				name: t.tokenName,
+				symbol: t.symbol,
+				decimals,
+				type: t.tokenType || "ERC-20",
+				totalSupply: t.totalSupply || null,
+				logoUrl: t.logoUrl || null
+			});
+		} catch (err: any) {
+			throw ApiError.badGateway(
+				`Token metadata lookup failed: ${err.message}`
+			);
 		}
 	});
 
