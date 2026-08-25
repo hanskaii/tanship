@@ -60,6 +60,11 @@ const NewsSchema = QueryLimitSchema;
 const ImagesSchema = QueryLimitSchema;
 const ShoppingSchema = QueryLimitSchema;
 
+const HtmlSchema = UrlSchema.extend({
+	strip_scripts: z.boolean().default(true),
+	max_bytes: z.number().int().min(1).max(2_000_000).default(500_000)
+});
+
 const SEARCH_EXTRACTION_SCHEMA = {
 	type: "object",
 	properties: {
@@ -930,6 +935,49 @@ const browserHandler = new Hono<HonoEnv>()
 			throw ApiError.badGateway(
 				`Fast text extraction failed: ${err.message}`
 			);
+		}
+	})
+	.post("/html", zValidator("json", HtmlSchema), async (c) => {
+		const { url, strip_scripts, max_bytes } = c.req.valid("json");
+		try {
+			const res = await fetch(url, {
+				headers: {
+					"User-Agent":
+						"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+					Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+				}
+			});
+
+			if (!res.ok) {
+				throw new Error(`HTTP status ${res.status}`);
+			}
+
+			let html = await res.text();
+			const originalLength = html.length;
+
+			if (strip_scripts) {
+				html = html
+					.replace(
+						/<(script|style|noscript)[^>]*>[\s\S]*?<\/\1>/gi,
+						""
+					)
+					.replace(/<!--[\s\S]*?-->/g, "");
+			}
+
+			// Cap response size
+			if (html.length > max_bytes) {
+				html = html.slice(0, max_bytes);
+			}
+
+			return ApiResponse.ok(c, "HTML fetched successfully", {
+				url,
+				original_length: originalLength,
+				processed_length: html.length,
+				strip_scripts,
+				html
+			});
+		} catch (err: any) {
+			throw ApiError.badGateway(`HTML fetch failed: ${err.message}`);
 		}
 	});
 export default browserHandler;

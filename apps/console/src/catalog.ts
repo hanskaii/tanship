@@ -1185,6 +1185,26 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "browser.html",
+		method: "POST",
+		path: "/v1/browser/html",
+		price: "$0.003",
+		description:
+			"Fetch raw HTML from any webpage — returns the full page source with scripts and styles stripped, ideal for downstream parsing and indexing",
+		mimeType: "application/json",
+		input: {
+			url: "Page URL to fetch raw HTML from",
+			strip_scripts:
+				"Optional boolean — remove <script>, <style>, <noscript> blocks (default true)",
+			max_bytes:
+				"Optional response size cap in bytes 1-2000000 (default 500000)"
+		},
+		example: {
+			url: "https://example.com",
+			strip_scripts: true
+		}
+	},
+	{
 		id: "dev.token-count",
 		method: "POST",
 		path: "/v1/dev/token-count",
@@ -2016,6 +2036,27 @@ export const SERVICES: ServiceDef[] = [
 			input: "Either a 0x-prefixed EVM address or a *.eth ENS name (1-254 chars)"
 		},
 		example: { input: "vitalik.eth" }
+	},
+	{
+		id: "crypto.evm-call",
+		method: "POST",
+		path: "/v1/crypto/evm-call",
+		price: "$0.002",
+		description:
+			"Read-only eth_call against any EVM contract on Base, Ethereum, Arbitrum, or Polygon. Pass ABI-encoded calldata, get the raw hex response back. Perfect for token balanceOf, allowance, ERC-20 decimals reads, or any view/pure function call.",
+		mimeType: "application/json",
+		input: {
+			to: "0x-prefixed contract address to call",
+			data: "0x-prefixed ABI-encoded calldata (e.g. 0x70a08231... for balanceOf(address))",
+			chain: "One of: base, ethereum, arbitrum, polygon (default base)",
+			from: "Optional msg.sender address for the call (default caller)",
+			block: "Block tag: latest (default), pending, earliest, safe, finalized"
+		},
+		example: {
+			to: "0x4200000000000000000000000000000000000006",
+			data: "0x313ce567",
+			chain: "base"
+		}
 	},
 	{
 		id: "crypto.erc20-meta",
