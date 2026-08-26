@@ -18,6 +18,7 @@ import storageHandler from "./handlers/storage.handler";
 import dbHandler from "./handlers/db.handler";
 import queueHandler from "./handlers/queue.handler";
 import durableHandler from "./handlers/durable.handler";
+import coordinationHandler from "./handlers/coordination.handler";
 import agentResearchHandler from "./handlers/agent.research.handler";
 import agentInboxHandler from "./handlers/agent.inbox.handler";
 import nlHandler from "./handlers/nl.handler";
@@ -162,6 +163,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/db", dbHandler)
 	.route("/v1/queue", queueHandler)
 	.route("/v1/durable", durableHandler)
+	.route("/v1/coordination", coordinationHandler)
 	.route("/v1/agent", agentResearchHandler)
 	.route("/v1/agent/inbox", agentInboxHandler)
 	.route("/v1/nl", nlHandler)

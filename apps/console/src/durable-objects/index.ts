@@ -8,6 +8,89 @@ export interface CounterEnv {
 	COUNTER: DurableObjectNamespace<Counter>;
 }
 
+export interface LockEnv {
+	LOCK: DurableObjectNamespace<Lock>;
+}
+
+interface LockState {
+	locked: boolean;
+	owner: string | null;
+	lockedAt: number | null;
+}
+
+/**
+ * Distributed mutex lock backed by a Durable Object.
+ * Provides atomic lock/unlock with optional TTL for preventing deadlocks.
+ */
+export class Lock extends DurableObject {
+	private async load(): Promise<LockState> {
+		const state = (await this.ctx.storage.get<LockState>("state")) ?? {
+			locked: false,
+			owner: null,
+			lockedAt: null
+		};
+		return state;
+	}
+
+	private async save(state: LockState): Promise<void> {
+		await this.ctx.storage.put("state", state);
+		// Extend idle-expiry on every write
+		await this.ctx.storage.setAlarm(Date.now() + IDLE_TTL_MS);
+	}
+
+	/**
+	 * Acquire the lock if it is free, or return false if already locked.
+	 * Returns the lock token (owner id) on success.
+	 */
+	async acquire(
+		owner: string
+	): Promise<{ success: boolean; token?: string }> {
+		const state = await this.load();
+		if (state.locked) {
+			return { success: false };
+		}
+		const token = crypto.randomUUID();
+		await this.save({
+			locked: true,
+			owner: owner,
+			lockedAt: Date.now()
+		});
+		return { success: true, token };
+	}
+
+	/**
+	 * Release the lock. Only the current owner can release.
+	 * Returns true if released, false if not the owner or already unlocked.
+	 */
+	async release(owner: string): Promise<boolean> {
+		const state = await this.load();
+		if (!state.locked || state.owner !== owner) {
+			return false;
+		}
+		await this.save({ locked: false, owner: null, lockedAt: null });
+		return true;
+	}
+
+	/**
+	 * Check current lock status.
+	 */
+	async status(): Promise<LockState> {
+		return this.load();
+	}
+
+	/**
+	 * Force-release the lock regardless of owner (admin use only).
+	 */
+	async forceRelease(): Promise<void> {
+		await this.save({ locked: false, owner: null, lockedAt: null });
+	}
+
+	/** Idle for IDLE_TTL_MS — wipe storage to stop accruing cost. */
+	async alarm() {
+		await this.ctx.storage.deleteAll();
+	}
+}
+
 /**
  * Distributed atomic counter backed by a Durable Object.
  * Each named counter is its own isolate — no races, globally consistent.

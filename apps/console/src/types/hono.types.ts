@@ -1,6 +1,6 @@
 import type { ValidatedEnv } from "@/env";
 import type { Sandbox } from "@cloudflare/sandbox";
-import type { Counter, RateLimiter } from "@/durable-objects";
+import type { Counter, RateLimiter, Lock } from "@/durable-objects";
 import type { PayerIdentity } from "@/helpers/payer.helper";
 
 export type ConsoleBindings = ValidatedEnv & {
@@ -13,6 +13,7 @@ export type ConsoleBindings = ValidatedEnv & {
 	QUEUE: Queue;
 	COUNTER: DurableObjectNamespace<Counter>;
 	RATE_LIMITER: DurableObjectNamespace<RateLimiter>;
+	LOCK: DurableObjectNamespace<Lock>;
 };
 
 export interface HonoEnv {
@@ -20,5 +21,9 @@ export interface HonoEnv {
 	Variables: {
 		/** Set by the payer middleware on wallet-scoped routes. */
 		payer: PayerIdentity;
+		/** Convenience aliases for Cloudflare bindings (legacy handlers). */
+		kv: KVNamespace;
+		worker: Ai;
+		vectorize: VectorizeIndex;
 	};
 }

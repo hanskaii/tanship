@@ -19,17 +19,34 @@
 		}
 	],
 	"durable_objects": {
-		"bindings": [
-			{
-				"name": "Sandbox",
-				"class_name": "Sandbox"
-			}
-		]
+	    "bindings": [
+	        {
+	            "name": "Sandbox",
+	            "class_name": "Sandbox",
+	            "namespace_id": "dd0be404deac4defb29c28b3ba9d3aac"
+	        },
+	        {
+	            "name": "COUNTER",
+	            "class_name": "Counter",
+	            "namespace_id": "9a0108f67c0247b4b664b560b21f19ba"
+	        },
+	        {
+	            "name": "RATE_LIMITER",
+	            "class_name": "RateLimiter",
+	            "namespace_id": "84df1b264e304d25a5e516a85d8c4e75"
+	        },
+	        {
+	            "name": "LOCK",
+	            "class_name": "Lock",
+	            "namespace_id": "1234567890abcdef1234567890abcdef"
+	        }
+	    ],
 	},
 	"migrations": [
 		{
 			"tag": "v1",
-			"new_sqlite_classes": ["Sandbox"]
+			"new_sqlite_classes": ["Sandbox"],
+			"new_classes": ["Counter", "RateLimiter"]
 		}
 	],
 	"vectorize": [
@@ -65,24 +82,6 @@
 			}
 		]
 	},
-	"durable_objects": {
-		"bindings": [
-			{
-				"name": "COUNTER",
-				"class_name": "Counter"
-			},
-			{
-				"name": "RATE_LIMITER",
-				"class_name": "RateLimiter"
-			}
-		]
-	},
-	"migrations": [
-		{
-			"tag": "v1",
-			"new_classes": ["Counter", "RateLimiter"]
-		}
-	],
 	"routes": [
 		{
 			"pattern": "x402.tanship.dev",

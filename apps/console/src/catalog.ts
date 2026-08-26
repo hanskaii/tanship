@@ -2087,6 +2087,45 @@ export const SERVICES: ServiceDef[] = [
 			count: "Number of ULIDs to generate, 1-100 (default 1)"
 		},
 		example: { count: 3 }
+	},
+	{
+		id: "coordination.lock.acquire",
+		method: "POST",
+		path: "/v1/coordination/lock/acquire",
+		price: "$0.001",
+		description:
+			"Atomically acquire a distributed mutex lock via a globally-consistent Durable Object. Prevents race conditions in multi-agent workflows. Returns a lock token on success; the lock auto-cleans after 30 days of inactivity.",
+		mimeType: "application/json",
+		input: {
+			name: "Lock name (1-256 chars) — locks are isolated by name"
+		},
+		example: { name: "agent-trade-123" }
+	},
+	{
+		id: "coordination.lock.release",
+		method: "POST",
+		path: "/v1/coordination/lock/release",
+		price: "$0.001",
+		description:
+			"Release a previously-acquired distributed mutex lock. Returns true if the lock was held by the caller and is now released; false if the lock was free or held by a different owner.",
+		mimeType: "application/json",
+		input: {
+			name: "Lock name to release (1-256 chars)"
+		},
+		example: { name: "agent-trade-123" }
+	},
+	{
+		id: "coordination.lock.status",
+		method: "POST",
+		path: "/v1/coordination/lock/status",
+		price: "$0.001",
+		description:
+			"Check the current status of a distributed lock (locked, owner, lockedAt). Cheap read against the same globally-consistent Durable Object. Use to poll before attempting acquire.",
+		mimeType: "application/json",
+		input: {
+			name: "Lock name to check (1-256 chars)"
+		},
+		example: { name: "agent-trade-123" }
 	}
 ];
 
