@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
-import { ApiError } from "@/helpers/errors.helper";
+
 import { ApiResponse } from "@/helpers/response.helper";
 import type { HonoEnv } from "@/types/hono.types";
 
@@ -28,7 +28,7 @@ const ChatSchema = z.object({
 	cacheKey: z.string().optional()
 });
 
-const ChatResponseSchema = z.object({
+const _ChatResponseSchema = z.object({
 	response: z.string().optional(),
 	usage: z.any().optional(),
 	cached: z.boolean().optional()
@@ -53,7 +53,7 @@ export const aiCachedHandler = new Hono<HonoEnv>().post(
 							cached: true
 						});
 					}
-				} catch (e) {
+				} catch {
 					// If cache is corrupted, continue to generate new response
 				}
 			}

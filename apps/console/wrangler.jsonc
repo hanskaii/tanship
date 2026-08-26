@@ -39,14 +39,23 @@
 	            "name": "LOCK",
 	            "class_name": "Lock",
 	            "namespace_id": "1234567890abcdef1234567890abcdef"
+	        },
+	        {
+	            "name": "SCHEDULER",
+	            "class_name": "Scheduler",
+	            "namespace_id": "abcdef1234567890abcdef1234567890"
 	        }
-	    ],
+	        ],
 	},
 	"migrations": [
 		{
 			"tag": "v1",
 			"new_sqlite_classes": ["Sandbox"],
 			"new_classes": ["Counter", "RateLimiter"]
+		},
+		{
+			"tag": "v2",
+			"new_classes": ["Scheduler"]
 		}
 	],
 	"vectorize": [

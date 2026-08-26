@@ -1,6 +1,7 @@
 import type { ValidatedEnv } from "@/env";
 import type { Sandbox } from "@cloudflare/sandbox";
 import type { Counter, RateLimiter, Lock } from "@/durable-objects";
+import type { Scheduler } from "@/durable-objects/scheduler";
 import type { PayerIdentity } from "@/helpers/payer.helper";
 
 export type ConsoleBindings = ValidatedEnv & {
@@ -14,6 +15,7 @@ export type ConsoleBindings = ValidatedEnv & {
 	COUNTER: DurableObjectNamespace<Counter>;
 	RATE_LIMITER: DurableObjectNamespace<RateLimiter>;
 	LOCK: DurableObjectNamespace<Lock>;
+	SCHEDULER: DurableObjectNamespace<Scheduler>;
 };
 
 export interface HonoEnv {

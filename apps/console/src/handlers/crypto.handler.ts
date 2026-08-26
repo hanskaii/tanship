@@ -28,6 +28,19 @@ const Erc20MetaSchema = z.object({
 	chain: z.enum(["base", "ethereum", "arbitrum", "polygon"]).default("base")
 });
 
+const EvmCallSchema = z.object({
+	chain: z.enum(["base", "ethereum", "arbitrum", "polygon"]).default("base"),
+	to: EvmAddressSchema,
+	data: z
+		.string()
+		.regex(/^0x[0-9a-fA-F]*$/, "data must be 0x-prefixed hex calldata")
+		.max(20_000),
+	from: EvmAddressSchema.optional(),
+	block: z
+		.enum(["latest", "pending", "earliest", "safe", "finalized"])
+		.default("latest")
+});
+
 const EXPLORER_APIS: Record<string, string> = {
 	base: "https://api.basescan.org/api",
 	ethereum: "https://api.etherscan.io/api",
@@ -493,6 +506,30 @@ const cryptoHandler = new Hono<HonoEnv>()
 			throw ApiError.badGateway(
 				`Token metadata lookup failed: ${err.message}`
 			);
+		}
+	})
+	.post("/evm-call", zValidator("json", EvmCallSchema), async (c) => {
+		const { chain, to, data, from, block } = c.req.valid("json");
+		const rpcUrl = RPC_URLS[chain];
+		if (!rpcUrl) {
+			throw ApiError.badRequest(`Unsupported chain: ${chain}`);
+		}
+		const callObj: Record<string, string> = { to, data };
+		if (from) callObj.from = from;
+		try {
+			const result = await rpcCall(rpcUrl, "eth_call", [callObj, block]);
+			if (typeof result !== "string") {
+				throw ApiError.badGateway("RPC returned non-hex result");
+			}
+			return ApiResponse.ok(c, "eth_call succeeded", {
+				chain,
+				to,
+				from: from ?? null,
+				block,
+				result
+			});
+		} catch (err: any) {
+			throw ApiError.badGateway(`eth_call failed: ${err.message}`);
 		}
 	});
 

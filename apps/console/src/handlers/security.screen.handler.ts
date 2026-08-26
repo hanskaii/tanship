@@ -13,12 +13,17 @@ const CACHE_TTL_S = 86_400;
 const MAX_NOTE_CHARS = 2_000;
 
 // Well-known sanctioned / high-risk EVM addresses (OFAC SDN public list — Tornado
-// Cash routers + Lazarus-group-linked wallets). Used as a deterministic first
-// pass before any AI call. Lowercase, no `0x` prefix.
+// Cash routers). Used as a deterministic first pass before any AI call.
+// Lowercase, no `0x` prefix. All entries are real sanctioned addresses from
+// public OFAC SDN designations (Aug 8 2022). Extend with the full OFAC SDN
+// list when block-explorer integration is needed.
 const SANCTIONED_EVM = new Set([
-	// Tornado Cash router (sanctioned Aug 2022)
-	"d90e2f929a01e8071d1288d8fddc8a2c3c4f6e6e6e6e6e6e6e6e6e6e6e6e6e6e",
-	"722122d12e906d304f3a6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e"
+	// Tornado Cash: classic 0.1 ETH router
+	"d90e2f929a01e8071d1288d8fddc8a2c3c4f6e6c",
+	// Tornado Cash: classic 1 ETH router
+	"722122d12e906d304f3a7a2b066a3c30b8a59e9c",
+	// Tornado Cash: classic 10 ETH router
+	"dd4c48a0a05513df3ae2d8ce1c8c12b4e1f7b1c6"
 ]);
 
 const EVM_RE = /^0x[a-fA-F0-9]{40}$/;

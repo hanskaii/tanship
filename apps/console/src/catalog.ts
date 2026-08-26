@@ -1762,7 +1762,7 @@ export const SERVICES: ServiceDef[] = [
 	{
 		id: "agent.inbox.create",
 		method: "POST",
-		path: "/v1/agent/inbox/",
+		path: "/v1/agent/inbox",
 		price: "$0.002",
 		description:
 			"Create a throwaway agent inbox on edge KV with a configurable TTL (1 min - 30d). Returns a short id you can hand to a remote sender. Bounded storage: max 200 messages per inbox",
@@ -2126,6 +2126,181 @@ export const SERVICES: ServiceDef[] = [
 			name: "Lock name to check (1-256 chars)"
 		},
 		example: { name: "agent-trade-123" }
+	},
+	// ── kv.queue ──────────────────────────────────────────────────────────────
+	{
+		id: "kv.queue.push",
+		method: "POST",
+		path: "/v1/kv/queue/push",
+		price: "$0.001",
+		description:
+			"Push a message onto a pull-based FIFO queue backed by Cloudflare KV. Supports delayed visibility (delaySeconds). Returns a monotonic sequence number.",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name (1-64 chars, a-zA-Z0-9_- only)",
+			payload: "Arbitrary JSON value — max 25 KB",
+			delaySeconds:
+				"Optional seconds before message becomes visible to pop (0-86400, default 0)"
+		},
+		example: {
+			name: "my-queue",
+			payload: { task: "process-image", url: "https://…" },
+			delaySeconds: 0
+		}
+	},
+	{
+		id: "kv.queue.pop",
+		method: "POST",
+		path: "/v1/kv/queue/pop",
+		price: "$0.001",
+		description:
+			"Pop 1–100 messages atomically from a KV-backed FIFO queue. Messages enter a visibility lease — call ack or let visibilitySeconds elapse to re-queue. Idempotent per-lease.",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name",
+			max: "Max messages to pop 1-100 (default 1)",
+			visibilitySeconds:
+				"Lease duration in seconds before auto-requeue (1-3600, default 30)"
+		},
+		example: { name: "my-queue", max: 5, visibilitySeconds: 30 }
+	},
+	{
+		id: "kv.queue.peek",
+		method: "POST",
+		path: "/v1/kv/queue/peek",
+		price: "$0.001",
+		description:
+			"Read the next N messages from a KV-backed FIFO queue without removing them.",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name",
+			max: "Max messages to peek 1-100 (default 1)"
+		},
+		example: { name: "my-queue", max: 10 }
+	},
+	{
+		id: "kv.queue.ack",
+		method: "POST",
+		path: "/v1/kv/queue/ack",
+		price: "$0.001",
+		description:
+			"Acknowledge a popped message by leaseId — permanently deletes it from the queue.",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name",
+			leaseId: "Lease id returned from a pop response"
+		},
+		example: { name: "my-queue", leaseId: "abc-123-def" }
+	},
+	{
+		id: "kv.queue.dead-letter",
+		method: "POST",
+		path: "/v1/kv/queue/dead-letter",
+		price: "$0.001",
+		description:
+			"Move a poison/expired in-flight message to the dead-letter sub-queue (q:{name}:dlq:{seq}).",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name",
+			leaseId: "Lease id of the message to dead-letter"
+		},
+		example: { name: "my-queue", leaseId: "abc-123-def" }
+	},
+	{
+		id: "kv.queue.drain",
+		method: "POST",
+		path: "/v1/kv/queue/drain",
+		price: "$0.001",
+		description:
+			"Delete all messages in a queue and reset its head/tail counters.",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name",
+			includeDeadLetter:
+				"Optional: also drain the dead-letter sub-queue (default false)"
+		},
+		example: { name: "my-queue" }
+	},
+	{
+		id: "kv.queue.stats",
+		method: "POST",
+		path: "/v1/kv/queue/stats",
+		price: "$0.001",
+		description:
+			"Return queue depth metrics: ready, in_flight, dead_letter counts and cumulative pushed/popped/acked/dead_lettered.",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name"
+		},
+		example: { name: "my-queue" }
+	},
+	// ── durable.scheduler ─────────────────────────────────────────────────────
+	{
+		id: "durable.scheduler.schedule",
+		method: "POST",
+		path: "/v1/scheduler/schedule",
+		price: "$0.002",
+		description:
+			"Schedule a one-off HTTP webhook to fire at a future time (delaySeconds or executeAt). Uses a Durable Object alarm for at-least-once delivery. Max 500 jobs per named scheduler.",
+		mimeType: "application/json",
+		input: {
+			name: "Scheduler name — isolated namespace per name (1-64 chars)",
+			url: "HTTPS endpoint to call when the job fires",
+			method: "HTTP method: GET, POST, PUT (default POST)",
+			headers: "Optional custom HTTP headers",
+			payload: "Optional JSON body for POST/PUT",
+			delaySeconds:
+				"Optional delay in seconds before firing (0-2592000, default 0)",
+			executeAt:
+				"Optional Unix timestamp (ms) to fire at — overrides delaySeconds if in the future"
+		},
+		example: {
+			name: "nightly-batch",
+			url: "https://api.example.com/webhook",
+			method: "POST",
+			payload: { event: "cron-fired" },
+			delaySeconds: 300
+		}
+	},
+	{
+		id: "durable.scheduler.list",
+		method: "POST",
+		path: "/v1/scheduler/list",
+		price: "$0.001",
+		description:
+			"List all jobs (scheduled, fired, failed) in a named scheduler.",
+		mimeType: "application/json",
+		input: {
+			name: "Scheduler name"
+		},
+		example: { name: "nightly-batch" }
+	},
+	{
+		id: "durable.scheduler.get",
+		method: "POST",
+		path: "/v1/scheduler/get",
+		price: "$0.001",
+		description: "Get a single job by its id.",
+		mimeType: "application/json",
+		input: {
+			name: "Scheduler name",
+			jobId: "Job id returned from schedule"
+		},
+		example: { name: "nightly-batch", jobId: "abc-123-def" }
+	},
+	{
+		id: "durable.scheduler.cancel",
+		method: "POST",
+		path: "/v1/scheduler/cancel",
+		price: "$0.001",
+		description:
+			"Cancel and remove a scheduled (or failed) job. Returns not-found if the job already fired or does not exist.",
+		mimeType: "application/json",
+		input: {
+			name: "Scheduler name",
+			jobId: "Job id to cancel"
+		},
+		example: { name: "nightly-batch", jobId: "abc-123-def" }
 	}
 ];
 

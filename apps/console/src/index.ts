@@ -17,6 +17,8 @@ import kvHandler from "./handlers/kv.handler";
 import storageHandler from "./handlers/storage.handler";
 import dbHandler from "./handlers/db.handler";
 import queueHandler from "./handlers/queue.handler";
+import kvQueueHandler from "./handlers/kv.queue.handler";
+import schedulerHandler from "./handlers/scheduler.handler";
 import durableHandler from "./handlers/durable.handler";
 import coordinationHandler from "./handlers/coordination.handler";
 import agentResearchHandler from "./handlers/agent.research.handler";
@@ -162,13 +164,15 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/storage", storageHandler)
 	.route("/v1/db", dbHandler)
 	.route("/v1/queue", queueHandler)
+	.route("/v1/kv/queue", kvQueueHandler)
+	.route("/v1/scheduler", schedulerHandler)
 	.route("/v1/durable", durableHandler)
 	.route("/v1/coordination", coordinationHandler)
 	.route("/v1/agent", agentResearchHandler)
 	.route("/v1/agent/inbox", agentInboxHandler)
 	.route("/v1/nl", nlHandler)
 	.route("/v1/rag", ragHandler)
-	.route("/v1/rag", ragAnswerHandler)
+	.route("/v1/rag/answer", ragAnswerHandler)
 	// Free discovery endpoints
 	.get("/v1/logs", (c) => {
 		return c.json({ success: true, logs: recentLogs });
@@ -299,6 +303,7 @@ app.onError((err, c) => {
 export type AppType = typeof app;
 
 export { Counter, RateLimiter, Lock } from "./durable-objects";
+export { Scheduler } from "./durable-objects/scheduler";
 export { Sandbox };
 
 export default {
