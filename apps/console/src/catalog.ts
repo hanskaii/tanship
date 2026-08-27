@@ -2368,6 +2368,38 @@ export const SERVICES: ServiceDef[] = [
 				storageGb: 0.5
 			}
 		}
+	},
+	{
+		id: "crypto.token-price",
+		method: "POST",
+		path: "/v1/crypto/token-price",
+		price: "$0.003",
+		description:
+			"Get the current USD price and 24h change for any token by symbol or contract address on Base or Ethereum, powered by CoinGecko. Supports ETH, WETH, USDC, WBTC and any ERC-20 by address.",
+		mimeType: "application/json",
+		input: {
+			token: "Token symbol (ETH, USDC, WBTC) or ERC-20 contract address",
+			chain: "Blockchain: base or ethereum (default: base)"
+		},
+		example: {
+			token: "ETH",
+			chain: "base"
+		}
+	},
+	{
+		id: "sec.url-scan",
+		method: "POST",
+		path: "/v1/security/url-scan",
+		price: "$0.003",
+		description:
+			"Check a URL against the URLhaus abuse.ch malware blacklist. Returns whether the URL is a known threat along with the threat type and tags. Free, instant verdict for any URL the agent is about to fetch.",
+		mimeType: "application/json",
+		input: {
+			url: "Absolute URL to scan against URLhaus"
+		},
+		example: {
+			url: "http://malware.wicar.org/data/eicar.com"
+		}
 	}
 ];
 

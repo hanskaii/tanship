@@ -71,4 +71,56 @@ const securityHandler = new Hono<HonoEnv>().post(
 	}
 );
 
+const UrlScanSchema = z.object({
+	url: z.string().url()
+});
+
+securityHandler.post(
+	"/url-scan",
+	zValidator("json", UrlScanSchema),
+	async (c) => {
+		const { url } = c.req.valid("json");
+
+		try {
+			const res = await fetch(
+				`https://urlhaus-api.abuse.ch/v1/lookup/?url=${encodeURIComponent(url)}`,
+				{ headers: { Accept: "application/json" } }
+			);
+			if (!res.ok) throw new Error(`URLhaus API: ${res.status}`);
+			const data = (await res.json()) as {
+				query_status: string;
+				urlhaus_reference?: string;
+				threat?: string;
+				tags?: string[];
+				blacklist?: { verification: string }[];
+			};
+
+			if (data.query_status !== "ok") {
+				// Not in URLhaus → treat as clean
+				return ApiResponse.ok(
+					c,
+					"URL scan complete — not found in threat feeds",
+					{
+						url,
+						threat: false,
+						classification: "unknown",
+						message:
+							"URL not found in URLhaus blacklist — treat as unverified"
+					}
+				);
+			}
+
+			return ApiResponse.ok(c, "URL threat scan complete", {
+				url,
+				threat: true,
+				classification: data.threat || "malware",
+				tags: data.tags || [],
+				urlhausRef: data.urlhaus_reference || null
+			});
+		} catch (err: any) {
+			throw ApiError.badGateway(`URL scan failed: ${err.message}`);
+		}
+	}
+);
+
 export default securityHandler;

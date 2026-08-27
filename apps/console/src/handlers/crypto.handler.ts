@@ -312,7 +312,7 @@ const cryptoHandler = new Hono<HonoEnv>()
 		const { address, chain } = c.req.valid("json");
 		const explorerUrl = EXPLORER_APIS[chain];
 		const apiKey =
-			(c.env as Record<string, string | undefined>)[
+			(c.env as unknown as Record<string, string | undefined>)[
 				`${chain.toUpperCase()}_EXPLORER_API_KEY`
 			] || "";
 
@@ -394,8 +394,8 @@ const cryptoHandler = new Hono<HonoEnv>()
 		const isAddress = /^0x[a-fA-F0-9]{40}$/.test(trimmed);
 		// ENS lookups always go to mainnet (ENS registry lives there)
 		const rpc =
-			(c.env as Record<string, string | undefined>).ETHEREUM_RPC_URL ||
-			"https://cloudflare-eth.com";
+			(c.env as unknown as Record<string, string | undefined>)
+				.ETHEREUM_RPC_URL || "https://cloudflare-eth.com";
 
 		try {
 			if (isAddress) {
@@ -442,7 +442,7 @@ const cryptoHandler = new Hono<HonoEnv>()
 		const { address, chain } = c.req.valid("json");
 		const explorerUrl = EXPLORER_APIS[chain];
 		const apiKey =
-			(c.env as Record<string, string | undefined>)[
+			(c.env as unknown as Record<string, string | undefined>)[
 				`${chain.toUpperCase()}_EXPLORER_API_KEY`
 			] || "";
 
@@ -532,5 +532,79 @@ const cryptoHandler = new Hono<HonoEnv>()
 			throw ApiError.badGateway(`eth_call failed: ${err.message}`);
 		}
 	});
+
+// ── Token Price ────────────────────────────────────────────────────────────────
+const TokenPriceSchema = z.object({
+	token: z.string().min(1).max(128), // symbol or address
+	chain: z.enum(["base", "ethereum"]).default("base")
+});
+
+/** Map common tokens to CoinGecko coin ids. */
+const KNOWN_IDS: Record<string, Record<string, string>> = {
+	base: {
+		ETH: "ethereum",
+		WETH: "weth",
+		USDC: "usd-coin",
+		"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913": "usd-coin"
+	},
+	ethereum: {
+		ETH: "ethereum",
+		WETH: "weth",
+		USDC: "usd-coin",
+		WBTC: "wrapped-bitcoin"
+	}
+};
+
+cryptoHandler.post(
+	"/token-price",
+	zValidator("json", TokenPriceSchema),
+	async (c) => {
+		const { token, chain } = c.req.valid("json");
+
+		// Resolve to CoinGecko id
+		const ids = KNOWN_IDS[chain];
+		const coinId =
+			ids?.[token.toUpperCase()] || ids?.[token.toLowerCase()] || token;
+
+		try {
+			const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(coinId)}&vs_currencies=usd&include_24hr_change=true&include_last_updated_at=true`;
+			const res = await fetch(url, {
+				headers: { Accept: "application/json" }
+			});
+			if (!res.ok) {
+				if (res.status === 404)
+					throw ApiError.notFound(
+						`Token '${token}' not found on CoinGecko`
+					);
+				throw ApiError.badGateway(`CoinGecko API error: ${res.status}`);
+			}
+			const data = (await res.json()) as Record<
+				string,
+				{
+					usd: number;
+					usd_24h_change?: number;
+					last_updated_at?: number;
+				}
+			>;
+			const price = data[coinId];
+			if (!price) throw ApiError.notFound(`Token '${token}' not found`);
+
+			return ApiResponse.ok(c, "Token price retrieved", {
+				token,
+				chain,
+				priceUsd: price.usd,
+				change24h: price.usd_24h_change ?? null,
+				lastUpdated: price.last_updated_at
+					? new Date(price.last_updated_at * 1000).toISOString()
+					: null
+			});
+		} catch (err: any) {
+			if (err instanceof ApiError) throw err;
+			throw ApiError.badGateway(
+				`Token price lookup failed: ${err.message}`
+			);
+		}
+	}
+);
 
 export default cryptoHandler;
