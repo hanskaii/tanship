@@ -87,7 +87,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.embeddings",
 		method: "POST",
 		path: "/v1/ai/embeddings",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Multilingual text embeddings via edge AI (BGE-M3, 1024 dims)",
 		mimeType: "application/json",
@@ -867,7 +867,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.hash",
 		method: "POST",
 		path: "/v1/dev/hash",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Compute cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) for a given text",
 		mimeType: "application/json",
@@ -885,7 +885,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.jwt-decode",
 		method: "POST",
 		path: "/v1/dev/jwt-decode",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Decode a JWT token's header and payload without verifying signature",
 		mimeType: "application/json",
@@ -917,7 +917,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.csv-to-json",
 		method: "POST",
 		path: "/v1/dev/csv-to-json",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Parse CSV/TSV formatted text and convert it to a structured JSON array",
 		mimeType: "application/json",
@@ -937,7 +937,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.geo-ip",
 		method: "POST",
 		path: "/v1/dev/geo-ip",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Geolocate an IP address. Uses Cloudflare context for the request IP, or queries target IP",
 		mimeType: "application/json",
@@ -952,7 +952,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.redact",
 		method: "POST",
 		path: "/v1/dev/redact",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Redact personally identifiable information (PII) and secret keys from text",
 		mimeType: "application/json",
@@ -969,7 +969,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.dns",
 		method: "POST",
 		path: "/v1/dev/dns",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Query DNS records (A, AAAA, MX, TXT, etc.) for a hostname via Cloudflare DoH",
 		mimeType: "application/json",
@@ -1020,7 +1020,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.convert-unit",
 		method: "POST",
 		path: "/v1/dev/convert-unit",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Convert values between measurement units (length, mass, volume, temperature, speed)",
 		mimeType: "application/json",
@@ -1041,7 +1041,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.uuid",
 		method: "POST",
 		path: "/v1/dev/uuid",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Generate cryptographically secure v4 (random) or v7 (time-ordered) UUIDs",
 		mimeType: "application/json",
@@ -1058,7 +1058,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.regex-test",
 		method: "POST",
 		path: "/v1/dev/regex-test",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Test a JavaScript regular expression against input text and return match indexes",
 		mimeType: "application/json",
@@ -1077,7 +1077,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.time-parse",
 		method: "POST",
 		path: "/v1/dev/time-parse",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Parse date/time strings or relative words into ISO and Unix timestamps",
 		mimeType: "application/json",
@@ -1092,7 +1092,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.flatten-json",
 		method: "POST",
 		path: "/v1/dev/flatten-json",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Flatten a nested JSON object into key/value pairs using dot-notation",
 		mimeType: "application/json",
@@ -1109,7 +1109,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.convert-currency",
 		method: "POST",
 		path: "/v1/dev/convert-currency",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Convert currency amounts based on live rates from Frankfurter API",
 		mimeType: "application/json",
@@ -1128,7 +1128,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.password-exposure",
 		method: "POST",
 		path: "/v1/dev/password-exposure",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Check if a password has been compromised in data breaches via Have I Been Pwned API",
 		mimeType: "application/json",
@@ -1144,7 +1144,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.domain-whois",
 		method: "POST",
 		path: "/v1/dev/domain-whois",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Perform domain registration (WHOIS) lookup using Registration Data Access Protocol (RDAP)",
 		mimeType: "application/json",
@@ -1159,7 +1159,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.html-to-markdown",
 		method: "POST",
 		path: "/v1/dev/html-to-markdown",
-		price: "$0.001",
+		price: "$0.002",
 		description: "Sanitize raw HTML and convert it into readable markdown",
 		mimeType: "application/json",
 		input: {
@@ -1208,7 +1208,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.token-count",
 		method: "POST",
 		path: "/v1/dev/token-count",
-		price: "$0.001",
+		price: "$0.002",
 		description: "Approximate cl100k-base token counter for LLM prompts",
 		mimeType: "application/json",
 		input: {
@@ -1663,7 +1663,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "rag.upsert",
 		method: "POST",
 		path: "/v1/rag/upsert",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Embed text via Workers AI (BGE-M3, 1024 dims) and upsert into the shared Vectorize index under a caller-chosen namespace. One paid call per batch",
 		mimeType: "application/json",
@@ -1687,7 +1687,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "rag.query",
 		method: "POST",
 		path: "/v1/rag/query",
-		price: "$0.0005",
+		price: "$0.002",
 		description:
 			"Embed a query and return the top-K nearest neighbours from the shared Vectorize index, filtered to the caller's namespace. Pay-per-query semantic search",
 		mimeType: "application/json",
@@ -1708,7 +1708,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "rag.delete",
 		method: "POST",
 		path: "/v1/rag/delete",
-		price: "$0.0005",
+		price: "$0.002",
 		description:
 			"Delete vectors by id from the shared Vectorize index. Useful for cleaning up after an agent session ends or a doc is removed",
 		mimeType: "application/json",
@@ -1803,7 +1803,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "agent.inbox.read",
 		method: "GET",
 		path: "/v1/agent/inbox/:id/messages",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Read all messages stored in an agent inbox. KV-backed, cheap, no auth required beyond the id",
 		mimeType: "application/json",
@@ -1837,7 +1837,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.base64",
 		method: "POST",
 		path: "/v1/dev/base64",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Encode or decode text with Base64 (standard or URL-safe). Useful for JWT/cookie/header handling and storage payloads",
 		mimeType: "application/json",
@@ -1857,7 +1857,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.url-codec",
 		method: "POST",
 		path: "/v1/dev/url-codec",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Encode or decode a URL string (full URL or URI component). Useful for query-string and path-segment handling",
 		mimeType: "application/json",
@@ -1877,7 +1877,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.user-agent-parse",
 		method: "POST",
 		path: "/v1/dev/user-agent-parse",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Parse a User-Agent header to extract browser name + version, OS string, mobile flag, and bot heuristic. Useful for analytics & access-control logic",
 		mimeType: "application/json",
@@ -1893,7 +1893,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.color-convert",
 		method: "POST",
 		path: "/v1/dev/color-convert",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Convert a CSS color between hex, rgb, rgba, and hsl formats. Accepts #rgb, #rrggbb, #rrggbbaa, rgb(r,g,b), or rgba(r,g,b,a)",
 		mimeType: "application/json",
@@ -1931,7 +1931,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.html-to-text",
 		method: "POST",
 		path: "/v1/dev/html-to-text",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Strip HTML tags, scripts, styles, and entities from a string. Returns plain text suitable for indexing or LLM ingestion.",
 		mimeType: "application/json",
@@ -1946,7 +1946,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.json-to-xml",
 		method: "POST",
 		path: "/v1/dev/json-to-xml",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Convert a JSON object to an XML string with configurable root element name. Nested objects/arrays serialize as repeated child tags.",
 		mimeType: "application/json",
@@ -1963,7 +1963,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.xml-to-json",
 		method: "POST",
 		path: "/v1/dev/xml-to-json",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Parse a simple XML string into a JSON object. Optimized for typical document structures (single-pass regex parser).",
 		mimeType: "application/json",
@@ -1978,7 +1978,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.text-chunker",
 		method: "POST",
 		path: "/v1/dev/text-chunker",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Split a long string into overlapping chunks by character count. Useful for RAG ingestion, embedding pipelines, or fitting text into a model context window.",
 		mimeType: "application/json",
@@ -1998,7 +1998,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "crypto.nonce",
 		method: "POST",
 		path: "/v1/crypto/nonce",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Get the next pending transaction nonce for an EVM address. Useful for agents that need to build sequential transactions without race conditions.",
 		mimeType: "application/json",
@@ -2015,7 +2015,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "crypto.gas-price",
 		method: "POST",
 		path: "/v1/crypto/gas-price",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Fetch current gas price (in gwei) for an EVM chain via public RPC. Returns both legacy and EIP-1559 base fee fields when available.",
 		mimeType: "application/json",
@@ -2079,7 +2079,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.ulid",
 		method: "POST",
 		path: "/v1/dev/ulid",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Generate ULIDs — 26-character Crockford-base32 identifiers that are lexicographically sortable by creation time. Ideal for primary keys, event IDs, and trace IDs where insertion order matters.",
 		mimeType: "application/json",
@@ -2092,7 +2092,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "coordination.lock.acquire",
 		method: "POST",
 		path: "/v1/coordination/lock/acquire",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Atomically acquire a distributed mutex lock via a globally-consistent Durable Object. Prevents race conditions in multi-agent workflows. Returns a lock token on success; the lock auto-cleans after 30 days of inactivity.",
 		mimeType: "application/json",
@@ -2105,7 +2105,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "coordination.lock.release",
 		method: "POST",
 		path: "/v1/coordination/lock/release",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Release a previously-acquired distributed mutex lock. Returns true if the lock was held by the caller and is now released; false if the lock was free or held by a different owner.",
 		mimeType: "application/json",
@@ -2118,7 +2118,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "coordination.lock.status",
 		method: "POST",
 		path: "/v1/coordination/lock/status",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Check the current status of a distributed lock (locked, owner, lockedAt). Cheap read against the same globally-consistent Durable Object. Use to poll before attempting acquire.",
 		mimeType: "application/json",
@@ -2131,7 +2131,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "coordination.lock.heartbeat",
 		method: "POST",
 		path: "/v1/coordination/lock/heartbeat",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Refresh the TTL on a held distributed mutex lock. Only the current owner may heartbeat; returns the new expiresAt on success or { renewed: false, reason } on failure. Lets long-running agent jobs renew their lease without dropping and re-acquiring the lock (no race window).",
 		mimeType: "application/json",
@@ -2151,7 +2151,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "kv.queue.push",
 		method: "POST",
 		path: "/v1/kv/queue/push",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Push a message onto a pull-based FIFO queue backed by Cloudflare KV. Supports delayed visibility (delaySeconds). Returns a monotonic sequence number.",
 		mimeType: "application/json",
@@ -2171,7 +2171,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "kv.queue.pop",
 		method: "POST",
 		path: "/v1/kv/queue/pop",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Pop 1–100 messages atomically from a KV-backed FIFO queue. Messages enter a visibility lease — call ack or let visibilitySeconds elapse to re-queue. Idempotent per-lease.",
 		mimeType: "application/json",
@@ -2187,7 +2187,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "kv.queue.peek",
 		method: "POST",
 		path: "/v1/kv/queue/peek",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Read the next N messages from a KV-backed FIFO queue without removing them.",
 		mimeType: "application/json",
@@ -2201,7 +2201,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "kv.queue.ack",
 		method: "POST",
 		path: "/v1/kv/queue/ack",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Acknowledge a popped message by leaseId — permanently deletes it from the queue.",
 		mimeType: "application/json",
@@ -2215,7 +2215,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "kv.queue.dead-letter",
 		method: "POST",
 		path: "/v1/kv/queue/dead-letter",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Move a poison/expired in-flight message to the dead-letter sub-queue (q:{name}:dlq:{seq}).",
 		mimeType: "application/json",
@@ -2229,7 +2229,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "kv.queue.drain",
 		method: "POST",
 		path: "/v1/kv/queue/drain",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Delete all messages in a queue and reset its head/tail counters.",
 		mimeType: "application/json",
@@ -2244,7 +2244,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "kv.queue.stats",
 		method: "POST",
 		path: "/v1/kv/queue/stats",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Return queue depth metrics: ready, in_flight, dead_letter counts and cumulative pushed/popped/acked/dead_lettered.",
 		mimeType: "application/json",
@@ -2285,7 +2285,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "durable.scheduler.list",
 		method: "POST",
 		path: "/v1/scheduler/list",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"List all jobs (scheduled, fired, failed) in a named scheduler.",
 		mimeType: "application/json",
@@ -2298,7 +2298,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "durable.scheduler.get",
 		method: "POST",
 		path: "/v1/scheduler/get",
-		price: "$0.001",
+		price: "$0.002",
 		description: "Get a single job by its id.",
 		mimeType: "application/json",
 		input: {
@@ -2311,7 +2311,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "durable.scheduler.cancel",
 		method: "POST",
 		path: "/v1/scheduler/cancel",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Cancel and remove a scheduled (or failed) job. Returns not-found if the job already fired or does not exist.",
 		mimeType: "application/json",
@@ -2417,6 +2417,32 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			token: "ETH",
 			chain: "base"
+		}
+	},
+	{
+		id: "ai.batch",
+		method: "POST",
+		path: "/v1/ai/batch",
+		price: "$0.02",
+		description:
+			"Execute multiple AI operations in a single payment — chat, summarize, classify, sentiment, code, translate, embeddings, and more. Pass an array of operations; all run in parallel via Workers AI and results return as an array. Saves N payments vs calling each endpoint individually.",
+		mimeType: "application/json",
+		input: {
+			operations:
+				"Array of operation objects. Each: { type: 'chat'|'summarize'|'sentiment'|'classify'|'code'|'translate'|'embeddings'|'moderate'|'correct'|'emotion'|'answer'|'reason'|'rerank'|'sql'|'compress'|'lint'|'similarity', ...params }. Max 20 operations per call."
+		},
+		example: {
+			operations: [
+				{ type: "sentiment", text: "I love building on Base!" },
+				{
+					type: "summarize",
+					text: "x402 is an HTTP-native payment protocol..."
+				},
+				{
+					type: "chat",
+					messages: [{ role: "user", content: "What is Base?" }]
+				}
+			]
 		}
 	},
 	{

@@ -30,6 +30,7 @@ import nlHandler from "./handlers/nl.handler";
 import ragHandler from "./handlers/rag.handler";
 import ragAnswerHandler from "./handlers/rag.answer.handler";
 import { aiCachedHandler } from "./handlers/ai.rag.handler";
+import aiBatchHandler from "./handlers/ai.batch.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
 import { OPENAPI_SPEC } from "./openapi";
@@ -154,6 +155,7 @@ const app = new Hono<HonoEnv>()
 	.use("/v1/*", x402)
 	.route("/v1/ai", aiHandler)
 	.route("/v1/ai/chat/cached", aiCachedHandler)
+	.route("/v1/ai/batch", aiBatchHandler)
 	.route("/v1/browser", browserHandler)
 	.route("/v1/crypto", cryptoHandler)
 	.route("/v1/dev", devHandler)
