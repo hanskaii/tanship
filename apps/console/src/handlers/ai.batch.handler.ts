@@ -3,6 +3,7 @@ import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 
 import { ApiError } from "@/helpers/errors.helper";
+import { STATUS_CODES } from "@/constants/status.constants";
 import { ApiResponse } from "@/helpers/response.helper";
 import type { HonoEnv } from "@/types/hono.types";
 
@@ -167,7 +168,8 @@ async function runOne(
 const aiBatchHandler = new Hono<HonoEnv>().post(
 	"/",
 	zValidator("json", BatchSchema, (result, _c) => {
-		if (!result.success) throw new ApiError("Invalid request", 400);
+		if (!result.success)
+			throw new ApiError(STATUS_CODES.BAD_REQUEST, "Invalid request");
 	}),
 	async (c) => {
 		const { operations } = c.req.valid("json");
