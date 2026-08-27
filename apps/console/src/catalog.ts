@@ -2335,6 +2335,39 @@ export const SERVICES: ServiceDef[] = [
 		example: { cve: "CVE-2024-3094" }
 	},
 	{
+		id: "sec.mcp-tool-risk-scorer",
+		method: "POST",
+		path: "/v1/security/mcp-tool-risk-scorer",
+		price: "$0.05",
+		description:
+			"Score a batch of MCP (Model Context Protocol) tool definitions for agentic risk. Analyzes each tool's name, description, input schema, dangerous flag, and annotations to assign a 0-5 risk score with severity label, category tags (secrets_access, code_execution, pii_access, financial_access, etc.), reasons, and remediation recommendations. For high-risk tools, a brief AI-generated security posture summary is included. KV-cached for 24h based on the tool-name set.",
+		mimeType: "application/json",
+		input: {
+			tools: "Array of tool objects (1-500) with name, description, inputSchema, dangerous, annotations"
+		},
+		example: {
+			tools: [
+				{
+					name: "read_file",
+					description: "Read a file from the local filesystem",
+					inputSchema: {
+						type: "object",
+						properties: { path: { type: "string" } }
+					},
+					dangerous: true
+				},
+				{
+					name: "search_web",
+					description: "Search the web for a query",
+					inputSchema: {
+						type: "object",
+						properties: { query: { type: "string" } }
+					}
+				}
+			]
+		}
+	},
+	{
 		id: "cloud.estimate",
 		method: "POST",
 		path: "/v1/cloud/estimate",
