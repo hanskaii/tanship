@@ -1415,6 +1415,21 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "storage.presign.batch",
+		method: "POST",
+		path: "/v1/storage/presign/batch",
+		price: "$0.02",
+		description:
+			"Batch object metadata lookup for up to 100 keys at once. Cheaper than 100 single presign calls. Returns per-key metadata (size, etag, contentType) or not_found — never throws on missing keys, so a single missing object cannot fail the whole batch.",
+		mimeType: "application/json",
+		input: {
+			keys: "Array of object keys to look up (1-100)"
+		},
+		example: {
+			keys: ["uploads/a.png", "uploads/b.png", "uploads/c.png"]
+		}
+	},
+	{
 		id: "db.query",
 		method: "POST",
 		path: "/v1/db/query",
@@ -1468,6 +1483,31 @@ export const SERVICES: ServiceDef[] = [
 				{
 					sql: "INSERT INTO notes (id, content) VALUES (?, ?)",
 					params: ["note-1", "Hello"]
+				}
+			]
+		}
+	},
+	{
+		id: "db.migrate",
+		method: "POST",
+		path: "/v1/db/migrate",
+		price: "$0.05",
+		description:
+			"Schema-as-a-service: apply a list of named SQL migrations to the shared D1 database. Tracks each migration id in a _migrations table and skips already-applied ones — call this idempotently and only the pending migrations run. 100% blue ocean on x402 (no one else sells D1-compatible migrations).",
+		mimeType: "application/json",
+		input: {
+			migrations:
+				"Array of { id, sql } pairs (1-20). id is a unique migration identifier; sql is the DDL/DML to apply."
+		},
+		example: {
+			migrations: [
+				{
+					id: "001_create_users",
+					sql: "CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, email TEXT UNIQUE NOT NULL, created_at INTEGER NOT NULL)"
+				},
+				{
+					id: "001_create_users_index",
+					sql: "CREATE INDEX IF NOT EXISTS users_email_idx ON users(email)"
 				}
 			]
 		}
@@ -1717,6 +1757,28 @@ export const SERVICES: ServiceDef[] = [
 		},
 		example: {
 			ids: ["agent-007:doc-1", "agent-007:doc-2"]
+		}
+	},
+	{
+		id: "rag.hybrid.search",
+		method: "POST",
+		path: "/v1/rag/hybrid/search",
+		price: "$0.01",
+		description:
+			"Hybrid dense + lexical search over a Vectorize namespace. Pulls 4x candidates with BGE-M3 dense retrieval, then re-scores with BM25 (k1=1.5, b=0.75) on the matched text, and fuses via weighted linear combination. Vectorize-only competitors (DataForAgents) are dense-only — this is the only hybrid search on x402.",
+		mimeType: "application/json",
+		input: {
+			namespace: "Vectorize namespace to search (default 'default')",
+			query: "The search query (max 10000 chars)",
+			top_k: "Optional number of fused results to return (1-50, default 5)",
+			vector_weight:
+				"Optional weight of dense score vs lexical (0-1, default 0.7)"
+		},
+		example: {
+			namespace: "agent-007",
+			query: "how do I ship a Cloudflare Worker?",
+			top_k: 5,
+			vector_weight: 0.7
 		}
 	},
 	{

@@ -37,6 +37,18 @@ const BatchSchema = z.object({
 		.max(50)
 });
 
+const MigrateSchema = z.object({
+	migrations: z
+		.array(
+			z.object({
+				id: z.string().min(1).max(64),
+				sql: z.string().min(1).max(10_000)
+			})
+		)
+		.min(1)
+		.max(20)
+});
+
 // Hard cap on total database size. Writes are rejected past this so a
 // one-time-paid write can never grow storage cost without bound.
 const MAX_DB_BYTES = 500 * 1024 * 1024; // 500 MB
@@ -142,6 +154,49 @@ const dbHandler = new Hono<HonoEnv>()
 					changes: r.meta.changes
 				}
 			}))
+		});
+	})
+	.post("/migrate", zValidator("json", MigrateSchema), async (c) => {
+		const { migrations } = c.req.valid("json");
+
+		// Ensure the _migrations tracking table exists
+		await c.env.DB.exec(`
+			CREATE TABLE IF NOT EXISTS _migrations (
+				id TEXT PRIMARY KEY,
+				applied_at INTEGER NOT NULL
+			)
+		`);
+
+		const applied = await c.env.DB.prepare(
+			"SELECT id FROM _migrations"
+		).all<{ id: string }>();
+		const appliedSet = new Set(applied.results.map((r) => r.id));
+
+		const pending = migrations.filter((m) => !appliedSet.has(m.id));
+		if (pending.length === 0) {
+			return ApiResponse.ok(c, "All migrations already applied", {
+				applied: migrations.map((m) => m.id),
+				skipped: migrations.map((m) => m.id),
+				applied_count: 0
+			});
+		}
+
+		const stmts = [
+			...pending.map((m) =>
+				c.env.DB.prepare(
+					"INSERT INTO _migrations (id, applied_at) VALUES (?, ?)"
+				).bind(m.id, Date.now())
+			),
+			...pending.map((m) => c.env.DB.prepare(m.sql))
+		];
+		await c.env.DB.batch(stmts);
+
+		return ApiResponse.ok(c, "Migrations applied", {
+			applied: pending.map((m) => m.id),
+			skipped: migrations
+				.filter((m) => appliedSet.has(m.id))
+				.map((m) => m.id),
+			applied_count: pending.length
 		});
 	});
 

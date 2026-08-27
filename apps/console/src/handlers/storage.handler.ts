@@ -44,6 +44,10 @@ const SignedUrlSchema = z.object({
 	expiresIn: z.number().int().min(60).max(604800).default(3600)
 });
 
+const BatchPresignSchema = z.object({
+	keys: z.array(z.string().min(1).max(512)).min(1).max(100)
+});
+
 const storageHandler = new Hono<HonoEnv>()
 	.post("/upload", zValidator("json", UploadSchema), async (c) => {
 		const { key, content, contentType, retentionDays } =
@@ -145,6 +149,44 @@ const storageHandler = new Hono<HonoEnv>()
 			uploaded: head.uploaded.toISOString(),
 			expiresIn
 		});
-	});
+	})
+	.post(
+		"/presign/batch",
+		zValidator("json", BatchPresignSchema),
+		async (c) => {
+			const { keys } = c.req.valid("json");
+
+			// Head each object in parallel; missing keys surface as null entries.
+			const settled = await Promise.allSettled(
+				keys.map((k) =>
+					c.env.R2.head(k).then((h) => ({ key: k, head: h }))
+				)
+			);
+
+			const results = settled.map((r, i) => {
+				if (r.status === "fulfilled" && r.value.head) {
+					const h = r.value.head;
+					return {
+						key: r.value.key,
+						found: true,
+						size: h.size,
+						etag: h.etag,
+						contentType:
+							h.httpMetadata?.contentType ??
+							"application/octet-stream",
+						uploaded: h.uploaded.toISOString()
+					};
+				}
+				return { key: keys[i], found: false, error: "not_found" };
+			});
+
+			return ApiResponse.ok(c, "Batch presign completed", {
+				count: results.length,
+				found: results.filter((r) => r.found).length,
+				missing: results.length - results.filter((r) => r.found).length,
+				results
+			});
+		}
+	);
 
 export default storageHandler;

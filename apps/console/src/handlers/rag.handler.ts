@@ -45,6 +45,13 @@ const DeleteSchema = z.object({
 	ids: z.array(z.string().min(1).max(MAX_ID_CHARS)).min(1).max(100)
 });
 
+const HybridSearchSchema = z.object({
+	namespace: z.string().min(1).max(MAX_ID_CHARS).default("default"),
+	query: z.string().min(1).max(MAX_TEXT_CHARS),
+	top_k: z.number().int().min(1).max(50).default(5),
+	vector_weight: z.number().min(0).max(1).default(0.7)
+});
+
 async function embed(
 	env: HonoEnv["Bindings"],
 	text: string
@@ -130,6 +137,119 @@ const ragHandler = new Hono<HonoEnv>()
 		const { ids } = c.req.valid("json");
 		await c.env.VECTORIZE.deleteByIds(ids);
 		return ApiResponse.ok(c, "Vectors deleted", { count: ids.length, ids });
-	});
+	})
+	.post(
+		"/hybrid/search",
+		zValidator("json", HybridSearchSchema),
+		async (c) => {
+			const { namespace, query, top_k, vector_weight } =
+				c.req.valid("json");
+			const lexWeight = 1 - vector_weight;
+
+			// Dense retrieval: pull 4x candidates so lexical re-rank has headroom
+			const values = await embed(c.env, query);
+			const dense = (await c.env.VECTORIZE.query(values, {
+				topK: Math.min(50, Math.max(10, top_k * 4)),
+				returnValues: false,
+				returnMetadata: "all",
+				filter: { namespace: { $eq: namespace } }
+			} as any)) as {
+				matches?: Array<{
+					id: string;
+					score: number;
+					metadata?: Record<string, unknown> | null;
+				}>;
+			};
+
+			const candidates = dense.matches ?? [];
+			if (candidates.length === 0) {
+				return ApiResponse.ok(c, "Hybrid search completed", {
+					namespace,
+					query,
+					topK: top_k,
+					count: 0,
+					matches: []
+				});
+			}
+
+			// Lexical (BM25-lite) scoring on returned text. Tokenize once, score once.
+			const queryTokens = new Set(
+				query
+					.toLowerCase()
+					.split(/[^a-z0-9]+/u)
+					.filter((t) => t.length > 1)
+			);
+			const docCount = candidates.length;
+			// Document frequency per token (for IDF)
+			const df = new Map<string, number>();
+			const tfPerDoc: Array<Map<string, number>> = [];
+			for (const m of candidates) {
+				const text = String(m.metadata?.text ?? "").toLowerCase();
+				const tokens = text
+					.split(/[^a-z0-9]+/u)
+					.filter((t) => t.length > 1);
+				const tf = new Map<string, number>();
+				for (const t of tokens) {
+					tf.set(t, (tf.get(t) ?? 0) + 1);
+					if (queryTokens.has(t)) {
+						df.set(t, (df.get(t) ?? 0) + 1);
+					}
+				}
+				tfPerDoc.push(tf);
+			}
+
+			// Normalize dense scores to [0, 1] (Vectorize cosine is already 0..1).
+			const maxDense = Math.max(...candidates.map((c) => c.score), 1e-9);
+			const minDense = Math.min(...candidates.map((c) => c.score));
+			const denseRange = Math.max(maxDense - minDense, 1e-9);
+
+			const fused = candidates.map((m, i) => {
+				const tf = tfPerDoc[i];
+				let bm25 = 0;
+				for (const qt of queryTokens) {
+					const f = tf.get(qt) ?? 0;
+					if (f === 0) continue;
+					const idf = Math.log(
+						1 +
+							(docCount - (df.get(qt) ?? 0) + 0.5) /
+								((df.get(qt) ?? 0) + 0.5)
+					);
+					// length-normalized term frequency; k1=1.5, b=0.75
+					bm25 += (idf * (f * 1.5)) / (f + 0.75);
+				}
+				const denseNorm = (m.score - minDense) / denseRange;
+				const score =
+					vector_weight * denseNorm +
+					lexWeight * Math.min(1, bm25 / 5);
+				return {
+					id: m.id,
+					score,
+					dense_score: m.score,
+					lexical_score: bm25,
+					text: m.metadata?.text ?? null,
+					metadata:
+						m.metadata && typeof m.metadata === "object"
+							? Object.fromEntries(
+									Object.entries(m.metadata).filter(
+										([k]) => k !== "text"
+									)
+								)
+							: null
+				};
+			});
+			fused.sort((a, b) => b.score - a.score);
+			const matches = fused.slice(0, top_k);
+
+			return ApiResponse.ok(c, "Hybrid search completed", {
+				namespace,
+				query,
+				topK: top_k,
+				count: matches.length,
+				vector_weight,
+				lexical_weight: lexWeight,
+				matches
+			});
+		}
+	);
 
 export default ragHandler;
