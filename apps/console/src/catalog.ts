@@ -2421,6 +2421,30 @@ export const SERVICES: ServiceDef[] = [
 		example: { name: "nightly-batch", jobId: "abc-123-def" }
 	},
 	{
+		id: "durable.scheduler.recurring",
+		method: "POST",
+		path: "/v1/scheduler/recurring",
+		price: "$0.010",
+		description:
+			"Schedule a recurring HTTP webhook using a 5-field cron expression (minute hour day month dow). After each fire the Durable Object re-arms the job to the next matching slot. Cancel via /scheduler/cancel. Supports '*', literals, and '*/n' step expressions. Compute happens on a single DO isolate; no external cron worker required.",
+		mimeType: "application/json",
+		input: {
+			name: "Scheduler name — isolated namespace per name (1-64 chars)",
+			url: "HTTPS endpoint to call on every fire",
+			method: "HTTP method: GET, POST, PUT (default POST)",
+			headers: "Optional custom HTTP headers",
+			payload: "Optional JSON body for POST/PUT",
+			cron: "5-field cron: 'minute hour day-of-month month day-of-week' (UTC). Examples: '0 * * * *' (hourly), '*/15 * * * *' (every 15m), '0 9 * * 1-5' (weekdays 09:00)"
+		},
+		example: {
+			name: "hourly-poll",
+			url: "https://api.example.com/cron",
+			method: "POST",
+			payload: { event: "hourly-tick" },
+			cron: "0 * * * *"
+		}
+	},
+	{
 		id: "sec.cve-lookup",
 		method: "POST",
 		path: "/v1/security/cve-lookup",
