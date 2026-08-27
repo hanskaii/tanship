@@ -11,6 +11,7 @@ import securityScreenHandler from "./handlers/security.screen.handler";
 import secCveLookupHandler from "./handlers/sec.cve-lookup.handler";
 import secMcpRiskScorerHandler from "./handlers/sec.mcp-tool-risk-scorer.handler";
 import secPromptInjectionScanHandler from "./handlers/sec.prompt-injection-scan.handler";
+import secDomainThreatReportHandler from "./handlers/sec.domain-threat-report.handler";
 import cloudEstimateHandler from "./handlers/cloud.estimate.handler";
 import devHandler from "./handlers/dev.handler";
 import modalHandler from "./handlers/modal.handler";
@@ -165,6 +166,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/security/cve-lookup", secCveLookupHandler)
 	.route("/v1/security/mcp-tool-risk-scorer", secMcpRiskScorerHandler)
 	.route("/v1/security/prompt-injection-scan", secPromptInjectionScanHandler)
+	.route("/v1/security/domain-threat-report", secDomainThreatReportHandler)
 	.route("/v1/cloud/estimate", cloudEstimateHandler)
 	.route("/v1/modal", modalHandler)
 	.route("/v1/reddit", redditHandler)

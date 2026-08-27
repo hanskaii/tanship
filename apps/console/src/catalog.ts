@@ -27,9 +27,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.chat",
 		method: "POST",
 		path: "/v1/ai/chat",
-		price: "$0.005",
+		price: "$0.008",
 		description:
-			"LLM chat completion via edge AI (Llama 3.3 70B by default)",
+			"LLM chat completion via edge AI (Llama 3.1 8B by default, 70B available on opt-in)",
 		mimeType: "application/json",
 		input: {
 			messages:
@@ -47,9 +47,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.chat.cached",
 		method: "POST",
 		path: "/v1/ai/chat/cached",
-		price: "$0.006",
+		price: "$0.01",
 		description:
-			"Cached AI chat completion via edge AI (Llama 3.3 70B) with KV prompt cache. Checks KV for a matching cached response first; if not found, generates new response and caches it.",
+			"Cached AI chat completion via edge AI (Llama 3.1 8B default, 70B available) with KV prompt cache. Checks KV for a matching cached response first; if not found, generates new response and caches it.",
 		mimeType: "application/json",
 		input: {
 			messages:
@@ -275,7 +275,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.summarize",
 		method: "POST",
 		path: "/v1/summarize",
-		price: "$0.015",
+		price: "$0.02",
 		description:
 			"Summarize any webpage — fetch readable markdown and synthesize highlights using AI",
 		mimeType: "application/json",
@@ -435,9 +435,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.compress",
 		method: "POST",
 		path: "/v1/ai/compress",
-		price: "$0.005",
+		price: "$0.008",
 		description:
-			"Compress long text semantically using edge AI (Llama 3.3 70B) to save downstream LLM prompt tokens",
+			"Compress long text semantically using edge AI (Llama 3.1 8B) to save downstream LLM prompt tokens",
 		mimeType: "application/json",
 		input: {
 			text: "The text content to semantically compress"
@@ -467,7 +467,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.answer",
 		method: "POST",
 		path: "/v1/ai/answer",
-		price: "$0.008",
+		price: "$0.012",
 		description:
 			"Perform visual question answering (VQA) on any image via edge AI (PaliGemma), returns the text answer",
 		mimeType: "application/json",
@@ -499,9 +499,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.correct",
 		method: "POST",
 		path: "/v1/ai/correct",
-		price: "$0.005",
+		price: "$0.008",
 		description:
-			"Automatically correct grammar, spelling, punctuation, and phrasing via edge AI (Llama 3.3 70B)",
+			"Automatically correct grammar, spelling, punctuation, and phrasing via edge AI (Llama 3.1 8B)",
 		mimeType: "application/json",
 		input: {
 			text: "The text content to check and correct"
@@ -514,9 +514,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.code",
 		method: "POST",
 		path: "/v1/ai/code",
-		price: "$0.005",
+		price: "$0.008",
 		description:
-			"Analyze, debug, or refactor code via coding-tailored edge AI (Llama 3.3 70B)",
+			"Analyze, debug, or refactor code via coding-tailored edge AI (Llama 3.1 8B)",
 		mimeType: "application/json",
 		input: {
 			code: "The code snippet to analyze",
@@ -533,7 +533,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.reason",
 		method: "POST",
 		path: "/v1/ai/reason",
-		price: "$0.008",
+		price: "$0.015",
 		description:
 			"Reasoning model completion via edge AI (DeepSeek R1 Distill Qwen 32B), separating thinking process from final answer",
 		mimeType: "application/json",
@@ -569,7 +569,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.ocr",
 		method: "POST",
 		path: "/v1/ai/ocr",
-		price: "$0.008",
+		price: "$0.01",
 		description:
 			"Extract spelling/text content from any image via edge AI (PaliGemma OCR)",
 		mimeType: "application/json",
@@ -616,7 +616,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/lint",
 		price: "$0.008",
 		description:
-			"Perform static code syntax checking and linting via compiler-tailored edge AI (Llama 3.3 70B)",
+			"Perform static code syntax checking and linting via compiler-tailored edge AI (Llama 3.1 8B)",
 		mimeType: "application/json",
 		input: {
 			code: "The code snippet to lint",
@@ -663,9 +663,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.sql",
 		method: "POST",
 		path: "/v1/ai/sql",
-		price: "$0.005",
+		price: "$0.008",
 		description:
-			"Generate a clean, optimized SQL query from natural language instructions via edge AI (Llama 3.3 70B)",
+			"Generate a clean, optimized SQL query from natural language instructions via edge AI (Llama 3.1 8B)",
 		mimeType: "application/json",
 		input: {
 			prompt: "Natural language query description",
@@ -697,9 +697,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.emotion",
 		method: "POST",
 		path: "/v1/ai/emotion",
-		price: "$0.005",
+		price: "$0.008",
 		description:
-			"Analyze sentiment and detailed emotion categories (joy, sadness, anger, fear, etc) via edge AI (Llama 3.3 70B)",
+			"Analyze sentiment and detailed emotion categories (joy, sadness, anger, fear, etc) via edge AI (Llama 3.1 8B)",
 		mimeType: "application/json",
 		input: {
 			text: "The text content to analyze emotions on"
@@ -2537,7 +2537,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.batch",
 		method: "POST",
 		path: "/v1/ai/batch",
-		price: "$0.02",
+		price: "$0.025",
 		description:
 			"Execute multiple AI operations in a single payment — chat, summarize, classify, sentiment, code, translate, embeddings, and more. Pass an array of operations; all run in parallel via Workers AI and results return as an array. Saves N payments vs calling each endpoint individually.",
 		mimeType: "application/json",
@@ -2572,6 +2572,21 @@ export const SERVICES: ServiceDef[] = [
 		},
 		example: {
 			url: "http://malware.wicar.org/data/eicar.com"
+		}
+	},
+	{
+		id: "sec.domain-threat-report",
+		method: "POST",
+		path: "/v1/security/domain-threat-report",
+		price: "$0.04",
+		description:
+			"Comprehensive threat report for a domain, fanning out to DNS (Cloudflare), WHOIS (RDAP), SSL (CertSpotter), and URLhaus in parallel. Returns a threat level (clean/warning/critical), a human-readable summary, and per-source results — perfect for vetting a domain before fetching, registering, or transacting with it.",
+		mimeType: "application/json",
+		input: {
+			domain: "Bare domain to investigate (e.g. example.com). Protocol and www. prefix are stripped automatically."
+		},
+		example: {
+			domain: "example.com"
 		}
 	}
 ];
