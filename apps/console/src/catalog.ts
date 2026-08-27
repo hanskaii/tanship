@@ -2146,6 +2146,105 @@ export const SERVICES: ServiceDef[] = [
 			ttlMs: 30000
 		}
 	},
+	{
+		id: "coordination.leader.elect",
+		method: "POST",
+		path: "/v1/coordination/leader/elect",
+		price: "$0.02",
+		description:
+			"Try to become the leader of a named group. Atomic election backed by a Durable Object — no split-brain, no races. Returns a fenced token + monotonic generation on success, or the current leader's id + remaining lease on failure. Re-electing the same candidate refreshes the lease without bumping the generation.",
+		mimeType: "application/json",
+		input: {
+			name: "Leader group name (1-256 chars)",
+			candidateId: "Caller-chosen id for this candidate (1-256 chars)",
+			ttlMs: "Requested lease duration in ms (1,000-604,800,000)"
+		},
+		example: {
+			name: "scrape-orchestrator",
+			candidateId: "worker-3",
+			ttlMs: 30000
+		}
+	},
+	{
+		id: "coordination.leader.resign",
+		method: "POST",
+		path: "/v1/coordination/leader/resign",
+		price: "$0.005",
+		description:
+			"Voluntarily step down as the leader of a named group. Requires the candidateId and the fenced token from a prior elect. Triggers a new election the next time another candidate calls elect.",
+		mimeType: "application/json",
+		input: {
+			name: "Leader group name (1-256 chars)",
+			candidateId: "Leader's candidateId (1-256 chars)",
+			token: "Fenced token returned by elect (1-256 chars)"
+		},
+		example: {
+			name: "scrape-orchestrator",
+			candidateId: "worker-3",
+			token: "9d2a1c8b-…"
+		}
+	},
+	{
+		id: "coordination.leader.status",
+		method: "POST",
+		path: "/v1/coordination/leader/status",
+		price: "$0.002",
+		description:
+			"Snapshot the current leadership state for a named group — current leader id, fenced token, lease expiry, and monotonic generation. Use the generation as a fencing token for downstream writes (prevents zombie leaders).",
+		mimeType: "application/json",
+		input: {
+			name: "Leader group name (1-256 chars)"
+		},
+		example: { name: "scrape-orchestrator" }
+	},
+	{
+		id: "coordination.barrier.create",
+		method: "POST",
+		path: "/v1/coordination/barrier/create",
+		price: "$0.01",
+		description:
+			"Initialise a distributed barrier that requires exactly N distinct participants to call join before it trips. Once tripped, every subsequent join reports completed:true. Re-calling create with the same required count is a no-op; a different required count resets the barrier.",
+		mimeType: "application/json",
+		input: {
+			name: "Barrier name (1-256 chars)",
+			required:
+				"Number of participants required to trip the barrier (1-10,000)"
+		},
+		example: {
+			name: "phase-2-ready",
+			required: 5
+		}
+	},
+	{
+		id: "coordination.barrier.join",
+		method: "POST",
+		path: "/v1/coordination/barrier/join",
+		price: "$0.002",
+		description:
+			"Record a participant's arrival at a named barrier. Returns the current arrived count and a tripped flag — when tripped:true this call is the one that completed the barrier. Duplicate joins from the same participantId are idempotent (no double-count).",
+		mimeType: "application/json",
+		input: {
+			name: "Barrier name (1-256 chars)",
+			participantId: "Caller-chosen id for this participant (1-256 chars)"
+		},
+		example: {
+			name: "phase-2-ready",
+			participantId: "worker-3"
+		}
+	},
+	{
+		id: "coordination.barrier.status",
+		method: "POST",
+		path: "/v1/coordination/barrier/status",
+		price: "$0.002",
+		description:
+			"Snapshot the current barrier state for a named group — required count, arrived count, completed flag, and the list of arrived participant ids. Read-only.",
+		mimeType: "application/json",
+		input: {
+			name: "Barrier name (1-256 chars)"
+		},
+		example: { name: "phase-2-ready" }
+	},
 	// ── kv.queue ──────────────────────────────────────────────────────────────
 	{
 		id: "kv.queue.push",

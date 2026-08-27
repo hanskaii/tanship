@@ -19,33 +19,43 @@
 		}
 	],
 	"durable_objects": {
-	    "bindings": [
-	        {
-	            "name": "Sandbox",
-	            "class_name": "Sandbox",
-	            "namespace_id": "dd0be404deac4defb29c28b3ba9d3aac"
-	        },
-	        {
-	            "name": "COUNTER",
-	            "class_name": "Counter",
-	            "namespace_id": "9a0108f67c0247b4b664b560b21f19ba"
-	        },
-	        {
-	            "name": "RATE_LIMITER",
-	            "class_name": "RateLimiter",
-	            "namespace_id": "84df1b264e304d25a5e516a85d8c4e75"
-	        },
-	        {
-	            "name": "LOCK",
-	            "class_name": "Lock",
-	            "namespace_id": "1234567890abcdef1234567890abcdef"
-	        },
-	        {
-	            "name": "SCHEDULER",
-	            "class_name": "Scheduler",
-	            "namespace_id": "abcdef1234567890abcdef1234567890"
-	        }
-	        ],
+		"bindings": [
+			{
+				"name": "Sandbox",
+				"class_name": "Sandbox",
+				"namespace_id": "dd0be404deac4defb29c28b3ba9d3aac"
+			},
+			{
+				"name": "COUNTER",
+				"class_name": "Counter",
+				"namespace_id": "9a0108f67c0247b4b664b560b21f19ba"
+			},
+			{
+				"name": "RATE_LIMITER",
+				"class_name": "RateLimiter",
+				"namespace_id": "84df1b264e304d25a5e516a85d8c4e75"
+			},
+			{
+				"name": "LOCK",
+				"class_name": "Lock",
+				"namespace_id": "1234567890abcdef1234567890abcdef"
+			},
+			{
+				"name": "SCHEDULER",
+				"class_name": "Scheduler",
+				"namespace_id": "abcdef1234567890abcdef1234567890"
+			},
+			{
+				"name": "LEADER",
+				"class_name": "Leader",
+				"namespace_id": "7fc6a9104bb20279f36d141a8f6adf0c"
+			},
+			{
+				"name": "BARRIER",
+				"class_name": "Barrier",
+				"namespace_id": "64addbe37f11e170b6b8abc947764683"
+			}
+		]
 	},
 	"migrations": [
 		{
@@ -56,6 +66,10 @@
 		{
 			"tag": "v2",
 			"new_classes": ["Scheduler"]
+		},
+		{
+			"tag": "v3",
+			"new_classes": ["Leader", "Barrier"]
 		}
 	],
 	"vectorize": [

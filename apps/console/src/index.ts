@@ -312,7 +312,7 @@ app.onError((err, c) => {
 
 export type AppType = typeof app;
 
-export { Counter, RateLimiter, Lock } from "./durable-objects";
+export { Counter, RateLimiter, Lock, Leader, Barrier } from "./durable-objects";
 export { Scheduler } from "./durable-objects/scheduler";
 export { Sandbox };
 
