@@ -16,6 +16,8 @@ interface LockState {
 	locked: boolean;
 	owner: string | null;
 	lockedAt: number | null;
+	/** Epoch ms when the lock auto-releases; refreshed by heartbeat. */
+	expiresAt: number | null;
 }
 
 /**
@@ -27,7 +29,8 @@ export class Lock extends DurableObject {
 		const state = (await this.ctx.storage.get<LockState>("state")) ?? {
 			locked: false,
 			owner: null,
-			lockedAt: null
+			lockedAt: null,
+			expiresAt: null
 		};
 		return state;
 	}
@@ -43,19 +46,29 @@ export class Lock extends DurableObject {
 	 * Returns the lock token (owner id) on success.
 	 */
 	async acquire(
-		owner: string
-	): Promise<{ success: boolean; token?: string }> {
+		owner: string,
+		ttlMs?: number
+	): Promise<{ success: boolean; token?: string; expiresAt?: number }> {
 		const state = await this.load();
+		// Auto-expire: if expired, treat as free.
+		if (state.locked && state.expiresAt && state.expiresAt <= Date.now()) {
+			state.locked = false;
+			state.owner = null;
+			state.lockedAt = null;
+			state.expiresAt = null;
+		}
 		if (state.locked) {
 			return { success: false };
 		}
 		const token = crypto.randomUUID();
+		const expiresAt = ttlMs ? Date.now() + ttlMs : null;
 		await this.save({
 			locked: true,
 			owner: owner,
-			lockedAt: Date.now()
+			lockedAt: Date.now(),
+			expiresAt
 		});
-		return { success: true, token };
+		return { success: true, token, expiresAt: expiresAt ?? undefined };
 	}
 
 	/**
@@ -67,8 +80,40 @@ export class Lock extends DurableObject {
 		if (!state.locked || state.owner !== owner) {
 			return false;
 		}
-		await this.save({ locked: false, owner: null, lockedAt: null });
+		await this.save({
+			locked: false,
+			owner: null,
+			lockedAt: null,
+			expiresAt: null
+		});
 		return true;
+	}
+
+	/**
+	 * Refresh the TTL on a held lock. Only the current owner may heartbeat.
+	 * Returns the new expiresAt on success, or { renewed: false } if the
+	 * lock was free / held by another owner / already expired.
+	 */
+	async heartbeat(
+		owner: string,
+		ttlMs: number
+	): Promise<
+		| { renewed: true; expiresAt: number }
+		| { renewed: false; reason: "not_owner" | "expired" | "free" }
+	> {
+		const state = await this.load();
+		if (!state.locked) {
+			return { renewed: false, reason: "free" };
+		}
+		if (state.expiresAt && state.expiresAt <= Date.now()) {
+			return { renewed: false, reason: "expired" };
+		}
+		if (state.owner !== owner) {
+			return { renewed: false, reason: "not_owner" };
+		}
+		const expiresAt = Date.now() + ttlMs;
+		await this.save({ ...state, expiresAt });
+		return { renewed: true, expiresAt };
 	}
 
 	/**
@@ -82,7 +127,12 @@ export class Lock extends DurableObject {
 	 * Force-release the lock regardless of owner (admin use only).
 	 */
 	async forceRelease(): Promise<void> {
-		await this.save({ locked: false, owner: null, lockedAt: null });
+		await this.save({
+			locked: false,
+			owner: null,
+			lockedAt: null,
+			expiresAt: null
+		});
 	}
 
 	/** Idle for IDLE_TTL_MS — wipe storage to stop accruing cost. */

@@ -2,7 +2,6 @@ import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import type { HonoEnv } from "@/types/hono.types";
-import type { Ai } from "cloudflare:workers";
 import { ApiResponse } from "@/helpers/response.helper";
 import { ApiError } from "@/helpers/errors.helper";
 

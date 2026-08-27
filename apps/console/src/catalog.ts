@@ -2127,6 +2127,25 @@ export const SERVICES: ServiceDef[] = [
 		},
 		example: { name: "agent-trade-123" }
 	},
+	{
+		id: "coordination.lock.heartbeat",
+		method: "POST",
+		path: "/v1/coordination/lock/heartbeat",
+		price: "$0.001",
+		description:
+			"Refresh the TTL on a held distributed mutex lock. Only the current owner may heartbeat; returns the new expiresAt on success or { renewed: false, reason } on failure. Lets long-running agent jobs renew their lease without dropping and re-acquiring the lock (no race window).",
+		mimeType: "application/json",
+		input: {
+			name: "Lock name (1-256 chars) — same as acquire/release",
+			owner: "Owner id returned from acquire (1-256 chars)",
+			ttlMs: "New lease duration in ms (1,000-604,800,000; max 7 days)"
+		},
+		example: {
+			name: "agent-trade-123",
+			owner: "agent-7f3a",
+			ttlMs: 30000
+		}
+	},
 	// ── kv.queue ──────────────────────────────────────────────────────────────
 	{
 		id: "kv.queue.push",
@@ -2301,6 +2320,54 @@ export const SERVICES: ServiceDef[] = [
 			jobId: "Job id to cancel"
 		},
 		example: { name: "nightly-batch", jobId: "abc-123-def" }
+	},
+	{
+		id: "sec.cve-lookup",
+		method: "POST",
+		path: "/v1/security/cve-lookup",
+		price: "$0.005",
+		description:
+			"Look up a CVE by id (CVE-YYYY-NNNNN) against the OSV.dev database. Returns full OSV payload plus a normalized _summary block with severity, affected packages, and the highest-priority fixed version. KV-cached for 24h",
+		mimeType: "application/json",
+		input: {
+			cve: "CVE id string, e.g. CVE-2024-3094"
+		},
+		example: { cve: "CVE-2024-3094" }
+	},
+	{
+		id: "cloud.estimate",
+		method: "POST",
+		path: "/v1/cloud/estimate",
+		price: "$0.01",
+		description:
+			"Estimate the monthly Cloudflare bill for a given workload across Workers, Workers AI, D1, Vectorize, KV, R2, Durable Objects, and Browser Rendering. Pricing sourced from developers.cloudflare.com (verified 2026-08-27); free tiers applied per-product before billing. Returns total + per-product breakdown in USD",
+		mimeType: "application/json",
+		input: {
+			workers: "{ requestsPerMonth, cpuMsPerMonth }",
+			workersAi: "{ neuronsPerDay }",
+			d1: "{ rowReadsPerMonth, rowWritesPerMonth, storageGb }",
+			vectorize: "{ queriedDimsPerMonth, storedDims }",
+			kv: "{ readsPerMonth, writesPerMonth, storageGb }",
+			r2: "{ storageGb, classAOpsPerMonth, classBOpsPerMonth }",
+			durableObjects: "{ requestsPerMonth, computeGbSPerMonth }",
+			browserRun: "{ browserHoursPerMonth }"
+		},
+		example: {
+			workers: {
+				requestsPerMonth: 50_000_000,
+				cpuMsPerMonth: 200_000_000
+			},
+			d1: {
+				rowReadsPerMonth: 1_000_000_000,
+				rowWritesPerMonth: 5_000_000,
+				storageGb: 2
+			},
+			kv: {
+				readsPerMonth: 20_000_000,
+				writesPerMonth: 1_000_000,
+				storageGb: 0.5
+			}
+		}
 	}
 ];
 
