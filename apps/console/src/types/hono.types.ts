@@ -28,6 +28,7 @@ export type ConsoleBindings = ValidatedEnv & {
 	BARRIER: DurableObjectNamespace<Barrier>;
 	DURABLE_QUEUE: DurableObjectNamespace<DurableFIFOQueue>;
 	DURABLE_BLOOM: DurableObjectNamespace<DurableBloomFilter>;
+	ELEVENLABS_API_KEY: string;
 };
 
 export interface HonoEnv {

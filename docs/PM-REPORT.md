@@ -1,224 +1,192 @@
 # Tanship — PM Status Report
 
-**Date**: 2026-08-28 (cron re-run, Refresh 14)
-**Author**: hermes-agent (PM cron)
-**Sources**: `docs/research-results.md` (Refresh 14), `docs/engineering-report.md` (durable.queue.fifo run), live git state.
+**Date**: 2026-08-29
+**Cycle**: Research R17 + Engineering R17 (1-day cycle)
+**Author**: PM (cron-rendered)
 
 ---
 
-## 🔑 CREDENTIALS NEEDED FROM HUDA
+## 1. Executive Summary
 
-**Untuk run ini (Refresh 14 + durable.queue.fifo): ZERO secrets/env baru dibutuhkan.**
+| Metric                             | Value                      | Δ vs R16  |
+| ---------------------------------- | -------------------------- | --------- |
+| Priced endpoints live              | 195 (+3)                   | +3        |
+| Blue-ocean (0-competitor) coverage | All 7 CF primitives        | unchanged |
+| Catalog gross margin               | 81.4% (95% ex loss-makers) | unchanged |
+| Loss-makers still bleeding         | 6 (rag×2, modal×4)         | unchanged |
+| New endpoints deployed today       | 3                          | —         |
+| New revenue @ 100 calls/day each   | **+$240/mo**               | —         |
+| Build / lint / deploy              | ✅ all green               | —         |
+| Git push to `main`                 | ✅ `aa9127e`               | —         |
 
-Yang dipakai sudah ada di `wrangler.jsonc`:
-
-- Durable Object namespace ID placeholder `d1a4f00d1234abcd5678ef9012345678` (hex pattern match). Kalau Cloudflare reject, run `wrangler deploy --new-class DurableFIFOQueue` — no new secret, just re-deploy.
-- Semua binding lain (COUNTER, RATE_LIMITER, LOCK, SCHEDULER, LEADER, BARRIER, KV, R2, D1, Vectorize, AI, Queues, Sandbox) sudah live.
-
-**Potensi kredensial baru untuk run BERIKUTNYA** (belum butuh sekarang):
-
-- `durable.cron.set` (Priority 1) — butuh Cloudflare Cron Triggers API token jika pakai trigger eksternal (default pakai internal DO alarm, jadi opsional).
-- `durable.pubsub.subscribe` webhook — butuh public HTTPS URL + HMAC signing key (bisa pakai existing worker URL).
-- Email Routing untuk `agent.inbox.*` — butuh zone credentials + token `email_routing:read` (jika belum aktif di account Cloudflare Huda).
-- **Bazaar / x402scan / Coinbase CDP registration** (strategi #1) — butuh wallet address signer + registration API key per platform (jika platform require paid listing).
-
-**Bottom line: tim engineer/researcher BISA LANJUT tanpa input Huda untuk endpoint baru + deployment. Hanya strategi #1 (Bazaar registration) yang mungkin butuh wallet signing key nanti.**
+**TL;DR**: Market research confirmed the same blue-ocean thesis (Tship remains the only true CF-primitive seller on x402). Engineering shipped 3 of 8 recommended new endpoints, all in the 95–99% margin band. The single highest-ROI carryover remains **distribution** — Tship is still only listed in 1 of 27,772 Bazaar entries and 0 of 575 x402-list entries.
 
 ---
 
-## 1. 🎯 Peluang Baru (Riset Refresh 14)
+## 2. New Opportunities Identified (from R17 research)
 
-**Data live (2026-08-28 18:10 UTC)**: 173 endpoint Tship live, 100/27,761 listing Bazaar di-scan, 575-service census x402-list.com, 30d volume x402 = $24.24M / 75.41M tx / 94.06K buyers / 22K sellers.
+### 2.1 Confirmed Blue Ocean — still uncontested
 
-### Top 5 Highest-Conviction Blue Ocean (semua 0 kompetitor di Bazaar top-100)
+Across 575 x402-list services, **0 true sellers** exist for any of the 7 Cloudflare primitives (D1, KV, DO, R2, Vectorize, Workers AI, Browser). Tship holds the entire primitive layer on x402.
 
-| #   | Service                                                                                                                 | CF Primitive            | Harga         | Margin       | Kompetitor verified                                    |
-| --- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------- | ------------- | ------------ | ------------------------------------------------------ |
-| 1   | **D1 SQL-as-service** (5 endpoint: query/exec/batch/migrate/upsert)                                                     | D1 + Workers            | $0.005–$0.050 | 97.5–99.99%  | **0** (SQLGuard $0.10 validation only)                 |
-| 2   | **Durable Object coordination suite** (26 endpoint: lock/leader/barrier/queue/counter/scheduler/pubsub/bloom/ratelimit) | Durable Objects         | $0.001–$0.020 | 99.5–99.99%  | **0 primitive** (Sovereign $0.001 bundle only)         |
-| 3   | **Workers KV + DO queue** (21 endpoint: set/get/atomic/lease/session)                                                   | KV + DO                 | $0.001–$0.010 | 99.0–99.99%  | **0 standalone**                                       |
-| 4   | **Vectorize + AI memory** (5 RAG + 2 memory endpoint baru)                                                              | Vectorize + BGE-M3 + DO | $0.002–$0.010 | 99.4–99.9%   | **0 pure seller** (28 keyword match = internal RAG)    |
-| 5   | **R2 S3-compatible** (7 endpoint: upload/get/presign/lifecycle/batch)                                                   | R2                      | $0.002–$0.020 | 99.88–99.99% | **0 di Bazaar** (Relaystation $0.01, Sovereign bundle) |
+### 2.2 Loss-makers requiring immediate fix
 
-### 4 Endpoint Baru Sejak Refresh 13 (semua LIVE)
+| Endpoint             | Current       | Cost                       | Margin      | Action                                                 |
+| -------------------- | ------------- | -------------------------- | ----------- | ------------------------------------------------------ |
+| `rag.query`          | $0.002        | $0.077                     | **-3740%**  | Reprice to $0.020 (still undercuts Replicate/Pinecone) |
+| `rag.answer`         | $0.010        | $0.078                     | **-669%**   | Reprice to $0.050                                      |
+| `ai.chat`            | $0.008        | $0.414 (Llama 8B, 500 out) | **-5050%**  | Cap `max_tokens ≤ 50` or reprice to $0.050             |
+| `modal.sandbox.*` ×4 | $0.002–$0.010 | $0.005–$0.015              | -150% to 0% | Remove (external dependency)                           |
 
-| Endpoint                 | Price  | Category                              |
-| ------------------------ | ------ | ------------------------------------- |
-| `durable.bloom.add`      | $0.003 | DO (novel: DO-backed bloom filter)    |
-| `durable.bloom.has`      | $0.002 | DO                                    |
-| `durable.bloom.has-many` | $0.005 | DO (batched check)                    |
-| `ai.memory.add`          | $0.003 | AI + RAG + DO (agent memory compound) |
-| `ai.memory.search`       | $0.003 | AI + RAG + DO                         |
+At 100 calls/day, the rag endpoints alone cost **-$2,700/yr** in subsidies.
 
-**Plus 7 endpoint dari `durable.queue.fifo` run**: push/pop/peek/ack/dead-letter/stats/drain @ $0.003/push.
+### 2.3 Recommended new blue-ocean endpoints (8 total — 3 shipped this run, 5 deferred)
 
-### Kompetitor Aktif (Bazaar top-100 verified)
+| #   | Endpoint                      | Price  | Margin | Status         |
+| --- | ----------------------------- | ------ | ------ | -------------- |
+| 1   | `rag.batch.upsert`            | $0.010 | 95%    | ✅ **SHIPPED** |
+| 2   | `sec.llm-output-validate`     | $0.030 | 97%    | ✅ **SHIPPED** |
+| 3   | `sec.agent-trace-anomaly`     | $0.040 | 99%    | ✅ **SHIPPED** |
+| 4   | `coordination.pubsub.publish` | $0.005 | 98%    | deferred       |
+| 5   | `durable.pubsub.subscribe`    | $0.010 | 99%    | deferred       |
+| 6   | `storage.multipart.upload`    | $0.020 | —      | deferred       |
+| 7   | `db.transaction`              | $0.025 | 96%    | deferred (R18) |
+| 8   | `ai.vision.describe`          | $0.020 | 95%    | deferred (R18) |
 
-| Kompetitor                                   | Count | Band        | Catatan                                                       |
-| -------------------------------------------- | ----- | ----------- | ------------------------------------------------------------- |
-| k2so family (3 host)                         | 78    | $0.002      | Distorts Bazaar P50 — bukan real market signal                |
-| relay402.georgespring                        | 11    | $0.02–$0.10 | **Direct competitor** di `sec.*` — Tship 1.5–2.5× lebih mahal |
-| paysponge, chainray, laevitas, dpe, uktender | 9     | varies      | No overlap                                                    |
+### 2.4 Underserved segments worth entering later
 
-### 🚨 #1 Strategi Prioritas (unchanged dari R12 & R13)
-
-**Daftarkan Tship di PayAI Bazaar, x402scan, x402-list.com, Coinbase CDP.**
-
-- Saat ini: **0 presence** di 4 public discovery surface
-- 173 endpoint built, **0 discoverable** ke ekosistem 27,761 listing
-- Free registration via `x402scan.com/api/x402/registry/register-origin` (bulk 173 endpoint)
-- Estimasi impact: +500% discovery → +200–500% sales dalam 30 hari
-- **Loss $100–$1,000/hari** selama belum terdaftar
-
-### TAM x402 Ecosystem
-
-| Market share          | Annual     | Monthly  |
-| --------------------- | ---------- | -------- |
-| 0.01% (long-tail BE)  | $2,424     | $202     |
-| 0.1% (1 customer mix) | $24,240    | $2,020   |
-| 1.0% (category lead)  | $242,400   | $20,200  |
-| 5.0% (infra monopoly) | $1,212,000 | $101,000 |
-
-**Tship = satu-satunya seller di "Infrastructure" category** di x402-list.com (575-service census).
-
-### Pricing Rekomendasi (Refresh 14)
-
-- **Increase**: `ai.image` $0.020→$0.030, `ai.reason` $0.015→$0.025, `browser.search.summary` $0.030→$0.050, `storage.presign.batch` $0.020→$0.030, `db.query` $0.005→$0.010, `db.exec` $0.010→$0.015
-- **Decrease**: `sec.mcp-tool-risk-scorer` $0.050→$0.030, `sec.prompt-injection-scan` $0.050→$0.030
-- **Fix**: `kv.lease.status` $0.001→$0.002 (eliminate onchain gas floor loss)
+- **Finance** (avg $0.95 on x402) — Tship has only 8 `crypto.*`, no DeFi/price feeds
+- **Verification/Trust** (avg $0.27) — `sec.*` growing but no EVM interaction
+- **Content premium** (avg $1.72) — no PDF generation, no OCR
 
 ---
 
-## 2. 🔧 Rincian Implementasi (Engineer Run Ini)
+## 3. Implementation Details (this run)
 
-**Target**: `durable.queue.fifo` — DO-backed persistent FIFO queue (harga $0.003/push, 99.6% margin).
+### 3.1 Shipped endpoints
 
-### Files Changed (7 files, +413 lines, -1)
+**`rag.batch.upsert`** — `POST /v1/rag/batch` ($0.010)
 
-| File                                                 | Action                                                                         |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `apps/console/src/durable-objects/fifo.ts`           | **NEW** — `DurableFIFOQueue` class (push/pop/peek/ack/dead-letter/stats/drain) |
-| `apps/console/src/durable-objects/index.ts`          | Export DO class                                                                |
-| `apps/console/src/types/hono.types.ts`               | Add `DURABLE_QUEUE` binding                                                    |
-| `apps/console/src/index.ts`                          | Mount route `/v1/durable/queue` + export DO for Wrangler                       |
-| `apps/console/src/handlers/durable.queue.handler.ts` | **NEW** — HTTP handler + JSON validation                                       |
-| `apps/console/src/catalog.ts`                        | Catalog entry `durable.queue.fifo` @ $0.003                                    |
-| `apps/console/wrangler.jsonc`                        | DO binding + migration tag `v4`                                                |
+- Parallel-embed up to 100 texts via Workers AI BGE-M3 (1024-dim) → single Vectorize upsert
+- One `mutationId` for the whole batch
+- Reuses existing `VECTORIZE` + `AI` bindings; ~$0.0005/call at max batch
 
-### Fitur
+**`sec.llm-output-validate`** — `POST /v1/security/llm-output-validate` ($0.030)
 
-- 7 endpoint: `push`, `pop`, `peek`, `ack`, `dead-letter`, `stats`, `drain`
-- FIFO semantics + visibility timeout (max 1 jam = 3600s)
-- Dead-letter threshold: 3 attempts (configurable constant)
-- Payload cap: 25 KB (parity dengan KV)
-- Name validation: `^[a-zA-Z0-9_-]+$` (cegah KV key injection)
-- Max depth: 10,000 items (configurable `MAX_QUEUE`)
+- 7-stage validator: JSON parse → JSON Schema → type check → prompt-injection regex+AI → safety → PII → quality summary
+- KV-cached 24h on `(output + schema + expectedType)` hash
+- ~$0.001/call
 
-### Security
+**`sec.agent-trace-anomaly`** — `POST /v1/security/agent-trace-anomaly` ($0.040)
 
-- Per-namespace DO isolation (no cross-tenant leakage)
-- Semua mutating endpoint = POST only
-- Visibility timeout hard-capped (cegah infinite lease starvation)
-- All bindings verified live setelah deploy
+- 6 parallel detectors: loops, credential scanning, data exfil, long steps, rapid-fire, suspicious inputs
+- AI verdict + risk summary; optional KV trace storage
+- ~$0.0005/call (+ $0.00001 if stored)
 
-### Catatan Operasional
+### 3.2 Files changed
 
-- Throughput rendah (1 isolate per queue) tapi durability tinggi (survive worker restart)
-- Untuk high-throughput ephemeral → pakai `/v1/queue`; low-throughput persistent → `/v1/durable/queue`
-- FIFO ordering best-effort across DO migration (extremely rare event)
-- **Pre-existing issue (tidak terkait PR)**: Container image `docker.io/cloudflare/sandbox:0.7.0` registry fetch timeout. Worker code uploaded OK, image rebuild pada next deploy.
+| File                                                           | Change                         |
+| -------------------------------------------------------------- | ------------------------------ |
+| `apps/console/src/handlers/rag.batch-upsert.handler.ts`        | NEW, 75 LOC                    |
+| `apps/console/src/handlers/sec.llm-output-validate.handler.ts` | NEW, 520 LOC                   |
+| `apps/console/src/handlers/sec.agent-trace-anomaly.handler.ts` | NEW, 380 LOC                   |
+| `apps/console/src/catalog.ts`                                  | +88 LOC (3 ServiceDef entries) |
+| `apps/console/src/index.ts`                                    | +5 LOC (route registration)    |
 
----
+**Total**: 1,068 new lines, 5 files.
 
-## 3. 🚀 Status Deployment
+### 3.3 Quality gates
 
-| Check                      | Status                                                                                             |
-| -------------------------- | -------------------------------------------------------------------------------------------------- |
-| Lint (full workspace)      | ✅ 0 errors, 12 pre-existing warnings (unrelated)                                                  |
-| Build (monorepo)           | ✅ 4/4 tasks pass (web, api, console, docs)                                                        |
-| Deploy (Wrangler)          | ✅ `tanflare-console` uploaded (12.95s)                                                            |
-| DO binding `DURABLE_QUEUE` | ✅ Live di production                                                                              |
-| All other bindings         | ✅ COUNTER, RATE_LIMITER, LOCK, SCHEDULER, LEADER, BARRIER, Sandbox + KV/R2/D1/Vectorize/AI/Queues |
+- `pnpm run check` — 17 warnings (all pre-existing in `apps/web`), 0 errors
+- `pnpm --filter console build` — `tsc --noEmit` passed
+- `pnpm --filter console deploy` — Worker uploaded (1246.62 KiB / 329.67 KiB gzip, 10.20 s); all 20 bindings registered
 
-**Live endpoints** (7) di `https://x402.tanship.dev/v1/durable/queue/{push,pop,peek,ack,dead-letter,stats,drain}`.
+### 3.4 Known issue (non-blocking)
 
-⚠️ Caveat: Sandbox container image build timeout (pre-existing, registry issue). Worker code deployed OK.
+- `tanflare-console-sandbox` Docker container build failed: Docker Hub network timeout pulling `cloudflare/sandbox:0.7.0`. Affects only the Modal sandbox subsystem, **not** the 3 new endpoints. Manual retry or pre-pulling the image will clear it.
 
 ---
 
-## 4. 📦 Status Git Push
+## 4. Deployment Status
 
-| Field          | Value                                            |
-| -------------- | ------------------------------------------------ |
-| Commit         | `feat(console): durable.queue.fifo`              |
-| Hash           | `07bc1ae`                                        |
-| Branch         | `main`                                           |
-| Remote         | `origin`                                         |
-| Local = remote | ✅ synced                                        |
-| URL            | https://github.com/hanskaii/tanship/tree/07bc1ae |
-| Push           | ✅ `8935476..07bc1ae  main -> main`              |
-
-**Diff**: 2 new files, 5 modified, +413 lines / -1.
-
-**Working tree** (per `git status`): 22 modified files, 26 untracked — mayoritas adalah research artifacts (`.research/`, `docs/*-research.md`), `apps/console` handler additions (`ai.handler.ts`, `browser.handler.ts`, `db.handler.ts`, `kv.handler.ts`, `storage.handler.ts`, `durable.bloom.handler.ts`, `kv.queue.handler.ts`, dll), dan `durable-objects/bloom.ts` dari run sebelumnya. **Tidak ada push baru sejak `07bc1ae`**.
+| Stage                                                | Status                              |
+| ---------------------------------------------------- | ----------------------------------- |
+| Worker build                                         | ✅                                  |
+| Bindings (AI, VECTORIZE, KV, R2, DB, QUEUE, 8 DOs)   | ✅ 20/20 registered                 |
+| Routes live at `x402.tanship.dev`                    | ✅                                  |
+| Sandbox container                                    | ❌ Docker pull timeout (Modal only) |
+| x402scan / x402-list.com / PayAI Bazaar registration | ❌ **not yet done**                 |
 
 ---
 
-## 5. 📋 Backlog (Next Runs)
+## 5. Git Push Status
 
-**Priority 1 — DO primitives (blue ocean sisa)**:
-
-- `durable.pubsub.publish` @ $0.005
-- `durable.pubsub.subscribe` @ $0.010
-- `durable.cron.set` @ $0.010/cron + $0.001/fire
-- `durable.websocket.broadcast` @ $0.010
-
-**Priority 2 — D1 blue ocean**:
-
-- `db.transaction` @ $0.025 (atomic ACID)
-- `db.schema.introspect` @ $0.005
-- `db.query.readonly` @ $0.005
-- `db.index.advisory` @ $0.010
-
-**Priority 3 — KV primitives**:
-
-- `kv.cas` @ $0.005, `kv.bulk.get` @ $0.005, `kv.ttl.set` @ $0.003, `kv.watcher` @ $0.020
-
-**Priority 4 — Vectorize**:
-
-- `rag.batch.upsert` @ $0.010, `rag.metadata.filter` @ $0.005, `rag.rerank` @ $0.003
-
-**Priority 5 — R2 bucket mgmt**:
-
-- `storage.cors.configure` @ $0.005, `storage.bucket.create` @ $0.010, `storage.multipart.upload` @ $0.020
-
-**Priority 6 — Workers AI**:
-
-- `ai.vision.describe` @ $0.020, `ai.audio.transcribe` @ $0.015, `ai.tts` @ $0.010
-
-**Pricing fixes**: 9 endpoint perlu re-pricing (lihat Section 1 tabel).
+| Field   | Value                                                                                   |
+| ------- | --------------------------------------------------------------------------------------- |
+| Commit  | `aa9127e`                                                                               |
+| Branch  | `main`                                                                                  |
+| Pushed  | ✅ `main` → `origin/main` (`7aeb794..aa9127e`)                                          |
+| Message | `feat(console): add rag.batch.upsert, sec.llm-output-validate, sec.agent-trace-anomaly` |
 
 ---
 
-## 6. 📊 Ringkasan Eksekutif
+## 6. Revenue Impact
 
-| Metric                       | Status                                                                             |
-| ---------------------------- | ---------------------------------------------------------------------------------- |
-| Endpoint baru live (run ini) | 1 sistem (`durable.queue.fifo`, 7 sub-endpoint @ $0.003)                           |
-| Total endpoint Tship (live)  | **173** (was 168 → +4 R14 endpoints + 1 queue system)                              |
-| Avg gross margin             | **96.29%** (semua 173 endpoint)                                                    |
-| Blue ocean terverifikasi     | **5/7 CF primitive** (D1, KV, DO, Vectorize, R2)                                   |
-| Deployment                   | ✅ Production (Wrangler 12.95s)                                                    |
-| Git push                     | ✅ main @ `07bc1ae`, synced with origin                                            |
-| Secrets/env needed (run ini) | **NONE**                                                                           |
-| **Top risk**                 | Tship belum terdaftar di Bazaar/x402scan → loss $100–$1,000/hari                   |
-| **Top opportunity**          | Daftar Tship di 4 discovery surface + ship `durable.pubsub.*` (sisa DO blue ocean) |
+| Endpoint                  | Price  | CF cost | Margin | @100/day    | @1K/day       |
+| ------------------------- | ------ | ------- | ------ | ----------- | ------------- |
+| `rag.batch.upsert`        | $0.010 | $0.0005 | 95.0%  | $30/mo      | $300/mo       |
+| `sec.llm-output-validate` | $0.030 | $0.001  | 96.7%  | $90/mo      | $900/mo       |
+| `sec.agent-trace-anomaly` | $0.040 | $0.0005 | 98.75% | $120/mo     | $1,200/mo     |
+| **Total new**             | —      | —       | —      | **$240/mo** | **$2,400/mo** |
+
+**Baseline**: existing 192 endpoints at 100 calls/day each ≈ $3,182/mo. New endpoints = **+7.5% lift** at conservative adoption.
 
 ---
 
-## 7. 🚦 Action Items (PM Decision Needed)
+## 7. Top 3 Carryover Actions (priority order)
 
-1. **APPROVE Bazaar registration** — 1 jam kerja, butuh wallet signer. Impact: +500% discovery.
-2. **APPROVE batch settlement** — eliminates 1 loss-maker (`kv.lease.status`), 80/173 endpoint jadi 99%+ margin.
-3. **APPROVE pricing uplift** — 9 endpoint re-price untuk market alignment, dev cost: 1 hari.
-4. **DECIDE next endpoint ship** — rekomendasi: `durable.pubsub.publish` (largest unserved DO niche) atau `db.transaction` (highest-value D1 gap).
+1. **Register Tship on PayAI Bazaar, x402scan, x402-list.com, Coinbase CDP** — still listed in 1 of 27,772 Bazaar entries and 0 of 575 x402-list entries. Single highest-ROI action for distribution.
+2. **Fix the 6 loss-makers** (rag.query, rag.answer, ai.chat cap, modal.\* removal) — protects against bill shock; ~1 day of work.
+3. **Resolve sandbox Docker build** — pre-pull `cloudflare/sandbox:0.7.0` or extend `docker buildx` timeout. Blocks Modal subsystem only.
+
+---
+
+## 8. Risks
+
+| Risk                                                                                       | Severity | Mitigation                                                                     |
+| ------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------ |
+| CF pricing changes without notice (Mistral 7B jumped 4.3×, Llama 8B 19× between Aug 26–28) | High     | Re-verify Workers AI prices before every deploy; cap `max_tokens` on `ai.chat` |
+| rag.\* loss-makers burning cash at scale                                                   | High     | Reprice immediately                                                            |
+| Single discovery channel (Bazaar) for distribution                                         | Medium   | Bulk-register on x402scan + x402-list.com                                      |
+| Modal external dependency                                                                  | Medium   | Remove endpoints to cut risk surface                                           |
+| No volume pricing for enterprise tier                                                      | Low      | Add tiered pricing in R19+                                                     |
+
+---
+
+## 9. Kredensial / Secrets yang Mungkin Dibutuhkan (untuk produk Cloudflare baru)
+
+> ⚠️ **Untuk Huda — mohon disiapkan sebelum R18 jika engineer akan lanjut:**
+
+| Secret                                     | Untuk                                                     | Status                                       |
+| ------------------------------------------ | --------------------------------------------------------- | -------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN` (additional scopes) | Bulk-register domain di x402scan registry                 | Cek scope `Zone:Edit` + `Account:Read`       |
+| `X402SCAN_API_KEY`                         | Auto-register 195 endpoints ke x402scan                   | **Belum ada — perlu signup di x402scan.com** |
+| `X402_LIST_SUBMISSION_TOKEN`               | Submit Tship ke x402-list.com (0/575 saat ini)            | **Belum ada — perlu manual submit**          |
+| `PAYPYAI_FACILITATOR_KEY`                  | Bulk-register di PayAI Bazaar (saat ini 1/27,772 listing) | **Belum ada — perlu apply ke PayAI**         |
+| `COINBASE_CDP_API_KEY`                     | Register di Coinbase CDP (masih kosong)                   | **Belum ada**                                |
+| `MODAL_API_KEY` (existing)                 | Sandbox subsystem; atau set null untuk disable            | Sudah ada, sandbox build timeout             |
+| `DODO_PAYMENTS_API_KEY` (existing)         | Billing                                                   | Sudah ada                                    |
+
+**Action item untuk Huda**: Sign up di x402scan.com, x402-list.com, PayAI Bazaar facilitator, dan Coinbase CDP → simpan API key-nya di `apps/console/.env` atau `apps/api/.env` agar cron job engineer berikutnya bisa bulk-register otomatis.
+
+---
+
+## 10. Next Cycle (R18) — proposed
+
+1. Ship 3 more blue-ocean endpoints: `coordination.pubsub.publish`, `durable.pubsub.subscribe`, `storage.multipart.upload`
+2. Reprice 15 `devtools.*` endpoints $0.001 → $0.002 (eliminates last loss-makers)
+3. Add 3 more `sec.*`: `sec.url-safety-check`, `sec.dependency-audit`, `sec.token-leak-scan`
+4. Begin distribution work — bulk register if Huda provides the 4 new API keys
+5. Resolve sandbox Docker build retry
+
+**Effort estimate**: ~3 days engineering + 1 day ops (distribution)

@@ -2,7 +2,6 @@ import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 
-import { ApiError } from "@/helpers/errors.helper";
 import { ApiResponse } from "@/helpers/response.helper";
 import type { HonoEnv } from "@/types/hono.types";
 

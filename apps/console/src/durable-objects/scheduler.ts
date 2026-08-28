@@ -294,8 +294,6 @@ function nextCronRun(expr: string, from: number): number | null {
 		}
 		const day = cursor.getUTCDate();
 		const dow = cursor.getUTCDay();
-		const dayOk = doms.includes(day) && (domStar || dows.includes(dow));
-		const dowOk = dows.includes(dow) && (dowStar || doms.includes(day));
 		// Vixie cron: if both DOM and DOW are restricted (not *), the day must
 		// match BOTH. If only one is restricted, that one decides.
 		const bothRestricted = !domStar && !dowStar;

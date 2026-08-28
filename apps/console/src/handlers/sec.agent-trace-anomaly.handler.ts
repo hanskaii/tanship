@@ -159,11 +159,11 @@ function detectCredentialScanning(
 			label: "key_file_access"
 		},
 		{
-			regex: /(aws[_\-]?access|aws[_\-]?secret|bucket|s3|iam)\b/i,
+			regex: /(aws[-_]?access|aws[-_]?secret|bucket|s3|iam)\b/i,
 			label: "cloud_credential"
 		},
 		{
-			regex: /(stripe[_\-]?key|github[_\-]?token|slack[_\-]?bot)\b/i,
+			regex: /(stripe[-_]?key|github[-_]?token|slack[-_]?bot)\b/i,
 			label: "saas_credential"
 		}
 	];

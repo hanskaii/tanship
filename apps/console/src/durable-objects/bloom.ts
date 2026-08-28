@@ -5,11 +5,6 @@ const IDLE_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 const DEFAULT_CAPACITY = 1_000_000;
 const DEFAULT_ERROR_RATE = 0.01; // 1% false positive
 
-interface BloomParams {
-	capacity: number;
-	errorRate: number;
-}
-
 interface BloomState {
 	bits: Uint8Array;
 	added: number;
