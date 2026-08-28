@@ -1549,6 +1549,138 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "kv.session.create",
+		method: "POST",
+		path: "/v1/kv/session/create",
+		price: "$0.005",
+		description:
+			"Create an ephemeral JSON-typed session in edge KV with a configurable TTL (60s to 7 days). Returns the expiry timestamp; the entry auto-expires. 100% blue ocean on x402 — no other service sells KV-backed session storage as a primitive.",
+		mimeType: "application/json",
+		input: {
+			sessionId: "Alphanumeric session id (max 256 chars)",
+			data: "Arbitrary JSON object to store",
+			ttlSeconds: "Optional lifetime 60-604800 (default 3600)"
+		},
+		example: {
+			sessionId: "agent-abc-123",
+			data: { userId: "u_42", step: 1, history: [] },
+			ttlSeconds: 3600
+		}
+	},
+	{
+		id: "kv.session.get",
+		method: "POST",
+		path: "/v1/kv/session/get",
+		price: "$0.002",
+		description:
+			"Read a previously-created session by id. Returns the stored JSON object or 404 if the session expired.",
+		mimeType: "application/json",
+		input: {
+			sessionId: "Alphanumeric session id (max 256 chars)"
+		},
+		example: { sessionId: "agent-abc-123" }
+	},
+	{
+		id: "kv.session.update",
+		method: "POST",
+		path: "/v1/kv/session/update",
+		price: "$0.003",
+		description:
+			"Replace the JSON object stored in an existing session and refresh its TTL. Returns 404 if the session has expired.",
+		mimeType: "application/json",
+		input: {
+			sessionId: "Alphanumeric session id (max 256 chars)",
+			data: "Replacement JSON object",
+			ttlSeconds: "New lifetime 60-604800 (default 3600)"
+		},
+		example: {
+			sessionId: "agent-abc-123",
+			data: { step: 2, history: ["hello"] },
+			ttlSeconds: 3600
+		}
+	},
+	{
+		id: "kv.session.delete",
+		method: "POST",
+		path: "/v1/kv/session/delete",
+		price: "$0.002",
+		description:
+			"Delete a session by id. Idempotent — deleting a missing session is a no-op success.",
+		mimeType: "application/json",
+		input: {
+			sessionId: "Alphanumeric session id (max 256 chars)"
+		},
+		example: { sessionId: "agent-abc-123" }
+	},
+	{
+		id: "kv.lease.acquire",
+		method: "POST",
+		path: "/v1/kv/lease/acquire",
+		price: "$0.010",
+		description:
+			"Acquire a named mutex-style lease in edge KV with a configurable TTL. Returns the current owner if the lease is already held by someone else. Cheaper alternative to a full Durable-Object lock for low-contention coordination.",
+		mimeType: "application/json",
+		input: {
+			leaseId: "Alphanumeric lease id (max 256 chars)",
+			owner: "Caller identity (used to release / heartbeat the lease)",
+			ttlSeconds: "Optional lifetime 1-604800 (default 60)"
+		},
+		example: {
+			leaseId: "build-deploy-42",
+			owner: "agent-007",
+			ttlSeconds: 60
+		}
+	},
+	{
+		id: "kv.lease.release",
+		method: "POST",
+		path: "/v1/kv/lease/release",
+		price: "$0.005",
+		description:
+			"Release a held lease. Only the current owner may release; mismatched owners get a 4xx. Idempotent — releasing a missing lease is a no-op success.",
+		mimeType: "application/json",
+		input: {
+			leaseId: "Alphanumeric lease id (max 256 chars)",
+			owner: "Caller identity — must match the current owner"
+		},
+		example: {
+			leaseId: "build-deploy-42",
+			owner: "agent-007"
+		}
+	},
+	{
+		id: "kv.lease.heartbeat",
+		method: "POST",
+		path: "/v1/kv/lease/heartbeat",
+		price: "$0.005",
+		description:
+			"Refresh the TTL on a held lease. Only the current owner may heartbeat. Returns the new expiry timestamp on success.",
+		mimeType: "application/json",
+		input: {
+			leaseId: "Alphanumeric lease id (max 256 chars)",
+			owner: "Caller identity — must match the current owner",
+			ttlSeconds: "New lifetime 1-604800 (default 60)"
+		},
+		example: {
+			leaseId: "build-deploy-42",
+			owner: "agent-007",
+			ttlSeconds: 60
+		}
+	},
+	{
+		id: "kv.lease.status",
+		method: "POST",
+		path: "/v1/kv/lease/status",
+		price: "$0.001",
+		description:
+			"Read-only snapshot of a lease: who currently holds it and when it expires. Free semantic — cheap to poll.",
+		mimeType: "application/json",
+		input: {
+			leaseId: "Alphanumeric lease id (max 256 chars)"
+		},
+		example: { leaseId: "build-deploy-42" }
+	},
+	{
 		id: "queue.batch",
 		method: "POST",
 		path: "/v1/queue/batch",
