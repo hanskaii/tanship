@@ -60,6 +60,27 @@ const UlidSchema = z.object({
 	count: z.number().int().min(1).max(100).default(1)
 });
 
+const CronParserSchema = z.object({
+	expression: z
+		.string()
+		.min(1)
+		.max(256)
+		.describe(
+			"5- or 6-field cron expression (e.g. '*/15 * * * *' or '0 0 * * 0')"
+		),
+	count: z
+		.number()
+		.int()
+		.min(1)
+		.max(20)
+		.default(5)
+		.describe("How many upcoming fire times to return (1-20)"),
+	from: z
+		.string()
+		.optional()
+		.describe("Optional ISO-8601 start timestamp (defaults to now)")
+});
+
 // Crockford-base32 ULID generator: 48-bit timestamp (ms) + 80-bit randomness.
 // Sortable, collision-resistant, and faster than UUIDv4 for ID generation.
 function generateUlid(): string {
@@ -1316,6 +1337,206 @@ const devHandler = new Hono<HonoEnv>()
 				);
 			}
 		}
-	);
+	)
+	// 5- or 6-field cron parser. Computes the next N fire times after a given
+	// instant. Returns ISO-8601 strings + epoch ms for each fire time, plus
+	// a normalized expression echo. No deps — pure-date arithmetic.
+	.post("/cron-parser", zValidator("json", CronParserSchema), async (c) => {
+		const { expression, count, from } = c.req.valid("json");
+		const parsed = parseCron(expression);
+		if (!parsed) {
+			throw ApiError.badRequest(
+				`Invalid cron expression: "${expression}". Expected 5 or 6 whitespace-separated fields (minute, hour, day-of-month, month, day-of-week[, second]).`
+			);
+		}
+		const start = from ? new Date(from) : new Date();
+		if (Number.isNaN(start.getTime())) {
+			throw ApiError.badRequest(`Invalid 'from' timestamp: ${from}`);
+		}
+		// Walk forward in 1-minute increments (sub-minute only if 6-field).
+		const step = parsed.hasSeconds ? 1000 : 60_000;
+		const fires: { iso: string; epochMs: number }[] = [];
+		const maxIterations = 60_000; // safety: ~1000 days at minute resolution
+		let t = start.getTime();
+		for (let i = 0; i < maxIterations && fires.length < count; i++) {
+			t += step;
+			if (matchesCron(parsed, new Date(t))) {
+				fires.push({ iso: new Date(t).toISOString(), epochMs: t });
+			}
+		}
+		return ApiResponse.ok(c, "Cron expression parsed", {
+			expression,
+			normalized: parsed.normalized,
+			fields: parsed.fields,
+			hasSeconds: parsed.hasSeconds,
+			from: start.toISOString(),
+			next: fires
+		});
+	});
+
+// ----------------------------------------------------------------------------
+// Cron helpers
+// ----------------------------------------------------------------------------
+
+type CronField = {
+	raw: string;
+	min: number;
+	max: number;
+	values: Set<number>;
+};
+
+type ParsedCron = {
+	hasSeconds: boolean;
+	fields: Record<
+		"second" | "minute" | "hour" | "day" | "month" | "weekday",
+		CronField
+	>;
+	normalized: string;
+};
+
+const FIELD_BOUNDS = {
+	second: [0, 59],
+	minute: [0, 59],
+	hour: [0, 23],
+	day: [1, 31],
+	month: [1, 12],
+	weekday: [0, 6] // 0 = Sunday
+} as const;
+
+const MONTH_NAMES: Record<string, number> = {
+	jan: 1,
+	feb: 2,
+	mar: 3,
+	apr: 4,
+	may: 5,
+	jun: 6,
+	jul: 7,
+	aug: 8,
+	sep: 9,
+	oct: 10,
+	nov: 11,
+	dec: 12
+};
+
+const WEEKDAY_NAMES: Record<string, number> = {
+	sun: 0,
+	mon: 1,
+	tue: 2,
+	wed: 3,
+	thu: 4,
+	fri: 5,
+	sat: 6
+};
+
+function expandField(
+	raw: string,
+	min: number,
+	max: number,
+	names?: Record<string, number>
+): CronField | null {
+	const values = new Set<number>();
+	const parts = raw.split(",");
+	for (const part of parts) {
+		const match = part.match(/^(.+)\/(\d+)$/);
+		const rangePart = match ? match[1] : part;
+		const step = match ? parseInt(match[2], 10) : 1;
+		if (step < 1) return null;
+		let range: [number, number];
+		if (rangePart === "*") {
+			range = [min, max];
+		} else if (rangePart.includes("-")) {
+			const [a, b] = rangePart.split("-");
+			const lo = resolveToken(a, names);
+			const hi = resolveToken(b, names);
+			if (lo === null || hi === null || lo < min || hi > max || lo > hi)
+				return null;
+			range = [lo, hi];
+		} else {
+			const v = resolveToken(rangePart, names);
+			if (v === null || v < min || v > max) return null;
+			if (match) {
+				range = [v, max];
+			} else {
+				values.add(v);
+				continue;
+			}
+		}
+		for (let v = range[0]; v <= range[1]; v += step) values.add(v);
+	}
+	if (values.size === 0) return null;
+	return { raw, min, max, values };
+}
+
+function resolveToken(
+	token: string,
+	names?: Record<string, number>
+): number | null {
+	const lower = token.toLowerCase();
+	if (names && lower in names) return names[lower];
+	if (/^\d+$/.test(token)) {
+		const n = parseInt(token, 10);
+		return Number.isFinite(n) ? n : null;
+	}
+	return null;
+}
+
+function parseCron(expr: string): ParsedCron | null {
+	const tokens = expr.trim().split(/\s+/);
+	if (tokens.length !== 5 && tokens.length !== 6) return null;
+	const hasSeconds = tokens.length === 6;
+	const order: (
+		| "second"
+		| "minute"
+		| "hour"
+		| "day"
+		| "month"
+		| "weekday"
+	)[] = hasSeconds
+		? ["second", "minute", "hour", "day", "month", "weekday"]
+		: ["minute", "hour", "day", "month", "weekday"];
+	const fields = {} as ParsedCron["fields"];
+	for (const name of order) {
+		const raw = tokens.shift()!;
+		const [min, max] = FIELD_BOUNDS[name];
+		const names =
+			name === "month"
+				? MONTH_NAMES
+				: name === "weekday"
+					? WEEKDAY_NAMES
+					: undefined;
+		const field = expandField(raw, min, max, names);
+		if (!field) return null;
+		fields[name] = field;
+	}
+	return {
+		hasSeconds,
+		fields,
+		normalized: order.map((n) => fields[n].raw).join(" ")
+	};
+}
+
+function matchesCron(parsed: ParsedCron, d: Date): boolean {
+	const { second, minute, hour, day, month, weekday } = parsed.fields;
+	if (second && !second.values.has(d.getUTCSeconds())) return false;
+	if (!minute.values.has(d.getUTCMinutes())) return false;
+	if (!hour.values.has(d.getUTCHours())) return false;
+	// Day-of-month AND day-of-week: standard cron semantics — when BOTH are
+	// constrained, match if EITHER matches; otherwise each is independent.
+	const domConstrained = day.raw !== "*";
+	const dowConstrained = weekday.raw !== "*";
+	const utcDay = d.getUTCDate();
+	const utcMonth = d.getUTCMonth() + 1;
+	const utcDow = d.getUTCDay();
+	if (!month.values.has(utcMonth)) return false;
+	if (domConstrained && dowConstrained) {
+		if (!day.values.has(utcDay) && !weekday.values.has(utcDow))
+			return false;
+	} else if (domConstrained) {
+		if (!day.values.has(utcDay)) return false;
+	} else if (dowConstrained) {
+		if (!weekday.values.has(utcDow)) return false;
+	}
+	return true;
+}
 
 export default devHandler;

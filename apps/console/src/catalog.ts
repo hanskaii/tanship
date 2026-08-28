@@ -2155,6 +2155,24 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "dev.cron-parser",
+		method: "POST",
+		path: "/v1/dev/cron-parser",
+		price: "$0.002",
+		description:
+			"Parse a 5- or 6-field cron expression and compute the next N upcoming fire times as ISO-8601 + epoch ms. Pure computation, no external calls.",
+		mimeType: "application/json",
+		input: {
+			expression: "Cron expression (e.g. '*/5 * * * *' or '0 0 * * 0')",
+			count: "How many fire times to return (1-20, default 5)",
+			from: "Optional ISO-8601 start timestamp (default: now)"
+		},
+		example: {
+			expression: "*/5 * * * *",
+			count: 3
+		}
+	},
+	{
 		id: "dev.ulid",
 		method: "POST",
 		path: "/v1/dev/ulid",

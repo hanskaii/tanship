@@ -8,8 +8,8 @@ import { ApiResponse } from "@/helpers/response.helper";
 import type { HonoEnv } from "@/types/hono.types";
 
 const CHAT_MODELS = [
-	"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-	"@cf/meta/llama-1-8b-instruct-fast"
+	"@cf/meta/llama-3.1-8b-instruct-fast",
+	"@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 ] as const;
 const DEFAULT_CHAT = CHAT_MODELS[0];
 

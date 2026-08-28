@@ -6,10 +6,12 @@ import { ApiError } from "@/helpers/errors.helper";
 import { ApiResponse } from "@/helpers/response.helper";
 import type { HonoEnv } from "@/types/hono.types";
 
+// ponytail: default 70B is profitable only at >=$0.02/call; 8B is the margin-safe
+// default for cheap LLM endpoints. Caller can still opt-in to 70B via the `model` field.
 const CHAT_MODELS = [
-	"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 	"@cf/meta/llama-3.1-8b-instruct-fast",
 	"@cf/openai/gpt-oss-120b",
+	"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 	"@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
 	"@cf/deepseek-ai/deepseek-r1-distill-llama-8b"
 ] as const;
