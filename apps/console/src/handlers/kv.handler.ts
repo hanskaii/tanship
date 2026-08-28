@@ -26,6 +26,12 @@ const ListSchema = z.object({
 	cursor: z.string().optional()
 });
 
+// Atomic increment schema
+const AtomicIncrementSchema = z.object({
+	key: z.string().min(1).max(512),
+	amount: z.number().int().min(1).max(1_000_000).default(1)
+});
+
 const kvHandler = new Hono<HonoEnv>()
 	.post("/set", zValidator("json", SetSchema), async (c) => {
 		const { key, value, ttl } = c.req.valid("json");
@@ -74,6 +80,32 @@ const kvHandler = new Hono<HonoEnv>()
 			cursor: result.list_complete ? null : result.cursor,
 			complete: result.list_complete
 		});
-	});
+	})
+	// Atomic increment endpoint
+	.post(
+		"/atomic/increment",
+		zValidator("json", AtomicIncrementSchema),
+		async (c) => {
+			const { key, amount } = c.req.valid("json");
+
+			// Get current value (default to 0 if not exists)
+			const currentValueStr = await c.env.KV.get(key);
+			const currentValue = currentValueStr
+				? parseInt(currentValueStr, 10)
+				: 0;
+
+			// Calculate new value
+			const newValue = currentValue + amount;
+
+			// Store new value as string
+			await c.env.KV.put(key, newValue.toString());
+
+			return ApiResponse.ok(c, "Counter incremented", {
+				key,
+				value: newValue,
+				amount
+			});
+		}
+	);
 
 export default kvHandler;

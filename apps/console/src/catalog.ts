@@ -1532,6 +1532,23 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "kv.atomic.increment",
+		method: "POST",
+		path: "/v1/kv/atomic/increment",
+		price: "$0.003",
+		description:
+			"Atomically increment a numeric counter in edge KV. Reads the current value, adds the amount, and writes back in a single operation. Returns the new value. KV-API primitives are 100% blue ocean on x402 — no one else sells atomic KV counter operations.",
+		mimeType: "application/json",
+		input: {
+			key: "Counter key (max 512 chars)",
+			amount: "Optional increment amount 1-1000000 (default 1)"
+		},
+		example: {
+			key: "page-views",
+			amount: 1
+		}
+	},
+	{
 		id: "queue.batch",
 		method: "POST",
 		path: "/v1/queue/batch",
