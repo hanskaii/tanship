@@ -2961,6 +2961,36 @@ export const SERVICES: ServiceDef[] = [
 			]
 		}
 	},
+	// ── db.query.readonly (R16 blue ocean) ──────────────────────────────────
+	{
+		id: "db.query.readonly",
+		method: "POST",
+		path: "/v1/db/query/readonly",
+		price: "$0.005",
+		description:
+			"Execute a strictly read-only SELECT, PRAGMA, or EXPLAIN query on edge SQLite via D1. Returns { readonly: true } in every response — callers that only need to read data get an explicit non-mutation guarantee, making it safe for untrusted agents and audit logs. Destructive write attempts are rejected.",
+		mimeType: "application/json",
+		input: {
+			sql: "SQL SELECT/PRAGMA/EXPLAIN statement (1-10,000 chars)",
+			params: "Optional array of bind parameters"
+		},
+		example: {
+			sql: "SELECT id, email, created_at FROM users ORDER BY created_at DESC LIMIT 10",
+			params: []
+		}
+	},
+	// ── db.schema.introspect (R16 blue ocean) ───────────────────────────────
+	{
+		id: "db.schema.introspect",
+		method: "POST",
+		path: "/v1/db/schema/introspect",
+		price: "$0.010",
+		description:
+			"Introspect the full schema of the edge SQLite database — returns table names, column names, types, nullability, default values, primary keys, indexes, foreign keys, and raw DDL for every user table. No query parameters required.",
+		mimeType: "application/json",
+		input: {},
+		example: {}
+	},
 	// ── kv.new ───────────────────────────────────────────────────────────────
 	{
 		id: "kv.atomic.cas",

@@ -270,6 +270,112 @@ const dbHandler = new Hono<HonoEnv>()
 				}
 			}))
 		});
+	})
+	// Strictly SELECT-only DQL endpoint — callers that only need to read data
+	// get the same guarantee as /query but with an explicit contract: zero
+	// writes are possible by design, making it safe for untrusted agents.
+	.post("/query/readonly", zValidator("json", QuerySchema), async (c) => {
+		const { sql, params } = c.req.valid("json");
+
+		const normalized = sql.trim().toUpperCase();
+		if (
+			!normalized.startsWith("SELECT") &&
+			!normalized.startsWith("PRAGMA") &&
+			!normalized.startsWith("EXPLAIN")
+		) {
+			throw ApiError.badRequest(
+				"/query/readonly only accepts SELECT, PRAGMA, and EXPLAIN. No writes are permitted by design."
+			);
+		}
+
+		const stmt = c.env.DB.prepare(sql).bind(...params);
+		const result = await stmt.all();
+
+		return ApiResponse.ok(c, "Read-only query executed", {
+			readonly: true,
+			columns:
+				result.results.length > 0
+					? Object.keys(result.results[0] as object)
+					: [],
+			rows: result.results,
+			meta: {
+				rowsRead: result.meta.rows_read,
+				rowsWritten: result.meta.rows_written,
+				duration: result.meta.duration
+			}
+		});
+	})
+	// Schema introspection — returns the full DDL of every table, including
+	// column types, nullability, primary keys, indexes, and foreign keys.
+	.post("/schema/introspect", async (c) => {
+		const tables = await c.env.DB.prepare("PRAGMA table_list").all<{
+			name: string;
+			type: string;
+			sql: string;
+		}>();
+
+		const schema: Array<{
+			name: string;
+			type: string;
+			columns: Array<{
+				name: string;
+				type: string;
+				notnull: number;
+				dflt_value: string | null;
+				pk: number;
+			}>;
+			indexes: Array<{ name: string; unique: number; origin: string }>;
+			foreignKeys: Array<{
+				from: string;
+				table: string;
+				to: string;
+			}>;
+			ddl: string;
+		}> = [];
+
+		for (const table of tables.results) {
+			if (table.type !== "table" || table.name.startsWith("sqlite_"))
+				continue;
+
+			const columns = await c.env.DB.prepare(
+				`PRAGMA table_info("${table.name}")`
+			).all<{
+				cid: number;
+				name: string;
+				type: string;
+				notnull: number;
+				dflt_value: string | null;
+				pk: number;
+			}>();
+
+			const indexes = await c.env.DB.prepare(
+				`PRAGMA index_list("${table.name}")`
+			).all<{ name: string; unique: number; origin: string }>();
+
+			const foreignKeys = await c.env.DB.prepare(
+				`PRAGMA foreign_key_list("${table.name}")`
+			).all<{ from: string; table: string; to: string }>();
+
+			schema.push({
+				name: table.name,
+				type: table.type,
+				columns: columns.results.map((col) => ({
+					name: col.name,
+					type: col.type,
+					notnull: col.notnull,
+					dflt_value: col.dflt_value,
+					pk: col.pk
+				})),
+				indexes: indexes.results,
+				foreignKeys: foreignKeys.results,
+				ddl: table.sql
+			});
+		}
+
+		return ApiResponse.ok(c, "Schema introspected", {
+			tables: schema,
+			count: schema.length
+		});
 	});
 
 export default dbHandler;
