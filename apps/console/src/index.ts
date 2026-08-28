@@ -12,6 +12,8 @@ import secCveLookupHandler from "./handlers/sec.cve-lookup.handler";
 import secMcpRiskScorerHandler from "./handlers/sec.mcp-tool-risk-scorer.handler";
 import secPromptInjectionScanHandler from "./handlers/sec.prompt-injection-scan.handler";
 import secDomainThreatReportHandler from "./handlers/sec.domain-threat-report.handler";
+import secLlmOutputValidateHandler from "./handlers/sec.llm-output-validate.handler";
+import secAgentTraceAnomalyHandler from "./handlers/sec.agent-trace-anomaly.handler";
 import cloudEstimateHandler from "./handlers/cloud.estimate.handler";
 import devHandler from "./handlers/dev.handler";
 import modalHandler from "./handlers/modal.handler";
@@ -34,8 +36,10 @@ import devtoolsHandler from "./handlers/devtools.handler";
 import nlHandler from "./handlers/nl.handler";
 import ragHandler from "./handlers/rag.handler";
 import ragAnswerHandler from "./handlers/rag.answer.handler";
+import { handler as ragBatchUpsertHandler } from "./handlers/rag.batch-upsert.handler";
 import { aiCachedHandler } from "./handlers/ai.rag.handler";
 import aiBatchHandler from "./handlers/ai.batch.handler";
+import aiTtsHandler from "./handlers/ai.tts.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
 import { OPENAPI_SPEC } from "./openapi";
@@ -161,6 +165,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/ai", aiHandler)
 	.route("/v1/ai/chat/cached", aiCachedHandler)
 	.route("/v1/ai/batch", aiBatchHandler)
+	.route("/v1/ai/tts", aiTtsHandler)
 	.route("/v1/browser", browserHandler)
 	.route("/v1/crypto", cryptoHandler)
 	.route("/v1/dev", devHandler)
@@ -171,6 +176,8 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/security/mcp-tool-risk-scorer", secMcpRiskScorerHandler)
 	.route("/v1/security/prompt-injection-scan", secPromptInjectionScanHandler)
 	.route("/v1/security/domain-threat-report", secDomainThreatReportHandler)
+	.route("/v1/security/llm-output-validate", secLlmOutputValidateHandler)
+	.route("/v1/security/agent-trace-anomaly", secAgentTraceAnomalyHandler)
 	.route("/v1/cloud/estimate", cloudEstimateHandler)
 	.route("/v1/modal", modalHandler)
 	.route("/v1/reddit", redditHandler)
@@ -190,6 +197,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/agent/inbox", agentInboxHandler)
 	.route("/v1/nl", nlHandler)
 	.route("/v1/rag", ragHandler)
+	.route("/v1/rag/batch", ragBatchUpsertHandler)
 	.route("/v1/rag/answer", ragAnswerHandler)
 	// Free discovery endpoints
 	.get("/v1/logs", (c) => {

