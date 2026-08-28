@@ -1,5 +1,54 @@
 # Tanship x402 Revenue Agent — Cycle Log
 
+## Cycle 5 — 2026-08-28
+
+### Balance (Base Mainnet)
+
+- **Revenue Wallet** (0x392D595f8F678df7f7A1D3d42d87E7985c8E5146): **0.625808 USDC** (Δ +0.000000)
+- **Agent Wallet** (0x3dcA920eEd16B39F7afbB12558B0123032D49b2F): n/a this cycle
+
+### Improvements Deployed
+
+| Item                 | Type             | Details                                                                                                          |
+| -------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `kv.session.create`  | **New Endpoint** | Ephemeral JSON-typed session in edge KV, TTL 60s–7d. $0.005                                                      |
+| `kv.session.get`     | **New Endpoint** | Read session JSON by id. 404 if expired. $0.002                                                                  |
+| `kv.session.update`  | **New Endpoint** | Replace session payload + refresh TTL. 404 if missing. $0.003                                                    |
+| `kv.session.delete`  | **New Endpoint** | Delete session, idempotent. $0.002                                                                               |
+| `kv.lease.acquire`   | **New Endpoint** | KV-backed optimistic mutex, owner-gated, TTL 1s–7d. Returns current owner if held. $0.010 (cheaper than DO lock) |
+| `kv.lease.release`   | **New Endpoint** | Release lease (owner-gated, idempotent). $0.005                                                                  |
+| `kv.lease.heartbeat` | **New Endpoint** | Refresh lease TTL, owner-gated. $0.005                                                                           |
+| `kv.lease.status`    | **New Endpoint** | Free read of lease holder/expiry. $0.001 (cheapest in catalog)                                                   |
+| `pnpm run check`     | **Lint**         | 0 errors, 12 warnings (all pre-existing — unused catch params, dead imports)                                     |
+
+### Deploy Status
+
+- Version ID: `97998f33-3d24-4117-b1ad-9bdb2314a4e7`
+- Commit: `88047e2`
+- Live: https://x402.tanship.dev
+- Catalog size: **165 services** (was 157 at start of cycle, +8 new)
+- Discovery payload `X-Extension-Bazaar-Info` header intact
+
+### Live Verification
+
+- `GET /v1/services` → 200 OK, 165 services returned
+- 8 new `kv.session.*` / `kv.lease.*` paths visible in catalog
+- `npx awal` Electron daemon still hanging (workaround: direct `eth_call` against `mainnet.base.org`)
+
+### Notes
+
+- Bazaar registration still requires real payment settlement (sibling agents paying). Can't self-trigger without Electron daemon.
+- Lease endpoints compete with existing `coordination.lock.*` (Durable Object) — different value prop: cheaper, no DO spin-up cost, but eventually-consistent vs single-writer DO guarantees. Positioned in catalog as "low-contention alternative".
+
+### Next Actions
+
+- Add `web3.tx-decode` (cycle 3+ backlog)
+- Add `ai.budget-guard` (per-wallet spending cap w/ KV)
+- Monitor revenue wallet for new inflows from new endpoints
+- Restart `awal` daemon or fully migrate to direct RPC
+
+---
+
 ## Cycle 4 — 2026-08-28
 
 ### Balance (Base Mainnet)
