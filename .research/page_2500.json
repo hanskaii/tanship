@@ -1,0 +1,4287 @@
+{
+	"items": [
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "4MLEGbgVfcXYWLoV71Cf52oLXThJWsx1ggSV9iwbVRWk",
+					"amount": "5000000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 120
+				}
+			],
+			"lastUpdated": "2026-07-08T06:13:15.247Z",
+			"metadata": {},
+			"resource": "https://pretestads.com/api/v1/score",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"media_url": "https://example.com/my-ad.mp4",
+					"window_seconds": 15
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"id": "9c2c7a4e-0000-0000-0000-000000000000",
+					"status": "pending",
+					"status_url": "https://pretestads.com/api/v1/score/9c2c7a4e-0000-0000-0000-000000000000"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "8VZEQmHM8ADqTSWMtnn3cMmevBaR1E8xrrzm2zf81g2U",
+					"amount": "60000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-08T00:57:17.754Z",
+			"metadata": {},
+			"resource": "https://stablesocial.dev/api/sc/tiktok/profile",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x678765DeEdF73A70207F18CAdA018d381Cf25637",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-07T21:28:03.877Z",
+			"metadata": {},
+			"resource": "http://x402llm.xyz/v1/chat/completions",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"model": "llama-3.1-8b",
+					"messages": [
+						{
+							"role": "user",
+							"content": "Say hello in one sentence."
+						}
+					],
+					"max_tokens": 256
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"id": "chatcmpl-abc123",
+					"model": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+					"usage": {
+						"total_tokens": 11,
+						"prompt_tokens": 8,
+						"completion_tokens": 3
+					},
+					"object": "chat.completion",
+					"choices": [
+						{
+							"index": 0,
+							"message": {
+								"role": "assistant",
+								"content": "Hello!"
+							},
+							"finish_reason": "stop"
+						}
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xd83a6d335B7792b409CDB5763A3C8885386402F0",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://lookup.bustercall.workers.dev/util/ping?query=solana&limit=10",
+					"description": "",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "1000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-07T16:24:01.577Z",
+			"metadata": {},
+			"resource": "https://lookup.bustercall.workers.dev/util/ping",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9246XrsAEKH6hAyEQe5PvdpUL1p5Ktj9c7ySnwQn6ois",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-07T09:49:45.401Z",
+			"metadata": {},
+			"resource": "https://fal.x402.paysponge.com/fal-ai/fast-sdxl",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "40000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-07T09:47:42.384Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/price-alert",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "POST",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"status": "active",
+					"symbol": "ETH",
+					"alert_id": "alert_eth_3500_001",
+					"condition": "above",
+					"created_at": "2026-07-04T10:15:30Z",
+					"expires_at": "2026-07-05T10:15:30Z",
+					"target_price": 3500,
+					"current_price": 3245.67
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "8EgACpZ16XWEt7YjJPsh1ZheVRZUGmmwQ8nJdmA1o5w4",
+					"amount": "60000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-07T05:54:09.953Z",
+			"metadata": {},
+			"resource": "https://stableenrich.dev/api/companyenrich/properties-enrich",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xdB5C2dF47e4A6Df74edeb6DE3159ae38b8Cc10fd",
+					"amount": "100000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-07T01:24:57.819Z",
+			"metadata": {},
+			"resource": "http://apiv2.laevitas.ch/api/v1/analytics/:var1",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "var1": "realized-volatility" },
+				"queryParams": {
+					"limit": 100,
+					"exchange": "deribit",
+					"instrument_name": "BTC-PERPETUAL"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "data": [], "success": true }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9VaDVp1Wb78G4Wm6VuTiMrpESjrUymXefQTHcJGRSTEA",
+					"amount": "500000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 1200
+				}
+			],
+			"lastUpdated": "2026-07-06T23:36:40.784Z",
+			"metadata": {},
+			"resource": "https://api.xona-agent.com/video/short-generation",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "prompt": "", "image_url": "", "aspect_ratio": "" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"data": {
+						"model": "grok-imagine-video",
+						"duration": 10,
+						"metadata": {},
+						"video_url": ""
+					},
+					"success": true
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x4c3b0b1cab290300bd5a36ad5f33a607acbd7ac3",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 600
+				}
+			],
+			"lastUpdated": "2026-07-06T22:30:05.710Z",
+			"metadata": {},
+			"resource": "https://x402.cambrian.network/x402/api/v1/evm/price-current",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"token_address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+				}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "HvBMG7ezcwDssxXP7DPJJsveyDnvUm2wNySBR5WF2XEY",
+					"amount": "1000000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T21:44:43.857Z",
+			"metadata": {},
+			"resource": "https://x402email.com/api/inbox/buy",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "username": "my-inbox" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "D6GAZpvvLe8aUi9qZEDTXPERHpP3pwAgaeucp9ib1fW",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T21:25:40.967Z",
+			"metadata": {},
+			"resource": "https://stable-finance-jvzp8sbhf-merit-systems.vercel.app/api/prices/snapshot",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "ticker": "AAPL" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"snapshot": {
+						"time": "2026-05-28T20:35:17Z",
+						"price": 312.18,
+						"ticker": "AAPL",
+						"day_change": 1.33,
+						"time_milliseconds": 1780000517325,
+						"day_change_percent": 0.43
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "8EgACpZ16XWEt7YjJPsh1ZheVRZUGmmwQ8nJdmA1o5w4",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T21:17:42.128Z",
+			"metadata": {},
+			"resource": "https://stable-enrich-anncfzk3u-merit-systems.vercel.app/api/exa/search",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"type": "auto",
+					"query": "hedge fund portfolio manager New York",
+					"category": "people",
+					"numResults": 10
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"features": { "xSettlementAccountSupported": true },
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "8EgACpZ16XWEt7YjJPsh1ZheVRZUGmmwQ8nJdmA1o5w4",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T20:52:36.481Z",
+			"metadata": {},
+			"resource": "https://stable-enrich-ecdu27dk1-merit-systems.vercel.app/api/exa/search",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"type": "auto",
+					"query": "hedge fund portfolio manager New York",
+					"category": "people",
+					"numResults": 10
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x4c3b0b1cab290300bd5a36ad5f33a607acbd7ac3",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 600
+				}
+			],
+			"lastUpdated": "2026-07-06T19:58:27.877Z",
+			"metadata": {},
+			"resource": "https://x402.cambrian.network/api/v1/evm/price-current",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "token_address": "0xabc" }
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"features": { "xSettlementAccountSupported": true },
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "8EgACpZ16XWEt7YjJPsh1ZheVRZUGmmwQ8nJdmA1o5w4",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T18:06:25.575Z",
+			"metadata": {},
+			"resource": "https://stable-enrich-git-payai-solana-facilitator-merit-systems.vercel.app/api/exa/search",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"type": "auto",
+					"query": "hedge fund portfolio manager New York",
+					"category": "people",
+					"numResults": 10
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"version": "2",
+						"assetTransferMethod": "eip3009"
+					},
+					"payTo": "0xabc23c618ed32cb9c3064dff2798fc23c87a5a6d",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-06T08:35:38.644Z",
+			"metadata": {},
+			"resource": "https://engedi.digi-life17.workers.dev/api/crypto/analyze",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "coin": "Coin", "currency": "Currency" }
+			},
+			"outputSchema": { "type": "json" }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"version": "2",
+						"assetTransferMethod": "eip3009"
+					},
+					"payTo": "0xabc23c618ed32cb9c3064dff2798fc23c87a5a6d",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-06T08:35:15.671Z",
+			"metadata": {},
+			"resource": "https://engedi.digi-life17.workers.dev/api/stocks/analyze",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "symbol": "Stock" }
+			},
+			"outputSchema": { "type": "json" }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"version": "2",
+						"assetTransferMethod": "eip3009"
+					},
+					"payTo": "0xabc23c618ed32cb9c3064dff2798fc23c87a5a6d",
+					"amount": "15000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-06T08:29:11.825Z",
+			"metadata": {},
+			"resource": "https://engedi.digi-life17.workers.dev/api/news/briefing",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "topic": "Topic" }
+			},
+			"outputSchema": { "type": "json" }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"version": "2",
+						"assetTransferMethod": "eip3009"
+					},
+					"payTo": "0xabc23c618ed32cb9c3064dff2798fc23c87a5a6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-06T08:18:05.234Z",
+			"metadata": {},
+			"resource": "https://engedi.digi-life17.workers.dev/api/exchange-rates",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "base": "Base", "target": "Target" }
+			},
+			"outputSchema": { "type": "json" }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "60000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T08:00:34.995Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/liquidation/alert",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "POST",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"status": "active",
+					"symbol": "BTC",
+					"alert_id": "liq_alert_btc_1720000000_a1b2c3d4",
+					"condition": "cascade",
+					"expires_at": "2026-07-06T10:15:30Z",
+					"webhook_url": "https://your-app.com/webhook",
+					"threshold_usd": 1000000
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T04:47:07.741Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/domain-extract",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "url": "https://api.example.com/path" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "domainExtract",
+					"summary": "Extract host and naive domain parts using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T04:46:54.448Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/diff-lines",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"after": "beta\ngamma",
+					"before": "alpha\nbeta"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "diffLines",
+					"summary": "Compare line sets using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T04:46:41.940Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/color-convert",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "hex": "#22c55e" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "colorConvert",
+					"summary": "Convert hex colors to RGB and HSL using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+						"mimeType": "application/json",
+						"resource": "https://sol.blockrun.ai/api/v1/chat/completions",
+						"description": "AI model inference"
+					},
+					"payTo": "AQqnMFBwGZEoti85aTVRy8XYpKrho7GaMDx9ZB3CEeKA",
+					"amount": "393751",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T03:56:44.010Z",
+			"metadata": {},
+			"resource": "https://sol.blockrun.ai/api/v1/search",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "POST",
+				"bodyFields": {
+					"query": {
+						"type": "string",
+						"description": "Search query"
+					},
+					"sources": {
+						"type": "array",
+						"items": {
+							"enum": ["x", "web", "news"],
+							"type": "string"
+						}
+					},
+					"max_results": {
+						"type": "integer",
+						"maximum": 50,
+						"minimum": 1
+					}
+				},
+				"discoverable": true
+			},
+			"outputSchema": {
+				"type": "object",
+				"properties": {
+					"query": { "type": "string" },
+					"summary": { "type": "string" },
+					"citations": { "type": "array" }
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "3232",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:54:54.461Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/code-review/mini",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"code": "function add(a,b){ return a-b }",
+					"focus": "bugs and tests",
+					"language": "javascript"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "3000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:54:36.143Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-discovery-price-compare",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"urls": ["https://gpt55.558686.xyz"],
+					"limit": 20,
+					"query": "quote"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402DiscoveryPriceCompare",
+					"summary": "Structured x402 discovery price comparison."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2930",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:54:25.823Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/extract-json/standard",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Alice from Acme wants a demo next Tuesday. Email alice@example.com.",
+					"fields": ["name", "company", "email", "intent", "date"]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2930",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:54:15.837Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/extract-json",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Alice from Acme wants a demo next Tuesday. Email alice@example.com.",
+					"fields": ["name", "company", "email", "intent", "date"]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "{\"field\":\"value\"}" }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2930",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:54:07.529Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/code-review/standard",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"code": "function add(a,b){ return a-b }",
+					"focus": "bugs and tests",
+					"language": "javascript"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2930",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:53:57.037Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/code-review",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"code": "function add(a,b){ return a-b }",
+					"focus": "bugs and tests",
+					"language": "javascript"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Concise code review findings." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2930",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:53:45.856Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/chat/completions/gpt-5.4-mini",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"model": "gpt-5.4-mini",
+					"stream": false,
+					"messages": [
+						{
+							"role": "user",
+							"content": "Summarize x402 in one sentence."
+						}
+					],
+					"max_tokens": 256
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"id": "chatcmpl_example",
+					"model": "gpt-5.5",
+					"usage": {
+						"total_tokens": 44,
+						"prompt_tokens": 32,
+						"completion_tokens": 12
+					},
+					"object": "chat.completion",
+					"choices": [
+						{
+							"index": 0,
+							"message": {
+								"role": "assistant",
+								"content": "A concise answer from GPT-5.5."
+							},
+							"finish_reason": "stop"
+						}
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2627",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:53:37.004Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/rewrite/mini",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Make this clearer.",
+					"tone": "professional"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2627",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:53:29.803Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/answer/mini",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"context": "x402 is a payment protocol for HTTP APIs.",
+					"question": "What is x402?"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:53:19.987Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/translate/standard",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Hello, world.",
+					"target_language": "Chinese"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:53:07.746Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/translate/mini",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Hello, world.",
+					"target_language": "Chinese"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:52:50.670Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/translate",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"text": "Hello, x402 buyer.",
+					"max_tokens": 64,
+					"source_language": "English",
+					"target_language": "Spanish"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Translated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:52:43.589Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/summarize/standard",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Paste text to summarize here.",
+					"format": "bullets"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:52:32.724Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/summarize/mini",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Paste text to summarize here.",
+					"format": "bullets"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:52:24.722Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/summarize",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Paste text to summarize here.",
+					"format": "bullets"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Concise summary text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:52:17.696Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/rewrite/standard",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Make this clearer.",
+					"tone": "professional"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:52:07.637Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/rewrite",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Make this clearer.",
+					"tone": "professional"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Rewritten text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:51:58.117Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/answer/standard",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"context": "x402 is a payment protocol for HTTP APIs.",
+					"question": "What is x402?"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:51:50.697Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/answer",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"context": "x402 is a payment protocol for HTTP APIs.",
+					"question": "What is x402?"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Concise answer." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "2000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:51:30.260Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-batch-quote-inspector",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"urls": [
+						"https://gpt55.558686.xyz/v1/x402-ping",
+						"https://gpt55.558686.xyz/v1/tools/x402-quote-inspector"
+					],
+					"method": "GET"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402BatchQuoteInspector",
+					"summary": "Structured batch x402 402-payment quote inspection."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:51:16.373Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/x402-ping",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"model": "gpt-5.5",
+					"service": "gpt55-token-gateway"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:51:00.314Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-site-audit",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "url": "https://example.com" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402SiteAudit",
+					"summary": "Structured x402/API buyer-readiness audit."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:50:42.304Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/url-text",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"url": "https://example.com",
+					"max_chars": 2000
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "urlText",
+					"summary": "Clean readable webpage text."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:50:24.832Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/url-metadata",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "url": "https://example.com" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "urlMetadata",
+					"summary": "Structured URL metadata."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:50:13.688Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/url-links",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "url": "https://example.com", "limit": 50 }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "urlLinks",
+					"summary": "Structured webpage links."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:49:59.838Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/uri-codec",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"mode": "encode",
+					"text": "hello world",
+					"component": true
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "uriCodec",
+					"summary": "Encode or decode URI text using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:49:42.143Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/timestamp",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "value": "2026-06-10T00:00:00Z" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "timestamp",
+					"summary": "Convert timestamps and ISO dates using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:49:23.923Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/sort-lines",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"text": "beta\nalpha\n10\n2",
+					"numeric": false,
+					"descending": false
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "sortLines",
+					"summary": "Sort lines using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:49:04.437Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/regex-match",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"text": "alice@example.com and bob@example.com",
+					"flags": "g",
+					"limit": 10,
+					"pattern": "[\\w.-]+@[\\w.-]+"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "regexMatch",
+					"summary": "Run bounded regex matching using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:48:52.168Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/query-parse",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "query": "a=1&a=2&b=test" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "queryParse",
+					"summary": "Parse URL query strings using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:48:40.072Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/jwt-decode",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"token": "eyJhbGciOiJub25lIn0.eyJzdWIiOiJleGFtcGxlIn0."
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "jwtDecode",
+					"summary": "Decode JWT header and payload using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:48:26.704Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/json-validate",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"json": "{\"ok\":true,\"items\":[1,2]}",
+					"pretty": true
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "jsonValidate",
+					"summary": "JSON parse status and formatted output."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:48:14.402Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/json-minify",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "json": "{ \"ok\": true, \"items\": [1, 2] }" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "jsonMinify",
+					"summary": "Minify JSON using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:48:02.953Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/json-keys",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"json": "{\"user\":{\"name\":\"Alice\"},\"items\":[1,2]}",
+					"max_depth": 4
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "jsonKeys",
+					"summary": "List JSON key paths using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:47:50.147Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/http-status",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "url": "https://example.com" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "httpStatus",
+					"summary": "HTTP status and redirect details."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:47:36.801Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/html-strip",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"html": "<h1>Hello</h1><p>x402</p>",
+					"max_chars": 2000
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "htmlStrip",
+					"summary": "Strip HTML to clean text using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:47:23.817Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/html-entity-codec",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "mode": "escape", "text": "<hello & x402>" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "htmlEntityCodec",
+					"summary": "Escape or unescape HTML entities using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "100",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T02:47:07.526Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/email-normalize",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "email": " Alice@Example.COM " }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "emailNormalize",
+					"summary": "Normalize and validate email shape using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "12000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T01:01:24.299Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-receipt-bound-execution-gate",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"action_ref": "mcp-install-2026-06-24",
+					"paid_route": "/v1/tools/x402-mcp-integration-kit",
+					"receipt_url": "https://gpt55.558686.xyz/x402/receipts/example",
+					"result_hash": "sha256:example",
+					"tool_call_id": "toolcall_123",
+					"expected_pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"max_age_seconds": 3600,
+					"expected_network": "eip155:8453",
+					"expected_amount_atomic": "6000"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402ReceiptBoundExecutionGate",
+					"summary": "Structured post-payment entitlement decision with receipt binding, reuse decision, MCP gate config, Flowise gate config, audit record, and repurchase trigger."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "12000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T01:01:19.001Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-paid-mcp-authorization-bridge",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"tool_name": "x402_mcp_integration_kit",
+					"buyer_agent": "claude-desktop-agent",
+					"paid_tool_url": "https://gpt55.558686.xyz/v1/tools/x402-mcp-integration-kit",
+					"mcp_server_url": "https://gpt55.558686.xyz/mcp",
+					"expected_pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"expected_network": "eip155:8453",
+					"daily_budget_usdc": 1,
+					"max_usdc_per_call": 0.02,
+					"authorization_scope": "paid:mcp:x402:integration-kit",
+					"require_receipt_evidence": true
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402PaidMcpAuthorizationBridge",
+					"summary": "Generated text."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "12000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T01:01:07.699Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-directory-compliance-repair-pack",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"issue": "Inconsistent 0/4 recent graded runs passed",
+					"github_repo": "https://github.com/go165/gpt55-x402-gateway",
+					"listing_url": "https://x402gle.com/resources/a369e5cb-3158-4599-b0fd-e1321868629a",
+					"service_url": "https://gpt55.558686.xyz",
+					"target_buyer": "agent wallet and MCP buyers",
+					"expected_pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"expected_network": "eip155:8453",
+					"public_pages_url": "https://go165.github.io/gpt55-x402-gateway/",
+					"expected_price_usd": 0.006
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402DirectoryComplianceRepairPack",
+					"summary": "Structured x402 directory compliance repair pack for metadata drift, marketplace grading, buyer trust copy, and retest actions."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "12000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T01:01:00.419Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-buyer-client-adapter-pack",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"method": "POST",
+					"paid_route": "https://gpt55.558686.xyz/v1/paid/wallet-signing-safety-pack",
+					"buyer_runtime": "node",
+					"wallet_env_var": "X402_PRIVATE_KEY",
+					"expected_pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"expected_network": "eip155:8453",
+					"max_usdc_per_call": 0.02,
+					"request_body_example": {
+						"chain": "base",
+						"typed_data": "{\"domain\":{\"chainId\":8453},\"primaryType\":\"Permit\"}",
+						"max_usdc_per_call": 0.02
+					},
+					"require_receipt_evidence": true
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402BuyerClientAdapterPack",
+					"summary": "Buyer-owned x402 payment client adapter pack with quote validation, local wallet env contract, Node fetch client, MCP wrapper, same-request retry, and receipt capture policy."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "12000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T01:00:54.901Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-agent-task-receipt-outbox",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"network": "eip155:8453",
+					"task_id": "task_weather_001",
+					"agent_id": "claude-desktop-agent",
+					"action_ref": "mcp-install-2026-06-27",
+					"paid_route": "/v1/tools/x402-mcp-integration-kit",
+					"receipt_id": "example",
+					"receipt_url": "https://gpt55.558686.xyz/x402/receipts/example",
+					"result_hash": "sha256:example",
+					"tool_call_id": "toolcall_123",
+					"amount_atomic": "6000",
+					"payment_status": "payment-completed"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402AgentTaskReceiptOutbox",
+					"summary": "Generated text."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "12000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T01:00:47.505Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-agent-payment-policy-compiler",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"expected_pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"allowed_services": "https://gpt55.558686.xyz/v1/x402-ping",
+					"expected_network": "eip155:8453",
+					"daily_budget_usdc": 1,
+					"max_usdc_per_call": 0.02,
+					"consecutive_failures_before_pause": 2
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402AgentPaymentPolicyCompiler",
+					"summary": "Compiled buyer-owned payment policy with spend caps, allowlists, MCP guard config, Flowise guard config, and receipt audit schema."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "12000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T01:00:41.970Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-agent-payment-approval-pack",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"use_case": "allow MCP agent to buy x402 tools under a capped budget",
+					"buyer_team": "agent platform",
+					"service_url": "https://gpt55.558686.xyz/v1/tools/x402-mcp-integration-kit",
+					"approver_role": "engineering manager",
+					"expected_pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"expected_network": "eip155:8453",
+					"daily_budget_usdc": 1,
+					"max_usdc_per_call": 0.02,
+					"require_receipt_evidence": true
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402AgentPaymentApprovalPack",
+					"summary": "Team-ready x402 agent payment approval pack with budget approval, security review, procurement summary, receipt evidence policy, MCP approval gate, Flowise approval gate, and repeat approval contract."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "12000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T01:00:27.799Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/paid/wallet-runtime-spend-guard",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "url": "https://example.com" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402AgentSpendRecurrenceGuard",
+					"summary": "Per-payment recurrence guard for agent spend caps, quote drift, receipt evidence, and subscriptionless spend ledger entries."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T01:00:09.973Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/paid/evm-transaction-risk-decoder",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"to": "0x0000000000000000000000000000000000000000",
+					"data": "0x095ea7b30000000000000000000000001111111111111111111111111111111111111111ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+					"chain": "base",
+					"value": "0"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "evmTransactionRiskDecoder",
+					"summary": "Decode EVM transaction calldata and flag signing risks using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:59:58.203Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/paid/eip712-signature-risk-decoder",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"chain": "base",
+					"typed_data": {
+						"types": {
+							"Permit": [
+								{ "name": "owner", "type": "address" },
+								{ "name": "spender", "type": "address" },
+								{ "name": "value", "type": "uint256" },
+								{ "name": "deadline", "type": "uint256" }
+							]
+						},
+						"domain": {
+							"name": "USD Coin",
+							"chainId": 8453,
+							"verifyingContract": "0x0000000000000000000000000000000000000000"
+						},
+						"message": {
+							"owner": "0x0000000000000000000000000000000000000001",
+							"value": "115792089237316195423570985008687907853269984665640564039457584007913129639935",
+							"spender": "0x1111111111111111111111111111111111111111",
+							"deadline": "9999999999"
+						},
+						"primaryType": "Permit"
+					}
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "eip712SignatureRiskDecoder",
+					"summary": "Decode EIP-712 typed-data signatures and flag Permit/approval risks using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:59:51.900Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/slippage-sentinel/entrypoints/estimate_slippage/invoke",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"chain": "base",
+					"token_in": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"amount_in": "100",
+					"token_out": "0x4200000000000000000000000000000000000006"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "warnings": [], "estimates": [] }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:59:41.899Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/perps-funding-pulse/entrypoints/get_funding_pulse/invoke",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"chains": ["base"],
+					"venues": ["hyperliquid"],
+					"symbols": ["ETH"]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "markets": [], "signals": [], "warnings": [] }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:59:34.837Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/mev-protection-scanner/entrypoints/scan_transaction/invoke",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"dex": "uniswap-v2",
+					"chain": "eth",
+					"token_in": "USDC",
+					"amount_in": "10000",
+					"token_out": "ETH",
+					"max_pending_txs": 20
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"risk_score": 0,
+					"attack_type": "none",
+					"data_sources": [],
+					"competing_txs": 0,
+					"response_time_ms": 0,
+					"estimated_loss_usd": 0,
+					"gas_price_percentile": 0,
+					"protection_suggestions": []
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:59:24.127Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/lp-impermanent-loss-estimator/entrypoints/estimate_lp_il/invoke",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"network": "eth",
+					"pool_address": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+					"window_hours": 24,
+					"deposit_amounts": [1, 1]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"notes": [],
+					"tvl_usd": null,
+					"IL_percent": 0,
+					"fee_apr_est": null,
+					"data_sources": [],
+					"volume_window": null
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:59:15.673Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/lending-liquidation-sentinel/entrypoints/monitor_liquidation/invoke",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"chains": ["base"],
+					"wallet": "0x0000000000000000000000000000000000000001",
+					"protocols": ["aave"]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "alerts": [], "warnings": [], "positions": [] }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:59:08.471Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/fresh-markets-watch/entrypoints/watch_fresh_markets/invoke",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "chains": ["base"], "min_liquidity_usd": 10000 },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "markets": [], "warnings": [] }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:58:59.498Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/cross-dex-arbitrage-alert/entrypoints/detect_arbitrage/invoke",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"chains": ["base"],
+					"token_in": "0x4200000000000000000000000000000000000006",
+					"amount_in": "1",
+					"token_out": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"quotes": [],
+					"warnings": [],
+					"alt_routes": [],
+					"best_route": null,
+					"est_fill_cost": null,
+					"net_spread_bps": null
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:58:50.473Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/bridge-route-pinger/entrypoints/ping_bridge_routes/invoke",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"token": "USDC",
+					"amount": "100",
+					"to_chain": "base",
+					"from_chain": "ethereum"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "routes": [], "warnings": [] }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:58:43.774Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/approval-risk-auditor/entrypoints/audit_approvals/invoke",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"chains": ["base"],
+					"wallet": "0x0000000000000000000000000000000000000001",
+					"stale_days": 90
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"approvals": [],
+					"risk_flags": {},
+					"revoke_tx_data": []
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "9000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:58:29.832Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-opportunity-finder",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"focus": "ai-tools",
+					"limit": 80,
+					"sources": ["x402.direct", "agora402", "payai-discovery"]
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402OpportunityFinder",
+					"focus": "ai-tools",
+					"pricedCount": 180,
+					"opportunities": [
+						{
+							"id": "directory-seo",
+							"label": "x402 directory SEO and listing audits",
+							"opportunityScore": 82,
+							"recommendedPriceBandUsd": { "target": 0.008 }
+						}
+					],
+					"positioningNotes": [
+						"Avoid relying on generic chat alone; current directories show specific seller-tool demand."
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "8000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:58:02.324Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-listing-seo-audit",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"url": "https://gpt55.558686.xyz",
+					"query": "gpt-5.5 x402",
+					"include_market": true
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402ListingSeoAudit",
+					"grade": "B",
+					"query": "gpt-5.5 x402",
+					"score": 88,
+					"topFixes": [
+						"Add marketplace-seo to resource tags/descriptions."
+					],
+					"keywordCoverage": {
+						"score": 81,
+						"missing": ["marketplace-seo"],
+						"present": ["gpt-5.5", "x402", "pricing"]
+					},
+					"directoryVisibility": {
+						"score": 50,
+						"checkedSources": 6,
+						"matchedSources": 3
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:57:36.740Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-wallet-funding-readiness-doctor",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"url": "https://gpt55.558686.xyz/v1/x402-ping",
+					"method": "GET",
+					"max_usdc": 0.001,
+					"expected_asset": "USDC",
+					"usdc_available": 0.01,
+					"wallet_address": "0x2f71C92945cA36cFC10c4c1d19A8d0389dC20e8F",
+					"expected_pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"expected_network": "eip155:8453",
+					"has_payment_client": true,
+					"can_sign_typed_data": true,
+					"same_request_retry_supported": true
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402WalletFundingReadinessDoctor",
+					"summary": "Structured wallet funding readiness decision for Base USDC balance, spend cap, quote fields, official x402 client readiness, and X-PAYMENT creation."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:57:24.813Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-receipt-dispute-pack",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"route": "/v1/tools/translate",
+					"method": "POST",
+					"pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"network": "eip155:8453",
+					"receipt_url": "https://gpt55.558686.xyz/x402/receipts/example",
+					"status_code": 200,
+					"transaction": "0x0000000000000000000000000000000000000000000000000000000000000000",
+					"amount_atomic": "100",
+					"dispute_reason": "verify paid response evidence before repeat agent payment",
+					"response_fields": [
+						"text",
+						"paidExperienceSummary",
+						"x402NextPurchase"
+					],
+					"paid_json_present": true,
+					"receipt_header_present": true,
+					"payment_response_header_present": true
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402ReceiptDisputePack",
+					"summary": "Structured x402 post-payment receipt evidence, dispute packet, audit record, and next-payment policy."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:57:11.851Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-payment-failure-doctor",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "url": "https://example.com" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402PaymentFailureDoctor",
+					"summary": "Structured x402 payment failure diagnosis for payment header, verify, settle, payTo, network, and amount issues."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:56:59.695Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-mcp-integration-kit",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"base_url": "https://gpt55.558686.xyz",
+					"service_name": "GPT-5.5 x402 Gateway",
+					"max_usdc_per_call": 0.01
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402McpIntegrationKit",
+					"summary": "Generate MCP, Claude, curl, and x402 buyer integration snippets using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:56:45.758Z",
+			"metadata": {},
+			"resource": "https://x402-seller.558686.xyz/v1/tools/x402-market-benchmark",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"routes": [
+						{
+							"id": "quote-inspector",
+							"tags": ["seller"],
+							"price": "$0.001"
+						}
+					]
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402-market-benchmark",
+					"input": {
+						"routes": [
+							{
+								"id": "quote-inspector",
+								"tags": ["seller"],
+								"price": "$0.001"
+							}
+						]
+					},
+					"route": "/v1/tools/x402-market-benchmark",
+					"result": {
+						"routeCount": 1,
+						"lowestRoute": "lowestRoute_example",
+						"marketBands": [],
+						"recommendations": []
+					},
+					"project": "x402-seller-growth-tools",
+					"deterministic": true
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:56:29.706Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-client-compatibility-adapter",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"url": "https://gpt55.558686.xyz/v1/x402-ping",
+					"client": "official-x402-fetch",
+					"method": "GET",
+					"max_usdc": 0.02,
+					"expected_asset": "USDC",
+					"expected_pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"expected_network": "eip155:8453"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402ClientCompatibilityAdapter",
+					"summary": "Official x402 client compatibility adapter for requirement selection, X-PAYMENT same-request retry, and receipt evidence."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:56:11.188Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-buyer-prepay-risk-score",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"url": "https://gpt55.558686.xyz/v1/x402-ping",
+					"method": "GET",
+					"max_price_usd": 0.001,
+					"expected_pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"expected_network": "eip155:8453",
+					"include_site_audit": true
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402BuyerPrepayRiskScore",
+					"summary": "Buyer-facing x402 endpoint risk score before payment."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:55:53.673Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-agentcore-integration-kit",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"base_url": "https://gpt55.558686.xyz",
+					"agent_name": "research-agent",
+					"service_name": "GPT-5.5 x402 Gateway",
+					"max_usdc_per_call": 0.01
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402AgentCoreIntegrationKit",
+					"summary": "Generate AgentCore Gateway, CDP Bazaar, MCP, curl, and x402 buyer integration snippets using x402 USDC payment"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:55:42.103Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/paid/x402-seller-mini-check",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"limit": 50,
+					"pages": 1,
+					"query": "ai",
+					"sources": ["x402.direct", "cdp-bazaar"],
+					"page_size": 50
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402MarketBenchmark",
+					"query": "ai",
+					"aiLikeCount": 18,
+					"pricedCount": 42,
+					"ownPriceComparison": [
+						{
+							"id": "compactChat",
+							"price": 0.0001,
+							"belowMarketMedian": true
+						}
+					],
+					"aiLikePriceSummaryUsd": {
+						"max": 1,
+						"min": 0.0001,
+						"p25": 0.01,
+						"p75": 0.08,
+						"count": 18,
+						"median": 0.03
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:55:30.116Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/paid/x402-checkout-recovery-doctor",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "url": "https://example.com" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402PaymentFailureDoctor",
+					"summary": "Structured x402 payment failure diagnosis for payment header, verify, settle, payTo, network, and amount issues."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:55:24.358Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/wallet/topup",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"account_id": "buyer-001",
+					"request_id": "topup-001"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"account": {
+						"token": "returned-once-per-account",
+						"accountId": "buyer-001",
+						"balanceUsd": 0.005,
+						"tokenHeader": "X-GPT55-BALANCE-TOKEN"
+					},
+					"productId": "gpt55-balance-topup",
+					"ledgerEntry": {
+						"type": "topup",
+						"amountUsd": 0.005,
+						"balanceAfterUsd": 0.005
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:54:56.024Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-prepay-trust-check",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"url": "https://gpt55.558686.xyz/v1/x402-ping",
+					"method": "GET",
+					"max_price_usd": 0.001,
+					"max_latency_ms": 3000,
+					"expected_pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"expected_network": "eip155:8453"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402PrepayTrustCheck",
+					"summary": "Generated text."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:54:43.717Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/x402-bazaar-search",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"limit": 10,
+					"query": "gpt-5.5",
+					"pay_to": "0x1f0130669ca6fd02e025a984cc038f139df19a2f"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"tool": "x402BazaarSearch",
+					"query": "gpt-5.5",
+					"resources": [
+						{
+							"network": "eip155:8453",
+							"resource": "https://gpt55.558686.xyz/v1/chat/completions",
+							"livePricing": {
+								"matched": true,
+								"stalePrice": true,
+								"liveCheaper": true,
+								"livePriceUsd": "0.0001"
+							},
+							"minPriceUsd": "0.004",
+							"effectivePriceUsd": "0.0001",
+							"effectivePriceSource": "live_discovery"
+						}
+					],
+					"returnedCount": 2,
+					"stalePriceCount": 1,
+					"liveCheaperCount": 1,
+					"includeLivePrices": true,
+					"matchedPayToCount": 2
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1f0130669ca6fd02e025a984cc038f139df19a2f",
+					"amount": "3232",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:54:38.213Z",
+			"metadata": {},
+			"resource": "https://gpt55.558686.xyz/v1/tools/extract-json/mini",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Alice from Acme wants a demo next Tuesday. Email alice@example.com.",
+					"fields": ["name", "company", "email", "intent", "date"]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "text": "Generated text." }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x0dAada2f4f15b2151071CDA5fBA7b92Bb727fa90",
+					"amount": "300000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-06T00:02:33.723Z",
+			"metadata": {},
+			"resource": "https://verifik.x402.paysponge.com/v2/usa/vehicle",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "8BVE7pEafYZkhZh7H5pStXTs6xu4nuyu4pEffqyk8x15",
+					"amount": "400000",
+					"scheme": "exact",
+					"network": "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-05T21:27:20.730Z",
+			"metadata": {},
+			"resource": "https://api.x402cloud.space/v1/video/gemini-omni-flash",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"prompt": "A cinematic product video in a clean studio.",
+					"numberOfVideos": 1,
+					"durationSeconds": 8
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json",
+				"inputSchema": {
+					"type": "object",
+					"required": ["prompt"],
+					"properties": {
+						"prompt": { "type": "string", "maxLength": 4000 },
+						"max-seconds": {
+							"type": "integer",
+							"maximum": 10,
+							"minimum": 1
+						},
+						"walletAddress": {
+							"type": "string",
+							"description": "Optional prepaid wallet public address."
+						},
+						"numberOfVideos": {
+							"type": "integer",
+							"maximum": 4,
+							"minimum": 1
+						},
+						"durationSeconds": {
+							"enum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+							"type": "integer"
+						},
+						"walletSignature": {
+							"type": "string",
+							"description": "Optional wallet ownership signature for prepaid topup balance."
+						}
+					},
+					"additionalProperties": true
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"done": false,
+					"job_id": "job_xxx",
+					"status": "pending"
+				},
+				"outputSchema": {
+					"type": "object",
+					"properties": {
+						"done": { "type": "boolean" },
+						"job_id": { "type": "string" },
+						"status": { "type": "string" }
+					}
+				}
+			}
+		}
+	],
+	"pagination": { "limit": 100, "offset": 2500, "total": 25751 },
+	"x402Version": 1
+}

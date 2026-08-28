@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Hono } from "hono";
 import githubHandler from "./github.handler";
-import { ApiError } from "../helpers/errors.helper";
+
 import type { HonoEnv } from "../types/hono.types";
 
 // Mock global fetch for GitHub API calls

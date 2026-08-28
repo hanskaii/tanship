@@ -787,6 +787,29 @@ const aiHandler = new Hono<HonoEnv>()
 			model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 			result: parsed
 		});
+	})
+	.post("/function/call", zValidator("json", ChatSchema), async (c) => {
+		const { messages, model, max_tokens } = c.req.valid("json");
+
+		const result = (await c.env.AI.run(model, {
+			messages,
+			max_tokens,
+			response_format: { type: "json_object" }
+		} as any)) as { response?: string };
+
+		let parsed: unknown;
+		try {
+			parsed = JSON.parse(result.response ?? "{}");
+		} catch {
+			throw ApiError.badGateway(
+				"AI model returned non-JSON response for function call"
+			);
+		}
+
+		return ApiResponse.ok(c, "Function call completed", {
+			model,
+			result: parsed
+		});
 	});
 
 export default aiHandler;

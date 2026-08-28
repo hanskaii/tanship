@@ -198,6 +198,78 @@ const dbHandler = new Hono<HonoEnv>()
 				.map((m) => m.id),
 			applied_count: pending.length
 		});
+	})
+	.post("/upsert", zValidator("json", ExecSchema), async (c) => {
+		const { sql, params } = c.req.valid("json");
+
+		// Only INSERT OR REPLACE / INSERT OR IGNORE / REPLACE are allowed
+		const normalized = sql.trim().toUpperCase();
+		const allowed = [
+			"INSERT OR REPLACE",
+			"INSERT OR IGNORE",
+			"REPLACE INTO"
+		];
+		if (!allowed.some((kw) => normalized.startsWith(kw))) {
+			throw ApiError.badRequest(
+				`/upsert only accepts INSERT OR REPLACE / INSERT OR IGNORE / REPLACE INTO. Use /exec for other writes.`
+			);
+		}
+
+		await assertUnderSizeCap(c.env.DB);
+		const stmt = c.env.DB.prepare(sql).bind(...params);
+		const result = await stmt.run();
+
+		return ApiResponse.ok(c, "Upsert executed", {
+			success: result.success,
+			meta: {
+				rowsRead: result.meta.rows_read,
+				rowsWritten: result.meta.rows_written,
+				duration: result.meta.duration,
+				lastRowId: result.meta.last_row_id,
+				changes: result.meta.changes
+			}
+		});
+	})
+	// Atomic D1 transaction. D1's batch() is the documented transactional
+	// primitive: all statements commit together, or none of them do. Useful
+	// for multi-row mutations that must be consistent (e.g. ledger debits +
+	// credits, inventory reservations + order inserts).
+	.post("/transaction", zValidator("json", BatchSchema), async (c) => {
+		const { statements } = c.req.valid("json");
+
+		// Block destructive DDL inside the transaction.
+		for (const s of statements) {
+			const normalized = s.sql.trim().toUpperCase();
+			if (
+				normalized.startsWith("DROP DATABASE") ||
+				normalized.startsWith("DROP ALL")
+			) {
+				throw ApiError.badRequest("Destructive DDL not allowed");
+			}
+		}
+
+		await assertUnderSizeCap(c.env.DB);
+
+		const stmts = statements.map((s) =>
+			c.env.DB.prepare(s.sql).bind(...s.params)
+		);
+		// D1 batch() runs all statements in a single implicit transaction.
+		const results = await c.env.DB.batch(stmts);
+
+		return ApiResponse.ok(c, "Transaction committed", {
+			atomic: true,
+			count: results.length,
+			results: results.map((r) => ({
+				success: r.success,
+				meta: {
+					rowsRead: r.meta.rows_read,
+					rowsWritten: r.meta.rows_written,
+					duration: r.meta.duration,
+					lastRowId: r.meta.last_row_id,
+					changes: r.meta.changes
+				}
+			}))
+		});
 	});
 
 export default dbHandler;

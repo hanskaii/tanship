@@ -1,6 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { HomeNav } from "./-components/home-nav";
-import { Logo } from "@/routes/-components/logo";
 
 export const Route = createFileRoute("/(app)/_home")({
 	component: HomeLayout

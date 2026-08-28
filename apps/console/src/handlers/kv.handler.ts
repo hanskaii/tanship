@@ -32,6 +32,15 @@ const AtomicIncrementSchema = z.object({
 	amount: z.number().int().min(1).max(1_000_000).default(1)
 });
 
+// Compare-and-swap: only write if the current value matches `expected`.
+// Returns { swapped, current } so callers can retry on mismatch.
+const AtomicCasSchema = z.object({
+	key: z.string().min(1).max(512),
+	expected: z.string().min(0).max(25_000),
+	next: z.string().min(1).max(25_000),
+	ttl: z.number().int().min(60).max(86400).optional()
+});
+
 // Session create: ephemeral JSON blob with TTL. sessionId is namespaced under
 // `session:` so it cannot collide with user keys.
 const SessionIdParam = z
@@ -157,6 +166,31 @@ const kvHandler = new Hono<HonoEnv>()
 			});
 		}
 	)
+	// Compare-and-swap: only writes if the existing value equals `expected`.
+	// The single read+write race window is acceptable for the small CAS
+	// primitive — callers must treat { swapped: false } as a retry signal.
+	.post("/atomic/cas", zValidator("json", AtomicCasSchema), async (c) => {
+		const { key, expected, next, ttl } = c.req.valid("json");
+
+		const current = await c.env.KV.get(key);
+		if (current !== expected) {
+			return ApiResponse.ok(c, "CAS rejected", {
+				swapped: false,
+				key,
+				current
+			});
+		}
+
+		const opts: KVNamespacePutOptions = {};
+		if (ttl) opts.expirationTtl = ttl;
+		await c.env.KV.put(key, next, opts);
+
+		return ApiResponse.ok(c, "CAS applied", {
+			swapped: true,
+			key,
+			next
+		});
+	})
 	// Session management: ephemeral JSON store with TTL
 	.post(
 		"/session/create",

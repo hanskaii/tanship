@@ -24,7 +24,6 @@ import { Route as appHomeShowcaseIndexRouteImport } from './routes/(app)/_home/s
 import { Route as appHomeContactIndexRouteImport } from './routes/(app)/_home/contact/index'
 import { Route as appHomeBadgeIndexRouteImport } from './routes/(app)/_home/badge/index'
 import { Route as appHomeActivateIndexRouteImport } from './routes/(app)/_home/activate/index'
-import { Route as appAppOverviewIndexRouteImport } from './routes/(app)/_app/overview/index'
 import { Route as appHomeLegalsTermsRouteImport } from './routes/(app)/_home/legals/terms'
 import { Route as appHomeLegalsPrivacyPolicyRouteImport } from './routes/(app)/_home/legals/privacy-policy'
 import { Route as appHomeShowcaseSubmitIndexRouteImport } from './routes/(app)/_home/showcase/submit/index'
@@ -107,11 +106,6 @@ const appHomeActivateIndexRoute = appHomeActivateIndexRouteImport.update({
   path: '/activate/',
   getParentRoute: () => appHomeRouteRoute,
 } as any)
-const appAppOverviewIndexRoute = appAppOverviewIndexRouteImport.update({
-  id: '/overview/',
-  path: '/overview/',
-  getParentRoute: () => appAppRouteRoute,
-} as any)
 const appHomeLegalsTermsRoute = appHomeLegalsTermsRouteImport.update({
   id: '/legals/terms',
   path: '/legals/terms',
@@ -181,7 +175,6 @@ export interface FileRoutesByFullPath {
   '/': typeof appHomeIndexRoute
   '/legals/privacy-policy': typeof appHomeLegalsPrivacyPolicyRoute
   '/legals/terms': typeof appHomeLegalsTermsRoute
-  '/overview/': typeof appAppOverviewIndexRoute
   '/activate/': typeof appHomeActivateIndexRoute
   '/badge/': typeof appHomeBadgeIndexRoute
   '/contact/': typeof appHomeContactIndexRoute
@@ -205,7 +198,6 @@ export interface FileRoutesByTo {
   '/': typeof appHomeIndexRoute
   '/legals/privacy-policy': typeof appHomeLegalsPrivacyPolicyRoute
   '/legals/terms': typeof appHomeLegalsTermsRoute
-  '/overview': typeof appAppOverviewIndexRoute
   '/activate': typeof appHomeActivateIndexRoute
   '/badge': typeof appHomeBadgeIndexRoute
   '/contact': typeof appHomeContactIndexRoute
@@ -235,7 +227,6 @@ export interface FileRoutesById {
   '/(app)/_home/': typeof appHomeIndexRoute
   '/(app)/_home/legals/privacy-policy': typeof appHomeLegalsPrivacyPolicyRoute
   '/(app)/_home/legals/terms': typeof appHomeLegalsTermsRoute
-  '/(app)/_app/overview/': typeof appAppOverviewIndexRoute
   '/(app)/_home/activate/': typeof appHomeActivateIndexRoute
   '/(app)/_home/badge/': typeof appHomeBadgeIndexRoute
   '/(app)/_home/contact/': typeof appHomeContactIndexRoute
@@ -261,7 +252,6 @@ export interface FileRouteTypes {
     | '/'
     | '/legals/privacy-policy'
     | '/legals/terms'
-    | '/overview/'
     | '/activate/'
     | '/badge/'
     | '/contact/'
@@ -285,7 +275,6 @@ export interface FileRouteTypes {
     | '/'
     | '/legals/privacy-policy'
     | '/legals/terms'
-    | '/overview'
     | '/activate'
     | '/badge'
     | '/contact'
@@ -314,7 +303,6 @@ export interface FileRouteTypes {
     | '/(app)/_home/'
     | '/(app)/_home/legals/privacy-policy'
     | '/(app)/_home/legals/terms'
-    | '/(app)/_app/overview/'
     | '/(app)/_home/activate/'
     | '/(app)/_home/badge/'
     | '/(app)/_home/contact/'
@@ -444,13 +432,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appHomeActivateIndexRouteImport
       parentRoute: typeof appHomeRouteRoute
     }
-    '/(app)/_app/overview/': {
-      id: '/(app)/_app/overview/'
-      path: '/overview'
-      fullPath: '/overview/'
-      preLoaderRoute: typeof appAppOverviewIndexRouteImport
-      parentRoute: typeof appAppRouteRoute
-    }
     '/(app)/_home/legals/terms': {
       id: '/(app)/_home/legals/terms'
       path: '/legals/terms'
@@ -568,12 +549,10 @@ const appAppAccountRouteRouteWithChildren =
 
 interface appAppRouteRouteChildren {
   appAppAccountRouteRoute: typeof appAppAccountRouteRouteWithChildren
-  appAppOverviewIndexRoute: typeof appAppOverviewIndexRoute
 }
 
 const appAppRouteRouteChildren: appAppRouteRouteChildren = {
   appAppAccountRouteRoute: appAppAccountRouteRouteWithChildren,
-  appAppOverviewIndexRoute: appAppOverviewIndexRoute,
 }
 
 const appAppRouteRouteWithChildren = appAppRouteRoute._addFileChildren(

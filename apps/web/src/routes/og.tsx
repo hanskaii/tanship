@@ -58,6 +58,7 @@ export const Route = createFileRoute("/og")({
 								width={52}
 								height={52}
 								style={{ objectFit: "contain" }}
+								alt="Logo"
 							/>
 							<span
 								style={{

@@ -772,7 +772,7 @@ const browserHandler = new Hono<HonoEnv>()
 		let origin;
 		try {
 			origin = new URL(url).origin;
-		} catch (err) {
+		} catch {
 			throw ApiError.badRequest("Invalid website root URL");
 		}
 
@@ -786,7 +786,7 @@ const browserHandler = new Hono<HonoEnv>()
 								parsed.hash = "";
 								return parsed.toString();
 							}
-						} catch (e) {}
+						} catch {}
 						return null;
 					})
 					.filter((link): link is string => link !== null)

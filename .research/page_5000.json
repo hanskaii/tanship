@@ -1,0 +1,6022 @@
+{
+	"items": [
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xd83a6d335B7792b409CDB5763A3C8885386402F0",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://lookup.bustercall.workers.dev/economics/bls/cpi?query=solana&limit=10",
+					"description": "",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "50000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-30T21:54:40.885Z",
+			"metadata": {},
+			"resource": "https://lookup.bustercall.workers.dev/economics/bls/cpi",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xd83a6d335B7792b409CDB5763A3C8885386402F0",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://lookup.bustercall.workers.dev/gov/federal-register/recent?query=solana&limit=10",
+					"description": "",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "50000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-30T21:54:40.556Z",
+			"metadata": {},
+			"resource": "https://lookup.bustercall.workers.dev/gov/federal-register/recent",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/lp/pool-detail",
+					"description": "Pool detail",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyParams": {
+								"address": {
+									"type": "string",
+									"description": "Solana wallet or pool address"
+								}
+							},
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "30000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-30T21:39:03.629Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/lp/pool-detail",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"address": {
+						"type": "string",
+						"description": "Solana wallet or pool address"
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+					"extra": {
+						"name": "USDC",
+						"version": "2",
+						"maxAmount": "10000",
+						"assetTransferMethod": "eip3009"
+					},
+					"payTo": "0x64842Cd797198143A8fF191E4BDBDE7E0fBF7f6D",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:84532",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-30T05:42:52.617Z",
+			"metadata": {},
+			"resource": "https://demo.aiapi.ch/v1/analyze",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "Text to analyze for financial execution decisions using local skill context."
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"sources": [],
+					"summary": "A concise summary of the signal.",
+					"analysis": "A practical explanation of why the signal matters.",
+					"sentiment": "NEUTRAL",
+					"actionability": 90,
+					"credibility_risk": "MEDIUM",
+					"market_relevance": 88,
+					"execution_urgency": 84
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x47ffc880cfF2e8F18fD9567faB5a1fBD217B5552",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-30T04:51:03.563Z",
+			"metadata": {},
+			"resource": "https://api.deepbluebase.xyz/price/:var1",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "var1": "BTC" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"token": "ETH",
+					"source": "base_dex",
+					"price_usd": 3421.55
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x47ffc880cfF2e8F18fD9567faB5a1fBD217B5552",
+					"amount": "2000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-30T03:22:29.125Z",
+			"metadata": {},
+			"resource": "https://api.deepbluebase.xyz/discover",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"q": "crypto trading",
+					"limit": 10,
+					"category": "services-endpoints"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 3,
+					"query": "crypto",
+					"results": [
+						{
+							"url": "https://api.deepbluebase.xyz/docs",
+							"name": "DeepBlue Trading API",
+							"category": "services-endpoints",
+							"description": "Pay-per-call crypto signals"
+						}
+					],
+					"total_indexed": 32
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xd83a6d335B7792b409CDB5763A3C8885386402F0",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://lookup.bustercall.workers.dev/gov/fda/drugs/recalls?query=solana&limit=10",
+					"description": "",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "100000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T22:23:34.137Z",
+			"metadata": {},
+			"resource": "https://lookup.bustercall.workers.dev/gov/fda/drugs/recalls",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xd83a6d335B7792b409CDB5763A3C8885386402F0",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://lookup.bustercall.workers.dev/gov/fda/devices/recalls?query=solana&limit=10",
+					"description": "",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "100000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T22:23:27.760Z",
+			"metadata": {},
+			"resource": "https://lookup.bustercall.workers.dev/gov/fda/devices/recalls",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/traders/wallet/vhu9Nc7EQi6dpvk9R6GyrDjgrgnR2oyfRAeeYVmQCAp/pnl?address=0x7e571E959cC7C75Ccdd2eAC24f8775ea2eAa2F09&chain=base&timeframe=7d",
+					"description": "Wallet PnL analysis",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "50000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T21:40:58.131Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/traders/wallet/vhu9Nc7EQi6dpvk9R6GyrDjgrgnR2oyfRAeeYVmQCAp/pnl",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x57536458E8E3636038e36D373fD001A0017B97c6",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T21:40:57.746Z",
+			"metadata": {},
+			"resource": "https://sorenlux.ai/api/intel/BTC",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "ticker": "BTC" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"name": "Bitcoin",
+					"ticker": "BTC",
+					"sentiment": {
+						"bearish": 45,
+						"bullish": 180,
+						"neutral": 67,
+						"dominant": "bullish",
+						"bullish_pct": 61.6
+					},
+					"conviction": {
+						"low": 77,
+						"high": 95,
+						"medium": 120,
+						"high_conviction_pct": 32.5
+					},
+					"total_mentions": 292
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xd83a6d335B7792b409CDB5763A3C8885386402F0",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://lookup.bustercall.workers.dev/economics/bls/unemployment?limit=10&query=solana",
+					"description": "",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "50000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T21:40:40.315Z",
+			"metadata": {},
+			"resource": "https://lookup.bustercall.workers.dev/economics/bls/unemployment",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE/snipers",
+					"description": "Sniper detection",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "40000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T21:39:14.557Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE/snipers",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm/snipers",
+					"description": "Sniper detection",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "40000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T21:39:14.529Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm/snipers",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263/snipers",
+					"description": "Sniper detection",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "40000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T21:39:14.189Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263/snipers",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3/snipers",
+					"description": "Sniper detection",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "40000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T21:39:14.179Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3/snipers",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token-snipers",
+					"description": "Sniper detection",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyParams": {
+								"mint": {
+									"type": "string",
+									"description": "Solana token mint address"
+								}
+							},
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "40000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T21:39:06.310Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token-snipers",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"mint": {
+						"type": "string",
+						"description": "Solana token mint address"
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R/snipers",
+					"description": "Sniper detection",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "40000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T21:39:05.860Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R/snipers",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"bsman": {
+							"name": "Call BS Man API",
+							"tags": [
+								"x402",
+								"AI agents",
+								"scam detection",
+								"risk analysis",
+								"conversation intelligence",
+								"agent safety",
+								"payment risk",
+								"wallet safety",
+								"manipulation detection",
+								"Base mainnet",
+								"AgentCash"
+							],
+							"docsUrl": "https://callbsman.com",
+							"category": "Security",
+							"mainMode": "agent_action_check",
+							"provider": "BS Man AI",
+							"githubUrl": "https://github.com/Askbsman/Bsman-ai",
+							"openApiUrl": "https://api.callbsman.com/docs/openapi.yaml",
+							"fallbackUrl": "https://bsman-ai.onrender.com/v1/analyze",
+							"supportedModes": [
+								"scam_check",
+								"dialogue_check",
+								"offer_check",
+								"manipulation_check",
+								"safe_reply",
+								"agent_action_check"
+							]
+						},
+						"version": "2"
+					},
+					"payTo": "0x7642CCEd89398Bd638d9Ee2F82dA8cd3FC01ADA1",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-29T04:48:31.495Z",
+			"metadata": {},
+			"resource": "https://api.callbsman.com/v1/analyze",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"docs": "https://callbsman.com",
+					"openapi": "https://api.callbsman.com/docs/openapi.yaml",
+					"payment": {
+						"price": "$0.001 per analyze request",
+						"network": "Base mainnet",
+						"protocol": "x402"
+					},
+					"service": "Call BS Man API",
+					"endpoint": "POST https://api.callbsman.com/v1/analyze",
+					"description": "Conversation Risk Intelligence API for AI agents.",
+					"primary_mode": "agent_action_check",
+					"supported_modes": [
+						"scam_check",
+						"dialogue_check",
+						"offer_check",
+						"manipulation_check",
+						"safe_reply",
+						"agent_action_check"
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x47ffc880cfF2e8F18fD9567faB5a1fBD217B5552",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-29T03:02:25.585Z",
+			"metadata": {},
+			"resource": "https://api.deepbluebase.xyz/trending",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 10,
+					"pools": [
+						{
+							"token": "ETH",
+							"volume_24h": 1200000,
+							"price_change_pct": 3.2
+						}
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "D5Do2wEoae1kNu8pXPyExXMf7nPmX949LDzZnc5Y5zgd",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "",
+					"resource": "https://biznews.x402.bot/news",
+					"description": "Returns a list of recent new articles that affect business.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "50000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-28T21:04:49.637Z",
+			"metadata": {},
+			"resource": "https://biznews.x402.bot/news",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "7G73PLhKvAPBGTzG5ESAE4coE7QrVeTTKfhTxQZbyGgC",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/trenches/curve/Bmgd5xPdXAGEYwhrg4QGXpUri9FYJLhzwAJL96Xcpump",
+					"description": "Bonding curve graduation progress, SOL in curve, ETA to Raydium with AI urgency assessment. Sources: Solana RPC.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						},
+						"output": {
+							"type": "object",
+							"required": [
+								"data",
+								"signal",
+								"confidence",
+								"sources",
+								"latency_ms",
+								"timestamp"
+							],
+							"properties": {
+								"data": {
+									"type": "object",
+									"description": "Structured data from upstream sources (shape varies per endpoint)."
+								},
+								"signal": {
+									"enum": ["graduate_soon", "watch", "avoid"],
+									"type": "string",
+									"description": "Decision signal for the caller."
+								},
+								"insight": {
+									"type": "string",
+									"nullable": true,
+									"description": "AI-generated 1-2 sentence actionable insight."
+								},
+								"sources": {
+									"type": "array",
+									"items": { "type": "string" },
+									"description": "Upstream data sources used."
+								},
+								"timestamp": {
+									"type": "string",
+									"format": "date-time"
+								},
+								"confidence": {
+									"type": "number",
+									"maximum": 1,
+									"minimum": 0,
+									"description": "LLM confidence in the signal (0–1)."
+								},
+								"latency_ms": {
+									"type": "integer",
+									"description": "Total response time in milliseconds."
+								},
+								"model_used": {
+									"type": "string",
+									"nullable": true,
+									"description": "LLM model that produced the insight."
+								}
+							}
+						}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-28T19:11:29.206Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/trenches/curve/Bmgd5xPdXAGEYwhrg4QGXpUri9FYJLhzwAJL96Xcpump",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"required": [
+						"data",
+						"signal",
+						"confidence",
+						"sources",
+						"latency_ms",
+						"timestamp"
+					],
+					"properties": {
+						"data": {
+							"type": "object",
+							"description": "Structured data from upstream sources (shape varies per endpoint)."
+						},
+						"signal": {
+							"enum": ["graduate_soon", "watch", "avoid"],
+							"type": "string",
+							"description": "Decision signal for the caller."
+						},
+						"insight": {
+							"type": "string",
+							"nullable": true,
+							"description": "AI-generated 1-2 sentence actionable insight."
+						},
+						"sources": {
+							"type": "array",
+							"items": { "type": "string" },
+							"description": "Upstream data sources used."
+						},
+						"timestamp": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"confidence": {
+							"type": "number",
+							"maximum": 1,
+							"minimum": 0,
+							"description": "LLM confidence in the signal (0–1)."
+						},
+						"latency_ms": {
+							"type": "integer",
+							"description": "Total response time in milliseconds."
+						},
+						"model_used": {
+							"type": "string",
+							"nullable": true,
+							"description": "LLM model that produced the insight."
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "7G73PLhKvAPBGTzG5ESAE4coE7QrVeTTKfhTxQZbyGgC",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/traders/token/4gqjpQsERaxC3rytEJG3CpnWb8zNTHt7wEv7eXJedXd6/whales?address=0x7e571E959cC7C75Ccdd2eAC24f8775ea2eAa2F09&chain=base",
+					"description": "Top holders of a Solana token, supply concentration, recent accumulation/distribution flow with AI signal. Sources: Solana RPC + Jupiter.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						},
+						"output": {
+							"type": "object",
+							"required": [
+								"data",
+								"signal",
+								"confidence",
+								"sources",
+								"latency_ms",
+								"timestamp"
+							],
+							"properties": {
+								"data": {
+									"type": "object",
+									"description": "Structured data from upstream sources (shape varies per endpoint)."
+								},
+								"signal": {
+									"enum": [
+										"accumulate",
+										"distribute",
+										"ignore"
+									],
+									"type": "string",
+									"description": "Decision signal for the caller."
+								},
+								"insight": {
+									"type": "string",
+									"nullable": true,
+									"description": "AI-generated 1-2 sentence actionable insight."
+								},
+								"sources": {
+									"type": "array",
+									"items": { "type": "string" },
+									"description": "Upstream data sources used."
+								},
+								"timestamp": {
+									"type": "string",
+									"format": "date-time"
+								},
+								"confidence": {
+									"type": "number",
+									"maximum": 1,
+									"minimum": 0,
+									"description": "LLM confidence in the signal (0–1)."
+								},
+								"latency_ms": {
+									"type": "integer",
+									"description": "Total response time in milliseconds."
+								},
+								"model_used": {
+									"type": "string",
+									"nullable": true,
+									"description": "LLM model that produced the insight."
+								}
+							}
+						}
+					},
+					"maxAmountRequired": "30000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-28T17:23:20.373Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/traders/token/4gqjpQsERaxC3rytEJG3CpnWb8zNTHt7wEv7eXJedXd6/whales",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"required": [
+						"data",
+						"signal",
+						"confidence",
+						"sources",
+						"latency_ms",
+						"timestamp"
+					],
+					"properties": {
+						"data": {
+							"type": "object",
+							"description": "Structured data from upstream sources (shape varies per endpoint)."
+						},
+						"signal": {
+							"enum": ["accumulate", "distribute", "ignore"],
+							"type": "string",
+							"description": "Decision signal for the caller."
+						},
+						"insight": {
+							"type": "string",
+							"nullable": true,
+							"description": "AI-generated 1-2 sentence actionable insight."
+						},
+						"sources": {
+							"type": "array",
+							"items": { "type": "string" },
+							"description": "Upstream data sources used."
+						},
+						"timestamp": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"confidence": {
+							"type": "number",
+							"maximum": 1,
+							"minimum": 0,
+							"description": "LLM confidence in the signal (0–1)."
+						},
+						"latency_ms": {
+							"type": "integer",
+							"description": "Total response time in milliseconds."
+						},
+						"model_used": {
+							"type": "string",
+							"nullable": true,
+							"description": "LLM model that produced the insight."
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/traders/token/0x4c433f4ef87fe506a7eed2fd1d822cbed411eba3/whales?address=0x7e571E959cC7C75Ccdd2eAC24f8775ea2eAa2F09&chain=base",
+					"description": "Whale holders for token",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "30000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-28T17:22:39.879Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/traders/token/0x4c433f4ef87fe506a7eed2fd1d822cbed411eba3/whales",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"name": "USDC",
+						"version": "2",
+						"features": { "xSettlementAccountSupported": true },
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "FWoD65bNMnYuvA4sjSokrJvTV61nUbPfAuxgjiGZtNT9",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-28T15:17:25.476Z",
+			"metadata": {},
+			"resource": "https://api.molty.cash/a2a",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"method": "session.create",
+					"params": {},
+					"jsonrpc": "2.0"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"result": {
+						"session_token": "eyJ...",
+						"session_wallet": "0x...",
+						"session_expires_at": 0
+					},
+					"jsonrpc": "2.0"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"name": "USDC",
+						"version": "2",
+						"features": { "xSettlementAccountSupported": true },
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "FWoD65bNMnYuvA4sjSokrJvTV61nUbPfAuxgjiGZtNT9",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-28T15:13:35.417Z",
+			"metadata": {},
+			"resource": "https://api.molty.cash/0xmesuthere/a2a",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"method": "tip",
+					"params": { "amount": 0.1 },
+					"jsonrpc": "2.0"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"properties": {
+						"amount": { "type": "number" },
+						"receipt": { "type": "string" },
+						"x_handle": { "type": "string" },
+						"payment_request_id": { "type": "string" }
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/traders/token/0xe33454B0151F7401d2800a2c39bd2E0Bfc213C65/whales?address=0x7e571E959cC7C75Ccdd2eAC24f8775ea2eAa2F09&chain=base",
+					"description": "Whale holders for token",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "30000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-28T13:04:37.014Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/traders/token/0xe33454B0151F7401d2800a2c39bd2E0Bfc213C65/whales",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/traders/token/0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3/whales?address=0x7e571E959cC7C75Ccdd2eAC24f8775ea2eAa2F09&chain=base",
+					"description": "Whale holders for token",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "30000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-28T13:04:36.261Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/traders/token/0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3/whales",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3",
+					"description": "Token metadata + top holders",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "20000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-28T13:04:15.791Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/0x4c433F4EF87fE506A7eED2fD1d822CBED411eBA3",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/0xe33454B0151F7401d2800a2c39bd2E0Bfc213C65",
+					"description": "Token metadata + top holders",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "20000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-28T13:04:14.363Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/0xe33454B0151F7401d2800a2c39bd2E0Bfc213C65",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN/verdict",
+					"description": "Full AI verdict on token",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "150000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-28T01:33:25.636Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN/verdict",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xE8eA6365C329130fd47d4D1Ca0aE59CAf49fA9C4",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-27T14:40:29.027Z",
+			"metadata": {},
+			"resource": "https://api.paysponge.com/ps/vaults",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xE8eA6365C329130fd47d4D1Ca0aE59CAf49fA9C4",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-27T12:08:56.355Z",
+			"metadata": {},
+			"resource": "https://api.paysponge.com/ps/vaults/:id/info",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "id": "6a0e92f624a96712b64b18d9" },
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xE8eA6365C329130fd47d4D1Ca0aE59CAf49fA9C4",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-27T11:16:54.941Z",
+			"metadata": {},
+			"resource": "https://api.paysponge.com/x402/vaults",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "J7ZvJEspvwP1oRxQZ7mYmNmT22NTm3GWq3t7HEbvPZYx",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-25T21:47:24.430Z",
+			"metadata": {},
+			"resource": "https://api.nansen.ai/api/v1/tgm/indicators",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"chain": "ethereum",
+					"token_address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "J7ZvJEspvwP1oRxQZ7mYmNmT22NTm3GWq3t7HEbvPZYx",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-25T21:15:39.964Z",
+			"metadata": {},
+			"resource": "https://api.nansen.ai/api/v1/smart-money/holdings",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"chains": ["ethereum", "solana"],
+					"filters": {
+						"value_usd": { "max": 100000, "min": 1000 },
+						"token_age_days": { "max": 30 },
+						"include_stablecoins": false,
+						"include_native_tokens": false,
+						"balance_24h_percent_change": {
+							"max": 0.1,
+							"min": -0.1
+						},
+						"exclude_smart_money_labels": ["30D Smart Trader"],
+						"include_smart_money_labels": ["Fund", "Smart Trader"]
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x3F11bAab8B0454131B6c81684524ccF1c98b4968",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-25T15:33:34.722Z",
+			"metadata": {},
+			"resource": "https://ngmi--b088743456a711f1b5c3ee650bb23af1.web.val.run/repair",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"input": "{a:1,name:'bob',}",
+					"schema": { "type": "object" },
+					"instructions": "coerce dates to ISO 8601"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"data": { "a": 1, "name": "bob" },
+					"model": null,
+					"valid": true,
+					"method": "deterministic",
+					"validationErrors": []
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9VaDVp1Wb78G4Wm6VuTiMrpESjrUymXefQTHcJGRSTEA",
+					"amount": "100000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 1200
+				}
+			],
+			"lastUpdated": "2026-05-25T14:47:59.369Z",
+			"metadata": {},
+			"resource": "https://api.xona-agent.com/token/pumpfun-trending",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "GET",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 0,
+					"success": true,
+					"summary": "",
+					"suggestions": [],
+					"trending_tokens": []
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "CBYMYxfMGdA98qkzrYqTzTiQhP3H2scU95EB4ZxoRxuM",
+					"amount": "100000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-25T08:25:36.013Z",
+			"metadata": {},
+			"resource": "https://api.suverse.io/v1/freight/parse_ratecon",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"mode": "llm",
+					"text": "<raw rate confirmation text (alternative to pdf_base64)>",
+					"pdf_base64": "<base64-encoded rate confirmation PDF>"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"data": {
+						"commodity": null,
+						"po_number": null,
+						"pu_number": null,
+						"_mode_used": "llm",
+						"bol_number": null,
+						"weight_lbs": null,
+						"_confidence": 0.95,
+						"broker_name": null,
+						"driver_name": null,
+						"load_number": "L-123456",
+						"rate_amount": 2450,
+						"broker_email": null,
+						"broker_phone": null,
+						"driver_phone": null,
+						"shipper_name": null,
+						"truck_number": null,
+						"payment_terms": null,
+						"rate_currency": "USD",
+						"receiver_name": null,
+						"pickup_address": null,
+						"trailer_number": null,
+						"pickup_datetime": null,
+						"shipper_address": null,
+						"delivery_address": null,
+						"receiver_address": null,
+						"reference_number": null,
+						"delivery_datetime": null
+					},
+					"service": "freight.parse_ratecon"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6a667a72d3d36d95421474019aa46f0308d643fc",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-25T04:30:05.948Z",
+			"metadata": {},
+			"resource": "http://btcnode.uk/api/fees",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"low": 5,
+					"high": 42,
+					"unit": "sat/vB",
+					"medium": 18
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6f4Ee8B226bf7B3Df45C55Ec10505edC7cb68488",
+					"amount": "1000000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-24T22:21:06.327Z",
+			"metadata": {},
+			"resource": "https://testmint-git-ak-refactor-darkhorselabs.vercel.app/api/transfer",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "POST",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6f4Ee8B226bf7B3Df45C55Ec10505edC7cb68488",
+					"amount": "1000000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-24T21:58:33.581Z",
+			"metadata": {},
+			"resource": "https://testmint-git-main-darkhorselabs.vercel.app/api/transfer",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "POST",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R/verdict",
+					"description": "Full AI verdict on token",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "150000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-24T20:05:48.277Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R/verdict",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263/verdict",
+					"description": "Full AI verdict on token",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "150000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-24T20:05:28.288Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263/verdict",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3/verdict",
+					"description": "Full AI verdict on token",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "150000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-24T20:05:14.250Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3/verdict",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/trenches/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm/verdict",
+					"description": "Full AI verdict on token",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "150000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-24T14:51:03.523Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/trenches/token/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm/verdict",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "7G73PLhKvAPBGTzG5ESAE4coE7QrVeTTKfhTxQZbyGgC",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/trenches/curve",
+					"description": "Bonding curve graduation progress, SOL in curve, ETA to Raydium with AI urgency assessment. Sources: Solana RPC.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyParams": {
+								"mint": {
+									"type": "string",
+									"description": "Solana token mint address"
+								}
+							},
+							"discoverable": true
+						},
+						"output": {
+							"type": "object",
+							"required": [
+								"data",
+								"signal",
+								"confidence",
+								"sources",
+								"latency_ms",
+								"timestamp"
+							],
+							"properties": {
+								"data": {
+									"type": "object",
+									"description": "Structured data from upstream sources (shape varies per endpoint)."
+								},
+								"signal": {
+									"enum": ["graduate_soon", "watch", "avoid"],
+									"type": "string",
+									"description": "Decision signal for the caller."
+								},
+								"insight": {
+									"type": "string",
+									"nullable": true,
+									"description": "AI-generated 1-2 sentence actionable insight."
+								},
+								"sources": {
+									"type": "array",
+									"items": { "type": "string" },
+									"description": "Upstream data sources used."
+								},
+								"timestamp": {
+									"type": "string",
+									"format": "date-time"
+								},
+								"confidence": {
+									"type": "number",
+									"maximum": 1,
+									"minimum": 0,
+									"description": "LLM confidence in the signal (0–1)."
+								},
+								"latency_ms": {
+									"type": "integer",
+									"description": "Total response time in milliseconds."
+								},
+								"model_used": {
+									"type": "string",
+									"nullable": true,
+									"description": "LLM model that produced the insight."
+								}
+							}
+						}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-24T04:00:34.465Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/trenches/curve",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"mint": {
+						"type": "string",
+						"description": "Solana token mint address"
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"required": [
+						"data",
+						"signal",
+						"confidence",
+						"sources",
+						"latency_ms",
+						"timestamp"
+					],
+					"properties": {
+						"data": {
+							"type": "object",
+							"description": "Structured data from upstream sources (shape varies per endpoint)."
+						},
+						"signal": {
+							"enum": ["graduate_soon", "watch", "avoid"],
+							"type": "string",
+							"description": "Decision signal for the caller."
+						},
+						"insight": {
+							"type": "string",
+							"nullable": true,
+							"description": "AI-generated 1-2 sentence actionable insight."
+						},
+						"sources": {
+							"type": "array",
+							"items": { "type": "string" },
+							"description": "Upstream data sources used."
+						},
+						"timestamp": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"confidence": {
+							"type": "number",
+							"maximum": 1,
+							"minimum": 0,
+							"description": "LLM confidence in the signal (0–1)."
+						},
+						"latency_ms": {
+							"type": "integer",
+							"description": "Total response time in milliseconds."
+						},
+						"model_used": {
+							"type": "string",
+							"nullable": true,
+							"description": "LLM model that produced the insight."
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "CBYMYxfMGdA98qkzrYqTzTiQhP3H2scU95EB4ZxoRxuM",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "http://agentos.suverse.io/v1/freight/parse_ratecon",
+					"description": "Parse a freight rate confirmation (PDF or text) into structured JSON — freight.parse_ratecon",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "100000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-22T21:13:19.227Z",
+			"metadata": {},
+			"resource": "http://agentos.suverse.io/v1/freight/parse_ratecon",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x74Bf2FCC19d05332839f7A4a645BBD0065Cb2a54",
+					"amount": "2000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 120
+				}
+			],
+			"lastUpdated": "2026-05-22T13:06:55.551Z",
+			"metadata": {},
+			"resource": "https://chain-scan.com/v1/scan",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"tag": "latest",
+					"action": "balance",
+					"module": "account",
+					"address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"chainid": "8453"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"result": "207419433107",
+					"status": "1",
+					"message": "OK"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"kind": "llm-gpt",
+						"iconUrl": "https://x402factory.ai/x402factoryfavoicon.jpg",
+						"network": "solana",
+						"pricing": {
+							"mode": "default",
+							"model": "gpt-5-mini",
+							"amount": 0.01,
+							"network": "Solana",
+							"currency": "USDC",
+							"minAmount": 0.001,
+							"isAgentCall": false,
+							"defaultAmount": 0.01,
+							"isCreateAction": false,
+							"maxOutputTokens": 2000,
+							"estimatedInputTokens": 41
+						},
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+						"avatarUrl": "https://x402factory.ai/x402factoryfavoicon.jpg",
+						"serviceUrl": "https://x402factory.ai",
+						"serviceName": "x402Factory",
+						"serviceDescription": "x402Factory Solana endpoints for agents (notes, LLMs, TTS, Telegram, coin prices, payments)."
+					},
+					"payTo": "AGENTxr77msTPAmGk4DwdumueVAa3SvtyrpTf6tWMeWD",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://x402factory.ai/solana/llm/gpt",
+					"description": "Solana GPT wrapper API using x402 payments. Default direct call: model gpt-5-mini, max_output_tokens=2000, fixed price 0.01 USDC for up to 1000 input tokens. For all other settings the price is computed per model as (input_tokens * input_price_per_million + max_output_tokens * output_price_per_million) / 1,000,000, with a minimum of 0.001 USDC and always rounded up to 6 decimals. Optional max_input_tokens lets you cap the input tokens used for pricing; if the message is longer than this cap the server returns an error instead of under-pricing. Optional action=message (or omitting action) performs a direct GPT call with the given message. Optional action=create creates a custom agent with the given message as preprompt for 0.001 USDC (no OpenAI call), stores a base_price_usdc using (max_input_tokens_for_agent or 1000) + preprompt + max_output_tokens, and returns a custom_id. Optional action=list lists up to 100 recent custom agents for the paying wallet for 0.001 USDC without calling OpenAI. Custom agents can be called via POST /solana/llm/gpt with custom_id, or POST /solana/llm/gpt/{custom_id}. Each custom agent has a fixed price per call based on its stored preprompt, model, max_output_tokens and max_input_tokens; if the runtime message is longer than max_input_tokens the server returns an error. This specific request uses model gpt-5-mini with max_output_tokens=2000. Pricing mode: default. Prepaid price (x402) for this request: 0.010000 USDC. Estimated input tokens for pricing: 41.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyType": "json",
+							"bodyFields": {
+								"model": {
+									"enum": [
+										"gpt-5.1",
+										"gpt-5-mini",
+										"gpt-5-nano",
+										"gpt-5-pro"
+									],
+									"type": "string",
+									"required": false,
+									"description": "Logical model name. One of: gpt-5.1, gpt-5-mini (default), gpt-5-nano, gpt-5-pro. Pricing is per model using per-million token rates."
+								},
+								"action": {
+									"enum": ["message", "create", "list"],
+									"type": "string",
+									"required": false,
+									"description": "Optional action. Use 'message' (or omit action) for a direct GPT call, 'create' to create a custom agent with a preprompt, or 'list' to list your custom agents without calling OpenAI."
+								},
+								"message": {
+									"type": "string",
+									"required": false,
+									"description": "User message for the LLM. Required for normal GPT calls. For action=create this becomes the preprompt that is stored for the custom agent."
+								},
+								"custom_id": {
+									"type": "string",
+									"required": false,
+									"description": "Optional custom agent ID returned from action=create. When set, the preprompt + model from that agent are used. Can also be provided via URL: /solana/llm/gpt/{custom_id}."
+								},
+								"max_input_tokens": {
+									"type": "number",
+									"required": false,
+									"description": "Optional hard ceiling on input tokens used for pricing. For normal calls this caps the user message tokens. For custom agents this caps the user message tokens on top of the fixed preprompt. If the actual message is longer than this value, the server returns an error instead of under-pricing."
+								},
+								"max_output_tokens": {
+									"type": "number",
+									"required": false,
+									"description": "Maximum number of output tokens. Default 2000. Higher limits increase the prepaid price because x402 payments are upfront."
+								}
+							}
+						},
+						"output": {
+							"ok": {
+								"type": "boolean",
+								"description": "True on success"
+							},
+							"model": {
+								"type": "string",
+								"description": "Model used for this call"
+							},
+							"reply": {
+								"type": "string",
+								"description": "For GPT calls, the assistant reply text from OpenAI."
+							},
+							"action": {
+								"type": "string",
+								"description": "Action performed: 'call' for direct GPT calls, 'call_custom' for custom agents, 'create' for new custom agents, 'list' for listing your custom agents."
+							},
+							"agents": {
+								"type": "array",
+								"description": "For action=list: up to 100 recent custom agents for the paying wallet. Each entry includes custom_id, model, max_output_tokens, base_price_usdc, preprompt_preview (first 250 chars), created_at and updated_at."
+							},
+							"custom_id": {
+								"type": "string",
+								"description": "Custom agent ID used for this call, if any. For action=create this is the newly created agent ID."
+							},
+							"preprompt": {
+								"type": "string",
+								"description": "For action=create, the stored preprompt text. For custom calls, the preprompt used for the agent."
+							},
+							"price_usdc": {
+								"type": "number",
+								"description": "Price charged for this call in USDC (6 decimals, rounded up). Minimum is 0.001 USDC. Default direct calls cost 0.01 USDC for up to 1000 input tokens with gpt-5-mini and max_output_tokens=2000."
+							},
+							"base_price_usdc": {
+								"type": "number",
+								"description": "For action=create, the stored base price for the agent (max_input_tokens_for_agent + preprompt + max_output_tokens) using the selected model."
+							},
+							"max_output_tokens": {
+								"type": "number",
+								"description": "Maximum output tokens used for this call (after applying any defaults and limits)."
+							},
+							"estimated_input_tokens": {
+								"type": "number",
+								"description": "Estimated number of input tokens used for pricing. For custom agents this includes both preprompt and user message."
+							}
+						}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-22T11:12:18.698Z",
+			"metadata": {},
+			"resource": "https://x402factory.ai/solana/llm/gpt",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"model": {
+						"enum": [
+							"gpt-5.1",
+							"gpt-5-mini",
+							"gpt-5-nano",
+							"gpt-5-pro"
+						],
+						"type": "string",
+						"required": false,
+						"description": "Logical model name. One of: gpt-5.1, gpt-5-mini (default), gpt-5-nano, gpt-5-pro. Pricing is per model using per-million token rates."
+					},
+					"action": {
+						"enum": ["message", "create", "list"],
+						"type": "string",
+						"required": false,
+						"description": "Optional action. Use 'message' (or omit action) for a direct GPT call, 'create' to create a custom agent with a preprompt, or 'list' to list your custom agents without calling OpenAI."
+					},
+					"message": {
+						"type": "string",
+						"required": false,
+						"description": "User message for the LLM. Required for normal GPT calls. For action=create this becomes the preprompt that is stored for the custom agent."
+					},
+					"custom_id": {
+						"type": "string",
+						"required": false,
+						"description": "Optional custom agent ID returned from action=create. When set, the preprompt + model from that agent are used. Can also be provided via URL: /solana/llm/gpt/{custom_id}."
+					},
+					"max_input_tokens": {
+						"type": "number",
+						"required": false,
+						"description": "Optional hard ceiling on input tokens used for pricing. For normal calls this caps the user message tokens. For custom agents this caps the user message tokens on top of the fixed preprompt. If the actual message is longer than this value, the server returns an error instead of under-pricing."
+					},
+					"max_output_tokens": {
+						"type": "number",
+						"required": false,
+						"description": "Maximum number of output tokens. Default 2000. Higher limits increase the prepaid price because x402 payments are upfront."
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": {
+						"type": "boolean",
+						"description": "True on success"
+					},
+					"model": {
+						"type": "string",
+						"description": "Model used for this call"
+					},
+					"reply": {
+						"type": "string",
+						"description": "For GPT calls, the assistant reply text from OpenAI."
+					},
+					"action": {
+						"type": "string",
+						"description": "Action performed: 'call' for direct GPT calls, 'call_custom' for custom agents, 'create' for new custom agents, 'list' for listing your custom agents."
+					},
+					"agents": {
+						"type": "array",
+						"description": "For action=list: up to 100 recent custom agents for the paying wallet. Each entry includes custom_id, model, max_output_tokens, base_price_usdc, preprompt_preview (first 250 chars), created_at and updated_at."
+					},
+					"custom_id": {
+						"type": "string",
+						"description": "Custom agent ID used for this call, if any. For action=create this is the newly created agent ID."
+					},
+					"preprompt": {
+						"type": "string",
+						"description": "For action=create, the stored preprompt text. For custom calls, the preprompt used for the agent."
+					},
+					"price_usdc": {
+						"type": "number",
+						"description": "Price charged for this call in USDC (6 decimals, rounded up). Minimum is 0.001 USDC. Default direct calls cost 0.01 USDC for up to 1000 input tokens with gpt-5-mini and max_output_tokens=2000."
+					},
+					"base_price_usdc": {
+						"type": "number",
+						"description": "For action=create, the stored base price for the agent (max_input_tokens_for_agent + preprompt + max_output_tokens) using the selected model."
+					},
+					"max_output_tokens": {
+						"type": "number",
+						"description": "Maximum output tokens used for this call (after applying any defaults and limits)."
+					},
+					"estimated_input_tokens": {
+						"type": "number",
+						"description": "Estimated number of input tokens used for pricing. For custom agents this includes both preprompt and user message."
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"version": "2",
+						"facilitator": "https://facilitator.payai.network",
+						"facilitatorId": "payai"
+					},
+					"payTo": "0xbab109cB9c5d8CEA5809B59C3Cb7bb4Da54F5314",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-21T21:50:04.905Z",
+			"metadata": {},
+			"resource": "http://tiresapi.com/api/v1/answers/best_price_near",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"zip_code": "33705",
+					"tire_size": "235/55R17",
+					"radius_miles": 40
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"answer": {
+						"size": "235/55R17",
+						"brand": "Michelin",
+						"model": "Defender T+H",
+						"min_price": 142.99,
+						"retailer_key": "DISCOUNTTIRE",
+						"store_number": "1234",
+						"key_brand_mpc": "AAECAw",
+						"store_distance_miles": 4.2
+					},
+					"matches": [
+						{
+							"store_num": "1234",
+							"retailer_key": "DISCOUNTTIRE",
+							"single_price": 142.99,
+							"store_distance_miles": 4.2
+						},
+						{
+							"store_num": null,
+							"retailer_key": "TIRERACK",
+							"single_price": 158.99,
+							"store_distance_miles": null
+						}
+					],
+					"match_count": 2
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6a667a72d3d36d95421474019aa46f0308d643fc",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-21T21:02:22.754Z",
+			"metadata": {},
+			"resource": "https://btcnode.uk/api/fees",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"low": 5,
+					"high": 42,
+					"unit": "sat/vB",
+					"medium": 18
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xebe2dcac105bfa5f8d86867e3cf5de4d6c184b03",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-21T18:25:30.001Z",
+			"metadata": {},
+			"resource": "https://honorarios.rootspa.cl/honorarios/calcular",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "anio": 2026, "monto_bruto": 1000000 },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"liquido": 847500,
+					"retencion": 152500,
+					"monto_bruto": 1000000,
+					"tasa_retencion": 0.1525
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xebe2dcac105bfa5f8d86867e3cf5de4d6c184b03",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-21T18:25:27.753Z",
+			"metadata": {},
+			"resource": "https://honorarios.rootspa.cl/honorarios/afp",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"afps": [
+						{
+							"nombre": "habitat",
+							"comision": 0.0127,
+							"tasa_total": 0.1227
+						}
+					],
+					"afp_base": 0.1
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xebe2dcac105bfa5f8d86867e3cf5de4d6c184b03",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-21T18:25:25.439Z",
+			"metadata": {},
+			"resource": "https://honorarios.rootspa.cl/honorarios/tasas/:anio",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "anio": "2026" },
+				"queryParams": { "anio": 2026 }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "anio": 2026, "tasa": 0.1525 }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xebe2dcac105bfa5f8d86867e3cf5de4d6c184b03",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-21T18:25:23.579Z",
+			"metadata": {},
+			"resource": "https://honorarios.rootspa.cl/honorarios/tasas",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"2025": 0.145,
+					"2026": 0.1525,
+					"2027": 0.16,
+					"2028": 0.17
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6a5e7d954F49712aBf3F873f037EC845b7b8c666",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "",
+					"resource": "http://mcp-x402.vishwanetwork.xyz/api/pay-service",
+					"description": "Vishwa - micropayment",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						},
+						"output": {
+							"input": {
+								"type": "http",
+								"method": "GET",
+								"discoverable": true
+							}
+						}
+					},
+					"maxAmountRequired": "1000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-21T18:04:09.773Z",
+			"metadata": {},
+			"resource": "http://mcp-x402.vishwanetwork.xyz/api/pay-service",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"input": {
+						"type": "http",
+						"method": "GET",
+						"discoverable": true
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xebe2dcac105bfa5f8d86867e3cf5de4d6c184b03",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-21T18:03:59.554Z",
+			"metadata": {},
+			"resource": "https://latam.rootspa.cl/v1/validate",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "id": "11.222.333/0001-81", "country": "BR" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"id": "11.222.333/0001-81",
+					"country": "BR",
+					"id_type": "CNPJ",
+					"dv_check": "passed",
+					"is_valid": true,
+					"entity_type": "persona_moral",
+					"format_normalized": "11.222.333/0001-81"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "7G73PLhKvAPBGTzG5ESAE4coE7QrVeTTKfhTxQZbyGgC",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/traders/wallet-pnl",
+					"description": "Solana wallet realized + unrealized PnL, win rate, portfolio value with AI copy-worthiness verdict. Sources: Solana RPC + Jupiter.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyParams": {
+								"address": {
+									"type": "string",
+									"description": "Solana wallet or pool address"
+								}
+							},
+							"discoverable": true
+						},
+						"output": {
+							"type": "object",
+							"required": [
+								"data",
+								"signal",
+								"confidence",
+								"sources",
+								"latency_ms",
+								"timestamp"
+							],
+							"properties": {
+								"data": {
+									"type": "object",
+									"description": "Structured data from upstream sources (shape varies per endpoint)."
+								},
+								"signal": {
+									"enum": ["follow", "ignore"],
+									"type": "string",
+									"description": "Decision signal for the caller."
+								},
+								"insight": {
+									"type": "string",
+									"nullable": true,
+									"description": "AI-generated 1-2 sentence actionable insight."
+								},
+								"sources": {
+									"type": "array",
+									"items": { "type": "string" },
+									"description": "Upstream data sources used."
+								},
+								"timestamp": {
+									"type": "string",
+									"format": "date-time"
+								},
+								"confidence": {
+									"type": "number",
+									"maximum": 1,
+									"minimum": 0,
+									"description": "LLM confidence in the signal (0–1)."
+								},
+								"latency_ms": {
+									"type": "integer",
+									"description": "Total response time in milliseconds."
+								},
+								"model_used": {
+									"type": "string",
+									"nullable": true,
+									"description": "LLM model that produced the insight."
+								}
+							}
+						}
+					},
+					"maxAmountRequired": "50000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-21T11:45:25.350Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/traders/wallet-pnl",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"address": {
+						"type": "string",
+						"description": "Solana wallet or pool address"
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"required": [
+						"data",
+						"signal",
+						"confidence",
+						"sources",
+						"latency_ms",
+						"timestamp"
+					],
+					"properties": {
+						"data": {
+							"type": "object",
+							"description": "Structured data from upstream sources (shape varies per endpoint)."
+						},
+						"signal": {
+							"enum": ["follow", "ignore"],
+							"type": "string",
+							"description": "Decision signal for the caller."
+						},
+						"insight": {
+							"type": "string",
+							"nullable": true,
+							"description": "AI-generated 1-2 sentence actionable insight."
+						},
+						"sources": {
+							"type": "array",
+							"items": { "type": "string" },
+							"description": "Upstream data sources used."
+						},
+						"timestamp": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"confidence": {
+							"type": "number",
+							"maximum": 1,
+							"minimum": 0,
+							"description": "LLM confidence in the signal (0–1)."
+						},
+						"latency_ms": {
+							"type": "integer",
+							"description": "Total response time in milliseconds."
+						},
+						"model_used": {
+							"type": "string",
+							"nullable": true,
+							"description": "LLM model that produced the insight."
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x327Da3138533f86a6e31F08A3Da8Ba62f4d5c2B9",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://risk-api.riskengine.workers.dev/v1/screen",
+					"description": "Sanctions screening — OFAC, EU, UK lists",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-21T06:04:45.525Z",
+			"metadata": {},
+			"resource": "https://risk-api.riskengine.workers.dev/v1/screen",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"kind": "solana-coinprice",
+						"iconUrl": "https://x402factory.ai/x402factoryfavoicon.jpg",
+						"network": "solana",
+						"pricing": {
+							"mode": "fixed",
+							"amount": 0.001,
+							"network": "Solana",
+							"currency": "USDC"
+						},
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+						"avatarUrl": "https://x402factory.ai/x402factoryfavoicon.jpg",
+						"serviceUrl": "https://x402factory.ai",
+						"serviceName": "x402Factory",
+						"serviceDescription": "x402Factory Solana endpoints for agents (notes, LLMs, TTS, Telegram, coin prices, payments)."
+					},
+					"payTo": "AGENTxr77msTPAmGk4DwdumueVAa3SvtyrpTf6tWMeWD",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://x402factory.ai/solana/coinprice",
+					"description": "Solana coin price mini-endpoint for major tokens only. Returns spot prices and 24h stats for well-known tickers like btc, solana, eth, xmr, ltc and other large-cap coins, never microcaps. Pass an optional ticker to get a single-coin 24h snapshot with price, symbol, changeRate, changePrice, high and low, or omit ticker to receive a compact basket of top tokens in a fixed order. Cost: 0.001 USDC per request.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyType": "json",
+							"bodyFields": {
+								"ticker": {
+									"type": "string",
+									"required": false,
+									"description": "Optional ticker symbol for a single major token (case-insensitive). Examples: btc, solana, eth, xmr, ltc. When omitted the endpoint returns a compact basket of top tokens instead."
+								}
+							}
+						},
+						"output": {
+							"ok": {
+								"type": "boolean",
+								"description": "True on success."
+							},
+							"low": {
+								"type": "number",
+								"description": "Low price for the recent period (single mode only)."
+							},
+							"high": {
+								"type": "number",
+								"description": "High price for the recent period (single mode only)."
+							},
+							"mode": {
+								"type": "string",
+								"description": "Result mode: 'single' when ticker is provided, 'top' when ticker is omitted."
+							},
+							"price": {
+								"type": "number",
+								"description": "Spot price for the asset, using the upstream best bid/last price in a stable quote asset."
+							},
+							"prices": {
+								"type": "array",
+								"description": "For mode='top': ordered array of { ticker, symbol, price } for a fixed basket of major tokens, in the order: btc, solana, eth, xmr, bnb, xrp, trx, doge, ada, bch, hype, link, leo, xlm, zec, ltc, avax, hbar, dai, shib, ton, mnt, wlfi, cro."
+							},
+							"symbol": {
+								"type": "string",
+								"description": "Upstream trading symbol for the asset (e.g. BTC-USDT for single mode, or base asset symbol like BTC in the top basket)."
+							},
+							"ticker": {
+								"type": "string",
+								"description": "Normalized lower-case ticker that was resolved (single mode only)."
+							},
+							"changeRate": {
+								"type": "number",
+								"description": "Relative change rate over the recent period for the asset (single mode only)."
+							},
+							"changePrice": {
+								"type": "number",
+								"description": "Absolute price change over the recent period for the asset (single mode only)."
+							}
+						}
+					},
+					"maxAmountRequired": "1000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-21T00:23:30.032Z",
+			"metadata": {},
+			"resource": "https://x402factory.ai/solana/coinprice",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"ticker": {
+						"type": "string",
+						"required": false,
+						"description": "Optional ticker symbol for a single major token (case-insensitive). Examples: btc, solana, eth, xmr, ltc. When omitted the endpoint returns a compact basket of top tokens instead."
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": {
+						"type": "boolean",
+						"description": "True on success."
+					},
+					"low": {
+						"type": "number",
+						"description": "Low price for the recent period (single mode only)."
+					},
+					"high": {
+						"type": "number",
+						"description": "High price for the recent period (single mode only)."
+					},
+					"mode": {
+						"type": "string",
+						"description": "Result mode: 'single' when ticker is provided, 'top' when ticker is omitted."
+					},
+					"price": {
+						"type": "number",
+						"description": "Spot price for the asset, using the upstream best bid/last price in a stable quote asset."
+					},
+					"prices": {
+						"type": "array",
+						"description": "For mode='top': ordered array of { ticker, symbol, price } for a fixed basket of major tokens, in the order: btc, solana, eth, xmr, bnb, xrp, trx, doge, ada, bch, hype, link, leo, xlm, zec, ltc, avax, hbar, dai, shib, ton, mnt, wlfi, cro."
+					},
+					"symbol": {
+						"type": "string",
+						"description": "Upstream trading symbol for the asset (e.g. BTC-USDT for single mode, or base asset symbol like BTC in the top basket)."
+					},
+					"ticker": {
+						"type": "string",
+						"description": "Normalized lower-case ticker that was resolved (single mode only)."
+					},
+					"changeRate": {
+						"type": "number",
+						"description": "Relative change rate over the recent period for the asset (single mode only)."
+					},
+					"changePrice": {
+						"type": "number",
+						"description": "Absolute price change over the recent period for the asset (single mode only)."
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"kind": "solana-xprofile",
+						"iconUrl": "https://x402factory.ai/x402factoryfavoicon.jpg",
+						"network": "solana",
+						"pricing": {
+							"mode": "fixed",
+							"amount": 0.001,
+							"network": "Solana",
+							"currency": "USDC"
+						},
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+						"avatarUrl": "https://x402factory.ai/x402factoryfavoicon.jpg",
+						"serviceUrl": "https://x402factory.ai",
+						"serviceName": "x402Factory",
+						"serviceDescription": "x402Factory Solana endpoints for agents (notes, LLMs, TTS, Telegram, coin prices, payments, X profiles)."
+					},
+					"payTo": "AGENTxr77msTPAmGk4DwdumueVAa3SvtyrpTf6tWMeWD",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://x402factory.ai/solana/xprofile",
+					"description": "Solana X profile mini-endpoint. Fetches a full X profile and the 10 most recent tweets for a given handle, returning the raw profile data plus a trimmed tweet list with key engagement metrics and media. Cost: 0.001 USDC per request.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyType": "json",
+							"bodyFields": {
+								"handle": {
+									"type": "string",
+									"required": true,
+									"description": "X handle (username) without the @ prefix, for example WURKDOTFUN or statikheadz."
+								}
+							}
+						},
+						"output": {
+							"ok": {
+								"type": "boolean",
+								"description": "True on success."
+							},
+							"handle": {
+								"type": "string",
+								"description": "Normalized X handle that was requested."
+							},
+							"tweets": {
+								"type": "array",
+								"description": "Array of up to 10 recent tweets with trimmed but useful metadata: id, text (max 3000 chars; longer texts are truncated), created_at, language, basic user info, engagement metrics, media and links."
+							},
+							"profile": {
+								"type": "object",
+								"description": "Full upstream X profile payload for the user, including core fields like id, rest_id, name, screen_name, description, avatar, location and counters."
+							},
+							"price_usdc": {
+								"type": "string",
+								"description": "Fixed price charged for this call in USDC (6 decimals)."
+							},
+							"tweet_count": {
+								"type": "number",
+								"description": "Number of recent tweets returned (up to 10)."
+							}
+						}
+					},
+					"maxAmountRequired": "1000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-21T00:22:38.874Z",
+			"metadata": {},
+			"resource": "https://x402factory.ai/solana/xprofile",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"handle": {
+						"type": "string",
+						"required": true,
+						"description": "X handle (username) without the @ prefix, for example WURKDOTFUN or statikheadz."
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": {
+						"type": "boolean",
+						"description": "True on success."
+					},
+					"handle": {
+						"type": "string",
+						"description": "Normalized X handle that was requested."
+					},
+					"tweets": {
+						"type": "array",
+						"description": "Array of up to 10 recent tweets with trimmed but useful metadata: id, text (max 3000 chars; longer texts are truncated), created_at, language, basic user info, engagement metrics, media and links."
+					},
+					"profile": {
+						"type": "object",
+						"description": "Full upstream X profile payload for the user, including core fields like id, rest_id, name, screen_name, description, avatar, location and counters."
+					},
+					"price_usdc": {
+						"type": "string",
+						"description": "Fixed price charged for this call in USDC (6 decimals)."
+					},
+					"tweet_count": {
+						"type": "number",
+						"description": "Number of recent tweets returned (up to 10)."
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb5998e11E666Fd1e7f3B8e8d9122A755eec1E9b7",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/base/lp/pools-strategy",
+					"description": "LP strategy advisor",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyParams": {
+								"token_pair": {
+									"type": "string",
+									"description": "Token pair (e.g. SOL-USDC)"
+								},
+								"capital_usdc": {
+									"type": "string",
+									"description": "Capital in USD"
+								}
+							},
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "200000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-20T22:12:22.261Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/base/lp/pools-strategy",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"token_pair": {
+						"type": "string",
+						"description": "Token pair (e.g. SOL-USDC)"
+					},
+					"capital_usdc": {
+						"type": "string",
+						"description": "Capital in USD"
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9VaDVp1Wb78G4Wm6VuTiMrpESjrUymXefQTHcJGRSTEA",
+					"amount": "60000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 1200
+				}
+			],
+			"lastUpdated": "2026-05-20T16:30:58.755Z",
+			"metadata": {},
+			"resource": "https://api.xona-agent.com/image/flux-2-flex",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"prompt": "",
+					"aspect_ratio": "1:1",
+					"referenceImage": []
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"metadata": {},
+					"image_url": "",
+					"image_description": ""
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x47663506e9016aC3Df59632d30426c563b252DbE",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "",
+					"resource": "http://api.aimo.xyz/api-paid/search-coins",
+					"description": "Search for cryptocurrency coins by name or symbol",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyFields": {
+								"limit": {
+									"description": "Maximum number of results (default: 10)"
+								},
+								"query": {
+									"description": "Search term (coin name or symbol)"
+								},
+								"include_platform": {
+									"description": "Include platform information (default: false)"
+								}
+							},
+							"discoverable": true
+						},
+						"output": {
+							"bodyFields": {
+								"result": {
+									"description": "Formatted list of matching coins with their CoinGecko IDs and market cap ranks"
+								}
+							}
+						}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-20T03:57:09.879Z",
+			"metadata": {},
+			"resource": "http://api.aimo.xyz/api-paid/search-coins",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"limit": {
+						"description": "Maximum number of results (default: 10)"
+					},
+					"query": {
+						"description": "Search term (coin name or symbol)"
+					},
+					"include_platform": {
+						"description": "Include platform information (default: false)"
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"bodyFields": {
+						"result": {
+							"description": "Formatted list of matching coins with their CoinGecko IDs and market cap ranks"
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "5HK2dGaaquDWFnYWaWhMzMYtbcDsqeq5biJ2PMtX1tkN",
+					"amount": "990000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-19T15:33:12.544Z",
+			"metadata": {},
+			"resource": "https://underground.substratesymposium.com/buy/basil",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"title": "Basil (Abundance)",
+					"content": "Reflection on rapid productive growth for understanding quick iteration cycles.",
+					"product": "basil",
+					"delivered_at": "2026-04-24T10:00:00Z"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"name": "Relay Agent Search",
+						"category": "Search",
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+						"assetSymbol": "USDC",
+						"description": "Discover Relay agents - search ranked by reputation across handles, names, and bios",
+						"networkCaip": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp1tu7BL5",
+						"assetDecimals": 6,
+						"maxAmountRequired": "5000"
+					},
+					"payTo": "4TmAbwMAMqHSUPDWgFLZn9Ep3A3w5hqnY461dhg3xgaz",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://relaynetwork.ai/api/v1/agents/search",
+					"description": "Search Relay agents by handle, display name, or bio",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"queryParams": {
+								"q": "search query (matches handle / display_name / bio)",
+								"limit": "max results, 1-50 (default 10)",
+								"verified_only": "\"true\" to restrict to verified agents"
+							},
+							"discoverable": true
+						},
+						"output": {
+							"type": "object",
+							"schema": {
+								"type": "object",
+								"required": ["query", "count", "results"],
+								"properties": {
+									"count": { "type": "integer" },
+									"query": { "type": "string" },
+									"results": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"required": [
+												"handle",
+												"is_verified",
+												"reputation_score"
+											],
+											"properties": {
+												"handle": { "type": "string" },
+												"avatar_url": {
+													"type": ["string", "null"]
+												},
+												"is_verified": {
+													"type": "boolean"
+												},
+												"display_name": {
+													"type": ["string", "null"]
+												},
+												"follower_count": {
+													"type": "integer"
+												},
+												"reputation_score": {
+													"type": "integer"
+												}
+											}
+										}
+									}
+								}
+							},
+							"example": {
+								"count": 2,
+								"query": "forge",
+								"results": [
+									{
+										"handle": "forge_gpt",
+										"avatar_url": "https://relaynetwork.ai/images/avatars/forge_gpt.png",
+										"is_verified": true,
+										"display_name": "Forge GPT",
+										"follower_count": 218,
+										"reputation_score": 492
+									},
+									{
+										"handle": "forge_lab",
+										"avatar_url": null,
+										"is_verified": false,
+										"display_name": "Forge Lab",
+										"follower_count": 12,
+										"reputation_score": 87
+									}
+								]
+							}
+						}
+					},
+					"maxAmountRequired": "5000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-19T05:27:11.624Z",
+			"metadata": {},
+			"resource": "https://relaynetwork.ai/api/v1/agents/search",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"q": "search query (matches handle / display_name / bio)",
+					"limit": "max results, 1-50 (default 10)",
+					"verified_only": "\"true\" to restrict to verified agents"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"schema": {
+						"type": "object",
+						"required": ["query", "count", "results"],
+						"properties": {
+							"count": { "type": "integer" },
+							"query": { "type": "string" },
+							"results": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"required": [
+										"handle",
+										"is_verified",
+										"reputation_score"
+									],
+									"properties": {
+										"handle": { "type": "string" },
+										"avatar_url": {
+											"type": ["string", "null"]
+										},
+										"is_verified": { "type": "boolean" },
+										"display_name": {
+											"type": ["string", "null"]
+										},
+										"follower_count": { "type": "integer" },
+										"reputation_score": {
+											"type": "integer"
+										}
+									}
+								}
+							}
+						}
+					},
+					"example": {
+						"count": 2,
+						"query": "forge",
+						"results": [
+							{
+								"handle": "forge_gpt",
+								"avatar_url": "https://relaynetwork.ai/images/avatars/forge_gpt.png",
+								"is_verified": true,
+								"display_name": "Forge GPT",
+								"follower_count": 218,
+								"reputation_score": 492
+							},
+							{
+								"handle": "forge_lab",
+								"avatar_url": null,
+								"is_verified": false,
+								"display_name": "Forge Lab",
+								"follower_count": 12,
+								"reputation_score": 87
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xfB7eF581B0338A31e47AA9770345b26D46BF0451",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-18T20:00:36.442Z",
+			"metadata": {},
+			"resource": "https://x402.klimalabs.com/api",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"action": "retire",
+					"chainId": 8453,
+					"retirements": [
+						{
+							"amount": "1",
+							"details": {
+								"beneficiaryString": "Example Beneficiary",
+								"retirementMessage": "Offsetting Q1 2026 emissions"
+							},
+							"inputToken": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+							"carbonClass": "0x0008f35758a4318942ecb5d5414116ce7b1ede2d",
+							"creditToken": "0x8528f4cd40b56e18db7145a48b545cb9fb85b293"
+						}
+					]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"to": "0xda0a793d7c32ab80bcdab7f8c725c96db22464f4",
+					"data": "0x...",
+					"quotes": [
+						{
+							"creditToken": "0x...",
+							"priceFormatted": "0.13",
+							"tonnesFormatted": "1"
+						}
+					],
+					"chainId": 8453,
+					"retirementCount": 1,
+					"approvalRequired": true,
+					"approvalInstructions": [
+						{
+							"note": "...",
+							"token": "0x...",
+							"amount": "...",
+							"spender": "0x..."
+						}
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"name": "getPumpFunTokens",
+						"decimals": 6,
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+						"priceUsd": 0.068686,
+						"description": "Query PumpFun tokens (new, graduating, graduated)",
+						"tokenSymbol": "SOL_USDC",
+						"tokenPriceUsd": 1
+					},
+					"payTo": "4Z4rmiTW3U74qjYrRw7zS9Y7McKEVDLssHndKyJvGbFn",
+					"amount": "68687",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-18T06:39:27.913Z",
+			"metadata": {},
+			"resource": "https://agenthustle.ai/api/tools/execute/unified/getPumpFunTokens",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "type": "newly_created" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json",
+				"bodyFields": {
+					"type": {
+						"enum": [
+							"newly_created",
+							"about_to_graduate",
+							"graduated"
+						],
+						"type": "string",
+						"description": "Type of tokens to query"
+					},
+					"chain": { "enum": ["sol"], "type": "string" },
+					"limit": { "type": "number" },
+					"apiKey": {
+						"type": "string",
+						"description": "(Optional) Vault API key — alternative to JWT"
+					},
+					"context": { "enum": ["meme"], "type": "string" },
+					"orderBy": {
+						"enum": ["curvePercent+desc", "createdAt+desc"],
+						"type": "string",
+						"description": "(Optional) Order by"
+					},
+					"emblemJwt": {
+						"type": "string",
+						"description": "(Optional) Emblem Vault JWT — not needed for this info-only tool"
+					},
+					"volume_gte": {
+						"type": "number",
+						"description": "(Optional) volume greater than value"
+					},
+					"volume_lte": {
+						"type": "number",
+						"description": "(Optional) volume less than value"
+					},
+					"buyCount_gte": { "type": "number" },
+					"buyCount_lte": { "type": "number" },
+					"liquidUsd_gte": { "type": "number" },
+					"liquidUsd_lte": { "type": "number" },
+					"marketCap_gte": {
+						"type": "number",
+						"description": "(Optional) market cap greater than value"
+					},
+					"marketCap_lte": {
+						"type": "number",
+						"description": "(Optional) market cap less than {value}"
+					},
+					"sellCount_gte": { "type": "number" },
+					"sellCount_lte": { "type": "number" },
+					"tradeCount_gte": { "type": "number" },
+					"tradeCount_lte": { "type": "number" },
+					"holderCount_gte": { "type": "number" },
+					"holderCount_lte": { "type": "number" },
+					"devHoldPercent_gte": {
+						"type": "number",
+						"description": "(Optional) dev hold percent greater than value"
+					},
+					"devHoldPercent_lte": {
+						"type": "number",
+						"description": "(Optional) dev hold percent less than value"
+					},
+					"sniperWalletCount_gte": { "type": "number" },
+					"sniperWalletCount_lte": { "type": "number" },
+					"insiderHoldPercent_gte": { "type": "number" },
+					"insiderHoldPercent_lte": { "type": "number" }
+				},
+				"discoverable": true
+			},
+			"outputSchema": {
+				"tool": {
+					"type": "string",
+					"description": "Tool name that was executed"
+				},
+				"result": {
+					"type": "object",
+					"description": "Tool execution result"
+				},
+				"example": {
+					"tool": "getPumpFunTokens",
+					"result": {},
+					"timestamp": "2025-01-01T00:00:00.000Z",
+					"callerType": "ephemeral"
+				},
+				"timestamp": {
+					"type": "string",
+					"description": "ISO 8601 timestamp"
+				},
+				"callerType": {
+					"enum": ["authenticated", "ephemeral"],
+					"type": "string"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"name": "getAllBalances",
+						"decimals": 6,
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+						"priceUsd": 0.0012,
+						"description": "Get balances across all supported networks (Solana, Ethereum, BSC, Polygon, Base, Hedera, Bitcoin). Defaults to the connected addresses from context. Optionally accepts a single `address` to query on behalf of another wallet: EVM (0x…) fans out to ethereum/bsc/polygon/base/hedera; Solana base58 goes to solana; Bitcoin 33-byte compressed pubkey hex goes to bitcoin. Chains whose address format doesn't match the override return `{ error: 'address type mismatch' }`. Returns per-network results, the `resolvedFrom` source for each chain, and a `requestedAt` timestamp.",
+						"tokenSymbol": "SOL_USDC",
+						"tokenPriceUsd": 1
+					},
+					"payTo": "4Z4rmiTW3U74qjYrRw7zS9Y7McKEVDLssHndKyJvGbFn",
+					"amount": "1200",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-18T06:38:52.831Z",
+			"metadata": {},
+			"resource": "https://agenthustle.ai/api/tools/execute/unified/getAllBalances",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"apiKey": "<vault-api-key>",
+					"emblemJwt": "<emblem-jwt>"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json",
+				"bodyFields": {
+					"apiKey": {
+						"type": "string",
+						"description": "(Required: provide apiKey OR emblemJwt) Vault API key — alternative to JWT"
+					},
+					"emblemJwt": {
+						"type": "string",
+						"description": "(Required: provide emblemJwt OR apiKey) Emblem Vault JWT — this tool needs wallet/vault access"
+					}
+				},
+				"discoverable": true
+			},
+			"outputSchema": {
+				"tool": {
+					"type": "string",
+					"description": "Tool name that was executed"
+				},
+				"result": {
+					"type": "object",
+					"description": "Tool execution result"
+				},
+				"example": {
+					"tool": "getAllBalances",
+					"result": {},
+					"timestamp": "2025-01-01T00:00:00.000Z",
+					"callerType": "authenticated"
+				},
+				"timestamp": {
+					"type": "string",
+					"description": "ISO 8601 timestamp"
+				},
+				"callerType": {
+					"enum": ["authenticated", "ephemeral"],
+					"type": "string"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"version": "2",
+						"maxDeposit": "10000000000",
+						"minDeposit": "1000000"
+					},
+					"payTo": "0x51806490898991fbf6cb4f2a6743dd4ef8f12a6b",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://api.polypay.pro/api/x402/deposit/0x51806490898991fbf6cb4f2a6743dd4ef8f12a6b",
+					"description": "Gasless USDC deposit to PolyPay multisig 0x51806490898991fbf6cb4f2a6743dd4ef8f12a6b. Sign EIP-3009 transferWithAuthorization for any amount in [1000000, 10000000000] (6-decimals USDC).",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "1000000",
+					"maxTimeoutSeconds": 120
+				}
+			],
+			"lastUpdated": "2026-05-18T03:20:33.887Z",
+			"metadata": {},
+			"resource": "https://api.polypay.pro/api/x402/deposit/0x51806490898991fbf6cb4f2a6743dd4ef8f12a6b",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "7G73PLhKvAPBGTzG5ESAE4coE7QrVeTTKfhTxQZbyGgC",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://mpp.hyreagent.fun/lp/pools",
+					"description": "All Meteora DLMM pools with TVL, 24h volume, fees, and APR — sortable by APR/volume/TVL, filterable by token. Sources: Meteora DLMM API.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyParams": {
+								"limit": {
+									"type": "integer",
+									"description": "Max results (default 10)"
+								}
+							},
+							"discoverable": true
+						},
+						"output": {
+							"type": "object",
+							"required": [
+								"data",
+								"signal",
+								"confidence",
+								"sources",
+								"latency_ms",
+								"timestamp"
+							],
+							"properties": {
+								"data": {
+									"type": "object",
+									"description": "Structured data from upstream sources (shape varies per endpoint)."
+								},
+								"signal": {
+									"enum": ["add_liquidity", "hold", "remove"],
+									"type": "string",
+									"description": "Decision signal for the caller."
+								},
+								"insight": {
+									"type": "string",
+									"nullable": true,
+									"description": "AI-generated 1-2 sentence actionable insight."
+								},
+								"sources": {
+									"type": "array",
+									"items": { "type": "string" },
+									"description": "Upstream data sources used."
+								},
+								"timestamp": {
+									"type": "string",
+									"format": "date-time"
+								},
+								"confidence": {
+									"type": "number",
+									"maximum": 1,
+									"minimum": 0,
+									"description": "LLM confidence in the signal (0–1)."
+								},
+								"latency_ms": {
+									"type": "integer",
+									"description": "Total response time in milliseconds."
+								},
+								"model_used": {
+									"type": "string",
+									"nullable": true,
+									"description": "LLM model that produced the insight."
+								}
+							}
+						}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-17T20:35:24.029Z",
+			"metadata": {},
+			"resource": "https://mpp.hyreagent.fun/lp/pools",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"limit": {
+						"type": "integer",
+						"description": "Max results (default 10)"
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"required": [
+						"data",
+						"signal",
+						"confidence",
+						"sources",
+						"latency_ms",
+						"timestamp"
+					],
+					"properties": {
+						"data": {
+							"type": "object",
+							"description": "Structured data from upstream sources (shape varies per endpoint)."
+						},
+						"signal": {
+							"enum": ["add_liquidity", "hold", "remove"],
+							"type": "string",
+							"description": "Decision signal for the caller."
+						},
+						"insight": {
+							"type": "string",
+							"nullable": true,
+							"description": "AI-generated 1-2 sentence actionable insight."
+						},
+						"sources": {
+							"type": "array",
+							"items": { "type": "string" },
+							"description": "Upstream data sources used."
+						},
+						"timestamp": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"confidence": {
+							"type": "number",
+							"maximum": 1,
+							"minimum": 0,
+							"description": "LLM confidence in the signal (0–1)."
+						},
+						"latency_ms": {
+							"type": "integer",
+							"description": "Total response time in milliseconds."
+						},
+						"model_used": {
+							"type": "string",
+							"nullable": true,
+							"description": "LLM model that produced the insight."
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9246XrsAEKH6hAyEQe5PvdpUL1p5Ktj9c7ySnwQn6ois",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-17T19:27:13.653Z",
+			"metadata": {},
+			"resource": "https://api.paysponge.com/person/search",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6E8B64638b24C6D625b045dD353120d850064E2E",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-17T18:44:43.889Z",
+			"metadata": {},
+			"resource": "https://url-shortener.api.klymax402.com/api/shorten",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "url": "example", "custom_alias": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6E8B64638b24C6D625b045dD353120d850064E2E",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-17T18:44:39.583Z",
+			"metadata": {},
+			"resource": "https://slug-generator.api.klymax402.com/api/slugify",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"text": "example",
+					"lowercase": true,
+					"separator": "example"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6E8B64638b24C6D625b045dD353120d850064E2E",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-17T18:44:37.644Z",
+			"metadata": {},
+			"resource": "https://pii-detector.api.klymax402.com/api/detect",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "text": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6E8B64638b24C6D625b045dD353120d850064E2E",
+					"amount": "2000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-17T18:44:33.542Z",
+			"metadata": {},
+			"resource": "https://language-detector.api.klymax402.com/api/detect",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "text": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6E8B64638b24C6D625b045dD353120d850064E2E",
+					"amount": "3000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-17T18:44:30.115Z",
+			"metadata": {},
+			"resource": "https://hl-vaults.api.klymax402.com/api/vaults",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "limit": 1 }
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6E8B64638b24C6D625b045dD353120d850064E2E",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-17T18:44:28.313Z",
+			"metadata": {},
+			"resource": "https://hash-generator.api.klymax402.com/api/hash",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "text": "example", "algorithm": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x85889c8c714505E0c94b30fcfcF64fE3Ac8FCb20",
+					"extra": {
+						"name": "Bridged USDC (SKALE Bridge)",
+						"eip712": {
+							"name": "Bridged USDC (SKALE Bridge)",
+							"version": "2"
+						},
+						"version": "2",
+						"decimals": 6
+					},
+					"payTo": "0x515e7Bce44Baa5F6e42D16d4B5f27768E7f2F8cC",
+					"amount": "100000",
+					"scheme": "exact",
+					"network": "eip155:1187947933",
+					"maxTimeoutSeconds": 1200
+				}
+			],
+			"lastUpdated": "2026-05-17T14:06:59.472Z",
+			"metadata": {},
+			"resource": "https://api.xona-agent.com/base/ai/prediction-market/limitless/alpha-feed",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "limit": 0, "category_id": 0, "min_confidence": 0 },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "opportunities": [] }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"name": "Relay Agent Reputation",
+						"category": "Social",
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+						"assetSymbol": "USDC",
+						"description": "On-chain reputation score for verified Relay agents (Solana / x402)",
+						"networkCaip": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp1tu7BL5",
+						"assetDecimals": 6,
+						"maxAmountRequired": "1000"
+					},
+					"payTo": "4TmAbwMAMqHSUPDWgFLZn9Ep3A3w5hqnY461dhg3xgaz",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://relaynetwork.ai/api/v1/agents/{handle}/reputation",
+					"description": "Relay agent reputation lookup",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"pathParams": {
+								"handle": "relay-agent-handle (e.g. relay_foundation, mesa_open)"
+							},
+							"discoverable": true
+						},
+						"output": {
+							"type": "object",
+							"schema": {
+								"type": "object",
+								"required": [
+									"handle",
+									"score",
+									"contracts",
+									"progression"
+								],
+								"properties": {
+									"score": { "type": "integer" },
+									"handle": { "type": "string" },
+									"on_chain": { "type": ["object", "null"] },
+									"contracts": { "type": "integer" },
+									"progression": { "type": "object" },
+									"total_contracts": { "type": "integer" },
+									"fulfillment_rate": { "type": "number" },
+									"fulfilled_contracts": {
+										"type": "integer"
+									},
+									"onchain_profile_pda": {
+										"type": ["string", "null"]
+									},
+									"onchain_profile_solscan_url": {
+										"type": ["string", "null"]
+									}
+								}
+							},
+							"example": {
+								"score": 1000,
+								"handle": "relay_foundation",
+								"on_chain": {
+									"score_bps": 9750,
+									"program_id": "2dysoEiGEyn2DeUKgFneY1KxBNqGP4XWdzLtzBK8MYau",
+									"last_updated": 1745236615,
+									"total_volume": "12340000",
+									"settled_count": "655",
+									"disputed_count": "0",
+									"reputation_pda": "<derived from agent wallet pubkey>",
+									"cancelled_count": "0",
+									"reputation_solscan_url": "https://solscan.io/account/<pda>"
+								},
+								"contracts": 655,
+								"progression": {
+									"level": 18,
+									"total_xp": 8240,
+									"next_level_xp": 1110,
+									"smartness_tier": "elite",
+									"smartness_score": 10,
+									"current_level_xp": 210,
+									"learning_momentum": 30,
+									"milestone_unlocks": [
+										"Broader contract matching for adjacent capabilities"
+									],
+									"confidence_threshold": 68
+								},
+								"total_contracts": 655,
+								"fulfillment_rate": 1,
+								"fulfilled_contracts": 655,
+								"onchain_profile_pda": "derived from [b\"profile\", utf8(handle)]",
+								"onchain_profile_solscan_url": "https://solscan.io/account/<pda>"
+							}
+						}
+					},
+					"maxAmountRequired": "1000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-17T12:54:02.509Z",
+			"metadata": {},
+			"resource": "https://relaynetwork.ai/api/v1/agents/%7Bhandle%7D/reputation",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"schema": {
+						"type": "object",
+						"required": [
+							"handle",
+							"score",
+							"contracts",
+							"progression"
+						],
+						"properties": {
+							"score": { "type": "integer" },
+							"handle": { "type": "string" },
+							"on_chain": { "type": ["object", "null"] },
+							"contracts": { "type": "integer" },
+							"progression": { "type": "object" },
+							"total_contracts": { "type": "integer" },
+							"fulfillment_rate": { "type": "number" },
+							"fulfilled_contracts": { "type": "integer" },
+							"onchain_profile_pda": {
+								"type": ["string", "null"]
+							},
+							"onchain_profile_solscan_url": {
+								"type": ["string", "null"]
+							}
+						}
+					},
+					"example": {
+						"score": 1000,
+						"handle": "relay_foundation",
+						"on_chain": {
+							"score_bps": 9750,
+							"program_id": "2dysoEiGEyn2DeUKgFneY1KxBNqGP4XWdzLtzBK8MYau",
+							"last_updated": 1745236615,
+							"total_volume": "12340000",
+							"settled_count": "655",
+							"disputed_count": "0",
+							"reputation_pda": "<derived from agent wallet pubkey>",
+							"cancelled_count": "0",
+							"reputation_solscan_url": "https://solscan.io/account/<pda>"
+						},
+						"contracts": 655,
+						"progression": {
+							"level": 18,
+							"total_xp": 8240,
+							"next_level_xp": 1110,
+							"smartness_tier": "elite",
+							"smartness_score": 10,
+							"current_level_xp": 210,
+							"learning_momentum": 30,
+							"milestone_unlocks": [
+								"Broader contract matching for adjacent capabilities"
+							],
+							"confidence_threshold": 68
+						},
+						"total_contracts": 655,
+						"fulfillment_rate": 1,
+						"fulfilled_contracts": 655,
+						"onchain_profile_pda": "derived from [b\"profile\", utf8(handle)]",
+						"onchain_profile_solscan_url": "https://solscan.io/account/<pda>"
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xF50C0D73C68EF2d8B3388Ec060ED39edCeb62BAF",
+					"amount": "3000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-17T12:35:31.976Z",
+			"metadata": {},
+			"resource": "https://war-tracker.com/api/v1/vessels/search",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"q": {
+							"type": "string",
+							"description": "Free-text name / IMO / MMSI prefix."
+						},
+						"flag": {
+							"type": "string",
+							"description": "ISO-3166-1 alpha-2 flag (e.g. 'MH')."
+						},
+						"type": {
+							"type": "string",
+							"description": "AIS type (see /api/v1/vessels/facets)."
+						},
+						"limit": {
+							"type": "integer",
+							"maximum": 20,
+							"minimum": 1
+						},
+						"cursor": {
+							"type": "string",
+							"description": "Opaque cursor from a previous page."
+						},
+						"subtype": {
+							"type": "string",
+							"description": "AIS subtype (see facets)."
+						},
+						"min_length": {
+							"type": "number",
+							"description": "Minimum overall length in metres."
+						},
+						"sanctioned": { "type": "boolean" },
+						"watchlisted": { "type": "boolean" },
+						"min_year_built": { "type": "integer" },
+						"commercial_market_name": {
+							"type": "string",
+							"description": "13-value broad category (e.g. WET BULK, DRY BULK)."
+						}
+					}
+				},
+				"queryParams": {
+					"q": "achilles",
+					"flag": "MH",
+					"type": "Tanker",
+					"limit": 20,
+					"subtype": "Crude Oil Tanker",
+					"sanctioned": true,
+					"commercial_market_name": "WET BULK"
+				},
+				"routeTemplate": "/api/v1/vessels/search"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 1,
+					"vessels": [
+						{
+							"imo": 9368223,
+							"mmsi": 538003228,
+							"name": "ACHILLES",
+							"type": "Tanker",
+							"length": 333,
+							"ship_id": "10330187",
+							"subtype": "Crude Oil Tanker",
+							"sanctioned": true,
+							"year_built": 2007,
+							"watchlisted": true,
+							"country_code": "MH",
+							"last_seen_utc": "2026-05-17T11:42:00Z",
+							"commercial_market_name": "WET BULK"
+						}
+					],
+					"has_more": true,
+					"next_cursor": "eyJsYXN0X3NlZW4iOiIyMDI2LTA1LTE3VDExOjQyOjAwWiIsInNoaXBfaWQiOiIxMDMzMDE4NyJ9"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xF50C0D73C68EF2d8B3388Ec060ED39edCeb62BAF",
+					"amount": "11000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-17T12:35:11.805Z",
+			"metadata": {},
+			"resource": "https://war-tracker.com/api/v1/hormuz/crossings",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"date": { "type": "string", "format": "date" },
+						"days": {
+							"type": "integer",
+							"maximum": 14,
+							"minimum": 1
+						},
+						"limit": {
+							"type": "integer",
+							"maximum": 10,
+							"minimum": 1
+						},
+						"cursor": { "type": "string" },
+						"direction": { "enum": [0, 1], "type": "integer" },
+						"sanctioned": { "type": "boolean" },
+						"country_code": { "type": "string" }
+					}
+				},
+				"queryParams": { "days": 7, "limit": 10, "sanctioned": true },
+				"routeTemplate": "/api/v1/hormuz/crossings"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 1,
+					"has_more": true,
+					"crossings": [
+						{
+							"dwt": 318000,
+							"imo": 9368223,
+							"mmsi": 538003228,
+							"name": "ACHILLES",
+							"time1": "08:14:00",
+							"time2": "08:32:00",
+							"dt_utc": "2026-05-17T00:00:00Z",
+							"operator": "NITC",
+							"shiptype": "Crude Oil Tanker",
+							"direction": 1,
+							"sanctioned": true,
+							"watchlisted": true,
+							"country_code": "MH"
+						}
+					],
+					"next_cursor": "eyJkdCI6IjIwMjYtMDUtMTdUMDA6MDA6MDBaIiwibW1zaSI6NTM4MDAzMjI4fQ"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xF50C0D73C68EF2d8B3388Ec060ED39edCeb62BAF",
+					"amount": "26000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-17T12:34:53.462Z",
+			"metadata": {},
+			"resource": "https://war-tracker.com/api/v1/vessels/sanctioned",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"body": {
+							"enum": [
+								"ofac",
+								"fcdo",
+								"uani",
+								"eu",
+								"aso",
+								"gac",
+								"un",
+								"seco",
+								"mfat"
+							],
+							"type": "string",
+							"description": "Filter to one sanctioning body."
+						},
+						"flag": { "type": "string" },
+						"limit": {
+							"type": "integer",
+							"maximum": 10,
+							"minimum": 1
+						},
+						"cursor": {
+							"type": "string",
+							"description": "Opaque cursor from a previous page's next_cursor."
+						},
+						"active_only": { "type": "boolean" }
+					}
+				},
+				"queryParams": {
+					"body": "ofac",
+					"limit": 10,
+					"active_only": true
+				},
+				"routeTemplate": "/api/v1/vessels/sanctioned"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 10,
+					"filters": {
+						"body": null,
+						"flag": null,
+						"active_only": false
+					},
+					"vessels": [
+						{
+							"imo": 8517243,
+							"mmsi": 422143000,
+							"name": "MARIVAN",
+							"type": "Tanker - Hazard A (Major)",
+							"built": 1985,
+							"class": "Handysize/Handymax",
+							"bodies": [
+								{ "body": "ofac", "listed_date": "2012-12-13" },
+								{ "body": "un", "listed_date": "2025-09-28" }
+							],
+							"length": 50.7,
+							"ship_id": "658038",
+							"subtype": "Bunkering Tanker",
+							"last_cog": 267,
+							"last_lat": 26.4776,
+							"last_lon": 54.7827,
+							"last_sog": 4.5,
+							"flag_name": "Iran",
+							"year_built": null,
+							"country_code": "IR",
+							"last_ping_utc": "2026-05-14T18:20:20.098Z",
+							"last_destination": "B.ABBAS",
+							"last_pos_age_seconds": 236985,
+							"blacklist_updated_utc": "2026-04-17T01:08:18.208Z",
+							"commercial_market_name": "WET BULK"
+						}
+					],
+					"has_more": true,
+					"next_cursor": "eyJpbW8iOjg1MTcyNDN9"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x47663506e9016aC3Df59632d30426c563b252DbE",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "",
+					"resource": "http://api.aimo.xyz/api-paid/get-crypto-asset-info",
+					"description": "Get real-time market information for any cryptocurrency",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyFields": {
+								"ticker": {
+									"description": "Optional display ticker symbol (e.g., 'BTC', 'ETH')"
+								},
+								"coingeckoId": {
+									"description": "CoinGecko coin ID (e.g., 'bitcoin', 'ethereum', 'solana')"
+								}
+							},
+							"discoverable": true
+						},
+						"output": {
+							"bodyFields": {
+								"result": {
+									"description": "Formatted crypto asset statistics including price, 24h change, volume, market cap, and ATH"
+								}
+							}
+						}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-17T10:38:11.859Z",
+			"metadata": {},
+			"resource": "http://api.aimo.xyz/api-paid/get-crypto-asset-info",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"ticker": {
+						"description": "Optional display ticker symbol (e.g., 'BTC', 'ETH')"
+					},
+					"coingeckoId": {
+						"description": "CoinGecko coin ID (e.g., 'bitcoin', 'ethereum', 'solana')"
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"bodyFields": {
+						"result": {
+							"description": "Formatted crypto asset statistics including price, 24h change, volume, market cap, and ATH"
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "7QgUsgVto3kB7JEG9GU7Xizr3i1K22zRhwgK9X4cpiCp",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://agent.collabrachain.fun/api/crawl",
+					"description": "🌐 Supercharge your data extraction! Our lightning-fast web crawler fetches content from any URL in milliseconds. Perfect for scraping, research, and gathering intelligence from the web!",
+					"outputSchema": {
+						"input": { "type": "http", "method": "POST" },
+						"output": { "status": "ok" }
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-17T07:37:42.409Z",
+			"metadata": {},
+			"resource": "https://agent.collabrachain.fun/api/crawl",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": { "type": "json", "example": { "status": "ok" } }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "7QgUsgVto3kB7JEG9GU7Xizr3i1K22zRhwgK9X4cpiCp",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://agent.collabrachain.fun/api/polymarket/discovery/early-movers",
+					"description": "🚀 Discover trending new markets before the crowd arrives! Get early access to markets that are just starting to gain attention, sorted by trading activity velocity. Be the first to spot the next big opportunity.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"queryParams": {
+								"limit": {
+									"type": "number",
+									"required": false,
+									"description": "Maximum number of markets to return (default: 20, max: 100)"
+								}
+							}
+						},
+						"output": {}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-17T07:25:33.517Z",
+			"metadata": {},
+			"resource": "https://agent.collabrachain.fun/api/polymarket/discovery/early-movers",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json",
+				"queryParams": {
+					"limit": {
+						"type": "number",
+						"required": false,
+						"description": "Maximum number of markets to return (default: 20, max: 100)"
+					}
+				}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6E8B64638b24C6D625b045dD353120d850064E2E",
+					"amount": "3000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-16T15:18:32.000Z",
+			"metadata": {},
+			"resource": "https://address-validator.api.klymax402.com/api/validate",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "address": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"valid": true,
+					"issues": [],
+					"formatted": "example",
+					"components": {},
+					"confidence": 1
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"name": "Relay Agent Profile",
+						"category": "Social",
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+						"assetSymbol": "USDC",
+						"description": "Public profile, wallet, DID and on-chain mint for any Relay agent (Solana / x402)",
+						"networkCaip": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp1tu7BL5",
+						"assetDecimals": 6,
+						"maxAmountRequired": "2000"
+					},
+					"payTo": "4TmAbwMAMqHSUPDWgFLZn9Ep3A3w5hqnY461dhg3xgaz",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "https://relaynetwork.ai/api/v1/agents/{handle}/profile",
+					"description": "Public profile + on-chain identity for a Relay agent",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"pathParams": {
+								"handle": "relay-agent-handle (e.g. relay_foundation)"
+							},
+							"discoverable": true
+						},
+						"output": {
+							"type": "object",
+							"schema": {
+								"type": "object",
+								"required": [
+									"handle",
+									"is_verified",
+									"reputation_score"
+								],
+								"properties": {
+									"bio": { "type": ["string", "null"] },
+									"did": { "type": ["string", "null"] },
+									"handle": { "type": "string" },
+									"avatar_url": {
+										"type": ["string", "null"]
+									},
+									"created_at": {
+										"type": ["string", "null"]
+									},
+									"post_count": { "type": "integer" },
+									"is_verified": { "type": "boolean" },
+									"display_name": {
+										"type": ["string", "null"]
+									},
+									"total_earned": { "type": "number" },
+									"on_chain_mint": {
+										"type": ["string", "null"]
+									},
+									"follower_count": { "type": "integer" },
+									"wallet_address": {
+										"type": ["string", "null"]
+									},
+									"reputation_score": { "type": "integer" },
+									"onchain_profile_pda": {
+										"type": ["string", "null"]
+									},
+									"onchain_profile_solscan_url": {
+										"type": ["string", "null"]
+									}
+								}
+							},
+							"example": {
+								"bio": "Stewards of the Relay protocol.",
+								"did": "did:relay:relay_foundation",
+								"handle": "relay_foundation",
+								"avatar_url": "https://relaynetwork.ai/images/avatars/relay_foundation.png",
+								"created_at": "2026-01-15T00:00:00Z",
+								"post_count": 187,
+								"is_verified": true,
+								"display_name": "Relay Foundation",
+								"total_earned": 12.34,
+								"on_chain_mint": null,
+								"follower_count": 4321,
+								"wallet_address": "4TmAbwMAMqHSUPDWgFLZn9Ep3A3w5hqnY461dhg3xgaz",
+								"reputation_score": 1000,
+								"onchain_profile_pda": "derived from [b\"profile\", utf8(handle)]",
+								"onchain_profile_solscan_url": "https://solscan.io/account/<pda>"
+							}
+						}
+					},
+					"maxAmountRequired": "2000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-16T13:27:53.348Z",
+			"metadata": {},
+			"resource": "https://relaynetwork.ai/api/v1/agents/%7Bhandle%7D/profile",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"schema": {
+						"type": "object",
+						"required": [
+							"handle",
+							"is_verified",
+							"reputation_score"
+						],
+						"properties": {
+							"bio": { "type": ["string", "null"] },
+							"did": { "type": ["string", "null"] },
+							"handle": { "type": "string" },
+							"avatar_url": { "type": ["string", "null"] },
+							"created_at": { "type": ["string", "null"] },
+							"post_count": { "type": "integer" },
+							"is_verified": { "type": "boolean" },
+							"display_name": { "type": ["string", "null"] },
+							"total_earned": { "type": "number" },
+							"on_chain_mint": { "type": ["string", "null"] },
+							"follower_count": { "type": "integer" },
+							"wallet_address": { "type": ["string", "null"] },
+							"reputation_score": { "type": "integer" },
+							"onchain_profile_pda": {
+								"type": ["string", "null"]
+							},
+							"onchain_profile_solscan_url": {
+								"type": ["string", "null"]
+							}
+						}
+					},
+					"example": {
+						"bio": "Stewards of the Relay protocol.",
+						"did": "did:relay:relay_foundation",
+						"handle": "relay_foundation",
+						"avatar_url": "https://relaynetwork.ai/images/avatars/relay_foundation.png",
+						"created_at": "2026-01-15T00:00:00Z",
+						"post_count": 187,
+						"is_verified": true,
+						"display_name": "Relay Foundation",
+						"total_earned": 12.34,
+						"on_chain_mint": null,
+						"follower_count": 4321,
+						"wallet_address": "4TmAbwMAMqHSUPDWgFLZn9Ep3A3w5hqnY461dhg3xgaz",
+						"reputation_score": 1000,
+						"onchain_profile_pda": "derived from [b\"profile\", utf8(handle)]",
+						"onchain_profile_solscan_url": "https://solscan.io/account/<pda>"
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xF50C0D73C68EF2d8B3388Ec060ED39edCeb62BAF",
+					"amount": "11000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-15T21:51:27.521Z",
+			"metadata": {},
+			"resource": "https://war-tracker.com/media/397003",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "event_id": "12345" },
+				"inputSchema": {
+					"type": "object",
+					"required": ["event_id"],
+					"properties": {
+						"event_id": {
+							"type": "string",
+							"pattern": "^[0-9]+$",
+							"description": "Numeric event id from /api/v1/events; check has_media=true before paying."
+						}
+					}
+				}
+			},
+			"outputSchema": {
+				"type": "bytes",
+				"example": "binary image/* or video/mp4 bytes; Content-Type reflects the underlying media (image/jpeg, image/png, video/mp4). Range requests supported on video responses."
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xF50C0D73C68EF2d8B3388Ec060ED39edCeb62BAF",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-15T21:51:07.516Z",
+			"metadata": {},
+			"resource": "https://war-tracker.com/api/v1/events",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"to": {
+							"type": "string",
+							"format": "date",
+							"description": "ISO-8601 exclusive upper bound on event date."
+						},
+						"from": {
+							"type": "string",
+							"format": "date",
+							"description": "ISO-8601 inclusive lower bound on event date."
+						},
+						"limit": {
+							"type": "integer",
+							"maximum": 200,
+							"minimum": 1,
+							"description": "Page size (max 200)."
+						},
+						"cursor": {
+							"type": "string",
+							"description": "Opaque pagination cursor from a previous response."
+						},
+						"region": {
+							"type": "string",
+							"description": "Region slug. See /api/v1/regions for the full list."
+						},
+						"country": {
+							"type": "string",
+							"description": "ISO-3166-1 alpha-2 country code (e.g. 'UA')."
+						},
+						"event_type": {
+							"type": "string",
+							"description": "Event-type display string, case-insensitive."
+						}
+					}
+				},
+				"queryParams": { "limit": 50, "country": "UA" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 1,
+					"events": [
+						{
+							"id": 12345,
+							"lat": 36.2,
+							"lng": 37.13,
+							"url": "https://war-tracker.com/share/12345/syria-strike-2026-05-12",
+							"date": "2026-05-12",
+							"title": "Reported strike on infrastructure in Aleppo, Syria",
+							"country": "Syria",
+							"event_type": "Strike",
+							"description": "Open-source posts described a strike on infrastructure ..."
+						}
+					],
+					"has_more": true,
+					"next_cursor": "MTAw"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xF50C0D73C68EF2d8B3388Ec060ED39edCeb62BAF",
+					"amount": "2000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-15T21:50:45.597Z",
+			"metadata": {},
+			"resource": "https://war-tracker.com/api/v1/events/397003",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "event_id": "12345" },
+				"inputSchema": {
+					"type": "object",
+					"required": ["event_id"],
+					"properties": {
+						"event_id": {
+							"type": "string",
+							"pattern": "^[0-9]+$",
+							"description": "Numeric event id."
+						}
+					}
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"id": 12345,
+					"faq": [{ "a": "...", "q": "..." }],
+					"lat": 36.2,
+					"lng": 37.13,
+					"date": "2026-05-12",
+					"tldr": "On May 12, 2026 ...",
+					"country": "SY",
+					"headline": "Strike – Aleppo",
+					"is_video": false,
+					"location": "Aleppo",
+					"modified": "2026-05-12T17:32:00Z",
+					"has_media": true,
+					"media_url": "https://war-tracker.com/media/12345",
+					"confidence": "HIGH",
+					"event_type": "Strike",
+					"source_url": null,
+					"transcript": null,
+					"description": "Open-source posts described a strike on infrastructure ...",
+					"region_slug": "middle-east",
+					"super_event": {
+						"url": "...",
+						"name": "Russo-Ukrainian War",
+						"startDate": "2022-02-24"
+					},
+					"country_name": "Syria",
+					"jsonld_graph": {
+						"@graph": [
+							"...NewsArticle, Event, VideoObject, BreadcrumbList, FAQPage..."
+						],
+						"@context": "https://schema.org"
+					},
+					"canonical_url": "https://war-tracker.com/share/12345/syria-strike-2026-05-12",
+					"thumbnail_url": "https://war-tracker.com/video/thumb/12345",
+					"article_paragraphs": ["..."]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xF50C0D73C68EF2d8B3388Ec060ED39edCeb62BAF",
+					"amount": "1500",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-15T21:50:31.651Z",
+			"metadata": {},
+			"resource": "https://war-tracker.com/event-type/strike",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "slug": "ukraine", "hub_type": "country" },
+				"inputSchema": {
+					"type": "object",
+					"required": ["hub_type", "slug"],
+					"properties": {
+						"slug": {
+							"type": "string",
+							"description": "URL slug for the hub (lowercase, dash-separated)."
+						},
+						"hub_type": {
+							"enum": ["region", "country", "event-type"],
+							"type": "string"
+						}
+					}
+				}
+			},
+			"outputSchema": {
+				"type": "html",
+				"example": "<html>...CollectionPage JSON-LD + linked Dataset distribution...<section>aggregated events for this slice</section>...</html>"
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582",
+					"extra": { "name": "USDC", "version": "2" },
+					"payTo": "0xF50C0D73C68EF2d8B3388Ec060ED39edCeb62BAF",
+					"amount": "2000",
+					"scheme": "exact",
+					"network": "eip155:80002",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-15T20:58:36.080Z",
+			"metadata": {},
+			"resource": "https://war-tracker.com/share/397003/strike",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"headers": { "Accept": "text/html, application/json" },
+				"pathParams": {
+					"id": "12345",
+					"slug": "syria-strike-2026-05-12"
+				},
+				"inputSchema": {
+					"type": "object",
+					"required": ["id"],
+					"properties": {
+						"id": {
+							"type": "string",
+							"pattern": "^[0-9]+$",
+							"description": "Numeric event id from /api/v1/events."
+						},
+						"slug": {
+							"type": "string",
+							"description": "URL slug (cosmetic — server canonicalises)."
+						}
+					}
+				}
+			},
+			"outputSchema": {
+				"type": "html",
+				"example": "<html>...JSON-LD @graph with NewsArticle + Event + VideoObject...<article>headline + description + sources</article>...</html>  OR, with Accept: application/json, the /api/v1/events/{id} JSON payload (canonical_url, headline, jsonld_graph, media_url, thumbnail_url, transcript, faq, super_event, ...)."
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+					"extra": { "name": "USDC", "version": "2" },
+					"payTo": "0xF50C0D73C68EF2d8B3388Ec060ED39edCeb62BAF",
+					"amount": "2000",
+					"scheme": "exact",
+					"network": "eip155:84532",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-15T20:29:44.579Z",
+			"metadata": {},
+			"resource": "https://war-tracker.com/share/397003/military-withdrawal-qasrak-syria",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"headers": { "Accept": "text/html, application/json" },
+				"pathParams": {
+					"id": "12345",
+					"slug": "syria-strike-2026-05-12"
+				},
+				"inputSchema": {
+					"type": "object",
+					"required": ["id"],
+					"properties": {
+						"id": {
+							"type": "string",
+							"pattern": "^[0-9]+$",
+							"description": "Numeric event id from /api/v1/events."
+						},
+						"slug": {
+							"type": "string",
+							"description": "URL slug (cosmetic — server canonicalises)."
+						}
+					}
+				}
+			},
+			"outputSchema": {
+				"type": "html",
+				"example": "<html>...JSON-LD @graph with NewsArticle + Event + VideoObject...<article>headline + description + sources</article>...</html>  OR, with Accept: application/json, the /api/v1/events/{id} JSON payload (canonical_url, headline, jsonld_graph, media_url, thumbnail_url, transcript, faq, super_event, ...)."
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1664530DC2A1CA350B1dbaD1Fc1F1a70c90fe4de",
+					"amount": "500000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-15T19:44:09.624Z",
+			"metadata": {},
+			"resource": "https://wallet-intel-meta-mcp.mtree.workers.dev/v1/wallet/dossier_summary",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "url": "https://example.com", "query": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"result": "sample paid JSON response",
+					"service": "wallet-intel-meta-mcp",
+					"endpoint": "/v1/wallet/dossier_summary",
+					"dataset_fresh_at": "1970-01-01T00:00:00.000Z"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1664530DC2A1CA350B1dbaD1Fc1F1a70c90fe4de",
+					"amount": "30000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-15T19:34:33.639Z",
+			"metadata": {},
+			"resource": "https://liquidation-risk-mcp.mtree.workers.dev/v1/risk/aave_v3",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "url": "https://example.com", "query": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"result": "sample paid JSON response",
+					"service": "liquidation-risk-mcp",
+					"endpoint": "/v1/risk/aave_v3",
+					"dataset_fresh_at": "1970-01-01T00:00:00.000Z"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1664530DC2A1CA350B1dbaD1Fc1F1a70c90fe4de",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-15T19:34:29.777Z",
+			"metadata": {},
+			"resource": "https://wallet-funding-trace-mcp.mtree.workers.dev/v1/wallet/funding_path",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "url": "https://example.com", "query": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"result": "sample paid JSON response",
+					"service": "wallet-funding-trace-mcp",
+					"endpoint": "/v1/wallet/funding_path",
+					"dataset_fresh_at": "1970-01-01T00:00:00.000Z"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1664530DC2A1CA350B1dbaD1Fc1F1a70c90fe4de",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-15T19:34:11.433Z",
+			"metadata": {},
+			"resource": "https://wallet-cex-flows-mcp.mtree.workers.dev/v1/wallet/cex_attribution",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "url": "https://example.com", "query": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"result": "sample paid JSON response",
+					"service": "wallet-cex-flows-mcp",
+					"endpoint": "/v1/wallet/cex_attribution",
+					"dataset_fresh_at": "1970-01-01T00:00:00.000Z"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1664530DC2A1CA350B1dbaD1Fc1F1a70c90fe4de",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-15T19:34:08.111Z",
+			"metadata": {},
+			"resource": "https://wallet-labels-mcp.mtree.workers.dev/v1/wallet/labels",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "url": "https://example.com", "query": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"result": "sample paid JSON response",
+					"service": "wallet-labels-mcp",
+					"endpoint": "/v1/wallet/labels",
+					"dataset_fresh_at": "1970-01-01T00:00:00.000Z"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x1664530DC2A1CA350B1dbaD1Fc1F1a70c90fe4de",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-05-15T19:34:03.575Z",
+			"metadata": {},
+			"resource": "https://approval-revoke-mcp.mtree.workers.dev/v1/spender/reputation",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "url": "https://example.com", "query": "example" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"result": "sample paid JSON response",
+					"service": "approval-revoke-mcp",
+					"endpoint": "/v1/spender/reputation",
+					"dataset_fresh_at": "1970-01-01T00:00:00.000Z"
+				}
+			}
+		}
+	],
+	"pagination": { "limit": 100, "offset": 5000, "total": 25751 },
+	"x402Version": 1
+}

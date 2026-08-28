@@ -539,3 +539,5 @@ export class Barrier extends DurableObject {
 
 export { DurableFIFOQueue } from "./fifo";
 export type { DurableFifoQueueEnv } from "./fifo";
+export { DurableBloomFilter } from "./bloom";
+export type { DurableBloomFilterEnv } from "./bloom";

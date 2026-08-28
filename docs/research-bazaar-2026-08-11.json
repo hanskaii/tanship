@@ -1,0 +1,2043 @@
+{
+	"bazaar": [
+		{
+			"resource": "https://apiv2.laevitas.ch/api/v1/vol-surface/:var1",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "100000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"data": [],
+							"success": true
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://api.paysponge.com/v0/inboxes/:inbox_id/threads/:thread_id",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "0",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://api.paysponge.com/v0/inboxes/:inbox_id/threads",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "0",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://api.paysponge.com/v0/inboxes/:inbox_id/messages",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "0",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/data/geocode",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"results": [
+								{
+									"name": "London",
+									"latitude": 51.5,
+									"longitude": -0.12
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/data/weather",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"source": "open-meteo.com",
+							"current": {
+								"temperature_2m": 18.2
+							}
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/data/fx/convert",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"rate": 0.92,
+							"converted": 92
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/data/fx",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"base": "USD",
+							"rates": {
+								"EUR": 0.92
+							},
+							"source": "frankfurter.app (ECB)"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/time/business-days",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"business_days": 6
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/time/convert",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"valid": true,
+							"utc_iso": "..."
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/time/cron-next",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"next": ["2026-..."],
+							"valid": true
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/math/compound",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"amount": 1628.89,
+							"interest": 628.89
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/math/sharpe",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"mean": 0.00125,
+							"sharpe": 0.12
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/math/impermanent-loss",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"impermanent_loss_pct": -2.02
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/math/black-scholes",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"price": 10.45,
+							"greeks": {
+								"delta": 0.63
+							}
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/math/irr",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"irr": 0.23,
+							"converged": true
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/math/npv",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"npv": 22.95
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/validate/json-schema",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"valid": true,
+							"errors": []
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/validate/phone",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"country_code": "44",
+							"valid_e164_format": true
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/validate/luhn",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"valid": true,
+							"digits": 16,
+							"masked": "4111********1111"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/validate/iban",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"valid": true,
+							"country": "GB",
+							"electronic": "GB82..."
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/validate/email",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"domain": "example.com",
+							"valid_syntax": true
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/utils/slugify",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"slug": "hello-world"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/utils/markdown/to-html",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"html": "<h1>Hi</h1>\n"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/utils/text/metrics",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"chars": 11,
+							"words": 2,
+							"approx_tokens": 3
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/utils/timestamp",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"iso": "2024-...",
+							"valid": true,
+							"unix_seconds": 1710000000
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/utils/json/diff",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"added": ["y"],
+							"equal": false,
+							"changed": [
+								{
+									"to": 2,
+									"from": 1,
+									"path": "x"
+								}
+							],
+							"removed": []
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/utils/json/format",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"type": "object",
+							"valid": true,
+							"formatted": "{\n  \"a\": 1\n}"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/utils/uuid",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"count": 1,
+							"uuids": ["..."],
+							"version": "v4"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/utils/base64",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"encoded": "aGVsbG8="
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.co.uk/v1/utils/hash",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"hex": "2cf24dba...",
+							"bytes": 5,
+							"algorithm": "sha256"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://agent402.tools/api/hash",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:43114",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"hex": "b94d27\u2026",
+							"algo": "sha256",
+							"base64": "uU0n\u2026"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://api.paysponge.com/chat/completions",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "10000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://api.dev.hypercli.com/agents/x402/solo",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "10000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"ok": true,
+							"key": "hyper_api_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+							"plan_id": "solo",
+							"quantity": 1,
+							"rpm_limit": 1000,
+							"tpm_limit": 50000,
+							"expires_at": "2026-03-13T00:00:00Z",
+							"amount_paid": "39.000000",
+							"duration_days": 32,
+							"contract_version": "2026-08"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://apiv2.laevitas.ch/api/v1/futures/:var1",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "100000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"data": [],
+							"success": true
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://api.paysponge.com/v0/inboxes/:inbox_id/messages/:message_id",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "0",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://apiv2.laevitas.ch/api/v1/options/:var1",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "100000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"data": [],
+							"success": true
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://wouldpayagain.com/api/ads/book/classified-1",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "200000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"ok": true,
+							"status": "pending_review",
+							"confirmed": true,
+							"tearsheet": "https://wouldpayagain.com/api/ads/booking/6",
+							"booking_id": 6,
+							"settlement_tx": "0x\u2026"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://k2so.wrong.systems/api/services/pay-per-crawl-pricing-adjudication-for-the-agent",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"ok": true,
+							"paid": true,
+							"result": {
+								"ok": true,
+								"brief": "plain prose decision procedure (120+ words)",
+								"model": "deepseek/deepseek-v4-flash-0731",
+								"topic": "string topic",
+								"service": "pay-per-crawl-pricing-adjudication-for-the-agent",
+								"procedure": "same as brief",
+								"generatedAt": "2026-01-01T00:00:00.000Z",
+								"generationSource": "deterministic"
+							},
+							"service": "pay-per-crawl-pricing-adjudication-for-the-agent",
+							"provider": "K-2SO"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://k2so.wrong.systems/api/services/always-on-local-agent-model-selection-and-infere",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"ok": true,
+							"paid": true,
+							"result": {
+								"ok": true,
+								"brief": "plain prose decision procedure (120+ words)",
+								"model": "deepseek/deepseek-v4-flash-0731",
+								"topic": "string topic",
+								"service": "always-on-local-agent-model-selection-and-infere",
+								"procedure": "same as brief",
+								"generatedAt": "2026-01-01T00:00:00.000Z",
+								"generationSource": "deterministic"
+							},
+							"service": "always-on-local-agent-model-selection-and-infere",
+							"provider": "K-2SO"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://chainray.online/nft/:var1",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "http://lazareus.xyz/get_recommended_priority_fee",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "http://lazareus.xyz/get_network_health",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "http://x-research.suzi.trade/x402/read",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "5000",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"data": {
+								"id": "1873471977766361323",
+								"name": "Solana",
+								"text": "Solana builders still underestimate how quickly distribution compounds.",
+								"urls": ["https://solana.com"],
+								"author": {
+									"id": "2244994945",
+									"name": "Solana",
+									"username": "solana",
+									"verified": true,
+									"created_at": "2018-02-08T18:00:00.000Z",
+									"tweet_count": 18845,
+									"followers_count": 3250000,
+									"following_count": 287
+								},
+								"metrics": {
+									"likes": 421,
+									"quotes": 11,
+									"replies": 23,
+									"retweets": 98,
+									"bookmarks": 52,
+									"impressions": 14500
+								},
+								"hashtags": ["solana"],
+								"mentions": ["solana"],
+								"username": "solana",
+								"author_id": "2244994945",
+								"tweet_url": "https://x.com/solana/status/1873471977766361323",
+								"created_at": "2026-03-12T10:00:00.000Z",
+								"is_article": false,
+								"conversation_id": "1873471977766361323"
+							},
+							"meta": {
+								"mode": "standard",
+								"cached": false,
+								"returned_count": 1
+							}
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/web-website-trust-report",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "30000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/web-ssl-cert-info",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "5000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/web-email-deliverability",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "5000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/web-domain-risk",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "10000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/web-dns-lookup",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "3000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/web-dmarc-check",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "5000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/security-secrets-check",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "20000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/security-pypi-risk",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "15000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/security-prompt-injection-risk",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "20000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/wayback-snapshot",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://devices-interface-hull-man.trycloudflare.com/audit",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "100000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"format": "application/json",
+						"example": {
+							"isProxy": false,
+							"isContract": true
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://devices-interface-hull-man.trycloudflare.com/gas",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "50000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"format": "application/json",
+						"example": {
+							"chains": {}
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://devices-interface-hull-man.trycloudflare.com/query",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "100000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"format": "application/json",
+						"example": {
+							"results": [],
+							"service": "free-resource-directory"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "http://lazareus.xyz/is_network_degraded",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "1000",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://apiv2.laevitas.ch/api/v1/perpetuals/:var1",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "100000",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"data": [],
+							"success": true
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://k2so.wrong.systems/api/services/pre-trade-token-safety-screening-procedure-for-a",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"ok": true,
+							"paid": true,
+							"result": {
+								"ok": true,
+								"brief": "plain prose decision procedure (120+ words)",
+								"model": "deepseek/deepseek-v4-flash-0731",
+								"topic": "string topic",
+								"service": "pre-trade-token-safety-screening-procedure-for-a",
+								"procedure": "same as brief",
+								"generatedAt": "2026-01-01T00:00:00.000Z",
+								"generationSource": "deterministic"
+							},
+							"service": "pre-trade-token-safety-screening-procedure-for-a",
+							"provider": "K-2SO"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://k2so.wrong.systems/api/services/x402-agent-payment-hook-configuration-verificati",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"ok": true,
+							"paid": true,
+							"result": {
+								"ok": true,
+								"brief": "plain prose decision procedure (120+ words)",
+								"model": "deepseek/deepseek-v4-flash-0731",
+								"topic": "string topic",
+								"service": "x402-agent-payment-hook-configuration-verificati",
+								"procedure": "same as brief",
+								"generatedAt": "2026-01-01T00:00:00.000Z",
+								"generationSource": "deterministic"
+							},
+							"service": "x402-agent-payment-hook-configuration-verificati",
+							"provider": "K-2SO"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://k2so.wrong.systems/api/services/live-per-rail-fee-index-for-x402-settlement-choi",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"ok": true,
+							"paid": true,
+							"result": {
+								"ok": true,
+								"brief": "plain prose decision procedure (120+ words)",
+								"model": "deepseek/deepseek-v4-flash-0731",
+								"topic": "string topic",
+								"service": "live-per-rail-fee-index-for-x402-settlement-choi",
+								"procedure": "same as brief",
+								"generatedAt": "2026-01-01T00:00:00.000Z",
+								"generationSource": "deterministic"
+							},
+							"service": "live-per-rail-fee-index-for-x402-settlement-choi",
+							"provider": "K-2SO"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://k2so.wrong.systems/api/services/x402-retry-and-replay-control-verification-pre-p",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"ok": true,
+							"paid": true,
+							"result": {
+								"ok": true,
+								"brief": "plain prose decision procedure (120+ words)",
+								"model": "deepseek/deepseek-v4-flash-0731",
+								"topic": "string topic",
+								"service": "x402-retry-and-replay-control-verification-pre-p",
+								"procedure": "same as brief",
+								"generatedAt": "2026-01-01T00:00:00.000Z",
+								"generationSource": "deterministic"
+							},
+							"service": "x402-retry-and-replay-control-verification-pre-p",
+							"provider": "K-2SO"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://k2so.wrong.systems/api/services/live-multi-rail-x402-routing-optimizer",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"ok": true,
+							"paid": true,
+							"result": {
+								"ok": true,
+								"float": {
+									"tiers": [
+										{
+											"settlements": 10,
+											"minFloatUsdc": 0.0372
+										},
+										{
+											"settlements": 100,
+											"minFloatUsdc": 0.372
+										},
+										{
+											"settlements": 1000,
+											"minFloatUsdc": 3.72
+										}
+									],
+									"perSettlementUsdc": 0.0031
+								},
+								"intent": {
+									"rails": ["base-x402", "solana-usdc"],
+									"amountUsdc": 0.1
+								},
+								"routes": [
+									{
+										"rail": "base-x402",
+										"chain": "eip155:8453",
+										"label": "x402 direct on Base (USDC native)",
+										"totalUsdc": 0.0031,
+										"confidence": 0.95,
+										"reliability": 0.99,
+										"transferFeeUsdc": 0.0011,
+										"facilitatorFeeBps": 0
+									}
+								],
+								"service": "live-multi-rail-x402-routing-optimizer",
+								"generatedAt": "2026-01-01T00:00:00.000Z",
+								"indexUpdatedAt": "2026-01-01T00:00:00.000Z",
+								"recommendation": {
+									"rail": "base-x402",
+									"reason": "lowest total cost among N eligible rails",
+									"totalUsdc": 0.0031
+								}
+							},
+							"service": "live-multi-rail-x402-routing-optimizer",
+							"provider": "K-2SO"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://x402-api-production-266e.up.railway.app/v1/whales/latest",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "5000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"count": 1,
+							"trades": [
+								{
+									"side": "yes",
+									"price": 0.62,
+									"wallet": "0x8dab6cf42d7e4d1cd6cca897b9e12a8cbe6d69e8",
+									"tx_hash": "0x6a7de5\u2026",
+									"category": "economics",
+									"platform": "polymarket",
+									"size_usd": 25400,
+									"market_slug": "fed-rate-cut-september",
+									"condition_id": "0x178a746e2b342c25b1d78d0f0d0ea77157c9b6d40b2e97ffbf827cd7f9994c39",
+									"market_title": "Will the Fed cut rates in September?",
+									"wallet_score": 81,
+									"block_timestamp": "2026-07-17T09:41:02.000Z",
+									"wallet_win_rate_30d": 0.67
+								}
+							],
+							"delay_minutes": 15,
+							"whale_min_usd": 10000
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://api.nansen.ai/api/v1/token-screener",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "10000",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://consistent-casey-believes-browse.trycloudflare.com/gas",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "50000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"format": "application/json",
+						"example": {
+							"chains": {}
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://api.polandfoxbot.shop/search",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "5000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"meta": {
+								"version": "0.4.2",
+								"warning": null,
+								"degraded": false,
+								"provider": "jina",
+								"cache_hit": false,
+								"latency_ms": 1800,
+								"result_count": 1,
+								"estimated_upstream_cost_usd": 0
+							},
+							"query": "x402 payment protocol",
+							"results": [
+								{
+									"url": "https://example.com/result",
+									"score": 80,
+									"title": "Example result",
+									"source": "jina",
+									"snippet": "Relevant web-search result snippet",
+									"published_at": null
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://consistent-casey-believes-browse.trycloudflare.com/query",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "100000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"format": "application/json",
+						"example": {
+							"results": [],
+							"service": "free-resource-directory"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://padelmaps.org/api/x402/clubs/bulk",
+			"type": "http",
+			"x402Version": 1,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "base",
+					"maxAmountRequired": "250000",
+					"amount": null,
+					"description": "Get all active clubs in a country with full fields",
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://getvideos.app/api/harness/mcp",
+			"type": "mcp",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxAmountRequired": null,
+					"amount": "460545",
+					"description": null,
+					"extra.name": null,
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"status": "queued",
+							"expiresAt": "2027-01-01T00:00:00.000Z",
+							"productId": "seedance-fast-4s-480p-16x9-audio-v1",
+							"retryAfterMs": 3000,
+							"jobCapability": "rhj_\u2026"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://k2so-8080.on.ascii.dev/api/services/agent-facing-decision-procedure-at-the-intersect",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "2000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"ok": true,
+							"paid": true,
+							"result": {
+								"ok": true,
+								"brief": "plain prose decision procedure (120+ words)",
+								"model": "deepseek/deepseek-v4-flash-0731",
+								"topic": "string topic",
+								"service": "agent-facing-decision-procedure-at-the-intersect",
+								"procedure": "same as brief",
+								"generatedAt": "2026-01-01T00:00:00.000Z",
+								"generationSource": "deterministic"
+							},
+							"service": "agent-facing-decision-procedure-at-the-intersect",
+							"provider": "K-2SO"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://api.botpay.network/pay",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "10000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"message": "Thanks for using BotPay",
+							"protocol": "x402"
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://x402-api-production-266e.up.railway.app/v1/wallets/leaderboard",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "10000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": {
+						"type": "json",
+						"example": {
+							"window": "30d",
+							"wallets": [
+								{
+									"edge": 0.37,
+									"score": 81,
+									"address": "0x8dab6cf42d7e4d1cd6cca897b9e12a8cbe6d69e8",
+									"win_rate": 0.71,
+									"trades_count": 24,
+									"decided_trades": 17,
+									"avg_entry_price": 0.34,
+									"avg_position_usd": 17166.67,
+									"conviction_score": 2.33,
+									"edge_lower_bound": 0.18,
+									"total_volume_usd": 412000,
+									"win_rate_lower_bound": 0.52
+								}
+							],
+							"ranked_by": "conviction_score",
+							"min_trades": 10,
+							"min_volume_usd": 1000,
+							"insufficient_data": false
+						}
+					}
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/security-npm-risk",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "15000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/security-github-repo-health",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "10000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/security-deploy-config-risk",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "20000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/security-db-migration-risk",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "20000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/security-cve-lookup",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "3000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		},
+		{
+			"resource": "https://relay402.georgespring.workers.dev/api/sanctions-screen",
+			"type": "http",
+			"x402Version": 2,
+			"accepts": [
+				{
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxAmountRequired": null,
+					"amount": "100000",
+					"description": null,
+					"extra.name": "USD Coin",
+					"extra.outputSchema": null,
+					"outputSchema": null
+				}
+			]
+		}
+	],
+	"cf_pricing": {
+		"workers_ai": {
+			"neurons_rate_above_free": "$0.011 per 1,000 Neurons",
+			"free_daily_neurons": 10000,
+			"per_model_examples": {
+				"@cf/meta/llama-3.1-8b-instruct": "$0.027/M input tokens, $0.030/M output tokens",
+				"@cf/meta/llama-3.3-70b-instruct": "$0.293/M input tokens, $2.253/M output tokens",
+				"@cf/openai/gpt-oss-120b": "$0.351/M input tokens, $0.860/M output tokens",
+				"@cf/baai/bge-base-en-v1.5": "$0.020/M input tokens (1841 neurons/M input)",
+				"@cf/baai/bge-large-en-v1.5": "$0.067/M input tokens (6058 neurons/M input)",
+				"@cf/baai/bge-m3": "$0.204/M input tokens (18582 neurons/M input)"
+			}
+		},
+		"browser_run": {
+			"rate": "$0.09 per hour",
+			"note": "confirmed"
+		},
+		"vectorize": {
+			"queried_dims_rate": "$0.01 per million queried dimensions (Workers Paid)",
+			"stored_dims_rate": "$0.05 per 100 million stored dimensions",
+			"free_tier": "30M queried dims/mo + 10M stored dims/mo included (Workers Free); Workers Paid: 50M stored included"
+		},
+		"r2": {
+			"storage": "$0.015 / GB-month",
+			"egress": "free (no egress charges)",
+			"confirmed": true
+		},
+		"d1": {
+			"rows_read": "$0.001 / million rows read",
+			"rows_written": "$1.00 / million rows written",
+			"confirmed": true
+		},
+		"kv": {
+			"reads": "$0.50 / million reads",
+			"writes": "$5.00 / million writes",
+			"storage": "$0.50 / GB-month",
+			"confirmed": true
+		},
+		"durable_objects": {
+			"requests": "$0.15 / million requests",
+			"duration": "$12.50 / million GB-seconds",
+			"confirmed": true
+		},
+		"x402_batch_settlement": {
+			"live": true,
+			"post_date": "2026-05-11 (updated 2026-06-24)",
+			"authors": "Cam Whiteside (Cloudflare), Carson Roscoe, Conner Swenberg, Josh Nickerson, Philippe d'Argent (Coinbase)",
+			"paragraph": "TL;DR: The x402 protocol is introducing batch settlement, enabling agents to transact at extremely low latency and fractions of a cent. Agents provide cryptographic vouchers that enable sellers to verify payment intent without an onchain transfer at every step. Batch settlement separates intent-to-pay from onchain finality: at request time the buyer provides a proof of authorization that is near-instant to verify; at scale, value moves onchain only when it is economically optimal, amortized across hundreds or thousands of interactions. This is a core protocol scheme, not a vendor-specific extension. The 402 header advertises a ceiling per interaction; the seller captures only actual usage against the batch escrow. The dominant expense shifts toward the session or day rather than the individual call."
+		}
+	},
+	"stats": {
+		"count": 76,
+		"median_usdc_atomic": 2000,
+		"p25_usdc_atomic": 1000,
+		"p75_usdc_atomic": 15000,
+		"max_usdc_atomic": 460545,
+		"min_usdc_atomic": 1000
+	},
+	"cf_sellers_on_bazaar": [
+		{
+			"resource": "https://devices-interface-hull-man.trycloudflare.com/audit",
+			"network": "eip155:8453",
+			"price_usdc_atomic": 100000
+		},
+		{
+			"resource": "https://devices-interface-hull-man.trycloudflare.com/gas",
+			"network": "eip155:8453",
+			"price_usdc_atomic": 50000
+		},
+		{
+			"resource": "https://devices-interface-hull-man.trycloudflare.com/query",
+			"network": "eip155:8453",
+			"price_usdc_atomic": 100000
+		},
+		{
+			"resource": "https://consistent-casey-believes-browse.trycloudflare.com/gas",
+			"network": "eip155:8453",
+			"price_usdc_atomic": 50000
+		},
+		{
+			"resource": "https://consistent-casey-believes-browse.trycloudflare.com/query",
+			"network": "eip155:8453",
+			"price_usdc_atomic": 100000
+		}
+	]
+}

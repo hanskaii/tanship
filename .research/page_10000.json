@@ -1,0 +1,3106 @@
+{
+	"items": [
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:49.977Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/leadership-effectiveness-score-api-203e6c",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:49.971Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lead-optimization-score-api-a4c80d",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:49.953Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lay-up-quality-score-api-decfeb",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:49.857Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/letter-of-credit-document-score-api-456209",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:49.853Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/liability-driven-investment-score-api-164459",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:49.836Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/leaf-wetness-score-api-550a00",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:49.821Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/marine-lcoe-calculator-api-0af0ed",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:49.753Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/carbon-leakage-risk-score-api-4cd3ab",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:47.823Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/legal-ops-maturity-score-api-375986",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:47.689Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/learning-effectiveness-score-api-7cb9b4",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:47.668Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/legal-risk-register-score-api-6a377f",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:47.656Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lease-term-optimizer-api-d6eb7c",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:47.646Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/least-restrictive-score-api-964f3e",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:47.635Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lease-accounting-calculator-api-cb37c2",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:47.620Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/least-privilege-score-api-fd9e63",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:47.609Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lean-waste-classifier-api-d37505",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:45.974Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lender-rights-score-api-7e4aa9",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:45.805Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/legal-ai-adoption-score-api-64ec2a",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:45.764Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/leo-coverage-calculator-api-650fbb",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:45.638Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/legal-spend-analyzer-api-0014e6",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:45.630Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/legacy-ot-risk-score-api-936a2c",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:45.609Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/level-of-service-calculator-api-ccc92e",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:43.842Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/liability-management-score-api-fcf19d",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:43.837Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/library-usage-analytics-score-api-1bfb5e",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:43.833Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lifetime-journey-score-api-d3e395",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:43.805Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/licensing-strategy-score-api-7f6b84",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:43.795Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/library-space-utilization-score-api-b8aed6",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:43.785Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/licensing-program-score-api-62bf9a",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:43.628Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lidar-quality-score-api-0a78eb",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:43.618Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/iot-lifecycle-management-score-api-5385de",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:40.267Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lime-score-api-f497ce",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:40.263Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lipinski-rule-score-api-fe9569",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:40.242Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/litigation-finance-score-api-ea6fc0",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:40.057Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/litigation-hold-score-api-336b61",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:40.043Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/liveness-detection-score-api-1e83c6",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:39.952Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/light-estimation-score-api-a6f404",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:39.947Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/link-margin-calculator-api-b4db0f",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:39.924Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/listing-quality-score-api-a7114d",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:37.974Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/hpc-load-balance-score-api-48214c",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:37.969Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/location-roi-calculator-api-e0ca8b",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:37.948Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/level-of-detail-classifier-api-860bcb",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:37.916Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/robot-localization-accuracy-api-db7ccd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:37.904Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lock-grade-score-api-341278",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:37.893Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/long-term-contract-score-api-e92860",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:37.664Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lodging-risk-score-api-1f73bf",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:37.653Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/long-term-safety-score-api-485473",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:35.951Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/loyalty-program-optimizer-api-844e7e",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:35.943Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lung-function-score-api-98035d",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:35.924Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/loss-reserve-score-api-28355f",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:35.780Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/macular-degeneration-score-api-c8b902",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:35.770Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/lot-size-optimizer-api-3d2cdd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:35.675Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/loyalty-journey-score-api-ed0391",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:35.668Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/loss-given-default-calculator-api-66353f",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:35.646Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/low-vision-assessment-score-api-541d77",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:33.891Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/managed-aquifer-recharge-score-api-dc4bf9",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:33.884Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/gene-therapy-manufacturing-score-api-aac45e",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:33.864Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/mail-screening-score-api-f449b7",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:33.851Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/maintenance-roi-calculator-api-dd820e",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:33.825Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/maintenance-window-calculator-api-bebf8a",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:33.779Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/manipulation-dexterity-score-api-b61d51",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:33.725Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/mammography-quality-score-api-5ddbf9",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:33.674Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/maillard-reaction-score-api-0ed0c3",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:32.079Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/margin-distribution-calculator-api-24c0ad",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:31.906Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/manual-therapy-score-api-62d19c",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:31.896Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/margin-waterfall-calculator-api-1e4e7e",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:31.882Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/marginal-var-calculator-api-2dbed9",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:30.081Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/ar-marker-detection-score-api-ea93aa",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:30.075Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/marine-tourism-score-api-40dc6f",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:30.056Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/marker-assisted-selection-score-api-0fdd75",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:30.044Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/marine-permit-score-api-5b4e73",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:30.032Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/market-participation-score-api-b8bb92",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:30.021Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/market-pull-score-api-0147b5",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:29.840Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/market-validation-score-api-d4d5e5",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:29.822Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/markov-model-score-api-7f0168",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:28.223Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/massive-mimo-score-api-262c8a",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:28.216Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/material-certification-score-api-eba2be",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:28.208Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/matchmaking-quality-score-api-9047b1",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:28.181Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/mass-balance-calculator-api-7fc034",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:28.174Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/material-take-off-calculator-api-541b78",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:28.148Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/maternal-health-score-api-959f33",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:27.901Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/material-flow-score-api-1e4658",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:27.891Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/matter-complexity-score-api-d7c22e",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:26.244Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/medication-assisted-treatment-calculator-api-b97a12",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:26.232Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/medication-reconciliation-score-api-b8a007",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:26.109Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/mbr-score-api-904e8b",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:26.070Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/crop-maturity-date-calculator-api-990cbd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:26.026Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/media-sentiment-score-api-f85f10",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:25.981Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/maturity-matching-score-api-91e66a",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:25.976Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/mci-risk-score-api-3c0114",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:25.952Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/maxdiff-score-api-0531d6",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:22.227Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/medication-error-detector-api-1f701a",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:22.223Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/meeting-technology-score-api-88790f",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:22.219Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/menopause-symptom-score-api-d4850a",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:22.214Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/mental-wellness-score-api-7c13e8",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:22.174Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/melanoma-risk-score-api-7d9b55",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:22.164Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/mental-health-access-score-api-f6a5d4",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:21.962Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/memory-bandwidth-calculator-api-537d32",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:21.952Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/member-communication-score-api-5162d6",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:18.198Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/merchant-fraud-score-api-f31d2c",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x2bb72231EeD303cc91a462A1fA738b42B6a9ac6d",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-05-06T16:03:18.191Z",
+			"metadata": {},
+			"resource": "https://orbisapi.com/proxy/mesa-optimization-detector-api-de01f0",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		}
+	],
+	"pagination": { "limit": 100, "offset": 10000, "total": 25751 },
+	"x402Version": 1
+}

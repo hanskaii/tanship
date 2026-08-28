@@ -1,0 +1,3306 @@
+{
+	"items": [
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:17.781Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/juice/usd/juice-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:16.265Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/hogs/usd/hogs-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:15.118Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/cotton/usd/cotton-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:13.829Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/corn/usd/corn-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:12.400Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/coffee/usd/coffee-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:11.238Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/cocoa/usd/cocoa-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:09.654Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/cattle/usd/cattle-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:08.419Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/wti/usd/wti-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:06.411Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/silver/usd/xag-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:04.917Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/platinum/usd/xpt-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:03.260Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/palladium/usd/xpd-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:01.791Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/gold/usd/xau-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:43:00.366Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/gas/usd/natgas-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:58.751Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/copper/usd/copper-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:57.456Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price/brent/usd/brent-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:56.224Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/commodity/price",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:54.891Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/xlf",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:53.614Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/wmt",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:51.936Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/vti",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:50.167Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/voo",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:48.295Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/v",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:46.988Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/tsla",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:45.477Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/spy",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:44.204Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/qqq",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:42.702Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/nvda",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:41.180Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/nflx",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:39.906Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/msft",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:38.643Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/meta",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:37.527Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/ko",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:36.264Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/jpm",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:34.583Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/iwm",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:33.162Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/intc",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:32.047Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/googl",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:30.878Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/dis",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:29.184Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/dia",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:27.922Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/baba",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:26.387Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/avgo",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:24.933Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/arkk",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:23.691Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/amzn",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:22.079Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/amd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:20.810Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote/aapl",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:19.340Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/stock/quote",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:18.175Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/forex/rate",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:16.499Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/xrp/usd/xrp-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:15.389Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/xlm/usd/xlm-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:14.075Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/usdt/usd/usdt-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:11.772Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/usdc/usd/usdc-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:10.669Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/uni/usd/uni-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:09.145Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/trx/usd/trx-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:07.845Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/ton/usd/ton-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:06.399Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/sui/usd/sui-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:04.926Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/sol/usd/sol-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:03.408Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/shib/usd/shib-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:02.120Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/pepe/usd/pepe-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:42:00.879Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/op/usd/op-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:59.588Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/near/usd/near-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:58.319Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/matic/usd/matic-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:56.819Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/ltc/usd/ltc-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:55.698Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/link/usd/link-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:54.417Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/inj/usd/inj-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:53.191Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/fil/usd/fil-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:51.737Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/eth/usd/eth-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:50.277Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/etc/usd/etc-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:48.761Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/dot/usd/dot-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:47.299Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/doge/usd/doge-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:45.958Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/dai/usd/dai-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:44.661Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/btc/usd/btc-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:43.237Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/bnb/usd/bnb-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:41.731Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/bch/usd/bch-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:40.399Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/avax/usd/avax-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:39.292Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/atom/usd/atom-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:38.143Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/arb/usd/arb-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:36.851Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/apt/usd/apt-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:35.358Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price/ada/usd/ada-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:34.087Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/price",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:01.430Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/xlm/usd/xlm-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:41:00.024Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/usdt/usd/usdt-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:58.342Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/usdc/usd/usdc-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:56.739Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/uni/usd/uni-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:54.871Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/trx/usd/trx-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:22.143Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/sui/usd/sui-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:19.642Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/sol/usd/sol-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:18.061Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/shib/usd/shib-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:16.394Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/pepe/usd/pepe-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:14.636Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/op/usd/op-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:13.398Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/near/usd/near-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:11.799Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/matic/usd/matic-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:10.340Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/ltc/usd/ltc-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:08.394Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/link/usd/link-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:06.737Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/inj/usd/inj-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:05.085Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/fil/usd/fil-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:03.407Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/eth/usd/eth-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:02.121Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/etc/usd/etc-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:40:00.616Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/dot/usd/dot-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:39:59.334Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/doge/usd/doge-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:39:58.206Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/dai/usd/dai-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:39:56.876Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/btc/usd/btc-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:39:55.275Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/bnb/usd/bnb-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:39:53.807Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/bch/usd/bch-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9urRvUx69HqAopg1JGV9P9wR7JdKoztzdkuNyJ8Eo1up",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-19T21:39:52.227Z",
+			"metadata": {},
+			"resource": "https://api.x402node.dev/crypto/convert/avax/usd/avax-usd",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": null
+		}
+	],
+	"pagination": { "limit": 100, "offset": 1500, "total": 25751 },
+	"x402Version": 1
+}

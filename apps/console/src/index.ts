@@ -27,8 +27,10 @@ import schedulerHandler from "./handlers/scheduler.handler";
 import durableHandler from "./handlers/durable.handler";
 import coordinationHandler from "./handlers/coordination.handler";
 import durableQueueHandler from "./handlers/durable.queue.handler";
+import durableBloomHandler from "./handlers/durable.bloom.handler";
 import agentResearchHandler from "./handlers/agent.research.handler";
 import agentInboxHandler from "./handlers/agent.inbox.handler";
+import devtoolsHandler from "./handlers/devtools.handler";
 import nlHandler from "./handlers/nl.handler";
 import ragHandler from "./handlers/rag.handler";
 import ragAnswerHandler from "./handlers/rag.answer.handler";
@@ -162,6 +164,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/browser", browserHandler)
 	.route("/v1/crypto", cryptoHandler)
 	.route("/v1/dev", devHandler)
+	.route("/v1/devtools", devtoolsHandler)
 	.route("/v1/security", securityHandler)
 	.route("/v1/security/screen", securityScreenHandler)
 	.route("/v1/security/cve-lookup", secCveLookupHandler)
@@ -181,6 +184,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/scheduler", schedulerHandler)
 	.route("/v1/durable", durableHandler)
 	.route("/v1/durable/queue", durableQueueHandler)
+	.route("/v1/durable/bloom", durableBloomHandler)
 	.route("/v1/coordination", coordinationHandler)
 	.route("/v1/agent", agentResearchHandler)
 	.route("/v1/agent/inbox", agentInboxHandler)
@@ -322,7 +326,8 @@ export {
 	Lock,
 	Leader,
 	Barrier,
-	DurableFIFOQueue
+	DurableFIFOQueue,
+	DurableBloomFilter
 } from "./durable-objects";
 export { Scheduler } from "./durable-objects/scheduler";
 export { Sandbox };

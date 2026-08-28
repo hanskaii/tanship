@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 
 // Mock agents module before importing index to avoid cloudflare: scheme issues
 vi.mock("agents", () => ({

@@ -37,6 +37,10 @@ export class ApiError extends Error {
 		return new ApiError(STATUS_CODES.BAD_GATEWAY, message);
 	}
 
+	static gatewayTimeout(message = "Gateway Timeout") {
+		return new ApiError(STATUS_CODES.GATEWAY_TIMEOUT, message);
+	}
+
 	static server(message = "Internal Server Error") {
 		return new ApiError(STATUS_CODES.INTERNAL_SERVER_ERROR, message);
 	}

@@ -2695,6 +2695,60 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "durable.bloom.add",
+		method: "POST",
+		path: "/v1/durable/bloom/add",
+		price: "$0.002",
+		description:
+			"Space-efficient probabilistic set backed by a Durable Object. Add an item to a named Bloom filter (1% default FPR, up to 10M items). False positives possible, false negatives impossible. Survives isolate restarts. Ideal for deduplication, lead-funnel filtering, seen-it tracking, and cache-busting hit-rate counters. 0 direct x402 competitors",
+		mimeType: "application/json",
+		input: {
+			name: "Filter name — isolated per name (1-64 chars, [a-zA-Z0-9_-])",
+			item: "String to add (1-1024 chars)",
+			capacity:
+				"Optional initial capacity override (1000-10M, only honored on first add)",
+			errorRate:
+				"Optional false-positive rate override (0.0001-0.1, only honored on first add)"
+		},
+		example: {
+			name: "seen-ads",
+			item: "user:42:campaign:99",
+			capacity: 100000,
+			errorRate: 0.01
+		}
+	},
+	{
+		id: "durable.bloom.has",
+		method: "POST",
+		path: "/v1/durable/bloom/has",
+		price: "$0.002",
+		description:
+			"Test membership in a named Bloom filter. Returns { present: bool } where false positives are bounded by the filter's configured error rate",
+		mimeType: "application/json",
+		input: {
+			name: "Filter name (same name used in /add)",
+			item: "String to test (1-1024 chars)"
+		},
+		example: { name: "seen-ads", item: "user:42:campaign:99" }
+	},
+	{
+		id: "durable.bloom.has-many",
+		method: "POST",
+		path: "/v1/durable/bloom/has-many",
+		price: "$0.003",
+		description:
+			"Batch membership test (up to 1000 items) in a single DO round-trip. Cheaper than per-item /has at >3 items",
+		mimeType: "application/json",
+		input: {
+			name: "Filter name",
+			items: "Array of strings (1-1000 items, each 1-1024 chars)"
+		},
+		example: {
+			name: "seen-ads",
+			items: ["user:42:campaign:99", "user:42:campaign:100"]
+		}
+	},
+	{
 		id: "sec.cve-lookup",
 		method: "POST",
 		path: "/v1/security/cve-lookup",
@@ -2862,6 +2916,316 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			domain: "example.com"
 		}
+	},
+	// ── db.new ────────────────────────────────────────────────────────────────
+	{
+		id: "db.upsert",
+		method: "POST",
+		path: "/v1/db/upsert",
+		price: "$0.01",
+		description:
+			"Execute an atomic upsert (INSERT OR REPLACE / INSERT OR IGNORE / REPLACE INTO) on a persistent edge SQLite database. Idempotent by design — safe to call multiple times with the same primary key.",
+		mimeType: "application/json",
+		input: {
+			sql: "SQL upsert statement (INSERT OR REPLACE / INSERT OR IGNORE / REPLACE INTO)",
+			params: "Optional array of bind parameters"
+		},
+		example: {
+			sql: "INSERT OR REPLACE INTO users (id, email, updated_at) VALUES (?, ?, ?)",
+			params: ["user-123", "alice@example.com", 1724800000]
+		}
+	},
+	// ── db.transaction (R14 blue ocean) ───────────────────────────────────────
+	{
+		id: "db.transaction",
+		method: "POST",
+		path: "/v1/db/transaction",
+		price: "$0.025",
+		description:
+			"Run 2-50 SQL statements as a single atomic D1 transaction — all statements commit together, or none of them do. Perfect for multi-row mutations that must be consistent (ledger debits + credits, inventory reservations + order inserts, etc.). Destructive DDL is rejected.",
+		mimeType: "application/json",
+		input: {
+			statements:
+				"Array of 2-50 { sql, params } objects, each executed as one statement in the same implicit transaction"
+		},
+		example: {
+			statements: [
+				{
+					sql: "UPDATE accounts SET balance = balance - ? WHERE id = ?",
+					params: [50, "alice"]
+				},
+				{
+					sql: "UPDATE accounts SET balance = balance + ? WHERE id = ?",
+					params: [50, "bob"]
+				}
+			]
+		}
+	},
+	// ── kv.new ───────────────────────────────────────────────────────────────
+	{
+		id: "kv.atomic.cas",
+		method: "POST",
+		path: "/v1/kv/atomic/cas",
+		price: "$0.003",
+		description:
+			"Compare-and-swap: atomically write a new value only if the current value matches the expected one. Returns { swapped: true } on success, or { swapped: false, current } on mismatch so callers can retry. Ideal for distributed locks and optimistic concurrency.",
+		mimeType: "application/json",
+		input: {
+			key: "KV key to compare-and-swap",
+			expected:
+				"Value the key must currently hold for the swap to succeed",
+			next: "New value to write if expected matches",
+			ttl: "Optional TTL in seconds (60-86400)"
+		},
+		example: {
+			key: "counter",
+			expected: "42",
+			next: "43",
+			ttl: 3600
+		}
+	},
+	// ── storage.new ───────────────────────────────────────────────────────────
+	{
+		id: "storage.lifecycle.set",
+		method: "POST",
+		path: "/v1/storage/lifecycle/set",
+		price: "$0.005",
+		description:
+			"Set a lifecycle rule on the R2 bucket so objects expire and are auto-deleted after a configurable number of days. Rules can target all objects or a key prefix. Prevents storage costs from accumulating on forgotten objects.",
+		mimeType: "application/json",
+		input: {
+			prefix: "Optional key prefix to scope the rule to (omit for entire bucket)",
+			expiryDays:
+				"Days after creation before objects are deleted (1-3650)"
+		},
+		example: {
+			prefix: "tmp/",
+			expiryDays: 7
+		}
+	},
+	// ── ai.new ────────────────────────────────────────────────────────────────
+	{
+		id: "ai.function.call",
+		method: "POST",
+		path: "/v1/ai/function/call",
+		price: "$0.015",
+		description:
+			"Structured AI function-calling: send a messages array and receive a guaranteed JSON object response. Uses Workers AI JSON-object mode so the model is constrained to valid JSON output — ideal for tool-use pipelines and structured data extraction.",
+		mimeType: "application/json",
+		input: {
+			messages: "Array of { role, content } messages",
+			model: "Optional model (default: Llama 3.1 8B)",
+			max_tokens: "Optional max output tokens (default 1024, max 4096)"
+		},
+		example: {
+			messages: [
+				{
+					role: "user",
+					content:
+						'Extract the user name and email: {"name": "Alice", "email": "alice@example.com"}'
+				}
+			]
+		}
+	},
+	// ── devtools ──────────────────────────────────────────────────────────────
+	{
+		id: "devtools.timestamp",
+		method: "POST",
+		path: "/v1/devtools/timestamp",
+		price: "$0.001",
+		description:
+			"Get current Unix timestamp in any format: unix seconds, unix_ms, ISO-8601, RFC3339, date-only, time-only, or all at once. Useful for cron job scheduling and event ordering.",
+		mimeType: "application/json",
+		input: {
+			format: "iso | unix | unix_ms | rfc3339 | date | time | all (default all)",
+			offset_seconds: "Optional UTC offset in seconds (default 0)"
+		},
+		example: { format: "all", offset_seconds: 0 }
+	},
+	{
+		id: "devtools.http-status",
+		method: "POST",
+		path: "/v1/devtools/http-status",
+		price: "$0.001",
+		description:
+			"Fetch any URL and return HTTP status code, status text, response headers (Content-Type, Cache-Control, Server, etc.), and redirect chain info. HEAD or GET with configurable timeout.",
+		mimeType: "application/json",
+		input: {
+			url: "Target URL to check",
+			method: "HEAD or GET (default HEAD)",
+			timeout_ms: "Timeout in ms 100-30000 (default 10000)",
+			follow_redirects: "Follow redirects (default true)"
+		},
+		example: { url: "https://x402.tanship.dev", method: "HEAD" }
+	},
+	{
+		id: "devtools.json-validate",
+		method: "POST",
+		path: "/v1/devtools/json-validate",
+		price: "$0.001",
+		description:
+			"Validate a JSON string. Returns type (object/array/string/number/boolean/null), key count, array length, and byte size. Non-strict mode returns result instead of error.",
+		mimeType: "application/json",
+		input: {
+			json: "JSON string to validate",
+			strict: "Throw error on invalid JSON (default false)"
+		},
+		example: { json: '{"hello":"world"}', strict: false }
+	},
+	{
+		id: "devtools.sort-lines",
+		method: "POST",
+		path: "/v1/devtools/sort-lines",
+		price: "$0.001",
+		description:
+			"Sort text lines alphabetically or reverse. Optional deduplication and case-insensitive mode. Useful for preparing word lists, deduplicating IDs, or normalizing data.",
+		mimeType: "application/json",
+		input: {
+			text: "Multiline text to sort",
+			reverse: "Sort Z→A instead of A→Z (default false)",
+			unique: "Remove duplicate lines (default false)",
+			case_insensitive: "Case-insensitive sort (default false)"
+		},
+		example: { text: "banana\napple\ncherry", unique: true }
+	},
+	{
+		id: "devtools.html-entity",
+		method: "POST",
+		path: "/v1/devtools/html-entity",
+		price: "$0.001",
+		description:
+			"Encode special characters to HTML entities (&lt;, &amp;, etc.) or decode entities back to characters. Handles numeric (&#65;) and named (&amp;) entities.",
+		mimeType: "application/json",
+		input: {
+			text: "Text to encode or decode",
+			operation: "encode or decode (default decode)"
+		},
+		example: { text: "Rock &amp; Roll <3", operation: "decode" }
+	},
+	{
+		id: "devtools.email-normalize",
+		method: "POST",
+		path: "/v1/devtools/email-normalize",
+		price: "$0.001",
+		description:
+			"Normalize an email address: lowercase, strip dots in Gmail local part, strip plus-aliases. Returns the normalized address, local part, and domain separately.",
+		mimeType: "application/json",
+		input: { email: "Email address to normalize" },
+		example: { email: "John.Doe+Newsletter@Gmail.com" }
+	},
+	{
+		id: "devtools.robots-check",
+		method: "POST",
+		path: "/v1/devtools/robots-check",
+		price: "$0.001",
+		description:
+			"Check if a URL is allowed by robots.txt. Fetches the site's robots.txt and evaluates User-agent: * rules against the target path. Returns allowed/denied with the matching rule.",
+		mimeType: "application/json",
+		input: {
+			url: "Target URL to check",
+			timeout_ms: "Timeout in ms (default 8000)"
+		},
+		example: { url: "https://example.com/admin", timeout_ms: 8000 }
+	},
+	{
+		id: "devtools.url-metadata",
+		method: "POST",
+		path: "/v1/devtools/url-metadata",
+		price: "$0.001",
+		description:
+			"Extract page metadata from any URL: title, meta description, og:image, canonical link, and Content-Type. Headless-free (parses raw HTML response).",
+		mimeType: "application/json",
+		input: {
+			url: "Target URL to scrape metadata from",
+			timeout_ms: "Timeout in ms (default 8000)"
+		},
+		example: { url: "https://x402.tanship.dev", timeout_ms: 8000 }
+	},
+	{
+		id: "devtools.domain-extract",
+		method: "POST",
+		path: "/v1/devtools/domain-extract",
+		price: "$0.001",
+		description:
+			"Parse a URL or hostname string into components: root domain, subdomain, and public suffix. Works on any string containing a domain, even without a scheme.",
+		mimeType: "application/json",
+		input: { url: "URL or hostname string" },
+		example: { url: "https://api.x402.tanship.dev/v1/endpoint" }
+	},
+	{
+		id: "devtools.x402-ping",
+		method: "POST",
+		path: "/v1/devtools/x402-ping",
+		price: "$0.001",
+		description:
+			"Probe one or more URLs to detect x402 payment protocol support. Checks for WWW-Authenticate header with x402 scheme. Default probes: x402.tanship.dev, payai.fun, three.ws.",
+		mimeType: "application/json",
+		input: { target: "Optional specific URL to ping (omit for defaults)" },
+		example: {}
+	},
+	{
+		id: "devtools.x402-site-audit",
+		method: "POST",
+		path: "/v1/devtools/x402-site-audit",
+		price: "$0.001",
+		description:
+			"Audit an x402 endpoint for spec compliance: checks 402 status, WWW-Authenticate header fields (price, network, pay-to, max-amount), Vary header, and JSON content type. Returns a compliance score and letter grade.",
+		mimeType: "application/json",
+		input: {
+			url: "x402 endpoint URL to audit",
+			timeout_ms: "Timeout in ms (default 8000)"
+		},
+		example: {
+			url: "https://x402.tanship.dev/v1/dev/qr-generate",
+			timeout_ms: 8000
+		}
+	},
+	{
+		id: "devtools.query-parse",
+		method: "POST",
+		path: "/v1/devtools/query-parse",
+		price: "$0.001",
+		description:
+			"Parse a URL query string (with or without the leading ?) into key-value pairs. Handles duplicate keys by returning arrays when needed. Returns count of parameters.",
+		mimeType: "application/json",
+		input: { query: "Raw query string or full URL" },
+		example: { query: "page=1&limit=100&tag=ai&tag=payments" }
+	},
+	{
+		id: "devtools.diff-lines",
+		method: "POST",
+		path: "/v1/devtools/diff-lines",
+		price: "$0.001",
+		description:
+			"Compute a line-level diff between two text blobs. Returns added lines, removed lines, and unchanged count. Fast set-based algorithm, works on large files.",
+		mimeType: "application/json",
+		input: { a: "First text (before)", b: "Second text (after)" },
+		example: { a: "apple\nbanana", b: "banana\ncherry" }
+	},
+	{
+		id: "devtools.json-keys",
+		method: "POST",
+		path: "/v1/devtools/json-keys",
+		price: "$0.001",
+		description:
+			"Extract all keys from a JSON object. Shallow mode returns top-level keys; deep mode returns dot-notation paths for all nested keys (e.g. user.address.city).",
+		mimeType: "application/json",
+		input: {
+			json: "JSON string",
+			deep: "Extract nested paths (default false)"
+		},
+		example: { json: '{"user":{"name":"Alice","age":30}}', deep: true }
+	},
+	{
+		id: "devtools.json-minify",
+		method: "POST",
+		path: "/v1/devtools/json-minify",
+		price: "$0.001",
+		description:
+			"Minify a JSON string by removing whitespace. Returns original size, minified size, and bytes saved. Useful for reducing payload size for storage or transmission.",
+		mimeType: "application/json",
+		input: { json: "Pretty-printed or indented JSON string" },
+		example: { json: '{\n  "name": "Alice",\n  "age": 30\n}' }
 	}
 ];
 

@@ -48,6 +48,16 @@ const BatchPresignSchema = z.object({
 	keys: z.array(z.string().min(1).max(512)).min(1).max(100)
 });
 
+const LifecycleSetSchema = z.object({
+	prefix: z.string().max(512).optional(),
+	expiryDays: z
+		.number()
+		.int()
+		.min(1)
+		.max(3650)
+		.describe("Days after object creation before it expires")
+});
+
 const storageHandler = new Hono<HonoEnv>()
 	.post("/upload", zValidator("json", UploadSchema), async (c) => {
 		const { key, content, contentType, retentionDays } =
@@ -185,6 +195,47 @@ const storageHandler = new Hono<HonoEnv>()
 				found: results.filter((r) => r.found).length,
 				missing: results.length - results.filter((r) => r.found).length,
 				results
+			});
+		}
+	)
+	// Set an R2 object lifecycle rule via the Cloudflare REST API. Rules are
+	// scoped to a key prefix (or the entire bucket when prefix is omitted) and
+	// automatically delete objects after `expiryDays`.
+	.post(
+		"/lifecycle/set",
+		zValidator("json", LifecycleSetSchema),
+		async (c) => {
+			const { prefix, expiryDays } = c.req.valid("json");
+
+			const rule = {
+				id: prefix
+					? `expire-${prefix}-${expiryDays}d`
+					: `expire-all-${expiryDays}d`,
+				enabled: true,
+				conditions: prefix ? { prefix } : {},
+				delete_objects: { max_age: expiryDays * 24 * 60 * 60 }
+			};
+
+			const url = `https://api.cloudflare.com/client/v4/accounts/${c.env.CLOUDFLARE_ACCOUNT_ID}/r2/buckets/tanflare-storage/lifecycle`;
+			const res = await fetch(url, {
+				method: "PUT",
+				headers: {
+					Authorization: `Bearer ${c.env.CLOUDFLARE_API_TOKEN}`,
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ rules: [rule] })
+			});
+
+			if (!res.ok) {
+				const text = await res.text();
+				throw ApiError.badGateway(
+					`Cloudflare R2 lifecycle API returned ${res.status}: ${text}`
+				);
+			}
+
+			return ApiResponse.ok(c, "Lifecycle rule applied", {
+				rule,
+				bucket: "tanflare-storage"
 			});
 		}
 	);

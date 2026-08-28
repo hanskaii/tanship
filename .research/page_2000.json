@@ -1,0 +1,5476 @@
+{
+	"items": [
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xD8049F6998E05C437C970815eF1094aC6241e948",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T19:20:07.710Z",
+			"metadata": {},
+			"resource": "https://holder-victor-nova-mag.trycloudflare.com/x402/grant-eligibility",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"profile": "U.S. nonprofit innovation and workforce organization",
+					"eligibility": "nonprofit",
+					"opportunity_id": "362903",
+					"project_budget_usd": 100000,
+					"days_needed_to_apply": 14
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "result": { "status": "ok" } }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xD8049F6998E05C437C970815eF1094aC6241e948",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T19:20:05.722Z",
+			"metadata": {},
+			"resource": "https://holder-victor-nova-mag.trycloudflare.com/x402/metadata",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "url": "https://example.com" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "result": { "status": "ok" } }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xD8049F6998E05C437C970815eF1094aC6241e948",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T19:03:30.220Z",
+			"metadata": {},
+			"resource": "https://holder-victor-nova-mag.trycloudflare.com/v1/qr",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"data": "https://example.com/pay",
+					"size": 300,
+					"format": "png"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"qr_code": {
+						"size": 300,
+						"base64": "iVBORw0KGgo...",
+						"format": "png",
+						"mimeType": "image/png",
+						"dataSha256": "sha256-of-input"
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xC66D1757b9CF97E51f22075927c36Ff7aDD96A01",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T18:59:18.630Z",
+			"metadata": {},
+			"resource": "https://www.cloudworldmodel.ai/api/simulations/a2e677cc-c3c9-4eb4-bc78-1889a047e77d/step-hybrid",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "steps": 1 },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json",
+				"pathParams": { "id": "sim-abc123" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"events": [],
+					"metrics": {
+						"cpuUsage": 42.5,
+						"errorRate": 0.01,
+						"latencyP95": 120,
+						"costPerHour": 0.18
+					},
+					"simulation": { "id": "sim-id", "currentTime": 1 },
+					"hybridResult": {
+						"summary": {
+							"totalSteps": 1,
+							"blendedSteps": 0,
+							"fallbackSteps": 0,
+							"eventsDetected": 0,
+							"mlConfidenceAvg": 0.9,
+							"bottlenecksDetected": 0
+						},
+						"decisions": [],
+						"simulationId": "sim-id"
+					},
+					"hybridDecision": { "mode": "rules", "confidence": 0.9 }
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xFe8b1298727706A6D9737C5afbC7AF8e76842B91",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T18:50:15.610Z",
+			"metadata": {},
+			"resource": "https://conceptual-assistance-incurred-transformation.trycloudflare.com/v1/analyze",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "scenario": "destructive-customer-migration" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"summary": "Destructive schema changes reach critical downstream assets.",
+					"verdict": "BLOCK",
+					"findings": [],
+					"risk_score": 100,
+					"safe_patch": "-- expand/contract migration",
+					"rollout_plan": []
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+						"name": "USDC",
+						"label": "solana-mainnet",
+						"version": "2",
+						"decimals": 6,
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "8mTdwZCZDPeDhso3iAk2znuuzWWXrq7Cni67WJ6Tc167",
+					"amount": "100000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T18:12:40.937Z",
+			"metadata": {},
+			"resource": "https://solidus-x402.fly.dev/v1/sol/tx-sim",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"err": null,
+					"verdict": "will_succeed",
+					"units_consumed": 42000,
+					"programs_invoked": [
+						{ "id": "JUP6LkbZbj…", "label": "jupiter-v6" }
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x76D0590f857DFbebB303851a89C4a14234E89Ba6",
+					"amount": "200000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T18:02:01.911Z",
+			"metadata": {},
+			"resource": "https://api.mcdm.one/v1/sort",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"objects": [
+						[100, 50, 3],
+						[120, 45, 5]
+					],
+					"options": { "return_explanations": false },
+					"priorities": [
+						{ "index": 0, "weight": 0.8 },
+						{ "weight": 0.5, "indices": [0, 1] }
+					],
+					"param_names": ["price", "area", "floor"]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"meta": { "n_params": 3, "n_objects": 2, "latency_ms": 45 },
+					"ratings": [0.72, 0.91],
+					"rule_summary": {
+						"rule_id": "a1b2c3d4e5f6",
+						"n_params": 3,
+						"polynom_terms": 7
+					},
+					"ranked_indices": [1, 0]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9VaDVp1Wb78G4Wm6VuTiMrpESjrUymXefQTHcJGRSTEA",
+					"amount": "80000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 1200
+				}
+			],
+			"lastUpdated": "2026-07-18T16:13:37.392Z",
+			"metadata": {},
+			"resource": "https://api.xona-agent.com/image/flux-2-max",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"prompt": "",
+					"aspect_ratio": "1:1",
+					"referenceImage": []
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"metadata": {},
+					"image_url": "",
+					"image_description": ""
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "30000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T15:50:39.748Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/volatility-index/:symbol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "symbol": "SLX" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "object",
+				"example": {
+					"symbol": "ETH",
+					"sentiment": {
+						"label": "Greed",
+						"trend": "increasing",
+						"fear_greed_index": 72
+					},
+					"volatility": {
+						"implied_vol": 52.1,
+						"realized_vol_1h": 12.5,
+						"realized_vol_7d": 45.2,
+						"realized_vol_24h": 28.3,
+						"vol_percentile_30d": 65
+					},
+					"risk_metrics": {
+						"var_95_1d": -3.2,
+						"var_99_1d": -5.1,
+						"beta_vs_btc": 0.92,
+						"max_drawdown_7d": -8.5,
+						"sharpe_ratio_30d": 1.85
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T15:50:37.077Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/cvd/:symbol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "symbol": "SLX" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "object",
+				"example": {
+					"cvd": 125000000,
+					"period": "1h",
+					"signal": "bullish_pressure",
+					"symbol": "BTC",
+					"exchanges": {
+						"binance": {
+							"cvd": 4200000,
+							"buy_volume": 27000000,
+							"sell_volume": 22800000
+						}
+					},
+					"timestamp": "2026-07-08T12:00:00.000Z",
+					"buy_volume": 54250000,
+					"period_cvd": 8500000,
+					"sell_volume": 45750000,
+					"active_ws_connections": 4
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T15:50:34.384Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/liquidation/heatmap/:symbol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "symbol": "SLX" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "object",
+				"example": {
+					"symbol": "BTC",
+					"cascade_risk": "medium",
+					"current_price": 67250.5,
+					"open_interest": {
+						"contracts": 125000,
+						"value_usd": 8406312500
+					},
+					"nearest_cluster": {
+						"side": "long_liquidation_zone",
+						"price_level": 65900,
+						"distance_from_current": "-2.01%"
+					},
+					"liquidation_clusters": []
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T15:50:31.059Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/futures/predicted-funding/:symbol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "symbol": "SLX" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "object",
+				"example": {
+					"trend": "increasing",
+					"symbol": "BTC",
+					"predicted_next": 0.00014,
+					"current_funding": 0.0001,
+					"time_to_next_settlement_min": 187
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T15:50:28.262Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/funding-rate/:symbol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "symbol": "SLX" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "object",
+				"example": {
+					"signal": "bullish",
+					"symbol": "BTC",
+					"confidence": 0.75,
+					"mark_price": 67250.5,
+					"index_price": 67230,
+					"funding_rate": 0.0125,
+					"annualized_pct": 136.88,
+					"interpretation": "Longs pay shorts (bullish sentiment)",
+					"funding_rate_pct": "0.1250%",
+					"next_funding_time": "2026-07-05T16:00:00.000Z",
+					"next_funding_in_hours": 2.5
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T15:50:25.688Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/futures/long-short/:symbol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "symbol": "SLX" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "object",
+				"example": {
+					"signal": "contrarian_short",
+					"symbol": "ETH",
+					"top_traders": { "long_pct": 62.4, "short_pct": 37.6 }
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "30000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T15:50:23.008Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/futures/open-interest/:symbol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "symbol": "SLX" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "object",
+				"example": {
+					"symbol": "BTC",
+					"by_exchange": {
+						"okx": { "oi_usd": 4100000000 },
+						"binance": { "oi_usd": 8200000000 }
+					},
+					"total_oi_usd": 18500000000
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T15:50:18.432Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/price/history/:symbol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "symbol": "SLX" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "object",
+				"example": {
+					"params": { "limit": 168, "interval": "1h" },
+					"symbol": "ETH",
+					"candles": [
+						{
+							"low": 2432.5,
+							"high": 2455.8,
+							"open": 2435.1,
+							"close": 2450.32,
+							"trades": 3420,
+							"volume": 1250000,
+							"timestamp": "2026-07-04T09:00:00.000Z"
+						},
+						{
+							"low": 2448.9,
+							"high": 2462.15,
+							"open": 2450.32,
+							"close": 2458.45,
+							"trades": 3850,
+							"volume": 1380000,
+							"timestamp": "2026-07-04T10:00:00.000Z"
+						}
+					],
+					"interval": "1h",
+					"total_candles": 168
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T15:50:15.833Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/price/:symbol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "symbol": "SLX" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "object",
+				"example": {
+					"spread": 0.07,
+					"symbol": "ETH",
+					"sources": [
+						{
+							"dex": "uniswap_v3",
+							"pair": "ETH/USDC",
+							"price": 2450.35,
+							"liquidity": 45000000,
+							"confidence": 0.98,
+							"volume_24h": 5200000
+						},
+						{
+							"dex": "sushiswap",
+							"pair": "ETH/USDC",
+							"price": 2450.28,
+							"liquidity": 12000000,
+							"confidence": 0.92,
+							"volume_24h": 1800000
+						}
+					],
+					"change_1h": 0.12,
+					"price_btc": 0.03891,
+					"price_usd": 2450.32,
+					"timestamp": "2026-07-04T13:30:00.000Z",
+					"change_24h": 2.45,
+					"market_cap": 294500000000,
+					"total_sources": 3,
+					"volume_24h_usd": 12500000,
+					"aggregated_price": 2450.32,
+					"aggregation_method": "volume_weighted"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x86AB3d75C9240ef9452536d4d5D7052f9100cB97",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T14:49:50.129Z",
+			"metadata": {},
+			"resource": "https://api.tradeperpetua.xyz/report",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "asset": "ETH" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"asset": "ETH",
+					"price": 1578.1,
+					"score": 23,
+					"trend": "flat",
+					"anomaly": false,
+					"factors": [
+						{
+							"name": "Price move 24h",
+							"weight": "low",
+							"reading": "0.4 percent"
+						}
+					],
+					"analysis": "ETH is steady near 1578 with low risk, volume is moderate and gas is calm.",
+					"confidence": "medium"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "956Uj3zhbKG5VjyECw6C8oW6VLAzZyH1FGgvFi73vNvc",
+					"scheme": "exact",
+					"network": "solana",
+					"mimeType": "application/json",
+					"resource": "http://notified-turns-schedule-wrapping.trycloudflare.com/safety/So11111111111111111111111111111111111111112",
+					"description": "Solana token safety & honeypot check: sellability via live Jupiter round-trip, liquidity, volume, age, red flags, 0-100 score, OK/CAUTION/AVOID verdict. Call GET /safety/{mintAddress}.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"discoverable": true
+						},
+						"output": {
+							"type": "object",
+							"required": [
+								"mint",
+								"verdict",
+								"score",
+								"sellable"
+							],
+							"properties": {
+								"mint": {
+									"type": "string",
+									"description": "Token mint address checked"
+								},
+								"flags": {
+									"type": "array",
+									"items": { "type": "string" },
+									"description": "Human-readable red flags"
+								},
+								"score": {
+									"type": "number",
+									"maximum": 100,
+									"minimum": 0,
+									"description": "Risk score, higher = riskier"
+								},
+								"ageDays": { "type": "number" },
+								"verdict": {
+									"enum": ["OK", "CAUTION", "AVOID"],
+									"type": "string",
+									"description": "Overall safety verdict"
+								},
+								"priceUsd": { "type": "number" },
+								"sellable": {
+									"type": "boolean",
+									"description": "Live Jupiter round-trip sell test passed"
+								},
+								"liquidityUsd": { "type": "number" },
+								"volume24hUsd": { "type": "number" },
+								"roundTripLossPct": {
+									"type": "number",
+									"description": "Value lost in buy+sell round trip (honeypot/tax detector)"
+								}
+							}
+						}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-18T14:24:16.469Z",
+			"metadata": {},
+			"resource": "http://notified-turns-schedule-wrapping.trycloudflare.com/safety/So11111111111111111111111111111111111111112",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"required": ["mint", "verdict", "score", "sellable"],
+					"properties": {
+						"mint": {
+							"type": "string",
+							"description": "Token mint address checked"
+						},
+						"flags": {
+							"type": "array",
+							"items": { "type": "string" },
+							"description": "Human-readable red flags"
+						},
+						"score": {
+							"type": "number",
+							"maximum": 100,
+							"minimum": 0,
+							"description": "Risk score, higher = riskier"
+						},
+						"ageDays": { "type": "number" },
+						"verdict": {
+							"enum": ["OK", "CAUTION", "AVOID"],
+							"type": "string",
+							"description": "Overall safety verdict"
+						},
+						"priceUsd": { "type": "number" },
+						"sellable": {
+							"type": "boolean",
+							"description": "Live Jupiter round-trip sell test passed"
+						},
+						"liquidityUsd": { "type": "number" },
+						"volume24hUsd": { "type": "number" },
+						"roundTripLossPct": {
+							"type": "number",
+							"description": "Value lost in buy+sell round trip (honeypot/tax detector)"
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xf8384c55677dcB6FA28eE6641260298C22c47Ad1",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "",
+					"resource": "https://intel.asrai.me/search",
+					"description": "Perplexica AI Search",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"discoverable": true
+						},
+						"output": null
+					},
+					"maxAmountRequired": "5000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T08:43:20.986Z",
+			"metadata": {},
+			"resource": "https://intel.asrai.me/search",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x17cf15D61026b4CDD26cff6042f8e7D2e0Ca5e8D",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://api.agentinternetruntime.com/v1/extract",
+					"description": "Extract Webpage",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"schema": {
+								"type": "object",
+								"required": ["url"],
+								"properties": {
+									"url": {
+										"type": "string",
+										"format": "uri",
+										"description": "URL to extract structured data from"
+									},
+									"schema": {
+										"type": "object",
+										"description": "Optional JSON Schema for structured output mapping."
+									},
+									"options": {
+										"type": "object",
+										"properties": {
+											"cache": {
+												"enum": ["bypass", "only"],
+												"type": "string"
+											},
+											"timeout": {
+												"type": "number",
+												"description": "Timeout in ms (1000-30000)"
+											},
+											"waitForSelector": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							},
+							"discoverable": true
+						},
+						"output": {
+							"type": "http",
+							"schema": {
+								"type": "object",
+								"properties": {
+									"data": {
+										"type": "object",
+										"properties": {
+											"url": { "type": "string" },
+											"title": { "type": "string" },
+											"content": { "type": "object" },
+											"metadata": { "type": "object" },
+											"description": { "type": "string" }
+										}
+									},
+									"success": { "type": "boolean" }
+								}
+							}
+						}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-18T08:40:45.585Z",
+			"metadata": {},
+			"resource": "https://api.agentinternetruntime.com/v1/extract",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "http",
+					"schema": {
+						"type": "object",
+						"properties": {
+							"data": {
+								"type": "object",
+								"properties": {
+									"url": { "type": "string" },
+									"title": { "type": "string" },
+									"content": { "type": "object" },
+									"metadata": { "type": "object" },
+									"description": { "type": "string" }
+								}
+							},
+							"success": { "type": "boolean" }
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x09b00dFE1E9b09653191fE8b3EDab5f2f0504dFE",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T08:38:40.255Z",
+			"metadata": {},
+			"resource": "https://api.foursec.xyz/futures/basis/:symbol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "symbol": "RE" },
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "object",
+				"example": {
+					"symbol": "BTC",
+					"spot_price": 98420.5,
+					"best_carry_trade": "bybit",
+					"perp_by_exchange": {
+						"binance": {
+							"basis_pct": "0.091%",
+							"mark_price": 98510.2
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xAB8073f5b13b3B7fc6F6b03439151D5EEC0B6dD5",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "http://appraxa-ip.b-kohlenbach.workers.dev/v1/ip/basic",
+					"description": "Appraxa IP Valuation /v1/ip/basic (price USD 0.99)",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"summary": "Patent portfolio description (status, risk levels, tech field) plus revenues or market parameters; see /openapi.json",
+							"bodyType": "json"
+						},
+						"output": {
+							"type": "json",
+							"summary": "DIN 77100 relief-from-royalty valuation: point value, value range, full derivation, confidence rating"
+						}
+					},
+					"maxAmountRequired": "990000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T07:31:15.284Z",
+			"metadata": {},
+			"resource": "http://appraxa-ip.b-kohlenbach.workers.dev/v1/ip/basic",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "json",
+					"summary": "DIN 77100 relief-from-royalty valuation: point value, value range, full derivation, confidence rating"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xD8049F6998E05C437C970815eF1094aC6241e948",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T05:22:28.658Z",
+			"metadata": {},
+			"resource": "https://holder-victor-nova-mag.trycloudflare.com/v1/dossier",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "url": "https://example.com", "maxPages": 3 },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"dossier": {
+						"url": "https://example.com",
+						"pagesAnalyzed": 1,
+						"agentContextMarkdown": "# Example Domain\n\nCompact website context for an AI agent."
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"version": "2",
+						"assetTransferMethod": "eip3009"
+					},
+					"payTo": "0x06b525eb86790851a5632a01b513bee51ca32189",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-18T04:00:10.325Z",
+			"metadata": {},
+			"resource": "https://engedi.digi-life17.workers.dev/api/screenshot-live",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "url": "URL", "width": 0, "height": 0 }
+			},
+			"outputSchema": { "type": "json" }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"version": "2",
+						"assetTransferMethod": "eip3009"
+					},
+					"payTo": "0x06b525eb86790851a5632a01b513bee51ca32189",
+					"amount": "2000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-18T04:00:09.928Z",
+			"metadata": {},
+			"resource": "https://engedi.digi-life17.workers.dev/api/jobs",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "query": "Job", "location": "Location" }
+			},
+			"outputSchema": { "type": "json" }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "J7ZvJEspvwP1oRxQZ7mYmNmT22NTm3GWq3t7HEbvPZYx",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-18T03:08:29.082Z",
+			"metadata": {},
+			"resource": "https://api.nansen.ai/api/v1/tgm/token-information",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"chain": "ethereum",
+					"timeframe": "1d",
+					"token_address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x68e3E7822cf83C824cF9606EC999b5e8a93c85B5",
+					"amount": "4000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T23:07:55.925Z",
+			"metadata": {},
+			"resource": "https://lion-x402-bible.lionmaster-operations.workers.dev/api/x402/cpg-product-intel-json",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "barcode": "5449000000996" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": { "asset_id": "LION", "resolved": true }
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x83240485B70E5C820E5f180533fC6156470CFd0e",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://x402.lucyos.ai/x402/tools/analyze_token",
+					"description": "Payment for token analysis service ($0.01)",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"bodyType": "json",
+							"bodyFields": {
+								"chain": {
+									"type": "string",
+									"default": "bsc",
+									"required": false,
+									"description": "Blockchain name (bsc, solana, ethereum, etc.)"
+								},
+								"token": {
+									"type": "string",
+									"required": true,
+									"description": "Token address or symbol (e.g. BTC, ETH, SOL, etc.)"
+								},
+								"language": {
+									"type": "string",
+									"default": "English",
+									"required": false,
+									"description": "Output language (English, Chinese, Korean, etc.)"
+								}
+							},
+							"headerFields": {
+								"X-PAYMENT": {
+									"type": "string",
+									"required": false,
+									"description": "Base64-encoded JSON PaymentPayload; automatically filled by x402scan"
+								}
+							}
+						},
+						"output": {
+							"chain": "string",
+							"token": "string",
+							"status": "string",
+							"analysis": "object",
+							"language": "string",
+							"created_at": "string",
+							"workflow_run_id": "string|null"
+						}
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T22:24:58.925Z",
+			"metadata": {},
+			"resource": "https://x402.lucyos.ai/x402/tools/analyze_token",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"chain": {
+						"type": "string",
+						"default": "bsc",
+						"required": false,
+						"description": "Blockchain name (bsc, solana, ethereum, etc.)"
+					},
+					"token": {
+						"type": "string",
+						"required": true,
+						"description": "Token address or symbol (e.g. BTC, ETH, SOL, etc.)"
+					},
+					"language": {
+						"type": "string",
+						"default": "English",
+						"required": false,
+						"description": "Output language (English, Chinese, Korean, etc.)"
+					}
+				},
+				"type": "http",
+				"method": "POST",
+				"headers": {
+					"X-PAYMENT": {
+						"type": "string",
+						"required": false,
+						"description": "Base64-encoded JSON PaymentPayload; automatically filled by x402scan"
+					}
+				},
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"chain": "string",
+					"token": "string",
+					"status": "string",
+					"analysis": "object",
+					"language": "string",
+					"created_at": "string",
+					"workflow_run_id": "string|null"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xC66D1757b9CF97E51f22075927c36Ff7aDD96A01",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T21:42:32.721Z",
+			"metadata": {},
+			"resource": "https://www.cloudworldmodel.ai/api/simulations/6d3e5b4e-7134-4b07-8b78-b52a791cd851/step-hybrid",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "steps": 1 },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json",
+				"pathParams": { "id": "sim-abc123" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"events": [],
+					"metrics": {
+						"cpuUsage": 42.5,
+						"errorRate": 0.01,
+						"latencyP95": 120,
+						"costPerHour": 0.18
+					},
+					"simulation": { "id": "sim-id", "currentTime": 1 },
+					"hybridResult": {
+						"summary": {
+							"totalSteps": 1,
+							"blendedSteps": 0,
+							"fallbackSteps": 0,
+							"eventsDetected": 0,
+							"mlConfidenceAvg": 0.9,
+							"bottlenecksDetected": 0
+						},
+						"decisions": [],
+						"simulationId": "sim-id"
+					},
+					"hybridDecision": { "mode": "rules", "confidence": 0.9 }
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xC66D1757b9CF97E51f22075927c36Ff7aDD96A01",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T21:16:21.668Z",
+			"metadata": {},
+			"resource": "https://www.cloudworldmodel.ai/api/simulations/3cfa3ce6-19db-4d3b-b67c-0773ce15cac4/step-hybrid",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "steps": 1 },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json",
+				"pathParams": { "id": "sim-abc123" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"events": [],
+					"metrics": {
+						"cpuUsage": 42.5,
+						"errorRate": 0.01,
+						"latencyP95": 120,
+						"costPerHour": 0.18
+					},
+					"simulation": { "id": "sim-id", "currentTime": 1 },
+					"hybridResult": {
+						"summary": {
+							"totalSteps": 1,
+							"blendedSteps": 0,
+							"fallbackSteps": 0,
+							"eventsDetected": 0,
+							"mlConfidenceAvg": 0.9,
+							"bottlenecksDetected": 0
+						},
+						"decisions": [],
+						"simulationId": "sim-id"
+					},
+					"hybridDecision": { "mode": "rules", "confidence": 0.9 }
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xC66D1757b9CF97E51f22075927c36Ff7aDD96A01",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T21:00:38.289Z",
+			"metadata": {},
+			"resource": "https://www.cloudworldmodel.ai/api/simulations/0cb8a026-4685-4b52-a585-e434fc63aebc/step-hybrid",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "steps": 1 },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json",
+				"pathParams": { "id": "sim-abc123" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"events": [],
+					"metrics": {
+						"cpuUsage": 42.5,
+						"errorRate": 0.01,
+						"latencyP95": 120,
+						"costPerHour": 0.18
+					},
+					"simulation": { "id": "sim-id", "currentTime": 1 },
+					"hybridResult": {
+						"summary": {
+							"totalSteps": 1,
+							"blendedSteps": 0,
+							"fallbackSteps": 0,
+							"eventsDetected": 0,
+							"mlConfidenceAvg": 0.9,
+							"bottlenecksDetected": 0
+						},
+						"decisions": [],
+						"simulationId": "sim-id"
+					},
+					"hybridDecision": { "mode": "rules", "confidence": 0.9 }
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xe61e9aae81810f199a7d313c355688b28e0f41b9",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T18:43:37.754Z",
+			"metadata": {},
+			"resource": "https://orchard-data.letom1176.workers.dev/api/fear-greed",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"crypto_fear_greed": {
+						"value": 25,
+						"classification": "Extreme Fear",
+						"previous_value": 25
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "2CkpGoj5cGYdmxSBZYC21AJia9hGjj5bKzCTkyrPzL4H",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T17:12:45.848Z",
+			"metadata": {},
+			"resource": "https://relayzero.ai/v1/intel/scan/:var1",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": {
+					"var1": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+				},
+				"queryParams": { "address": "solana-token-mint-address" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"scan": { "type": "drainbrain_scan" },
+					"source": "DrainBrain ML Security Oracle"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "100000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:58:52.468Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/migrate/batch",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"dialect": "postgres",
+					"migrations": [
+						{
+							"sql": "ALTER TABLE users ADD COLUMN nickname text",
+							"name": "0001_add_nickname"
+						}
+					]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 1,
+					"object": "dbmigrate_batch",
+					"results": [
+						{ "name": "0001_add_nickname", "verdict": "pass" }
+					],
+					"summary": {
+						"passed": ["0001_add_nickname"],
+						"blocked": [],
+						"caution": [],
+						"pass_count": 1,
+						"block_count": 0,
+						"caution_count": 0
+					},
+					"disclaimer": "Automated migration-safety indicators, not a guarantee.",
+					"worst_verdict": "pass"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "100000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:58:49.455Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/a11y/batch",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"files": [
+						{
+							"markup": "<img src=\"logo.png\" />",
+							"filename": "Logo.jsx",
+							"framework": "jsx"
+						},
+						{
+							"markup": "<img src=\"a.png\" alt=\"A\">",
+							"filename": "ok.html",
+							"framework": "html"
+						}
+					]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"files": [
+						{
+							"summary": {
+								"counts": { "findings": 1 },
+								"by_severity": { "block": 1, "caution": 0 }
+							},
+							"verdict": "block",
+							"filename": "Logo.jsx",
+							"findings": ["…"],
+							"framework_detected": "jsx"
+						},
+						{
+							"summary": {
+								"counts": { "findings": 0 },
+								"by_severity": { "block": 0, "caution": 0 }
+							},
+							"verdict": "pass",
+							"filename": "ok.html",
+							"findings": [],
+							"framework_detected": "html"
+						}
+					],
+					"object": "a11y_batch",
+					"totals": {
+						"findings": 1,
+						"by_severity": { "block": 1, "caution": 0 }
+					},
+					"disclaimer": "Automated accessibility indicators, NOT a legal compliance guarantee.",
+					"file_count": 2,
+					"worst_verdict": "block",
+					"ruleset_version": "2026.07.16"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "80000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:58:46.410Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/personality/chart",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"date": "1990-05-15",
+					"name": "Jane Doe",
+					"time": "12:00",
+					"place": "New York, USA",
+					"utc_offset": -4
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"input": {
+						"date": "1990-05-15",
+						"has_time": true,
+						"julian_day": 2448027.17
+					},
+					"systems": {
+						"chinese": {
+							"zodiac": { "animal": "Horse", "element": "Metal" }
+						},
+						"western": {
+							"sun": { "dms": "24°33'", "sign": "Taurus" },
+							"ascendant": { "sign": "Leo" }
+						},
+						"bodygraph": {
+							"profile": "1/3",
+							"energy_type": "Generator"
+						},
+						"numerology": { "life_path": { "number": 3 } }
+					},
+					"frameworks": [
+						"western",
+						"vedic",
+						"chinese",
+						"numerology",
+						"bodygraph",
+						"biorhythm"
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "40000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:58:42.967Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/news/brief",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"topic": "ethereum etf flows",
+					"timelimit": "w"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"brief": "Spot ETH ETFs saw net inflows this week [1].",
+					"model": "deepseek-v4-flash",
+					"topic": "ethereum etf flows",
+					"sources": [
+						{
+							"url": "https://example.com/eth",
+							"date": "2026-07-15",
+							"title": "ETH ETF weekly",
+							"source": "Example"
+						}
+					],
+					"key_points": ["Inflows led by major issuers [1]"]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "30000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:59.524Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/personality/bodygraph",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"date": "1990-05-15",
+					"time": "12:00",
+					"place": "New York, USA",
+					"utc_offset": -4
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"bodygraph": {
+						"profile": "1/3",
+						"activations": {
+							"personality": [
+								{ "body": "Sun", "gate": 23, "line": 6 }
+							]
+						},
+						"energy_type": "Generator",
+						"defined_centers": ["Sacral", "Throat"],
+						"inner_authority": "Emotional (Solar Plexus)"
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "30000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:55.913Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/answer",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "query": "what is the x402 payment protocol" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"model": "deepseek-v4-flash",
+					"query": "what is the x402 payment protocol",
+					"answer": "x402 is an open protocol for machine payments over HTTP 402 [1].",
+					"sources": [{ "url": "https://x402.org", "title": "x402" }],
+					"used_sources": ["https://x402.org"]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:44.594Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/migrate/check",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"sql": "ALTER TABLE users ADD COLUMN nickname text",
+					"dialect": "postgres"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"object": "dbmigrate_check",
+					"dialect": "postgres",
+					"summary": {
+						"info_count": 0,
+						"block_count": 0,
+						"caution_count": 0
+					},
+					"verdict": "pass",
+					"coverage": {
+						"parse_partial": false,
+						"statements_total": 1,
+						"statements_parsed": 1
+					},
+					"findings": [],
+					"disclaimer": "Automated migration-safety indicators, not a guarantee."
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:41.316Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/a11y/preflight",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"markup": "<img src=\"logo.png\" />",
+					"framework": "jsx"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"object": "a11y_preflight",
+					"summary": {
+						"counts": { "findings": 1 },
+						"by_severity": { "block": 1, "caution": 0 }
+					},
+					"verdict": "block",
+					"coverage": {
+						"level": "AA",
+						"rules_run": 13,
+						"rules_total": 14,
+						"framework_detected": "jsx",
+						"skipped_needs_render": []
+					},
+					"findings": [
+						{
+							"element": "<img src=\"logo.png\" />",
+							"message": "Image has no alt attribute.",
+							"rule_id": "img-alt",
+							"wcag_sc": "1.1.1",
+							"category": "text-alternatives",
+							"location": "line 1",
+							"severity": "block",
+							"wcag_level": "A",
+							"remediation": "Add alt text, or alt=\"\" if decorative."
+						}
+					],
+					"disclaimer": "Automated accessibility indicators, NOT a legal compliance guarantee.",
+					"ruleset_version": "2026.07.16"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:38.311Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/code/scan",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"diff": "--- a/db.py\n+++ b/db.py\n@@ -1,2 +1,3 @@\n import sqlite3\n+def f(cur, uid):\n+    cur.execute(f\"SELECT * FROM users WHERE id = {uid}\")\n"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"object": "code_scan",
+					"verdict": "block",
+					"coverage": {
+						"cwe_total": 12,
+						"cwe_flagged": ["CWE-89"],
+						"languages_scanned": ["python"]
+					},
+					"findings": [
+						{
+							"cwe": "CWE-89",
+							"file": "db.py",
+							"line": 3,
+							"name": "SQL Injection",
+							"reason": "User-controlled data appears to be interpolated into a SQL query.",
+							"evidence": "cur.execute(f\"SELECT * FROM users WHERE id = {uid}\")",
+							"severity": "high",
+							"dimension": "injection",
+							"confidence": "high"
+						}
+					],
+					"disclaimer": "Automated static security indicators, not a guarantee.",
+					"risk_score": 30,
+					"files_scanned": 1,
+					"findings_by_cwe": { "CWE-89": 1 },
+					"ruleset_version": "2026.07.16",
+					"added_lines_scanned": 2
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:35.306Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/iac/scan",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"format": "kubernetes",
+					"content": "apiVersion: v1\nkind: Pod\nmetadata:\n  name: web\nspec:\n  containers:\n  - name: app\n    image: nginx:latest\n    securityContext:\n      privileged: true\n"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"format": "kubernetes",
+					"object": "config",
+					"verdict": "block",
+					"coverage": {
+						"rules_total": 52,
+						"resources_scanned": 1,
+						"dimensions_flagged": ["container_security"]
+					},
+					"findings": [
+						{
+							"path": "doc[0] Pod/web",
+							"reason": "Container runs in privileged mode (full host access).",
+							"rule_id": "k8s.privileged",
+							"evidence": "pod.containers.0.securityContext.privileged = True",
+							"fix_hint": "Set securityContext.privileged = false.",
+							"provider": "k8s",
+							"resource": "Pod.web",
+							"severity": "critical",
+							"dimension": "container_security"
+						}
+					],
+					"disclaimer": "Automated security indicators, not a guarantee.",
+					"risk_score": 40,
+					"config_hash": "sha256:…",
+					"resource_count": 1,
+					"ruleset_version": "2026.07.16",
+					"counts_by_severity": { "critical": 1 }
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:32.044Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/personality/western",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"date": "1990-05-15",
+					"time": "12:00",
+					"place": "New York, USA",
+					"utc_offset": -4
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"western": {
+						"planets": [
+							{
+								"dms": "24°33'",
+								"body": "Sun",
+								"sign": "Taurus",
+								"house": 10,
+								"retrograde": false
+							}
+						],
+						"ascendant": { "dms": "19°53'", "sign": "Leo" },
+						"angles_available": true
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:28.009Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/model/route",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"task": "coding",
+					"min_context": 200000,
+					"needs_tools": true,
+					"max_output_price": 10
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"task": "coding",
+					"rationale": "Cheapest of 41 models passing [context >= 200,000; tool-use] for task 'coding'.",
+					"attribution": [
+						"LiteLLM (BerriAI) — MIT",
+						"models.dev — MIT",
+						"Aider — Apache-2.0"
+					],
+					"recommended": {
+						"id": "gpt-4.1-mini",
+						"caps": ["tools", "vision"],
+						"blended": 1.3,
+						"context": 1047576,
+						"price_in": 0.4,
+						"provider": "openai",
+						"benchmark": {
+							"source": "aider_polyglot",
+							"pass_rate": 32.4
+						},
+						"citations": [
+							{
+								"source": "litellm",
+								"license": "MIT",
+								"source_url": "https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json"
+							}
+						],
+						"price_out": 1.6
+					},
+					"sources_used": [
+						"litellm",
+						"modelsdev",
+						"aider_polyglot",
+						"aider_edit"
+					],
+					"candidate_count": 41
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:24.973Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/rwa/product",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "slug": "blackrock-buidl" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"tvl": { "total": 3415141436 },
+					"yield": { "avg_apy": 4.5, "available": true },
+					"identity": {
+						"name": "BlackRock BUIDL",
+						"slug": "blackrock-buidl",
+						"issuer": "BlackRock",
+						"symbol": "BUIDL"
+					},
+					"citations": ["Source: DefiLlama (open data)"],
+					"growth_trend": {
+						"windows": { "30d": { "pct_change": 4.2 } }
+					},
+					"classification": {
+						"backing_type": "us-treasuries",
+						"sub_category": "tokenized-treasury"
+					},
+					"onchain_verification": {
+						"available": true,
+						"onchain_total_supply": 191594864.6
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:19.036Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/secret/diff",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"diff": "--- a/config.py\n+++ b/config.py\n@@ -1,2 +1,3 @@\n DEBUG = True\n+TOKEN = 'ghp_012345678901234567890123456789abcdef'\n"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"object": "secret_diff",
+					"summary": {
+						"verdict": "block",
+						"has_secrets": true,
+						"total_findings": 1,
+						"worst_severity": "high",
+						"counts_by_provider": { "GitHub": 1 },
+						"counts_by_severity": { "high": 1 }
+					},
+					"verdict": "block",
+					"findings": [
+						{
+							"file": "config.py",
+							"line": 3,
+							"reason": "GitHub personal access token",
+							"rule_id": "github-pat",
+							"category": "vcs",
+							"evidence": "TOKEN = 'ghp_…cdef'",
+							"provider": "GitHub",
+							"severity": "high"
+						}
+					],
+					"disclaimer": "Automated secret indicators, not a guarantee.",
+					"worst_severity": "high",
+					"added_lines_scanned": 1
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:15.971Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/secret/scan",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"content": "AWS_KEY = 'AKIA1234567890ABCDEF'\nDEBUG = True\n",
+					"filename": "config.py"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"object": "secret_scan",
+					"summary": {
+						"verdict": "block",
+						"has_secrets": true,
+						"total_findings": 1,
+						"worst_severity": "high",
+						"counts_by_provider": { "AWS": 1 },
+						"counts_by_severity": { "high": 1 }
+					},
+					"verdict": "block",
+					"findings": [
+						{
+							"file": "config.py",
+							"line": 1,
+							"reason": "AWS access key id",
+							"rule_id": "aws-access-key-id",
+							"category": "cloud",
+							"evidence": "AWS_KEY = 'AKIA…CDEF'",
+							"provider": "AWS",
+							"severity": "high"
+						}
+					],
+					"disclaimer": "Automated secret indicators, not a guarantee.",
+					"files_scanned": 1,
+					"worst_severity": "high"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:11.883Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/model/compare",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"models": "gpt-4o, claude-sonnet-4-5, gemini-2.5-flash"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"picks": {
+						"cheapest": "gpt-4o",
+						"best_benchmark": "claude-sonnet-4-5",
+						"largest_context": "claude-sonnet-4-5"
+					},
+					"models": [
+						{
+							"id": "gpt-4o",
+							"caps": ["tools", "vision"],
+							"query": "gpt-4o",
+							"context": 128000,
+							"price_in": 2.5,
+							"provider": "openai",
+							"benchmark": {
+								"source": "aider_polyglot",
+								"pass_rate": 23.1
+							},
+							"price_out": 10
+						},
+						{
+							"id": "claude-sonnet-4-5",
+							"caps": ["tools", "vision", "reasoning"],
+							"query": "claude-sonnet-4-5",
+							"context": 1000000,
+							"price_in": 3,
+							"provider": "anthropic",
+							"benchmark": {
+								"source": "aider_polyglot",
+								"pass_rate": 77.3
+							},
+							"price_out": 15
+						}
+					],
+					"not_found": [],
+					"attribution": [
+						"LiteLLM (BerriAI) — MIT",
+						"models.dev — MIT",
+						"Aider — Apache-2.0"
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:08.818Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/rwa/category",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "category": "tokenized-treasury" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"category": "tokenized-treasury",
+					"total_tvl": 12000000000,
+					"attribution": ["Source: DefiLlama (open data)"],
+					"top_products": [
+						{
+							"tvl": 3415141436,
+							"slug": "blackrock-buidl",
+							"issuer": "BlackRock",
+							"tvl_share": 0.28
+						}
+					],
+					"product_count": 20,
+					"issuer_concentration": {
+						"top_issuer": "BlackRock",
+						"distinct_issuers": 12
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "8000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:04.907Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/code/inspect",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"code": "import hashlib\nh = hashlib.md5(data).hexdigest()\n",
+					"language": "python"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"object": "code_inspect",
+					"verdict": "caution",
+					"coverage": {
+						"cwe_total": 12,
+						"cwe_flagged": ["CWE-327"],
+						"languages_scanned": ["python"]
+					},
+					"findings": [
+						{
+							"cwe": "CWE-327",
+							"line": 2,
+							"name": "Weak Cryptography",
+							"reason": "A broken/weak cryptographic primitive is used (MD5).",
+							"evidence": "h = hashlib.md5(data).hexdigest()",
+							"severity": "medium",
+							"dimension": "weak_crypto",
+							"confidence": "high"
+						}
+					],
+					"language": "python",
+					"disclaimer": "Automated static security indicators, not a guarantee.",
+					"risk_score": 14,
+					"files_scanned": 1,
+					"findings_by_cwe": { "CWE-327": 1 },
+					"ruleset_version": "2026.07.16"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "8000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:57:01.616Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/model/lookup",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "name": "sonnet" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"id": "claude-sonnet-4-5",
+					"caps": ["tools", "vision", "reasoning", "prompt_caching"],
+					"name": "Claude Sonnet 4.5",
+					"found": true,
+					"query": "sonnet",
+					"prices": {
+						"input": { "litellm": 3, "modelsdev": 3 },
+						"output": { "litellm": 15, "modelsdev": 15 }
+					},
+					"context": 1000000,
+					"price_in": 3,
+					"provider": "anthropic",
+					"benchmark": {
+						"source": "aider_polyglot",
+						"pass_rate": 77.3
+					},
+					"citations": [
+						{
+							"source": "litellm",
+							"license": "MIT",
+							"source_url": "https://..."
+						},
+						{
+							"source": "modelsdev",
+							"license": "MIT",
+							"source_url": "https://..."
+						}
+					],
+					"price_out": 15,
+					"max_output": 128000,
+					"release_date": "2025-09-29",
+					"knowledge_cutoff": "2025-07-31"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "8000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:56:30.997Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/rwa/yield",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "slug": "ondo-yield-assets" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"name": "Ondo Yield Assets",
+					"slug": "ondo-yield-assets",
+					"yield": {
+						"pools": [
+							{
+								"apy": 4.35,
+								"chain": "Ethereum",
+								"symbol": "USDY"
+							}
+						],
+						"avg_apy": 3.53,
+						"available": true,
+						"pool_count": 11
+					},
+					"attribution": ["Source: DefiLlama Yields (open data)"],
+					"sub_category": "tokenized-treasury"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "6000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:56:25.779Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/iac/inspect",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"kind": "terraform-plan",
+					"resource": "{\"planned_values\":{\"root_module\":{\"resources\":[{\"type\":\"aws_s3_bucket\",\"name\":\"b\",\"values\":{\"acl\":\"public-read\"}}]}}}"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"format": "terraform-plan",
+					"object": "resource",
+					"verdict": "caution",
+					"coverage": {
+						"rules_total": 52,
+						"resources_scanned": 1,
+						"dimensions_flagged": ["data_exposure"]
+					},
+					"findings": [
+						{
+							"path": "aws_s3_bucket.b",
+							"reason": "S3 bucket ACL grants public access (public-read / public-read-write).",
+							"rule_id": "aws.s3.public_acl",
+							"evidence": "acl = public-read",
+							"fix_hint": "Set acl to private and manage access via bucket policy / IAM.",
+							"provider": "aws",
+							"resource": "aws_s3_bucket.b",
+							"severity": "high",
+							"dimension": "data_exposure"
+						}
+					],
+					"disclaimer": "Automated security indicators, not a guarantee.",
+					"risk_score": 25,
+					"resource_count": 1,
+					"ruleset_version": "2026.07.16",
+					"counts_by_severity": { "high": 1 }
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "5000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:56:21.644Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/rwa/list",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "limit": 5, "category": "tokenized-treasury" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 1,
+					"products": [
+						{
+							"tvl": 3415141436,
+							"name": "BlackRock BUIDL",
+							"slug": "blackrock-buidl",
+							"chains": ["Ethereum"],
+							"issuer": "BlackRock",
+							"symbol": "BUIDL",
+							"backing_type": "us-treasuries",
+							"sub_category": "tokenized-treasury"
+						}
+					],
+					"attribution": ["Source: DefiLlama (open data)"],
+					"total_matched": 1
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "AytHnvc6bZx1ALTy7b5Px7hcavoSYszG9aeKvDcZ8R1u",
+					"amount": "3000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:56:17.194Z",
+			"metadata": {},
+			"resource": "https://payai.agentstools.dev/search/news",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"query": "ethereum etf",
+					"timelimit": "w",
+					"max_results": 5
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 5,
+					"query": "...",
+					"results": [
+						{
+							"url": "https://...",
+							"date": "2026-07-16T...",
+							"image": "https://...",
+							"title": "...",
+							"source": "CryptoSlate",
+							"snippet": "..."
+						}
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x340713f49C3b6dd73E4557722d208AE9b89fE49b",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://448c.org/x402/check_address",
+					"description": "Screen a crypto address before paying it: OFAC sanctions + community scam/darklists + on-chain contract/EOA. Returns verdict (safe/caution/avoid), 0-100 score, reasons, sources.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "20000",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:55:39.597Z",
+			"metadata": {},
+			"resource": "https://448c.org/x402/check_address",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "2CkpGoj5cGYdmxSBZYC21AJia9hGjj5bKzCTkyrPzL4H",
+					"amount": "100000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T16:37:57.310Z",
+			"metadata": {},
+			"resource": "https://relayzero.ai/v1/intel/scan/batch",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "mints": ["solana-token-mint-address"] },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"batch": true,
+					"failed": 0,
+					"results": [
+						{
+							"ok": true,
+							"mint": "…",
+							"result": { "score": 12, "riskLevel": "LOW" }
+						}
+					],
+					"scanned": 2,
+					"requested": 2
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x072F3a2bD93bB75b1Eb84a9E45D17a4F90a6D801",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://md.fastdb.in/pulse/tvl",
+					"description": "Current DeFi protocol TVL in USD by DefiLlama slug.",
+					"outputSchema": {
+						"input": {
+							"body": { "protocols": ["uniswap", "aave"] },
+							"type": "http",
+							"method": "POST",
+							"bodyType": "json",
+							"discoverable": true
+						},
+						"output": {
+							"type": "json",
+							"example": {
+								"at": "2026-07-17T15:00:00.000Z",
+								"tvl": {
+									"aave": { "usd": 24500000000 },
+									"uniswap": { "usd": 3067634352.49 }
+								},
+								"source": "defillama"
+							}
+						}
+					},
+					"maxAmountRequired": "1000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-17T15:05:50.864Z",
+			"metadata": {},
+			"resource": "https://md.fastdb.in/pulse/tvl",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "protocols": ["uniswap", "aave"] },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "json",
+					"example": {
+						"at": "2026-07-17T15:00:00.000Z",
+						"tvl": {
+							"aave": { "usd": 24500000000 },
+							"uniswap": { "usd": 3067634352.49 }
+						},
+						"source": "defillama"
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x072F3a2bD93bB75b1Eb84a9E45D17a4F90a6D801",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://md.fastdb.in/pulse/price",
+					"description": "Real-time USD prices for any crypto asset — majors by symbol, any CoinGecko id, any token by chain:address. Aggregated, with confidence score.",
+					"outputSchema": {
+						"input": {
+							"body": {
+								"coins": [
+									"ETH",
+									"BTC",
+									"base:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+								]
+							},
+							"type": "http",
+							"method": "POST",
+							"bodyType": "json",
+							"discoverable": true
+						},
+						"output": {
+							"type": "json",
+							"example": {
+								"at": "2026-07-17T15:00:00.000Z",
+								"prices": {
+									"BTC": {
+										"key": "coingecko:bitcoin",
+										"usd": 63164.1,
+										"symbol": "BTC",
+										"confidence": 0.99
+									},
+									"ETH": {
+										"key": "coingecko:ethereum",
+										"usd": 1818.32,
+										"symbol": "ETH",
+										"confidence": 0.99
+									}
+								},
+								"source": "defillama"
+							}
+						}
+					},
+					"maxAmountRequired": "1000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-17T15:05:47.621Z",
+			"metadata": {},
+			"resource": "https://md.fastdb.in/pulse/price",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"coins": [
+						"ETH",
+						"BTC",
+						"base:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+					]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "json",
+					"example": {
+						"at": "2026-07-17T15:00:00.000Z",
+						"prices": {
+							"BTC": {
+								"key": "coingecko:bitcoin",
+								"usd": 63164.1,
+								"symbol": "BTC",
+								"confidence": 0.99
+							},
+							"ETH": {
+								"key": "coingecko:ethereum",
+								"usd": 1818.32,
+								"symbol": "ETH",
+								"confidence": 0.99
+							}
+						},
+						"source": "defillama"
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x072F3a2bD93bB75b1Eb84a9E45D17a4F90a6D801",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://md.fastdb.in/pulse/gas",
+					"description": "Live gas on Ethereum, Base, Arbitrum, Optimism, Polygon — base fee, priority fee tiers, and USD transfer cost, straight from chain RPC.",
+					"outputSchema": {
+						"input": {
+							"body": { "chains": ["base", "ethereum"] },
+							"type": "http",
+							"method": "POST",
+							"bodyType": "json",
+							"discoverable": true
+						},
+						"output": {
+							"type": "json",
+							"example": {
+								"at": "2026-07-17T15:00:00.000Z",
+								"gas": {
+									"base": {
+										"chain": "base",
+										"nativeUsd": 1818.32,
+										"baseFeeGwei": 0.005,
+										"blockNumber": 48755195,
+										"priorityFee": {
+											"fastGwei": 0.019,
+											"slowGwei": 0.0001,
+											"standardGwei": 0.0011
+										},
+										"gasPriceGwei": 0.006,
+										"nativeSymbol": "ETH",
+										"transferCostUsd": 0.0002291
+									}
+								},
+								"chains": ["base"]
+							}
+						}
+					},
+					"maxAmountRequired": "1000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-17T15:05:39.178Z",
+			"metadata": {},
+			"resource": "https://md.fastdb.in/pulse/gas",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "chains": ["base", "ethereum"] },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "json",
+					"example": {
+						"at": "2026-07-17T15:00:00.000Z",
+						"gas": {
+							"base": {
+								"chain": "base",
+								"nativeUsd": 1818.32,
+								"baseFeeGwei": 0.005,
+								"blockNumber": 48755195,
+								"priorityFee": {
+									"fastGwei": 0.019,
+									"slowGwei": 0.0001,
+									"standardGwei": 0.0011
+								},
+								"gasPriceGwei": 0.006,
+								"nativeSymbol": "ETH",
+								"transferCostUsd": 0.0002291
+							}
+						},
+						"chains": ["base"]
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "2CkpGoj5cGYdmxSBZYC21AJia9hGjj5bKzCTkyrPzL4H",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T14:05:26.582Z",
+			"metadata": {},
+			"resource": "http://relayzero.ai/v1/intel/scan/:var1",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": {
+					"var1": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+				},
+				"queryParams": { "address": "solana-token-mint-address" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"scan": { "type": "drainbrain_scan" },
+					"source": "DrainBrain ML Security Oracle"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x072F3a2bD93bB75b1Eb84a9E45D17a4F90a6D801",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://md.fastdb.in/extract",
+					"description": "Web page to structured JSON (title, byline, excerpt, links, images, meta)",
+					"outputSchema": {
+						"input": {
+							"body": {
+								"url": "https://example.com/article",
+								"mode": "article | full"
+							},
+							"type": "http",
+							"method": "POST",
+							"bodyType": "json",
+							"discoverable": true
+						},
+						"output": {
+							"type": "json",
+							"example": {
+								"links": [
+									{
+										"href": "https://example.com/abs",
+										"text": "link text"
+									}
+								],
+								"title": "Title",
+								"words": 2037,
+								"siteName": "Example",
+								"publishedTime": "2026-01-01T00:00:00Z"
+							}
+						}
+					},
+					"maxAmountRequired": "5000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-17T13:31:32.345Z",
+			"metadata": {},
+			"resource": "https://md.fastdb.in/extract",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"url": "https://example.com/article",
+					"mode": "article | full"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "json",
+					"example": {
+						"links": [
+							{
+								"href": "https://example.com/abs",
+								"text": "link text"
+							}
+						],
+						"title": "Title",
+						"words": 2037,
+						"siteName": "Example",
+						"publishedTime": "2026-01-01T00:00:00Z"
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x072F3a2bD93bB75b1Eb84a9E45D17a4F90a6D801",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://md.fastdb.in/md",
+					"description": "HTML to clean Markdown conversion",
+					"outputSchema": {
+						"input": {
+							"body": {
+								"url": "https://example.com/article",
+								"mode": "article | full"
+							},
+							"type": "http",
+							"method": "POST",
+							"bodyType": "json",
+							"discoverable": true
+						},
+						"output": {
+							"type": "json",
+							"example": {
+								"mode": "article",
+								"title": "Title",
+								"words": 7139,
+								"byline": "Author name or null",
+								"markdown": "# Title\n\nBody..."
+							}
+						}
+					},
+					"maxAmountRequired": "5000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-17T13:24:00.114Z",
+			"metadata": {},
+			"resource": "https://md.fastdb.in/md",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"url": "https://example.com/article",
+					"mode": "article | full"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "json",
+					"example": {
+						"mode": "article",
+						"title": "Title",
+						"words": 7139,
+						"byline": "Author name or null",
+						"markdown": "# Title\n\nBody..."
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x072F3a2bD93bB75b1Eb84a9E45D17a4F90a6D801",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://mdapi.46-224-113-94.sslip.io/md",
+					"description": "HTML to clean Markdown conversion",
+					"outputSchema": {
+						"input": {
+							"body": {
+								"url": "https://example.com/article",
+								"mode": "article | full"
+							},
+							"type": "http",
+							"method": "POST",
+							"bodyType": "json",
+							"discoverable": true
+						},
+						"output": {
+							"type": "json",
+							"example": {
+								"mode": "article",
+								"title": "Title",
+								"words": 7139,
+								"byline": "Author name or null",
+								"markdown": "# Title\n\nBody..."
+							}
+						}
+					},
+					"maxAmountRequired": "5000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-17T13:20:11.039Z",
+			"metadata": {},
+			"resource": "https://mdapi.46-224-113-94.sslip.io/md",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"url": "https://example.com/article",
+					"mode": "article | full"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "json",
+					"example": {
+						"mode": "article",
+						"title": "Title",
+						"words": 7139,
+						"byline": "Author name or null",
+						"markdown": "# Title\n\nBody..."
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x796d1bbc7f48135e8e273746637085b01e29999b",
+					"amount": "250000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T13:06:45.816Z",
+			"metadata": {},
+			"resource": "https://3ak4wnwmvtcimaemr2xqt5wkc4.srv.us/v1/funding/match",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"limit": 5,
+					"profile": "US nonprofit developing workforce training for rural small businesses",
+					"keywords": ["economic development", "technology"],
+					"eligibility": "nonprofit"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"matches": [
+						{
+							"title": "Example funding opportunity",
+							"fitScore": 82,
+							"deadlineDays": 31,
+							"awardCeilingUsd": 100000
+						}
+					],
+					"product": "opportunity-signal/funding-match",
+					"evaluatedCount": 15,
+					"upstreamHitCount": 42
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9VaDVp1Wb78G4Wm6VuTiMrpESjrUymXefQTHcJGRSTEA",
+					"amount": "135198",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 1200
+				}
+			],
+			"lastUpdated": "2026-07-17T12:47:41.085Z",
+			"metadata": {},
+			"resource": "https://api.xona-agent.com/llm/kimi-k3",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"prompt": "",
+					"messages": [],
+					"max_tokens": 0,
+					"temperature": 0,
+					"system_prompt": ""
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"text": "",
+					"model": "deepseek-v4-pro",
+					"usage": {},
+					"metadata": { "provider": "nim" }
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x7e6bda810812a4975a72bd9fabafdb2a2b16b664",
+					"amount": "250000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T10:45:46.075Z",
+			"metadata": {},
+			"resource": "https://mcp.runbot.io/v1/backtest",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"strategy_id": "<uuid from build-strategy>",
+					"window_days": 90
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9uZrHXS1T7kV1b7MKSS9ognUMTHCTSjP7mmur3yg3dN7",
+					"amount": "250000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T10:38:08.205Z",
+			"metadata": {},
+			"resource": "https://earlythunder.com/api/x402/v1/thesis",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "slug": "ethereum" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"name": "Ethereum",
+					"slug": "ethereum",
+					"tier": 1,
+					"thesis": "Full cited deep-value thesis text.",
+					"composite_score": 82
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9uZrHXS1T7kV1b7MKSS9ognUMTHCTSjP7mmur3yg3dN7",
+					"amount": "50000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T10:38:04.983Z",
+			"metadata": {},
+			"resource": "https://earlythunder.com/api/x402/v1/scorecard",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 251,
+					"tokens": [
+						{
+							"price": 3500,
+							"score": 82,
+							"symbol": "ETH",
+							"verdict": "ACCUMULATE",
+							"market_cap": 420000000000
+						}
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9uZrHXS1T7kV1b7MKSS9ognUMTHCTSjP7mmur3yg3dN7",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T10:38:02.465Z",
+			"metadata": {},
+			"resource": "https://earlythunder.com/api/x402/v1/earnings",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 15,
+					"items": [
+						{
+							"risk": "LOW",
+							"ticker": "AAVE",
+							"protocol": "Aave",
+							"yield_pct": 4.5
+						}
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9uZrHXS1T7kV1b7MKSS9ognUMTHCTSjP7mmur3yg3dN7",
+					"amount": "30000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T10:37:59.614Z",
+			"metadata": {},
+			"resource": "https://earlythunder.com/api/x402/v1/catalysts",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 13,
+					"items": [
+						{
+							"event": "MiCA milestone",
+							"source": "ESMA",
+							"urgency": "HIGH",
+							"end_date": "2026-08-01",
+							"protocol": "EU Regulation"
+						}
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9uZrHXS1T7kV1b7MKSS9ognUMTHCTSjP7mmur3yg3dN7",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T10:37:32.173Z",
+			"metadata": {},
+			"resource": "https://earlythunder.com/api/x402/v1/scores",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": { "type": "http", "method": "GET" },
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 259,
+					"items": [
+						{
+							"name": "Bitcoin",
+							"slug": "bitcoin",
+							"tier": 1,
+							"ticker": "$BTC",
+							"one_liner": "Digital store of value.",
+							"composite_score": 94
+						}
+					],
+					"updated_at": "2026-06-11T11:03:08Z"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "J7ZvJEspvwP1oRxQZ7mYmNmT22NTm3GWq3t7HEbvPZYx",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T06:00:59.955Z",
+			"metadata": {},
+			"resource": "https://api.nansen.ai/api/v1/profiler/address/current-balance",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"chain": "ethereum",
+					"address": "0x28c6c06298d514db089934071355e5743bf21d60",
+					"pagination": { "page": 1, "per_page": 10 },
+					"hide_spam_token": true
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"version": "2",
+						"decimals": 6
+					},
+					"payTo": "0x668aDd9213985E7Fd613Aec87767C892f4b9dF1c",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T04:37:46.171Z",
+			"metadata": {},
+			"resource": "https://cannastack.0x402.sh/api/deal-scout",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "category": "flower", "location": "Las Vegas, NV" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"results": [
+						{
+							"rating": 4.7,
+							"address": "2548 W Desert Inn Rd, Las Vegas, NV",
+							"dispensary": "Planet 13",
+							"deal_products": [
+								{
+									"name": "Sour Diesel",
+									"brand": "House",
+									"price": 18
+								}
+							]
+						}
+					],
+					"summary": "18 of 32 dispensaries near Las Vegas, NV have active deals. Best value: Sour Diesel at $18 (Planet 13).",
+					"category": "flower",
+					"response_ms": 483,
+					"deals_dispensaries": 18,
+					"total_dispensaries": 32
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": {
+						"name": "USD Coin",
+						"version": "2",
+						"decimals": 6
+					},
+					"payTo": "0x668aDd9213985E7Fd613Aec87767C892f4b9dF1c",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-17T04:37:27.776Z",
+			"metadata": {},
+			"resource": "https://cannastack.0x402.sh/api/strain-finder",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"radius": 15,
+					"strain": "Blue Dream",
+					"location": "Denver, CO"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"ok": true,
+					"source": "database",
+					"strain": "Blue Dream",
+					"results": [
+						{
+							"url": "https://...",
+							"rating": 4.6,
+							"address": "1146 Broadway, Denver, CO",
+							"matches": [
+								{
+									"name": "Blue Dream",
+									"brand": "House",
+									"price": 28,
+									"category": "flower",
+									"genetics": "hybrid",
+									"orderable": true
+								}
+							],
+							"reviews": 1248,
+							"dispensary": "Native Roots"
+						}
+					],
+					"summary": "Searched 24 dispensaries near Denver, CO for \"Blue Dream\". Found 12 matches at 8 dispensaries. Cheapest: $28 at Native Roots.",
+					"location": {
+						"lat": 39.7392,
+						"lng": -104.9849,
+						"query": "Denver, CO",
+						"resolved": "Denver, Colorado, USA"
+					},
+					"response_ms": 612,
+					"next_actions": [
+						{
+							"url": "https://cannastack.0x402.sh/api/price-history",
+							"body": {
+								"days": 30,
+								"strain": "Blue Dream",
+								"location": "Denver, CO"
+							},
+							"action": "price-history",
+							"method": "POST",
+							"endpoint": "price-history",
+							"price_usdc": 0.02,
+							"description": "Is \"Blue Dream\" trending up or down? 30-day price history."
+						}
+					],
+					"dispensaries_searched": 24
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9VaDVp1Wb78G4Wm6VuTiMrpESjrUymXefQTHcJGRSTEA",
+					"amount": "270386",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 1200
+				}
+			],
+			"lastUpdated": "2026-07-17T03:36:40.259Z",
+			"metadata": {},
+			"resource": "https://api.xona-agent.com/llm/gpt-5.6-sol",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"prompt": "",
+					"messages": [],
+					"max_tokens": 0,
+					"temperature": 0,
+					"system_prompt": ""
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"text": "",
+					"model": "deepseek-v4-pro",
+					"usage": {},
+					"metadata": { "provider": "nim" }
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9VaDVp1Wb78G4Wm6VuTiMrpESjrUymXefQTHcJGRSTEA",
+					"amount": "51210",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 1200
+				}
+			],
+			"lastUpdated": "2026-07-17T03:31:33.786Z",
+			"metadata": {},
+			"resource": "https://api.xona-agent.com/llm/claude-fable-5",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"tier": "small",
+					"image": "",
+					"prompt": "",
+					"max_tokens": 0,
+					"system_prompt": ""
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"text": "",
+					"tier": "small",
+					"model": "claude-fable-5",
+					"usage": { "input_tokens": 0, "output_tokens": 0 },
+					"metadata": {}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+					"extra": {
+						"feePayer": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4"
+					},
+					"payTo": "9VaDVp1Wb78G4Wm6VuTiMrpESjrUymXefQTHcJGRSTEA",
+					"amount": "14338",
+					"scheme": "exact",
+					"network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+					"maxTimeoutSeconds": 1200
+				}
+			],
+			"lastUpdated": "2026-07-17T03:01:14.110Z",
+			"metadata": {},
+			"resource": "https://api.xona-agent.com/llm/gpt-5.2",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"tier": "small",
+					"image": "",
+					"prompt": "",
+					"max_tokens": 0,
+					"reasoning_effort": "medium"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"text": "",
+					"tier": "small",
+					"model": "gpt-5.2",
+					"usage": { "input_tokens": 0, "output_tokens": 0 },
+					"metadata": {}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x84193a9E60c72Bd0c4f4B3FDba4faE6AE811fCb1",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T22:10:27.794Z",
+			"metadata": {},
+			"resource": "http://history.parklandarchives.com/api/almanac-records",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"limit": 5,
+					"search": "exports",
+					"category": "trade"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"limit": 5,
+					"total": 1,
+					"offset": 0,
+					"records": [
+						{
+							"id": 612,
+							"unit": "USD",
+							"year": 1899,
+							"value": 1204123134,
+							"category": "trade",
+							"createdAt": "2026-07-15T18:20:04.101Z",
+							"uncertain": false,
+							"flagReason": null,
+							"recordName": "United States exports of domestic merchandise, 1899",
+							"sourcePage": 214,
+							"sourceIdentifier": "worldalmanacency1900newy"
+						}
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x84193a9E60c72Bd0c4f4B3FDba4faE6AE811fCb1",
+					"amount": "40000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T22:09:05.065Z",
+			"metadata": {},
+			"resource": "http://history.parklandarchives.com/api/catalog-prices/modern-value",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "item_number": "3T400" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"found": true,
+					"record": {
+						"id": 44,
+						"category": "books",
+						"priceUsd": 0.6,
+						"createdAt": "2026-07-14T21:51:18.595Z",
+						"materials": "cloth",
+						"uncertain": false,
+						"flagReason": null,
+						"itemNumber": "3T400",
+						"sourcePage": 130,
+						"catalogYear": 1900,
+						"productName": "Practical Blacksmithing, Volume I",
+						"catalogSeason": null,
+						"sourceIdentifier": "catalogueno11200sear"
+					},
+					"source": "Federal Reserve Bank of Minneapolis, Consumer Price Index 1800- (official BLS CPI from 1913, academic estimates before)",
+					"modernYear": 2025,
+					"multiplier": 38.7,
+					"originalYear": 1900,
+					"modernValueUsd": 23.22,
+					"originalPriceUsd": 0.6
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x84193a9E60c72Bd0c4f4B3FDba4faE6AE811fCb1",
+					"amount": "40000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T22:08:19.331Z",
+			"metadata": {},
+			"resource": "http://history.parklandarchives.com/api/catalog-prices/summary",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": { "category": "books" }
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"byCategory": [
+						{
+							"count": 982,
+							"category": "books",
+							"avgPriceUsd": 0.75,
+							"maxPriceUsd": 13.98,
+							"minPriceUsd": 0.03
+						}
+					],
+					"avgPriceUsd": 0.75,
+					"catalogYear": 1900,
+					"maxPriceUsd": 13.98,
+					"minPriceUsd": 0.03,
+					"totalRecords": 982,
+					"pricedRecords": 978
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x84193a9E60c72Bd0c4f4B3FDba4faE6AE811fCb1",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T22:07:38.921Z",
+			"metadata": {},
+			"resource": "http://history.parklandarchives.com/api/catalog-prices",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"limit": 5,
+					"search": "clock",
+					"category": "housewares"
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"limit": 5,
+					"total": 1,
+					"offset": 0,
+					"records": [
+						{
+							"id": 44,
+							"category": "books",
+							"priceUsd": 0.6,
+							"createdAt": "2026-07-14T21:51:18.595Z",
+							"materials": "cloth",
+							"uncertain": false,
+							"flagReason": null,
+							"itemNumber": "3T400",
+							"sourcePage": 130,
+							"catalogYear": 1900,
+							"productName": "Practical Blacksmithing, Volume I",
+							"catalogSeason": null,
+							"sourceIdentifier": "catalogueno11200sear"
+						}
+					]
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb40867B72334463eE9bF5D2bD933eab5FB4ab8e0",
+					"amount": "15000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T21:45:18.436Z",
+			"metadata": {},
+			"resource": "https://cabrini.ai/v1/bars",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"date": "2024-01-02",
+					"ticker": "AAPL",
+					"interval": 15
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"bars": 26,
+					"data": [
+						{
+							"low": 185.3,
+							"high": 186.1,
+							"open": 185.42,
+							"close": 185.9,
+							"volume": 3200000,
+							"timestamp": 1704204600000000000,
+							"transactions": 4200
+						}
+					],
+					"date": "2024-01-02",
+					"ticker": "AAPL",
+					"interval": 15
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb40867B72334463eE9bF5D2bD933eab5FB4ab8e0",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T21:45:16.458Z",
+			"metadata": {},
+			"resource": "https://cabrini.ai/v1/filings",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"types": ["10-K"],
+					"ticker": "AAPL",
+					"sections": ["risk_factors"]
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"count": 42,
+					"ticker": "AAPL",
+					"filings": [
+						{
+							"date": "2025-11-01",
+							"form": "10-K",
+							"doc_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000123/aapl-20250927.htm",
+							"accession": "0000320193-25-000123",
+							"report_date": "2025-09-27"
+						}
+					],
+					"sections": {
+						"0000320193-25-000123": {
+							"date": "2025-11-01",
+							"form": "10-K",
+							"risk_factors": "Item 1A. Risk Factors — The Company's business..."
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb40867B72334463eE9bF5D2bD933eab5FB4ab8e0",
+					"amount": "20000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T21:44:46.657Z",
+			"metadata": {},
+			"resource": "https://cabrini.ai/v1/fundamentals",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "ticker": "AAPL" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"data": [
+						{
+							"form": "10-Q",
+							"revenue": 124300000000,
+							"net_income": 36330000000,
+							"period_end": "2024-12-28",
+							"eps_diluted": 2.4
+						}
+					],
+					"ticker": "AAPL",
+					"quarters": 74
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xb40867B72334463eE9bF5D2bD933eab5FB4ab8e0",
+					"amount": "1000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T21:44:44.042Z",
+			"metadata": {},
+			"resource": "https://cabrini.ai/v1/daily",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"end": "2024-12-31",
+					"start": "2024-01-02",
+					"ticker": "AAPL"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"end": "2024-12-31",
+					"data": [
+						{
+							"low": 184.3,
+							"date": "2024-01-02",
+							"high": 186.1,
+							"open": 185.42,
+							"close": 185.6,
+							"volume": 47000000,
+							"transactions": 512000
+						}
+					],
+					"start": "2024-01-02",
+					"ticker": "AAPL",
+					"trading_days": 251
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xCa1271E777C209e171826A681855351f4989cd0c",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://api.itsgloria.ai/news-ticker-summary",
+					"description": "Get a 24-hour news summary for a specific token/ticker, combining internal news data with web search results. Returns decision-grade bullet points for fund managers and trading agents.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "GET",
+							"queryParams": {
+								"ticker": {
+									"type": "string",
+									"required": true,
+									"description": "Token symbol or name (e.g. ZRO, LayerZero, SOL, Solana)"
+								}
+							},
+							"discoverable": true
+						},
+						"output": {
+							"type": "object",
+							"properties": {
+								"summary": {
+									"type": "string",
+									"description": "Bullet-point summary of the most important developments for the ticker over the last 24 hours"
+								}
+							}
+						}
+					},
+					"maxAmountRequired": "31000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-16T13:37:23.845Z",
+			"metadata": {},
+			"resource": "https://api.itsgloria.ai/news-ticker-summary",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {
+					"ticker": {
+						"type": "string",
+						"required": true,
+						"description": "Token symbol or name (e.g. ZRO, LayerZero, SOL, Solana)"
+					}
+				}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"type": "object",
+					"properties": {
+						"summary": {
+							"type": "string",
+							"description": "Bullet-point summary of the most important developments for the ticker over the last 24 hours"
+						}
+					}
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x7e6bda810812a4975a72bd9fabafdb2a2b16b664",
+					"amount": "1500000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T06:30:24.196Z",
+			"metadata": {},
+			"resource": "https://mcp.runbot.io/v1/build-strategy",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {
+					"description": "EMA 20/50 crossover on BTC with a 2% stop loss, 4h candles"
+				},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x7e6bda810812a4975a72bd9fabafdb2a2b16b664",
+					"amount": "500000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T06:29:17.752Z",
+			"metadata": {},
+			"resource": "https://mcp.runbot.io/v1/optimize/:minutes",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "strategy_id": "<uuid from build-strategy>" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json",
+				"pathParams": { "minutes": "2" }
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x7e6bda810812a4975a72bd9fabafdb2a2b16b664",
+					"amount": "350000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-16T06:28:54.061Z",
+			"metadata": {},
+			"resource": "https://mcp.runbot.io/v1/export",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": { "strategy_id": "<uuid from build-strategy>" },
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xd8bA61a0b0974db0EC8E325C7628470526558E9B",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://x402.onchainexpat.com/api/x402-tools/crypto/prices",
+					"description": "Get multiple cryptocurrency prices",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"discoverable": true
+						},
+						"output": null
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-16T06:02:19.817Z",
+			"metadata": {},
+			"resource": "https://x402.onchainexpat.com/api/x402-tools/crypto/prices",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xd8bA61a0b0974db0EC8E325C7628470526558E9B",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://padelmaps.org/api/x402-tools/crypto/prices",
+					"description": "Get multiple cryptocurrency prices",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"discoverable": true
+						},
+						"output": null
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-16T04:26:27.691Z",
+			"metadata": {},
+			"resource": "https://padelmaps.org/api/x402-tools/crypto/prices",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xd8bA61a0b0974db0EC8E325C7628470526558E9B",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "application/json",
+					"resource": "https://x402.onchainexpat.com/api/x402-proxy/stats",
+					"description": "Get proxy service usage statistics",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"discoverable": true
+						},
+						"output": null
+					},
+					"maxAmountRequired": "10000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-16T03:54:08.310Z",
+			"metadata": {},
+			"resource": "https://x402.onchainexpat.com/api/x402-proxy/stats",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0x6302D9e6DBB22fEC3c350551568Bb39B4b35Ad57",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:8453",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-15T23:55:27.751Z",
+			"metadata": {},
+			"resource": "https://tripadvisor.x402.paysponge.com/api/v1/location/:locationId/photos",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"pathParams": { "locationId": "1212806" },
+				"queryParams": {}
+			},
+			"outputSchema": { "type": "json", "example": {} }
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+					"extra": { "name": "USDC", "version": "2" },
+					"payTo": "0x14c7403a5a9a268EeFe0Eb5d57Fe5ea020097429",
+					"amount": "5000000",
+					"scheme": "exact",
+					"network": "eip155:84532",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-15T22:24:03.329Z",
+			"metadata": {},
+			"resource": "https://sceeto-macdaddy-events.netlify.app/api/v1/datasets/macdaddy-es-events-20250701-20260701-v1/access",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"artifact": {
+						"url": "https://download.example/presigned-artifact",
+						"sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+						"byte_size": 1,
+						"expires_at": "2026-07-22T00:00:00.000Z",
+						"content_type": "application/zip"
+					},
+					"dataset_id": "macdaddy-es-events-20250701-20260701-v1",
+					"manifest_url": "https://sceeto-macdaddy-events.netlify.app/api/v1/datasets/macdaddy-es-events-20250701-20260701-v1/manifest"
+				}
+			}
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xdb53ec33e399D4bE655372f3aF796de123210227",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "",
+					"resource": "http://lab-petri-gateway-916rp7.exe.xyz/svc/static-playtest-scanner",
+					"description": "static-playtest-scanner — Fast, dependency-free static defect scanner for HTML/JS pages. Send {\"html\":\"...\"} or {\"url\":\"...\"} — get back a structured report: score 0-100, verdict, and a list of real defects found (JS syntax errors, dangling onclick refs, duplicate ids, unbalanced tags, missing viewport meta, broken/missing a",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "100000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-15T19:44:09.883Z",
+			"metadata": {},
+			"resource": "http://lab-petri-gateway-916rp7.exe.xyz/svc/static-playtest-scanner",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+					"extra": { "name": "USD Coin", "version": "2" },
+					"payTo": "0xdb53ec33e399D4bE655372f3aF796de123210227",
+					"scheme": "exact",
+					"network": "base",
+					"mimeType": "",
+					"resource": "http://lab-petri-gateway-916rp7.exe.xyz/svc/playtest-service",
+					"description": "playtest-service — Pre-deadline QA: find crashes, errors, broken links in 2–3 min. Auto score + defect report ($0.25). Or bundle with human judgment ($0.40). Made for makers shipping products under time pressure.",
+					"outputSchema": {
+						"input": {
+							"type": "http",
+							"method": "POST",
+							"discoverable": true
+						}
+					},
+					"maxAmountRequired": "250000",
+					"maxTimeoutSeconds": 60
+				}
+			],
+			"lastUpdated": "2026-07-15T19:32:37.977Z",
+			"metadata": {},
+			"resource": "http://lab-petri-gateway-916rp7.exe.xyz/svc/playtest-service",
+			"type": "http",
+			"x402Version": 1,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "POST",
+			"toolName": null,
+			"inputSchema": {
+				"body": {},
+				"type": "http",
+				"method": "POST",
+				"bodyType": "json"
+			},
+			"outputSchema": null
+		},
+		{
+			"accepts": [
+				{
+					"asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+					"extra": { "name": "USDC", "version": "2" },
+					"payTo": "0x14c7403a5a9a268EeFe0Eb5d57Fe5ea020097429",
+					"amount": "10000",
+					"scheme": "exact",
+					"network": "eip155:84532",
+					"maxTimeoutSeconds": 300
+				}
+			],
+			"lastUpdated": "2026-07-15T19:26:36.583Z",
+			"metadata": {},
+			"resource": "https://sceeto-x402-market-api.netlify.app/api/v1/datasets/macdaddy-es-r5-20250720-20260630-v1/access",
+			"type": "http",
+			"x402Version": 2,
+			"description": null,
+			"mimeType": null,
+			"serviceName": null,
+			"tags": null,
+			"iconUrl": null,
+			"method": "GET",
+			"toolName": null,
+			"inputSchema": {
+				"type": "http",
+				"method": "GET",
+				"queryParams": {}
+			},
+			"outputSchema": {
+				"type": "json",
+				"example": {
+					"artifact": {
+						"url": "https://download.example/presigned-artifact",
+						"sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+						"byte_size": 1,
+						"expires_at": "2026-07-22T00:00:00.000Z",
+						"content_type": "application/zip"
+					},
+					"dataset_id": "macdaddy-es-r5-20250720-20260630-v1",
+					"manifest_url": "https://sceeto-x402-market-api.netlify.app/api/v1/datasets/macdaddy-es-r5-20250720-20260630-v1/manifest"
+				}
+			}
+		}
+	],
+	"pagination": { "limit": 100, "offset": 2000, "total": 25751 },
+	"x402Version": 1
+}
