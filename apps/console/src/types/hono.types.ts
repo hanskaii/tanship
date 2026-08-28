@@ -8,6 +8,7 @@ import type {
 	Barrier
 } from "@/durable-objects";
 import type { Scheduler } from "@/durable-objects/scheduler";
+import type { DurableFIFOQueue } from "@/durable-objects/fifo";
 import type { PayerIdentity } from "@/helpers/payer.helper";
 
 export type ConsoleBindings = ValidatedEnv & {
@@ -24,6 +25,7 @@ export type ConsoleBindings = ValidatedEnv & {
 	SCHEDULER: DurableObjectNamespace<Scheduler>;
 	LEADER: DurableObjectNamespace<Leader>;
 	BARRIER: DurableObjectNamespace<Barrier>;
+	DURABLE_QUEUE: DurableObjectNamespace<DurableFIFOQueue>;
 };
 
 export interface HonoEnv {

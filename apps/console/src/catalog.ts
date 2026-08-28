@@ -2674,6 +2674,27 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "durable.queue.fifo",
+		method: "POST",
+		path: "/v1/durable/queue/push",
+		price: "$0.003",
+		description:
+			"Persistent FIFO queue backed by a Durable Object. Messages survive isolate restarts and are delivered oldest-first with a configurable visibility timeout. One call = one push. Use /v1/durable/queue/pop to receive, /ack to confirm, /dead-letter to fail, /peek to inspect, /stats to query depth, /drain to clear. 0 direct x402 competitors — first DO-based persistent queue exposed as a paid primitive",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name — isolated per name (1-64 chars, [a-zA-Z0-9_-])",
+			payload:
+				"Any JSON-serializable value (max 25,000 bytes serialized)",
+			delaySeconds:
+				"Optional delay before the message becomes visible (0-86400, default 0)"
+		},
+		example: {
+			name: "agent-inbox",
+			payload: { task: "send-email", to: "user@example.com" },
+			delaySeconds: 0
+		}
+	},
+	{
 		id: "sec.cve-lookup",
 		method: "POST",
 		path: "/v1/security/cve-lookup",

@@ -26,6 +26,7 @@ import kvQueueHandler from "./handlers/kv.queue.handler";
 import schedulerHandler from "./handlers/scheduler.handler";
 import durableHandler from "./handlers/durable.handler";
 import coordinationHandler from "./handlers/coordination.handler";
+import durableQueueHandler from "./handlers/durable.queue.handler";
 import agentResearchHandler from "./handlers/agent.research.handler";
 import agentInboxHandler from "./handlers/agent.inbox.handler";
 import nlHandler from "./handlers/nl.handler";
@@ -179,6 +180,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/kv/queue", kvQueueHandler)
 	.route("/v1/scheduler", schedulerHandler)
 	.route("/v1/durable", durableHandler)
+	.route("/v1/durable/queue", durableQueueHandler)
 	.route("/v1/coordination", coordinationHandler)
 	.route("/v1/agent", agentResearchHandler)
 	.route("/v1/agent/inbox", agentInboxHandler)
@@ -314,7 +316,14 @@ app.onError((err, c) => {
 
 export type AppType = typeof app;
 
-export { Counter, RateLimiter, Lock, Leader, Barrier } from "./durable-objects";
+export {
+	Counter,
+	RateLimiter,
+	Lock,
+	Leader,
+	Barrier,
+	DurableFIFOQueue
+} from "./durable-objects";
 export { Scheduler } from "./durable-objects/scheduler";
 export { Sandbox };
 

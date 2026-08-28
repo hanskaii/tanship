@@ -536,3 +536,6 @@ export class Barrier extends DurableObject {
 		await this.ctx.storage.deleteAll();
 	}
 }
+
+export { DurableFIFOQueue } from "./fifo";
+export type { DurableFifoQueueEnv } from "./fifo";

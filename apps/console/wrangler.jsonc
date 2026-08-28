@@ -54,6 +54,11 @@
 				"name": "BARRIER",
 				"class_name": "Barrier",
 				"namespace_id": "64addbe37f11e170b6b8abc947764683"
+			},
+			{
+				"name": "DURABLE_QUEUE",
+				"class_name": "DurableFIFOQueue",
+				"namespace_id": "d1a4f00d1234abcd5678ef9012345678"
 			}
 		]
 	},
@@ -70,6 +75,10 @@
 		{
 			"tag": "v3",
 			"new_classes": ["Leader", "Barrier"]
+		},
+		{
+			"tag": "v4",
+			"new_classes": ["DurableFIFOQueue"]
 		}
 	],
 	"vectorize": [
