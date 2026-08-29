@@ -436,7 +436,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.compress",
 		method: "POST",
 		path: "/v1/ai/compress",
-		price: "$0.008",
+		price: "$0.030",
 		description:
 			"Compress long text semantically using edge AI (Llama 3.1 8B) to save downstream LLM prompt tokens",
 		mimeType: "application/json",
@@ -500,7 +500,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.correct",
 		method: "POST",
 		path: "/v1/ai/correct",
-		price: "$0.008",
+		price: "$0.030",
 		description:
 			"Automatically correct grammar, spelling, punctuation, and phrasing via edge AI (Llama 3.1 8B)",
 		mimeType: "application/json",
@@ -515,7 +515,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.code",
 		method: "POST",
 		path: "/v1/ai/code",
-		price: "$0.008",
+		price: "$0.030",
 		description:
 			"Analyze, debug, or refactor code via coding-tailored edge AI (Llama 3.1 8B)",
 		mimeType: "application/json",
@@ -3618,6 +3618,34 @@ export const SERVICES: ServiceDef[] = [
 			data: "Hello, World!",
 			encoding: "hex",
 			formats: ["md5", "sha256", "keccak256"]
+		}
+	},
+	// ── ai.chat.completions (R21 — zero-cost market share, OpenAI SDK compatibility) ──
+	{
+		id: "ai.chat.completions",
+		method: "POST",
+		path: "/v1/chat/completions",
+		price: "$0.010",
+		description:
+			"OpenAI-compatible chat completion endpoint. Accepts the same request shape as OpenAI's /v1/chat/completions API. Maps gpt-4o-mini to Llama 3.1 8B, gpt-4o/gpt-4-turbo to Llama 3.3 70B. Zero-config switch for any OpenAI SDK client: set base_url to https://x402.tanship.dev/v1 and api_key to your x402 key. Competes with xfuel.app at $0.010/request.",
+		mimeType: "application/json",
+		input: {
+			model: "Optional model name (gpt-4o-mini, gpt-4o, gpt-4-turbo, gpt-3.5-turbo, llama-3.1-8b, llama-3.3-70b; defaults to gpt-4o-mini → Llama 3.1 8B)",
+			messages:
+				"Array of { role: system|user|assistant, content: string }",
+			max_tokens: "Optional max output tokens (default 1024, max 4096)",
+			temperature: "Optional sampling temperature 0-2 (default 0.7)",
+			stream: "Not yet supported (returns error if true)"
+		},
+		example: {
+			model: "gpt-4o-mini",
+			messages: [
+				{
+					role: "user",
+					content: "Explain x402 payments in one sentence."
+				}
+			],
+			max_tokens: 50
 		}
 	},
 	// ── sec.agent.reputation (R20 — blue ocean, kortex-service-trust competitor) ──
