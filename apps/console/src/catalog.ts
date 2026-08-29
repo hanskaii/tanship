@@ -3367,6 +3367,56 @@ export const SERVICES: ServiceDef[] = [
 			voice: "alloy",
 			speed: 1.0
 		}
+	},
+	// ── openai.compat (R18 — compete with xfuel $0.01) ───────────────────────
+	{
+		id: "openai.chat.completions",
+		method: "POST",
+		path: "/v1/openai/chat/completions",
+		price: "$0.010",
+		description:
+			"OpenAI-compatible chat completions endpoint. Drop-in replacement for OpenAI SDK — change baseURL to x402.tanship.dev/v1/openai. Uses Workers AI Llama 3.1 8B by default, 70B on gpt-4o/gpt-4-turbo. Competitor to xfuel at same price point.",
+		mimeType: "application/json",
+		input: {
+			model: "Optional model: gpt-4o-mini (default), gpt-4o, gpt-4-turbo, gpt-3.5-turbo",
+			messages:
+				"Array of { role: system|user|assistant, content: string }",
+			max_tokens: "Optional max output tokens (default 1024, max 4096)",
+			temperature: "Optional sampling temperature 0-2 (default 0.7)",
+			stream: "Streaming not yet supported (returns error if true)"
+		},
+		example: {
+			model: "gpt-4o-mini",
+			messages: [
+				{ role: "user", content: "Explain x402 in one sentence." }
+			]
+		}
+	},
+	// ── agent.memory.longterm (R18 — blue ocean, aura-agent-persistence competitor) ──
+	{
+		id: "agent.memory.longterm",
+		method: "POST",
+		path: "/v1/agent/memory/longterm",
+		price: "$0.050",
+		description:
+			"Persistent agent memory backed by Durable Objects + R2. Stores structured memory chunks (up to 1MB) with metadata (namespace, tags, created_at) that survive DO isolate restarts. Combines DO durability with R2 for large-payload persistence. aiora-agent-persistence at $1.00/month proves the market — Tship offers usage-based pricing.",
+		mimeType: "application/json",
+		input: {
+			namespace:
+				"Memory namespace (default 'default', isolated per name 1-64 chars)",
+			key: "Unique memory key (1-256 chars)",
+			value: "Memory value: string, object, or array (max 1MB serialized)",
+			tags: "Optional array of string tags for filtering (max 20)",
+			ttlSeconds:
+				"Optional TTL in seconds (default: no expiry, max 31536000 = 1yr)"
+		},
+		example: {
+			namespace: "user-42",
+			key: "preferences",
+			value: { language: "en", theme: "dark", notifications: true },
+			tags: ["preferences", "user-42"],
+			ttlSeconds: 86400
+		}
 	}
 ];
 

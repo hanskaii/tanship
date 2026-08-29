@@ -33,6 +33,7 @@ import durableBloomHandler from "./handlers/durable.bloom.handler";
 import agentResearchHandler from "./handlers/agent.research.handler";
 import agentInboxHandler from "./handlers/agent.inbox.handler";
 import devtoolsHandler from "./handlers/devtools.handler";
+import agentMemoryHandler from "./handlers/agent.memory.handler";
 import nlHandler from "./handlers/nl.handler";
 import ragHandler from "./handlers/rag.handler";
 import ragAnswerHandler from "./handlers/rag.answer.handler";
@@ -40,6 +41,7 @@ import { handler as ragBatchUpsertHandler } from "./handlers/rag.batch-upsert.ha
 import { aiCachedHandler } from "./handlers/ai.rag.handler";
 import aiBatchHandler from "./handlers/ai.batch.handler";
 import aiTtsHandler from "./handlers/ai.tts.handler";
+import aiOpenaiChatHandler from "./handlers/ai_openai_chat.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
 import { OPENAPI_SPEC } from "./openapi";
@@ -165,6 +167,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/ai", aiHandler)
 	.route("/v1/ai/chat/cached", aiCachedHandler)
 	.route("/v1/ai/batch", aiBatchHandler)
+	.route("/v1/openai", aiOpenaiChatHandler)
 	.route("/v1/ai/tts", aiTtsHandler)
 	.route("/v1/browser", browserHandler)
 	.route("/v1/crypto", cryptoHandler)
@@ -195,6 +198,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/coordination", coordinationHandler)
 	.route("/v1/agent", agentResearchHandler)
 	.route("/v1/agent/inbox", agentInboxHandler)
+	.route("/v1/agent/memory", agentMemoryHandler)
 	.route("/v1/nl", nlHandler)
 	.route("/v1/rag", ragHandler)
 	.route("/v1/rag/batch", ragBatchUpsertHandler)
