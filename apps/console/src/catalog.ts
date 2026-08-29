@@ -27,15 +27,16 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.chat",
 		method: "POST",
 		path: "/v1/ai/chat",
-		price: "$0.008",
+		price: "$0.050",
 		description:
-			"LLM chat completion via edge AI (Llama 3.1 8B by default, 70B available on opt-in)",
+			"LLM chat completion via edge AI (Llama 3.1 8B by default, 70B available on opt-in). RECOMMEND: set max_tokens ≤ 50 to keep response affordable. Default 1024 tokens can incur higher Workers AI cost.",
 		mimeType: "application/json",
 		input: {
 			messages:
 				"Array of { role: system|user|assistant, content: string }",
 			model: "Optional model id from the allowlist",
-			max_tokens: "Optional max output tokens (default 1024)"
+			max_tokens:
+				"Optional max output tokens (default 1024, RECOMMEND ≤ 50)"
 		},
 		example: {
 			messages: [
@@ -800,7 +801,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "modal.sandbox.create",
 		method: "POST",
 		path: "/v1/modal/sandbox/create",
-		price: "$0.01",
+		price: "$0.015",
 		description:
 			"Create a managed Python 3.11 sandbox with bounded CPU, memory, and lifetime limits",
 		mimeType: "application/json",
@@ -822,7 +823,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "modal.sandbox.exec",
 		method: "POST",
 		path: "/v1/modal/sandbox/exec",
-		price: "$0.005",
+		price: "$0.015",
 		description:
 			"Execute a command inside a running sandbox. Returns stdout, stderr, and exit code",
 		mimeType: "application/json",
@@ -839,7 +840,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "modal.sandbox.status",
 		method: "POST",
 		path: "/v1/modal/sandbox/status",
-		price: "$0.002",
+		price: "$0.010",
 		description: "Check the status of a sandbox (running or terminated)",
 		mimeType: "application/json",
 		input: {
@@ -853,7 +854,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "modal.sandbox.terminate",
 		method: "POST",
 		path: "/v1/modal/sandbox/terminate",
-		price: "$0.002",
+		price: "$0.010",
 		description: "Terminate a running sandbox and release its resources",
 		mimeType: "application/json",
 		input: {
@@ -1876,7 +1877,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "rag.query",
 		method: "POST",
 		path: "/v1/rag/query",
-		price: "$0.002",
+		price: "$0.020",
 		description:
 			"Embed a query and return the top-K nearest neighbours from the shared Vectorize index, filtered to the caller's namespace. Pay-per-query semantic search",
 		mimeType: "application/json",
@@ -1934,7 +1935,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "rag.answer",
 		method: "POST",
 		path: "/v1/rag/answer",
-		price: "$0.01",
+		price: "$0.050",
 		description:
 			"Compound RAG answer: embeds the query, retrieves top-k matching chunks from Vectorize, and generates a grounded Llama 3.3 70B answer. KV-cached by query hash for 1h to amortize repeat questions",
 		mimeType: "application/json",
@@ -3416,6 +3417,96 @@ export const SERVICES: ServiceDef[] = [
 			value: { language: "en", theme: "dark", notifications: true },
 			tags: ["preferences", "user-42"],
 			ttlSeconds: 86400
+		}
+	},
+	// ── agent.memory.longterm.get (R19 — companion CRUD) ──
+	{
+		id: "agent.memory.longterm.get",
+		method: "POST",
+		path: "/v1/agent/memory/longterm/get",
+		price: "$0.005",
+		description:
+			"Retrieve a previously-stored long-term memory by namespace + key. Returns the value, tags, createdAt, expiresAt, and size. Returns 404 if not found. Uses the same Durable-Object + R2 backing as /v1/agent/memory/longterm.",
+		mimeType: "application/json",
+		input: {
+			namespace: "Memory namespace (1-64 chars)",
+			key: "Memory key to retrieve (1-256 chars)"
+		},
+		example: {
+			namespace: "user-42",
+			key: "preferences"
+		}
+	},
+	// ── agent.memory.longterm.delete (R19 — companion CRUD) ──
+	{
+		id: "agent.memory.longterm.delete",
+		method: "POST",
+		path: "/v1/agent/memory/longterm/delete",
+		price: "$0.003",
+		description:
+			"Delete a long-term memory by namespace + key. Removes the R2 value and the KV index in a single call. Idempotent — returns deleted: false if the key didn't exist.",
+		mimeType: "application/json",
+		input: {
+			namespace: "Memory namespace (1-64 chars)",
+			key: "Memory key to delete (1-256 chars)"
+		},
+		example: {
+			namespace: "user-42",
+			key: "preferences"
+		}
+	},
+	// ── agent.memory.longterm.list (R19 — companion CRUD) ──
+	{
+		id: "agent.memory.longterm.list",
+		method: "POST",
+		path: "/v1/agent/memory/longterm/list",
+		price: "$0.005",
+		description:
+			"List all memory metadata entries in a namespace. Returns {namespace, count, items[{key, tags, createdAt, expiresAt, size}], hasMore, cursor}. Paginated via cursor for namespaces with > 20 entries. Values themselves are NOT returned — use /longterm/get to fetch.",
+		mimeType: "application/json",
+		input: {
+			namespace: "Memory namespace to list (1-64 chars)",
+			limit: "Optional max items to return (1-100, default 20)",
+			cursor: "Optional cursor from previous /list call"
+		},
+		example: {
+			namespace: "user-42",
+			limit: 50
+		}
+	},
+	// ── dev.slugify (R19 — blue ocean, 0 competitors) ──
+	{
+		id: "dev.slugify",
+		method: "POST",
+		path: "/v1/dev/slugify",
+		price: "$0.001",
+		description:
+			"Convert any string to a URL-safe slug. Strips diacritics (NFD normalize), lowercases, replaces non-alphanumeric with hyphens, collapses runs. Pure compute, no API calls, $0.001 per invocation. 0 direct x402 competitors.",
+		mimeType: "application/json",
+		input: {
+			text: "String to slugify (1-1000 chars)"
+		},
+		example: {
+			text: "Hello, World! 你好 🌍 Café"
+		}
+	},
+	// ── dev.json-path (R19 — blue ocean, 0 competitors) ──
+	{
+		id: "dev.json-path",
+		method: "POST",
+		path: "/v1/dev/json-path",
+		price: "$0.002",
+		description:
+			"Query any JSON value with simple path expressions: $.store.book[0].author, $.items[*].name, $.data.records[2].value. Returns the matching values + count. Optional JSONP callback support. 0 direct x402 competitors.",
+		mimeType: "application/json",
+		input: {
+			json: "JSON string OR parsed object/array (max 200KB)",
+			path: "Path expression starting with $. (1-500 chars)",
+			callback: "Optional JSONP callback name"
+		},
+		example: {
+			json: { store: { book: [{ author: "Neal Stephenson" }] } },
+			path: "$.store.book[0].author"
 		}
 	}
 ];

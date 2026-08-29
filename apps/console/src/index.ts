@@ -42,6 +42,8 @@ import { aiCachedHandler } from "./handlers/ai.rag.handler";
 import aiBatchHandler from "./handlers/ai.batch.handler";
 import aiTtsHandler from "./handlers/ai.tts.handler";
 import aiOpenaiChatHandler from "./handlers/ai_openai_chat.handler";
+import { devSlugifyHandler } from "./handlers/dev.slugify.handler";
+import { devJsonPathHandler } from "./handlers/dev.json-path.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
 import { OPENAPI_SPEC } from "./openapi";
@@ -173,6 +175,8 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/crypto", cryptoHandler)
 	.route("/v1/dev", devHandler)
 	.route("/v1/devtools", devtoolsHandler)
+	.route("/v1/dev/slugify", devSlugifyHandler)
+	.route("/v1/dev/json-path", devJsonPathHandler)
 	.route("/v1/security", securityHandler)
 	.route("/v1/security/screen", securityScreenHandler)
 	.route("/v1/security/cve-lookup", secCveLookupHandler)
