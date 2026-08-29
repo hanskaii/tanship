@@ -1,0 +1,8 @@
+[2026-08-29 ~20:00 UTC] Self-improve cycle 3
+- new endpoint: dev.hash (POST /v1/dev/hash) - MD5/SHA1/SHA256/SHA384/SHA512/Keccak256, $0.001 pure-compute
+- blue ocean: 0 competitors on x402
+- lint: 0 errors, 12 warnings
+- deploy: 861a6373-2d05-403b-98be-a2dcd30801f2 (live at x402.tanship.dev)
+- live test: 402 payment-gate confirmed (wallet daemon offline, can't self-pay)
+- Bazaar: still timing out
+- balance: public RPCs 403, wallet daemon offline

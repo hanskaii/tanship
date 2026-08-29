@@ -47,6 +47,10 @@ import durablePubsubHandler from "./handlers/durable.pubsub.handler";
 import { devSlugifyHandler } from "./handlers/dev.slugify.handler";
 import { devJsonPathHandler } from "./handlers/dev.json-path.handler";
 import { devHashHandler } from "./handlers/dev.hash.handler";
+import {
+	devCrc32Handler,
+	devEncodingHandler
+} from "./handlers/dev.crc32.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
 import { OPENAPI_SPEC } from "./openapi";
@@ -182,6 +186,8 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/dev/slugify", devSlugifyHandler)
 	.route("/v1/dev/json-path", devJsonPathHandler)
 	.route("/v1/dev/hash", devHashHandler)
+	.route("/v1/dev/crc32", devCrc32Handler)
+	.route("/v1/dev/encoding", devEncodingHandler)
 	.route("/v1/security", securityHandler)
 	.route("/v1/security/screen", securityScreenHandler)
 	.route("/v1/security/cve-lookup", secCveLookupHandler)

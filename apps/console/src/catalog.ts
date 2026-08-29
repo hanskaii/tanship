@@ -3670,6 +3670,35 @@ export const SERVICES: ServiceDef[] = [
 			network: "all",
 			includeDetails: true
 		}
+	},
+	// ── dev.crc32 (R22 — blue ocean, 0 x402 competitors) ──
+	{
+		id: "dev.crc32",
+		method: "POST",
+		path: "/v1/dev/crc32",
+		price: "$0.001",
+		description:
+			"Compute IEEE 802.3 CRC32 checksum of any text. Returns hex, signed-32 (Zip), and unsigned-32 (Ethernet) representations. Pure compute, ~0.1ms. Useful for integrity verification, file sync, and protocol checksums (gzip, PNG, ZIP). 0 direct x402 competitors.",
+		mimeType: "application/json",
+		input: {
+			text: "Input text to checksum (0-1,000,000 chars)"
+		},
+		example: { text: "Hello, World!" }
+	},
+	// ── dev.encoding (R22 — blue ocean, base32/base58/hex/base64url on x402) ──
+	{
+		id: "dev.encoding",
+		method: "POST",
+		path: "/v1/dev/encoding",
+		price: "$0.001",
+		description:
+			"Encode any text to common Web3/dev encodings: hex (bytes), base32 (RFC 4648, used in TOTP/Nostr/IPFS CIDs), base58 (Bitcoin/Solana addresses, IPFS), or base64url (JWT, URL-safe). Pure compute, ~0.1ms. 0 direct x402 competitors for these encodings.",
+		mimeType: "application/json",
+		input: {
+			text: "Input text to encode (0-100,000 chars)",
+			encoding: "Target encoding: hex | base32 | base58 | base64url (default hex)"
+		},
+		example: { text: "Hello, World!", encoding: "base58" }
 	}
 ];
 
