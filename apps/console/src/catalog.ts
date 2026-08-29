@@ -3508,6 +3508,29 @@ export const SERVICES: ServiceDef[] = [
 			json: { store: { book: [{ author: "Neal Stephenson" }] } },
 			path: "$.store.book[0].author"
 		}
+	},
+	// ── sec.agent.reputation (R20 — blue ocean, kortex-service-trust competitor) ──
+	{
+		id: "sec.agent.reputation",
+		method: "POST",
+		path: "/v1/security/agent-reputation",
+		price: "$0.050",
+		description:
+			"Score any x402 service for trust and compliance. Probes the service URL, checks x402 spec headers (402 status, WWW-Authenticate, price, network, pay-to), OpenAPI spec availability, Bazaar discovery header, and payment signature header. Returns a 0-100 trust score with tier (trusted/verified/experimental/unverified/unknown), per-category breakdown, and KV-cached 24h results. Pure compute, no AI calls. Competitor to kortex-service-trust at $1.00 — Tship offers usage-based at $0.050.",
+		mimeType: "application/json",
+		input: {
+			serviceUrl:
+				"Base URL of the x402 service to score (e.g. https://x402.tanship.dev)",
+			network:
+				"Target network: base | ethereum | solana | all (default all)",
+			includeDetails:
+				"Include per-category scoring breakdown (default false)"
+		},
+		example: {
+			serviceUrl: "https://x402.tanship.dev",
+			network: "all",
+			includeDetails: true
+		}
 	}
 ];
 

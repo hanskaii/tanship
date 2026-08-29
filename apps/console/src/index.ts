@@ -14,6 +14,7 @@ import secPromptInjectionScanHandler from "./handlers/sec.prompt-injection-scan.
 import secDomainThreatReportHandler from "./handlers/sec.domain-threat-report.handler";
 import secLlmOutputValidateHandler from "./handlers/sec.llm-output-validate.handler";
 import secAgentTraceAnomalyHandler from "./handlers/sec.agent-trace-anomaly.handler";
+import secAgentReputationHandler from "./handlers/sec.agent-reputation.handler";
 import cloudEstimateHandler from "./handlers/cloud.estimate.handler";
 import devHandler from "./handlers/dev.handler";
 import modalHandler from "./handlers/modal.handler";
@@ -185,6 +186,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/security/domain-threat-report", secDomainThreatReportHandler)
 	.route("/v1/security/llm-output-validate", secLlmOutputValidateHandler)
 	.route("/v1/security/agent-trace-anomaly", secAgentTraceAnomalyHandler)
+	.route("/v1/security/agent-reputation", secAgentReputationHandler)
 	.route("/v1/cloud/estimate", cloudEstimateHandler)
 	.route("/v1/modal", modalHandler)
 	.route("/v1/reddit", redditHandler)
