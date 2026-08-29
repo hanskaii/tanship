@@ -242,6 +242,31 @@ export const SERVICES: ServiceDef[] = [
 		example: { url: "https://example.com" }
 	},
 	{
+		id: "browser.crawl",
+		method: "POST",
+		path: "/v1/browser/crawl",
+		price: "$0.030",
+		description:
+			"Multi-page web crawl with depth limit. BFS traversal of same-domain links up to max_depth, extracts markdown content from each page. Blue ocean: 0 x402 competitors for multi-page crawl.",
+		mimeType: "application/json",
+		input: {
+			url: "Starting page URL",
+			max_depth: "Max crawl depth 1-5 (default 3)",
+			max_urls: "Max URLs to crawl 1-50 (default 20)",
+			include_content:
+				"Extract markdown content from each page (default true)",
+			"filters.allow":
+				"Optional: only follow URLs containing these patterns",
+			"filters.deny": "Optional: skip URLs containing these patterns"
+		},
+		example: {
+			url: "https://news.ycombinator.com",
+			max_depth: 2,
+			max_urls: 10,
+			include_content: true
+		}
+	},
+	{
 		id: "browser.rss",
 		method: "POST",
 		path: "/v1/browser/rss",
@@ -3696,7 +3721,8 @@ export const SERVICES: ServiceDef[] = [
 		mimeType: "application/json",
 		input: {
 			text: "Input text to encode (0-100,000 chars)",
-			encoding: "Target encoding: hex | base32 | base58 | base64url (default hex)"
+			encoding:
+				"Target encoding: hex | base32 | base58 | base64url (default hex)"
 		},
 		example: { text: "Hello, World!", encoding: "base58" }
 	}

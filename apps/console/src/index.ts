@@ -5,6 +5,7 @@ import { cors } from "hono/cors";
 
 import aiHandler from "./handlers/ai.handler";
 import browserHandler from "./handlers/browser.handler";
+import { browserCrawlHandler } from "./handlers/browser.crawl.handler";
 import cryptoHandler from "./handlers/crypto.handler";
 import securityHandler from "./handlers/security.handler";
 import securityScreenHandler from "./handlers/security.screen.handler";
@@ -180,6 +181,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/chat", aiOpenaiChatHandler)
 	.route("/v1/ai/tts", aiTtsHandler)
 	.route("/v1/browser", browserHandler)
+	.route("/v1/browser/crawl", browserCrawlHandler)
 	.route("/v1/crypto", cryptoHandler)
 	.route("/v1/dev", devHandler)
 	.route("/v1/devtools", devtoolsHandler)
