@@ -541,3 +541,5 @@ export { DurableFIFOQueue } from "./fifo";
 export type { DurableFifoQueueEnv } from "./fifo";
 export { DurableBloomFilter } from "./bloom";
 export type { DurableBloomFilterEnv } from "./bloom";
+export { PubSub } from "./pubsub";
+export type { PubSubEnv } from "./pubsub";

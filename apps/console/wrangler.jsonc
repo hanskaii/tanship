@@ -28,7 +28,8 @@
 			{ "name": "LEADER", "class_name": "Leader" },
 			{ "name": "BARRIER", "class_name": "Barrier" },
 			{ "name": "DURABLE_QUEUE", "class_name": "DurableFIFOQueue" },
-			{ "name": "DURABLE_BLOOM", "class_name": "DurableBloomFilter" }
+			{ "name": "DURABLE_BLOOM", "class_name": "DurableBloomFilter" },
+			{ "name": "PUBSUB", "class_name": "PubSub" }
 		]
 	},
 	"migrations": [
@@ -52,6 +53,10 @@
 		{
 			"tag": "v5",
 			"new_classes": ["DurableBloomFilter"]
+		},
+		{
+			"tag": "v6",
+			"new_classes": ["PubSub"]
 		}
 	],
 	"vectorize": [

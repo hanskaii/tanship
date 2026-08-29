@@ -6,7 +6,7 @@ import type { NetworkDef } from "@/networks";
 
 export interface ServiceDef {
 	id: string;
-	method: "GET" | "POST";
+	method: "GET" | "POST" | "DELETE";
 	path: string;
 	price: string;
 	description: string;
@@ -2749,6 +2749,96 @@ export const SERVICES: ServiceDef[] = [
 			items: ["user:42:campaign:99", "user:42:campaign:100"]
 		}
 	},
+	// ── durable.pubsub (R20 — blue ocean, zero x402-list competitors) ─────
+	{
+		id: "durable.pubsub.channel.create",
+		method: "POST",
+		path: "/v1/durable/pubsub/channel",
+		price: "$0.002",
+		description:
+			"Create a named pub/sub channel backed by a Hibernatable Durable Object. Idempotent — returns existing channel if already present. WebSocket connections are received via /ws and tracked by connection id.",
+		mimeType: "application/json",
+		input: {
+			channel: "Channel name (1-256 chars)"
+		},
+		example: { channel: "agent-events" }
+	},
+	{
+		id: "durable.pubsub.publish",
+		method: "POST",
+		path: "/v1/durable/pubsub/publish",
+		price: "$0.003",
+		description:
+			"Publish a message to a named channel. Fans out to all subscribed WebSocket connections in the DO. Returns the recipient count. Up to 64KB per message.",
+		mimeType: "application/json",
+		input: {
+			channel: "Channel name (1-256 chars)",
+			message:
+				"Message payload (string, 1-65536 chars — JSON-encode objects client-side)"
+		},
+		example: {
+			channel: "agent-events",
+			message: '{"event":"trade_filled","symbol":"BTC"}'
+		}
+	},
+	{
+		id: "durable.pubsub.subscribe",
+		method: "POST",
+		path: "/v1/durable/pubsub/subscribe",
+		price: "$0.001",
+		description:
+			"Register a WebSocket connection id as a subscriber of a channel. Caller must first establish a WebSocket to the DO (separate path) and then invoke this endpoint to bind the id to the channel.",
+		mimeType: "application/json",
+		input: {
+			channel: "Channel name (1-256 chars)",
+			connectionId: "WebSocket connection id (1-256 chars)"
+		},
+		example: {
+			channel: "agent-events",
+			connectionId: "conn-abc123"
+		}
+	},
+	{
+		id: "durable.pubsub.unsubscribe",
+		method: "POST",
+		path: "/v1/durable/pubsub/unsubscribe",
+		price: "$0.001",
+		description:
+			"Remove a WebSocket connection id from a channel's subscriber list. The WebSocket itself is not closed — caller is responsible for that.",
+		mimeType: "application/json",
+		input: {
+			channel: "Channel name (1-256 chars)",
+			connectionId: "WebSocket connection id (1-256 chars)"
+		},
+		example: {
+			channel: "agent-events",
+			connectionId: "conn-abc123"
+		}
+	},
+	{
+		id: "durable.pubsub.list",
+		method: "GET",
+		path: "/v1/durable/pubsub/channels",
+		price: "$0.001",
+		description:
+			"List all channels and their current subscriber counts. Free-ish introspection for agents to discover active topics.",
+		mimeType: "application/json",
+		input: {},
+		example: {}
+	},
+	{
+		id: "durable.pubsub.channel.delete",
+		method: "DELETE",
+		path: "/v1/durable/pubsub/channel",
+		price: "$0.002",
+		description:
+			"Delete a channel and close all subscribed WebSocket connections (close code 1000). Idempotent — returns deleted:false if channel does not exist.",
+		mimeType: "application/json",
+		input: {
+			channel: "Channel name (1-256 chars)"
+		},
+		example: { channel: "agent-events" }
+	},
 	{
 		id: "sec.cve-lookup",
 		method: "POST",
@@ -3507,6 +3597,27 @@ export const SERVICES: ServiceDef[] = [
 		example: {
 			json: { store: { book: [{ author: "Neal Stephenson" }] } },
 			path: "$.store.book[0].author"
+		}
+	},
+	// ── dev.hash (R21 — blue ocean, 0 competitors) ──────────────────────────
+	{
+		id: "dev.hash",
+		method: "POST",
+		path: "/v1/dev/hash",
+		price: "$0.001",
+		description:
+			"Compute cryptographic hashes (MD5, SHA-1, SHA-256, SHA-384, SHA-512, Keccak-256) of text or hex data. Pure compute, ~0.1ms, $0.001 per call. 0 direct x402 competitors.",
+		mimeType: "application/json",
+		input: {
+			data: "Input text or hex string to hash (max 1MB)",
+			encoding: "Output encoding: hex or base64 (default hex)",
+			formats:
+				"Array of hash algorithms to compute: md5, sha1, sha256, sha384, sha512, keccak256 (default all)"
+		},
+		example: {
+			data: "Hello, World!",
+			encoding: "hex",
+			formats: ["md5", "sha256", "keccak256"]
 		}
 	},
 	// ── sec.agent.reputation (R20 — blue ocean, kortex-service-trust competitor) ──

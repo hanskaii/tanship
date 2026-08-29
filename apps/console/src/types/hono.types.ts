@@ -10,6 +10,7 @@ import type {
 import type { Scheduler } from "@/durable-objects/scheduler";
 import type { DurableFIFOQueue } from "@/durable-objects/fifo";
 import type { DurableBloomFilter } from "@/durable-objects/bloom";
+import type { PubSub } from "@/durable-objects/pubsub";
 import type { PayerIdentity } from "@/helpers/payer.helper";
 
 export type ConsoleBindings = ValidatedEnv & {
@@ -28,6 +29,7 @@ export type ConsoleBindings = ValidatedEnv & {
 	BARRIER: DurableObjectNamespace<Barrier>;
 	DURABLE_QUEUE: DurableObjectNamespace<DurableFIFOQueue>;
 	DURABLE_BLOOM: DurableObjectNamespace<DurableBloomFilter>;
+	PUBSUB: DurableObjectNamespace<PubSub>;
 	ELEVENLABS_API_KEY: string;
 };
 
