@@ -1,184 +1,145 @@
-# Tanship — Engineering Implementation Report
+# Engineering Report — R31 Endpoint Implementation
 
-**Date**: 2026-08-30
-**Cron job**: market-research-to-deploy pipeline
-**Author**: Hermes Agent (cron, profile: tanship-engineer)
-**Inputs**: `docs/research-results.md` (R27) → `apps/console/src/handlers/`, `apps/console/src/catalog.ts` → production
-
----
-
-## 1. Research Input Summary
-
-Refresh 27 of market research flagged 10 blue-ocean endpoint candidates with zero x402 competition. Top of the list — **`durable.leader.elect`** — was selected as the highest-leverage target:
-
-- 0 competitors on x402-list (575 services surveyed)
-- 0 competitors on Bazaar (27,831 listings)
-- Backs an emerging need: distributed coordination for multi-agent systems
-- Recommended price: **$0.020/call** (premium for primitive-leader-election; same tier as `db.migrate`)
-- Leader / Barrier Durable Object classes already exist in `apps/console/src/durable-objects/index.ts` (added R20); only the paid HTTP surface was missing
-
-The `Leader` and `Barrier` DO classes already implement lease-based fencing tokens, heartbeat renewal, voluntary resign, and N-agent barrier sync with a `tripped` flag. No new DO classes were required — only the catalog entries and Hono handlers.
+**Date:** 2026-08-31
+**Research run:** R31 — Full market refresh
+**Endpoint shipped:** `browser.screenshot.full-page`
+**Commit:** `3f52df8` — `feat(console): browser.screenshot.full-page — retina full-height capture at $0.010`
 
 ---
 
-## 2. Implementation
+## 1. Research Source
 
-### 2.1 Files created
+File: `docs/research-results.md`
 
-| File                                                   | Purpose                                           |
-| ------------------------------------------------------ | ------------------------------------------------- |
-| `apps/console/src/handlers/durable.leader.handler.ts`  | 4 endpoints: `elect`, `status`, `renew`, `resign` |
-| `apps/console/src/handlers/durable.barrier.handler.ts` | 3 endpoints: `create`, `join`, `status`           |
+Key findings from R31 market research:
 
-Both handlers follow the established pattern in `durable.pubsub.handler.ts`: method-chained Hono routes, `zValidator("json", ...)` input validation, `ApiResponse.ok/error` response shape, `c.env.<BINDING>.idFromName(name)` for DO isolation.
-
-### 2.2 Files modified
-
-| File                                           | Change                                                                                                                                                                      |
-| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `apps/console/src/catalog.ts`                  | Inserted 7 new `ServiceDef` entries after `durable.pubsub.channel.delete`                                                                                                   |
-| `apps/console/src/index.ts`                    | Added imports for both handlers and `.route("/v1/durable/leader", ...)`, `.route("/v1/durable/barrier", ...)`                                                               |
-| `apps/console/src/handlers/dev.jwt.handler.ts` | Pre-existing tsc error fix — added type assertion so `payload: Record<string, unknown>` is assignable to the typed `claims` object. Blocked `pnpm run build` before the fix |
-
-### 2.3 Endpoint surface added
-
-| Endpoint                 | Method | Path                         | Price  | DO call                                    |
-| ------------------------ | ------ | ---------------------------- | ------ | ------------------------------------------ |
-| `durable.leader.elect`   | POST   | `/v1/durable/leader/elect`   | $0.020 | `LEADER.tryAcquire(leaderId, ttlMs)`       |
-| `durable.leader.status`  | POST   | `/v1/durable/leader/status`  | $0.002 | `LEADER.status()`                          |
-| `durable.leader.renew`   | POST   | `/v1/durable/leader/renew`   | $0.002 | `LEADER.heartbeat(leaderId, token, ttlMs)` |
-| `durable.leader.resign`  | POST   | `/v1/durable/leader/resign`  | $0.002 | `LEADER.resign(leaderId, token)`           |
-| `durable.barrier.create` | POST   | `/v1/durable/barrier/create` | $0.010 | `BARRIER.create(required)`                 |
-| `durable.barrier.join`   | POST   | `/v1/durable/barrier/join`   | $0.010 | `BARRIER.join(participantId)`              |
-| `durable.barrier.status` | POST   | `/v1/durable/barrier/status` | $0.002 | `BARRIER.status()`                         |
-
-Price ladder mirrors `durable.pubsub.*` (which has 6 entries, 1 free, 5 paid). Total catalog: **229 priced endpoints** (was 222 → now 222 + 7 = 229).
+- x402 ecosystem: 27,855 Bazaar listings, 575 services on x402-list, $24M/mo volume
+- Browser rendering segment: ~8 true primitive sellers; Hugen's Visual API ($0.02/screenshot, 365 buyers/30d) leads
+- Tship's browser.\* catalog: 24 endpoints, `browser.screenshot` at $0.005 (4× cheaper than Hugen)
+- **Identified gap:** `browser.screenshot.full-page` (full scroll-height capture at retina) — Tier-2 recommendation in R31 (ship in 2-4 weeks, $292/yr revenue potential)
+- **Justification:** Hugen charges $0.02 for featured screenshots. Tship's `browser.screenshot` ($0.005) only captures viewport. `browser.screenshot.featured` ($0.005) supports fullPage but lacks quality control. A dedicated full-page endpoint with retina resolution, quality tuning, and format selection closes the gap at half Hugen's price.
 
 ---
 
-## 3. Quality Gates
+## 2. Endpoint Design
 
-### 3.1 `pnpm run check` (oxlint)
+### 2.1 Catalog Entry
 
+| Field          | Value                              |
+| -------------- | ---------------------------------- |
+| ID             | `browser.screenshot.full-page`     |
+| Method         | `POST`                             |
+| Path           | `/v1/browser/screenshot/full-page` |
+| Price          | `$0.010`                           |
+| CF cost (est.) | ~$0.002/call                       |
+| Gross margin   | ~80%                               |
+
+**Input parameters:**
+
+| Param     | Type         | Default  | Range           | Notes           |
+| --------- | ------------ | -------- | --------------- | --------------- |
+| `url`     | string (url) | —        | required        | Page to capture |
+| `width`   | integer      | 1280     | 320–3840        | Viewport width  |
+| `height`  | integer      | 800      | 240–2160        | Viewport height |
+| `quality` | integer      | 85       | 10–100          | JPEG quality    |
+| `format`  | enum         | `"jpeg"` | `jpeg` \| `png` | Output format   |
+
+**Example request:**
+
+```json
+{
+	"url": "https://example.com",
+	"width": 1440,
+	"height": 900,
+	"quality": 90,
+	"format": "jpeg"
+}
 ```
-Found 14 warnings and 0 errors.
-Finished in 55ms on 278 files with 116 rules using 8 threads.
-```
 
-- 0 errors
-- 14 warnings — all pre-existing in unmodified files (`sec.agent-trace-anomaly`, `sec.llm-output-validate`, `dev.diff`, `_app/overview/index.tsx`)
-- 0 warnings introduced by this PR
+### 2.2 Pricing rationale
 
-### 3.2 `pnpm run build` (turbo)
-
-```
-Tasks:    4 successful, 4 total
-Cached:   3 cached, 4 total
-Time:     2.312s
-```
-
-- `console#build` (`tsc --noEmit`): **passed** after fixing pre-existing jwt handler type error
-- `web#build`: passed
-- 2 other workspaces: passed
+- $0.010 = 2× `browser.screenshot` ($0.005), justified by full scroll capture + retina resolution
+- $0.010 = 50% of Hugen's $0.02 (competitive moat)
+- Margin ~80% at ~$0.002/call CF cost
 
 ---
 
-## 4. Deploy
+## 3. Implementation
 
-### 4.1 Command
+### 3.1 Files modified
 
-```
-npx wrangler deploy --minify --containers-rollout none
-```
+| File                                           | Change                                                           |
+| ---------------------------------------------- | ---------------------------------------------------------------- |
+| `apps/console/src/services/browser.service.ts` | Added `screenshotFullPage()` method                              |
+| `apps/console/src/handlers/browser.handler.ts` | Added `ScreenshotFullPageSchema` + `/screenshot/full-page` route |
+| `apps/console/src/catalog.ts`                  | Added `browser.screenshot.full-page` catalog entry               |
 
-### 4.2 `--containers-rollout none` rationale
+### 3.2 Architecture
 
-The first two deploy attempts failed with:
+- `BrowserRenderingService.screenshotFullPage()` calls CF Browser Rendering API with `fullPage: true` and `deviceScaleFactor: 2` (retina) in viewport options
+- Route uses `zValidator` for typed input validation
+- Response is raw binary (JPEG or PNG) via `c.body(image, 200, {"Content-Type": ...})`
+- No new dependencies introduced
 
-```
-ERROR: failed to build: failed to solve: DeadlineExceeded: context deadline exceeded
-Dockerfile:1
-   1 | >>> FROM docker.io/cloudflare/sandbox:0.7.0
-```
+### 3.3 Ponytail / future upgrades
 
-The `Sandbox` container in `wrangler.jsonc` pulls `cloudflare/sandbox:0.7.0` from Docker Hub and the network is timing out (consistent with the R26 pitfall note "CF pricing pages must be re-fetched" — outbound network from this host is unreliable). The container is unrelated to the new endpoints; using `--containers-rollout none` skips the docker build while still shipping the Worker code and updating DO bindings.
-
-### 4.3 Deploy result
-
-```
-Uploaded tanflare-console (8.83 sec)
-Deployed tanflare-console triggers (7.94 sec)
-  x402.tanship.dev (custom domain)
-  Producer for tanflare-jobs
-Current Version ID: 98d31347-a2bb-43c0-b0ef-4b22515b3b16
-```
-
-**Bindings verified on deploy** (from wrangler output):
-
-```
-env.LEADER (Leader)        Durable Object
-env.BARRIER (Barrier)      Durable Object
-```
-
-LEADER + BARRIER bindings were already declared in `wrangler.jsonc` and migrated in tag `v3`, so no new migration tag was required.
-
-### 4.4 Live verification
-
-GET `https://x402.tanship.dev/v1/services` returns the new endpoint entries. Confirmed live and discoverable by Bazaar crawlers.
+- When CF Browser Rendering supports multi-frame scroll-merge natively, replace internal `fullPage: true` with a custom scroll-and-merge loop that captures incrementally and stitches strips
+- Add PNG canvas stitching when CF Image Resizing supports multi-frame merge
 
 ---
 
-## 5. Commit & Push
+## 4. Build & Deploy
 
-### 5.1 Commit
+| Check                  | Result                                                             |
+| ---------------------- | ------------------------------------------------------------------ |
+| `pnpm run check`       | ✅ Passed — 0 errors, 11 pre-existing warnings                     |
+| `pnpm run build`       | ✅ Passed — `console#build` + `web#build`                          |
+| `wrangler deploy`      | ✅ Worker uploaded (4.96 sec), Worker startup 122ms                |
+| `git push origin main` | ✅ Pushed to `main` — commit `3f52df8`                             |
+| Live verification      | ✅ `GET /v1/services` returns `browser.screenshot.full-page` entry |
 
-```
-[main 3e663be] feat(console): durable.leader & durable.barrier endpoints (R28 blue-ocean)
- 5 files changed, 247 insertions(+), 1 deletion(-)
- create mode 100644 apps/console/src/handlers/durable.barrier.handler.ts
- create mode 100644 apps/console/src/handlers/durable.leader.handler.ts
-```
+### Docker sandbox build
 
-Format: `feat(console): [name endpoint]` per task spec.
-
-### 5.2 Push
-
-```
-To https://github.com/hanskaii/tanship.git
-   98d45be..3e663be  main -> main
-```
+The Docker sandbox image build (`FROM docker.io/cloudflare/sandbox:0.7.0`) fails due to a Docker Hub network timeout — this is a pre-existing environment issue unrelated to the code changes. The Cloudflare Worker itself is deployed and live.
 
 ---
 
-## 6. Outcome
+## 5. Git Commit
 
-| Metric                       | Before                  | After                          | Delta     |
-| ---------------------------- | ----------------------- | ------------------------------ | --------- |
-| Catalog endpoints            | 222 priced              | **229 priced**                 | +7        |
-| Blue-ocean endpoints shipped | 0 (R28 candidates)      | **7**                          | +7        |
-| `pnpm run check`             | pass                    | pass                           | —         |
-| `pnpm run build`             | blocked (jwt tsc error) | **pass**                       | fix       |
-| Production deploy            | —                       | **live** at `x402.tanship.dev` | —         |
-| GitHub `main`                | `98d45be`               | **`3e663be`**                  | +1 commit |
+```
+feat(console): browser.screenshot.full-page — retina full-height capture at $0.010
 
-### Annual revenue projection (R27 base case: 50 calls/day per endpoint)
+- Add screenshotFullPage() to BrowserRenderingService (fullPage:true + retina viewport)
+- Add /v1/browser/screenshot/full-page route with width/height/quality/format params
+- Add catalog entry at $0.010 (2x price of basic screenshot, half of Hugen's $0.02)
+- Closes Tier-2 gap: full-page with quality control vs viewport-only fullPage flag
+- Aligns with market research R31: browser segment has ~8 competitors, full-page
+  coverage differentiated vs Hugen's Visual API offering
+```
 
-| Endpoint                                                          | Price      | Annual                              |
-| ----------------------------------------------------------------- | ---------- | ----------------------------------- |
-| `durable.leader.elect`                                            | $0.020     | $365                                |
-| `durable.barrier.create`                                          | $0.010     | $182                                |
-| `durable.barrier.join`                                            | $0.010     | $182                                |
-| `durable.leader.{status,renew,resign}` + `durable.barrier.status` | avg $0.002 | $219                                |
-| **Total**                                                         | —          | **$948/yr** at R27 base-case volume |
-
-Cost basis: 1 DO request (~$1.5e-7) + ~50ms duration on 128MB (~$8e-5) = ~$0.00008/call. At $0.020 = **99.6% margin** on `elect`. The `$0.002` introspection endpoints are **92% margin**.
-
-### Pitfalls encountered (update R27 list)
-
-- **Docker Hub timeout on container build** (NEW): `cloudflare/sandbox:0.7.0` image pull times out from this cron host. Workaround: `--containers-rollout none`. Investigate pre-pulling the image or switching the sandbox image to a Cloudflare-hosted mirror before next refresh.
-- **Pre-existing tsc error in `dev.jwt.handler.ts`** blocked `pnpm run build`. Fixed as part of this PR. Add a CI step that fails on any `tsc --noEmit` non-zero exit before future deploys.
+**Commit:** `3f52df8` — pushed to `origin/main`
 
 ---
 
-**End of report**.
-**End of report**.
+## 6. Summary
+
+| Dimension           | Status                                                         |
+| ------------------- | -------------------------------------------------------------- |
+| Research analyzed   | ✅ R31 market data reviewed, Tier-2 gap identified             |
+| Endpoint designed   | ✅ Price/params validated against CF cost + competitor pricing |
+| Handler implemented | ✅ `browser.service.ts` + `browser.handler.ts` + `catalog.ts`  |
+| Lint + type-check   | ✅ Zero errors                                                 |
+| Build               | ✅ Successful                                                  |
+| Deploy              | ✅ Worker live on production                                   |
+| Git commit          | ✅ `3f52df8` on `origin/main`                                  |
+| Report written      | ✅ This document                                               |
+
+---
+
+## 7. Next Steps (from R31 research)
+
+1. **Reprice 26 sub-$0.002 loss-makers** (devtools._, dev._, durable.pubsub.\*) — 30 min, eliminates settlement-floor leakage
+2. **Register catalog on x402-list + x402scan + Bazaar** — 1 dev-day, largest single revenue unlock
+3. **AI Search endpoints** (`ai.search.query`, `ai.search.create`, `ai.search.index-status`) — while CF AI Search is in free beta
+4. **`video.transcode`** — add duration-aware pricing for Stream delivery costs
+5. **`storage.list`** — add at $0.002 for R2 listing
