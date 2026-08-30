@@ -81,7 +81,7 @@ export const devJwtSignHandler = new Hono<HonoEnv>().post(
 		// ponytail: don't mutate caller's payload object — they may reuse it
 		const claims: Record<string, number | string | string[]> = {
 			...payload
-		};
+		} as Record<string, number | string | string[]>;
 		if (issuer) claims.iss = issuer;
 		if (subject) claims.sub = subject;
 		if (audience) claims.aud = audience;

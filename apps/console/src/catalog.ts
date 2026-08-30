@@ -2956,6 +2956,122 @@ export const SERVICES: ServiceDef[] = [
 		},
 		example: { channel: "agent-events" }
 	},
+	// ── durable.leader (R28 — blue ocean, zero x402 competitors) ───────────
+	{
+		id: "durable.leader.elect",
+		method: "POST",
+		path: "/v1/durable/leader/elect",
+		price: "$0.020",
+		description:
+			"Distributed leader election via Durable Object. Returns a fenced token on success or the current leader's id on failure. Lease-based with TTL refresh via heartbeat. Blue ocean — no x402 competitor sells primitive leader election.",
+		mimeType: "application/json",
+		input: {
+			leaderId: "Candidate leader id (1-256 chars)",
+			ttlMs: "Lease duration in ms, 1-86400000 (default 300000 = 5min)"
+		},
+		example: {
+			leaderId: "agent-1",
+			ttlMs: 30000
+		}
+	},
+	{
+		id: "durable.leader.status",
+		method: "POST",
+		path: "/v1/durable/leader/status",
+		price: "$0.002",
+		description:
+			"Inspect the current leader for a group: leaderId, token, generation, lease expiry. Free-ish introspection.",
+		mimeType: "application/json",
+		input: {
+			leaderId: "Leader group name (1-256 chars)"
+		},
+		example: { leaderId: "agent-1" }
+	},
+	{
+		id: "durable.leader.renew",
+		method: "POST",
+		path: "/v1/durable/leader/renew",
+		price: "$0.002",
+		description:
+			"Renew the lease on a held leadership. Requires the token from the original elect. Returns the new expiry and generation.",
+		mimeType: "application/json",
+		input: {
+			leaderId: "Leader group name (1-256 chars)",
+			ttlMs: "New lease duration in ms, 1-86400000 (default 300000)",
+			token: "Fenced token from the original elect"
+		},
+		example: {
+			leaderId: "agent-1",
+			ttlMs: 30000,
+			token: "uuid-from-elect"
+		}
+	},
+	{
+		id: "durable.leader.resign",
+		method: "POST",
+		path: "/v1/durable/leader/resign",
+		price: "$0.002",
+		description:
+			"Voluntarily step down from leadership. Requires the fenced token. Generation counter is preserved so the next elect bumps it.",
+		mimeType: "application/json",
+		input: {
+			leaderId: "Leader group name (1-256 chars)",
+			token: "Fenced token from the original elect"
+		},
+		example: {
+			leaderId: "agent-1",
+			token: "uuid-from-elect"
+		}
+	},
+	// ── durable.barrier (R28 — blue ocean, zero x402 competitors) ──────────
+	{
+		id: "durable.barrier.create",
+		method: "POST",
+		path: "/v1/durable/barrier/create",
+		price: "$0.010",
+		description:
+			"Create or reset an N-agent barrier sync primitive. All N participants must call /join before the barrier trips. Backed by a single DO per named barrier.",
+		mimeType: "application/json",
+		input: {
+			name: "Barrier name (1-256 chars)",
+			required:
+				"Number of participants required to trip the barrier (1-1000)"
+		},
+		example: {
+			name: "batch-001",
+			required: 3
+		}
+	},
+	{
+		id: "durable.barrier.join",
+		method: "POST",
+		path: "/v1/durable/barrier/join",
+		price: "$0.010",
+		description:
+			"Record a participant's arrival at the barrier. Returns the full barrier state. The caller that tips the count to required gets tripped:true.",
+		mimeType: "application/json",
+		input: {
+			name: "Barrier name (1-256 chars)",
+			participantId: "Participant id (1-256 chars)"
+		},
+		example: {
+			name: "batch-001",
+			participantId: "agent-1"
+		}
+	},
+	{
+		id: "durable.barrier.status",
+		method: "POST",
+		path: "/v1/durable/barrier/status",
+		price: "$0.002",
+		description:
+			"Snapshot a barrier's state: required, arrived, completed, participants list.",
+		mimeType: "application/json",
+		input: {
+			name: "Barrier name (1-256 chars)"
+		},
+		example: { name: "batch-001" }
+	},
 	{
 		id: "sec.cve-lookup",
 		method: "POST",

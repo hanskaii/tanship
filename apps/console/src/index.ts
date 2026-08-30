@@ -46,6 +46,8 @@ import aiBatchHandler from "./handlers/ai.batch.handler";
 import aiTtsHandler from "./handlers/ai.tts.handler";
 import aiOpenaiChatHandler from "./handlers/ai_openai_chat.handler";
 import durablePubsubHandler from "./handlers/durable.pubsub.handler";
+import durableLeaderHandler from "./handlers/durable.leader.handler";
+import durableBarrierHandler from "./handlers/durable.barrier.handler";
 import { devSlugifyHandler } from "./handlers/dev.slugify.handler";
 import { devJsonPathHandler } from "./handlers/dev.json-path.handler";
 import { devHashHandler } from "./handlers/dev.hash.handler";
@@ -223,6 +225,8 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/durable/queue", durableQueueHandler)
 	.route("/v1/durable/bloom", durableBloomHandler)
 	.route("/v1/durable/pubsub", durablePubsubHandler)
+	.route("/v1/durable/leader", durableLeaderHandler)
+	.route("/v1/durable/barrier", durableBarrierHandler)
 	.route("/v1/coordination", coordinationHandler)
 	.route("/v1/coordination/fifo", coordinationFifoHandler)
 	.route("/v1/agent", agentResearchHandler)
