@@ -27,9 +27,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.chat",
 		method: "POST",
 		path: "/v1/ai/chat",
-		price: "$0.050",
+		price: "$0.010",
 		description:
-			"LLM chat completion via edge AI (Llama 3.1 8B by default, 70B available on opt-in). RECOMMEND: set max_tokens ≤ 50 to keep response affordable. Default 1024 tokens can incur higher Workers AI cost.",
+			"LLM chat completion via edge AI (Llama 3.1 8B by default, 70B available on opt-in). RECOMMEND: set max_tokens ≤ 50 to keep response affordable. Default 1024 tokens can incur higher Workers AI cost. NOTE: price matched to openai.chat.completions to end internal cannibalization.",
 		mimeType: "application/json",
 		input: {
 			messages:
@@ -119,7 +119,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.sentiment",
 		method: "POST",
 		path: "/v1/ai/sentiment",
-		price: "$0.002",
+		price: "$0.005",
 		description:
 			"Sentiment analysis on text using edge AI, returns positive/negative label with score",
 		mimeType: "application/json",
@@ -392,7 +392,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.classify",
 		method: "POST",
 		path: "/v1/ai/classify",
-		price: "$0.003",
+		price: "$0.008",
 		description:
 			"Classify any image into pre-trained categories via edge AI (ResNet-50), returns tags and scores",
 		mimeType: "application/json",
@@ -3224,6 +3224,27 @@ export const SERVICES: ServiceDef[] = [
 			expiryDays: 7
 		}
 	},
+	// ── storage.migrate (R25 — Cyberdeck migration target, 0 x402 competitors) ──
+	{
+		id: "storage.migrate",
+		method: "POST",
+		path: "/v1/storage/migrate",
+		price: "$0.005",
+		description:
+			"Migrate any public object (HTTP/HTTPS URL, including pre-signed R2/S3 URLs from Cyberdeck and other providers) into the Tanship R2 bucket with a single paid call. Downloads the bytes, stores them at the given key, and stamps source URL + migration time as metadata. The 10MB cap keeps Workers within the 128MB CPU-memory limit. Cyberdeck Market went offline — this is the drop-in replacement for agents that need to ingest external storage.",
+		mimeType: "application/json",
+		input: {
+			url: "Public HTTP(S) URL to fetch the object from",
+			key: "Destination R2 key (1-512 chars)",
+			contentType:
+				"Optional Content-Type override (auto-detected from source response)",
+			retentionDays: "Optional retention in days 1-30 (default 30)"
+		},
+		example: {
+			url: "https://example.com/data/file.json",
+			key: "migrated/file.json"
+		}
+	},
 	// ── ai.new ────────────────────────────────────────────────────────────────
 	{
 		id: "ai.function.call",
@@ -3543,7 +3564,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.tts",
 		method: "POST",
 		path: "/v1/ai/tts",
-		price: "$0.01",
+		price: "$0.02",
 		description:
 			"Convert text to natural-sounding speech via ElevenLabs. Returns base64-encoded MP3 with 6 voice options (alloy, echo, fable, onyx, nova, shimmer) and adjustable speed. First TTS endpoint on x402 — 0 direct competitors.",
 		mimeType: "application/json",

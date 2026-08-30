@@ -58,6 +58,28 @@ const LifecycleSetSchema = z.object({
 		.describe("Days after object creation before it expires")
 });
 
+const MigrateSchema = z.object({
+	url: z.string().url().describe("Public URL to fetch content from"),
+	key: z
+		.string()
+		.min(1)
+		.max(512)
+		.describe("Destination R2 key for the migrated object"),
+	contentType: z
+		.string()
+		.min(1)
+		.max(128)
+		.optional()
+		.describe("Override Content-Type (auto-detected from URL if omitted)"),
+	retentionDays: z
+		.number()
+		.int()
+		.min(1)
+		.max(MAX_RETENTION_DAYS)
+		.default(MAX_RETENTION_DAYS)
+		.describe("Days to retain the object (default 30)")
+});
+
 const storageHandler = new Hono<HonoEnv>()
 	.post("/upload", zValidator("json", UploadSchema), async (c) => {
 		const { key, content, contentType, retentionDays } =
@@ -238,6 +260,66 @@ const storageHandler = new Hono<HonoEnv>()
 				bucket: "tanflare-storage"
 			});
 		}
-	);
+	)
+	// Migrate a public object into the Tanship R2 bucket. Pulls the bytes
+	// from any HTTP(S) URL (including pre-signed R2/S3 URLs from external
+	// providers like Cyberdeck) and writes them to the destination key.
+	// Cyberdeck refugees: this is the drop-in replacement endpoint.
+	.post("/migrate", zValidator("json", MigrateSchema), async (c) => {
+		const { url, key, contentType, retentionDays } = c.req.valid("json");
+
+		const res = await fetch(url, {
+			redirect: "follow",
+			headers: { "User-Agent": "Tanship-Storage-Migrate/1.0" }
+		});
+		if (!res.ok) {
+			throw ApiError.badGateway(
+				`Source URL returned ${res.status} ${res.statusText}`
+			);
+		}
+
+		const contentLength = res.headers.get("content-length");
+		if (
+			contentLength &&
+			Number.parseInt(contentLength, 10) > MAX_FILE_SIZE
+		) {
+			throw ApiError.badRequest(
+				`Source exceeds ${MAX_FILE_SIZE}-byte limit`
+			);
+		}
+
+		const bytes = new Uint8Array(await res.arrayBuffer());
+		if (bytes.length > MAX_FILE_SIZE) {
+			throw ApiError.badRequest(
+				`Source body exceeds ${MAX_FILE_SIZE}-byte limit`
+			);
+		}
+
+		const detectedType =
+			contentType ??
+			res.headers.get("content-type") ??
+			"application/octet-stream";
+
+		const expiresAt = new Date(
+			Date.now() + retentionDays * 24 * 60 * 60 * 1000
+		).toISOString();
+
+		await c.env.R2.put(key, bytes, {
+			httpMetadata: { contentType: detectedType },
+			customMetadata: {
+				expiresAt,
+				sourceUrl: url.slice(0, 500),
+				migratedAt: new Date().toISOString()
+			}
+		});
+
+		return ApiResponse.ok(c, "Object migrated", {
+			key,
+			size: bytes.length,
+			contentType: detectedType,
+			sourceUrl: url,
+			expiresAt
+		});
+	});
 
 export default storageHandler;
