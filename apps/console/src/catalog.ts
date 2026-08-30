@@ -530,6 +530,23 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "ai.vqa",
+		method: "POST",
+		path: "/v1/ai/vqa",
+		price: "$0.02",
+		description:
+			"Inline visual question answering (VQA) via edge AI (PaliGemma 3B). Pass the image as base64 — no upstream fetch, no external URL dependency. Returns a short text answer (≤64 tokens). PaliGemma cost is ~$0.0001/call, leaving 99% margin. First x402-native inline VQA endpoint.",
+		mimeType: "application/json",
+		input: {
+			image: "Base64-encoded image bytes (JPEG/PNG, max 5MB decoded)",
+			prompt: "Question about the image (1-512 chars)"
+		},
+		example: {
+			image: "<base64-jpeg-bytes>",
+			prompt: "What is written on the laptop screen?"
+		}
+	},
+	{
 		id: "browser.search.summary",
 		method: "POST",
 		path: "/v1/browser/search/summary",

@@ -110,6 +110,14 @@ const AnswerSchema = z.object({
 	prompt: z.string().min(1).max(2048)
 });
 
+const VqaSchema = z.object({
+	// ponytail: 5MB decoded cap. PaliGemma resizes internally to 448x448, so
+	// huge images waste bandwidth and R2 egress without quality gain. base64
+	// expands bytes by ~4/3, so raw field size cap is ~6.7MB.
+	image: z.string().min(1).max(7_000_000),
+	prompt: z.string().min(1).max(512)
+});
+
 const CorrectSchema = z.object({
 	text: z.string().min(1).max(20_000)
 });
@@ -462,6 +470,30 @@ const aiHandler = new Hono<HonoEnv>()
 		return ApiResponse.ok(c, "Visual question answering completed", {
 			model: ANSWER_MODEL,
 			response: result.response ?? ""
+		});
+	})
+	.post("/vqa", zValidator("json", VqaSchema), async (c) => {
+		const { image, prompt } = c.req.valid("json");
+
+		// Decode base64 to Uint8Array (then to number[] for Workers AI)
+		const binary = atob(image);
+		const len = binary.length;
+		const bytes = new Uint8Array(len);
+		for (let i = 0; i < len; i++) {
+			bytes[i] = binary.charCodeAt(i);
+		}
+		const imageArray = Array.from(bytes);
+
+		const result = (await c.env.AI.run(ANSWER_MODEL as any, {
+			image: imageArray,
+			prompt
+		})) as { response?: string };
+
+		return ApiResponse.ok(c, "Inline VQA completed", {
+			model: ANSWER_MODEL,
+			response: (result.response ?? "").trim().slice(0, 64), // safety cap
+			inputTokens: Math.ceil((prompt.length + image.length / 4) / 4), // rough approx
+			outputTokens: Math.ceil((result.response ?? "").length / 4)
 		});
 	})
 	.post("/correct", zValidator("json", CorrectSchema), async (c) => {
