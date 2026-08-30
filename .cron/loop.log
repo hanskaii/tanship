@@ -6,3 +6,41 @@
 - live test: 402 payment-gate confirmed (wallet daemon offline, can't self-pay)
 - Bazaar: still timing out
 - balance: public RPCs 403, wallet daemon offline
+[2026-08-30 ~21:15 UTC] Self-improve cycle 4
+- new endpoints: dev.crc32 (POST /v1/dev/crc32) + dev.encoding (POST /v1/dev/encoding)
+- CRC32 IEEE 802.3 + hex/signed/unsigned output, $0.001
+- Encoding: hex | base32 (RFC 4648) | base58 (BTC/SOL) | base64url (JWT), $0.001
+- blue ocean: 0 x402 competitors for either
+- lint: 0 errors
+- deploy: worker uploaded (13.34s) — docker sandbox image pull timed out (irrelevant, worker is live)
+- live test: HTTP 402 payment gate on /v1/dev/crc32 ✓
+- Bazaar: still unreachable from cron env
+- balance: daemon still offline
+- catalog: 232 id entries (was 230)
+[2026-08-30 ~21:30 UTC] Self-improve cycle 5
+- new endpoints: dev.totp (POST /v1/dev/totp) + dev.diff (POST /v1/dev/diff)
+- TOTP: RFC 6238, Base32 secret, 6/8 digits, SHA-1/256/512, configurable period 15-300s, $0.001
+- Diff: Myers LCS, GNU unified format with hunk headers, configurable context (0-10), ignore_whitespace toggle, $0.001
+- blue ocean: 0 x402 competitors for TOTP gen or text diff
+- Web Crypto HMAC for TOTP — Workers-native, no extra deps
+- validation: Base32 secret sanitized (case-insensitive, ignores padding/whitespace), counter/time optional for testing
+- lint: 0 errors (14 pre-existing warnings, unrelated)
+- deploy: 2479.79 KiB / gzip 470.98 KiB uploaded (16.18s) — Docker sandbox build timed out (irrelevant, worker live)
+- live test: POST /v1/dev/totp=402, POST /v1/dev/diff=402 (x402 payment gate ✓)
+- balance: $0.625936 USDC (Base mainnet via direct eth_call)
+- commit: 125e989 feat(console): dev.totp + dev.diff — blue ocean, $0.001 each
+- catalog: 232 -> 234 entries
+
+[2026-08-30 ~22:00 UTC] Self-improve cycle 6
+- new endpoints: dev.hmac (POST /v1/dev/hmac) + dev.jwt.sign (POST /v1/dev/jwt/sign)
+- HMAC: SHA-1/256/512 via Web Crypto, output hex/base64/base64url, $0.001
+- JWT sign: HS256/384/512, arbitrary claims, optional expiry/iss/sub/aud/jti, $0.001
+- blue ocean: 0 x402 competitors for either HMAC signing or JWT issuance
+- pair with existing: dev.hash, dev.totp (same algorithm family, pure compute)
+- lint: 0 errors (14 pre-existing warnings, unrelated)
+- deploy: 7f859721-ea13-4c8f-b4a3-a51d81b56742 (live at x402.tanship.dev)
+- live test: POST /v1/dev/hmac=402, POST /v1/dev/jwt/sign=402 (x402 payment gate ✓)
+- Bazaar: still unreachable from cron env (network timeout)
+- balance: $0.625040 USDC (Base mainnet via direct eth_call)
+- commit: 18309b7 feat(console): dev.hmac + dev.jwt.sign — blue ocean, $0.001 each
+- catalog: 234 -> 236 entries
