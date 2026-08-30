@@ -3725,6 +3725,47 @@ export const SERVICES: ServiceDef[] = [
 				"Target encoding: hex | base32 | base58 | base64url (default hex)"
 		},
 		example: { text: "Hello, World!", encoding: "base58" }
+	},
+	// ── dev.totp (R23 — blue ocean, RFC 6238 TOTP on x402) ──
+	{
+		id: "dev.totp",
+		method: "POST",
+		path: "/v1/dev/totp",
+		price: "$0.001",
+		description:
+			"Generate RFC 6238 TOTP codes from a Base32 secret. Supports 6/8 digits, configurable period (15-300s), SHA-1/SHA-256/SHA-512 algorithms. Returns the current code plus validity window. Pure compute via Web Crypto HMAC. Useful for testing 2FA flows, automating auth gates, and agent self-auth. 0 x402 competitors for TOTP generation.",
+		mimeType: "application/json",
+		input: {
+			secret: "Base32-encoded shared secret (e.g. JBSWY3DPEHPK3PXP)",
+			digits: "Code length: 6 (default) or 8",
+			period: "Time step in seconds (default 30, range 15-300)",
+			algorithm: "HMAC algorithm: SHA1 (default) | SHA256 | SHA512",
+			counter: "Optional manual counter (overrides time-based)",
+			time: "Optional Unix timestamp seconds (defaults to now)"
+		},
+		example: { secret: "JBSWY3DPEHPK3PXP", digits: "6", period: 30 }
+	},
+	// ── dev.diff (R23 — blue ocean, unified text diff on x402) ──
+	{
+		id: "dev.diff",
+		method: "POST",
+		path: "/v1/dev/diff",
+		price: "$0.001",
+		description:
+			"Compute a GNU-style unified diff between two text strings, with hunk headers (@@ -a,b +c,d @@) and configurable context lines. Myers LCS algorithm. Optional ignore_whitespace mode. Returns both structured hunk data and a unified-diff string ready to display. Pure compute, ~0.5ms for typical inputs. 0 x402 competitors for text diff.",
+		mimeType: "application/json",
+		input: {
+			a: "Original text (0-500,000 chars)",
+			b: "New text (0-500,000 chars)",
+			context: "Context lines around changes (default 3, range 0-10)",
+			ignore_whitespace:
+				"Trim/normalize whitespace before diff (default false)"
+		},
+		example: {
+			a: "line one\nline two\nline three",
+			b: "line one\nline TWO\nline three",
+			context: 1
+		}
 	}
 ];
 
