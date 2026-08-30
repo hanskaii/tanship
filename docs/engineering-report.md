@@ -1,156 +1,88 @@
-# Tanship — Engineering Report
+# Engineering Report — 2026-08-31
 
-**Date**: 2026-08-30
-**Source**: `docs/research-results.md` (Refresh 21)
-**Implementation**: `feat(console): ai.chat.completions + reprice loss-makers`
-**Commit**: `d4d6638` (pushed to `origin/main`)
-**Deploy**: `tanflare-console` Worker uploaded, current version ID `86363cdb-e195-49d9-ae10-f4fd7334364f`
+## Research Findings Summary
 
----
+Market research (`docs/research-results.md`, R24, Aug 31 2026) found two critical issues:
 
-## 1. Research → Endpoint Decision
+1. **7 catastrophic loss-makers** in the catalog. Cloudflare moved Workers AI to a **unified $0.011/1K neurons billing** on Aug 28 — R23's cost model was off by ~1,000×. Endpoints using 70B FP8 or DeepSeek R1 32B at uncapped max_tokens were burning $4.61 to $19.90 per call while charging $0.015–$0.030.
+2. **Tier 1 new endpoints** (blue-ocean per R24 §8): `browser.screenshot.featured` (Hugen has 365 buyers at $0.02), `coordination.fifo.push/pop` (0 x402 competitors), `storage.presign.batch` (100 signed URLs).
 
-Research R21 surfaced two distinct action buckets. Most high-ROI recommendations from §6 (market gap analysis) were already shipped in prior refreshes:
+## Implementation Summary
 
-| Idea                                             | Status                                                                                       |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| OpenAI-compatible `/v1/chat/completions`         | **IMPLEMENTED THIS RUN** (mounted at `/v1/chat/completions`, $0.010)                         |
-| Reprice `ai.compress`/`correct`/`code` → $0.030  | **IMPLEMENTED THIS RUN** (was $0.008 — confirmed loss-makers using 70B FP8 at 2K max_tokens) |
-| Reprice `ai.moderate` → $0.005                   | Already fixed in earlier refresh (R20)                                                       |
-| Cap `ai.reason` `max_tokens` to 256              | Already fixed in earlier refresh (R20)                                                       |
-| Pubsub (R20 §6.F)                                | **Already shipped** (`durable.pubsub.*`, 6 endpoints, commit `b4cf630`)                      |
-| OpenAI SDK compat `/v1/openai/chat/completions`  | **Already shipped** (R18, `openai.chat.completions` at $0.010)                               |
-| `agent.personal-assistant` bundle                | Not implemented — requires cross-endpoint bundle work                                        |
-| `durable.websocket` (real WS upgrade path on DO) | Not implemented — pub/sub currently uses `connectionId` string, not WS upgrade               |
-| x402-list.com registration                       | Not done — still 0/575 services. Highest external-ROI action remains pending                 |
+### A. Loss-Maker Fixes (handler code + catalog reprice)
 
-The R21 §5 "5 Actions" table flagged both fixes as immediate-priority (5-min tasks). §6.B explicitly recommended the OpenAI-compatible endpoint as a "zero-cost market share" play. **Both shipped in this run.**
+| Endpoint      | Old price | New price | Handler change                                                                                                       |
+| ------------- | --------- | --------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ai.compress` | $0.030    | $2.00     | 70B FP8 `max_tokens: 2048 → 256` (cost $4.61 → $0.58)                                                                |
+| `ai.correct`  | $0.030    | $2.00     | 70B FP8 `max_tokens: 2048 → 256`                                                                                     |
+| `ai.code`     | $0.030    | $2.00     | 70B FP8 `max_tokens: 2048 → 256`                                                                                     |
+| `ai.lint`     | —         | —         | 70B FP8 `max_tokens: 2048 → 512` (JSON output needs more headroom)                                                   |
+| `ai.reason`   | $0.015    | $2.00     | Switched model `deepseek-r1-distill-qwen-32b → deepseek-r1-distill-llama-8b`; cap `4096 → 256` (cost $19.90 → $0.10) |
+| `ai.moderate` | $0.002    | $0.10     | Input cap 10K → 2K chars (Llama Guard input cost control)                                                            |
+| `ai.chat`     | $0.050    | $0.050    | Default `max_tokens: 1024 → 256`; 70B/heavy models capped to 50 in handler                                           |
+| `ai.batch`    | $0.025    | $0.025    | All heavy ops (chat, reason, code, etc.) re-capped to ≤256; reason switched to 8B distill                            |
+| `ai.sql`      | $0.012    | $0.012    | 70B `max_tokens: 1024 → 256`                                                                                         |
+| `ai.emotion`  | $0.012    | $0.012    | 70B `max_tokens: 1024 → 256`                                                                                         |
+| `rag.query`   | $0.020    | $0.10     | Catalog reprice (handler unchanged)                                                                                  |
+| `rag.answer`  | $0.050    | $0.15     | 70B output cap 256 + catalog reprice                                                                                 |
 
----
+**Net margin effect**: catalog aggregate margin moves from catastrophic-negative (5 endpoints at -2,700% to -132,600%) to ~71% positive on the fixed AI/RAG endpoints. Eliminates wallet-drain before any marketplace registration.
 
-## 2. Implementation
+### B. New Endpoints Shipped
 
-### 2.1 Files Modified
+#### `browser.screenshot.featured` — Device Presets + Quality Tuning
 
-- `apps/console/src/catalog.ts` — added `ai.chat.completions` service entry; repriced `ai.compress`, `ai.correct`, `ai.code` from `$0.008` → `$0.030`.
-- `apps/console/src/index.ts` — mounted existing `aiOpenaiChatHandler` at `/v1/chat` (one-line route addition).
+**Endpoint**: `POST /v1/browser/screenshot/featured`
 
-### 2.2 Endpoints Shipped (1 new) + Repriced (3)
+**Research justification**: Tier 1 from R24 §8 — captures Hugen's 365-buyer demand pool at 4× cheaper ($0.005 vs $0.02). Device presets (mobile, tablet, HD, 4K) + quality tuning + retina (2x deviceScaleFactor) are 0 competitors in x402.
 
-| ID                    | Method | Path                   | Price  | Action   | Notes                                                                                  |
-| --------------------- | ------ | ---------------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
-| `ai.chat.completions` | POST   | `/v1/chat/completions` | $0.010 | NEW      | Reuses existing OpenAI-compat handler. Maps gpt-4o-mini → Llama 3.1 8B                 |
-| `ai.compress`         | POST   | `/v1/ai/compress`      | $0.030 | REPRICED | Was $0.008; runs Llama 3.3 70B FP8 at max_tokens=2048 → -18% to -107% margin at $0.008 |
-| `ai.correct`          | POST   | `/v1/ai/correct`       | $0.030 | REPRICED | Same model/behavior as `ai.compress`                                                   |
-| `ai.code`             | POST   | `/v1/ai/code`          | $0.030 | REPRICED | Same model/behavior; -168% margin on 30K-input calls                                   |
+**Stack**: Cloudflare Browser Run REST API (same primitive as all `browser.*`).
 
-### 2.3 Margin Model
+**Pricing**: $0.005/call. CF cost ~$0.0001 per screenshot. Margin ~98%.
 
-**`ai.chat.completions`** at $0.010:
+**Files**:
 
-- CF cost: 8B model @ ~$0.045/1M input + $0.384/1M output, typical 500 in / 200 out tokens ≈ $0.0001
-- Settlement: $0.0001
-- **Gross margin: ~99%**
+- `apps/console/src/services/browser.service.ts` — added `screenshotFeatured()` method with device map + quality clamping
+- `apps/console/src/handlers/browser.handler.ts` — `ScreenshotFeaturedSchema` + `POST /screenshot/featured` route
+- `apps/console/src/catalog.ts` — service definition entry
 
-**`ai.compress` / `ai.correct` / `ai.code`** at $0.030 (was $0.008):
+#### `coordination.fifo` — Lightweight Durable Object FIFO
 
-- Worst case 20K in / 2K out @ 70B FP8 = $0.01047
--   - Settlement $0.0001 + Workers Paid $0.0000003
-- Total CF cost ≈ $0.011
-- **Gross margin: 63% (worst case) — profitable on all real workloads**
+**Endpoints**: `POST /v1/coordination/fifo/{push,pop,peek}`
 
-### 2.4 Reuse vs. New File
+**Research justification**: Tier 1 from R24 §6 — "compound infrastructure" moat. 0 x402 competitors for DO-based FIFO (the existing `durable.queue.*` endpoints include ack/dead-letter/peek/stats/drain for full SQS parity, but FIFO push/pop alone covers ~80% of use cases at a leaner price).
 
-The `/v1/chat/completions` endpoint **reuses the existing `aiOpenaiChatHandler`** from `handlers/ai_openai_chat.handler.ts` (R18). This follows the "extend existing handler" pattern (Option B in the tanship-console-extension skill): same OpenAI-compat shape, same model mapping, same Zod validation. The path `/v1/chat/completions` is the canonical OpenAI URL; `/v1/openai/chat/completions` remains the alternative Tship-namespaced path. **No new file created.**
+**Stack**: Reuses existing `DurableFIFOQueue` DO (already bound as `DURABLE_QUEUE`). Pure refactor: thin handler layer over the same DO methods.
 
-### 2.5 Aggregate Catalog
+**Pricing**: $0.005 push, $0.005 pop, $0.003 peek. CF cost: ~$0.0001 per DO request. Margin 95–99%.
 
-210 → **211** priced endpoints (1 net new + 3 reprice).
+**Files**:
 
----
+- `apps/console/src/handlers/coordination.fifo.handler.ts` — new file (push/pop/peek routes)
+- `apps/console/src/index.ts` — import + route registration
+- `apps/console/src/catalog.ts` — 3 service definition entries
 
-## 3. Verification
+## Verification
 
-### 3.1 Lint
+| Check                              | Result                                                                                         |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `pnpm --filter console run build`  | ✅ Pass (tsc --noEmit, exit 0)                                                                 |
+| `pnpm run check`                   | ✅ Pass (oxlint, exit 0; no errors in changed files)                                           |
+| `pnpm --filter console run deploy` | ✅ Deployed to `tanflare-console` (Version `0db1da5c-46d9-4558-a3ce-f14076af7e2d`)             |
+| git commit                         | ✅ `81e52d2 feat(console): loss-maker fixes + browser.screenshot.featured + coordination.fifo` |
+| git push origin main               | ✅ Pushed (`67867dc..81e52d2`)                                                                 |
 
-```
-$ pnpm run check
-oxlint --config tooling/lint/oxlint.json --ignore-path tooling/lint/.oxlintignore apps/ packages/
-Found 12 warnings and 0 errors.
-Finished in 74ms on 269 files with 116 rules using 8 threads.
-```
+## Deployed Resources
 
-**0 errors.** All 12 warnings are pre-existing in unrelated files (e.g. `apps/web/src/routes/(app)/_app/overview/index.tsx` unused icons). No new warnings from this commit.
+- Worker: `tanflare-console` → custom domain `x402.tanship.dev`
+- Container: `tanflare-console-sandbox` (no changes — image cached)
+- New routes live: `/v1/browser/screenshot/featured`, `/v1/coordination/fifo/{push,pop,peek}`
+- Updated prices: `ai.compress` / `ai.correct` / `ai.code` / `ai.reason` / `ai.moderate` / `rag.query` / `rag.answer` (x402 middleware reads from `SERVICES` catalog at request time, so price changes are effective on next paid request)
 
-### 3.2 Build
+## Next Steps (Day 1–7 per R24 §10)
 
-```
-$ pnpm run build
- Tasks:    4 successful, 4 total
- Cached:   3 cached, 4 total
- Time:     2.568s
-```
-
-All 4 packages built successfully (console, api, web, mcp).
-
-### 3.3 Deploy
-
-```
-$ pnpm --filter console run deploy
-# Initial run (pnpm passthrough flag broken) failed on Sandbox Docker build:
-# ERROR: failed to build: failed to solve: DeadlineExceeded: context deadline exceeded
-# Worker itself was uploaded successfully.
-
-$ cd apps/console && npx wrangler deploy --minify --containers-rollout none
-...
-Uploaded tanflare-console (8.80 sec)
-Deployed tanflare-console triggers (7.61 sec)
-  x402.tanship.dev (custom domain)
-  Producer for tanflare-jobs
-Current Version ID: 86363cdb-e195-49d9-ae10-f4fd7334364f
-```
-
-**Worker deployed successfully** to production. Sandbox container build was bypassed via `--containers-rollout none` (pre-existing cron env limitation; the container image was unchanged by this commit). The cron-runner pnpm passthrough syntax (`pnpm -- --flag`) does not forward the flag to wrangler — workaround: invoke `npx wrangler` directly with the flag.
-
-### 3.4 Production Liveness
-
-`x402.tanship.dev` is live with the new `/v1/chat/completions` route registered. All 19 CF bindings visible in deploy output (PUBSUB, AI, KV, D1, R2, VECTORIZE, QUEUE, etc.). x402 middleware charges per-endpoint via the catalog; the new entry is auto-discovered by the x402 facilitator and Bazaar.
-
----
-
-## 4. Git
-
-```
-$ git add apps/console/src/catalog.ts apps/console/src/index.ts
-$ git commit -m "feat(console): ai.chat.completions + reprice loss-makers"
-[main d4d6638] feat(console): ai.chat.completions + reprice loss-makers
- 2 files changed, 32 insertions(+), 3 deletions(-)
-
-$ git push origin main
-To https://github.com/hanskaii/tanship.git
-   692bf43..d4d6638  main -> main
-```
-
-**Commit hash**: `d4d6638`
-**Push status**: ✅ `692bf43..d4d6638  main -> main`
-
-lint-staged ran `oxfmt` on staged files — no formatting changes applied (commit shows +32 -3, no whitespace-only edits).
-
----
-
-## 5. Pitfalls Hit This Run
-
-1. **`pnpm -- --flag` doesn't forward to the inner script** — `pnpm --filter console run deploy -- --containers-rollout none` produced `wrangler deploy --minify -- --containers-rollout none` (literal `--` passed through). Workaround: invoke `npx wrangler deploy --minify --containers-rollout none` directly from `apps/console/`. This is a packaging issue, not a code defect.
-2. **Sandbox container build timeout** — pre-existing cron-env limitation (Docker pull from `docker.io/cloudflare/sandbox:0.7.0` times out). Bypassed with `--containers-rollout none`. The Worker deploys cleanly; the Sandbox container is unchanged and uses the previously cached image. **Not caused by this commit.**
-3. **Three loss-makers at $0.008 were a quiet bleed** — even with max_tokens=2048 and 70B FP8, the catalog description claimed "Llama 3.1 8B" but the handler actually runs `llama-3.3-70b-instruct-fp8-fast`. Documented cost drift; catalog description should be updated in a future patch (out of scope here — descriptions are user-facing marketing copy, not a code defect).
-
----
-
-## 6. Next Steps (Not Done — Out of Scope)
-
-- Update `ai.compress` / `ai.correct` / `ai.code` / `ai.lint` catalog descriptions to reflect the **actual** 70B model (currently mislabelled as 8B in catalog copy).
-- `agent.personal-assistant` subscription bundle (R21 §6.E) — needs cross-endpoint composition + KV-backed subscriber table.
-- `durable.pubsub` WebSocket upgrade path (R20 follow-up) — currently uses `connectionId` string; real `ws` upgrade route still needed.
-- x402-list.com registration (R21 §12 #7) — **highest external-ROI action** still pending; this run focused on internal endpoint work.
-- `browser.crawl` (R21 §6.C) — crawl-N-pages primitive at $0.030, 99.7% margin. Suggested next batch.
-- Catalog descriptions still claim "Llama 3.1 8B" for compress/correct/code while handlers run 70B. Cosmetic but misleading.
+1. **Register on x402-list.com** — category=Infrastructure (only 2 existing services)
+2. **Publish OpenAPI manifest** at `x402.tanship.dev/.well-known/x402` (already there; verify 222+ endpoints now)
+3. **Register on PayAI Bazaar** — auto-crawled from OpenAPI
+4. **Register on x402scan** — `POST /api/x402/registry/register-origin` with SIWX auth
+5. **Add Solana network** — CF Workers x402 supports natively (~2 dev-days); 22% of x402 volume
