@@ -29,6 +29,14 @@ const ScreenshotFeaturedSchema = z.object({
 	format: z.enum(["jpeg", "png"]).default("jpeg").optional()
 });
 
+const ScreenshotFullPageSchema = z.object({
+	url: z.url(),
+	width: z.number().int().min(320).max(3840).default(1280),
+	height: z.number().int().min(240).max(2160).default(800),
+	quality: z.number().int().min(10).max(100).default(85).optional(),
+	format: z.enum(["jpeg", "png"]).default("jpeg").optional()
+});
+
 const PdfSchema = UrlSchema.extend({
 	scale: z.number().min(0.1).max(2.0).default(1.0),
 	printBackground: z.boolean().default(false),
@@ -366,6 +374,28 @@ const browserHandler = new Hono<HonoEnv>()
 				fullPage,
 				quality,
 				format
+			});
+			return c.body(image, 200, {
+				"Content-Type": format === "png" ? "image/png" : "image/jpeg"
+			});
+		}
+	)
+	.post(
+		"/screenshot/full-page",
+		zValidator("json", ScreenshotFullPageSchema),
+		async (c) => {
+			const { url, width, height, quality, format } = c.req.valid("json");
+			const browser = new BrowserRenderingService(
+				c.env.CLOUDFLARE_ACCOUNT_ID,
+				c.env.CLOUDFLARE_API_TOKEN
+			);
+
+			const image = await browser.screenshotFullPage({
+				url,
+				width,
+				height,
+				quality: quality ?? 85,
+				format: format ?? "jpeg"
 			});
 			return c.body(image, 200, {
 				"Content-Type": format === "png" ? "image/png" : "image/jpeg"

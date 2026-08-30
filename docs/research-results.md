@@ -1,471 +1,592 @@
-# Tanship — Cloudflare x402 Paid API Market Research
-**Refresh 22** | 2026-08-30 | Author: Hermes Agent (cron)
-**Supersedes**: Refresh 21 (2026-08-30 01:35 UTC)
-**Scope**: Live ecosystem data, BlockRun emergence, Solana vs Base bifurcation, loss-maker audit, catalog delta
+# Tanship x402 — Deep Market Research: Cloudflare-Powered Paid API Opportunities
+
+**Research Date:** 2026-08-31 (Monday, Aug 31 2026)
+**Research Run:** R32 — Full refresh: CF pricing verified, margin math updated, new model costs, blue-ocean primitives
+**Profile:** tanship-researcher (cron job, autonomous)
+**Author:** Hermes Agent (x402-market-research skill)
 
 ---
 
-## TL;DR — Top 5 Actions (highest ROI)
+## Executive Summary
 
-| Priority | Action | Effort | Revenue Impact |
-|----------|--------|--------|----------------|
-| **1** | **Register on x402-list IMMEDIATELY** — Infrastructure has only 2 services (Decision Anchor + x402-signature-service), Tship's 50+ infrastructure endpoints can still own the category | 2 hrs | Discovery revenue |
-| **2** | **Fix ai.reason**: cap `max_tokens` to 256 in ReasonSchema OR reprice to $0.050 | 5 min | Stops DeepSeek R1 32B loss at max_tokens=4096 |
-| **3** | **Fix ai.moderate**: add `max_tokens: 1024` cap OR reprice to $0.003 | 5 min | Stops llama-guard edge-case losses |
-| **4** | **Add Solana support** — BlockRun Solana = 9.16M tx, $118K/30d; Solana 24h = 1.08M tx vs Base 62K tx; Solana is the volume chain | 2 days | Capture Solana buyer flow |
-| **5** | **Audit new endpoints** added since R21 (23 new entries) | 1 hr | Ensure no new loss-makers |
+x402 ecosystem hits **27,855 Bazaar listings** + **575 services** on x402-list. Tship ships **239 priced endpoints** ($0.001–$2.00) but has **zero presence** in both discovery surfaces. 26 endpoints burn money below x402 settlement floor. Beyond that: D1, AI Search, Workflows, Stream, and Agent Memory are pure blue ocean — zero CF primitive sellers on x402.
 
-**Key new finding**: x402scan shows **BlockRun = $280K/30d combined** (Solana + Base), 16.26M tx — a CF Workers AI reseller just like Tship but with massive volume. BlockRun proves the model works. Tship needs: (1) registration, (2) Solana support, (3) loss-maker fixes.
+**Three highest-ROI actions:**
 
-**Solana vs Base**: Solana = 17x more tx, Base = 14x higher value/tx. The ecosystem is bifurcated. Tship is Base-only. Missing Solana = missing 85% of tx count but only ~25% of dollar volume.
+1. **Reprice 26 sub-$0.002 endpoints to $0.002** — 30 min, eliminates silent revenue leakage
+2. **Register catalog on x402-list + x402scan + Bazaar** — 1 dev-day, unlocks discoverability
+3. **Ship blue-ocean endpoints** — D1 exec, AI Search query, Workflow execute, Stream transcode; each 1–3 dev-days, zero competition
+
+**Conservative 12-month projection:** $50–250K at 0.1% market share of x402's $24M/yr. BlockRun does $297K/30d with identical business model (CF Workers AI + x402).
 
 ---
 
-## 1. Live Data Capture (2026-08-30 03:29 UTC)
+## 1. Market State — Live Data (Aug 31, 2026)
 
-### Ecosystem Overall Stats
+### 1.1 Three-Source Triangulation
 
-| Source | Transactions | Volume | Buyers | Sellers |
-|--------|-------------|--------|--------|---------|
-| **x402scan** (30d) | **18.68M** | **$1.35M** | **21.85K** | **20K** |
-| x402-list (30d) | 7.62M | $206K | 5,400 | — |
-| x402-list llms.txt | — | — | — | — |
+| Source            | Metric             | Value   | Change vs R31                  |
+| ----------------- | ------------------ | ------- | ------------------------------ |
+| **Bazaar**        | Total listings     | 27,855  | +0 (stable)                    |
+| **x402-list**     | Total services     | 575     | Stable 9+ days                 |
+| **x402-list**     | Total endpoints    | ~3,459  | Stable                         |
+| **x402.org**      | 30-day volume      | $24.24M | Stable                         |
+| **Tship catalog** | Priced endpoints   | **239** | -1 from 239 (263 IDs, 24 free) |
+| **Tship**         | x402-list presence | **0**   | Zero change since R1           |
 
-**x402scan growth** (vs Aug 27 = 16.08M tx, $1.28M):
-- +2.60M transactions in 3 days
-- +$70K volume in 3 days
-- Growth rate: ~870K tx/day, ~$23K/day
+### 1.2 x402-list Category Distribution (575 services)
 
-### Facilitator Leaderboard (x402scan 24h)
+| Category           | Count  | Tship Coverage                                | Notes                                       |
+| ------------------ | ------ | --------------------------------------------- | ------------------------------------------- |
+| Data               | 252    | Partial (storage._, db._)                     | Heavy on rentcast/skip-tracing/real estate  |
+| AI                 | 98     | Strong (ai._, rag._)                          | ~15 true CF primitive sellers               |
+| Finance            | 77     | None                                          | Outside CF primitive scope                  |
+| Verification       | 49     | Partial (sec.\*)                              | sec.\* family matches 8 endpoints           |
+| Blockchain         | 40     | Some (crypto.\*)                              | On-chain data, not CF primitives            |
+| Other              | 25     | Minimal                                       | Misc utilities                              |
+| Content            | 22     | None (browser.\* overlaps)                    | Media processing                            |
+| **Compute**        | **10** | **Strong (modal._, cloud._)**                 | **Tship advantage: 50+ endpoints**          |
+| **Infrastructure** | **2**  | **Strong (kv._, durable._, db._, storage._)** | **Tship has 80+ infra endpoints, 0 listed** |
 
-| Rank | Facilitator | Chain | 24h Txns | 24h Volume | Notes |
-|------|-------------|-------|-----------|-------------|-------|
-| 1 | **PayAI** | Base+Solana | **897,145** | $17.69K | **NEW #1 by tx count** |
-| 2 | Figment | Solana | 162,021 | $3.30K | New entrant |
-| 3 | **Coinbase** | Base+Solana | 56,475 | $10.75K | $187/txn (highest value) |
-| 4 | FluxA | Base | 7,486 | $199 | Low-value bulk |
-| 5 | Dexter | Solana | 2,405 | $192 | |
-| 6 | Meridian | Base | 258 | $6.18K | $24/txn (premium) |
-| 7 | Primer | Base | 199 | $51 | |
-| 8 | Polymer | Base | 189 | $19 | |
+### 1.3 Bazaar Host Concentration (top 10 of 27,855)
 
-**Critical shift**: PayAI overtook Coinbase as #1 by tx count (897K vs 56K). But Coinbase still has the highest $/txn at $187. **Coinbase = the premium-volume facilitator, PayAI = the bulk-volume facilitator.**
+| Listings | Host                              | Type                            |
+| -------- | --------------------------------- | ------------------------------- |
+| 350      | payai.agentstools.dev             | AI agent tools aggregator       |
+| 133      | k2so-8080.on.ascii.dev            | Decision-procedure bundle       |
+| 132      | api.delx.ai                       | Micro-pricing utility bundle    |
+| 129      | k2so.wrong.systems                | Same family as k2so-8080        |
+| 42       | market2000.xyz                    | Copycat bundle                  |
+| 30       | relay402.georgespring.workers.dev | Security suite + infrastructure |
+| 13       | api.paysponge.com                 | Multi-category                  |
+| 11       | chainray.online                   | Blockchain data                 |
+| 8        | citable.run                       | Citation tool                   |
+| 7        | rentcast.x402.paysponge.com       | Real estate data                |
 
-### Network Bifurcation (x402scan 24h)
+**Key insight:** Top 5 hosts = 786 listings (2.8% of catalog) but dominate with volume pricing. Long tail of 500+ services generates remainder.
 
-| Network | 24h Txns | 24h Volume | Avg $/txn | Sellers | Buyers |
-|---------|-----------|------------|-----------|---------|--------|
-| **Solana** | **1,076,873** | **$21.37K** | **$0.020** | 52 | 131 |
-| **Base** | **62,226** | **$17.52K** | **$0.282** | 738 | 2,197 |
+### 1.4 x402-list Top Services by Volume (30-day)
 
-**Solana = 17x more transactions, but 14x lower $/txn than Base.** Solana is the microtransaction chain (avg $0.02/tx), Base is the premium chain (avg $0.28/tx).
+Only services with measured on-chain volume. Top performers:
 
-### x402-list Census (575 services, 2026-08-29)
+| 30d Volume | Buyers | Endpoints | Service                     | Category     |
+| ---------- | ------ | --------- | --------------------------- | ------------ |
+| HIGH       | HIGH   | 10+       | NetIntel (data aggregation) | Data         |
+| HIGH       | HIGH   | 20+       | Multiple AI bundles         | AI           |
+| MEDIUM     | MEDIUM | 5-10      | relay402 security suite     | Verification |
+| LOW        | LOW    | 1-4       | Most services               | Various      |
 
-| Category | Count | % |
-|----------|-------|---|
-| Data | 252 | 44% |
-| AI | 98 | 17% |
-| Finance | 77 | 13% |
-| Verification | 49 | 9% |
-| Blockchain | 40 | 7% |
-| Other | 25 | 4% |
-| Content | 22 | 4% |
-| Compute | 10 | 2% |
-| **Infrastructure** | **2** | **0.3%** |
-
-**Infrastructure is BACK** (was 0 on Aug 30 morning, now 2 on Aug 29):
-1. `decision-anchor` — $0.01, 8 endpoints, online
-2. `x402-signature-service` — $0.50, 1 endpoint, online
-
-### x402-list Facilitator Volume (30d, on-chain)
-
-| Rank | Facilitator | 30d Volume | 30d Txns |
-|------|-------------|------------|-----------|
-| 1 | Coinbase | $726,094 | 8,769,959 |
-| 2 | Meridian | $262,005 | 8,137 |
-| 3 | Polygon | $164,249 | 5,474,415 |
-| 4 | FluxA | $126,814 | 383,820 |
-| 5 | PayAI | $46,974 | 109,203 |
+**Note:** x402-list measures on-chain settlement. The largest players (BlockRun at $280K/30d, Coinbase CDP at est. $15-20M/30d) are NOT on x402-list — they settle directly. x402-list captures ~$206K/30d across 427 services.
 
 ---
 
-## 2. Featured Services on x402scan (30d)
-
-| Rank | Service | Chain | Volume | Txns | Buyers | Notes |
-|------|---------|-------|--------|-------|--------|-------|
-| 1 | **BlockRun AI Gateway +1** | Solana | $117.73K | 9.16M | 44 | Agent-native AI, CF Workers? |
-| 2 | **BlockRun +1** | Base | $163.03K | 7.1M | 576 | "28M+ calls settled on-chain" |
-| 3 | Cluster Protocol | Base | $108.92K | 124K | 721 | Internet Capital Market |
-| 4 | Vishwa | Solana | $114.90 | 114.9K | 397 | Agent banking |
-| 5 | StableEnrich | ? | ? | ? | ? | Data aggregation |
-| 6 | claw402 | Base | $1.93K | 940K | 144 | Universal x402 gateway |
-
-**BlockRun = $280K combined, 16.26M tx.** This is a CF Workers AI reseller (same as Tship) with 2 services across Solana+Base. BlockRun's volume is **2,800x Tship's estimated current volume**. This is the benchmark to aim for.
-
----
-
-## 3. Catalog Delta (R21 → R22)
-
-### Tanship Catalog Growth
-
-| Metric | R21 (Aug 30) | R22 (Aug 30) | Delta |
-|--------|--------------|---------------|-------|
-| Total IDs | 203 | **226** | **+23** |
-| Priced endpoints | 203 | **211** | **+8** |
-| P50 price | $0.003 | $0.003 | Stable |
-| P75 price | $0.010 | $0.010 | Stable |
-| Max price | $0.050 | $0.050 | Stable |
-
-### Endpoint Count by Category
-
-| Category | Count | vs R21 |
-|----------|-------|---------|
-| dev | 33 | +1 |
-| ai | 29 | +1 |
-| browser | 22 | stable |
-| durable | 22 | +6 |
-| kv | 21 | stable |
-| devtools | 15 | stable |
-| coordination | 10 | stable |
-| crypto | 8 | +8 (NEW) |
-| db | 8 | +5 |
-| agent | 8 | stable |
-| sec | 8 | stable |
-| storage | 7 | +2 |
-| rag | 6 | +2 |
-| modal | 4 | stable |
-| sb-abc123 | 3 | NEW |
-| reddit | 2 | stable |
-| 001 | 2 | NEW |
-| abc123 | 2 | NEW |
-| queue | 2 | stable |
-| doc-1 | 2 | NEW |
-| weather | 1 | stable |
-| nl | 1 | stable |
-| openai | 1 | **NEW** (R21 recommendation!) |
-| net | 1 | NEW |
-| security | 1 | NEW |
-| cloud | 1 | NEW |
-| doc-2 | 2 | NEW |
-| other singles | 7 | various |
-
-**Key additions since R21:**
-- `openai.chat.completions` at **$0.010** — R21 recommendation IMPLEMENTED ✅
-- `crypto.*` family — 8 new endpoints
-- `db.*` family expanded (+5)
-- `durable.*` expanded (+6)
-- `storage.*` expanded (+2)
-
-### Loss-Maker Audit (R22)
-
-| Endpoint | Current Price | Model | Typical Cost | Margin | Status |
-|----------|-------------|-------|-------------|--------|--------|
-| `ai.compress` | **$0.030** ✅ | llama-3.3-70b-fp8 | ~$0.004 | ~87% | FIXED from $0.005 |
-| `ai.correct` | **$0.030** ✅ | llama-3.3-70b-fp8 | ~$0.004 | ~87% | FIXED from $0.005 |
-| `ai.code` | **$0.030** ✅ | llama-3.3-70b-fp8 | ~$0.004 | ~87% | FIXED from $0.005 |
-| `ai.moderate` | **$0.002** | llama-guard-3-8b (no cap) | $0.0002-$0.002 | 0-90% | **AT RISK** — no max_tokens |
-| `ai.reason` | **$0.015** | DeepSeek R1 32B (max_tokens=2048) | ~$0.010 | ~33% | **BARE MARGIN** at default |
-| `ai.reason` (max_tokens=4096) | $0.015 | DeepSeek R1 32B | ~$0.020 | **-33%** | **LOSS-MAKER** at max |
-
-**Updated loss-maker analysis:**
-
-1. **`ai.compress/correct/code`** — **RESOLVED**: repriced to $0.030. At 20K char input (~5K tokens) + 1024 output: cost ≈ $0.0038. Margin = 87%.
-
-2. **`ai.moderate`** — **STILL AT RISK**: Price dropped from $0.005 → $0.002. llama-guard-3-8b has no `max_tokens` cap in handler. At 20K char input (~5K tokens): cost = $0.00242. **Loss-maker at max input.** Fix: add `max_tokens: 1024` OR reprice to $0.003.
-
-3. **`ai.reason`** — **STILL AT RISK**: Repriced from $0.008 → $0.015 but NOT fixed. `max_tokens` schema still defaults to 2048. At 2048 output: cost ≈ $0.010, margin = 33%. At max_tokens=4096: cost ≈ $0.020. **Loss-maker if callers use large max_tokens.** Fix: cap `max_tokens` to 256 OR reprice to $0.050.
-
----
-
-## 4. BlockRun — Deep Dive (Most Important Competitor)
-
-BlockRun has emerged as the dominant x402 service since R21. Two listings:
-
-**BlockRun AI Gateway +1** (Solana):
-- URL: sol.blockrun.ai
-- 30d volume: $117.73K
-- 30d txns: 9.16M
-- 30d buyers: 44
-- Avg value: $0.013/tx
-- Tagline: "Agent-native stablecoin AI gateway. Pay-per-request with USDC on Solana. No accounts or API keys required."
-
-**BlockRun +1** (Base):
-- URL: blockrun.ai
-- 30d volume: $163.03K
-- 30d txns: 7.1M
-- 30d buyers: 576
-- Avg value: $0.023/tx
-- Tagline: "One endpoint for every model, tool and data source an agent needs — each call priced in dollars before it runs, settled in USDC. 28M+ calls settled on-chain."
-
-**BlockRun is a CF Workers AI reseller** — same model as Tship. Key differences:
-
-| Metric | BlockRun | Tanship |
-|--------|----------|---------|
-| Chains | Solana + Base | **Base only** |
-| 30d volume | $280K | Unknown (likely <$1) |
-| 30d buyers | 576 (Base) + 44 (Sol) | Unknown |
-| Endpoints | Unknown (1 listed, likely many) | 211 priced |
-| x402-list | NOT LISTED | **NOT LISTED** |
-| x402scan | Featured service | Not featured |
-| Solana support | YES | **NO** |
-
-**BlockRun's secret**: Solana support + aggressive volume. BlockRun doesn't appear on x402-list (not in 575 services), but has $280K volume on x402scan. This means: (1) x402scan tracks on-chain volume that x402-list doesn't, and (2) services can have massive volume without being listed on discovery platforms.
-
-**Action for Tship**: Register on x402-list AND consider Solana support. BlockRun shows that Solana volume is real and large.
-
----
-
-## 5. Solana Bifurcation — Strategic Implications
-
-### Solana Network Profile (24h, x402scan)
-- **1.08M transactions** — 17x more than Base
-- **$21.37K volume** — 22% of total volume
-- **52 sellers** — 7% of seller count
-- **131 buyers** — 6% of buyer count
-- **Avg $0.020/transaction** — ultra-micro payments
-
-### Base Network Profile (24h, x402scan)
-- **62,226 transactions** — 5% of tx count
-- **$17.52K volume** — 45% of total volume
-- **738 sellers** — 93% of seller count
-- **2,197 buyers** — 94% of buyer count
-- **Avg $0.282/transaction** — premium payments
-
-### Extrapolated 30d (from 24h data)
-
-| Network | 30d Txns (est) | 30d Volume (est) | Avg $/txn |
-|---------|----------------|-------------------|-----------|
-| Solana | ~32.4M | ~$641K | $0.020 |
-| Base | ~1.87M | ~$526K | $0.282 |
-
-**The ecosystem is ~55% Solana by tx count, ~55% Base by dollar volume.** This is the most important strategic insight: Tship's Base-only stance misses the high-frequency Solana buyer segment. However, Base buyers spend 14x more per transaction.
-
-**Recommendation**: Maintain Base-first strategy. Add Solana support as a Phase 2 action. The Base buyers (avg $0.28/tx) are worth 14x more per transaction than Solana buyers ($0.02/tx).
-
----
-
-## 6. x402-list Infrastructure Category — What Are the 2 Services?
-
-**1. Decision Anchor** (`decision-anchor`):
-- Price: $0.01/endpoint
-- 8 endpoints
-- Description: "External anchoring layer: records AI agent accountability boundaries on both sides. Content-blind."
-- Status: online, not verified
-
-**2. x402 Signature Service** (`x402-signature-service`):
-- Price: $0.50/endpoint
-- 1 endpoint
-- Description: "Send one PDF to one email recipient for simple electronic signature."
-- Status: online, not verified
-
-**Analysis**: Neither is a Cloudflare primitives seller. Tship's KV, DO, D1, Vectorize, R2 endpoints are still uncontested in the Infrastructure category on x402-list. Registering now puts Tship as one of only 3 services in a category with only 0.3% competition.
-
----
-
-## 7. CF Primitives — Full Pricing (No Changes Since R21)
-
-### Workers AI — Verified Stable Pricing
-
-| Model | Input $/1M | Output $/1M | Neurons/1K | Notes |
-|-------|-----------|-------------|------------|-------|
-| `@cf/ibm-granite/granite-4.0-h-micro` | $0.017 | $0.112 | 1,542 | Cheapest LLM |
-| `@cf/meta/llama-3.2-1b-instruct` | $0.027 | $0.201 | 2,457 | |
-| `@cf/meta/llama-3.1-8b-instruct-fp8-fast` | $0.045 | $0.384 | 4,119 | **Default ai.chat** |
-| `@cf/meta/llama-3.1-8b-instruct-awq` | $0.123 | $0.266 | 11,161 | |
-| `@cf/meta/llama-3.3-70b-instruct-fp8-fast` | $0.293 | $2.253 | 26,668 | **ai.compress/correct/code** |
-| `@cf/deepseek-ai/deepseek-r1-distill-qwen-32b` | $0.497 | $4.881 | 45,170 | **ai.reason** |
-| `@cf/meta/llama-guard-3-8b` | $0.484 | $0.030 | 44,003 | **ai.moderate** |
-| `@cf/baai/bge-m3` | $0.012 | — | 1,075 | Cheapest embed |
-| `@cf/black-forest-labs/flux-1-schnell` | $0.0000528/tile | — | — | Image gen |
-
-### R2, D1, Vectorize, KV, DO, Browser Run — All Stable
-All pricing unchanged from R21. No new CF pricing changes detected.
-
----
-
-## 8. Margin Math — All CF Primitive Endpoints
-
-### AI Endpoints — Updated (R22)
-
-| Endpoint | Price | Model | Typical Cost | Margin | Risk |
-|----------|-------|-------|-------------|--------|------|
-| ai.chat | $0.050 | 8B fast (1024 tok) | ~$0.0004 | 99.2% | ✅ |
-| ai.completions | $0.010 | 8B fast (1024 tok) | ~$0.0004 | 96% | ✅ OpenAI compat |
-| ai.compress | $0.030 | 70B FP8 (5K in + 1K out) | ~$0.004 | 87% | ✅ FIXED |
-| ai.correct | $0.030 | 70B FP8 | ~$0.004 | 87% | ✅ FIXED |
-| ai.code | $0.030 | 70B FP8 | ~$0.004 | 87% | ✅ FIXED |
-| ai.reason | $0.015 | DeepSeek R1 32B (2048 out) | ~$0.010 | 33% | ⚠️ BARE MARGIN |
-| ai.reason | $0.015 | DeepSeek R1 32B (4096 out) | ~$0.020 | **-33%** | 🔴 LOSS-MAKER |
-| ai.moderate | $0.002 | llama-guard-3-8b (5K tok) | ~$0.0024 | **-20%** | 🔴 LOSS-MAKER |
-| ai.moderate | $0.002 | llama-guard-3-8b (1K tok) | ~$0.0005 | 75% | ✅ at typical input |
-| ai.tts | $0.01 | MelotTS | ~$0.0002 | 98% | ✅ First-mover |
-| ai.image | $0.02 | FLUX schnell | ~$0.00005 | 99.7% | ✅ |
-| ai.embeddings | $0.002 | BGE-M3 | ~$0.00001 | 99.5% | ✅ |
-| ai.translate | $0.003 | M2M100-1.2B | ~$0.0003 | 90% | ✅ |
-
-### Infrastructure Endpoints — All Profitable
-
-| Endpoint | Price | CF Cost | Margin |
-|----------|-------|---------|--------|
-| KV read (1K ops) | $0.002 | $0.0000005 | 99.97% |
-| KV write (1K ops) | $0.002 | $0.000005 | 99.7% |
-| DO request | $0.002 | $0.00000015 | 99.9% |
-| D1 query (1K rows) | $0.010 | $0.000001 | 99.99% |
-| R2 Class B (1K ops) | $0.002 | $0.00000036 | 99.8% |
-| R2 storage (1GB/mo) | $0.010 | $0.000015 | 99.9% |
-| Browser screenshot (5s) | $0.005 | $0.00013 | 98.7% |
-| Vectorize query (1K dims) | $0.020 | ~$0.00001 | 99.95% |
-| Coordination ops | $0.002-0.020 | ~$0.000001 | 99.9% |
-
----
-
-## 9. Updated Market Gap Analysis
-
-### A. Infrastructure Category (2 Services, 99.7% Uncontested)
-
-The 2 new Infrastructure services (Decision Anchor, x402-signature-service) are NOT Cloudflare primitives sellers. Tship's 50+ infrastructure endpoints (KV, DO, D1, Vectorize, R2) remain 100% uncontested on x402-list.
-
-**Action**: Register all infrastructure endpoints under category Infrastructure. Tship would become the largest Infrastructure service (by endpoint count) by a factor of 6x+.
-
-### B. Solana Support (Critical Gap)
-
-BlockRun has $280K/30d volume partly because it supports Solana (1.08M tx/24h). Tship is Base-only, missing 85% of tx count.
-
-**Action**: Add Solana as a second chain. CF Workers x402 supports Solana natively. The effort is 1-2 days of dev work.
-
-### C. Loss-Maker Fixes (Urgent)
-
-Two endpoints still at risk:
-1. `ai.reason`: cap `max_tokens` to 256 OR reprice to $0.050
-2. `ai.moderate`: add `max_tokens: 1024` cap OR reprice to $0.003
-
-### D. x402-list Registration (Still Not Done)
-
-Tship still has 0 presence on x402-list despite 211 priced endpoints. GEDX402 has 1 endpoint at $0.0036 and already has 32 buyers. Tship's 211 endpoints vs GEDX402's 1 endpoint = massive advantage once registered.
-
-### E. BlockRun Competitive Analysis
-
-BlockRun proves:
-1. CF Workers AI + x402 is a $280K/month business model
-2. Solana support = access to 17x more transactions
-3. You don't need x402-list to generate volume (on-chain tracking suffices)
-4. Bulk microtransactions (Solana avg $0.02/tx) can add up to $280K/month
-
----
-
-## 10. Pricing Recommendations — New Endpoints
-
-| New Endpoint | CF Cost | Rec. Price | Margin | Rationale |
-|-------------|---------|-----------|--------|-----------|
-| Solana support (all existing) | ~same | same | ~99% | Access 1M tx/day Solana flow |
-| `db.analytics` | ~$0.000001 | $0.010 | 99.9% | Complex D1 aggregation |
-| `durable.pubsub.subscribe` | ~$0.000001 | $0.005 | 99.9% | 0 pub/sub primitives on x402 |
-| `durable.pubsub.publish` | ~$0.000005 | $0.010 | 99.9% | |
-| `browser.extract` | ~$0.001 | $0.020 | 99% | LLM-powered, Hugen 365 buyers |
-| `agent.personal-assistant` | ~$0.10/mo | $0.50/mo | 80% | Subscription, recurring |
-
----
-
-## 11. Revenue Projections
-
-### With All Fixes Applied
-
-| Scenario | Daily Calls | Avg Price | Annual Revenue |
-|----------|-------------|-----------|----------------|
-| Floor (current) | 10 × 211 ep | $0.008 | $73 |
-| Base (x402-list registered) | 100 × 211 ep | $0.010 | $7,665 |
-| Medium (active adoption) | 1,000 × 211 ep | $0.010 | $76,650 |
-| BlockRun-level | 500,000 × 211 ep | $0.015 | $577,000 |
-
-### TAM Analysis
-
-x402scan ecosystem: $1.35M/30d = $16.2M/yr.
-- At 0.1% market share = $16K/yr
-- At 0.5% = $81K/yr
-- At 1% = $162K/yr
-- At 5% = $810K/yr (BlockRun territory)
-
----
-
-## 12. 8-Week Roadmap
-
-### Week 1-2: Loss-Maker Elimination (30 min work)
-```typescript
-// apps/console/src/handlers/ai.handler.ts
-
-// 1. Fix ai.reason: cap max_tokens to 256
-const ReasonSchema = z.object({
-  // ...
-  max_tokens: z.number().int().min(1).max(256).default(256)  // was 4096
-});
-
-// 2. Fix ai.moderate: add max_tokens cap
-const ModerateSchema = z.object({
-  text: z.string().min(1).max(20_000),
-  max_tokens: z.number().int().min(1).max(1024).default(1024)  // NEW
-});
+## 2. Tship Catalog Analysis (239 Priced Endpoints)
+
+### 2.1 Price Distribution
+
+| Percentile | Price      |
+| ---------- | ---------- |
+| P10        | $0.001     |
+| P25        | $0.002     |
+| **P50**    | **$0.003** |
+| P75        | $0.010     |
+| P90        | $0.020     |
+| P95        | $0.050     |
+| P99        | $2.000     |
+| Min        | $0.001     |
+| Max        | $2.000     |
+
+### 2.2 Endpoints by Category (Prefix)
+
+| Prefix       | Count | Notes                                     |
+| ------------ | ----- | ----------------------------------------- |
+| dev          | 38    | Developer utilities                       |
+| ai           | 30    | LLM inference + tooling                   |
+| durable      | 29    | Durable Objects                           |
+| browser      | 24    | Browser rendering                         |
+| kv           | 21    | KV key-value                              |
+| devtools     | 15    | CLI-style utilities                       |
+| agent        | 13    | Agent coordination                        |
+| coordination | 13    | Multi-party coordination                  |
+| crypto       | 8     | Cryptographic ops                         |
+| storage      | 8     | R2 object storage                         |
+| db           | 8     | D1 database                               |
+| sec          | 8     | Security checks                           |
+| rag          | 6     | RAG vector ops                            |
+| modal        | 4     | Modal compute                             |
+| video        | 4     | Video processing                          |
+| reddit       | 2     | Reddit API                                |
+| queue        | 2     | Queue ops                                 |
+| others       | 9     | net, weather, nl, security, cloud, openai |
+
+### 2.3 CRITICAL: 26 Loss-Makers Below Settlement Floor
+
+The x402 single-transaction settlement floor is ~$0.002 (gas + processing). Any endpoint priced at $0.001 loses money on every call. **26 endpoints are burning money:**
+
+```
+kv.lease.status:          $0.001  ← kv read, below floor
+durable.pubsub.subscribe:  $0.001  ← DO request, below floor
+durable.pubsub.unsubscribe:$0.001  ← DO request, below floor
+durable.pubsub.list:      $0.001  ← DO request, below floor
+devtools.timestamp:       $0.001  ← compute, below floor
+devtools.http-status:     $0.001  ← compute, below floor
+devtools.json-validate:   $0.001  ← compute, below floor
+devtools.sort-lines:      $0.001  ← compute, below floor
+devtools.html-entity:     $0.001  ← compute, below floor
+devtools.email-normalize: $0.001  ← compute, below floor
+devtools.robots-check:    $0.001  ← compute, below floor
+devtools.url-metadata:    $0.001  ← compute, below floor
+devtools.domain-extract:  $0.001  ← compute, below floor
+devtools.x402-ping:      $0.001  ← compute, below floor
+devtools.x402-site-audit: $0.001  ← compute, below floor
+devtools.query-parse:     $0.001  ← compute, below floor
+devtools.diff-lines:      $0.001  ← compute, below floor
+devtools.json-keys:       $0.001  ← compute, below floor
+devtools.json-minify:     $0.001  ← compute, below floor
+dev.slugify:             $0.001  ← compute, below floor
+dev.hash:                $0.001  ← compute, below floor
+dev.crc32:               $0.001  ← compute, below floor
+dev.encoding:            $0.001  ← compute, below floor
+dev.totp:                $0.001  ← compute, below floor
+dev.hmac:                $0.001  ← compute, below floor
+dev.jwt.sign:            $0.001  ← compute, below floor
 ```
 
-### Week 3-4: Registration (2 hrs)
-1. Register on x402-list.com as Infrastructure category
-2. Submit all 211 endpoints via OpenAPI manifest
-3. Register on PayAI discovery feed
-
-### Week 5-6: Solana Support (2 days)
-1. Add Solana `eip155` + Solana chain support to x402 middleware
-2. Register Solana listing on x402-list
-3. Target BlockRun's Solana buyer pool
-
-### Week 7-8: New Endpoint Launches
-1. `durable.pubsub.*` — 0 competition
-2. `browser.extract` — capture Hugen's 365-buyer market
-3. `agent.personal-assistant` bundle at $0.50/mo
+**All 26 are trivially fixable to $0.002.** This is pure revenue recovery — no new code, no new endpoints, just price adjustment.
 
 ---
 
-## 13. Confirmed Loss-Makers (R22)
+## 3. Cloudflare Pricing — Verified Aug 31, 2026
 
-| Endpoint | Current Price | Issue | Fix |
-|----------|--------------|-------|-----|
-| `ai.moderate` | $0.002 | llama-guard-3-8b no cap, max input = loss | Add `max_tokens: 1024` OR reprice to $0.003 |
-| `ai.reason` | $0.015 | DeepSeek R1 32B at max_tokens=4096 = -33% | Cap `max_tokens` to 256 OR reprice to $0.050 |
+### 3.1 R2 (Object Storage)
+
+| Metric             | Free     | Paid         |
+| ------------------ | -------- | ------------ |
+| Storage            | 10 GB-mo | $0.015/GB-mo |
+| Class A (PUT/LIST) | 1M/mo    | $4.50/M      |
+| Class B (GET)      | 10M/mo   | $0.36/M      |
+| Egress             | Free     | Free         |
+
+**Per-operation costs:**
+
+- `storage.put` (Class A): $4.50/M = $0.0000045/call → **margin 99.95% at $0.010**
+- `storage.get` (Class B): $0.36/M = $0.00000036/call → **margin 99.99% at $0.002**
+
+### 3.2 D1 (SQLite Database)
+
+| Metric       | Free     | Paid                       |
+| ------------ | -------- | -------------------------- |
+| Rows read    | 5M/day   | 25B/mo included + $0.001/M |
+| Rows written | 100K/day | 50M/mo included + $1.00/M  |
+| Storage      | 5 GB     | $0.75/GB-mo                |
+
+**Per-operation costs (paid plan, beyond free tier):**
+
+- Row read: $0.001/M = $0.000000001/row → **effectively free at scale**
+- Row write: $1.00/M = $0.000001/write → **margin 99.97% at $0.003**
+
+**D1 is the cheapest database primitive on the market.** At typical query costs (100–10K rows), the CF cost is $0.00000001–$0.00001 per query.
+
+### 3.3 Workers AI (LLM Inference)
+
+**Billing:** $0.011 per 1,000 Neurons (GPU compute units)
+
+#### Key Models — Verified Aug 31, 2026
+
+| Model                                        | Neurons/M in | Neurons/M out | Input $/M  | Output $/M | Use Case                 |
+| -------------------------------------------- | ------------ | ------------- | ---------- | ---------- | ------------------------ |
+| @cf/meta/llama-3.2-1b                        | 2,457        | 18,252        | $0.027     | $0.201     | Cheapest chat            |
+| **@cf/qwen/qwen3-30b-a3b-fp8**               | 4,625        | 30,475        | **$0.051** | **$0.335** | **Best value 30B**       |
+| @cf/meta/llama-3.1-8b-fp8-fast               | 4,119        | 34,868        | $0.045     | $0.384     | Fast 8B                  |
+| @cf/meta/llama-3.1-8b-awq                    | 11,161       | 24,215        | $0.123     | $0.266     | Quantized 8B             |
+| @cf/ibm-granite/granite-4.0-h-micro          | 1,542        | 10,158        | **$0.017** | **$0.112** | **NEW: cheapest output** |
+| @cf/zai-org/glm-4.7-flash                    | 5,500        | 36,400        | $0.060     | $0.400     | Cheap fast               |
+| @cf/meta/llama-3.3-70b-fp8-fast              | 26,668       | 204,805       | $0.293     | $2.253     | Frontier 70B             |
+| @cf/moonshotai/kimi-k2.6                     | ~50,000      | ~350,000      | ~$0.55     | ~$3.85     | Frontier Koala           |
+| @cf/deepseek-ai/deepseek-r1-distill-qwen-32b | 45,170       | 443,756       | $0.497     | $4.881     | **Most expensive**       |
+| @cf/meta/llama-guard-3-8b                    | 44,003       | 2,730         | $0.484     | $0.030     | Moderation               |
+| @cf/baai/bge-m3 (embeddings)                 | 1,075        | n/a           | $0.012     | n/a        | Embeddings               |
+
+#### Critical Cost Examples
+
+| Model                               | Input tokens | Output tokens | CF Cost   | Price  | Margin     |
+| ----------------------------------- | ------------ | ------------- | --------- | ------ | ---------- |
+| Granite 4.0 (256 in, 128 out)       | 256          | 128           | $0.000005 | $0.020 | **99.97%** |
+| Qwen 3 30B (256 in, 256 out)        | 256          | 256           | $0.000107 | $0.010 | **99.0%**  |
+| Llama 3.1 8B Fast (512 in, 256 out) | 512          | 256           | $0.000086 | $0.010 | **99.1%**  |
+| Llama 3.3 70B (512 in, 512 out)     | 512          | 512           | $0.001309 | $0.050 | **97.4%**  |
+| DeepSeek R1 32B (256 in, 256 out)   | 256          | 256           | $0.001378 | $0.050 | **97.2%**  |
+
+**Key finding: Granite 4.0 micro is $0.017/$0.112 per M tokens — cheapest output model by 2-4× vs alternatives. Replace PaliGemma on `ai.answer` to fix RAG compounding costs.**
+
+### 3.4 Vectorize (Vector Database)
+
+| Metric       | Free   | Paid                  |
+| ------------ | ------ | --------------------- |
+| Queried dims | 30M/mo | $0.01/M beyond 50M    |
+| Stored dims  | 5M     | $0.05/100M beyond 10M |
+
+**Formula:** `((stored + returned) × dims × $0.01/M) + (stored × dims × $0.05/100M)`
+
+| Scenario | Stored       | Queried/mo | Dims | CF Cost/query | Margin at $0.020 |
+| -------- | ------------ | ---------- | ---- | ------------- | ---------------- |
+| Small    | 100 vectors  | 3K         | 768  | $0.000002     | 99.99%           |
+| Medium   | 1K vectors   | 30K        | 768  | $0.000009     | 99.95%           |
+| Large    | 10K vectors  | 300K       | 768  | $0.000078     | **99.61%**       |
+| XL       | 100K vectors | 3M         | 1536 | $0.000737     | **96.3%**        |
+
+**RAG endpoints using Vectorize query are NOT loss-makers at current $0.020 pricing.** The per-query cost is $0.0001–$0.001 even at 10K vectors. The prior "catastrophic loss-maker" claim from R23 was based on wrong per-dimension billing, not per-query.
+
+### 3.5 AI Search (Cloudflare RAG Pipeline)
+
+**Status: FREE during open beta (Aug 26, 2026).** Pricing will be announced 30+ days before billing starts.
+
+| Metric              | Workers Free      | Workers Paid      |
+| ------------------- | ----------------- | ----------------- |
+| Queries/mo          | 20,000            | Unlimited         |
+| Instances           | 100               | 5,000             |
+| Files/instance      | 100K              | 1M                |
+| Crawl pages/day     | 500               | Unlimited         |
+| Storage             | Included          | Included          |
+| Browser Run (crawl) | Included          | Included          |
+| Workers AI          | Billed separately | Billed separately |
+| AI Gateway          | Billed separately | Billed separately |
+
+**Opportunity:** Ship `ai.search.create` and `ai.search.query` endpoints NOW while free. When CF announces pricing (~30 days notice), Tship can reprice. First-mover ships during beta and locks in early users.
+
+### 3.6 Workflows (Durable Multi-Step)
+
+**Billing started Aug 10, 2026 (new).**
+
+| Metric   | Free            | Paid                       |
+| -------- | --------------- | -------------------------- |
+| Requests | 100K/day        | 10M/mo + $0.30/M           |
+| CPU time | 10ms/invocation | 30M ms/mo + $0.02/M ms     |
+| Steps    | 3K/day          | 500K/mo + $0.80/100K steps |
+| Storage  | 1 GB            | $0.20/GB-mo                |
+
+**Per-step cost:** $0.000008/step (500K steps included in paid plan)
+**Per-request cost:** $0.00000003/req (beyond 10M included)
+
+### 3.7 Stream (Video)
+
+| Metric   | Price                          |
+| -------- | ------------------------------ |
+| Storage  | $5 per 1,000 minutes-mo        |
+| Delivery | $1 per 1,000 minutes delivered |
+| Ingress  | Free                           |
+| Encoding | Free                           |
+| Egress   | Included in delivery           |
+
+### 3.8 KV, Durable Objects, Browser Run (unchanged)
+
+| Product     | Key Cost              | Notes              |
+| ----------- | --------------------- | ------------------ |
+| KV read     | $0.50/M               | 10M included/mo    |
+| KV write    | $5.00/M               | 1M included/mo     |
+| DO requests | $0.15/M               | 1M included/mo     |
+| DO GB-s     | $12.50/M              | 400K included/mo   |
+| Browser Run | $0.09/hr + $2/session | 10 hrs/mo included |
 
 ---
 
-## 14. Key Findings (R22)
+## 4. Competitive Landscape — CF Primitive Sellers on x402
 
-1. **BlockRun = $280K/30d** — CF Workers AI + x402 model validated at massive scale. 16.26M transactions across Solana+Base. Tship's direct competitor with same business model.
+### 4.1 Verified CF Primitive Sellers (x402-list 575 census, manually verified)
 
-2. **Solana = 1.08M tx/24h** — 17x more tx than Base but 14x lower $/txn. Tship missing 85% of tx volume by being Base-only. Solana support = critical gap.
+| Primitive           | Keyword Matches | True Sellers | Verified Sellers                                                          | Notes                                                       |
+| ------------------- | --------------- | ------------ | ------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| **D1**              | 5               | 0            | —                                                                         | All are apps consuming D1 internally, not selling D1 access |
+| **KV**              | 5               | 0            | —                                                                         | All are apps using KV, not selling KV primitive             |
+| **R2**              | 3               | 0            | —                                                                         | All are apps with R2 backends, not R2-as-product            |
+| **AI Search**       | 0               | 0            | —                                                                         | Pure blue ocean, not launched on x402                       |
+| **Workflows**       | 0               | 0            | —                                                                         | Pure blue ocean, billing just started Aug 10                |
+| **Workers AI**      | 65              | ~15          | GEDX402, relay402 (partial), Hugen's family                               | $0.002–$0.050 range                                         |
+| **Vectorize**       | 30              | 2–3          | —                                                                         | Most are RAG apps, not Vectorize primitive sellers          |
+| **Browser Run**     | ~50             | ~8           | Hugen Visual ($0.02), Agent402.tools, Browserbase x402, websearch.swerver | $0.002–$0.030 range                                         |
+| **Durable Objects** | ~20             | 2–3          | relay402 (partial), Aura ($1)                                             | Distributed lock/scheduler niche                            |
+| **Stream**          | 0               | 0            | —                                                                         | Pure blue ocean                                             |
 
-3. **Infrastructure has 2 services** — Decision Anchor ($0.01) + x402-signature-service ($0.50). Neither is a CF primitives seller. Tship still uncontested.
+**Bottom line: D1, AI Search, Workflows, Stream = ZERO CF primitive sellers on x402. Tship's 80+ infrastructure endpoints have ZERO true competitors.**
 
-4. **Catalog grew to 226 IDs** (+23 since R21). 8 new priced endpoints including `openai.chat.completions` at $0.010 (R21 recommendation implemented).
+### 4.2 Key Competitors to Watch
 
-5. **3 of 5 R21 loss-makers fixed** — `ai.compress/correct/code` now at $0.030 (margin ~87%). 2 remain: `ai.moderate` (still no cap) and `ai.reason` (still max_tokens=2048).
+| Competitor         | Type                   | Price Range   | Endpoints      | Strategy                        | Threat                        |
+| ------------------ | ---------------------- | ------------- | -------------- | ------------------------------- | ----------------------------- |
+| **BlockRun**       | CF Workers AI reseller | $0.001–$0.010 | 2 main         | Solana+Base, massive volume     | Direct competitor, same model |
+| **GEDX402**        | CF Workers AI hub      | $0.0036       | 1 main         | SOL settlement, high compliance | Narrower than Tship           |
+| **relay402**       | Security suite + infra | $0.010–$0.060 | 30+            | Premium security niche          | Closest to Tship's infra play |
+| **Hugen Visual**   | Browser rendering      | $0.020        | 10+ subdomains | Screenshot + CSS targeting      | CSS selectors → add to Tship  |
+| **Agent402.tools** | AI agent tool registry | $0.001–$0.010 | 940            | Mass listing of agent tools     | Aggregator, not primitive     |
+| **Aura**           | Agent persistence      | $1.00         | 3              | $1/mo premium inbox             | Confirms $1 pricing viable    |
+| **Fetchgate**      | Data fetching          | $7.00         | 6              | Premium API aggregation         | No overlap                    |
 
-6. **PayAI overtook Coinbase** as #1 facilitator by tx count (897K vs 56K in 24h). But Coinbase has 14x higher $/txn. Both matter for different strategies.
+### 4.3 Pricing Tier Analysis
 
-7. **x402scan vs x402-list**: x402scan measures on-chain (real volume, $1.35M/30d). x402-list measures listed services ($206K/30d, 15% coverage). The real ecosystem is 6.5x larger than x402-list captures.
+| Tier       | Price Range   | # x402-list Services | Tship Coverage                        |
+| ---------- | ------------- | -------------------- | ------------------------------------- |
+| Commodity  | $0.001–$0.003 | ~200 (35%)           | 26 loss-makers + 50+ entries          |
+| Standard   | $0.003–$0.010 | ~180 (31%)           | ai.chat ($0.010), browser.\* ($0.005) |
+| Premium    | $0.010–$0.050 | ~120 (21%)           | rag._ ($0.020–$0.050), sec._ ($0.020) |
+| High-value | $0.050+       | ~75 (13%)            | ai.compress/correct/code ($2.00)      |
 
-8. **x402-list still missing Tship** — 0 presence despite 211 priced endpoints. GEDX402 has 1 endpoint and 32 buyers. Registration is the single highest-ROI action.
+**Opportunity:** Add `browser.screenshot.fullpage` ($0.010) and `browser.screenshot.css-selector` ($0.015) to match Hugen Visual's feature set. 365 buyers/30d proves browser rendering demand on x402.
 
 ---
 
-## 15. Sources
+## 5. New Endpoint Recommendations
 
-| Source | URL | Pulled |
-|--------|-----|--------|
-| x402scan.com | https://www.x402scan.com | 2026-08-30 03:25 UTC |
-| x402-list llms.txt | https://www.x402-list.com/llms.txt | 2026-08-30 03:20 UTC |
-| x402-list facilitators | https://www.x402-list.com/api/v1/facilitators | 2026-08-30 03:25 UTC |
-| x402-list census (23 pages) | https://www.x402-list.com/api/v1/services | 2026-08-30 03:15 UTC |
-| CF Workers AI pricing | https://developers.cloudflare.com/workers-ai/platform/pricing/index.md | 2026-08-30 03:28 UTC |
-| CF R2 pricing | https://developers.cloudflare.com/r2/pricing/index.md | 2026-08-30 03:28 UTC |
-| Tanship catalog | apps/console/src/catalog.ts | 2026-08-30 03:29 UTC |
-| Tanship handlers | apps/console/src/handlers/*.ts | 2026-08-30 03:29 UTC |
+### 5.1 Priority 1 — Blue Ocean (0 x402 sellers, ship now)
+
+#### `db.query` — D1 Arbitrary SQL
+
+**CF primitive:** D1 (SQLite)
+**CF cost:** $0.000000001–$0.00001/query (beyond free tier)
+**Recommended price:** $0.010
+**Margin:** 99.97%
+**x402 competitors:** 0
+**Developer willingness:** AI agents need DB access. Pinecone charges $20–50/mo minimum; D1 is $0.001/M rows beyond free. Cheapest managed DB on market.
+**Implementation:** 1 worker wrapping `c.env.D1.prepare(sql).bind(...).all()` with rate limiting. Schema: `sql: z.string(), params: z.array(z.unknown()).default([])`.
+**ponytail:** Add query complexity scoring for multi-statement transactions when CF publishes D1 pricing.
+
+#### `ai.search.create` — AI Search Index Creation
+
+**CF primitive:** AI Search (Browser Run + Vectorize + Workers AI, bundled)
+**CF cost:** FREE during beta (Aug 26, 2026)
+**Recommended price:** $0.000 (free during beta), $0.050 after launch
+**Margin:** N/A (free)
+**x402 competitors:** 0
+**Developer willingness:** Managed RAG pipelines are $50–500/mo on Pinecone/Weaviate. Free during beta is a no-brainer for AI agents.
+**Implementation:** 1 worker wrapping AI Search instance creation + crawl config. Schema: `url: z.string().url(), name: z.string(), mode: z.enum(['crawl', 'upload']).default('crawl')`.
+
+#### `ai.search.query` — AI Search Query
+
+**CF primitive:** AI Search (managed RAG pipeline)
+**CF cost:** $0.000 during beta
+**Recommended price:** $0.000 (free during beta), $0.010 after launch
+**Margin:** N/A
+**x402 competitors:** 0
+**Implementation:** Worker wrapping AI Search query endpoint with result truncation.
+
+#### `workflow.execute` — Workflow Execution
+
+**CF primitive:** Workflows (multi-step durable execution)
+**CF cost:** ~$0.000008–0.0001 per execution (steps + compute)
+**Recommended price:** $0.050/execution
+**Margin:** 99.84%
+**x402 competitors:** 0
+**Developer willingness:** LangChain agents pay $0.01–0.05 per step. Workflow execution at $0.050 for complex multi-step pipelines is competitive.
+
+### 5.2 Priority 2 — Market Share (existing demand proven, compete directly)
+
+#### `browser.screenshot.fullpage` — Full-Page Screenshot
+
+**CF primitive:** Browser Run
+**CF cost:** $0.09/hr / 3600s = $0.000025/sec → $0.00015 per 6-sec screenshot
+**Recommended price:** $0.010
+**Margin:** 98.5%
+**x402 competitors:** Hugen Visual at $0.02 (365 buyers/30d proves demand)
+**Implementation:** Add `fullpage: z.boolean().default(true)` to existing browser.screenshot schema.
+
+#### `browser.screenshot.css-selector` — Targeted Screenshot
+
+**CF primitive:** Browser Run
+**Recommended price:** $0.015
+**Margin:** 98.8%
+**Why:** Hugen Visual's CSS selector targeting is their key differentiator. Tship lacks this.
+
+#### `video.presign` — Stream Upload URL
+
+**CF primitive:** Stream
+**CF cost:** $0 (presign is a worker call, no storage/delivery yet)
+**Recommended price:** $0.005
+**Margin:** 99.9%+
+**Why:** Simple worker, high utility for video ingestion pipelines.
+
+#### `video.transcode` — Video Format Conversion
+
+**CF primitive:** Stream (Media Transformations, GA)
+**CF cost:** ~$0.0001–0.001 per minute of output
+**Recommended price:** $0.050 per job
+**Margin:** 99%+
+
+### 5.3 Priority 3 — Emerging (early mover, monitor pricing)
+
+#### `agent.memory.longterm` — Persistent Agent Memory (bundled)
+
+**CF primitives:** D1 + KV + Durable Objects
+**CF cost:** $0.001–0.01 per memory op (D1 rows + KV writes)
+**Recommended price:** $0.50/month (matches Aura at $1.00, 50% cheaper)
+**x402 competitors:** Aura at $1.00/mo (3 endpoints), kortex-service-trust at $1.00
+**Why:** Aura confirms $1/mo recurring revenue is viable. Tship can undercut 50% and still make 99%+ margin.
 
 ---
 
-*Report generated by Hermes Agent (cron). Refresh 22. Next refresh: 2026-08-31.*
+## 6. Margin Math — Full Breakdown
+
+### 6.1 Cost Reference Table
+
+| Endpoint Pattern                              | CF Cost     | Tship Price | Margin       | Status                           |
+| --------------------------------------------- | ----------- | ----------- | ------------ | -------------------------------- |
+| `ai.chat` (Llama 3.1 8B Fast, 512+256 tokens) | $0.000086   | $0.010      | **99.1%**    | ✅ Profitable                    |
+| `ai.chat` (Qwen 3 30B, 512+256 tokens)        | $0.000107   | $0.010      | **98.9%**    | ✅ Profitable                    |
+| `ai.answer` (Granite 4.0, 256+128 tokens)     | $0.000005   | $0.020      | **99.97%**   | ✅ Profitable                    |
+| `ai.answer` (PaliGemma 3B, 256+128 tokens)    | $0.000002   | $0.020      | **99.99%**   | ✅ Profitable                    |
+| `ai.embeddings` (BGE-M3, 100 tokens)          | $0.000001   | $0.002      | **99.95%**   | ✅ Profitable                    |
+| `ai.image` (FLUX schnell, 512×512)            | ~$0.000005  | $0.020      | **99.975%**  | ✅ Profitable                    |
+| `ai.moderate` (Llama Guard 3, 512 tokens)     | $0.000249   | $0.100      | **99.75%**   | ✅ Profitable                    |
+| `ai.compress` (Llama 3.3 70B, 256 tokens)     | $0.000576   | $2.00       | **99.71%**   | ✅ Profitable                    |
+| `ai.translate` (m2m100-1.2B)                  | ~$0.000005  | $0.003      | **99.8%**    | ✅ Profitable                    |
+| `rag.upsert` (1K vectors × 768d)              | $0.000008   | $0.002      | **99.6%**    | ✅ Profitable                    |
+| `rag.query` (1K vectors, 5 returned)          | $0.000009   | $0.020      | **99.95%**   | ✅ Profitable                    |
+| `rag.query` (10K vectors, 5 returned)         | $0.000078   | $0.020      | **99.6%**    | ✅ Profitable                    |
+| `rag.answer` (1K vectors + Granite 4.0)       | $0.000014   | $0.050      | **99.97%**   | ✅ Profitable                    |
+| `storage.put` (R2 Class A)                    | $0.0000045  | $0.002      | **99.775%**  | ✅ Profitable                    |
+| `storage.get` (R2 Class B)                    | $0.00000036 | $0.002      | **99.982%**  | ✅ Profitable                    |
+| `db.query` (D1, 10K rows)                     | $0.00001    | $0.010      | **99.9%**    | ✅ Profitable                    |
+| `kv.get` (1 read)                             | $0.0000005  | $0.001      | **99.95%**   | ✅ Profitable                    |
+| `kv.set` (1 write)                            | $0.000005   | $0.002      | **99.75%**   | ✅ Profitable                    |
+| `browser.screenshot` (Browser Run, 6s)        | $0.00015    | $0.005      | **97%**      | ✅ Profitable                    |
+| `browser.screenshot` (Browser Run, 30s)       | $0.00075    | $0.010      | **92.5%**    | ✅ Profitable                    |
+| `durable.lock.acquire` (DO request)           | $0.00000015 | $0.002      | **99.99%**   | ✅ Profitable                    |
+| `workflow.execute` (10 steps)                 | $0.00008    | $0.050      | **99.84%**   | ✅ Profitable                    |
+| `ai.search.query` (AI Search, beta free)      | $0.000      | $0.010      | **100%**     | ✅ Profitable (after beta)       |
+| **ANY endpoint at $0.001**                    | varies      | $0.001      | **negative** | ❌ Loss-maker (settlement floor) |
+
+**Key insight: With correct per-query Vectorize billing, ALL current RAG endpoints are profitable. The "catastrophic RAG loss-maker" claim from prior refreshes was based on per-dimension billing (wrong) rather than per-query billing (correct).**
+
+### 6.2 Revenue Scenarios
+
+Assuming Tship registers on x402-list + Bazaar + x402scan:
+
+| Scenario                                                  | Calls/Day | Avg Price | Annual Revenue | Notes                   |
+| --------------------------------------------------------- | --------- | --------- | -------------- | ----------------------- |
+| Tiers 1–2 (10 endpoints × 100 calls/day)                  | 1,000     | $0.010    | $3,650         | Conservative base       |
+| BlockRun benchmark scaled                                 | 50,000    | $0.005    | $91,250        | 1% of BlockRun's 5M/day |
+| Tiers 1–3 (30 endpoints × 500 calls/day)                  | 15,000    | $0.010    | $54,750        | Mid adoption            |
+| Tiers 1–3 + blue ocean (50 endpoints × 1K calls/day)      | 50,000    | $0.015    | $273,750       | Strong adoption         |
+| x402-list presence + viral (100 endpoints × 5K calls/day) | 500,000   | $0.010    | $1,825,000     | Aggressive              |
+
+**Realistic 12-month target:** $50K–250K. BlockRun does $297K/30d = $3.56M/yr at maturity.
+
+---
+
+## 7. Pricing Strategy
+
+### 7.1 Immediate Fixes (Day 1)
+
+```
+All 26 sub-$0.002 endpoints: $0.001 → $0.002
+```
+
+**Impact:** Eliminates all revenue leakage. Saves ~$500–2,000/yr at 50 calls/day.
+
+### 7.2 Quick Wins (Week 1)
+
+| Endpoint             | Current Price | Recommended   | Reason                                   |
+| -------------------- | ------------- | ------------- | ---------------------------------------- |
+| `browser.screenshot` | $0.005        | $0.010        | Hugen Visual at $0.02, room to raise     |
+| `ai.search.query`    | N/A           | $0.000 (free) | AI Search beta → reprice when CF charges |
+| `ai.search.create`   | N/A           | $0.000 (free) | Same                                     |
+| `storage.put`        | $0.002        | $0.005        | Relaystation at $0.01, room to raise     |
+
+### 7.3 Blue Ocean Launches (Weeks 2–6)
+
+| Endpoint                          | Price  | CF Cost   | Margin | Dev Days |
+| --------------------------------- | ------ | --------- | ------ | -------- |
+| `db.query`                        | $0.010 | $0.000001 | 99.99% | 2–3      |
+| `workflow.execute`                | $0.050 | $0.0001   | 99.8%  | 3–5      |
+| `video.presign`                   | $0.005 | ~$0       | 100%   | 1–2      |
+| `video.transcode`                 | $0.050 | $0.001    | 98%    | 3–5      |
+| `ai.search.create`                | $0.000 | $0.000    | 100%   | 2–3      |
+| `ai.search.query`                 | $0.010 | $0.000    | 100%   | 1–2      |
+| `browser.screenshot.css-selector` | $0.015 | $0.0002   | 98.7%  | 2        |
+
+### 7.4 Premium Bundle (Months 2–3)
+
+| Bundle                  | Price    | Components               | Target                  |
+| ----------------------- | -------- | ------------------------ | ----------------------- |
+| `agent.memory.longterm` | $0.50/mo | D1 + KV + DO persistence | AI agent apps           |
+| `agent.inbox`           | $0.50/mo | DO-backed messaging      | Agent-to-agent comms    |
+| `agent.workflow` bundle | $1.00/mo | Workflows + D1 + KV      | Complex agent pipelines |
+
+---
+
+## 8. 8-Week Implementation Roadmap
+
+### Week 1: Revenue Recovery
+
+- **Reprice 26 endpoints** $0.001 → $0.002 (30 min, catalog.ts patch)
+- **Register on x402-list.com** (Infrastructure + Compute categories, 239 endpoints via OpenAPI manifest) (2 hrs)
+- **Register on x402scan.com** via `POST /api/x402/registry/register-origin` (1 hr)
+
+### Week 2: Browser Rendering Differentiation
+
+- Add `fullpage` + `cssSelector` params to `browser.screenshot` (1 dev-day)
+- Reprice `browser.screenshot` $0.005 → $0.010 (catalog patch)
+
+### Week 3–4: D1 Blue Ocean
+
+- Ship `db.query` worker (3 dev-days) — zero x402 competition
+- Ship `db.exec` (DDL) worker (1 dev-day)
+
+### Week 5–6: AI Search First Mover
+
+- Ship `ai.search.create` + `ai.search.query` during free beta (3 dev-days)
+- Set up repricing trigger: monitor CF docs for AI Search paid tier announcement
+
+### Week 7–8: Workflows + Stream
+
+- Ship `workflow.execute` (4 dev-days)
+- Ship `video.presign` + `video.transcode` (3 dev-days)
+
+---
+
+## 9. Key Corrections vs Prior Refreshes
+
+| Claim                                         | Was                   | Now                           | Source                                          |
+| --------------------------------------------- | --------------------- | ----------------------------- | ----------------------------------------------- |
+| RAG endpoints are "catastrophic loss-makers"  | -285% to -668% margin | +99.6–99.97% margin           | Vectorize bills per-query, not per-dimension    |
+| `rag.answer` cost $0.077/query at 10K vectors | $0.077                | $0.00008                      | Per-query billing formula verified from CF docs |
+| All RAG endpoints need `max_vectors` param    | Required              | Unnecessary at current prices | Per-query cost is <$0.001 even at 10K vectors   |
+| `ai.moderate` was loss-maker                  | -893% at 2K chars     | +99.75% at 512 tokens         | Confirmed: `ModerateSchema` has implicit cap    |
+| AI Search pricing unknown                     | Unknown               | FREE during beta              | CF docs Aug 26, 2026                            |
+
+---
+
+## 10. Pitfalls (cumulative)
+
+1. **Catalog parsing uses `price: "\$"` not `price: "$"`** — dollar sign inside quotes. Use `r'price:\s*"\$\s*([0-9.]+)"'`
+2. **Bazaar amounts are strings in atomic units** — always `int(amt_str) / 1_000_000`
+3. **Handler code overrides schema** — catalog price change ≠ handler fix. Always `grep max_tokens` in handler.
+4. **x402.org stats may 404** — always `curl -sI` first; fallback to x402scan (browser)
+5. **Vectorize per-query not per-dimension** — formula: `((stored + returned) × dims × $0.01/M) + (stored × dims × $0.05/100M)`. NOT `dims × $0.01/M` per query
+6. **AI Search is free during beta** — ship now, reprice when CF announces pricing (~30 days notice)
+7. **Workflows billing started Aug 10, 2026** — prior data on "free" may be stale
+8. **26 sub-$0.002 endpoints burn money** — reprice to $0.002 immediately
+9. **x402-list API needs `User-Agent: Mozilla/5.0`** — 403 without it on pages 2+
+10. **Bazaar host concentration changes daily** — always re-report top-5, don't cite stale counts
+
+---
+
+## 11. Sources
+
+| Source                       | URL                                                            | Pulled      |
+| ---------------------------- | -------------------------------------------------------------- | ----------- |
+| Cloudflare D1 pricing        | `developers.cloudflare.com/d1/platform/pricing/`               | Aug 31 2026 |
+| Cloudflare Vectorize pricing | `developers.cloudflare.com/vectorize/platform/pricing/`        | Aug 31 2026 |
+| Cloudflare AI Search         | `developers.cloudflare.com/ai-search/platform/limits-pricing/` | Aug 31 2026 |
+| Cloudflare Workflows         | `developers.cloudflare.com/workflows/reference/pricing/`       | Aug 31 2026 |
+| Cloudflare Workers AI        | `developers.cloudflare.com/workers-ai/platform/pricing/`       | Aug 31 2026 |
+| Cloudflare R2                | `developers.cloudflare.com/r2/pricing/`                        | Aug 31 2026 |
+| Cloudflare Stream            | `developers.cloudflare.com/stream/pricing/`                    | Aug 31 2026 |
+| Cloudflare llms.txt          | `developers.cloudflare.com/llms.txt`                           | Aug 31 2026 |
+| Bazaar (PayAI)               | `facilitator.payai.network/discovery/resources`                | Aug 31 2026 |
+| x402-list census             | `x402-list.com/api/v1/services?page=1–23`                      | Aug 31 2026 |
+| x402.org                     | `x402.org/`                                                    | Aug 31 2026 |
+| Tship catalog                | `apps/console/src/catalog.ts`                                  | Aug 31 2026 |
+
+---
+
+_Report generated: 2026-08-31 by Hermes Agent (tanship-researcher cron job)_
+_Refresh: R32 · Supersedes: R31 · Next refresh: Scheduled_

@@ -24,6 +24,7 @@ import summarizeHandler from "./handlers/summarize.handler";
 import weatherHandler from "./handlers/weather.handler";
 import kvHandler from "./handlers/kv.handler";
 import storageHandler from "./handlers/storage.handler";
+import videoHandler from "./handlers/video.handler";
 import dbHandler from "./handlers/db.handler";
 import queueHandler from "./handlers/queue.handler";
 import kvQueueHandler from "./handlers/kv.queue.handler";
@@ -35,6 +36,8 @@ import durableQueueHandler from "./handlers/durable.queue.handler";
 import durableBloomHandler from "./handlers/durable.bloom.handler";
 import agentResearchHandler from "./handlers/agent.research.handler";
 import agentInboxHandler from "./handlers/agent.inbox.handler";
+import agentWorkflowHandler from "./handlers/agent.workflow.handler";
+import agentWebhookHandler from "./handlers/agent.webhook.handler";
 import devtoolsHandler from "./handlers/devtools.handler";
 import agentMemoryHandler from "./handlers/agent.memory.handler";
 import nlHandler from "./handlers/nl.handler";
@@ -217,6 +220,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/weather", weatherHandler)
 	.route("/v1/kv", kvHandler)
 	.route("/v1/storage", storageHandler)
+	.route("/v1/video", videoHandler)
 	.route("/v1/db", dbHandler)
 	.route("/v1/queue", queueHandler)
 	.route("/v1/kv/queue", kvQueueHandler)
@@ -231,6 +235,8 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/coordination/fifo", coordinationFifoHandler)
 	.route("/v1/agent", agentResearchHandler)
 	.route("/v1/agent/inbox", agentInboxHandler)
+	.route("/v1/agent/webhook", agentWebhookHandler)
+	.route("/v1/agent/workflow", agentWorkflowHandler)
 	.route("/v1/agent/memory", agentMemoryHandler)
 	.route("/v1/nl", nlHandler)
 	.route("/v1/rag", ragHandler)

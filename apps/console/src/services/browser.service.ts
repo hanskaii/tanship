@@ -175,4 +175,34 @@ export class BrowserRenderingService {
 		const json = (await res.json()) as RenderingJsonResult<unknown>;
 		return json.result;
 	}
+
+	/**
+	 * Full-page screenshot — captures the entire scroll height of the page
+	 * at high resolution (retina). Returns a single stitched image.
+	 * ponytail: replace native fullPage with custom scroll-and-merge when
+	 * pages exceed the browser-rendering viewport stitching limit.
+	 */
+	async screenshotFullPage(options: {
+		url: string;
+		width: number;
+		height: number;
+		quality: number;
+		format: "jpeg" | "png";
+	}): Promise<ArrayBuffer> {
+		const res = await this.post("screenshot", {
+			url: options.url,
+			screenshotOptions: {
+				fullPage: true,
+				format: options.format,
+				quality: Math.min(Math.max(options.quality, 10), 100),
+				omitBackground: false
+			},
+			viewport: {
+				width: options.width,
+				height: options.height,
+				deviceScaleFactor: 2
+			}
+		});
+		return res.arrayBuffer();
+	}
 }

@@ -425,7 +425,7 @@ function detectPII(output: string): {
 	}> = [];
 
 	// Email
-	const emailRe = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g;
+	const emailRe = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
 	let m: RegExpExecArray | null;
 	while ((m = emailRe.exec(output)) !== null) {
 		detections.push({
@@ -473,7 +473,7 @@ function detectPII(output: string): {
 
 	// API key pattern
 	const apiKeyRe =
-		/(?:api[_-]?key|secret|token|password)\s*[:=]\s*["']?([a-zA-Z0-9_\-]{20,})/gi;
+		/(?:api[_-]?key|secret|token|password)\s*[:=]\s*["']?([a-zA-Z0-9_-]{20,})/gi;
 	while ((m = apiKeyRe.exec(output)) !== null) {
 		detections.push({
 			type: "api_key",

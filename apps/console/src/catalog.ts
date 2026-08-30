@@ -172,6 +172,29 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "browser.screenshot.full-page",
+		method: "POST",
+		path: "/v1/browser/screenshot/full-page",
+		price: "$0.010",
+		description:
+			"Full-page screenshot at retina resolution — captures the entire scroll height of the page, not just the viewport. Returns JPEG/PNG at 2x device pixel ratio. Closes the gap vs Hugen's $0.02 offering at half the price.",
+		mimeType: "image/jpeg",
+		input: {
+			url: "Page URL to capture",
+			width: "Optional viewport width 320-3840 (default 1280)",
+			height: "Optional viewport height 240-2160 (default 800)",
+			quality: "Optional JPEG quality 10-100 (default 85)",
+			format: "Optional output format: jpeg or png (default jpeg)"
+		},
+		example: {
+			url: "https://example.com",
+			width: 1440,
+			height: 900,
+			quality: 90,
+			format: "jpeg"
+		}
+	},
+	{
 		id: "browser.pdf",
 		method: "POST",
 		path: "/v1/browser/pdf",
@@ -3818,6 +3841,85 @@ export const SERVICES: ServiceDef[] = [
 			limit: 50
 		}
 	},
+	// ── agent.workflow (R28 — blue ocean, 0 x402 competitors) ──
+	{
+		id: "agent.workflow.create",
+		method: "POST",
+		path: "/v1/agent/workflow",
+		price: "$0.25",
+		description:
+			"Define a reusable multi-step workflow: a named sequence of API calls (path + method + body) stored on edge KV with a 30-day TTL. Each step references any Tship endpoint path. Workflows are cheap to define ($0.25) and can be executed repeatedly. Up to 50 steps per workflow, up to 50 run history entries. Companion: POST /v1/agent/workflow/:id/run. Blue ocean: 0 x402 competitors for workflow orchestration.",
+		mimeType: "application/json",
+		input: {
+			name: "Human-readable workflow name (1-256 chars)",
+			description:
+				"Optional description of what this workflow does (max 2000 chars)",
+			steps: "Array of step objects [{id, path, method, body}] — 1-50 steps"
+		},
+		example: {
+			name: "web-research-pipeline",
+			description: "Fetch URL, embed, store in RAG",
+			steps: [
+				{
+					id: "fetch",
+					path: "/v1/browser",
+					method: "POST",
+					body: { url: "https://example.com", focus: "main content" }
+				},
+				{
+					id: "embed",
+					path: "/v1/ai/embed",
+					method: "POST",
+					body: { text: "{{fetch.content}}" }
+				}
+			]
+		}
+	},
+	{
+		id: "agent.workflow.run",
+		method: "POST",
+		path: "/v1/agent/workflow/:id/run",
+		price: "$0.25",
+		description:
+			"Execute a previously-defined workflow. Steps run sequentially via HTTP calls, results written to edge KV. Fire-and-forget: returns immediately with run_id; poll GET /v1/agent/workflow/run/:run_id for per-step results. Max 3 concurrent runs per workflow. Fail-fast on step error. KV TTL 30d.",
+		mimeType: "application/json",
+		input: {
+			id: "Workflow id returned from POST /v1/agent/workflow (path param)"
+		},
+		example: {
+			id: "abc123xyz"
+		}
+	},
+	{
+		id: "agent.workflow.runs",
+		method: "GET",
+		path: "/v1/agent/workflow/:id/runs",
+		price: "$0.25",
+		description:
+			"List the last 10 run history entries for a workflow. Returns run ids, status (running/completed/failed), step counts, and timestamps. Use GET /v1/agent/workflow/run/:run_id for full per-step results.",
+		mimeType: "application/json",
+		input: {
+			id: "Workflow id (path param)"
+		},
+		example: {
+			id: "abc123xyz"
+		}
+	},
+	{
+		id: "agent.workflow.run.get",
+		method: "GET",
+		path: "/v1/agent/workflow/run/:run_id",
+		price: "$0.25",
+		description:
+			"Get the full result of a workflow run: status, per-step results (status code, duration_ms, response body, error), and timing. Poll this endpoint after POST /v1/agent/workflow/:id/run until status is completed or failed.",
+		mimeType: "application/json",
+		input: {
+			run_id: "Run id returned from POST /v1/agent/workflow/:id/run (path param)"
+		},
+		example: {
+			run_id: "run456xyz"
+		}
+	},
 	// ── dev.slugify (R19 — blue ocean, 0 competitors) ──
 	{
 		id: "dev.slugify",
@@ -4020,6 +4122,103 @@ export const SERVICES: ServiceDef[] = [
 			secret: "super-secret-key",
 			algorithm: "HS256",
 			expiresInSeconds: 3600
+		}
+	},
+	// ── agent.webhook (R30 — blue ocean, signed webhook delivery on x402) ──
+	{
+		id: "agent.webhook",
+		method: "POST",
+		path: "/v1/agent/webhook",
+		price: "$0.005",
+		description:
+			"Reliable webhook delivery from agents. POST/GET/PUT/PATCH/DELETE any URL with optional HMAC-SHA256/SHA512 signature header (Stripe/GitHub/Slack-compatible). Built-in retry with exponential backoff, configurable timeout, custom headers. Returns status, attempt count, duration, and response body. Blue ocean: first paid webhook delivery primitive on x402 — agents can notify external services (Discord, Slack, custom backends) without exposing their own IP or running a server.",
+		mimeType: "application/json",
+		input: {
+			url: "Target webhook URL (https/http)",
+			method: "HTTP method (default POST)",
+			headers: "Optional custom headers object",
+			body: "Optional request body (auto-sets Content-Type: application/json)",
+			timeout_ms: "Request timeout in ms (1000-30000, default 10000)",
+			retries: "Number of retry attempts on failure (0-5, default 0)",
+			retry_delay_ms:
+				"Base delay between retries with exponential backoff (100-60000, default 1000)",
+			signature_secret: "Optional HMAC secret — signs body with this key",
+			signature_header:
+				"Header name to send the signature (default x-webhook-signature)",
+			signature_algorithm: "sha256 (default) | sha512"
+		},
+		example: {
+			url: "https://discord.com/api/webhooks/123456/abcdef",
+			method: "POST",
+			body: '{"content":"Agent task completed successfully"}',
+			signature_secret: "my-shared-secret",
+			retries: 2,
+			retry_delay_ms: 500
+		}
+	},
+	// ── video.* (R30 — blue ocean Cloudflare Stream primitive on x402) ──
+	{
+		id: "video.upload",
+		method: "POST",
+		path: "/v1/video/upload",
+		price: "$0.010",
+		description:
+			"Upload a video to Cloudflare Stream from a public HTTPS URL. Initiates async transcode (HLS + DASH), returns a videoId for status checks. First paid Stream primitive on x402 — blue ocean, zero competition. CF cost: $0 (Stream minutes only bill on delivery/storage, not upload).",
+		mimeType: "application/json",
+		input: {
+			url: "Public HTTPS URL of the source video (mp4/mov/webm)",
+			videoId: "Optional custom video ID (UUID if omitted)",
+			muted: "Default to muted playback (default false)"
+		},
+		example: {
+			url: "https://example.com/sample.mp4",
+			muted: false
+		}
+	},
+	{
+		id: "video.status",
+		method: "POST",
+		path: "/v1/video/status",
+		price: "$0.005",
+		description:
+			"Get status and metadata for a Cloudflare Stream video. Returns state (pending|ready|error), ready flag, size, thumbnail URL, and preview URL. Use to poll for transcode completion after video.upload.",
+		mimeType: "application/json",
+		input: {
+			videoId: "Cloudflare Stream video UID"
+		},
+		example: {
+			videoId: "abc123def456"
+		}
+	},
+	{
+		id: "video.list",
+		method: "POST",
+		path: "/v1/video/list",
+		price: "$0.005",
+		description:
+			"List recent videos uploaded to the Cloudflare Stream account. Returns videoId, status, filetype, size, and timestamps. Useful for cataloging uploads without a separate Stream dashboard.",
+		mimeType: "application/json",
+		input: {
+			limit: "Number of videos to return (1-100, default 25)",
+			cursor: "Optional pagination cursor"
+		},
+		example: {
+			limit: 10
+		}
+	},
+	{
+		id: "video.delete",
+		method: "POST",
+		path: "/v1/video/delete",
+		price: "$0.005",
+		description:
+			"Delete a video from Cloudflare Stream. Removes the source file and all generated renditions. Stops further storage/delivery billing. Idempotent — returns success even if video already missing.",
+		mimeType: "application/json",
+		input: {
+			videoId: "Cloudflare Stream video UID to delete"
+		},
+		example: {
+			videoId: "abc123def456"
 		}
 	}
 ];
