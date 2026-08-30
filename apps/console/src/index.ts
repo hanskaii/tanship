@@ -30,6 +30,7 @@ import kvQueueHandler from "./handlers/kv.queue.handler";
 import schedulerHandler from "./handlers/scheduler.handler";
 import durableHandler from "./handlers/durable.handler";
 import coordinationHandler from "./handlers/coordination.handler";
+import coordinationFifoHandler from "./handlers/coordination.fifo.handler";
 import durableQueueHandler from "./handlers/durable.queue.handler";
 import durableBloomHandler from "./handlers/durable.bloom.handler";
 import agentResearchHandler from "./handlers/agent.research.handler";
@@ -219,6 +220,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/durable/bloom", durableBloomHandler)
 	.route("/v1/durable/pubsub", durablePubsubHandler)
 	.route("/v1/coordination", coordinationHandler)
+	.route("/v1/coordination/fifo", coordinationFifoHandler)
 	.route("/v1/agent", agentResearchHandler)
 	.route("/v1/agent/inbox", agentInboxHandler)
 	.route("/v1/agent/memory", agentMemoryHandler)

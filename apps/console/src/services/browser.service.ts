@@ -124,6 +124,44 @@ export class BrowserRenderingService {
 		return json.result;
 	}
 
+	/**
+	 * Featured screenshot with device presets, quality tuning, and retina support.
+	 * ponytail: extends basic screenshot with device presets and quality tuning.
+	 * Add PNG output format when CF Browser Rendering adds support.
+	 */
+	async screenshotFeatured(options: {
+		url: string;
+		device?: string;
+		fullPage: boolean;
+		quality?: number;
+		format?: "jpeg" | "png";
+	}): Promise<ArrayBuffer> {
+		const devices: Record<string, { width: number; height: number }> = {
+			desktop: { width: 1280, height: 800 },
+			mobile: { width: 375, height: 812 },
+			tablet: { width: 768, height: 1024 },
+			"desktop-hd": { width: 1920, height: 1080 },
+			"desktop-4k": { width: 3840, height: 2160 }
+		};
+		const preset = devices[options.device ?? "desktop"];
+		const quality = options.quality ?? 85;
+		const res = await this.post("screenshot", {
+			url: options.url,
+			screenshotOptions: {
+				fullPage: options.fullPage,
+				format: options.format ?? "jpeg",
+				quality: Math.min(Math.max(quality, 10), 100),
+				omitBackground: false
+			},
+			viewport: {
+				width: preset.width,
+				height: preset.height,
+				deviceScaleFactor: 2 // retina by default
+			}
+		});
+		return res.arrayBuffer();
+	}
+
 	async json(
 		url: string,
 		prompt: string,

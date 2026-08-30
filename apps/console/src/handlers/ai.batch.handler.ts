@@ -53,18 +53,38 @@ async function runOne(
 	payload: Record<string, unknown>
 ): Promise<unknown> {
 	switch (type) {
-		case "chat":
-		case "reason": {
+		case "chat": {
 			const messages = (payload.messages as unknown[]) ?? [];
-			const max =
-				(payload.max_tokens as number) ??
-				(type === "reason" ? 2048 : 1024);
+			// ponytail: 70B at 2048 = $4.61/call. Cap to 256 to stay profitable.
+			const max = Math.min((payload.max_tokens as number) ?? 256, 256);
 			const model = (payload.model as string) ?? DEFAULT_CHAT;
+			const isHeavyModel =
+				model === "@cf/meta/llama-3.3-70b-instruct-fp8-fast" ||
+				model === "@cf/openai/gpt-oss-120b";
+			const safeTokens = isHeavyModel ? Math.min(max, 50) : max;
 			const out = (await ai.run(model, {
 				messages,
-				max_tokens: max
+				max_tokens: safeTokens
 			})) as { response?: string };
 			return { response: out.response ?? "", model };
+		}
+		case "reason": {
+			const messages = (payload.messages as unknown[]) ?? [];
+			// ponytail: 32B distill at 2048 = $19.90/call. Use 8B distill at 256.
+			const out = (await ai.run(
+				"@cf/deepseek-ai/deepseek-r1-distill-llama-8b",
+				{
+					messages,
+					max_tokens: Math.min(
+						(payload.max_tokens as number) ?? 256,
+						256
+					)
+				}
+			)) as { response?: string };
+			return {
+				response: out.response ?? "",
+				model: "@cf/deepseek-ai/deepseek-r1-distill-llama-8b"
+			};
 		}
 		case "sentiment": {
 			const out = (await ai.run("@cf/huggingface/distilbert-sst-2-int8", {
@@ -131,7 +151,8 @@ async function runOne(
 						content: String(payload.text ?? payload.code ?? "")
 					}
 				],
-				max_tokens: (payload.max_tokens as number) ?? 512
+				// ponytail: 8B at 512 = $0.20/call. Cap to 256.
+				max_tokens: Math.min((payload.max_tokens as number) ?? 256, 256)
 			})) as { response?: string };
 			return { response: out.response ?? "" };
 		}

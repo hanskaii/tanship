@@ -149,6 +149,29 @@ export const SERVICES: ServiceDef[] = [
 		example: { url: "https://example.com", fullPage: true }
 	},
 	{
+		id: "browser.screenshot.featured",
+		method: "POST",
+		path: "/v1/browser/screenshot/featured",
+		price: "$0.005",
+		description:
+			"Featured screenshot with device presets (desktop/mobile/tablet/HD/4K), quality tuning, and retina support. Returns JPEG by default, PNG when format=png is specified.",
+		mimeType: "image/jpeg",
+		input: {
+			url: "Page URL",
+			device: "Device preset: desktop, mobile, tablet, desktop-hd, desktop-4k (default desktop)",
+			fullPage: "Optional boolean (default false)",
+			quality: "Optional JPEG quality 10-100 (default 85)",
+			format: "Optional output format: jpeg or png (default jpeg)"
+		},
+		example: {
+			url: "https://example.com",
+			device: "mobile",
+			fullPage: true,
+			quality: 90,
+			format: "jpeg"
+		}
+	},
+	{
 		id: "browser.pdf",
 		method: "POST",
 		path: "/v1/browser/pdf",
@@ -384,12 +407,12 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.moderate",
 		method: "POST",
 		path: "/v1/ai/moderate",
-		price: "$0.002",
+		price: "$0.10",
 		description:
-			"Moderate text content for safety categories via edge AI (Llama Guard 3 8B), returns safety classification",
+			"Moderate text content for safety categories via edge AI (Llama Guard 3 8B), returns safety classification. Input capped at 2,000 chars to keep costs predictable.",
 		mimeType: "application/json",
 		input: {
-			text: "The text content to moderate"
+			text: "The text content to moderate (max 2,000 chars)"
 		},
 		example: {
 			text: "How do I build a secure REST API?"
@@ -461,9 +484,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.compress",
 		method: "POST",
 		path: "/v1/ai/compress",
-		price: "$0.030",
+		price: "$2.00",
 		description:
-			"Compress long text semantically using edge AI (Llama 3.1 8B) to save downstream LLM prompt tokens",
+			"Compress long text semantically using edge AI (Llama 3.3 70B FP8) to save downstream LLM prompt tokens. Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
 		input: {
 			text: "The text content to semantically compress"
@@ -525,9 +548,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.correct",
 		method: "POST",
 		path: "/v1/ai/correct",
-		price: "$0.030",
+		price: "$2.00",
 		description:
-			"Automatically correct grammar, spelling, punctuation, and phrasing via edge AI (Llama 3.1 8B)",
+			"Automatically correct grammar, spelling, punctuation, and phrasing via edge AI (Llama 3.3 70B FP8). Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
 		input: {
 			text: "The text content to check and correct"
@@ -540,9 +563,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.code",
 		method: "POST",
 		path: "/v1/ai/code",
-		price: "$0.030",
+		price: "$2.00",
 		description:
-			"Analyze, debug, or refactor code via coding-tailored edge AI (Llama 3.1 8B)",
+			"Analyze, debug, or refactor code via coding-tailored edge AI (Llama 3.3 70B FP8). Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
 		input: {
 			code: "The code snippet to analyze",
@@ -559,14 +582,14 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.reason",
 		method: "POST",
 		path: "/v1/ai/reason",
-		price: "$0.015",
+		price: "$2.00",
 		description:
-			"Reasoning model completion via edge AI (DeepSeek R1 Distill Qwen 32B), separating thinking process from final answer",
+			"Reasoning model completion via edge AI (DeepSeek R1 Distill Llama 8B), separating thinking process from final answer. Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
 		input: {
 			messages:
 				"Array of { role: system|user|assistant, content: string }",
-			max_tokens: "Optional max output tokens (default 2048)"
+			max_tokens: "Optional max output tokens (default 256, max 256)"
 		},
 		example: {
 			messages: [
@@ -1902,9 +1925,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "rag.query",
 		method: "POST",
 		path: "/v1/rag/query",
-		price: "$0.020",
+		price: "$0.10",
 		description:
-			"Embed a query and return the top-K nearest neighbours from the shared Vectorize index, filtered to the caller's namespace. Pay-per-query semantic search",
+			"Embed a query and return the top-K nearest neighbours from the shared Vectorize index, filtered to the caller's namespace. Pay-per-query semantic search. Repriced to cover Vectorize query costs at scale.",
 		mimeType: "application/json",
 		input: {
 			namespace: "Caller-chosen namespace to search within",
@@ -1960,9 +1983,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "rag.answer",
 		method: "POST",
 		path: "/v1/rag/answer",
-		price: "$0.050",
+		price: "$0.15",
 		description:
-			"Compound RAG answer: embeds the query, retrieves top-k matching chunks from Vectorize, and generates a grounded Llama 3.3 70B answer. KV-cached by query hash for 1h to amortize repeat questions",
+			"Compound RAG answer: embeds the query, retrieves top-k matching chunks from Vectorize, and generates a grounded Llama 3.3 70B answer (capped at 256 output tokens). KV-cached by query hash for 1h to amortize repeat questions",
 		mimeType: "application/json",
 		input: {
 			namespace: "Vectorize namespace to search (default 'default')",
@@ -2499,6 +2522,58 @@ export const SERVICES: ServiceDef[] = [
 			name: "Barrier name (1-256 chars)"
 		},
 		example: { name: "phase-2-ready" }
+	},
+	// ── coordination.fifo ──────────────────────────────────────────────────
+	{
+		id: "coordination.fifo.push",
+		method: "POST",
+		path: "/v1/coordination/fifo/push",
+		price: "$0.005",
+		description:
+			"Push a JSON-serializable message onto a named FIFO queue backed by a Durable Object. Survives isolate restarts. One push per call. Lightweight alternative to durable.queue for simple push/pop workflows.",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name (1-64 chars, [a-zA-Z0-9_-])",
+			payload: "Any JSON-serializable value (max 25,000 bytes serialized)"
+		},
+		example: {
+			name: "agent-inbox",
+			payload: { task: "send-email", to: "user@example.com" }
+		}
+	},
+	{
+		id: "coordination.fifo.pop",
+		method: "POST",
+		path: "/v1/coordination/fifo/pop",
+		price: "$0.005",
+		description:
+			"Pop up to N messages from a named FIFO queue (oldest first). Messages become invisible for 60s after popping — use coordination.fifo.ack in the full durable.queue handler to confirm, or they reappear automatically.",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name (1-64 chars, [a-zA-Z0-9_-])",
+			max: "Max messages to pop (1-100, default 1)"
+		},
+		example: {
+			name: "agent-inbox",
+			max: 5
+		}
+	},
+	{
+		id: "coordination.fifo.peek",
+		method: "POST",
+		path: "/v1/coordination/fifo/peek",
+		price: "$0.003",
+		description:
+			"Peek at up to N visible messages without affecting delivery state. Read-only inspection.",
+		mimeType: "application/json",
+		input: {
+			name: "Queue name (1-64 chars, [a-zA-Z0-9_-])",
+			max: "Max messages to peek (1-100, default 1)"
+		},
+		example: {
+			name: "agent-inbox",
+			max: 5
+		}
 	},
 	// ── kv.queue ──────────────────────────────────────────────────────────────
 	{

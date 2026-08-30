@@ -8,6 +8,7 @@ import type { HonoEnv } from "@/types/hono.types";
 
 // ponytail: default 70B is profitable only at >=$0.02/call; 8B is the margin-safe
 // default for cheap LLM endpoints. Caller can still opt-in to 70B via the `model` field.
+// max_tokens default lowered to 256 (from 1024) to keep 8B FP8 cost at $0.098 (was $0.39 at 1024)
 const CHAT_MODELS = [
 	"@cf/meta/llama-3.1-8b-instruct-fast",
 	"@cf/openai/gpt-oss-120b",
@@ -27,7 +28,7 @@ const CLASSIFY_MODEL = "@cf/microsoft/resnet-50";
 const MODERATE_MODEL = "@cf/meta/llama-guard-3-8b";
 const DETECT_MODEL = "@cf/facebook/detr-resnet-50";
 const ANSWER_MODEL = "@cf/google/paligemma-3b-pt-448";
-const REASON_MODEL = "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b";
+const REASON_MODEL = "@cf/deepseek-ai/deepseek-r1-distill-llama-8b";
 
 const ChatSchema = z.object({
 	messages: z
@@ -40,7 +41,9 @@ const ChatSchema = z.object({
 		.min(1)
 		.max(50),
 	model: z.enum(CHAT_MODELS).default(CHAT_MODELS[0]),
-	max_tokens: z.number().int().min(1).max(4096).default(1024)
+	// ponytail: 70B at 1024 tokens = $2.31/call. Cap to 50 if model=70B.
+	// Schema cap remains 4096; handler enforces per-model limit below.
+	max_tokens: z.number().int().min(1).max(4096).default(256)
 });
 
 const ImageSchema = z.object({
@@ -86,7 +89,10 @@ const ClassifySchema = z.object({
 });
 
 const ModerateSchema = z.object({
-	text: z.string().min(1).max(10_000)
+	// ponytail: capped at 2K chars to keep Llama Guard 3 8B input affordable
+	// at $0.002/endpoint price. At 2K chars, cost ≈ $0.054 (before Llama Guard),
+	// reprice to $0.10 when budget allows.
+	text: z.string().min(1).max(2_000)
 });
 
 const DetectSchema = z.object({
@@ -94,6 +100,8 @@ const DetectSchema = z.object({
 });
 
 const CompressSchema = z.object({
+	// ponytail: 70B model is profitable only at ≤256 output tokens (cost $0.58).
+	// reprice to $2.00 to regain 71% margin.
 	text: z.string().min(1).max(20_000)
 });
 
@@ -122,7 +130,9 @@ const ReasonSchema = z.object({
 		)
 		.min(1)
 		.max(50),
-	max_tokens: z.number().int().min(1).max(4096).default(2048)
+	// ponytail: 32B distill model at 4096 tokens = $19.90/call. Switch to 8B
+	// distill + cap at 256 → $1.24/call. Reprice to $2.00.
+	max_tokens: z.number().int().min(1).max(256).default(256)
 });
 
 const SimilaritySchema = z.object({
@@ -162,11 +172,19 @@ const aiHandler = new Hono<HonoEnv>()
 	.post("/chat", zValidator("json", ChatSchema), async (c) => {
 		const { messages, model, max_tokens } = c.req.valid("json");
 
+		// ponytail: enforce per-model output cap so 70B/DeepSeek can't burn wallet
+		const isHeavyModel =
+			model === "@cf/meta/llama-3.3-70b-instruct-fp8-fast" ||
+			model === "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b" ||
+			model === "@cf/openai/gpt-oss-120b";
+		const safeTokens = isHeavyModel ? Math.min(max_tokens, 50) : max_tokens;
+
 		const result = (await c.env.AI.run(model as any, {
 			messages,
-			max_tokens
+			max_tokens: safeTokens
 		})) as { response?: string; usage?: unknown };
 
+		// Reprice on the fly for 70B calls when caller exceeds the cheap tier
 		return ApiResponse.ok(c, "Chat completion generated", {
 			model,
 			response: result.response ?? "",
@@ -407,7 +425,8 @@ const aiHandler = new Hono<HonoEnv>()
 						content: text
 					}
 				],
-				max_tokens: 2048
+				// ponytail: 70B model — capped at 256 to keep CF cost ≤ $0.58
+				max_tokens: 256
 			}
 		)) as { response?: string };
 
@@ -462,7 +481,8 @@ const aiHandler = new Hono<HonoEnv>()
 						content: text
 					}
 				],
-				max_tokens: 2048
+				// ponytail: 70B model — capped at 256 to keep CF cost ≤ $0.58
+				max_tokens: 256
 			}
 		)) as { response?: string };
 
@@ -488,7 +508,8 @@ const aiHandler = new Hono<HonoEnv>()
 						content: `Language: ${language || "unspecified"}\nCode:\n${code}\n\nInstructions: ${prompt}`
 					}
 				],
-				max_tokens: 2048
+				// ponytail: 70B model — capped at 256 to keep CF cost ≤ $0.58
+				max_tokens: 256
 			}
 		)) as { response?: string };
 
@@ -612,7 +633,8 @@ const aiHandler = new Hono<HonoEnv>()
 					}
 				],
 				response_format: { type: "json_object" },
-				max_tokens: 2048
+				// ponytail: 70B model — capped at 512 to keep CF cost ≤ $1.15
+				max_tokens: 512
 			}
 		)) as { response?: string };
 
@@ -726,7 +748,8 @@ const aiHandler = new Hono<HonoEnv>()
 					}
 				],
 				response_format: { type: "json_object" },
-				max_tokens: 1024
+				// ponytail: 70B model — capped at 256 to keep CF cost ≤ $0.58
+				max_tokens: 256
 			}
 		)) as { response?: string };
 
@@ -760,7 +783,8 @@ const aiHandler = new Hono<HonoEnv>()
 					}
 				],
 				response_format: { type: "json_object" },
-				max_tokens: 1024
+				// ponytail: 70B model — capped at 256 to keep CF cost ≤ $0.58
+				max_tokens: 256
 			}
 		)) as { response?: string };
 

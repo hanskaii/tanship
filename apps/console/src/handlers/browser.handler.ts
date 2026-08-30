@@ -19,6 +19,16 @@ const ScreenshotSchema = UrlSchema.extend({
 	selector: z.string().optional()
 });
 
+const ScreenshotFeaturedSchema = z.object({
+	url: z.url(),
+	device: z
+		.enum(["desktop", "mobile", "tablet", "desktop-hd", "desktop-4k"])
+		.default("desktop"),
+	fullPage: z.boolean().default(false),
+	quality: z.number().int().min(10).max(100).default(85).optional(),
+	format: z.enum(["jpeg", "png"]).default("jpeg").optional()
+});
+
 const PdfSchema = UrlSchema.extend({
 	scale: z.number().min(0.1).max(2.0).default(1.0),
 	printBackground: z.boolean().default(false),
@@ -339,6 +349,29 @@ const browserHandler = new Hono<HonoEnv>()
 		const image = await browser.screenshot(input);
 		return c.body(image, 200, { "Content-Type": "image/png" });
 	})
+	.post(
+		"/screenshot/featured",
+		zValidator("json", ScreenshotFeaturedSchema),
+		async (c) => {
+			const { url, device, fullPage, quality, format } =
+				c.req.valid("json");
+			const browser = new BrowserRenderingService(
+				c.env.CLOUDFLARE_ACCOUNT_ID,
+				c.env.CLOUDFLARE_API_TOKEN
+			);
+
+			const image = await browser.screenshotFeatured({
+				url,
+				device,
+				fullPage,
+				quality,
+				format
+			});
+			return c.body(image, 200, {
+				"Content-Type": format === "png" ? "image/png" : "image/jpeg"
+			});
+		}
+	)
 	.post("/pdf", zValidator("json", PdfSchema), async (c) => {
 		const input = c.req.valid("json");
 		const browser = new BrowserRenderingService(
