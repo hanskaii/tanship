@@ -3858,26 +3858,52 @@ export const SERVICES: ServiceDef[] = [
 		},
 		example: { secret: "JBSWY3DPEHPK3PXP", digits: "6", period: 30 }
 	},
-	// ── dev.diff (R23 — blue ocean, unified text diff on x402) ──
+	// ── dev.hmac (R26 — blue ocean, HMAC signing on x402) ──
 	{
-		id: "dev.diff",
+		id: "dev.hmac",
 		method: "POST",
-		path: "/v1/dev/diff",
+		path: "/v1/dev/hmac",
 		price: "$0.001",
 		description:
-			"Compute a GNU-style unified diff between two text strings, with hunk headers (@@ -a,b +c,d @@) and configurable context lines. Myers LCS algorithm. Optional ignore_whitespace mode. Returns both structured hunk data and a unified-diff string ready to display. Pure compute, ~0.5ms for typical inputs. 0 x402 competitors for text diff.",
+			"HMAC signing with SHA-1, SHA-256, SHA-512. Pure compute via Web Crypto, ~0.1ms. Output as hex, base64, or base64url. Use for webhook signatures (Stripe/GitHub/Slack), AWS sigv4, JWT HS256/384/512, and API request signing. Blue ocean: 0 x402 competitors.",
 		mimeType: "application/json",
 		input: {
-			a: "Original text (0-500,000 chars)",
-			b: "New text (0-500,000 chars)",
-			context: "Context lines around changes (default 3, range 0-10)",
-			ignore_whitespace:
-				"Trim/normalize whitespace before diff (default false)"
+			data: "Input text to sign (max 1MB)",
+			key: "HMAC secret key (1-1024 chars)",
+			algorithm: "SHA-1 | SHA-256 (default) | SHA-512",
+			encoding: "hex (default) | base64 | base64url"
 		},
 		example: {
-			a: "line one\nline two\nline three",
-			b: "line one\nline TWO\nline three",
-			context: 1
+			data: "Hello, World!",
+			key: "my-secret-key",
+			algorithm: "SHA-256",
+			encoding: "hex"
+		}
+	},
+	// ── dev.jwt.sign (R26 — blue ocean, JWT issuance on x402) ──
+	{
+		id: "dev.jwt.sign",
+		method: "POST",
+		path: "/v1/dev/jwt/sign",
+		price: "$0.001",
+		description:
+			"Issue an HS256/HS384/HS512 signed JWT in one call. Pure compute via Web Crypto HMAC, ~0.5ms. Pass arbitrary claims, optional expiry, issuer/subject/audience/jti. Returns the compact token + decoded header + claims. Companion to /v1/devtools/jwt-decode. Blue ocean: 0 x402 competitors for JWT issuance.",
+		mimeType: "application/json",
+		input: {
+			payload: "JWT claims object (at least one key required)",
+			secret: "HMAC signing secret (1-1024 chars)",
+			algorithm: "HS256 (default) | HS384 | HS512",
+			expiresInSeconds: "Optional TTL in seconds (max 31536000 = 1yr)",
+			issuer: "Optional issuer claim (iss)",
+			subject: "Optional subject claim (sub)",
+			audience: "Optional audience claim (aud)",
+			jwtid: "Optional JWT ID claim (jti)"
+		},
+		example: {
+			payload: { userId: "user-123", role: "admin" },
+			secret: "super-secret-key",
+			algorithm: "HS256",
+			expiresInSeconds: 3600
 		}
 	}
 ];

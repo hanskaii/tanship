@@ -55,6 +55,8 @@ import {
 } from "./handlers/dev.crc32.handler";
 import { devTotpHandler } from "./handlers/dev.totp.handler";
 import { devDiffHandler } from "./handlers/dev.diff.handler";
+import { devHmacHandler } from "./handlers/dev.hmac.handler";
+import { devJwtSignHandler } from "./handlers/dev.jwt.handler";
 import { x402 } from "./middleware/x402.middleware";
 import { SERVICES } from "./catalog";
 import { OPENAPI_SPEC } from "./openapi";
@@ -195,6 +197,8 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/dev/encoding", devEncodingHandler)
 	.route("/v1/dev/totp", devTotpHandler)
 	.route("/v1/dev/diff", devDiffHandler)
+	.route("/v1/dev/hmac", devHmacHandler)
+	.route("/v1/dev/jwt/sign", devJwtSignHandler)
 	.route("/v1/security", securityHandler)
 	.route("/v1/security/screen", securityScreenHandler)
 	.route("/v1/security/cve-lookup", secCveLookupHandler)
