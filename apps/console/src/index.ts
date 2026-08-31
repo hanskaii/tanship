@@ -27,6 +27,7 @@ import kvHandler from "./handlers/kv.handler";
 import storageHandler from "./handlers/storage.handler";
 import videoHandler from "./handlers/video.handler";
 import dbHandler from "./handlers/db.handler";
+import d1Handler from "./handlers/d1.handler";
 import queueHandler from "./handlers/queue.handler";
 import kvQueueHandler from "./handlers/kv.queue.handler";
 import schedulerHandler from "./handlers/scheduler.handler";
@@ -224,6 +225,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/storage", storageHandler)
 	.route("/v1/video", videoHandler)
 	.route("/v1/db", dbHandler)
+	.route("/v1/d1", d1Handler)
 	.route("/v1/queue", queueHandler)
 	.route("/v1/kv/queue", kvQueueHandler)
 	.route("/v1/scheduler", schedulerHandler)

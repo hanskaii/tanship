@@ -28,7 +28,11 @@ const CLASSIFY_MODEL = "@cf/microsoft/resnet-50";
 const MODERATE_MODEL = "@cf/meta/llama-guard-3-8b";
 const DETECT_MODEL = "@cf/facebook/detr-resnet-50";
 const ANSWER_MODEL = "@cf/google/paligemma-3b-pt-448";
-const REASON_MODEL = "@cf/deepseek-ai/deepseek-r1-distill-llama-8b";
+// ponytail: R34 fix — `@cf/deepseek-ai/deepseek-r1-distill-llama-8b` is NOT in the
+// CF model catalog (verified Aug 31 2026, https://developers.cloudflare.com/workers-ai/models/).
+// This endpoint was erroring on every call. Switched to the only available distill: qwen-32b.
+// R32 cost (32B distill @ 256 tokens, per CF pricing) ≈ $1.24/call. R34 price raised to $0.500.
+const REASON_MODEL = "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b";
 
 const ChatSchema = z.object({
 	messages: z
@@ -651,7 +655,7 @@ const aiHandler = new Hono<HonoEnv>()
 		const { code, language } = c.req.valid("json");
 
 		const result = (await c.env.AI.run(
-			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			"@cf/meta/llama-3.1-8b-instruct-fast",
 			{
 				messages: [
 					{
@@ -665,8 +669,7 @@ const aiHandler = new Hono<HonoEnv>()
 					}
 				],
 				response_format: { type: "json_object" },
-				// ponytail: 70B model — capped at 512 to keep CF cost ≤ $1.15
-				max_tokens: 512
+				max_tokens: 256
 			}
 		)) as { response?: string };
 
@@ -766,7 +769,7 @@ const aiHandler = new Hono<HonoEnv>()
 		const { prompt, schema, dialect } = c.req.valid("json");
 
 		const result = (await c.env.AI.run(
-			"@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+			"@cf/meta/llama-3.1-8b-instruct-fast",
 			{
 				messages: [
 					{
@@ -780,7 +783,6 @@ const aiHandler = new Hono<HonoEnv>()
 					}
 				],
 				response_format: { type: "json_object" },
-				// ponytail: 70B model — capped at 256 to keep CF cost ≤ $0.58
 				max_tokens: 256
 			}
 		)) as { response?: string };

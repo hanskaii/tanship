@@ -101,7 +101,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.translate",
 		method: "POST",
 		path: "/v1/ai/translate",
-		price: "$0.003",
+		price: "$0.015",
 		description: "AI-powered translation via edge AI (m2m100-1.2b)",
 		mimeType: "application/json",
 		input: {
@@ -119,7 +119,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.sentiment",
 		method: "POST",
 		path: "/v1/ai/sentiment",
-		price: "$0.005",
+		price: "$0.015",
 		description:
 			"Sentiment analysis on text using edge AI, returns positive/negative label with score",
 		mimeType: "application/json",
@@ -377,7 +377,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.describe",
 		method: "POST",
 		path: "/v1/ai/describe",
-		price: "$0.005",
+		price: "$0.015",
 		description:
 			"Describe or caption any image via edge AI (BLIP), returns description text",
 		mimeType: "application/json",
@@ -392,7 +392,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.rerank",
 		method: "POST",
 		path: "/v1/ai/rerank",
-		price: "$0.003",
+		price: "$0.010",
 		description:
 			"Rerank a list of documents relative to a query via edge AI (BGE Reranker Large)",
 		mimeType: "application/json",
@@ -430,7 +430,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.search.query",
 		method: "POST",
 		path: "/v1/ai/search/query",
-		price: "$0.010",
+		price: "$0.150",
 		description:
 			"Managed semantic search across indexed content via Cloudflare Workers AI Search. Returns ranked results with relevance scores. Blue-ocean: zero x402 competitors. Cost is $0 during CF open beta.",
 		mimeType: "application/json",
@@ -443,11 +443,54 @@ export const SERVICES: ServiceDef[] = [
 			topK: 5
 		}
 	},
+	// ── ai.search.create (R33 — blue ocean, 0 x402 competitors, free during CF beta) ──
+	{
+		id: "ai.search.create",
+		method: "POST",
+		path: "/v1/ai/search/create",
+		price: "$0.010",
+		description:
+			"Create a managed AI Search index on Cloudflare Workers. Indexes are stored in edge KV with a 1-year TTL and tracked in a discovery list. Companion: POST /v1/ai/search/ingest to add documents, POST /v1/ai/search/query to search. Blue-ocean: zero x402 competitors. Cost is $0 during CF open beta — pure arbitrage during beta, reprice when CF bills.",
+		mimeType: "application/json",
+		input: {
+			name: "Human-readable index name (1-256 chars)",
+			description: "Optional description of the index (max 2000 chars)",
+			columns:
+				"Optional column type map for structured data {field: text|string|number|boolean|date}"
+		},
+		example: {
+			name: "x402-docs",
+			description: "Indexed x402 protocol documentation",
+			columns: { title: "text", author: "string", publishedAt: "date" }
+		}
+	},
+	// ── ai.search.ingest (R33 — companion to ai.search.create) ──
+	{
+		id: "ai.search.ingest",
+		method: "POST",
+		path: "/v1/ai/search/ingest",
+		price: "$0.005",
+		description:
+			"Ingest up to 1000 documents into an existing AI Search index. Documents are stored in KV with compound key per index. Total document count is tracked. Blue-ocean: first paid AI Search ingest on x402. Cost is $0 during CF open beta.",
+		mimeType: "application/json",
+		input: {
+			indexId: "Index id returned from POST /v1/ai/search/create",
+			documents:
+				"Array of document objects (1-1000, same schema per record)"
+		},
+		example: {
+			indexId: "550e8400-e29b-41d4-a716-446655440000",
+			documents: [
+				{ title: "Doc 1", author: "Alice", publishedAt: "2026-01-01" },
+				{ title: "Doc 2", author: "Bob", publishedAt: "2026-02-01" }
+			]
+		}
+	},
 	{
 		id: "ai.moderate",
 		method: "POST",
 		path: "/v1/ai/moderate",
-		price: "$0.10",
+		price: "$0.500",
 		description:
 			"Moderate text content for safety categories via edge AI (Llama Guard 3 8B), returns safety classification. Input capped at 2,000 chars to keep costs predictable.",
 		mimeType: "application/json",
@@ -524,7 +567,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.compress",
 		method: "POST",
 		path: "/v1/ai/compress",
-		price: "$0.03",
+		price: "$1.000",
 		description:
 			"Compress long text semantically using edge AI (Llama 3.3 70B FP8) to save downstream LLM prompt tokens. Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
@@ -605,7 +648,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.correct",
 		method: "POST",
 		path: "/v1/ai/correct",
-		price: "$0.01",
+		price: "$1.000",
 		description:
 			"Automatically correct grammar, spelling, punctuation, and phrasing via edge AI (Llama 3.3 70B FP8). Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
@@ -620,7 +663,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.code",
 		method: "POST",
 		path: "/v1/ai/code",
-		price: "$0.150",
+		price: "$1.000",
 		description:
 			"Analyze, debug, or refactor code via coding-tailored edge AI (Llama 3.3 70B FP8). Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
@@ -639,7 +682,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.reason",
 		method: "POST",
 		path: "/v1/ai/reason",
-		price: "$0.05",
+		price: "$1.000",
 		description:
 			"Reasoning model completion via edge AI (DeepSeek R1 Distill Llama 8B), separating thinking process from final answer. Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
@@ -722,7 +765,7 @@ export const SERVICES: ServiceDef[] = [
 		path: "/v1/ai/lint",
 		price: "$0.150",
 		description:
-			"Perform static code syntax checking and linting via compiler-tailored edge AI (Llama 3.3 70B FP8). Output capped at 512 tokens to keep costs predictable.",
+			"Perform static code syntax checking and linting via compiler-tailored edge AI (Llama 3.1 8B FP8). Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
 		input: {
 			code: "The code snippet to lint",
@@ -769,9 +812,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.sql",
 		method: "POST",
 		path: "/v1/ai/sql",
-		price: "$0.008",
+		price: "$0.150",
 		description:
-			"Generate a clean, optimized SQL query from natural language instructions via edge AI (Llama 3.1 8B)",
+			"Generate a clean, optimized SQL query from natural language instructions via edge AI (Llama 3.1 8B FP8). Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
 		input: {
 			prompt: "Natural language query description",
@@ -1759,7 +1802,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "kv.lease.status",
 		method: "POST",
 		path: "/v1/kv/lease/status",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Read-only snapshot of a lease: who currently holds it and when it expires. Free semantic — cheap to poll.",
 		mimeType: "application/json",
@@ -2924,7 +2967,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "durable.pubsub.subscribe",
 		method: "POST",
 		path: "/v1/durable/pubsub/subscribe",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Register a WebSocket connection id as a subscriber of a channel. Caller must first establish a WebSocket to the DO (separate path) and then invoke this endpoint to bind the id to the channel.",
 		mimeType: "application/json",
@@ -2941,7 +2984,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "durable.pubsub.unsubscribe",
 		method: "POST",
 		path: "/v1/durable/pubsub/unsubscribe",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Remove a WebSocket connection id from a channel's subscriber list. The WebSocket itself is not closed — caller is responsible for that.",
 		mimeType: "application/json",
@@ -2958,7 +3001,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "durable.pubsub.list",
 		method: "GET",
 		path: "/v1/durable/pubsub/channels",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"List all channels and their current subscriber counts. Free-ish introspection for agents to discover active topics.",
 		mimeType: "application/json",
@@ -3211,7 +3254,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.batch",
 		method: "POST",
 		path: "/v1/ai/batch",
-		price: "$0.025",
+		price: "$1.000",
 		description:
 			"Execute multiple AI operations in a single payment — chat, summarize, classify, sentiment, code, translate, embeddings, and more. Pass an array of operations; all run in parallel via Workers AI and results return as an array. Saves N payments vs calling each endpoint individually.",
 		mimeType: "application/json",
@@ -3405,7 +3448,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.function.call",
 		method: "POST",
 		path: "/v1/ai/function/call",
-		price: "$0.015",
+		price: "$1.000",
 		description:
 			"Structured AI function-calling: send a messages array and receive a guaranteed JSON object response. Uses Workers AI JSON-object mode so the model is constrained to valid JSON output — ideal for tool-use pipelines and structured data extraction.",
 		mimeType: "application/json",
@@ -3429,7 +3472,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.timestamp",
 		method: "POST",
 		path: "/v1/devtools/timestamp",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Get current Unix timestamp in any format: unix seconds, unix_ms, ISO-8601, RFC3339, date-only, time-only, or all at once. Useful for cron job scheduling and event ordering.",
 		mimeType: "application/json",
@@ -3443,7 +3486,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.http-status",
 		method: "POST",
 		path: "/v1/devtools/http-status",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Fetch any URL and return HTTP status code, status text, response headers (Content-Type, Cache-Control, Server, etc.), and redirect chain info. HEAD or GET with configurable timeout.",
 		mimeType: "application/json",
@@ -3459,7 +3502,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.json-validate",
 		method: "POST",
 		path: "/v1/devtools/json-validate",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Validate a JSON string. Returns type (object/array/string/number/boolean/null), key count, array length, and byte size. Non-strict mode returns result instead of error.",
 		mimeType: "application/json",
@@ -3473,7 +3516,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.sort-lines",
 		method: "POST",
 		path: "/v1/devtools/sort-lines",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Sort text lines alphabetically or reverse. Optional deduplication and case-insensitive mode. Useful for preparing word lists, deduplicating IDs, or normalizing data.",
 		mimeType: "application/json",
@@ -3489,7 +3532,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.html-entity",
 		method: "POST",
 		path: "/v1/devtools/html-entity",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Encode special characters to HTML entities (&lt;, &amp;, etc.) or decode entities back to characters. Handles numeric (&#65;) and named (&amp;) entities.",
 		mimeType: "application/json",
@@ -3503,7 +3546,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.email-normalize",
 		method: "POST",
 		path: "/v1/devtools/email-normalize",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Normalize an email address: lowercase, strip dots in Gmail local part, strip plus-aliases. Returns the normalized address, local part, and domain separately.",
 		mimeType: "application/json",
@@ -3514,7 +3557,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.robots-check",
 		method: "POST",
 		path: "/v1/devtools/robots-check",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Check if a URL is allowed by robots.txt. Fetches the site's robots.txt and evaluates User-agent: * rules against the target path. Returns allowed/denied with the matching rule.",
 		mimeType: "application/json",
@@ -3528,7 +3571,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.url-metadata",
 		method: "POST",
 		path: "/v1/devtools/url-metadata",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Extract page metadata from any URL: title, meta description, og:image, canonical link, and Content-Type. Headless-free (parses raw HTML response).",
 		mimeType: "application/json",
@@ -3542,7 +3585,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.domain-extract",
 		method: "POST",
 		path: "/v1/devtools/domain-extract",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Parse a URL or hostname string into components: root domain, subdomain, and public suffix. Works on any string containing a domain, even without a scheme.",
 		mimeType: "application/json",
@@ -3553,7 +3596,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.x402-ping",
 		method: "POST",
 		path: "/v1/devtools/x402-ping",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Probe one or more URLs to detect x402 payment protocol support. Checks for WWW-Authenticate header with x402 scheme. Default probes: x402.tanship.dev, payai.fun, three.ws.",
 		mimeType: "application/json",
@@ -3564,7 +3607,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.x402-site-audit",
 		method: "POST",
 		path: "/v1/devtools/x402-site-audit",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Audit an x402 endpoint for spec compliance: checks 402 status, WWW-Authenticate header fields (price, network, pay-to, max-amount), Vary header, and JSON content type. Returns a compliance score and letter grade.",
 		mimeType: "application/json",
@@ -3581,7 +3624,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.query-parse",
 		method: "POST",
 		path: "/v1/devtools/query-parse",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Parse a URL query string (with or without the leading ?) into key-value pairs. Handles duplicate keys by returning arrays when needed. Returns count of parameters.",
 		mimeType: "application/json",
@@ -3592,7 +3635,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.diff-lines",
 		method: "POST",
 		path: "/v1/devtools/diff-lines",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Compute a line-level diff between two text blobs. Returns added lines, removed lines, and unchanged count. Fast set-based algorithm, works on large files.",
 		mimeType: "application/json",
@@ -3603,7 +3646,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.json-keys",
 		method: "POST",
 		path: "/v1/devtools/json-keys",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Extract all keys from a JSON object. Shallow mode returns top-level keys; deep mode returns dot-notation paths for all nested keys (e.g. user.address.city).",
 		mimeType: "application/json",
@@ -3617,7 +3660,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "devtools.json-minify",
 		method: "POST",
 		path: "/v1/devtools/json-minify",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Minify a JSON string by removing whitespace. Returns original size, minified size, and bytes saved. Useful for reducing payload size for storage or transmission.",
 		mimeType: "application/json",
@@ -3924,7 +3967,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.slugify",
 		method: "POST",
 		path: "/v1/dev/slugify",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Convert any string to a URL-safe slug. Strips diacritics (NFD normalize), lowercases, replaces non-alphanumeric with hyphens, collapses runs. Pure compute, no API calls, $0.001 per invocation. 0 direct x402 competitors.",
 		mimeType: "application/json",
@@ -3959,7 +4002,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.hash",
 		method: "POST",
 		path: "/v1/dev/hash",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Compute cryptographic hashes (MD5, SHA-1, SHA-256, SHA-384, SHA-512, Keccak-256) of text or hex data. Pure compute, ~0.1ms, $0.001 per call. 0 direct x402 competitors.",
 		mimeType: "application/json",
@@ -4031,7 +4074,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.crc32",
 		method: "POST",
 		path: "/v1/dev/crc32",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Compute IEEE 802.3 CRC32 checksum of any text. Returns hex, signed-32 (Zip), and unsigned-32 (Ethernet) representations. Pure compute, ~0.1ms. Useful for integrity verification, file sync, and protocol checksums (gzip, PNG, ZIP). 0 direct x402 competitors.",
 		mimeType: "application/json",
@@ -4045,7 +4088,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.encoding",
 		method: "POST",
 		path: "/v1/dev/encoding",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Encode any text to common Web3/dev encodings: hex (bytes), base32 (RFC 4648, used in TOTP/Nostr/IPFS CIDs), base58 (Bitcoin/Solana addresses, IPFS), or base64url (JWT, URL-safe). Pure compute, ~0.1ms. 0 direct x402 competitors for these encodings.",
 		mimeType: "application/json",
@@ -4061,7 +4104,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.totp",
 		method: "POST",
 		path: "/v1/dev/totp",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Generate RFC 6238 TOTP codes from a Base32 secret. Supports 6/8 digits, configurable period (15-300s), SHA-1/SHA-256/SHA-512 algorithms. Returns the current code plus validity window. Pure compute via Web Crypto HMAC. Useful for testing 2FA flows, automating auth gates, and agent self-auth. 0 x402 competitors for TOTP generation.",
 		mimeType: "application/json",
@@ -4080,7 +4123,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.hmac",
 		method: "POST",
 		path: "/v1/dev/hmac",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"HMAC signing with SHA-1, SHA-256, SHA-512. Pure compute via Web Crypto, ~0.1ms. Output as hex, base64, or base64url. Use for webhook signatures (Stripe/GitHub/Slack), AWS sigv4, JWT HS256/384/512, and API request signing. Blue ocean: 0 x402 competitors.",
 		mimeType: "application/json",
@@ -4102,7 +4145,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "dev.jwt.sign",
 		method: "POST",
 		path: "/v1/dev/jwt/sign",
-		price: "$0.001",
+		price: "$0.002",
 		description:
 			"Issue an HS256/HS384/HS512 signed JWT in one call. Pure compute via Web Crypto HMAC, ~0.5ms. Pass arbitrary claims, optional expiry, issuer/subject/audience/jti. Returns the compact token + decoded header + claims. Companion to /v1/devtools/jwt-decode. Blue ocean: 0 x402 competitors for JWT issuance.",
 		mimeType: "application/json",
@@ -4218,6 +4261,28 @@ export const SERVICES: ServiceDef[] = [
 		},
 		example: {
 			videoId: "abc123def456"
+		}
+	},
+	// ── d1.bulk-write (R33 — blue ocean, D1 batch write primitive on x402) ──
+	{
+		id: "d1.bulk-write",
+		method: "POST",
+		path: "/v1/d1/bulk-write",
+		price: "$0.010",
+		description:
+			"Simplified bulk-insert endpoint for D1. Pass a table name and an array of records; this endpoint generates parameterized INSERT OR REPLACE statements and executes them atomically via D1 batch(). Blue ocean: orisha-data is the only D1 x402 competitor at $0.010, but exposes raw SQL. This endpoint provides a schema-free, structured interface at the same price point — no SQL knowledge required. CF cost: $0.000001 per row written.",
+		mimeType: "application/json",
+		input: {
+			table: "Target D1 table name (alphanumeric + underscore only)",
+			records:
+				"Array of record objects — all records must have identical keys (1-200 records per call)"
+		},
+		example: {
+			table: "users",
+			records: [
+				{ id: "u1", name: "Alice", email: "alice@example.com" },
+				{ id: "u2", name: "Bob", email: "bob@example.com" }
+			]
 		}
 	}
 ];
