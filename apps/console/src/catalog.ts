@@ -4284,6 +4284,52 @@ export const SERVICES: ServiceDef[] = [
 				{ id: "u2", name: "Bob", email: "bob@example.com" }
 			]
 		}
+	},
+	{
+		id: "vectorize.upsert",
+		method: "POST",
+		path: "/v1/vectorize/upsert",
+		price: "$0.020",
+		description:
+			"Raw Vectorize upsert — caller supplies pre-computed embedding vectors. No Workers AI embedding cost ($0.00001/Mdims vs $0.012/1K tokens for embedding). Blue ocean: 0 competitors on x402 census (Aug 2026, 575 services). CF cost: $0.00001/1M dimensions queried.",
+		mimeType: "application/json",
+		input: {
+			namespace: "Target Vectorize namespace (default: 'default')",
+			items: "Array of { id, values: number[], metadata?: object } — 1-100 items per call"
+		},
+		example: {
+			namespace: "default",
+			items: [
+				{
+					id: "doc-001",
+					values: [0.12, -0.34, 0.56, 0.78],
+					metadata: { category: "blog", author: "alice" }
+				}
+			]
+		}
+	},
+	{
+		id: "vectorize.metadata.filter",
+		method: "POST",
+		path: "/v1/vectorize/metadata/filter",
+		price: "$0.010",
+		description:
+			"Metadata-first vector search — filter by arbitrary metadata conditions (e.g. { category: { $eq: 'news' } }) then rank by vector similarity. 0 competitors on x402 census (Aug 2026). Blue ocean: no x402 seller exposes raw Vectorize metadata filtering. CF cost: $0.00001/1M dims queried.",
+		mimeType: "application/json",
+		input: {
+			query: "Natural-language query string (embed via BGE-M3 internally) — OR provide 'values' directly",
+			values: "Optional pre-computed vector (bypasses embedding cost)",
+			filter: "Metadata filter object, e.g. { status: { $eq: 'published' }, type: { $in: ['a', 'b'] } }",
+			topK: "Max results to return (default 5, max 50)",
+			namespace: "Optional namespace to scope the query",
+			returnMetadata: "Return metadata in results (default true)"
+		},
+		example: {
+			query: "machine learning best practices",
+			filter: { status: { $eq: "published" } },
+			topK: 5,
+			namespace: "default"
+		}
 	}
 ];
 

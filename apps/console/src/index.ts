@@ -45,6 +45,7 @@ import agentMemoryHandler from "./handlers/agent.memory.handler";
 import nlHandler from "./handlers/nl.handler";
 import ragHandler from "./handlers/rag.handler";
 import ragAnswerHandler from "./handlers/rag.answer.handler";
+import vectorizeHandler from "./handlers/vectorize.handler";
 import { handler as ragBatchUpsertHandler } from "./handlers/rag.batch-upsert.handler";
 import { aiCachedHandler } from "./handlers/ai.rag.handler";
 import aiBatchHandler from "./handlers/ai.batch.handler";
@@ -246,6 +247,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/rag", ragHandler)
 	.route("/v1/rag/batch", ragBatchUpsertHandler)
 	.route("/v1/rag/answer", ragAnswerHandler)
+	.route("/v1/vectorize", vectorizeHandler)
 	// Free discovery endpoints
 	.get("/v1/logs", (c) => {
 		return c.json({ success: true, logs: recentLogs });
