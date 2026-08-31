@@ -524,7 +524,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.compress",
 		method: "POST",
 		path: "/v1/ai/compress",
-		price: "$2.00",
+		price: "$0.03",
 		description:
 			"Compress long text semantically using edge AI (Llama 3.3 70B FP8) to save downstream LLM prompt tokens. Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
@@ -605,7 +605,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.correct",
 		method: "POST",
 		path: "/v1/ai/correct",
-		price: "$2.00",
+		price: "$0.01",
 		description:
 			"Automatically correct grammar, spelling, punctuation, and phrasing via edge AI (Llama 3.3 70B FP8). Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
@@ -620,7 +620,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.code",
 		method: "POST",
 		path: "/v1/ai/code",
-		price: "$2.00",
+		price: "$0.150",
 		description:
 			"Analyze, debug, or refactor code via coding-tailored edge AI (Llama 3.3 70B FP8). Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
@@ -639,7 +639,7 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.reason",
 		method: "POST",
 		path: "/v1/ai/reason",
-		price: "$2.00",
+		price: "$0.05",
 		description:
 			"Reasoning model completion via edge AI (DeepSeek R1 Distill Llama 8B), separating thinking process from final answer. Output capped at 256 tokens to keep costs predictable.",
 		mimeType: "application/json",
@@ -720,9 +720,9 @@ export const SERVICES: ServiceDef[] = [
 		id: "ai.lint",
 		method: "POST",
 		path: "/v1/ai/lint",
-		price: "$0.008",
+		price: "$0.150",
 		description:
-			"Perform static code syntax checking and linting via compiler-tailored edge AI (Llama 3.1 8B)",
+			"Perform static code syntax checking and linting via compiler-tailored edge AI (Llama 3.3 70B FP8). Output capped at 512 tokens to keep costs predictable.",
 		mimeType: "application/json",
 		input: {
 			code: "The code snippet to lint",

@@ -1,244 +1,158 @@
-# PM Report — Tanship x402 Market Intelligence
+# Tanship — PM Report
 
-**Refresh**: R31 — 2026-08-31
-**Prepared by**: Hermes Agent (cron)
-**Scope**: Cloudflare x402 paid API market, Tanship implementation status, deployment health
-
----
-
-## TL;DR
-
-| Item                     | Status                                                                                 |
-| ------------------------ | -------------------------------------------------------------------------------------- |
-| Git push to `main`       | ✅ Pushed — HEAD `3e663be` synced with `origin/main`                                   |
-| Production deploy        | ✅ Live at `x402.tanship.dev` (version `98d31347`)                                     |
-| New endpoints deployed   | ✅ 7 durable leader/barrier endpoints live                                             |
-| Uncommitted working tree | ⚠️ `catalog.ts` + 3 new handlers (`agent.webhook`, `agent.workflow`, `video`) + 2 docs |
-| Loss-maker fix           | ⚠️ Pending — **26 endpoints** below x402 settlement floor, burning ~$475/yr            |
-| x402-list registration   | ⚠️ **Not done** — zero presence on 575-service marketplace                             |
-| Blue-ocean opportunities | 🚨 4 CF primitives with **zero** x402 competition: AI Search, Workflows, Stream, D1    |
+**Date:** 2026-08-31 (Monday)
+**Cycle:** R33 research + R31 implementation follow-up
+**Author:** PM (autonomous cron)
 
 ---
 
-## 1. Market Landscape (R31 Live Data)
+## 🔑 KREDENSIAL / SECRETS YANG DIBUTUHKAN TIM
 
-### Ecosystem size
+> **PENTING untuk Huda** — Bagian ini paling atas karena memblokir progress jika tidak ada.
 
-- **575 services** on x402-list (stable 8+ days)
-- **~27,855 listings** on PayAI Bazaar
-- **x402.org 30-day volume**: $24.24M (~$291M annualized)
-- **x402scan 30-day txns**: ~19.5M
-- **Tship**: 239 priced endpoints (was 222 at R28 deploy → now 239 per R31 research)
+**CF Secrets/env baru yang dibutuhkan engineer/researcher untuk endpoint Tier-S:**
 
-### x402-list per-primitive competition
+| Secret                                                                     | Tujuan                                                      | Endpoint yang butuh                                       |
+| -------------------------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------- |
+| `CLOUDFLARE_ACCOUNT_ID` (jika belum ada di env prod)                       | Identitas akun untuk Workers AI Search + Workflows bindings | `ai.search.query`, `ai.search.create`, `workflow.execute` |
+| `AI_SEARCH_BINDING` / `wrangler.toml` binding `[[ai_search]]`              | Wajib untuk AI Search API (free beta)                       | `ai.search.*`                                             |
+| Workflows binding `[[workflows]] name="tanship-workflow"`                  | Untuk eksekusi multi-step                                   | `workflow.execute`                                        |
+| `D1_DATABASE_ID` binding update (jika ada env baru)                        | Bulk write & streaming SQL                                  | `d1.bulk-write`, `d1.query-streaming`                     |
+| `CF_API_TOKEN` dengan scope `Workflows: Edit` (untuk deploy)               | Provisioning Workflows                                      | `workflow.execute`                                        |
+| `VECTORIZE_INDEX_ID` (existing atau baru)                                  | Vectorize binding                                           | `vectorize.upsert/delete`                                 |
+| Secrets untuk **x402-list.com** submission: `X402_LIST_HOST_FEE` ($1 USDC) | Submit katalog ke x402-list                                 | Discovery (top revenue unlock)                            |
 
-| Cloudflare Primitive | True Primitive Sellers | Competition          |
-| -------------------- | ---------------------- | -------------------- |
-| **D1 (SQLite)**      | **0**                  | 🔵 Pure blue ocean   |
-| **AI Search**        | **0**                  | 🔵 Pure blue ocean   |
-| **Workflows**        | **0**                  | 🔵 Pure blue ocean   |
-| **Stream (video)**   | **0**                  | 🔵 Pure blue ocean   |
-| Vectorize            | ~2                     | 🟢 Near-blue-ocean   |
-| KV                   | ~3                     | 🟢 Near-blue-ocean   |
-| Durable Objects      | ~5                     | 🟢 Near-blue-ocean   |
-| R2 storage           | 3                      | 🟢 Lightly contested |
-| Workers AI           | ~15                    | 🟡 Competitive       |
-| Browser rendering    | ~8                     | 🟡 Competitive       |
-
-### Tship vs key competitors
-
-| Competitor             | Model                  | 30-day Volume  | Tship advantage                             |
-| ---------------------- | ---------------------- | -------------- | ------------------------------------------- |
-| **BlockRun**           | CF Workers AI reseller | **$297K**      | Tship: 30 ai.\* + full CF primitive catalog |
-| Hugen Visual API       | Browser rendering      | 365 buyers     | Tship: 24 endpoints at 4× lower price       |
-| Aura Agent Persistence | DO persistence         | $1.00/endpoint | Tship: same at $0.002–0.020 (50× cheaper)   |
-
-**Tship is the only x402 service offering all 7 CF primitives in one catalog.** No competitor has this breadth.
+**Status: TIDAK BLOKIR untuk R33** — Tier S shippable dengan env yang sudah ada untuk #3–5; #1–2 butuh AI Search binding (verifikasi sudah ada di `wrangler.toml`).
 
 ---
 
-## 2. Critical Issues
+## 1. Ringkasan Eksekutif
 
-### 🔴 P0: Zero x402 Discovery — Highest Revenue Blocker
-
-**Tship has 239 priced endpoints and ZERO entries in x402-list, x402scan, and PayAI Bazaar.**
-
-Every day without registration = lost revenue. BlockRun (2 endpoints) does **$297K/30d** with registration. Tship has 239 endpoints but no buyers can find them.
-
-**Fix:** 1 dev-day to register. Submit at `https://x402-list.com/submit` (SIWX signature + OpenAPI manifest URL). Category: Infrastructure (only 2 services there — first-mover moat).
-
-**Expected impact:** 3–10× discovery rate. Revenue potential: $5–15K/yr at base case.
-
-### 🔴 P1: 26 Loss-Makers Below Settlement Floor — $475/yr Burning
-
-All 26 priced at $0.001. x402 single-tx settlement floor is ~$0.0015. Each call loses money on settlement alone.
-
-| Namespace          | Endpoints                                      | Fix      |
-| ------------------ | ---------------------------------------------- | -------- |
-| `devtools.*`       | 15 (all)                                       | → $0.002 |
-| `dev.*`            | 6 (slugify, hash, crc32, encoding, totp, hmac) | → $0.002 |
-| `kv.lease.status`  | 1                                              | → $0.002 |
-| `durable.pubsub.*` | 4 (subscribe, unsubscribe, list)               | → $0.002 |
-
-**Fix:** `apps/console/src/catalog.ts` — 1-line price change each. Total effort: **30 minutes**. No new code required.
-
-### 🟡 P2: RAG/Memory Endpoints — Potentially Underpriced
-
-`rag.upsert` at $0.002 vs Vectorize cost $0.0078/call at 1K vectors. May be a real loss-maker at scale.
-
-**Fix:** Add `max_vectors` parameter and dynamic pricing, or reprice upsert to $0.010 minimum.
-
-### 🟡 P3: AI Search Beta Window Closing
-
-CF AI Search is **free during beta**. No x402-list competitors (0 true sellers). Ship endpoints now to build buyer relationships before CF announces GA pricing (typically 30-day notice).
+| Area                                  | Status                                                                                                     |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Riset (R33)**                       | ✅ Selesai — 13 peluang blue-ocean teridentifikasi                                                         |
+| **Engineer — cycle sebelumnya (R31)** | ✅ 1 endpoint shipped, deployed, pushed                                                                    |
+| **Engineer — rekomendasi R33**        | ⏳ Belum dimulai, 4 dev-days Tier S                                                                        |
+| **Deployment**                        | ✅ Worker live, sandbox Docker build blocked (pre-existing env issue)                                      |
+| **Git push**                          | ✅ Up-to-date dengan `origin/main` (commit `7cae384`); working tree punya uncommitted docs/catalog changes |
 
 ---
 
-## 3. Blue Ocean Opportunities (4 CF Primitives — Zero Competition)
+## 2. Peluang Baru dari Riset (R33) — 13 Blue-Ocean
 
-### AI Search (Cloudflare) — Pure Blue Ocean 🔵
+### Tier S — Ship this week (4 dev-days, 100% margin)
 
-- **Status:** Open beta, free unlimited queries
-- **x402-list competitors:** 0
-- **Endpoints to ship:** `ai.search.create` ($0.050), `ai.search.query` ($0.010), `ai.search.index-status` ($0.005)
-- **Dev effort:** 2–3 days per endpoint
-- **Timeline risk:** CF announces paid tier with ~30 days notice. **Ship before then.**
+1. `ai.search.query` — $0 cost (beta), $0.010 ask, 1 dev-day
+2. `ai.search.create` — $0 cost, $0.010 ask, 0.5 dev-day
+3. `workflow.execute` — $0.000008 cost, $0.050 ask, 1 dev-day
+4. `d1.bulk-write` — $0.000001 cost, $0.010 ask, 0.5 dev-day
+5. `d1.query-streaming` — $0.000001 cost, $0.010 ask, 1 dev-day
 
-### Workflows (Cloudflare) — Pure Blue Ocean 🔵
+### Tier A — Next week (4 dev-days)
 
-- **Cost:** $0.30/M requests + $0.02/M CPU ms + $0.80/100K steps
-- **x402-list competitors:** 0
-- **Endpoint:** `workflow.execute` at $0.050/step
-- **CF cost at 1 step:** ~$0.0008. **Margin: 98.4%**
-- **Dev effort:** 3 days
+6. `vectorize.upsert` ($0.020)
+7. `vectorize.delete` ($0.005)
+8. `durable.cron` ($0.010)
+9. `durable.rate-limit` ($0.005)
+10. `r2.list` ($0.005)
 
-### Stream (Cloudflare) — Pure Blue Ocean 🔵
+### Tier B — 2 weeks (3 dev-days)
 
-- **Cost:** $5/1000 min-mo storage + $1/1000 min delivered
-- **x402-list competitors:** 0
-- **Endpoint:** `video.transcode` at $0.050/minute
-- **Margin:** 98% (CF delivery ~$0.001/min)
-- **Dev effort:** 2 days
+11. `stream.transcribe` ($0.050)
+12. `stream.deliver` ($0.020)
+13. `agent.memory.store/recall` ($0.010, hold sampai CF Memory GA)
 
-### D1 (Cloudflare) — Pure Blue Ocean 🔵
+**Zero direct x402 competitors** untuk: AI Search, Workflows, Durable Objects. **1 competitor** untuk D1 (orisha-data @ $0.010 — kita 70% lebih murah).
 
-- **Cost:** $0.001/M rows read, $1.00/M rows written
-- **x402-list competitors:** 0 (all "database" keyword matches use D1 internally, none sell access)
-- **Endpoints:** `db.query` ($0.005 read-only), `db.exec` ($0.010 write)
-- **Margin:** 80–90%
-- **Note:** Tship already has these — verify catalog pricing is correct
+### Quick wins tanpa kode baru
+
+- **Reprice 26 loss-makers** ($0.001 → $0.002) — 30 menit, hilangkan settlement-floor leak
+- **Submit ke x402-list.com** — 1 dev-day, biggest revenue unlock (Tship 240 eps = 6.8% dari total listed, saat ini presence = 0)
 
 ---
 
-## 4. Engineering Status
+## 3. Rincian Implementasi Terakhir (R31 cycle)
 
-### Deployed (R28, Aug 30)
+**Endpoint:** `browser.screenshot.full-page`
 
-✅ 7 new endpoints live at `x402.tanship.dev`:
+| Aspek     | Detail                                                                                                                                                                   |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Path      | `POST /v1/browser/screenshot/full-page`                                                                                                                                  |
+| Price     | $0.010 (2× basic screenshot, 50% dari Hugen $0.02)                                                                                                                       |
+| Cost      | ~$0.002/call (CF Browser Rendering, retina scale 2x)                                                                                                                     |
+| Margin    | ~80%                                                                                                                                                                     |
+| Params    | `url` (req), `width` 320–3840, `height` 240–2160, `quality` 10–100, `format` jpeg\|png                                                                                   |
+| Files     | `apps/console/src/services/browser.service.ts` (method baru), `apps/console/src/handlers/browser.handler.ts` (route + Zod schema), `apps/console/src/catalog.ts` (entry) |
+| Deps baru | Tidak ada (zero new deps)                                                                                                                                                |
+| Output    | Raw binary JPEG/PNG via `c.body()`                                                                                                                                       |
 
-| Endpoint                                                          | Price      | Margin | Annual potential                       |
-| ----------------------------------------------------------------- | ---------- | ------ | -------------------------------------- |
-| `durable.leader.elect`                                            | $0.020     | 99.6%  | $365                                   |
-| `durable.barrier.create`                                          | $0.010     | 99%    | $182                                   |
-| `durable.barrier.join`                                            | $0.010     | 99%    | $182                                   |
-| `durable.leader.{status,renew,resign}` + `durable.barrier.status` | avg $0.002 | 92%    | $219                                   |
-| **Total**                                                         |            |        | **$948/yr** (base case @ 50 calls/day) |
-
-**Quality gates:** `pnpm run check` ✅ (0 errors, 14 pre-existing warnings), `pnpm run build` ✅, `wrangler deploy` ✅
-
-### Working Tree (Uncommitted)
-
-⚠️ 3 new handlers built, not registered:
-
-| Handler                     | Status                              |
-| --------------------------- | ----------------------------------- |
-| `agent.webhook.handler.ts`  | Built, not registered in `index.ts` |
-| `agent.workflow.handler.ts` | Built, not registered in `index.ts` |
-| `video.handler.ts`          | Built, not registered in `index.ts` |
-
-These need: (1) review, (2) register in `index.ts`, (3) add to catalog, (4) deploy.
+**Justifikasi pasar:** Hugen Visual API = $0.02/screenshot, 365 buyer/30d. Tship `browser.screenshot` ($0.005) viewport-only. Endpoint baru ini tutup gap dengan full-page + retina + quality control di setengah harga Hugen.
 
 ---
 
-## 5. Git & Deployment Status
+## 4. Status Deployment
 
-| Item            | Value                                                                   |
-| --------------- | ----------------------------------------------------------------------- |
-| Current HEAD    | `3e663be` — `feat(console): durable.leader & durable.barrier endpoints` |
-| Upstream sync   | ✅ Matches `origin/main`                                                |
-| Live version ID | `98d31347-a2bb-43c0-b0ef-4b22515b3b16`                                  |
-| Production URL  | `https://x402.tanship.dev/v1/services`                                  |
-| DO bindings     | ✅ LEADER + BARRIER verified on deploy                                  |
+| Check                      | Hasil                                                                                  |
+| -------------------------- | -------------------------------------------------------------------------------------- |
+| `pnpm run check`           | ✅ 0 errors, 11 pre-existing warnings                                                  |
+| `pnpm run build`           | ✅ console#build + web#build sukses                                                    |
+| `wrangler deploy`          | ✅ Worker uploaded (4.96s), startup 122ms                                              |
+| `GET /v1/services`         | ✅ `browser.screenshot.full-page` muncul di list                                       |
+| **Live**                   | ✅ Production aktif                                                                    |
+| Docker sandbox image build | ❌ Gagal (Docker Hub network timeout) — **pre-existing env issue, tidak terkait kode** |
+| Sandbox runtime            | ⏸ Tidak dipakai di production path                                                     |
 
-### Docker Hub Issue (Note for Next Deploy)
-
-`cloudflare/sandbox:0.7.0` image pull times out from cron host (outbound network unreliable).
-
-**Workaround:** Use `--containers-rollout none` flag (skips docker build, ships Worker code + DO bindings).
-
-**Fix:** Pre-pull the image or switch sandbox to a Cloudflare-hosted mirror before next deploy cycle.
+**Worker live dan endpoint berfungsi di production.**
 
 ---
 
-## 6. Priority Stack (This Week)
+## 5. Status Git Push
 
-| #      | Action                                                       | Effort     | Annual Impact                            | Owner         |
-| ------ | ------------------------------------------------------------ | ---------- | ---------------------------------------- | ------------- |
-| **P0** | Register on x402-list.com + x402scan + Bazaar                | 2 h        | 3–10× discovery, $5–15K/yr               | Huda / DevRel |
-| **P0** | Fix 26 loss-makers (`$0.001` → `$0.002`)                     | 30 min     | +$475/yr + eliminate settlement failures | Engineer      |
-| **P1** | Commit + deploy `agent.webhook` + `agent.workflow` + `video` | 1 h        | Blue-ocean pipeline                      | Engineer      |
-| **P1** | Ship AI Search endpoints (free beta window)                  | 1 week     | $5K/yr, first-mover                      | Engineer      |
-| **P2** | Ship Workflows endpoints                                     | 3 days     | $1.8K/yr                                 | Engineer      |
-| **P2** | Ship Stream (video) endpoints                                | 2 days     | $1.8K/yr                                 | Engineer      |
-| **P2** | Fix `rag.upsert` pricing (add dynamic `max_vectors`)         | 1 day      | Eliminate burn at scale                  | Engineer      |
-| **P3** | Solana settlement integration                                | 2 dev-days | 17× tx reach                             | Engineer      |
+| Aspek                     | Status                                                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Branch                    | `main`                                                                                                                   |
+| Sync dengan `origin/main` | ✅ Up-to-date                                                                                                            |
+| Last commit (R31 cycle)   | `7cae384` — `docs: update engineering report`                                                                            |
+| Implementation commit     | `3f52df8` — `feat(console): browser.screenshot.full-page`                                                                |
+| Push                      | ✅ Pushed ke `origin/main`                                                                                               |
+| **Working tree**          | ⚠️ Uncommitted changes: `apps/console/src/catalog.ts`, `docs/research-results.md` (perlu commit + push cycle berikutnya) |
+| Untracked                 | `.agent-logs/`                                                                                                           |
 
----
-
-## 7. Annual Revenue Scenarios
-
-| Scenario                                   | Calls/day/endpoint | Avg Price  | Annual Revenue |
-| ------------------------------------------ | ------------------ | ---------- | -------------- |
-| Floor (loss-leader)                        | 1                  | $0.003     | $256           |
-| Pre-discovery                              | 5                  | $0.005     | $1,284         |
-| **Base (post-loss-fix + registered)**      | **50**             | **$0.010** | **$42,705**    |
-| Stretch (premium mix + blue-ocean)         | 200                | $0.015     | $262,800       |
-| BlockRun-class (same model, 239 endpoints) | 1,000              | $0.020     | $1,825,000     |
-
-**Reference:** BlockRun does $297K/30d = $3.56M/yr from 2 CF Workers AI endpoints. Tship has 239 endpoints across 7 CF primitives — ceiling is much higher with registration and distribution.
+**Risiko minor:** Working tree punya 2 modified files yang belum di-commit. Tidak konflik dengan main tapi sebaiknya dirapikan dalam cycle engineer berikutnya.
 
 ---
 
-## 8. Required Credentials / Env / Secrets
+## 6. Proyeksi Revenue (dari R33)
 
-> ⚠️ **Cloudflare Product Credentials Needed:**
->
-> **AI Search (CF product):** If CF AI Search transitions from free beta to paid, a new `AI_` binding may be required in `wrangler.jsonc`. Monitor [CF AI Search pricing page](https://developers.cloudflare.com/ai-search/platform/limits-pricing/) — CF typically gives 30 days notice before GA.
->
-> **Stream (CF product):** Already covered by existing CF bindings in `wrangler.jsonc`. No new secrets needed.
->
-> **Workflows (CF product):** Already covered by existing CF bindings in `wrangler.jsonc`. No new secrets needed.
->
-> **x402-list Registration:** Requires SIWX signature for the domain (`x402.tanship.dev`). Ensure `TSHIP_PRIVATE_KEY` or equivalent SIWX signing key is available in the deployment environment.
->
-> **All other blue-ocean endpoints (D1, KV, R2, Durable Objects, Vectorize, Workers AI, Browser):** Use existing bindings already declared in `wrangler.jsonc`. **No new secrets required.**
+| Skenario                  | Tship share                  | 12-bulan revenue    |
+| ------------------------- | ---------------------------- | ------------------- |
+| Konservatif               | 0.1% x402-list 30d vol       | $2,400 (status quo) |
+| Realistis                 | 0.5% + 13 endpoint baru      | $12K–$60K           |
+| Agresif (BlockRun parity) | 5% + 13 endpoint + marketing | $120K–$500K         |
+
+**BlockRun benchmark:** $280K/30d, stack identik (CF Workers AI + x402), catalog 6.7× lebih kecil dari Tship. Revenue gap = either underpriced atau under-distributed. **Submit ke x402-list = single biggest unlock.**
 
 ---
 
-## 9. Key Numbers Summary
+## 7. Rekomendasi Prioritas untuk Huda
 
-| Metric                   | Value                                                       |
-| ------------------------ | ----------------------------------------------------------- |
-| Total x402 ecosystem     | $24.24M/30d, 575 services, 19.5M txns                       |
-| Tship catalog            | 239 priced endpoints, $0.001–$2.00                          |
-| Tship x402-list presence | **0** (biggest revenue blocker)                             |
-| BlockRun revenue         | $297K/30d (2 endpoints)                                     |
-| Loss-makers              | 26 endpoints × $475/yr burn                                 |
-| Blue-ocean primitives    | 4 (AI Search, Workflows, Stream, D1 — all zero competition) |
-| Gross margin (blended)   | 94%                                                         |
-| Deployment status        | ✅ Live at `x402.tanship.dev`                               |
-| Git status               | ✅ Synced with `origin/main` (`3e663be`)                    |
+1. ✅ **Approve secrets list** di atas — kalau ada yang kurang, kasih ke engineer sekarang
+2. 🚀 **Prioritas 1:** Tier S 5 endpoints (4 dev-days) — pure blue-ocean, 100% margin
+3. 📋 **Prioritas 2:** Reprice 26 loss-makers (30 menit)
+4. 📣 **Prioritas 3:** Submit katalog ke x402-list.com (1 dev-day, biggest revenue impact)
+5. 🧹 **Cleanup:** Commit + push working tree changes (`catalog.ts` + `research-results.md`)
 
 ---
 
-_Report generated: 2026-08-31 | Sources: `docs/research-results.md` (R31), `docs/engineering-report.md` | Next refresh: TBD_
+## 8. Risiko yang Dipantau
+
+| Risiko                                            | Likelihood | Impact | Mitigasi                               |
+| ------------------------------------------------- | ---------- | ------ | -------------------------------------- |
+| Tship discovery = 0 di x402-list                  | High       | High   | Submit (top priority #3)               |
+| Kompetitor copy blue-ocean (AI Search, Workflows) | High       | Medium | Ship 5 dalam 4 hari, first-mover claim |
+| CF naikkan AI Search pricing post-beta            | Medium     | Low    | 30-day notice window, reprice          |
+| Docker sandbox build failure                      | Low        | Low    | Pre-existing, tidak blokir production  |
+
+---
+
+**Bottom line:** Riset R33 konfirmasi blue-ocean thesis masih terbuka. Engineer R31 successfully shipped 1 endpoint, deployed, pushed. **Next leverage point: 4 dev-days Tier S + 30 min reprice + 1 dev-day submission = 5 dev-days ke revenue unlock yang material.**
