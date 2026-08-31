@@ -4,6 +4,7 @@ import { Sandbox } from "@cloudflare/sandbox";
 import { cors } from "hono/cors";
 
 import aiHandler from "./handlers/ai.handler";
+import aiSearchHandler from "./handlers/ai.search.handler";
 import browserHandler from "./handlers/browser.handler";
 import { browserCrawlHandler } from "./handlers/browser.crawl.handler";
 import cryptoHandler from "./handlers/crypto.handler";
@@ -190,6 +191,7 @@ const app = new Hono<HonoEnv>()
 	.route("/v1/openai", aiOpenaiChatHandler)
 	.route("/v1/chat", aiOpenaiChatHandler)
 	.route("/v1/ai/tts", aiTtsHandler)
+	.route("/v1/ai/search", aiSearchHandler)
 	.route("/v1/browser", browserHandler)
 	.route("/v1/browser/crawl", browserCrawlHandler)
 	.route("/v1/crypto", cryptoHandler)

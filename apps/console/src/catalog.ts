@@ -427,6 +427,23 @@ export const SERVICES: ServiceDef[] = [
 		}
 	},
 	{
+		id: "ai.search.query",
+		method: "POST",
+		path: "/v1/ai/search/query",
+		price: "$0.010",
+		description:
+			"Managed semantic search across indexed content via Cloudflare Workers AI Search. Returns ranked results with relevance scores. Blue-ocean: zero x402 competitors. Cost is $0 during CF open beta.",
+		mimeType: "application/json",
+		input: {
+			query: "Natural language search query (1-1000 chars)",
+			topK: "Optional max results to return 1-100 (default 10)"
+		},
+		example: {
+			query: "What is x402 payment protocol?",
+			topK: 5
+		}
+	},
+	{
 		id: "ai.moderate",
 		method: "POST",
 		path: "/v1/ai/moderate",
@@ -950,24 +967,6 @@ export const SERVICES: ServiceDef[] = [
 		},
 		example: {
 			sandbox_id: "sb-abc123"
-		}
-	},
-	{
-		id: "dev.hash",
-		method: "POST",
-		path: "/v1/dev/hash",
-		price: "$0.002",
-		description:
-			"Compute cryptographic hashes (MD5, SHA-1, SHA-256, SHA-512) for a given text",
-		mimeType: "application/json",
-		input: {
-			text: "The plain text to hash",
-			algorithm:
-				"Optional hash algorithm (MD5, SHA-1, SHA-256, SHA-512, default: SHA-256)"
-		},
-		example: {
-			text: "hello world",
-			algorithm: "SHA-256"
 		}
 	},
 	{
